@@ -1161,7 +1161,7 @@ inline void get_serial_commands() {
   #endif
 #if 1
   
-	  /*5s?¡§?2a2?|¨¬?????¡§2¡§oy?Y?¡§¡ã¡§¡§??a??¡§?D¡§¡éa?¡§2?????¨º??¡§|¡§o1¡§??wifi*/
+	  /*5s?ï¿½ï¿½?2a2?|ï¿½ï¿½?????ï¿½ï¿½2ï¿½ï¿½oy?Y?ï¿½ï¿½ï¿½ã¡§ï¿½ï¿½??a??ï¿½ï¿½?Dï¿½ï¿½ï¿½ï¿½a?ï¿½ï¿½2?????ï¿½ï¿½??ï¿½ï¿½|ï¿½ï¿½o1ï¿½ï¿½??wifi*/
 	 if (commands_in_queue == 0 && !MYSERIAL.available() && ELAPSED(wait_ms, last_wait_time + 1000)) {
 		if(serial_wait_tick <= 5)
 	  {
@@ -1300,7 +1300,7 @@ void display_sd_error()
   if(sd_read_error_flg == 1)
   {
       GUI_SetBkColor(gCfgItems.background_color);
-      GUI_SetColor(0X0000ff);//   o¨¬¨¦?¡Á?¨¬?
+      GUI_SetColor(0X0000ff);//   oï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?
       //memset(buf_sd_err,' ',sizeof(buf_sd_err)-1);
       //GUI_DispStringAt(buf_sd_err,250, TITLE_YPOS);
       sprintf(buf_sd_err,"sd:%d",sd_read_cnt);
@@ -1367,7 +1367,7 @@ void display_sd_error()
 			#if 1
 			
 			
-			//¡ä¨°¨ª¨º1??¨²?¡ê
+			//ï¿½ä¨°ï¿½ï¿½ï¿½ï¿½1??ï¿½ï¿½?ï¿½ï¿½
 			//if((gCfgItems.print_finish_close_machine_flg == 1)&&(IsChooseAutoShutdown==1))
 			//    Close_machine_display();
 
@@ -1446,10 +1446,10 @@ void display_sd_error()
 			command_queue[cmd_queue_index_w][sd_count++] = sd_char;
 			if(sd_char == 0x5a ) //"Z"
 			{
-				mksReprint.sdpos = card.getsdpos()-3;	//"¡¤?2?????"
+				mksReprint.sdpos = card.getsdpos()-3;	//"ï¿½ï¿½?2?????"
 				#if 1
-				mksReprint.sdpos_bak = mksReprint.sdpos;//sdpos_bak¦Ì?¨¨Y??¦Ì?¡ê????¡ä¨º1¨®?
-				if(gCfgItems.pwroff_save_mode != 1)//sd?¡§¡À¡ê¡ä???¦Ì?¨ºy?Y
+				mksReprint.sdpos_bak = mksReprint.sdpos;//sdpos_bakï¿½ï¿½?ï¿½ï¿½Y??ï¿½ï¿½?ï¿½ï¿½????ï¿½ä¨º1ï¿½ï¿½?
+				if(gCfgItems.pwroff_save_mode != 1)//sd?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½???ï¿½ï¿½?ï¿½ï¿½y?Y
                 #endif
 					mksReprint.refresh = true;
 			}
@@ -3974,7 +3974,7 @@ inline void gcode_G0_G1(
    /*    
     if (gCfgItems.breakpoint_reprint_flg == 1) 
     {
-        if ((destination[2] <= gCfgItems.breakpoint_z_pos)&&(card.sdpos >= 5000)) //¶ÏµãÐø´òÐèÒª´óÓÚ5kÖ®ºóµÄÄÚÈÝ²ÅÄÜ½øÐÐÐø´ò¡£
+        if ((destination[2] <= gCfgItems.breakpoint_z_pos)&&(card.sdpos >= 5000)) //ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½5kÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½Ü½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             return;
         }
@@ -15781,7 +15781,7 @@ void display_temper_error()
 		wait_for_heatup = false;
 
 		GUI_SetBkColor(gCfgItems.background_color);
-		GUI_SetColor(0X0000ff);//	o¨¬¨¦?¡Á?¨¬?
+		GUI_SetColor(0X0000ff);//	oï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?
         sprintf(buf_err,"Err%d",temper_error_type);
 		GUI_DispStringAt(buf_err,380, TITLE_YPOS);
 		GUI_SetBkColor(gCfgItems.background_color);
@@ -15889,7 +15889,7 @@ void setup() {
 
   setup_killpin();
 
-  //setup_powerhold();
+  setup_powerhold();
 
   #if HAS_STEPPER_RESET
     disableStepperDrivers();

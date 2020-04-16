@@ -72,6 +72,7 @@
 #define FAN_PIN            17 
 
 #define PS_ON_PIN          -1
+#define SUICIDE_PIN      	28
   
 #define KILL_PIN           -1
 

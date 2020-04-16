@@ -85,8 +85,8 @@
 //#define REV_IO1_GPIO_Port GPIOA
 //#define PW_DET_Pin GPIO_PIN_2
 //#define PW_DET_GPIO_Port GPIOA
-//#define PW_OFF_Pin GPIO_PIN_3
-//#define PW_OFF_GPIO_Port GPIOA
+#define PW_OFF_Pin GPIO_PIN_2
+#define PW_OFF_GPIO_Port GPIOB
 #define ZMIN_Pin GPIO_PIN_11
 #define ZMIN_GPIO_Port GPIOA
 //#define EXT_IRQ_Pin GPIO_PIN_5

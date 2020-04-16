@@ -71,7 +71,7 @@
 #include "draw_pause_ui.h"
 #include "pic_manager.h"
 #include "draw_wifi_list.h"
-extern "C"void setTouchBound(int32_t x0, int32_t x1, int32_t y0, int32_t y1 );
+extern "C" void setTouchBound(int32_t x0, int32_t x1, int32_t y0, int32_t y1 );
 
 
 /* USER CODE END Includes */
@@ -107,11 +107,11 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-        //ÖÐ¶ÏÏòÁ¿ÉèÖÃ
+        //ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
         //SCB->VTOR = 0x08000000 | (0x7000 & (uint32_t)0x1FFFFF80);  /* Vector Table Relocation in Internal FLASH */
-                                                                //ÓÐbootloaderÊ±£¬ÉèÖÃÎª0x5000, Options ->Linker ->Edit...-> 0x08005000
-                                                                 //ÎÞbootloaderÊ±£¬ÉèÖÃÎª0x0000, Options ->Linker ->Edit...-> 0x08000000 
+                                                                //ï¿½ï¿½bootloaderÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0x5000, Options ->Linker ->Edit...-> 0x08005000
+                                                                 //ï¿½ï¿½bootloaderÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0x0000, Options ->Linker ->Edit...-> 0x08000000 
 
   /* USER CODE END 1 */
 
@@ -120,8 +120,8 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-  //ÓÐbootloaderÊ±£¬ÉèÖÃÎª0x7000, Options ->Linker ->Edit...-> Vector Table ->0x08007000
-  //ÁíÍâ×¢ÒâµÄÊÇ£ºµ±BootLoaderÌø×ª²»Õý³£Ê±£¬ROMÐèÒªÉèÖÃÎª 0x8007000, Options ->Linker ->Edit...-> Memony Regions ->Rom ->0x08007000
+  //ï¿½ï¿½bootloaderÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0x7000, Options ->Linker ->Edit...-> Vector Table ->0x08007000
+  //ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½BootLoaderï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ROMï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Îª 0x8007000, Options ->Linker ->Edit...-> Memony Regions ->Rom ->0x08007000
   NVIC_SetVectorTable(NVIC_VectTab_FLASH, (uint32_t)0x7000);
                                                             
   /* Configure the system clock */
@@ -160,7 +160,7 @@ int main(void)
 #endif
   //MX_DAC_Init();
   //MX_SPI1_Init();
-  //MX_IWDG_Init();     //Î¹¹·
+  //MX_IWDG_Init();     //Î¹ï¿½ï¿½
   /* Initialize interrupts */
   MX_NVIC_Init();
 
@@ -176,7 +176,7 @@ int main(void)
 	WIFISERIAL.begin(115200);   
 #endif
 
-  //Ê¹ÄÜSPIÍâÉè
+  //Ê¹ï¿½ï¿½SPIï¿½ï¿½ï¿½ï¿½
   SPI_Cmd(SPI2, ENABLE); 
   //GUI_Init();
   //Lcd_Light_ON;
@@ -192,7 +192,7 @@ int main(void)
  //mksSdCardTest();
  //mksUSBTest();
     /*---------test end-------------*/
-	//Æô¶¯PWM
+	//ï¿½ï¿½ï¿½ï¿½PWM
 #if defined(MKS_ROBINPRO) || defined(MKS_ROBIN_NANO)
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
 #elif defined(MKS_ROBIN) || defined(MKS_ROBIN2) 
@@ -213,16 +213,16 @@ int main(void)
 
     MKS_FAN_TIM = 0;
 
-    //Æô¶¯TIMER
+    //ï¿½ï¿½ï¿½ï¿½TIMER
     HAL_TIM_Base_Start_IT(&htim2);
     HAL_TIM_Base_Start_IT(&htim4);
-    //Æô¶¯ADC DMA
-    HAL_NVIC_DisableIRQ(DMA1_Channel1_IRQn);//¹Ø±ÕDMA1_Channel1_IRQHandlerÖÐ¶Ï
+    //ï¿½ï¿½ï¿½ï¿½ADC DMA
+    HAL_NVIC_DisableIRQ(DMA1_Channel1_IRQn);//ï¿½Ø±ï¿½DMA1_Channel1_IRQHandlerï¿½Ð¶ï¿½
     if(HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&uhADCxConvertedValue,3)!=HAL_OK)    
       Error_Handler();
-    HAL_NVIC_DisableIRQ(DMA1_Channel1_IRQn);//¹Ø±ÕDMA1_Channel1_IRQnÖÐ¶Ï
+    HAL_NVIC_DisableIRQ(DMA1_Channel1_IRQn);//ï¿½Ø±ï¿½DMA1_Channel1_IRQnï¿½Ð¶ï¿½
  
-    //Æô¶¯PWM
+    //ï¿½ï¿½ï¿½ï¿½PWM
     /*
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
     TIM1->CCR1 = 0;
@@ -259,7 +259,7 @@ int main(void)
 
   setTouchBound(gCfgItems.touch_adj_xMin, gCfgItems.touch_adj_xMax, gCfgItems.touch_adj_yMax, gCfgItems.touch_adj_yMin);
 
-  //Ë¢Ð´Í¼Æ¬×ÜÊý
+  //Ë¢Ð´Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
   SPI_FLASH_BufferRead((u8*)&gCfgItems.total_pic,PIC_COUNTER_ADDR,1);
   #if 0//tan_mask
   else
@@ -339,7 +339,7 @@ int main(void)
   /*
   if(DeviceCode==0x9488)
   {
-	TFT_screen.display_style = gCfgItems.display_style;// 1:¼òÔ¼°æ£»0:¾­µä°æ£»
+	TFT_screen.display_style = gCfgItems.display_style;// 1:ï¿½ï¿½Ô¼ï¿½æ£»0:ï¿½ï¿½ï¿½ï¿½æ£»
 	TFT_screen.firstpage_gap = 32;
 	TFT_screen.gap_h = 2;
 	TFT_screen.gap_v = 2;
@@ -353,7 +353,7 @@ int main(void)
   }
   else //if(DeviceCode==0x1505)
   {
-	TFT_screen.display_style = 0;//gCfgItems.display_style;// 1:¼òÔ¼°æ£»0:¾­µä°æ£»
+	TFT_screen.display_style = 0;//gCfgItems.display_style;// 1:ï¿½ï¿½Ô¼ï¿½æ£»0:ï¿½ï¿½ï¿½ï¿½æ£»
 	TFT_screen.firstpage_gap = 32;
 	TFT_screen.gap_h = 2;
 	TFT_screen.gap_v = 2;
@@ -382,7 +382,7 @@ int main(void)
     
       //mksTmp.cfg_hardware_test_enable = 1;  //for test
     
-      if(mksTmp.cfg_hardware_test_enable)   //Éú²úÓ²¼þ²âÊÔ
+      if(mksTmp.cfg_hardware_test_enable)   //ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       {
        /*
         GUI_SetBkColor(gCfgItems.background_color);
@@ -390,7 +390,7 @@ int main(void)
         GUI_Clear();
         GUI_UC_SetEncodeNone();
         GUI_SetFont(&GUI_FontHZ16);
-        GUI_DispStringAt("Ó²¼þ²âÊÔ-(Èí¼þÄÚ²¿°æ±¾V1.0.0_000)", 20, 0);
+        GUI_DispStringAt("Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-(ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½æ±¾V1.0.0_000)", 20, 0);
         mksHardwareTest();
         */
         mksCfg.extruders=2;
@@ -415,7 +415,7 @@ int main(void)
   {
   	mks_rePrintCheck();
   }
-  else//Ã»ÓÐ¶ÏµçÐø´ò
+  else//Ã»ï¿½Ð¶Ïµï¿½ï¿½ï¿½ï¿½ï¿½
   {
 	  while(1)
 	  {
@@ -503,10 +503,10 @@ void mksBeeperAlarm(void)
 #if 0
 		if((gCfgItems.filament_det1_level_flg==1)||(gCfgItems.filament_det2_level_flg==1))
 		{
-			//ÓÉÓÚ¸ßµçÆ½´¥·¢Ê±£¬
-			//±È½ÏÄÑÍ¨¹ý¹Ü½ÅµçÆ½À´ÅÐ¶Ï
-			//ÐÅºÅ½ÅµÄµçÆ½Ê¹ÆäÁ¢¼´Í£Ö¹ÃùÏì£¬
-			//ËùÒÔÄ¬ÈÏÃ¿´Î¶ÏÁÏÃùÏì5´Î¡£
+			//ï¿½ï¿½ï¿½Ú¸ßµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+			//ï¿½È½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½Ü½Åµï¿½Æ½ï¿½ï¿½ï¿½Ð¶ï¿½
+			//ï¿½ÅºÅ½ÅµÄµï¿½Æ½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½ï¿½ì£¬
+			//ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Ã¿ï¿½Î¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½5ï¿½Î¡ï¿½
 			beeper_cnt = 10;
 		}
 		else
@@ -614,27 +614,27 @@ void Close_machine_display()
 	MKS_PW_OFF_OP = 0;
 }
 
-//¶Ïµç¶ÏÁÏ¼ì²â
-//¶Ïµç:PB0¶Ïµç¼ì²â£¬¿ÉÒÔ×÷ÎªµÚ¶þÅçÍ·µÄ¶ÏÁÏ¼ì²â½Ó¿Ú¡£
-//¶ÏÁÏ:PB1¶ÏÁÏ¼ì²â£¬
-//¹Ø»úÄ£¿é¼ì²â¹Ü½Å:
-//PB4£¬¿ÉÒÔÍ¨¹ýÅäÖÃÎÄ¼þÀ´Ñ¡Ôñ½Ó220DETÄ£¿é»ò½ÓPWCÄ£¿é;
-//Ä¬ÈÏ½ÓPWCÄ£¿é¡£
+//ï¿½Ïµï¿½ï¿½ï¿½Ï¼ï¿½ï¿½
+//ï¿½Ïµï¿½:PB0ï¿½Ïµï¿½ï¿½â£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ú¶ï¿½ï¿½ï¿½Í·ï¿½Ä¶ï¿½ï¿½Ï¼ï¿½ï¿½Ó¿Ú¡ï¿½
+//ï¿½ï¿½ï¿½ï¿½:PB1ï¿½ï¿½ï¿½Ï¼ï¿½â£¬
+//ï¿½Ø»ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ü½ï¿½:
+//PB4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½220DETÄ£ï¿½ï¿½ï¿½ï¿½PWCÄ£ï¿½ï¿½;
+//Ä¬ï¿½Ï½ï¿½PWCÄ£ï¿½é¡£
 void PowerOff_Filament_Check()
 {
 	volatile uint8_t i;
 
-	//¶Ïµç¼ì²â
-	if(gCfgItems.insert_det_module == 1)//½Ó220detÄ£¿é£¬¶Ïµç¼ì²â
+	//ï¿½Ïµï¿½ï¿½ï¿½
+	if(gCfgItems.insert_det_module == 1)//ï¿½ï¿½220detÄ£ï¿½é£¬ï¿½Ïµï¿½ï¿½ï¿½
 	{
-		if((mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.mask_det_Function!=1))//´òÓ¡ÖÐÔò½øÈëÔÝÍ£½çÃæ
+		if((mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.mask_det_Function!=1))//ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 		{
 			if(MKS_PW_DET_OP== 0)
 			{
 				poweroff_det_flg = 1;
 				if(poweroff_det_cnt >= 1000)
 				{
-					if((MKS_PW_DET_OP==0)&&(gCfgItems.have_ups==1))//ÓÐUPSÔòÏÈÔÝÍ£
+					if((MKS_PW_DET_OP==0)&&(gCfgItems.have_ups==1))//ï¿½ï¿½UPSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£
 					{
 						poweroff_det_flg = 0;
 						poweroff_det_cnt= 0;
@@ -660,7 +660,7 @@ void PowerOff_Filament_Check()
 
 						return;				
 					}
-					//ÎÞUPSÖ±½Ó¹Ø»ú
+					//ï¿½ï¿½UPSÖ±ï¿½Ó¹Ø»ï¿½
 					poweroff_det_flg = 0;
 					poweroff_det_cnt= 0;
 
@@ -676,14 +676,14 @@ void PowerOff_Filament_Check()
 			}
 		}		
 	}
-	else//½ÓPWC¹Ø»úÄ£¿é
+	else//ï¿½ï¿½PWCï¿½Ø»ï¿½Ä£ï¿½ï¿½
 	{
 		if(MKS_PW_DET_OP == 0)//
 		{
-			poweroff_det_low_flg = 1;//Æô¶¯¼ÆÊ±
+			poweroff_det_low_flg = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
 		}
 		
-		if(poweroff_det_low_cnt >= 80)// 1sÌø±äÎª¸ßµçÆ½
+		if(poweroff_det_low_cnt >= 80)// 1sï¿½ï¿½ï¿½ï¿½Îªï¿½ßµï¿½Æ½
 		{
 			if(MKS_PW_DET_OP == 1)
 			{
@@ -705,7 +705,7 @@ void PowerOff_Filament_Check()
 			{
 				if(MKS_PW_DET_OP == 1)
 				{
-					if((mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.have_ups==1))//´òÓ¡ÖÐÇÒÓÐUPSºó±¸µçÔ´£¬Ôò½øÈëÔÝÍ£½çÃæ
+					if((mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.have_ups==1))//ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UPSï¿½ó±¸µï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 					{
 						poweroff_det_high_flg = 0;
 						poweroff_det_high_cnt = 0;
@@ -732,7 +732,7 @@ void PowerOff_Filament_Check()
 
 						return;
 					}
-					//Ã»UPSµçÔ´»òÃ»ÔÚ´òÓ¡£¬Ö±½Ó¹Ø»ú¡£
+					//Ã»UPSï¿½ï¿½Ô´ï¿½ï¿½Ã»ï¿½Ú´ï¿½Ó¡ï¿½ï¿½Ö±ï¿½Ó¹Ø»ï¿½ï¿½ï¿½
 					poweroff_det_high_flg = 0;
 					poweroff_det_high_cnt = 0;
 					poweroff_det_flg=0;
@@ -750,15 +750,15 @@ void PowerOff_Filament_Check()
 			}
 		}
 	}
-	//¶ÏÁÏ¼ì²â2
-	if((mksCfg.extruders == 2)&&(mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.mask_det_Function!=1))//´òÓ¡ÖÐÔò½øÈëÔÝÍ£½çÃæ
+	//ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½2
+	if((mksCfg.extruders == 2)&&(mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.mask_det_Function!=1))//ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 	{
-		if(gCfgItems.filament_det1_level_flg == 1)//¶ÏÁÏ½Ó¿Ú½ÓÈëµçÆ½Îª¸ßµçÆ½´¥·¢Ê±µÄ´¦Àí
+		if(gCfgItems.filament_det1_level_flg == 1)//ï¿½ï¿½ï¿½Ï½Ó¿Ú½ï¿½ï¿½ï¿½ï¿½Æ½Îªï¿½ßµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ä´ï¿½ï¿½ï¿½
 		{
-			//¸ßµçÆ½´¥·¢Ê±£¬ÊÇ¼ì²â2sµÍµçÆ½ºÍ2s¸ßµçÆ½
+			//ï¿½ßµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½2sï¿½Íµï¿½Æ½ï¿½ï¿½2sï¿½ßµï¿½Æ½
       		if(MKS_MT_DET2_OP == 0)
 			{
-				filament_det2_low_flg = 1;//Æô¶¯¼ÆÊ±
+				filament_det2_low_flg = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
 			}
 			
 			if(filament_det2_low_cnt >= 2000)// 2s
@@ -822,7 +822,7 @@ void PowerOff_Filament_Check()
 				}
 			}
 		}
-		else//¶ÏÁÏ½Ó¿Ú½ÓÈëµçÆ½ÎªµÍµçÆ½´¥·¢Ê±´¦Àí
+		else//ï¿½ï¿½ï¿½Ï½Ó¿Ú½ï¿½ï¿½ï¿½ï¿½Æ½Îªï¿½Íµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 		{
 			if(MKS_MT_DET2_OP == 0)
 			{
@@ -866,15 +866,15 @@ void PowerOff_Filament_Check()
 			}
 		}
 	}	
-	//¶ÏÁÏ¼ì²â1
-	if((mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.mask_det_Function!=1))//´òÓ¡ÖÐÔò½øÈëÔÝÍ£½çÃæ
+	//ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½1
+	if((mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.mask_det_Function!=1))//ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 	{
-		if(gCfgItems.filament_det0_level_flg == 1)//¶ÏÁÏ½Ó¿Ú½ÓÈëµçÆ½Îª¸ßµçÆ½´¥·¢Ê±µÄ´¦Àí
+		if(gCfgItems.filament_det0_level_flg == 1)//ï¿½ï¿½ï¿½Ï½Ó¿Ú½ï¿½ï¿½ï¿½ï¿½Æ½Îªï¿½ßµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ä´ï¿½ï¿½ï¿½
 		{
-			//¸ßµçÆ½´¥·¢Ê±£¬ÊÇ¼ì²â2sµÍµçÆ½ºÍ2s¸ßµçÆ½
+			//ï¿½ßµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½2sï¿½Íµï¿½Æ½ï¿½ï¿½2sï¿½ßµï¿½Æ½
       		if(MKS_MT_DET1_OP == 0)
 			{
-				filament_det1_low_flg = 1;//Æô¶¯¼ÆÊ±
+				filament_det1_low_flg = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
 			}
 			
 			if(filament_det1_low_cnt >= 2000)// 2s
@@ -938,7 +938,7 @@ void PowerOff_Filament_Check()
 				}
 			}
 		}
-		else//¶ÏÁÏ½Ó¿Ú½ÓÈëµçÆ½ÎªµÍµçÆ½´¥·¢Ê±´¦Àí
+		else//ï¿½ï¿½ï¿½Ï½Ó¿Ú½ï¿½ï¿½ï¿½ï¿½Æ½Îªï¿½Íµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 		{
 			if(MKS_MT_DET1_OP == 0)
 			{

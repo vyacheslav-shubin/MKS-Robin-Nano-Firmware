@@ -74,7 +74,7 @@ DSTATUS disk_status (
 	case MMC :		
 		return 0;
 	case USB :
-
+		break;
 	}
 	return STA_NOINIT;
 
@@ -188,7 +188,7 @@ DRESULT disk_write (
 	BYTE status = 0;
 	
 	u8 errorstatus;
-	u8 retry=0x1f;		//Ð´ÈëÊ§°ÜµÄÊ±ºò,ÖØÊÔ´ÎÊý
+	u8 retry=0x1f;		//Ð´ï¿½ï¿½Ê§ï¿½Üµï¿½Ê±ï¿½ï¿½,ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½
 
 	switch (pdrv) {
 	case ATA :
@@ -196,8 +196,8 @@ DRESULT disk_write (
 		return RES_PARERR;
 
 	case MMC :
-			errorstatus = SD_WriteDisk((u8*)buff, sector, count);	//Ð´Èë´ÅÅÌ
-			//×ª»»Ó¦´ðÖµÎªFatFsÖµ	
+			errorstatus = SD_WriteDisk((u8*)buff, sector, count);	//Ð´ï¿½ï¿½ï¿½ï¿½ï¿½
+			//×ªï¿½ï¿½Ó¦ï¿½ï¿½ÖµÎªFatFsÖµ	
 			if(errorstatus == SD_OK)	
 			{	
 				return RES_OK;

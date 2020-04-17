@@ -1074,7 +1074,7 @@
  * For other boards you may need to define FIL_RUNOUT_PIN.
  * By default the firmware assumes HIGH = has filament, LOW = ran out
  */
-//efine FILAMENT_RUNOUT_SENSOR
+#define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_INVERTING mksCfg.fil_runout_inverting // set to true to invert the logic of the sensor.
   #define ENDSTOPPULLUP_FIL_RUNOUT // Uncomment to use internal pullup for filament runout pins if the sensor is defined.

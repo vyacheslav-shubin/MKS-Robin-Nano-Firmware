@@ -77,7 +77,7 @@ TB_GPIO_Port,
 TH1_GPIO_Port,
 TH2_GPIO_Port,
 
-0, //FIL_RUNOUT
+MT_DET_GPIO_Port, //FIL_RUNOUT
 PW_OFF_GPIO_Port, //28
  
 
@@ -116,7 +116,7 @@ HEATER2_Pin,
 TB_Pin,
 TH1_Pin,	//25
 TH2_Pin,
-0, //FIL_RUNOUT
+MT_DET_Pin, //FIL_RUNOUT
 PW_OFF_Pin, //28
 
 

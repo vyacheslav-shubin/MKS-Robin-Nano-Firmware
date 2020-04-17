@@ -8264,8 +8264,17 @@ inline void gcode_M42() {
     for (uint8_t pin = first_pin; pin <= last_pin; pin++)
       report_pin_state_extended(pin, ignore_protection, true);
   }
-
 #endif // PINS_DEBUGGING
+
+#if DISABLED(PINS_DEBUGGING)
+  inline void gcode_M43() {
+	  const int pin_number = parser.intval('P', LED_PIN);
+      const byte val = digitalRead(pin_number);
+      SERIAL_PROTOCOLLNPAIR("Pin: ", pin_number);
+      SERIAL_PROTOCOLLNPAIR("Value: ", val);
+  }
+#endif // PINS_DEBUGGING
+
 
 #if ENABLED(Z_MIN_PROBE_REPEATABILITY_TEST)
 
@@ -13108,10 +13117,10 @@ void process_parsed_command() {
       case 42: // M42: Change pin state
         gcode_M42(); break;
 
-      #if ENABLED(PINS_DEBUGGING)
+      //#if ENABLED(PINS_DEBUGGING)
         case 43: // M43: Read pin state
           gcode_M43(); break;
-      #endif
+      //#endif
 
 
       #if ENABLED(Z_MIN_PROBE_REPEATABILITY_TEST)

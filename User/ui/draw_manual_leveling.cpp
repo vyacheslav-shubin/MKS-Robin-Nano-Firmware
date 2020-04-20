@@ -31,11 +31,11 @@ void manual_leveling(uint8_t point)
 	char level_buf[80]={0};
 
 	memset(level_buf,0,sizeof(level_buf));
-	sprintf(level_buf,"G91\nG1 Z10 F%d\n",gCfgItems.leveling_z_speed);
+	sprintf(level_buf,"G91 G1 Z10 F%d\n",gCfgItems.leveling_z_speed);
 	enqueue_and_echo_commands_P(PSTR(level_buf));
 
 	memset(level_buf,0,sizeof(level_buf));
-	sprintf(level_buf,"G90\nG1 X%d Y%d F%d\n", gCfgItems.leveling_points[point].x, gCfgItems.leveling_points[point].y, gCfgItems.leveling_xy_speed);
+	sprintf(level_buf,"G90 G1 X%d Y%d F%d\n", gCfgItems.leveling_points[point].x, gCfgItems.leveling_points[point].y, gCfgItems.leveling_xy_speed);
 	enqueue_and_echo_commands_P(PSTR(level_buf));
 
 	enqueue_and_echo_commands_P(PSTR("G1 Z0"));

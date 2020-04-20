@@ -5,8 +5,8 @@
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-extern void draw_Zero();
-extern void Clear_Zero();
+extern void draw_zero();
+extern void clear_zero();
 
 #if defined(__cplusplus)
 }    /* Make sure we have C-declarations in C++ programs */

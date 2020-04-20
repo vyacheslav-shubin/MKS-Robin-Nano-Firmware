@@ -76,7 +76,7 @@ static void cbDrawToolWin(WM_MESSAGE * pMsg) {
 				{
 					last_disp_state = TOOL_UI;
 					Clear_Tool();
-					draw_Zero();
+					draw_zero();
 				}
 				else if(pMsg->hWinSrc == buttonLeveling.btnHandle)
 				{

@@ -38,7 +38,7 @@ static GUI_HWIN hReadyPrintWnd;
 static TEXT_Handle textReadyTemp1,textReadyTemp2;
 static TEXT_Handle textReadyBedTemp,textReadyFanSpeed;
 
-int X_ADD=5,X_INTERVAL=10;   //**Í¼Æ¬¼ä¸ô
+int X_ADD=5,X_INTERVAL=10;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 extern char cmd_code[201];
 extern char x[1];
 extern volatile char *codebufpoint;
@@ -90,7 +90,7 @@ static void cbReadPrintWin(WM_MESSAGE * pMsg) {
 					disp_in_file_dir = 1;
 					last_disp_state = PRINT_READY_UI;
 					Clear_ready_print();
-					draw_print_file();      //printing °´¼ü Èë¿Ú
+					draw_print_file();      //printing ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				}
 				else if(pMsg->hWinSrc == buttonMove.btnHandle)
 				{
@@ -120,7 +120,7 @@ static void cbReadPrintWin(WM_MESSAGE * pMsg) {
 				{
 					last_disp_state = PRINT_READY_UI;
 					Clear_ready_print();
-					draw_Zero();
+					draw_zero();
 				}
 
 				else if(pMsg->hWinSrc == buttonSet.btnHandle)

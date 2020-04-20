@@ -94,7 +94,7 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmzero;
 
 extern uint8_t gcode_preview_over;
 
-uint8_t temperature_change_frequency = 1;//ÓÃÓÚÏÔÊ¾ÎÂ¶È¸üÐÂµÄÆµÂÊ
+uint8_t temperature_change_frequency = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Â¶È¸ï¿½ï¿½Âµï¿½Æµï¿½ï¿½
 //unsigned char bmp_public_buf[16*1024] = {0};
 
 extern uint8_t wifi_refresh_flg;
@@ -131,7 +131,7 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmpreheat;
 
 extern CFG_ITMES gCfgItems;
 
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 extern uint8_t volatile printing_rate_update_flag;
 extern volatile uint32_t TimeIncrease;
 static volatile uint8_t fan_move_flag;
@@ -542,7 +542,7 @@ void clear_cur_ui()
 			break;
 
 		case ZERO_UI:
-			Clear_Zero();
+			clear_zero();
 			break;
 
 		case SPRAYER_UI:
@@ -757,7 +757,7 @@ void draw_return_ui()
 				break;
 
 			case ZERO_UI:
-				draw_Zero();
+				draw_zero();
 				break;
 
 			case SPRAYER_UI:
@@ -1244,10 +1244,10 @@ void GUI_RefreshPage()
 					
 			case MOVE_MOTOR_UI:
 				#if 1
-				//ÏÔÊ¾ZÖá×ø±ê
+				//ï¿½ï¿½Ê¾Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if(mksReprint.mks_printer_state == MKS_IDLE)
 				{
-					if((z_high_count==1)&&(temper_error_flg != 1)) //Ã¿¸ô500msÏÔÊ¾Ò»´Î
+					if((z_high_count==1)&&(temper_error_flg != 1)) //Ã¿ï¿½ï¿½500msï¿½ï¿½Ê¾Ò»ï¿½ï¿½
 					{
 						z_high_count = 0;
 						//if((current_position[Z_AXIS] != zpos_bak)||current_position[Z_AXIS]=0)
@@ -1412,7 +1412,7 @@ void DRAW_LOGO()
 	uint32_t byteswritten, bytesread; 										/* File write/read counts */
 
 	/*##-1- Link the micro SD disk I/O driver ##################################*/
-	//Á´½Ó SD µ×²ãÇý¶¯º¯Êýµ½ FATFS ÎÄ¼þÏµÍ³£¬Õâ¸öÔÚ MX_FATFS_Init()º¯ÊýÖÐÒÑ¾­Íê³É
+	//ï¿½ï¿½ï¿½ï¿½ SD ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ FATFS ï¿½Ä¼ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MX_FATFS_Init()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½
 	//if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
 	{
 		/*##-2- Register the file system object to the FatFs module ##############*/
@@ -1425,7 +1425,7 @@ void DRAW_LOGO()
 		{
 			/*##-3- Create a FAT file system (format) on the logical drive #########*/
 			/* WARNING: Formatting the uSD card will delete all content on the device */
-			//¶Ô SD ¿¨½øÐÐ¸ñÊ½»¯
+			//ï¿½ï¿½ SD ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½Ê½ï¿½ï¿½
 #if 0
 			if(f_mkfs((TCHAR const*)SD_Path, 0, 0) != FR_OK)
 			{
@@ -1946,11 +1946,11 @@ void gcode_has_preview(char *path)
 #if 0
 
 /*****************************************************/
-//path:ÎÄ¼þÂ·¾¶
-//xsize,ysize:ÏÔÊ¾Ô¤ÀÀÍ¼Æ¬´óÐ¡;
+//path:ï¿½Ä¼ï¿½Â·ï¿½ï¿½
+//xsize,ysize:ï¿½ï¿½Ê¾Ô¤ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ð¡;
 //sel:
-//		0:ÎÄ¼þÄ¿Â¼Ô¤ÀÀ£»
-//		1:´òÓ¡ÎÄ¼þÔ¤ÀÀ
+//		0:ï¿½Ä¼ï¿½Ä¿Â¼Ô¤ï¿½ï¿½ï¿½ï¿½
+//		1:ï¿½ï¿½Ó¡ï¿½Ä¼ï¿½Ô¤ï¿½ï¿½
 //
 uint8_t drawicon_preview(char *path,int xsize_small,int ysize_small,int xsize_big,int ysize_big,char sel)
 {

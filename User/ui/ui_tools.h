@@ -19,7 +19,9 @@ extern void ui_initialize_screen_gui(void);
 
 //with placeholder
 #define ui_std_button(ph_x, ph_y, hwnd, img, title) ui_create_std_button(INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*ph_x,  INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * ph_y, hwnd, img, title)
-#define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbLevelingWin, 0)
+#define ui_std_button_return(hwnd) ui_std_button(3, 1, hwnd, "bmp_return.bin", common_menu.text_back)
+#define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cb, 0)
+
 
 extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
 extern void ui_set_text_value(TEXT_Handle handle, char* val);

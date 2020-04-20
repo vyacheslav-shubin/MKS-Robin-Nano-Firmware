@@ -69,7 +69,11 @@ static void cbLevelingWin(WM_MESSAGE * pMsg) {
 					manual_leveling(3);
 				} else if(pMsg->hWinSrc == buttonleveling5) {
 					manual_leveling(4);
-				}				
+				} else if(pMsg->hWinSrc == buttonAllZero) {
+					enqueue_and_echo_commands_P(PSTR("G28"));
+				} else if(pMsg->hWinSrc == buttonZZero) {
+					enqueue_and_echo_commands_P(PSTR("G28 Z0"));
+				}
 			}
 			break;
 		default:

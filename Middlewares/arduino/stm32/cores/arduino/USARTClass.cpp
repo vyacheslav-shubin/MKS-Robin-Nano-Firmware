@@ -331,7 +331,7 @@ void USARTClass::MoremenuCmd(void)
 	{
 		memset(codebuff,0,sizeof(codebuff));
 		
-		while((*(codebufpoint) != 0x3b)&&(i<=96))//?¨¹¨¢?DD¨°?¡¤?o??a?¨¢¨º?¡¤??¡ê
+		while((*(codebufpoint) != 0x3b)&&(i<=96))//?ï¿½ï¿½ï¿½ï¿½?DDï¿½ï¿½?ï¿½ï¿½?o??a?ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½??ï¿½ï¿½
 		{
 			codebuff[i] = *codebufpoint;
 			i++;
@@ -359,7 +359,7 @@ void USARTClass::MoremenuCmd(void)
 
 int USARTClass::check( void )
 {
-  if ( _rx_buffer->_iHead == _rx_buffer->_iTail )       //?¨®¨¢D??
+  if ( _rx_buffer->_iHead == _rx_buffer->_iTail )       //?ï¿½ï¿½ï¿½ï¿½D??
     return 1 ;
   else
     return 0;
@@ -367,13 +367,30 @@ int USARTClass::check( void )
 #if 1
 extern uint8_t next_cnt;
 extern uint8_t leveling_start_flg;
+
+void USARTClass::do_leveling_move_action(uint8_t point) {
+	uint8_t i;
+	char move_point_temp[50]={0};
+
+	if(USARTClass::check())
+	{
+		memset(move_point_temp,0,sizeof(move_point_temp));
+		sprintf((char*)move_point_temp,"G91\nG1 Z%d\nG90\nG1 X%d Y%d\nG28 Z0\n",gCfgItems.pause_zpos,gCfgItems.leveling_points[point].x,gCfgItems.leveling_points[point].y);
+		for(i=0;i<strlen(move_point_temp);i++)
+		{
+  			_rx_buffer->store_char(move_point_temp[i]) ;
+		}
+	}
+
+}
+
 void USARTClass::Leveling_move_action(void)
 {
 	uint8_t i;
 	char move_point_temp[50]={0};
 
     
-	if(leveling_start_flg == 1)//??¨º??a¨º?2?D¨¨¨°a??¨¢?
+	if(leveling_start_flg == 1)//??ï¿½ï¿½??aï¿½ï¿½?2?Dï¿½ï¿½ï¿½ï¿½a??ï¿½ï¿½?
 	{
 		leveling_start_flg = 0;
 		if(USARTClass::check())
@@ -387,83 +404,8 @@ void USARTClass::Leveling_move_action(void)
 		}			
 	} 
 
-	switch(next_cnt)
-	{
-	case 1:
-			/*
-			if(leveling_start_flg == 1)//??¨º??a¨º?2?D¨¨¨°a??¨¢?
-			{
-				leveling_start_flg = 0;
-				if(USARTClass::check())
-				{
-					memset(move_point_temp,0,sizeof(move_point_temp));
-					sprintf((char*)move_point_temp,"G28\nG91\nG1 Z%d\nG90\nG1 X%d Y%d\nG28 Z0\n",gCfgItems.pause_zpos,gCfgItems.leveling_point1_x,gCfgItems.leveling_point1_y);
-					for(i=0;i<strlen(move_point_temp);i++)
-					{
-		      			_rx_buffer->store_char(move_point_temp[i]) ;
-					}
-				}			
-			}
-			else
-			*/
-			{
-				if(USARTClass::check())
-				{
-					memset(move_point_temp,0,sizeof(move_point_temp));
-					sprintf((char*)move_point_temp,"G91\nG1 Z%d\nG90\nG1 X%d Y%d\nG28 Z0\n",gCfgItems.pause_zpos,gCfgItems.leveling_point1_x,gCfgItems.leveling_point1_y);
-					for(i=0;i<strlen(move_point_temp);i++)
-					{
-		      			_rx_buffer->store_char(move_point_temp[i]) ;
-					}
-				}
-			}
-
-		break;
-	case 2:
-		if(USARTClass::check())
-		{
-			memset(move_point_temp,0,sizeof(move_point_temp));
-			sprintf((char*)move_point_temp,"G91\nG1 Z%d\nG90\nG1 X%d Y%d\nG28 Z0\n",gCfgItems.pause_zpos,gCfgItems.leveling_point2_x,gCfgItems.leveling_point2_y);
-			for(i=0;i<strlen(move_point_temp);i++)
-			{
-      			_rx_buffer->store_char(move_point_temp[i]) ;
-			}
-		}		
-		break;
-	case 3:
-		if(USARTClass::check())
-		{
-			memset(move_point_temp,0,sizeof(move_point_temp));
-			sprintf((char*)move_point_temp,"G91\nG1 Z%d\nG90\nG1 X%d Y%d\nG28 Z0\n",gCfgItems.pause_zpos,gCfgItems.leveling_point3_x,gCfgItems.leveling_point3_y);
-			for(i=0;i<strlen(move_point_temp);i++)
-			{
-      			_rx_buffer->store_char(move_point_temp[i]) ;
-			}
-		}		
-		break;
-	case 4:
-		if(USARTClass::check())
-		{
-			memset(move_point_temp,0,sizeof(move_point_temp));
-			sprintf((char*)move_point_temp,"G91\nG1 Z%d\nG90\nG1 X%d Y%d\nG28 Z0\n",gCfgItems.pause_zpos,gCfgItems.leveling_point4_x,gCfgItems.leveling_point4_y);
-			for(i=0;i<strlen(move_point_temp);i++)
-			{
-      			_rx_buffer->store_char(move_point_temp[i]) ;
-			}
-		}		
-		break;
-	case 5:
-		if(USARTClass::check())
-		{
-			memset(move_point_temp,0,sizeof(move_point_temp));
-			sprintf((char*)move_point_temp,"G91\nG1 Z%d\nG90\nG1 X%d Y%d\nG28 Z0\n",gCfgItems.pause_zpos,gCfgItems.leveling_point5_x,gCfgItems.leveling_point5_y);
-			for(i=0;i<strlen(move_point_temp);i++)
-			{
-      			_rx_buffer->store_char(move_point_temp[i]) ;
-			}
-		}		
-		break;
-	}
+	if ((next_cnt > 0) && (next_cnt<6))
+		USARTClass::do_leveling_move_action(next_cnt - 1);
 }
 #endif
 

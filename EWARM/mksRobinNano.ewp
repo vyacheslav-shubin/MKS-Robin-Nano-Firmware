@@ -1017,7 +1017,13 @@
       <group>
         <name>UI</name>
         <file>
+          <name>$PROJ_DIR$\..\User\ui\ui_tools.cpp</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\User\ui\draw_about.cpp</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\User\ui\ui_utils.cpp</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\User\ui\draw_acceleration.cpp</name>

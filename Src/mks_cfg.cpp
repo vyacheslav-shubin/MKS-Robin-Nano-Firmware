@@ -18,7 +18,7 @@
 void epr_read_data(int pos, uint8_t* value, uint16_t size);
 //char WELCOME_MSG[30] = "3D Printer ready.";
 
-volatile u32 ugbksize;//flashÖÐUnicode×ªGBK×ª»»±í´óÐ¡Öµ¡£
+volatile u32 ugbksize;//flashï¿½ï¿½Unicode×ªGBK×ªï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Öµï¿½ï¿½
 
 #if defined(MKS_ROBIN2)
 char *cfg_file = "robin2_cfg.txt";	
@@ -91,7 +91,7 @@ void mksCardTest()
 {
 	char string[20]="clear_test_a";
 	FIL pft;
-	char *mks_pft_name = "mks_pft.sys";	//8.3 ÎÄ¼þÃû½á¹¹
+	char *mks_pft_name = "mks_pft.sys";	//8.3 ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½á¹¹
 	
 	char oldname[30]={0};
 	strcat(oldname,SD_Path);
@@ -130,7 +130,7 @@ void CardReader::mksConfiguration()
 	  SPI_FLASH_SectorErase(1024*4);
 
 	 mksReset();
-	 (void)settings.reset();	//MarlinÄ¬ÈÏ²ÎÊýÖµ»Ö¸´
+	 (void)settings.reset();	//MarlinÄ¬ï¿½Ï²ï¿½ï¿½ï¿½Öµï¿½Ö¸ï¿½
 	  memset(cfg_buf,0,sizeof(cfg_buf));
 	  p = cfg_buf;
 	  while(1)
@@ -143,26 +143,26 @@ void CardReader::mksConfiguration()
 			mksEepromRefresh();
 			break;
 		}
-		#if tan_mask//¶¨ÖÆÖ¸ÁîÊÇÐèÒª¿Õ¸ñµÄ¡£
-		//È¥µô¿Õ¸ñ
-		if(cfg_data != 0x20 && cfg_data != 0x09)	//0x20 -- ¿Õ¸ñ£» 0x09--Ë®Æ½ÖÆ±í·û
+		#if tan_mask//ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Õ¸ï¿½Ä¡ï¿½
+		//È¥ï¿½ï¿½ï¿½Õ¸ï¿½
+		if(cfg_data != 0x20 && cfg_data != 0x09)	//0x20 -- ï¿½Õ¸ï¿½ 0x09--Ë®Æ½ï¿½Æ±ï¿½ï¿½
 		#endif
 		{
 			if(notes_flag == 0)
 	  			*p++ = (uint8_t)cfg_data;
 		}
 		
-		//È¥µô×¢ÊÍ,±£Áô"#"
+		//È¥ï¿½ï¿½×¢ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½"#"
 		if(cfg_data == 0x23 && notes_flag == 0)         // "#"
 		{
 				notes_flag = 1;
 		}
-		if((cfg_data == 0x0A || cfg_data == 0x0D) && notes_flag == 1)  // »»ÐÐ ,»Ø³µ
+		if((cfg_data == 0x0A || cfg_data == 0x0D) && notes_flag == 1)  // ï¿½ï¿½ï¿½ï¿½ ,ï¿½Ø³ï¿½
 		{
 				notes_flag = 0;
 				*p++ = (uint8_t)cfg_data;					
 		}
-		//·Ö¶Î½øÐÐÅäÖÃ
+		//ï¿½Ö¶Î½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if((cfg_data == 0x0A || cfg_data == 0x0D) && ((p-cfg_buf) > (CFG_BUF_LEN-200)))  
 		{
 			mksEepromRefresh();
@@ -179,7 +179,7 @@ void CardReader::mksConfiguration()
 	  strcat(newname,SD_Path);
 	  strcat(newname,cfg_file_cur);
 
-	  if(!mksTmp.cfg_hardware_test_enable)  //¸ü¸ÄÎÄ¼þÃû
+	  if(!mksTmp.cfg_hardware_test_enable)  //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 	  	{
 		  r = f_unlink(newname);
 		  r = f_rename(oldname,newname);
@@ -196,15 +196,15 @@ void CardReader::mksConfiguration()
         mksCfg.bed_leveling_method = AUTO_BED_LEVELING_BILINEAR;
     }
 
-      //¿ªÆôÁËË«ZÖá£¬Ë«ZÏÞÎ»£¬
-      //ÓÉÓÚÓ²¼þ½Ó¿Ú²»¹»,Ç¿ÖÆ½ûÓÃµ÷Æ½¹¦ÄÜ.
+      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë«Zï¿½á£¬Ë«Zï¿½ï¿½Î»ï¿½ï¿½
+      //ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½Ó¿Ú²ï¿½ï¿½ï¿½,Ç¿ï¿½Æ½ï¿½ï¿½Ãµï¿½Æ½ï¿½ï¿½ï¿½ï¿½.
       if((mksCfg.z2_enable==1)&&(mksCfg.z2_endstops_enable==1))
       {
         mksCfg.bed_leveling_method = 0;
         epr_write_data(EPR_BED_LEVELING_METHOD, &mksCfg.bed_leveling_method,1);
       }
     
-	  (void)settings.save();	//±£´æ²ÎÊý
+	  (void)settings.save();	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	  SERIAL_PROTOCOLLNPGM("Refresh done!");  
     }
     else {
@@ -330,7 +330,7 @@ void flashBurnValue(char *string,uint16_t flash_addr)
 	{
 		tmp_index += strlen(string);
 		mksGetParameterToFlash(tmp_index);	
-		SPI_FLASH_BufferWrite((u8 *)cmd_code, flash_addr,strlen(cmd_code)+1);//¼Ó1±£Ö¤×îºóÒ»¸ö×Ö½ÚÎª0
+		SPI_FLASH_BufferWrite((u8 *)cmd_code, flash_addr,strlen(cmd_code)+1);//ï¿½ï¿½1ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½ï¿½Îª0
 	}
 }
 
@@ -357,7 +357,7 @@ void hexBurnValue2(char *string,uint8_t *data_addr,uint16_t flash_addr)
 		mksGetParameter(tmp_index);	
 		*data_addr = ascii2dec(&cmd_code[2],2);
 		//epr_write_data(epr_addr, (uint8_t *)data_addr,sizeof(uint8_t));
-		SPI_FLASH_BufferWrite((u8 *)data_addr, flash_addr,1);//¼Ó1±£Ö¤×îºóÒ»¸ö×Ö½ÚÎª0
+		SPI_FLASH_BufferWrite((u8 *)data_addr, flash_addr,1);//ï¿½ï¿½1ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½ï¿½Îª0
 		//SPI_FLASH_BufferRead((u8*)&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR,1);
 	}	
 }
@@ -406,9 +406,9 @@ void eprBurnValue_leveling(char *string, int32_t *data_addr_x, int32_t *data_add
 void CardReader::mksEepromRefresh()
 {
 	char *tmp_index;
-/*------------------------ÅÐ¶ÏÊÇ·ñ²Á³ýEEPROM---------------------------------*/
+/*------------------------ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½EEPROM---------------------------------*/
 /*
->ERASE_EEPROM 1		#1£ºÅäÖÃÇ°ÏÈ²Á³ýEEPROM; 0£ºÅäÖÃÇ°²»²Á³ýEEPROM;
+>ERASE_EEPROM 1		#1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½È²ï¿½ï¿½ï¿½EEPROM; 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½EEPROM;
 */
 	uint32_t erase_data = 0xffffffff;
     mksTmp.erase_eeprom = 0;
@@ -422,7 +422,7 @@ void CardReader::mksEepromRefresh()
            epr_write_data(i*4, (uint8_t *)erase_data, sizeof(erase_data));
 	}
 	
-/*------------------------Marlin ×Ô´ø²ÎÊýÅäÖÃ begin---------------------------------*/
+/*------------------------Marlin ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ begin---------------------------------*/
 
 //DEFAULT_AXIS_STEPS_PER_UNIT
         eprBurnValue(">DEFAULT_X_STEPS_PER_UNIT",&planner.axis_steps_per_mm[X_AXIS]);
@@ -622,9 +622,9 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue(">DELTA_CALIBRATION_RADIUS",&delta_calibration_radius);
  
 
-/*------------------------Marlin ×Ô´ø²ÎÊýÅäÖÃ end---------------------------------*/
+/*------------------------Marlin ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ end---------------------------------*/
 
-/*------------------------MKS ÐÂÔö²ÎÊýÅäÖÃ begin---------------------------------*/
+/*------------------------MKS ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ begin---------------------------------*/
         
 //INVERT_x_DIR
 	eprBurnValue(">INVERT_X_DIR", &mksCfg.invert_x_dir, EPR_INVERT_X_DIR);
@@ -867,15 +867,16 @@ void CardReader::mksEepromRefresh()
 	
 	eprBurnValue(">cfg_pwroff_save_mode", (uint8_t *)&gCfgItems.pwroff_save_mode,EPR_PWROFF_SAVE_MODE);
 	
-	//×Ô¶¯µ÷Æ½Ö¸Áî
+	//ï¿½Ô¶ï¿½ï¿½ï¿½Æ½Ö¸ï¿½ï¿½
 	flashBurnValue(">cfg_auto_leveling_cmd:", BUTTON_AUTOLEVELING_ADDR);
 	eprBurnValue(">cfg_leveling_mode", (uint8_t *)&gCfgItems.leveling_mode,EPR_LEVELING_MODE);
 	eprBurnValue(">cfg_point_number", (uint8_t *)&gCfgItems.leveling_point_number,EPR_LEVELING_POINT_CNT);
-	eprBurnValue_leveling(">cfg_point1:",(int32_t *)&gCfgItems.leveling_point1_x,(int32_t *)&gCfgItems.leveling_point1_y,EPR_LEVELING_POINT1_X,EPR_LEVELING_POINT1_Y);
-	eprBurnValue_leveling(">cfg_point2:",(int32_t *)&gCfgItems.leveling_point2_x,(int32_t *)&gCfgItems.leveling_point2_y,EPR_LEVELING_POINT2_X,EPR_LEVELING_POINT2_Y);
-	eprBurnValue_leveling(">cfg_point3:",(int32_t *)&gCfgItems.leveling_point3_x,(int32_t *)&gCfgItems.leveling_point3_y,EPR_LEVELING_POINT3_X,EPR_LEVELING_POINT3_Y);
-	eprBurnValue_leveling(">cfg_point4:",(int32_t *)&gCfgItems.leveling_point4_x,(int32_t *)&gCfgItems.leveling_point4_y,EPR_LEVELING_POINT4_X,EPR_LEVELING_POINT4_Y);
-	eprBurnValue_leveling(">cfg_point5:",(int32_t *)&gCfgItems.leveling_point5_x,(int32_t *)&gCfgItems.leveling_point5_y,EPR_LEVELING_POINT5_X,EPR_LEVELING_POINT5_Y);
+
+	eprBurnValue_leveling(">cfg_point1:",(int32_t *)&gCfgItems.leveling_points[0].x,(int32_t *)&gCfgItems.leveling_points[0].y,EPR_LEVELING_POINT1_X,EPR_LEVELING_POINT1_Y);
+	eprBurnValue_leveling(">cfg_point2:",(int32_t *)&gCfgItems.leveling_points[1].x,(int32_t *)&gCfgItems.leveling_points[1].y,EPR_LEVELING_POINT2_X,EPR_LEVELING_POINT2_Y);
+	eprBurnValue_leveling(">cfg_point3:",(int32_t *)&gCfgItems.leveling_points[2].x,(int32_t *)&gCfgItems.leveling_points[2].y,EPR_LEVELING_POINT3_X,EPR_LEVELING_POINT3_Y);
+	eprBurnValue_leveling(">cfg_point4:",(int32_t *)&gCfgItems.leveling_points[3].x,(int32_t *)&gCfgItems.leveling_points[3].y,EPR_LEVELING_POINT4_X,EPR_LEVELING_POINT4_Y);
+	eprBurnValue_leveling(">cfg_point5:",(int32_t *)&gCfgItems.leveling_points[4].x,(int32_t *)&gCfgItems.leveling_points[4].y,EPR_LEVELING_POINT5_X,EPR_LEVELING_POINT5_Y);
 
 	eprBurnValue(">cfg_print_over_auto_close", (uint8_t *)&gCfgItems.print_finish_close_machine_flg,EPR_AUTO_CLOSE_MACHINE);
 
@@ -921,7 +922,7 @@ void CardReader::mksEepromRefresh()
 
 	eprBurnValue(">Z_SAFE_HOMING", &mksCfg.z_save_homing, EPR_Z_SAVE_HOMING);
 
-/*------------------------MKS ÐÂÔö²ÎÊýÅäÖÃ end---------------------------------*/
+/*------------------------MKS ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ end---------------------------------*/
         
 	
 }
@@ -966,7 +967,7 @@ void epr_read_data(int pos, uint8_t* value, uint16_t size)
 }
 
 
-//³ýsettings.reset();Íâ£¬ÆäËûÄ¬ÈÏ²ÎÊý»Ö¸´
+//ï¿½ï¿½settings.reset();ï¿½â£¬ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï²ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½
 void CardReader::mksReset() 
 {
 	  mksCfg.machinetype = Cartesian;
@@ -1362,9 +1363,9 @@ void CardReader::mksLoad()
 	if(mksCfg.grid_max_points_y > GRID_MAX_POINTS_Y_MAX) mksCfg.grid_max_points_y = GRID_MAX_POINTS_Y_MAX;
 	if(MACHINETPYE == DELTA)
 		{
-		if(mksCfg.grid_max_points_x%2 == 0) mksCfg.grid_max_points_x -= 1;//Ö»ÄÜÎªÆæÊý
+		if(mksCfg.grid_max_points_x%2 == 0) mksCfg.grid_max_points_x -= 1;//Ö»ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 		if(mksCfg.grid_max_points_y%2 == 0) mksCfg.grid_max_points_y -= 1;
-		if(mksCfg.grid_max_points_x <3)	mksCfg.grid_max_points_x = 3;	// ²»Ð¡ÓÚ3µã
+		if(mksCfg.grid_max_points_x <3)	mksCfg.grid_max_points_x = 3;	// ï¿½ï¿½Ð¡ï¿½ï¿½3ï¿½ï¿½
 		if(mksCfg.grid_max_points_y <3)	mksCfg.grid_max_points_y = 3;	
 		}
 	//#error "GRID_MAX_POINTS_X and GRID_MAX_POINTS_Y must be less than 10 for MBL."
@@ -1399,13 +1400,13 @@ void CardReader::mksLoad()
 
 #if defined(MKS_ROBIN_LITE)
     epr_read_data((int)EPR_CURRENT_VREF_XY, (uint8_t*)&mksCfg.current_vref_xy, sizeof(mksCfg.current_vref_xy)); 
-    TIM3->CCR3 = mksCfg.current_vref_xy < 1000 ? mksCfg.current_vref_xy*0.364:364;      //A4988,RS=0.2Å·£¬XYÏÞÖÆ×î´óµçÁ÷Îª1A.
+    TIM3->CCR3 = mksCfg.current_vref_xy < 1000 ? mksCfg.current_vref_xy*0.364:364;      //A4988,RS=0.2Å·ï¿½ï¿½XYï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª1A.
     
     epr_read_data((int)EPR_CURRENT_VREF_Z, (uint8_t*)&mksCfg.current_vref_z, sizeof(mksCfg.current_vref_z)); 
-    TIM3->CCR2 = mksCfg.current_vref_z < 1000 ? mksCfg.current_vref_z*0.364:364;      //A4988,RS=0.2Å·£¬ZÏÞÖÆ×î´óµçÁ÷Îª1A.
+    TIM3->CCR2 = mksCfg.current_vref_z < 1000 ? mksCfg.current_vref_z*0.364:364;      //A4988,RS=0.2Å·ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª1A.
 	
     epr_read_data((int)EPR_CURRENT_VREF_E, (uint8_t*)&mksCfg.current_vref_e, sizeof(mksCfg.current_vref_e)); 
-    TIM3->CCR1 = mksCfg.current_vref_e < 1000 ? mksCfg.current_vref_e*0.364:364;      //A4988,RS=0.2Å·£¬EÏÞÖÆ×î´óµçÁ÷Îª1A.
+    TIM3->CCR1 = mksCfg.current_vref_e < 1000 ? mksCfg.current_vref_e*0.364:364;      //A4988,RS=0.2Å·ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª1A.
 #endif
 
 	epr_read_data((int)EPR_Z_CLEARANCE_DEPLOY_PROBE, (uint8_t*)&mksCfg.z_clearance_deploy_probe, sizeof(mksCfg.z_clearance_deploy_probe));			if(mksCfg.z_clearance_deploy_probe <= 0.0)		mksCfg.z_clearance_deploy_probe   = 0.0001;

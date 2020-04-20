@@ -13,7 +13,7 @@ static BUTTON_STRUCT level_point1_y_value,level_point2_y_value,level_point3_y_va
 
 static BUTTON_STRUCT button_next,button_previous,button_back;
 
-static uint8_t current_page;//0:上一页，1:下一页
+static uint8_t current_page;//0:锟斤拷一页锟斤拷1:锟斤拷一页
 
 static void cbXYZLevelParaWin(WM_MESSAGE * pMsg) {
 
@@ -228,15 +228,15 @@ void draw_XYZLevelPara()
 	    BUTTON_SetBmpFileName(level_point4_text.btnHandle,NULL,1);
 	    
 	    
-	    BUTTON_SetBitmapEx(level_point1_x_value.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(level_point1_x_value.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 	    BUTTON_SetBitmapEx(level_point2_x_value.btnHandle,0,&bmp_struct70X28,0,0);
 	    BUTTON_SetBitmapEx(level_point3_x_value.btnHandle,0,&bmp_struct70X28,0,0);
-	    BUTTON_SetBitmapEx(level_point4_x_value.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(level_point4_x_value.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 
-		BUTTON_SetBitmapEx(level_point1_y_value.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+		BUTTON_SetBitmapEx(level_point1_y_value.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 	    BUTTON_SetBitmapEx(level_point2_y_value.btnHandle,0,&bmp_struct70X28,0,0);
 	    BUTTON_SetBitmapEx(level_point3_y_value.btnHandle,0,&bmp_struct70X28,0,0);
-	    BUTTON_SetBitmapEx(level_point4_y_value.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(level_point4_y_value.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 	        
 	    BUTTON_SetTextAlign(level_point1_text.btnHandle,GUI_TA_LEFT|GUI_TA_VCENTER );
 	    BUTTON_SetTextAlign(level_point2_text.btnHandle,GUI_TA_LEFT|GUI_TA_VCENTER );
@@ -294,29 +294,29 @@ void draw_XYZLevelPara()
 	    BUTTON_SetTextColor(level_point4_y_value.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.value_text_color);
 
 	    memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point1_x);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[0].x);
 	    BUTTON_SetText(level_point1_x_value.btnHandle,cmd_code);
 	    memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point2_x);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[1].x);
 	    BUTTON_SetText(level_point2_x_value.btnHandle,cmd_code);
 	    memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point3_x);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[2].x);
 	    BUTTON_SetText(level_point3_x_value.btnHandle,cmd_code);
 	    memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point4_x);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[3].x);
 	    BUTTON_SetText(level_point4_x_value.btnHandle,cmd_code);
 
 		memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point1_y);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[0].y);
 	    BUTTON_SetText(level_point1_y_value.btnHandle,cmd_code);
 	    memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point2_y);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[1].y);
 	    BUTTON_SetText(level_point2_y_value.btnHandle,cmd_code);
 	    memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point3_y);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[2].y);
 	    BUTTON_SetText(level_point3_y_value.btnHandle,cmd_code);
 	    memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point4_y);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[3].y);
 	    BUTTON_SetText(level_point4_y_value.btnHandle,cmd_code);
 
 		button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hXYZLevelParaWnd,BUTTON_CF_SHOW,0,alloc_win_id());
@@ -350,8 +350,8 @@ void draw_XYZLevelPara()
 	    BUTTON_SetBmpFileName(level_point5_x_value.btnHandle, "bmp_value_blank.bin",1);
 	    BUTTON_SetBmpFileName(level_point5_y_value.btnHandle, "bmp_value_blank.bin",1); 
 
-	    BUTTON_SetBitmapEx(level_point5_x_value.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
-	    BUTTON_SetBitmapEx(level_point5_y_value.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(level_point5_x_value.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
+	    BUTTON_SetBitmapEx(level_point5_y_value.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 
 	    BUTTON_SetBkColor(level_point5_x_value.btnHandle, BUTTON_CI_PRESSED, gCfgItems.value_bk_color);
 	    BUTTON_SetBkColor(level_point5_x_value.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.value_bk_color); 
@@ -368,11 +368,11 @@ void draw_XYZLevelPara()
 	    BUTTON_SetTextAlign(level_point5_y_value.btnHandle,GUI_TA_HCENTER|GUI_TA_VCENTER );
 
 		memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point5_x);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[4].x);
 	    BUTTON_SetText(level_point5_x_value.btnHandle,cmd_code);
 		
 		memset(cmd_code,0,sizeof(cmd_code));
-	    sprintf(cmd_code,"%d",gCfgItems.leveling_point5_y);
+	    sprintf(cmd_code,"%d",gCfgItems.leveling_points[5].y);
 	    BUTTON_SetText(level_point5_y_value.btnHandle,cmd_code);
 
 	    button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hXYZLevelParaWnd,BUTTON_CF_SHOW,0,alloc_win_id());

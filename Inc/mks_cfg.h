@@ -476,8 +476,14 @@ typedef struct
 	
 }TMP_PRINTER_ITMES;		//����Ҫ����EEPROM������ 
 
-typedef struct
-{
+typedef struct{
+	volatile int16_t x;
+	volatile int16_t y;
+} XY_POINT;
+
+#define set_xy_point(point, xv, yv) {point.x = xv; point.y = yv; }
+
+typedef struct {
 	volatile int8_t custom_pic_flag;
 
 		int32_t value_bk_color;
@@ -587,17 +593,8 @@ typedef struct
 	
 		volatile uint8_t leveling_mode;//��ƽģʽ0:�ֶ���ƽ��1:�Զ���ƽ
 		volatile uint8_t leveling_point_number;//�ֶ���ƽ����������(����3/4/5����ֵ)
-		
-		volatile int16_t leveling_point1_x;
-		volatile int16_t leveling_point1_y;
-		volatile int16_t leveling_point2_x;
-		volatile int16_t leveling_point2_y;
-		volatile int16_t leveling_point3_x;
-		volatile int16_t leveling_point3_y;
-		volatile int16_t leveling_point4_x;
-		volatile int16_t leveling_point4_y;
-		volatile int16_t leveling_point5_x;
-		volatile int16_t leveling_point5_y; 	
+
+		XY_POINT leveling_points[5];
 		
 		volatile int32_t leveling_z_speed;
 		volatile int32_t leveling_xy_speed;

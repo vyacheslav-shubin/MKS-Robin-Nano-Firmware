@@ -66,16 +66,17 @@ void mkstft_ui_load()
 
 		epr_read_data(EPR_LEVELING_MODE,(uint8_t *)&gCfgItems.leveling_mode,sizeof(gCfgItems.leveling_mode));	
 		epr_read_data(EPR_LEVELING_POINT_CNT,(uint8_t *)&gCfgItems.leveling_point_number,sizeof(gCfgItems.leveling_point_number));	
-		epr_read_data(EPR_LEVELING_POINT1_X,(uint8_t *)&gCfgItems.leveling_point1_x,sizeof(gCfgItems.leveling_point1_x));	
-		epr_read_data(EPR_LEVELING_POINT1_Y,(uint8_t *)&gCfgItems.leveling_point1_y,sizeof(gCfgItems.leveling_point1_y));	
-		epr_read_data(EPR_LEVELING_POINT2_X,(uint8_t *)&gCfgItems.leveling_point2_x,sizeof(gCfgItems.leveling_point2_x));	
-		epr_read_data(EPR_LEVELING_POINT2_Y,(uint8_t *)&gCfgItems.leveling_point2_y,sizeof(gCfgItems.leveling_point2_y));
-		epr_read_data(EPR_LEVELING_POINT3_X,(uint8_t *)&gCfgItems.leveling_point3_x,sizeof(gCfgItems.leveling_point3_x));	
-		epr_read_data(EPR_LEVELING_POINT3_Y,(uint8_t *)&gCfgItems.leveling_point3_y,sizeof(gCfgItems.leveling_point3_y));
-		epr_read_data(EPR_LEVELING_POINT4_X,(uint8_t *)&gCfgItems.leveling_point4_x,sizeof(gCfgItems.leveling_point4_x));	
-		epr_read_data(EPR_LEVELING_POINT4_Y,(uint8_t *)&gCfgItems.leveling_point4_y,sizeof(gCfgItems.leveling_point4_y));
-		epr_read_data(EPR_LEVELING_POINT5_X,(uint8_t *)&gCfgItems.leveling_point5_x,sizeof(gCfgItems.leveling_point5_x));	
-		epr_read_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_point5_y,sizeof(gCfgItems.leveling_point5_y));
+
+		epr_read_data(EPR_LEVELING_POINT1_X,(uint8_t *)&gCfgItems.leveling_points[0].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_read_data(EPR_LEVELING_POINT1_Y,(uint8_t *)&gCfgItems.leveling_points[0].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_read_data(EPR_LEVELING_POINT2_X,(uint8_t *)&gCfgItems.leveling_points[1].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_read_data(EPR_LEVELING_POINT2_Y,(uint8_t *)&gCfgItems.leveling_points[1].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_read_data(EPR_LEVELING_POINT3_X,(uint8_t *)&gCfgItems.leveling_points[2].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_read_data(EPR_LEVELING_POINT3_Y,(uint8_t *)&gCfgItems.leveling_points[2].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_read_data(EPR_LEVELING_POINT4_X,(uint8_t *)&gCfgItems.leveling_points[3].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_read_data(EPR_LEVELING_POINT4_Y,(uint8_t *)&gCfgItems.leveling_points[3].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_read_data(EPR_LEVELING_POINT5_X,(uint8_t *)&gCfgItems.leveling_points[4].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_read_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_points[4].y,sizeof(gCfgItems.leveling_points[0].y));
 
 		epr_read_data(EPR_AUTO_CLOSE_MACHINE,(uint8_t *)&gCfgItems.print_finish_close_machine_flg,sizeof(gCfgItems.print_finish_close_machine_flg));
 		epr_read_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
@@ -148,16 +149,16 @@ void mkstft_ui_set_epr()
 		epr_write_data(EPR_LEVELING_MODE,(uint8_t *)&gCfgItems.leveling_mode,sizeof(gCfgItems.leveling_mode));	
 		epr_write_data(EPR_LEVELING_POINT_CNT,(uint8_t *)&gCfgItems.leveling_point_number,sizeof(gCfgItems.leveling_point_number));	
 
-		epr_write_data(EPR_LEVELING_POINT1_X,(uint8_t *)&gCfgItems.leveling_point1_x,sizeof(gCfgItems.leveling_point1_x));	
-		epr_write_data(EPR_LEVELING_POINT1_Y,(uint8_t *)&gCfgItems.leveling_point1_y,sizeof(gCfgItems.leveling_point1_y));	
-		epr_write_data(EPR_LEVELING_POINT2_X,(uint8_t *)&gCfgItems.leveling_point2_x,sizeof(gCfgItems.leveling_point2_x));	
-		epr_write_data(EPR_LEVELING_POINT2_Y,(uint8_t *)&gCfgItems.leveling_point2_y,sizeof(gCfgItems.leveling_point2_y));
-		epr_write_data(EPR_LEVELING_POINT3_X,(uint8_t *)&gCfgItems.leveling_point3_x,sizeof(gCfgItems.leveling_point3_x));	
-		epr_write_data(EPR_LEVELING_POINT3_Y,(uint8_t *)&gCfgItems.leveling_point3_y,sizeof(gCfgItems.leveling_point3_y));
-		epr_write_data(EPR_LEVELING_POINT4_X,(uint8_t *)&gCfgItems.leveling_point4_x,sizeof(gCfgItems.leveling_point4_x));	
-		epr_write_data(EPR_LEVELING_POINT4_Y,(uint8_t *)&gCfgItems.leveling_point4_y,sizeof(gCfgItems.leveling_point4_y));
-		epr_write_data(EPR_LEVELING_POINT5_X,(uint8_t *)&gCfgItems.leveling_point5_x,sizeof(gCfgItems.leveling_point5_x));	
-		epr_write_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_point5_y,sizeof(gCfgItems.leveling_point5_y));
+		epr_write_data(EPR_LEVELING_POINT1_X,(uint8_t *)&gCfgItems.leveling_points[0].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_write_data(EPR_LEVELING_POINT1_Y,(uint8_t *)&gCfgItems.leveling_points[0].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_write_data(EPR_LEVELING_POINT2_X,(uint8_t *)&gCfgItems.leveling_points[1].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_write_data(EPR_LEVELING_POINT2_Y,(uint8_t *)&gCfgItems.leveling_points[1].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_write_data(EPR_LEVELING_POINT3_X,(uint8_t *)&gCfgItems.leveling_points[2].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_write_data(EPR_LEVELING_POINT3_Y,(uint8_t *)&gCfgItems.leveling_points[2].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_write_data(EPR_LEVELING_POINT4_X,(uint8_t *)&gCfgItems.leveling_points[3].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_write_data(EPR_LEVELING_POINT4_Y,(uint8_t *)&gCfgItems.leveling_points[3].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_write_data(EPR_LEVELING_POINT5_X,(uint8_t *)&gCfgItems.leveling_points[4].x,sizeof(gCfgItems.leveling_points[0].x));
+		epr_write_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_points[4].y,sizeof(gCfgItems.leveling_points[0].y));
 
 		epr_write_data(EPR_AUTO_CLOSE_MACHINE,(uint8_t *)&gCfgItems.print_finish_close_machine_flg,sizeof(gCfgItems.print_finish_close_machine_flg));
 		epr_write_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
@@ -230,18 +231,12 @@ void mkstft_ui_init()
 
 		gCfgItems.leveling_mode = 0;
 		gCfgItems.leveling_point_number = 4;
-		//(50,50)
-		gCfgItems.leveling_point1_x = 50;
-		gCfgItems.leveling_point1_y = 50;
-		//(180,50)
-		gCfgItems.leveling_point2_x = 180;
-		gCfgItems.leveling_point2_y = 50;
-		//(180,180)
-		gCfgItems.leveling_point3_x = 180;
-		gCfgItems.leveling_point3_y = 180;
-		//(50,180)
-		gCfgItems.leveling_point4_x = 50;
-		gCfgItems.leveling_point4_y = 180;
+
+		set_xy_point(gCfgItems.leveling_points[0],50,50);
+		set_xy_point(gCfgItems.leveling_points[1],180,50);
+		set_xy_point(gCfgItems.leveling_points[2],180,180);
+		set_xy_point(gCfgItems.leveling_points[3],50,180);
+		set_xy_point(gCfgItems.leveling_points[4],115,115);
 		
 		gCfgItems.leveling_xy_speed = 3000;
 		gCfgItems.leveling_z_speed = 1500;
@@ -271,12 +266,12 @@ void mkstft_ui_init()
 		gCfgItems.func_btn1_display_flag = 1;
 		
 		/*wifi_cfg*/
-		gCfgItems.wifi_mode_sel = 1;//1ÎªAPÄ£Ê½£¬ÆäËûÎªclientÄ£Ê½£¬Ä¬ÈÏÎªAPÄ£Ê½¡£
+		gCfgItems.wifi_mode_sel = 1;//1ÎªAPÄ£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªclientÄ£Ê½ï¿½ï¿½Ä¬ï¿½ï¿½ÎªAPÄ£Ê½ï¿½ï¿½
 		memset(&wifiPara, 0, sizeof(wifiPara));
 		memset(&ipPara, 0, sizeof(ipPara));
 		strcpy(wifiPara.ap_name,WIFI_AP_NAME);
 		strcpy(wifiPara.keyCode,WIFI_KEY_CODE);
-		//clientÄ£Ê½³õÊ¼Öµ
+		//clientÄ£Ê½ï¿½ï¿½Ê¼Öµ
 		strcpy(ipPara.ip_addr,IP_ADDR);
 		strcpy(ipPara.mask,IP_MASK);
 		strcpy(ipPara.gate,IP_GATE);
@@ -284,7 +279,7 @@ void mkstft_ui_init()
 		
 		ipPara.dhcp_flag = IP_DHCP_FLAG;
 		
-		//APÄ£Ê½³õÊ¼Öµ
+		//APÄ£Ê½ï¿½ï¿½Ê¼Öµ
 		strcpy(ipPara.dhcpd_ip,AP_IP_ADDR);
 		strcpy(ipPara.dhcpd_mask,AP_IP_MASK);
 		strcpy(ipPara.dhcpd_gate,AP_IP_GATE);
@@ -421,14 +416,14 @@ void mks_initPrint()
 uint32_t t1,t2;
 char t12[10];
 
-void mks_WriteToEpr()        //ÔÝÍ£¡¢¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
+void mks_WriteToEpr()        //ï¿½ï¿½Í£ï¿½ï¿½ï¿½Ïµï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½Ô±ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
     //t1 = getTick();    
-	//±£´æÎÄ¼þÎ»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Î»ï¿½ï¿½
 	mksReprint.sdpos = card.getsdpos();
 	epr_write_data(EPR_SAV_SDPOS, (uint8_t *)&mksReprint.sdpos,sizeof(mksReprint.sdpos));	
 	
-	//±£´æ´òÓ¡Í·ÎÂ¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡Í·ï¿½Â¶ï¿½
 	mksReprint.target_temperature_0 = thermalManager.target_temperature[0];
 	epr_write_data(EPR_SAV_TARGET_TEMP_0, (uint8_t *)&mksReprint.target_temperature_0,sizeof(mksReprint.target_temperature_0));
 	if(mksCfg.extruders == 2)
@@ -437,26 +432,26 @@ void mks_WriteToEpr()        //ÔÝÍ£¡¢¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
 		epr_write_data(EPR_SAV_TARGET_TEMP_1, (uint8_t *)&mksReprint.target_temperature_1,sizeof(mksReprint.target_temperature_1));
 		
 	}
-	//±£´æÈÈ´²ÎÂ¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½Â¶ï¿½
 	if(HAS_TEMP_BED)
 	{
 		mksReprint.target_temperature_bed = thermalManager.target_temperature_bed;
 		epr_write_data(EPR_SAV_TARGET_TEMP_BED, (uint8_t *)&mksReprint.target_temperature_bed,sizeof(mksReprint.target_temperature_bed));
 	}
 	
-	//±£´æµ±Ç°Î»ÖÃ
+	//ï¿½ï¿½ï¿½æµ±Ç°Î»ï¿½ï¿½
 	epr_write_data(EPR_SAV_CUR_X, (uint8_t *)&mksReprint.current_position[0],sizeof(mksReprint.current_position[0]));
 	epr_write_data(EPR_SAV_CUR_Y, (uint8_t *)&mksReprint.current_position[1],sizeof(mksReprint.current_position[1]));
 	epr_write_data(EPR_SAV_CUR_Z, (uint8_t *)&mksReprint.current_position[2],sizeof(mksReprint.current_position[2]));
 	epr_write_data(EPR_SAV_CUR_E, (uint8_t *)&mksReprint.current_position[3],sizeof(mksReprint.current_position[3]));
-	//±£´æÄ¿±êÎ»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
 	epr_write_data(EPR_SAV_DST_X, (uint8_t *)&mksReprint.destination[0],sizeof(mksReprint.destination[0]));
 	epr_write_data(EPR_SAV_DST_Y, (uint8_t *)&mksReprint.destination[1],sizeof(mksReprint.destination[1]));
 	epr_write_data(EPR_SAV_DST_Z, (uint8_t *)&mksReprint.destination[2],sizeof(mksReprint.destination[2]));
 	epr_write_data(EPR_SAV_DST_E, (uint8_t *)&mksReprint.destination[3],sizeof(mksReprint.destination[3]));
 
 #if tan_mask        
-	//±£´æ½ø¶ÈºÍÊ±¼ä
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èºï¿½Ê±ï¿½ï¿½
 	print_job_timer.getTime(&mksReprint.accumulator,&mksReprint.startTimestamp,&mksReprint.stopTimestamp);
 	mksReprint.uwTick = millis();
 	
@@ -470,10 +465,10 @@ void mks_WriteToEpr()        //ÔÝÍ£¡¢¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
 	epr_write_data(EPR_SAV_SECOND, (uint8_t *)&print_time.seconds,sizeof(print_time.seconds));
 
 
-	//±£´æ·çÉÈËÙ¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	epr_write_data(EPR_SAV_FAN, (uint8_t *)&mksReprint.fanSpeeds_0,sizeof(mksReprint.fanSpeeds_0));
 
-	//±£´æfeedrate
+	//ï¿½ï¿½ï¿½ï¿½feedrate
 	epr_write_data(EPR_SAV_F, (uint8_t *)&mksReprint.feedrate_mm_s,sizeof(mksReprint.feedrate_mm_s));
 
 	epr_write_data(EPR_SAV_CUR_EXTRUDE, (uint8_t *)&active_extruder,sizeof(active_extruder));
@@ -484,11 +479,11 @@ void mks_WriteToEpr()        //ÔÝÍ£¡¢¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
 }
 
 
-void mks_ReadFromEpr()        //ÔÝÍ£¡¢¶ÏµçÊ±¶ÁÈ¡Êý¾Ý
+void mks_ReadFromEpr()        //ï¿½ï¿½Í£ï¿½ï¿½ï¿½Ïµï¿½Ê±ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 {
-	//¶ÁÈ¡ÎÄ¼þÃû
+	//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½
 	epr_read_data((int)EPR_SAV_FILENAME, (uint8_t*)&mksReprint.filename[0],sizeof(mksReprint.filename));  
-	//¶ÁÈ¡ÎÄ¼þÆ«ÒÆ
+	//ï¿½ï¿½È¡ï¿½Ä¼ï¿½Æ«ï¿½ï¿½
 	if(gCfgItems.pwroff_save_mode != 1)
 	{
 		epr_read_data((int)EPR_SAV_SDPOS, (uint8_t*)&mksReprint.sdpos, sizeof(mksReprint.sdpos));	
@@ -496,33 +491,33 @@ void mks_ReadFromEpr()        //ÔÝÍ£¡¢¶ÏµçÊ±¶ÁÈ¡Êý¾Ý
 	else
 	{
 		epr_read_data((int)EPR_SAV_SDPOS, (uint8_t*)&mksReprint.sdpos_from_epr, sizeof(mksReprint.sdpos_from_epr));
-		epr_read_data((int)EPR_SAV_SDPOS_BAK, (uint8_t*)&mksReprint.sdpos_bak, sizeof(mksReprint.sdpos_bak));//×îºózÎ»ÖÃ
+		epr_read_data((int)EPR_SAV_SDPOS_BAK, (uint8_t*)&mksReprint.sdpos_bak, sizeof(mksReprint.sdpos_bak));//ï¿½ï¿½ï¿½zÎ»ï¿½ï¿½
 	}
-	//¶ÁÈ¡´òÓ¡Í·ÎÂ¶È
+	//ï¿½ï¿½È¡ï¿½ï¿½Ó¡Í·ï¿½Â¶ï¿½
 	epr_read_data((int)EPR_SAV_TARGET_TEMP_0, (uint8_t*)&mksReprint.target_temperature_0, sizeof(mksReprint.target_temperature_0));
     if(mksCfg.extruders == 2)
     {
 		epr_read_data(EPR_SAV_TARGET_TEMP_1, (uint8_t *)&mksReprint.target_temperature_1,sizeof(mksReprint.target_temperature_1));
     }
 
-    //¶ÁÈ¡ÈÈ´²ÎÂ¶È
+    //ï¿½ï¿½È¡ï¿½È´ï¿½ï¿½Â¶ï¿½
 	if(HAS_TEMP_BED)
 	{
 		epr_read_data((int)EPR_SAV_TARGET_TEMP_BED, (uint8_t*)&mksReprint.target_temperature_bed, sizeof(mksReprint.target_temperature_bed));
 	}
-	//¶ÁÈ¡µ±Ç°Î»ÖÃ
+	//ï¿½ï¿½È¡ï¿½ï¿½Ç°Î»ï¿½ï¿½
 	epr_read_data((int)EPR_SAV_CUR_X, (uint8_t*)&mksReprint.current_position[0], sizeof(mksReprint.current_position[0]));
 	epr_read_data((int)EPR_SAV_CUR_Y, (uint8_t*)&mksReprint.current_position[1], sizeof(mksReprint.current_position[1]));
 	epr_read_data((int)EPR_SAV_CUR_Z, (uint8_t*)&mksReprint.current_position[2], sizeof(mksReprint.current_position[2]));
 	epr_read_data((int)EPR_SAV_CUR_E, (uint8_t*)&mksReprint.current_position[3], sizeof(mksReprint.current_position[3]));
-	//¶ÁÈ¡Ä¿±êÎ»ÖÃ
+	//ï¿½ï¿½È¡Ä¿ï¿½ï¿½Î»ï¿½ï¿½
 	epr_read_data((int)EPR_SAV_DST_X, (uint8_t*)&mksReprint.destination[0], sizeof(mksReprint.destination[0]));
 	epr_read_data((int)EPR_SAV_DST_Y, (uint8_t*)&mksReprint.destination[1], sizeof(mksReprint.destination[1]));
 	epr_read_data((int)EPR_SAV_DST_Z, (uint8_t*)&mksReprint.destination[2], sizeof(mksReprint.destination[2]));
 	epr_read_data((int)EPR_SAV_DST_E, (uint8_t*)&mksReprint.destination[3], sizeof(mksReprint.destination[3]));
 
 #if tan_mask
-	//¶ÁÈ¡½ø¶ÈºÍÊ±¼ä
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Èºï¿½Ê±ï¿½ï¿½
 	epr_read_data((int)EPR_SAV_ACCU, (uint8_t*)&mksReprint.accumulator, sizeof(mksReprint.accumulator));
 	epr_read_data((int)EPR_SAV_STARTIME, (uint8_t*)&mksReprint.startTimestamp, sizeof(mksReprint.startTimestamp));
 	epr_read_data((int)EPR_SAV_STOPTIME, (uint8_t*)&mksReprint.stopTimestamp, sizeof(mksReprint.stopTimestamp));
@@ -532,10 +527,10 @@ void mks_ReadFromEpr()        //ÔÝÍ£¡¢¶ÏµçÊ±¶ÁÈ¡Êý¾Ý
 	epr_read_data((int)EPR_SAV_MINUTE, (uint8_t *)&print_time.minutes,sizeof(print_time.minutes));
 	epr_read_data((int)EPR_SAV_SECOND, (uint8_t *)&print_time.seconds,sizeof(print_time.seconds));
 
-	//¶ÁÈ¡·çÉÈËÙ¶È
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	epr_read_data((int)EPR_SAV_FAN, (uint8_t*)&mksReprint.fanSpeeds_0, sizeof(mksReprint.fanSpeeds_0));
 
-	//¶ÁÈ¡feedrate
+	//ï¿½ï¿½È¡feedrate
 	epr_read_data((int)EPR_SAV_F, (uint8_t*)&mksReprint.feedrate_mm_s, sizeof(mksReprint.feedrate_mm_s));
 
 	epr_read_data((int)EPR_SAV_CUR_EXTRUDE, (uint8_t *)&active_extruder,sizeof(active_extruder));
@@ -549,13 +544,13 @@ void mks_resumePrint()
 		{
 		mksReprint.mks_printer_state = MKS_WORKING;
 		
-		//¼·³ö²¹³¥
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mks_preExtrude(mksReprint.mks_pausePrint_e);
 
-		//ÒÆ¶¯X,Y
+		//ï¿½Æ¶ï¿½X,Y
 
 		mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);
-		//ZÖáÏÂ½µ
+		//Zï¿½ï¿½ï¿½Â½ï¿½
 		mks_moveZ(0);
 		//lcd_setstatus("Resume print.");
 		//lcd_setstatus(MSG_RESUME_PRINT);
@@ -588,12 +583,12 @@ void mks_pausePrint()
         mksReprint.fanSpeeds_0 = fanSpeeds[0];
         mksReprint.feedrate_mm_s = feedrate_mm_s;
 
-	//E »Ø³é
+	//E ï¿½Ø³ï¿½
 	//mks_preExtrude(MKS_RETROVERSION); 
 	mks_preExtrude(gCfgItems.pause_unload_len); 
-	//ZÖáÉÏÉý
+	//Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	mks_moveZ(mksReprint.mks_pausePrint_z);
-    //ÒÆ¶¯X,Y
+    //ï¿½Æ¶ï¿½X,Y
     if(mksReprint.mks_pausePrint_x != (float)-1  && mksReprint.mks_pausePrint_y != (float)-1)
 	mks_moveXY(mksReprint.mks_pausePrint_x,mksReprint.mks_pausePrint_y);
 
@@ -615,14 +610,14 @@ void mks_PrintStatePolling()
 {
 	if(mksReprint.mks_printer_state == MKS_PAUSING)
 		{
-		if( !planner.blocks_queued() &&  card.getsdpos()>MIN_FILE_PRINTED) 	//±ÜÃâ ÎÄ¼þÖÐ M109£¬M190Ö¸Áî 
+		if( !planner.blocks_queued() &&  card.getsdpos()>MIN_FILE_PRINTED) 	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¼ï¿½ï¿½ï¿½ M109ï¿½ï¿½M190Ö¸ï¿½ï¿½ 
 			mksReprint.waitEndMoves++;
 		
 		if(mksReprint.waitEndMoves > 20)
 			{
 			mksReprint.mks_printer_state = MKS_PAUSED;
             if(gCfgItems.pwroff_save_mode != 1)
-			    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //ÔÝÍ£±êÖ¾ÖÃÎ»
+			    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //ï¿½ï¿½Í£ï¿½ï¿½Ö¾ï¿½ï¿½Î»
 			mksReprint.waitEndMoves = 0;
 			mks_pausePrint();
 
@@ -633,8 +628,8 @@ void mks_PrintStatePolling()
 			mksReprint.waitEndMoves = 0;
 		}
 /*
-	Cartesian»úÐÍ ÔÝÍ£ºó£¬LCD ÒÆ¶¯X,Y,Z´¦Àí
-	DELTA »úÐÍ ÔÝÍ£ºó£¬X,Y,Z¶¼¹éÁã£¬²»Ðè´¦Àí
+	Cartesianï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Í£ï¿½ï¿½LCD ï¿½Æ¶ï¿½X,Y,Zï¿½ï¿½ï¿½ï¿½
+	DELTA ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Í£ï¿½ï¿½X,Y,Zï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½è´¦ï¿½ï¿½
 */
 	//if(mksReprint.mks_printer_state == MKS_PAUSED && MACHINETPYE != DELTA)
 	if(mksReprint.mks_printer_state == MKS_PAUSED)		
@@ -657,11 +652,11 @@ void mks_PrintStatePolling()
 		}
 
 /*
-	ÎÄ¼þÕý³£´òÓ¡Íêºó£¬±êÖ¾Î»´¦Àí
+	ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½ó£¬±ï¿½Ö¾Î»ï¿½ï¿½ï¿½ï¿½
 */
     if(mksReprint.mks_printer_state == MKS_RESUMING)
     {
-		if(pause_resum == 1)//ÔÝÍ£»Ö¸´
+		if(pause_resum == 1)//ï¿½ï¿½Í£ï¿½Ö¸ï¿½
 		{
 			pause_resum = 0;
 			//mks_resumePrint();
@@ -679,9 +674,9 @@ void mks_PrintStatePolling()
 				gcode_G0_G1();
 				stepper.synchronize();
 			}*/
-			//ÒÆ¶¯X,Y
+			//ï¿½Æ¶ï¿½X,Y
 			mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);
-            //°´ÁËÍ£Ö¹¼üÖ®ºó£¬ºóÃæµÄ¶¯×÷²»ÐèÒªÖ´ÐÐ¡£
+            //ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½Ö®ï¿½ó£¬ºï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ð¡ï¿½
             if(mksReprint.mks_printer_state == MKS_STOP)
             {
                 card.sdprinting = false;
@@ -689,7 +684,7 @@ void mks_PrintStatePolling()
             }
 			//mks_preExtrude(gCfgItems.resume_load_len);
 			
-			//ZÖáÏÂ½µ
+			//Zï¿½ï¿½ï¿½Â½ï¿½
 			mks_moveZ(0);
 
 			mks_adjust_extrude_speed();
@@ -703,20 +698,20 @@ void mks_PrintStatePolling()
 	if(mksReprint.mks_printer_state == MKS_WORKING)
 	{
 	/*
-		if(pause_resum == 1)//ÔÝÍ£»Ö¸´
+		if(pause_resum == 1)//ï¿½ï¿½Í£ï¿½Ö¸ï¿½
 		{
 			pause_resum = 0;
 			//mks_resumePrint();
 			mks_preExtrude(mksReprint.mks_pausePrint_e);
-			//ÒÆ¶¯X,Y
+			//ï¿½Æ¶ï¿½X,Y
 			mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);
-            //°´ÁËÍ£Ö¹¼üÖ®ºó£¬ºóÃæµÄ¶¯×÷²»ÐèÒªÖ´ÐÐ¡£
+            //ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½Ö®ï¿½ó£¬ºï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ð¡ï¿½
             if(mksReprint.mks_printer_state == MKS_STOP)
             {
                 card.sdprinting = false;
                 return;
             }
-			//ZÖáÏÂ½µ
+			//Zï¿½ï¿½ï¿½Â½ï¿½
 			mks_moveZ(0);
 
 			card.startFileprint();
@@ -739,7 +734,7 @@ void mks_PrintStatePolling()
 			//if(gCfgItems.pwroff_save_mode != 1)
 				mks_clearFile();
             }
-            //´òÍê¹Ø»ú
+            //ï¿½ï¿½ï¿½ï¿½Ø»ï¿½
             
             if((gCfgItems.print_finish_close_machine_flg == 1)&&(IsChooseAutoShutdown==1))
             {
@@ -751,7 +746,7 @@ void mks_PrintStatePolling()
 
 		}
 	}
-	//Í£Ö¹´òÓ¡
+	//Í£Ö¹ï¿½ï¿½Ó¡
 	if(mksReprint.mks_printer_state == MKS_STOP)
 	{
 		mksReprint.mks_printer_state = MKS_IDLE;
@@ -760,7 +755,7 @@ void mks_PrintStatePolling()
 	
 		clear_command_queue();
         quickstop_stepper();
-		//ZÖáÉÏÉý
+		//Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mksReprint.destination[2]=destination[Z_AXIS];
 		mks_moveZ(mksReprint.mks_pausePrint_z);
 		mks_G28("G28 X0 Y0");
@@ -782,7 +777,7 @@ void mks_PrintStatePolling()
 		if(gCfgItems.pwroff_save_mode != 1)
 			mks_clearFile();		
 	}
-	//ÔÝÍ£,¶ÏµçÐø´ò
+	//ï¿½ï¿½Í£,ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 	if(mksReprint.mks_printer_state == MKS_REPRINTED)
 		{
 		switch(MACHINETPYE)
@@ -806,7 +801,7 @@ void mks_PrintStatePolling()
 
 
 
-	//SDÎÄ¼þ±£´æ "²ã" ÐÅÏ¢
+	//SDï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ "ï¿½ï¿½" ï¿½ï¿½Ï¢
 	
 	if(mksReprint.mks_printer_state == MKS_WORKING && card.sdprinting == true)
 		{
@@ -843,7 +838,7 @@ void mks_setTemperature()
 {
 	char string[20];
 	
-		//ÉèÖÃÈÈ´²ÎÂ¶È M140
+		//ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½Â¶ï¿½ M140
 		if(HAS_TEMP_BED && mksReprint.target_temperature_bed != 0)
 			{
 			memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
@@ -858,7 +853,7 @@ void mks_setTemperature()
 			}
 	
 	
-			//ÉèÖÃ´òÓ¡Í·ÎÂ¶È
+			//ï¿½ï¿½ï¿½Ã´ï¿½Ó¡Í·ï¿½Â¶ï¿½
 		if(mksReprint.target_temperature_0 != 0)
 		{
 			if((mksCfg.extruders ==2))
@@ -895,7 +890,7 @@ void mks_setTemperature()
 			parser.parse(mksReprint.command_queue);
 			gcode_M109();
 		}	
-		//ÉèÖÃÈÈ´²ÎÂ¶È
+		//ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½Â¶ï¿½
 		if(HAS_TEMP_BED && mksReprint.target_temperature_bed != 0)
 		{
 			memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
@@ -916,7 +911,7 @@ void mks_setPositionZ()
 {
  	char string[20];
    
-	//ÉèÖÃZµ±Ç°Î»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½Ç°Î»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G92 Z");
 	memset(string,0,sizeof(string));
@@ -932,7 +927,7 @@ void mks_ResetPositionZ(float z)
 {
  	char string[20];
    
-	//ÉèÖÃZµ±Ç°Î»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½Ç°Î»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G92 Z");
 	memset(string,0,sizeof(string));
@@ -946,14 +941,14 @@ void mks_ResetPositionZ(float z)
 
 void mks_setFeedrate( )
 {
-	//ÉèÖÃfeedrate
+	//ï¿½ï¿½ï¿½ï¿½feedrate
 	feedrate_mm_s = mksReprint.feedrate_mm_s;
 }
 
 
 void mks_preExtrude(float e)
 {
-	//¼·³ö²¹³¥
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	char string[20];
 	relative_mode = true;
@@ -972,7 +967,7 @@ void mks_preExtrude(float e)
 	relative_mode = false;
 
 
-//ÉèÖÃEµ±Ç°Î»ÖÃ
+//ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½Ç°Î»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G92 E");
 	memset(string,0,sizeof(string));
@@ -989,7 +984,7 @@ void mks_preExtrude(float e)
 void mks_moveXY(float X,float Y)
 {
       char string[20];
-    //ÒÆ¶¯´òÓ¡Í·X,YÎ»ÖÃ
+    //ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·X,YÎ»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G1 X");
 	memset(string,0,sizeof(string));
@@ -1011,7 +1006,7 @@ void mks_moveXY(float X,float Y)
 void mks_moveZ(float Z)
 {
       char string[20];
-    //ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+    //ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G1 Z");
 	memset(string,0,sizeof(string));
@@ -1028,7 +1023,7 @@ void mks_moveZ_relative(float Z)
       char string[20];
       relative_mode = true;
       
-    //ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+    //ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G1 Z");
 	memset(string,0,sizeof(string));
@@ -1065,10 +1060,11 @@ void mks_G28(char *g_command)
 
 extern uint8_t leveling_first_time;
 
+#if 0
 void mks_leveling_moveZ(float Z)
 {
       char string[20];
-    //ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+    //ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G1 Z");
 	memset(string,0,sizeof(string));
@@ -1083,7 +1079,7 @@ void mks_leveling_moveZ(float Z)
 void mks_leveling_moveXY(float X,float Y)
 {
       char string[20];
-    //ÒÆ¶¯´òÓ¡Í·X,YÎ»ÖÃ
+    //ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·X,YÎ»ï¿½ï¿½
 	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G1 X");
 	memset(string,0,sizeof(string));
@@ -1117,6 +1113,7 @@ void mks_manual_leveling(int16_t x,int16_t y)
     mks_leveling_moveXY((float)x,(float)y);
     enqueue_and_echo_commands_P(PSTR("G1 Z0")); 
 }
+#endif
 
 void mks_contiuePrintPause()
 {
@@ -1127,38 +1124,38 @@ void mks_contiuePrintPause()
 
 	mks_setTemperature();
 
-	// X,Y¹éÁã
+	// X,Yï¿½ï¿½ï¿½ï¿½
 	mks_G28("G28 X0 Y0");
-    //°´ÁËÍ£Ö¹¼üÖ®ºó£¬ºóÃæµÄ¶¯×÷²»ÐèÒªÖ´ÐÐ¡£
+    //ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½Ö®ï¿½ó£¬ºï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ð¡ï¿½
     if(mksReprint.mks_printer_state == MKS_STOP)
      {
         card.sdprinting = false;
         return;
      }
 
-	//¼·³ö²¹³¥
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	mks_preExtrude(mksReprint.mks_pausePrint_e);
 
 	
-	//ÒÆ¶¯´òÓ¡Í·X,YÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·X,YÎ»ï¿½ï¿½
 	mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);	
-	//ÉèÖÃZµ±Ç°Î»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½Ç°Î»ï¿½ï¿½
 	mks_setPositionZ();
 
-	//ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	mks_moveZ(0);
 
 
-	//ÉèÖÃfeedrate
+	//ï¿½ï¿½ï¿½ï¿½feedrate
 	mks_setFeedrate();
 
 	//sean
 	mks_adjust_extrude_speed();
 
-	//ÉèÖÃ·çÉÈËÙ¶È
+	//ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	fanSpeeds[0] = mksReprint.fanSpeeds_0;
 	MKS_FAN_TIM = fanSpeeds[0]*10000/255;
-    //°´ÁËÍ£Ö¹¼üÖ®ºó£¬ºóÃæµÄ¶¯×÷²»ÐèÒªÖ´ÐÐ¡£
+    //ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½Ö®ï¿½ó£¬ºï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ð¡ï¿½
     if(mksReprint.mks_printer_state == MKS_STOP)
      {
         card.sdprinting = false;
@@ -1183,16 +1180,16 @@ void mks_contiuePrintPwdwn()
 
 	mks_setTemperature();
 
-	//ÉèÖÃZµ±Ç°Î»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½Ç°Î»ï¿½ï¿½
 	mks_setPositionZ();
-	//E »Ø³é
+	//E ï¿½Ø³ï¿½
 	//mks_preExtrude(MKS_RETROVERSION);
-	//ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	mks_moveZ(mksReprint.mks_pausePrint_z);
 
-	// X,Y¹éÁã
+	// X,Yï¿½ï¿½ï¿½ï¿½
 	mks_G28("G28 X0 Y0");
-    //°´ÁËÍ£Ö¹¼üÖ®ºó£¬ºóÃæµÄ¶¯×÷²»ÐèÒªÖ´ÐÐ¡£
+    //ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½Ö®ï¿½ó£¬ºï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ð¡ï¿½
     if(mksReprint.mks_printer_state == MKS_STOP)
      {
         card.sdprinting = false;
@@ -1205,27 +1202,27 @@ void mks_contiuePrintPwdwn()
 
 	delay(3000);
 	
-	//¼·³ö²¹³¥
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	mks_preExtrude(mksReprint.mks_pausePrint_e);
 
-	//ÒÆ¶¯´òÓ¡Í·X,YÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·X,YÎ»ï¿½ï¿½
 	mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);	
-	//ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	mks_moveZ(0);
 	
-	//ÉèÖÃfeedrate
+	//ï¿½ï¿½ï¿½ï¿½feedrate
 	mks_setFeedrate();
 
 	//sean19.8.21
 	mks_adjust_extrude_speed();
 
-	//ÉèÖÃ·çÉÈËÙ¶È
+	//ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	fanSpeeds[0] = mksReprint.fanSpeeds_0;
 	MKS_FAN_TIM = fanSpeeds[0]*10000/255;
 
 	//lcd_setstatus("Resume printing...");
 	//lcd_setstatus(mksReprint.filename);
-    //°´ÁËÍ£Ö¹¼üÖ®ºó£¬ºóÃæµÄ¶¯×÷²»ÐèÒªÖ´ÐÐ¡£
+    //ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½Ö®ï¿½ó£¬ºï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ð¡ï¿½
     if(mksReprint.mks_printer_state == MKS_STOP)
      {
         card.sdprinting = false;
@@ -1247,26 +1244,26 @@ void mks_contiuePrintDelta()
 	mks_setTemperature();
 
 	
-	// X,Y,Z¹éÁã
+	// X,Y,Zï¿½ï¿½ï¿½ï¿½
 	mks_G28("G28");
 
 	
-	//ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	mks_moveZ(mksReprint.mks_pausePrint_z);
 
-	//¼·³ö²¹³¥
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	mks_preExtrude(mksReprint.mks_pausePrint_e);
 
-	//ÒÆ¶¯´òÓ¡Í·X,YÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·X,YÎ»ï¿½ï¿½
 	mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);	
 
-	//ÒÆ¶¯´òÓ¡Í·ZÎ»ÖÃ
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ó¡Í·ZÎ»ï¿½ï¿½
 	mks_moveZ(0);
 
-	//ÉèÖÃfeedrate
+	//ï¿½ï¿½ï¿½ï¿½feedrate
 	mks_setFeedrate();
 
-	//ÉèÖÃ·çÉÈËÙ¶È
+	//ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	fanSpeeds[0] = mksReprint.fanSpeeds_0;
 	MKS_FAN_TIM = fanSpeeds[0]*10000/255;
 
@@ -1288,7 +1285,7 @@ void mks_getPositionXYZE()
     volatile char z_dest[20];
     volatile char k=0;
     
-	//ÉèÖÃÎÄ¼þÆ«ÒÆ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Æ«ï¿½ï¿½
 	if(gCfgItems.pwroff_save_mode != 1)
 	{
 		card.setIndex(mksReprint.sdpos);
@@ -1308,7 +1305,7 @@ void mks_getPositionXYZE()
 		{
 			//current_command_args
 			//parser.string_arg = &command_queue[i][0];
-			//¶ÏµãzÖáµÚÒ»ÌõÖ¸Áî²»ÍêÕû£¬ÐèÒªÁíÍâ´¦Àí
+			//ï¿½Ïµï¿½zï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ö¸ï¿½î²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½â´¦ï¿½ï¿½
           /*
 			if(i!=0)
             {   
@@ -1455,7 +1452,7 @@ void mks_clearDir()
 	char *tmp_index = NULL;
 	char string[30];
 
-// ½«mksReprint.filename×Ö·û´®ÖÐµÄÄ¿Â¼²¿·ÖÈ¥µô£¬Ö»±£ÁôÎÄ¼þÃû
+// ï¿½ï¿½mksReprint.filenameï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 	while(1)
 		{
 		tmp_index = (char *)strstr(mksReprint.filename, "/");
@@ -1479,7 +1476,7 @@ void mks_contiuePrint_UI()
 	
 	card.openFile(mksReprint.filename, true);
 	strcpy(curFileName,mksReprint.filename);
-	if(!card.isFileOpen())	//´ò¿ªÐø´òÎÄ¼þÊ§°Ü
+	if(!card.isFileOpen())	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ê§ï¿½ï¿½
 	{
 	#if tan_mask
 		mksReprint.mks_printer_state = MKS_IDLE;
@@ -1502,14 +1499,14 @@ void mks_contiuePrint_UI()
     			mks_getPositionXYZE();
     		
 
-    		//ÉèÖÃÎÄ¼þÆ«ÒÆ
+    		//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Æ«ï¿½ï¿½
     		if(gCfgItems.pwroff_save_mode != 1)
     			card.setIndex(mksReprint.sdpos);
     		else
     			card.setIndex(mksReprint.sdpos_from_epr);
     		
 
-    		//ÉèÖÃ½ø¶ÈºÍÊ±¼ä
+    		//ï¿½ï¿½ï¿½Ã½ï¿½ï¿½Èºï¿½Ê±ï¿½ï¿½
     		//print_job_timer.setTime(mksReprint.accumulator,mksReprint.startTimestamp,mksReprint.stopTimestamp);
     		//cli();
     		//HAL_SetTick(mksReprint.uwTick);
@@ -1564,18 +1561,18 @@ void mks_contiuePrint_UI()
 }
 
 /*
-void mks_rePrintCheck() ÊµÏÖ
-ÔÝÍ£ -> ¶Ïµç -> ¶ÏµãÐø´ò
-Ö±½Ó¶Ïµç -> ¶Ï²ãÐø´ò
-ÔÝÍ£Ðø´ò²âÊÔ²½Öè:
-1.M32 *.gcode --´ò¿ª²¢´òÓ¡ÎÄ¼þ
-2.M25		  -- ÔÝÍ£´òÓ¡
-3.¶Ïµç¸´Î»
-4.M24		  -- Ðø´ò
-¶ÏµçÐø´ò²âÊÔ²½Öè:
-1.M32 *.gcode --´ò¿ª²¢´òÓ¡ÎÄ¼þ
-2.¶Ïµç¸´Î»
-3.M24		  -- Ðø´ò
+void mks_rePrintCheck() Êµï¿½ï¿½
+ï¿½ï¿½Í£ -> ï¿½Ïµï¿½ -> ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
+Ö±ï¿½Ó¶Ïµï¿½ -> ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½:
+1.M32 *.gcode --ï¿½ò¿ª²ï¿½ï¿½ï¿½Ó¡ï¿½Ä¼ï¿½
+2.M25		  -- ï¿½ï¿½Í£ï¿½ï¿½Ó¡
+3.ï¿½Ïµç¸´Î»
+4.M24		  -- ï¿½ï¿½ï¿½ï¿½
+ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½:
+1.M32 *.gcode --ï¿½ò¿ª²ï¿½ï¿½ï¿½Ó¡ï¿½Ä¼ï¿½
+2.ï¿½Ïµç¸´Î»
+3.M24		  -- ï¿½ï¿½ï¿½ï¿½
 */
 
 
@@ -1586,7 +1583,7 @@ void mks_rePrintCheck()
     #if 0
 	if ((!card.cardOK)&&(!card.usbOK)) return; 
 	#if unused
-	//ÐèÒªÈ·±£USBÒÑ¾­×¼±¸ºÃ
+	//ï¿½ï¿½ÒªÈ·ï¿½ï¿½USBï¿½Ñ¾ï¿½×¼ï¿½ï¿½ï¿½ï¿½
 	if(gCfgItems.fileSysType == FILE_SYS_USB)
 	{
 		while(1)
@@ -1602,10 +1599,10 @@ void mks_rePrintCheck()
 	#endif
     #endif
 	epr_read_data((int)EPR_SAV_FLAG, (uint8_t*)&mksReprint.mks_printer_state, sizeof(mksReprint.mks_printer_state));
-	if(mksReprint.mks_printer_state == MKS_PAUSED)		//ÔÝÍ£Ðø´ò
+	if(mksReprint.mks_printer_state == MKS_PAUSED)		//ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 	{
 		mksReprint.mks_printer_state = MKS_REPRINTING;
-		mks_ReadFromEpr();		//´ÓEERPOM¶ÁÈ¡ Ðø´ò²ÎÊý
+		mks_ReadFromEpr();		//ï¿½ï¿½EERPOMï¿½ï¿½È¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//if(mksReprint.sdpos > MIN_FILE_PRINTED)
 		{
 			mksReprint.resume = MKS_RESUME_PAUSE;
@@ -1624,12 +1621,12 @@ void mks_rePrintCheck()
 */
 	}
 	
-	else if(mksReprint.mks_printer_state == MKS_WORKING)	//¶ÏµçÐø´ò
+	else if(mksReprint.mks_printer_state == MKS_WORKING)	//ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		if(gCfgItems.pwroff_save_mode == 1)
 		{
 			mksReprint.mks_printer_state = MKS_REPRINTING;
-			mks_ReadFromEpr_pwroff();		//´ÓEERPOM¶ÁÈ¡ Ðø´ò²ÎÊý
+			mks_ReadFromEpr_pwroff();		//ï¿½ï¿½EERPOMï¿½ï¿½È¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			//if(mksReprint.sdpos_from_epr > MIN_FILE_PRINTED)
 			{
 				mksReprint.resume = MKS_RESUME_PWDWN;
@@ -1650,9 +1647,9 @@ void mks_rePrintCheck()
 		{
 
 			mksReprint.mks_printer_state = MKS_REPRINTING;
-			//¶ÁÈ¡ÎÄ¼þÃû
+			//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½
 			epr_read_data((int)EPR_SAV_FILENAME, (uint8_t*)&mksReprint.filename[0],sizeof(mksReprint.filename)); 
-			pft_ok = mks_ReadFromFile();	//´Ómks_pft.sysÎÄ¼þ¶ÁÈ¡Ðø´ò²ÎÊý
+			pft_ok = mks_ReadFromFile();	//ï¿½ï¿½mks_pft.sysï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			//if(pft_ok && mksReprint.sdpos > MIN_FILE_PRINTED )
 			{
 				mksReprint.resume = MKS_RESUME_PWDWN;
@@ -1724,13 +1721,13 @@ void mks_WriteToFile()
 		//mksReprint.card.write_command(string);	//"start"
 		f_printf(&mksReprint.pft,string);
 
-		//±£´æÎÄ¼þÎ»ÖÃ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Î»ï¿½ï¿½
 		memset(string,0,sizeof(string));
 		sprintf(string,"%d",mksReprint.sdpos);
 		//mksReprint.card.write_command(string);
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);
-		//±£´æ´òÓ¡Í·ÎÂ¶È
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡Í·ï¿½Â¶ï¿½
 		memset(string,0,sizeof(string));
 		sprintf(string,"%d",thermalManager.target_temperature[0]);
 		strcat(string,"\n");
@@ -1741,7 +1738,7 @@ void mks_WriteToFile()
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);		
 		
-		//±£´æÈÈ´²ÎÂ¶È
+		//ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½Â¶ï¿½
 		//if(HAS_TEMP_BED)
 		{
 			memset(string,0,sizeof(string));
@@ -1752,7 +1749,7 @@ void mks_WriteToFile()
 			
 		}
 
-		//±£´æ½ø¶ÈºÍÊ±¼ä
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èºï¿½Ê±ï¿½ï¿½
 		print_job_timer.getTime(&mksReprint.accumulator,&mksReprint.startTimestamp,&mksReprint.stopTimestamp);
 		mksReprint.uwTick = millis();
 		if(mksReprint.startTimestamp > mksReprint.stopTimestamp  ) mksReprint.stopTimestamp = mksReprint.uwTick;
@@ -1781,42 +1778,42 @@ void mks_WriteToFile()
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);
 #endif
-		//´òÓ¡Ê±¼ä:hour
+		//ï¿½ï¿½Ó¡Ê±ï¿½ï¿½:hour
 		memset(string,0,sizeof(string));					//uwTick
 		sprintf(string,"%d",print_time.hours);
 		//mksReprint.card.write_command(string);
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);
 		
-		//´òÓ¡Ê±¼ä:min
+		//ï¿½ï¿½Ó¡Ê±ï¿½ï¿½:min
 		memset(string,0,sizeof(string));					//uwTick
 		sprintf(string,"%d",print_time.minutes);
 		//mksReprint.card.write_command(string);
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);
 		
-		//´òÓ¡Ê±¼ä:sec
+		//ï¿½ï¿½Ó¡Ê±ï¿½ï¿½:sec
 		memset(string,0,sizeof(string));					//uwTick
 		sprintf(string,"%d",print_time.seconds);
 		//mksReprint.card.write_command(string);
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);	
 		
-		//±£´æ·çÉÈ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		memset(string,0,sizeof(string));
 		sprintf(string,"%d",fanSpeeds[0]);
 		//mksReprint.card.write_command(string);
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);
 		
-		//±£´æfeedrate
+		//ï¿½ï¿½ï¿½ï¿½feedrate
 		memset(string,0,sizeof(string));
 		sprintf(string,"%f",feedrate_mm_s);
 		//mksReprint.card.write_command(string);
 		strcat(string,"\n");
 		f_printf(&mksReprint.pft,string);
 		
-		//±£´æµ±Ç°¼·³öÍ·
+		//ï¿½ï¿½ï¿½æµ±Ç°ï¿½ï¿½ï¿½ï¿½Í·
 		memset(string,0,sizeof(string));
 		sprintf(string,"%d",active_extruder);
 		//mksReprint.card.write_command(string);
@@ -1837,18 +1834,18 @@ void mks_WriteToFile()
 
 }
 
-void mks_WriteToEpr_pwroff()        //¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
+void mks_WriteToEpr_pwroff()        //ï¿½Ïµï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½Ô±ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 { 
-    //´òÓ¡×´Ì¬
+    //ï¿½ï¿½Ó¡×´Ì¬
     epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));
 
-	//±£´æÎÄ¼þÎ»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Î»ï¿½ï¿½
 	epr_write_data(EPR_SAV_SDPOS_BAK, (uint8_t *)&mksReprint.sdpos_bak,sizeof(mksReprint.sdpos_bak));
 	
 	mksReprint.sdpos = card.getsdpos();
 	epr_write_data(EPR_SAV_SDPOS, (uint8_t *)&mksReprint.sdpos,sizeof(mksReprint.sdpos));	
 	
-	//±£´æ´òÓ¡Í·ÎÂ¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡Í·ï¿½Â¶ï¿½
 	mksReprint.target_temperature_0 = thermalManager.target_temperature[0];
 	epr_write_data(EPR_SAV_TARGET_TEMP_0, (uint8_t *)&mksReprint.target_temperature_0,sizeof(mksReprint.target_temperature_0));
 	if(mksCfg.extruders == 2)
@@ -1857,7 +1854,7 @@ void mks_WriteToEpr_pwroff()        //¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
 		epr_write_data(EPR_SAV_TARGET_TEMP_1, (uint8_t *)&mksReprint.target_temperature_1,sizeof(mksReprint.target_temperature_1));
 		
 	}
-	//±£´æÈÈ´²ÎÂ¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½Â¶ï¿½
 	if(HAS_TEMP_BED)
 	{
 		mksReprint.target_temperature_bed = thermalManager.target_temperature_bed;
@@ -1868,11 +1865,11 @@ void mks_WriteToEpr_pwroff()        //¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
 	epr_write_data(EPR_SAV_MINUTE, (uint8_t *)&print_time.minutes,sizeof(print_time.minutes));
 	epr_write_data(EPR_SAV_SECOND, (uint8_t *)&print_time.seconds,sizeof(print_time.seconds));
 
-	//±£´æ·çÉÈËÙ¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	mksReprint.fanSpeeds_0 = fanSpeeds[0];
 	epr_write_data(EPR_SAV_FAN, (uint8_t *)&mksReprint.fanSpeeds_0,sizeof(mksReprint.fanSpeeds_0));
 
-	//±£´æfeedrate
+	//ï¿½ï¿½ï¿½ï¿½feedrate
 	mksReprint.feedrate_mm_s = feedrate_mm_s;
 	epr_write_data(EPR_SAV_F, (uint8_t *)&mksReprint.feedrate_mm_s,sizeof(mksReprint.feedrate_mm_s));
 
@@ -1882,27 +1879,27 @@ void mks_WriteToEpr_pwroff()        //¶ÏµçÊ±±£´æÊý¾Ý£¬ÒÔ±¸¶ÏµçºóÐø´ò
 
 
 
-void mks_ReadFromEpr_pwroff()        //¶ÏµçÊ±¶ÁÈ¡Êý¾Ý
+void mks_ReadFromEpr_pwroff()        //ï¿½Ïµï¿½Ê±ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 {
-	//¶ÁÈ¡ÎÄ¼þÃû
+	//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½
 	epr_read_data((int)EPR_SAV_FILENAME, (uint8_t*)&mksReprint.filename[0],sizeof(mksReprint.filename));  
-	//¶ÁÈ¡ÎÄ¼þÆ«ÒÆ
+	//ï¿½ï¿½È¡ï¿½Ä¼ï¿½Æ«ï¿½ï¿½
 
 	epr_read_data((int)EPR_SAV_SDPOS, (uint8_t*)&mksReprint.sdpos_from_epr, sizeof(mksReprint.sdpos_from_epr));
-	epr_read_data((int)EPR_SAV_SDPOS_BAK, (uint8_t*)&mksReprint.sdpos_bak, sizeof(mksReprint.sdpos_bak));//×îºózÎ»ÖÃ
+	epr_read_data((int)EPR_SAV_SDPOS_BAK, (uint8_t*)&mksReprint.sdpos_bak, sizeof(mksReprint.sdpos_bak));//ï¿½ï¿½ï¿½zÎ»ï¿½ï¿½
 	
-	//¶ÁÈ¡´òÓ¡Í·ÎÂ¶È
+	//ï¿½ï¿½È¡ï¿½ï¿½Ó¡Í·ï¿½Â¶ï¿½
 	epr_read_data((int)EPR_SAV_TARGET_TEMP_0, (uint8_t*)&mksReprint.target_temperature_0, sizeof(mksReprint.target_temperature_0));
 	if(mksCfg.extruders == 2)
 		epr_read_data((int)EPR_SAV_TARGET_TEMP_1, (uint8_t*)&mksReprint.target_temperature_1, sizeof(mksReprint.target_temperature_1));
 
-	//¶ÁÈ¡ÈÈ´²ÎÂ¶È
+	//ï¿½ï¿½È¡ï¿½È´ï¿½ï¿½Â¶ï¿½
 	if(HAS_TEMP_BED)
 	{
 		epr_read_data((int)EPR_SAV_TARGET_TEMP_BED, (uint8_t*)&mksReprint.target_temperature_bed, sizeof(mksReprint.target_temperature_bed));
 	}
 #if tan_mask
-	//¶ÁÈ¡½ø¶ÈºÍÊ±¼ä
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Èºï¿½Ê±ï¿½ï¿½
 	epr_read_data((int)EPR_SAV_ACCU, (uint8_t*)&mksReprint.accumulator, sizeof(mksReprint.accumulator));
 	epr_read_data((int)EPR_SAV_STARTIME, (uint8_t*)&mksReprint.startTimestamp, sizeof(mksReprint.startTimestamp));
 	epr_read_data((int)EPR_SAV_STOPTIME, (uint8_t*)&mksReprint.stopTimestamp, sizeof(mksReprint.stopTimestamp));
@@ -1912,10 +1909,10 @@ void mks_ReadFromEpr_pwroff()        //¶ÏµçÊ±¶ÁÈ¡Êý¾Ý
 	epr_read_data((int)EPR_SAV_MINUTE, (uint8_t *)&print_time.minutes,sizeof(print_time.minutes));
 	epr_read_data((int)EPR_SAV_SECOND, (uint8_t *)&print_time.seconds,sizeof(print_time.seconds));
 
-	//¶ÁÈ¡·çÉÈËÙ¶È
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	epr_read_data((int)EPR_SAV_FAN, (uint8_t*)&mksReprint.fanSpeeds_0, sizeof(mksReprint.fanSpeeds_0));
 
-	//¶ÁÈ¡feedrate
+	//ï¿½ï¿½È¡feedrate
 	epr_read_data((int)EPR_SAV_F, (uint8_t*)&mksReprint.feedrate_mm_s, sizeof(mksReprint.feedrate_mm_s));
 
 	epr_read_data((int)EPR_SAV_CUR_EXTRUDE, (uint8_t *)&active_extruder,sizeof(active_extruder));
@@ -1956,21 +1953,21 @@ bool mks_get_commands() {
 	
 	if ( sd_char == '\n') 	//"start\r\n"
 		{
-		string[sd_count-1] = 0;		//È¥µô "\r"
+		string[sd_count-1] = 0;		//È¥ï¿½ï¿½ "\r"
 		switch(commands_count)
 			{
 			case 0:			//start
 				break;
-			case 1:			//¶ÁÈ¡ÎÄ¼þÎ»ÖÃ
+			case 1:			//ï¿½ï¿½È¡ï¿½Ä¼ï¿½Î»ï¿½ï¿½
 				mksReprint.sdpos = atoi(string);
 				break;
-			case 2:			//¶ÁÈ¡´òÓ¡Í·ÎÂ¶È
+			case 2:			//ï¿½ï¿½È¡ï¿½ï¿½Ó¡Í·ï¿½Â¶ï¿½
 				mksReprint.target_temperature_0 = atoi(string);
 				break;
-			case 3:			//¶ÁÈ¡´òÓ¡Í·ÎÂ¶È
+			case 3:			//ï¿½ï¿½È¡ï¿½ï¿½Ó¡Í·ï¿½Â¶ï¿½
 				mksReprint.target_temperature_1 = atoi(string);
 				break;				
-			case 4:			//¶ÁÈ¡ÈÈ´²ÎÂ¶È
+			case 4:			//ï¿½ï¿½È¡ï¿½È´ï¿½ï¿½Â¶ï¿½
 				mksReprint.target_temperature_bed = atoi(string);
 				break;
 			case 5:			//accumulator
@@ -1997,13 +1994,13 @@ bool mks_get_commands() {
 				print_time.seconds = atoi(string);
 				break;
 
-			case 9:			//¶ÁÈ¡·çÉÈ
+			case 9:			//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 				mksReprint.fanSpeeds_0 = atoi(string);
 				break;
-			case 10:		//¶ÁÈ¡feedrate
+			case 10:		//ï¿½ï¿½È¡feedrate
 				mksReprint.feedrate_mm_s = atof(string);
 				break;
-			case 11:		//¶ÁÈ¡µ±Ç°¼·³öÍ·
+			case 11:		//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Í·
 				gCfgItems.curSprayerChoose = atof(string);
                 active_extruder=gCfgItems.curSprayerChoose;
 				break;				
@@ -2022,7 +2019,7 @@ bool mks_get_commands() {
 	else 
 		{
 		  string[sd_count++] = sd_char;
-          if(sd_count>=20)//·ÀÖ¹³ö´í£¬Ôì³ÉÒç³ö
+          if(sd_count>=20)//ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
           {
             break;
           }
@@ -2096,12 +2093,12 @@ void mks_saveFileName(char *name)
 #if 1
 		memset(mksReprint.filename,0,sizeof(mksReprint.filename));
 	  
-	//±£´æÎÄ¼þÃû
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 		strcpy(mksReprint.filename,name);
 		epr_write_data(EPR_SAV_FILENAME, (uint8_t *)&mksReprint.filename[0],sizeof(mksReprint.filename)); 
-	//Çå³ý mks_pft.sysÎÄ¼þÖÐµÄ¼ÇÂ¼
+	//ï¿½ï¿½ï¿½ mks_pft.sysï¿½Ä¼ï¿½ï¿½ÐµÄ¼ï¿½Â¼
 		if((mksReprint.mks_printer_state == MKS_IDLE)
-			&&(gCfgItems.pwroff_save_mode != 1))	/*´ò¿ªÐÂÎÄ¼þÊ±£¬²ÅÇå³ý¼ÇÂ¼¡£Ðø´òÊ±²»Çå³ý*/
+			&&(gCfgItems.pwroff_save_mode != 1))	/*ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½*/
                   mks_clearFile();
 #endif
 }
@@ -2179,7 +2176,7 @@ void EXTI9_5_IRQHandler(void)
 		while(1);
 	}
   }
-  sei(); // ¿ªÆô interrupts
+  sei(); // ï¿½ï¿½ï¿½ï¿½ interrupts
 }
 
 

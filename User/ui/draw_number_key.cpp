@@ -204,6 +204,17 @@ static void cbNumberKeyWin(WM_MESSAGE * pMsg) {
     		WM_DefaultProc(pMsg);
     	}
 }
+
+void set_value_confirm_point_x(char * value, uint16_t pos, uint8_t point) {
+    gCfgItems.leveling_points[point].x = atof(value);
+	epr_write_data(pos,(uint8_t *)&gCfgItems.leveling_points[point].x,sizeof(gCfgItems.leveling_points[point].x));
+}
+
+void set_value_confirm_point_y(char * value, uint16_t pos, uint8_t point) {
+    gCfgItems.leveling_points[point].y = atof(value);
+	epr_write_data(pos,(uint8_t *)&gCfgItems.leveling_points[point].y,sizeof(gCfgItems.leveling_points[point].y));
+}
+
 void set_value_confirm()
 {
     switch(value)
@@ -310,7 +321,7 @@ void set_value_confirm()
         break;
        case zoffset:
         zprobe_zoffset = atof(key_value);   
-        gcode_M500();	//±£´æ²ÎÊý
+        gcode_M500();	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         break; 
        case xyspeed:
         mksCfg.xy_probe_speed = atof(key_value);   
@@ -319,16 +330,16 @@ void set_value_confirm()
        case zspeed:
         mksCfg.z_probe_speed_fast = atof(key_value);   
         epr_write_data(EPR_Z_PROBE_SPEED_FAST, (uint8_t *)&mksCfg.z_probe_speed_fast,sizeof(float));
-        mksCfg.z_probe_speed_slow= (float)((uint32_t)mksCfg.z_probe_speed_fast>>1);  //ÂýËÙÎª¿ìËÙµÄÒ»°ë 
+        mksCfg.z_probe_speed_slow= (float)((uint32_t)mksCfg.z_probe_speed_fast>>1);  //ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ùµï¿½Ò»ï¿½ï¿½ 
         epr_write_data(EPR_Z_PROBE_SPEED_SLOW, (uint8_t *)&mksCfg.z_probe_speed_slow,sizeof(float));
         break; 
        case DeltaRadius:
         delta_radius=atof(key_value);
-        gcode_M500();	//±£´æ²ÎÊý
+        gcode_M500();	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         break;
        case DeltaDiagonalRod:
         delta_diagonal_rod=atof(key_value);
-        gcode_M500();	//±£´æ²ÎÊý       
+        gcode_M500();	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½       
         break;
        case PrintableRadius:
         mksCfg.delta_printable_radius=atof(key_value);
@@ -351,148 +362,118 @@ void set_value_confirm()
         break;  
        case CalibrationRadius:
        delta_calibration_radius=atof(key_value);
-       gcode_M500();   //±£´æ²ÎÊý       
+       gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½       
         break; 
-       case Point1_x:
-       gCfgItems.leveling_point1_x=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT1_X,(uint8_t *)&gCfgItems.leveling_point1_x,sizeof(gCfgItems.leveling_point1_x));      
-        break;   
-	case Point1_y:
-       gCfgItems.leveling_point1_y=atof(key_value);
-	epr_write_data(EPR_LEVELING_POINT1_Y,(uint8_t *)&gCfgItems.leveling_point1_y,sizeof(gCfgItems.leveling_point1_y));	
-      
-        break; 
-       case Point2_x:
-       gCfgItems.leveling_point2_x=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT2_X,(uint8_t *)&gCfgItems.leveling_point2_x,sizeof(gCfgItems.leveling_point2_x));      
-        break;   
-	case Point2_y:
-       gCfgItems.leveling_point2_y=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT2_Y,(uint8_t *)&gCfgItems.leveling_point2_y,sizeof(gCfgItems.leveling_point2_y));	
-      
-        break;   
-       case Point3_x:
-       gCfgItems.leveling_point3_x=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT3_X,(uint8_t *)&gCfgItems.leveling_point3_x,sizeof(gCfgItems.leveling_point3_x));      
-        break;   
-	case Point3_y:
-       gCfgItems.leveling_point3_y=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT3_Y,(uint8_t *)&gCfgItems.leveling_point3_y,sizeof(gCfgItems.leveling_point3_y));	
-      
-        break;  
-	case Point4_x:
-       gCfgItems.leveling_point4_x=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT4_X,(uint8_t *)&gCfgItems.leveling_point4_x,sizeof(gCfgItems.leveling_point4_x));      
-        break;   
-	case Point4_y:
-       gCfgItems.leveling_point4_y=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT4_Y,(uint8_t *)&gCfgItems.leveling_point4_y,sizeof(gCfgItems.leveling_point4_y));	
-      
-        break; 
-	case Point5_x:
-       gCfgItems.leveling_point5_x=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT5_X,(uint8_t *)&gCfgItems.leveling_point5_x,sizeof(gCfgItems.leveling_point5_x));      
-        break;   
-	case Point5_y:
-       gCfgItems.leveling_point5_y=atoi(key_value);
-	epr_write_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_point5_y,sizeof(gCfgItems.leveling_point5_y));	
-      
+
+
+       case Point1_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,0);break;
+       case Point1_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,0);break;
+       case Point2_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,1);break;
+       case Point2_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,1);break;
+       case Point3_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,2);break;
+       case Point3_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,2);break;
+       case Point4_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,3);break;
+       case Point4_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,3);break;
+       case Point5_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,4);break;
+       case Point5_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,4);break;
+
+
         break; 
        case XMaxFeedRate:
         planner.max_feedrate_mm_s[X_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý          
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½          
         break;
        case YMaxFeedRate:
         planner.max_feedrate_mm_s[Y_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break; 
        case ZMaxFeedRate:
         planner.max_feedrate_mm_s[Z_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break;  
        case E0MaxFeedRate:
         planner.max_feedrate_mm_s[E_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý             
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½             
         break;
        case E1MaxFeedRate:
         planner.max_feedrate_mm_s[XYZE]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý           
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½           
         break;   
        case PrintAcceleration:
         planner.acceleration=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý   
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   
        
         break;   
        case RetractAcceleration:
         planner.retract_acceleration=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý         
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½         
         break;   
        case TravelAcceleration:
         planner.travel_acceleration=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý               
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½               
         break;  
        case XAcceleration:
         planner.max_acceleration_mm_per_s2[X_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break; 
        case YAcceleration:
         planner.max_acceleration_mm_per_s2[Y_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý                
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                
         break; 
        case ZAcceleration:
         planner.max_acceleration_mm_per_s2[Z_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý           
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½           
      
         break;
        case E0Acceleration:
         planner.max_acceleration_mm_per_s2[E_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý        
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½        
       
         break; 
        case E1Acceleration:
         planner.max_acceleration_mm_per_s2[XYZE]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý    
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    
      
         break;  
        case XJerk:
         planner.max_jerk[X_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý    
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    
      
         break; 
        case YJerk:
         planner.max_jerk[Y_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý    
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    
      
         break; 
        case ZJerk:
         planner.max_jerk[Z_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý    
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    
      
         break; 
        case EJerk:
         planner.max_jerk[E_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý    
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    
      
         break; 
        case Xstep:
         planner.axis_steps_per_mm[X_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break;
        case Ystep:
         planner.axis_steps_per_mm[Y_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break;  
        case Zstep:
         planner.axis_steps_per_mm[Z_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break;  
        case E0step:
         planner.axis_steps_per_mm[E_AXIS]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break;
        case E1step:
         planner.axis_steps_per_mm[XYZE]=atof(key_value);
-        gcode_M500();   //±£´æ²ÎÊý            
+        gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½            
         break;  
        case XYspeed:
 		mksCfg.homing_feedrate_xy=atof(key_value);
@@ -538,15 +519,15 @@ void set_value_confirm()
             break;
          case Nozzle_pid_p:
             thermalManager.Kp=atof(key_value);
-            gcode_M500();   //±£´æ²ÎÊý                        
+            gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                        
             break;
          case Nozzle_pid_i:
             thermalManager.Ki=scalePID_i(atof(key_value));
-            gcode_M500();   //±£´æ²ÎÊý                        
+            gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                        
             break;
          case Nozzle_pid_d:
             thermalManager.Kd=scalePID_d(atof(key_value));
-            gcode_M500();   //±£´æ²ÎÊý                        
+            gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                        
             break;  
             
         case HotBed_max:
@@ -562,18 +543,21 @@ void set_value_confirm()
             
          case HotBed_pid_p:
             thermalManager.bedKp=atof(key_value);
-            gcode_M500();   //±£´æ²ÎÊý                        
+            gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                        
             break;
          case HotBed_pid_i:
             thermalManager.bedKi=scalePID_i(atof(key_value));
-            gcode_M500();   //±£´æ²ÎÊý                        
+            gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                        
             break;
          case HotBed_pid_d:
             thermalManager.bedKd=scalePID_d(atof(key_value));
-            gcode_M500();   //±£´æ²ÎÊý                        
+            gcode_M500();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                        
             break;             
     }    
 }
+
+#define MEMSET_LEV_P(index, item) {memset(cmd_code,0,sizeof(cmd_code));sprintf(cmd_code,"%d",gCfgItems.leveling_points[index].item);}
+
 void disp_value()
 {
     char *temp;
@@ -664,46 +648,18 @@ void disp_value()
         memset(cmd_code,0,sizeof(cmd_code));
         sprintf(cmd_code,"%.1f",delta_calibration_radius);        
         break; 
-       case Point1_x:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point1_x);        
-        break; 
-	case Point1_y:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point1_y);        
-        break;
-       case Point2_x:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point2_x);        
-        break;
-	case Point2_y:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point2_y);        
-        break;
-       case Point3_x:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point3_x);        
-        break;   
-	case Point3_y:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point3_y);        
-        break;
-       case Point4_x:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point4_x);        
-        break; 
-	case Point4_y:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point4_y);        
-        break; 
-	case Point5_x:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point5_x);        
-        break; 
-	case Point5_y:
-        memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.leveling_point5_y);        
-        break;
+
+       case Point1_x : MEMSET_LEV_P(0, x); break;
+       case Point1_y:  MEMSET_LEV_P(0, y); break;
+       case Point2_x : MEMSET_LEV_P(1, x); break;
+       case Point2_y : MEMSET_LEV_P(1, y); break;
+       case Point3_x : MEMSET_LEV_P(2, x); break;
+       case Point3_y : MEMSET_LEV_P(2, y); break;
+       case Point4_x : MEMSET_LEV_P(3, x); break;
+       case Point4_y : MEMSET_LEV_P(3, y); break;
+       case Point5_x : MEMSET_LEV_P(4, x); break;
+       case Point5_y : MEMSET_LEV_P(4, y); break;
+
        case XMaxFeedRate:
         memset(cmd_code,0,sizeof(cmd_code));
         sprintf(cmd_code,"%.1f",planner.max_feedrate_mm_s[X_AXIS]);        
@@ -940,16 +896,16 @@ void draw_NumberKey()
     
     //BUTTON_SetBmpFileName(KeyValue.btnHandle,NULL,1);
     
-    BUTTON_SetBitmapEx(NumberKey_1.btnHandle,0,&bmp_struct68X40,0,0);//Í¼Æ¬´óÐ¡Îª68x40
+    BUTTON_SetBitmapEx(NumberKey_1.btnHandle,0,&bmp_struct68X40,0,0);//Í¼Æ¬ï¿½ï¿½Ð¡Îª68x40
     BUTTON_SetBitmapEx(NumberKey_2.btnHandle,0,&bmp_struct68X40,0,0);
     BUTTON_SetBitmapEx(NumberKey_3.btnHandle,0,&bmp_struct68X40,0,0);
-    BUTTON_SetBitmapEx(NumberKey_4.btnHandle,0,&bmp_struct68X40,0,0);//Í¼Æ¬´óÐ¡Îª68x40
+    BUTTON_SetBitmapEx(NumberKey_4.btnHandle,0,&bmp_struct68X40,0,0);//Í¼Æ¬ï¿½ï¿½Ð¡Îª68x40
     BUTTON_SetBitmapEx(NumberKey_5.btnHandle,0,&bmp_struct68X40,0,0);
     BUTTON_SetBitmapEx(NumberKey_6.btnHandle,0,&bmp_struct68X40,0,0);
-    BUTTON_SetBitmapEx(NumberKey_7.btnHandle,0,&bmp_struct68X40,0,0);//Í¼Æ¬´óÐ¡Îª68x40
+    BUTTON_SetBitmapEx(NumberKey_7.btnHandle,0,&bmp_struct68X40,0,0);//Í¼Æ¬ï¿½ï¿½Ð¡Îª68x40
     BUTTON_SetBitmapEx(NumberKey_8.btnHandle,0,&bmp_struct68X40,0,0);
     BUTTON_SetBitmapEx(NumberKey_9.btnHandle,0,&bmp_struct68X40,0,0);
-    BUTTON_SetBitmapEx(NumberKey_0.btnHandle,0,&bmp_struct144X40,0,0);//Í¼Æ¬´óÐ¡Îª68x40
+    BUTTON_SetBitmapEx(NumberKey_0.btnHandle,0,&bmp_struct144X40,0,0);//Í¼Æ¬ï¿½ï¿½Ð¡Îª68x40
     BUTTON_SetBitmapEx(KeyPoint.btnHandle,0,&bmp_struct68X40,0,0);
     BUTTON_SetBitmapEx(KeyBack.btnHandle,0,&bmp_struct68X40,0,0);
     BUTTON_SetBitmapEx(KeyReset.btnHandle,0,&bmp_struct68X40,0,0);

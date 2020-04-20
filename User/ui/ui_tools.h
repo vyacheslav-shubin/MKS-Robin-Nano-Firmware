@@ -1,0 +1,35 @@
+#ifndef _UI_TOOLS
+#define _UI_TOOLS
+
+#include "draw_ui.h"
+#include "GUI.h"
+#include "BUTTON.h"
+#include "TEXT.h"
+
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+
+extern void ui_push_disp_stack(char ui_id);
+extern void ui_pop_disp_stack(void);
+extern void ui_clear_screen(void);
+extern void ui_drop_window(WM_HWIN wnd);
+extern void ui_initialize_screen_gui(void);
+
+//with placeholder
+#define ui_std_button(ph_x, ph_y, hwnd, img, title) ui_create_std_button(INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*ph_x,  INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * ph_y, hwnd, img, title)
+#define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbLevelingWin, 0)
+
+extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
+extern void ui_set_text_value(TEXT_Handle handle, char* val);
+
+
+
+
+
+#if defined(__cplusplus)
+}
+#endif
+
+#endif

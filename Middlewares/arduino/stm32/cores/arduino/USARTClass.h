@@ -53,7 +53,7 @@ class USARTClass : public HardwareSerial
     USART_InitTypeDef USART_InitStructure ;
     IRQn_Type _dwIrq ;
     uint32_t _dwId ;
-
+    void do_leveling_move_action(uint8_t point);
   public:
     //USARTClass( Usart* pUsart, IRQn_Type dwIrq, uint32_t dwId, RingBuffer* pRx_buffer ) ;
     USARTClass( USART_TypeDef* pUsart, IRQn_Type dwIrq, uint32_t dwId, RingBuffer* pRx_buffer ) ;

@@ -588,7 +588,7 @@ void clear_cur_ui()
 			Clear_Printmore();
 			break;
 		case LEVELING_UI:
-			Clear_Leveling();//**
+			clear_leveling();//**
 			break;
 		case BIND_UI:
 			Clear_Bind();
@@ -757,7 +757,8 @@ void draw_return_ui()
 				break;
 
 			case ZERO_UI:
-				draw_zero();
+				if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
+					draw_zero();
 				break;
 
 			case SPRAYER_UI:
@@ -1130,6 +1131,14 @@ void GUI_RefreshPage()
 					
 				//}
 				break;
+		     case ZERO_UI:
+				if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
+		    	  refresh_zero();
+		    	  break;
+		     case LEVELING_UI:
+				if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
+		    	   refresh_leveling();
+		    	break;
 			case EXTRUSION_UI:  
 				if(temperature_change_frequency == 1)
 				{

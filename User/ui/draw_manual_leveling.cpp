@@ -57,7 +57,7 @@ static void cbLevelingWin(WM_MESSAGE * pMsg) {
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
 				if(pMsg->hWinSrc == buttonRet) {
 					leveling_first_time=0;
-					Clear_Leveling();
+					clear_leveling();
 					draw_return_ui();
 				} else if(pMsg->hWinSrc == buttonleveling1) {
 					manual_leveling(0);
@@ -104,9 +104,21 @@ void draw_leveling()
 	buttonAllZero = ui_std_button(3, 0, hLevelingWnd, "bmp_zero.bin", home_menu.home_all);
 	buttonZZero = ui_std_button(2, 0, hLevelingWnd, "bmp_zeroZ.bin", home_menu.home_z);
 	buttonRet = ui_std_button(3, 1, hLevelingWnd, "bmp_return.bin", common_menu.text_back);
+	refresh_leveling();
 }
 
-void Clear_Leveling()
+void refresh_leveling(void) {
+	static uint8_t last_sec = 0;
+	char buf[20];
+	if(gCfgItems.multiple_language != 0) {
+		memset(buf, 0, sizeof(buf));
+		sprintf(buf,"Z:%.3f",current_position[Z_AXIS]);
+		BUTTON_SetText(buttonZZero, buf);
+	}
+}
+
+
+void clear_leveling()
 {
 	ui_drop_window(hLevelingWnd);
 }

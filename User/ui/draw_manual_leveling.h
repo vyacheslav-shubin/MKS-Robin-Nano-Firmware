@@ -5,8 +5,8 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
 extern void draw_leveling();
-extern void Clear_Leveling();
-extern void leveling_move_action();
+extern void clear_leveling();
+extern void refresh_leveling(void);
 
 
 #if defined(__cplusplus)

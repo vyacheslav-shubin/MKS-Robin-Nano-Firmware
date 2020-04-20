@@ -14,6 +14,22 @@ static GUI_HWIN hZeroWnd;
 
 static BUTTON_Handle buttonAllZero, buttonXZero, buttonYZero, buttonZZero, buttonRet, buttonDisable;
 
+static void refresh_zero(void) {
+	static uint8_t last_sec = 0;
+	char buf[20];
+	if(gCfgItems.multiple_language != 0) {
+		memset(buf, 0, sizeof(buf));
+		sprintf(buf,"X:%.3f",current_position[X_AXIS]);
+		BUTTON_SetText(buttonXZero, buf);
+		memset(buf, 0, sizeof(buf));
+		sprintf(buf,"Y:%.3f",current_position[Y_AXIS]);
+		BUTTON_SetText(buttonYZero, buf);
+		memset(buf, 0, sizeof(buf));
+		sprintf(buf,"Z:%.3f",current_position[Z_AXIS]);
+		BUTTON_SetText(buttonZZero, buf);
+	}
+}
+
 static void cbZeroWin(WM_MESSAGE * pMsg) {
 
 	switch (pMsg->MsgId) {
@@ -47,7 +63,6 @@ static void cbZeroWin(WM_MESSAGE * pMsg) {
 
 void draw_zero()
 {	
-	int i;
 	ui_push_disp_stack(ZERO_UI);
 	ui_clear_screen();
 	
@@ -57,9 +72,12 @@ void draw_zero()
 	buttonXZero = ui_std_button(1, 0, hZeroWnd, "bmp_zeroX.bin", home_menu.home_x);
 	buttonYZero = ui_std_button(2, 0, hZeroWnd, "bmp_zeroY.bin", home_menu.home_y);
 	buttonZZero = ui_std_button(3, 0, hZeroWnd, "bmp_zeroZ.bin", home_menu.home_z);
-	buttonRet = ui_std_button_return("bmp_return.bin");
+	buttonRet = ui_std_button_return(hZeroWnd);
 	buttonDisable = ui_std_button(0, 1, hZeroWnd, "bmp_function1.bin", set_menu.motoroff);
+	refresh_zero();
 }
+
+
 
 void clear_zero()
 {

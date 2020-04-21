@@ -12817,9 +12817,9 @@ inline void gcode_T(const uint8_t tmp_extruder) {
 void process_parsed_command() {
   KEEPALIVE_STATE(IN_HANDLER);
 
-  SERIAL_ECHOPAIR("L: ", parser.command_letter);
-  SERIAL_ECHOPAIR("N: ", parser.codenum);
-  SERIAL_EOL();
+  //SERIAL_ECHOPAIR("L: ", parser.command_letter);
+  //SERIAL_ECHOPAIR("N: ", parser.codenum);
+  //SERIAL_EOL();
 
   // Handle a known G, M, or T
   switch (parser.command_letter) {

@@ -12817,6 +12817,10 @@ inline void gcode_T(const uint8_t tmp_extruder) {
 void process_parsed_command() {
   KEEPALIVE_STATE(IN_HANDLER);
 
+  SERIAL_ECHOPAIR("L: ", parser.command_letter);
+  SERIAL_ECHOPAIR("N: ", parser.codenum);
+  SERIAL_EOL();
+
   // Handle a known G, M, or T
   switch (parser.command_letter) {
     case 'G': switch (parser.codenum) {
@@ -12991,9 +12995,13 @@ void process_parsed_command() {
 
       case 90: // G90
         relative_mode = false;
+        if (parser.chain())
+        	process_parsed_command();
         break;
       case 91: // G91
         relative_mode = true;
+        if (parser.chain())
+        	process_parsed_command();
         break;
 
       case 92: // G92

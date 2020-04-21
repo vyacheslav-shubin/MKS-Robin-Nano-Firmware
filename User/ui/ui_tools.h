@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 
-extern void ui_push_disp_stack(char ui_id);
+extern void ui_push_disp_stack(DISP_STATE ui_id);
 extern void ui_pop_disp_stack(void);
 extern void ui_clear_screen(void);
 extern void ui_drop_window(WM_HWIN wnd);

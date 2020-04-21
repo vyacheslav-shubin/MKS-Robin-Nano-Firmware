@@ -14,7 +14,7 @@ static GUI_HWIN hZeroWnd;
 
 static BUTTON_Handle buttonAllZero, buttonXZero, buttonYZero, buttonZZero, buttonRet, buttonDisable;
 
-static void refresh_zero(void) {
+void refresh_zero(void) {
 	static uint8_t last_sec = 0;
 	char buf[20];
 	if(gCfgItems.multiple_language != 0) {

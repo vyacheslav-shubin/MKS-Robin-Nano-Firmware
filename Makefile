@@ -45,6 +45,9 @@ CXX = $(TOOLS)$(TOOL_PREFIX)-g++
 GCC = $(TOOLS)$(TOOL_PREFIX)-gcc
 OBJCOPY = $(TOOLS)$(TOOL_PREFIX)-objcopy
 
+COMMON_ARGS = -Os -mcpu=cortex-m3 -mthumb -fsigned-char -fno-move-loop-invariants -fno-strict-aliasing --specs=nano.specs --specs=nosys.specs -MMD -MP -DTARGET_STM32F1
+CXX_ARGS = -fabi-version=0 -fno-use-cxa-atexit -fno-threadsafe-statics
+
 
 prepare:
 	mkdir -p $(BUILD_BASE)
@@ -68,8 +71,6 @@ prepare:
 	ln -s -f ../../User/ui/QRENCODE/QR_Encode.h $(PATCH_DIR)/qr_encode.h
 	ln -s -f ../../Middlewares/Third_Party/FatFs/src/ff.h $(PATCH_DIR)/Ff.h
 
-$(FIRMWARE).elf: $(OBJ_LIST_FILE)
-	$(CXX) -Os -o $(FIRMWARE).elf $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ) $(LIBS) -mcpu=cortex-m3 -T"$(LD_SCRIPT)" -Wl,-Map="$(FIRMWARE).map" -Wl,--gc-sections -static --specs=nosys.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 
 $(FIRMWARE).bin: $(FIRMWARE).elf
 	$(OBJCOPY) -O binary $(FIRMWARE).elf $(FIRMWARE).bin
@@ -88,18 +89,26 @@ $1: $2
 	$(CXX) -MMD -c $2 -o $1
 endef
 
+
 define compile-c-objects
 $1: $2
 	mkdir -p $(dir $1)
-	$(GCC) $2 -mcpu=cortex-m3 -std=gnu11 -g3 $(DEFINE_OPT) -c $(INCLIDE_OPT) -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o $1
+	$(GCC) $2 -mcpu=cortex-m3 -g3 $(DEFINE_OPT) -c $(INCLIDE_OPT) -Os -fsigned-char -fno-move-loop-invariants -fno-strict-aliasing -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MT"$@"  --specs=nano.specs --specs=nosys.specs  -mfloat-abi=soft -mthumb -o $1
+	#$(GCC) -std=gnu11 -ffunction-sections -fdata-sections $2 $(COMMON_ARGS) $(DEFINE_OPT) -c $(INCLIDE_OPT) -o $1
 endef
 
 
 define compile-cpp-objects
 $1: $2
 	mkdir -p $(dir $1)
-	$(CXX) $2 -mcpu=cortex-m3 -std=gnu++14 -g3 $(DEFINE_OPT) -c $(INCLIDE_OPT) -Os -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fpermissive -fno-use-cxa-atexit -fstack-usage -MMD -MP -MT"$1" -MT"$1.d" --specs=nano.specs -mfloat-abi=soft -mthumb -o $1
+	$(CXX) $2 -mcpu=cortex-m3 -std=gnu++14 -g3 $(DEFINE_OPT) -c $(INCLIDE_OPT) -Os  -fsigned-char -fno-move-loop-invariants -fno-strict-aliasing -ffunction-sections -fdata-sections -fno-exceptions  -fno-use-cxa-atexit -fno-threadsafe-statics -fno-rtti -fno-threadsafe-statics -fpermissive -fno-use-cxa-atexit -fstack-usage -MMD -MP -MT"$1" -MT"$1.d"  --specs=nano.specs --specs=nosys.specs  -mfloat-abi=soft -mthumb -o $1
+	#$(GCC) -fpermissive -ffunction-sections -fdata-sections -std=gnu++14 $2 $(COMMON_ARGS) $(CXX_ARGS) $(DEFINE_OPT) -c $(INCLIDE_OPT) -o $1
 endef
+
+$(FIRMWARE).elf: $(OBJ_LIST_FILE)
+	$(CXX) -Os -o $(FIRMWARE).elf $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ) $(LIBS) -mcpu=cortex-m3 -T"$(LD_SCRIPT)" -Wl,-Map="$(FIRMWARE).map" -Wl,--gc-sections -static  --specs=nano.specs --specs=nosys.specs  -u_printf_float -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+	#$(CXX) -o $(FIRMWARE).elf $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ) $(LIBS) -T"$(LD_SCRIPT)" -Wl,-Map="$(FIRMWARE).map" $(COMMON_ARGS)b -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+
 
 $(OBJ_LIST_FILE): $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)
 	echo $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)>$(OBJ_LIST_FILE)

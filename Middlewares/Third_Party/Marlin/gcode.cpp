@@ -241,25 +241,22 @@ void GCodeParser::parse(char *p) {
   }
 }
 
-#if ENABLED(CNC_COORDINATE_SYSTEMS)
 
-  // Parse the next parameter as a new command
-  bool GCodeParser::chain() {
-    #if ENABLED(FASTER_GCODE_PARSER)
-      char *next_command = command_ptr;
-      if (next_command) {
-        while (*next_command && *next_command != ' ') ++next_command;
-        while (*next_command == ' ') ++next_command;
-        if (!*next_command) next_command = NULL;
-      }
+// Parse the next parameter as a new command
+bool GCodeParser::chain() {
+	#if ENABLED(FASTER_GCODE_PARSER)
+		char *next_command = command_ptr;
+		if (next_command) {
+			while (*next_command && *next_command != ' ') ++next_command;
+			while (*next_command == ' ') ++next_command;
+			if (!*next_command) next_command = NULL;
+		}
     #else
-      const char *next_command = command_args;
+		const char *next_command = command_args;
     #endif
-    if (next_command) parse(next_command);
-    return !!next_command;
-  }
-
-#endif // CNC_COORDINATE_SYSTEMS
+	if (next_command) parse(next_command);
+	return !!next_command;
+}
 
 void GCodeParser::unknown_command_error() {
   SERIAL_ECHO_START();

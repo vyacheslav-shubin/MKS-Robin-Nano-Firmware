@@ -1,2 +1,5 @@
 build/*
+EWARM/mksRobinNano/List/*
+EWARM/mksRobinNano/Exe/*
+EWARM/mksRobinNano/Obj/*
 

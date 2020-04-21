@@ -1,6 +1,6 @@
 #include "ui_tools.h"
 
-void ui_push_disp_stack(char ui_id) {
+void ui_push_disp_stack(DISP_STATE ui_id) {
     if(disp_state_stack._disp_state[disp_state_stack._disp_index] != ui_id)
     {
         disp_state_stack._disp_index++;

@@ -12,6 +12,7 @@ extern "C" {
 
 
 extern void ui_push_disp_stack(DISP_STATE ui_id);
+extern void ui_reset_disp_stack(DISP_STATE ui_id);
 extern void ui_pop_disp_stack(void);
 extern void ui_clear_screen(void);
 extern void ui_drop_window(WM_HWIN wnd);
@@ -24,6 +25,12 @@ extern void ui_initialize_screen_gui(void);
 
 
 extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
+extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
+extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile);
+extern BUTTON_Handle ui_create_state_button_id(int x, int y, WM_HWIN hWinParent, char *pFile, uint32_t id);
+
+extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
+
 extern void ui_set_text_value(TEXT_Handle handle, char* val);
 
 

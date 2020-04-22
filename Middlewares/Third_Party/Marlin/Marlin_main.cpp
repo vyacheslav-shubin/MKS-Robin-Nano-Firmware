@@ -273,7 +273,7 @@
 
 #include "wifi_module.h"
 
-#include "gui.h"
+#include "GUI.h"
 
 #include "draw_ready_print.h"
 
@@ -299,7 +299,6 @@ extern uint8_t IsChooseAutoShutdown;
 
 extern uint8_t temperature_change_frequency;
 
-static uint32_t temperature_change_frequency_cnt = 0;
 static uint32_t After_finish_print_time = 0;
 
 uint8_t filament_loading_time_flg;
@@ -318,7 +317,6 @@ extern uint32_t filament_rate;
 volatile uint32_t TimeIncrease;
 uint8_t volatile printing_rate_update_flag;
 uint8_t preview_no_display;
-extern PRINT_TIME  print_time;
 
 extern uint8_t from_flash_pic;
 volatile uint8_t loop_start=0;
@@ -13056,7 +13054,7 @@ void process_parsed_command() {
           gcode_M23(); break;
         case 24: // M24: Start SD print
           gcode_M24(); 
-
+          //TODO: shubin выкинуть отсюда в UI
           if(mksReprint.mks_printer_state == MKS_WORKING)
           {
             clear_cur_ui();
@@ -13071,6 +13069,7 @@ void process_parsed_command() {
           break;
         case 25: // M25: Pause SD print
             gcode_M25(); 
+            //TODO: shubib выкинуть отсюда в UI
             if(mksReprint.mks_printer_state == MKS_PAUSING)
             {
             	stop_print_time();							
@@ -16296,36 +16295,12 @@ void SysTick_Handler_User()
 			}
 		}	
 	
-		temperature_change_frequency_cnt++;
-		if((temperature_change_frequency_cnt>=2000)&&(temperature_change_frequency!=1))
-		{
-			temperature_change_frequency_cnt = 0;
-			temperature_change_frequency = 1;
-		}
-		
-		if(!(TimeIncrease * TICK_CYCLE % 3000))	// 3s
-		{		
-			printing_rate_update_flag = 1;
-		}	
+		ui_timings();
+
 
 		if((TimeIncrease * TICK_CYCLE % 1000) == 0) 
-		{		
-			if(print_time.start == 1)
-			{
-				print_time.seconds++;
-				if(print_time.seconds >= 60)
-				{
-					print_time.seconds = 0;
-					print_time.minutes++;
-					if(print_time.minutes >= 60)
-					{
-						print_time.minutes = 0;
-						print_time.hours++;
-					}
-
-				}			}
 			display_hold_cnt++;
-		}
+
 		if((TimeIncrease * TICK_CYCLE % 1000) == 0)
 		{
 			z_high_count=1;

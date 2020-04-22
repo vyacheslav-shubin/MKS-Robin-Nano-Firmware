@@ -27,7 +27,6 @@ extern void setProBarRate();
 extern void disp_fan_move_printing();
 extern void start_print_time();
 extern void stop_print_time();
-extern void print_time_run();
 extern void reset_file_info();
 
 #if defined(__cplusplus)

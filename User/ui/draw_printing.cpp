@@ -1,12 +1,14 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
+#include "CHECKBOX.h"
 #include "draw_printing.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
 #include "text.h"
 #include "draw_operate.h"
+#include "ui_tools.h"
 #include "pic_manager.h"
 
 #include "draw_ready_print.h"
@@ -14,7 +16,6 @@
 //#include "mks_tft_com.h"
 
 #include "draw_print_file.h"
-#include "CHECKBOX.h"
 #include "pic.h"
 #include "marlin.h"
 #include "mks_reprint.h"
@@ -32,8 +33,6 @@ extern FIL *srcfp;
 extern volatile uint8_t temper_error_flg;
 
 int8_t curFilePath[30];
-
-PRINT_TIME  print_time;
 
 int once_flag = 0;
 
@@ -349,8 +348,94 @@ void reset_file_info()
 	gCurFileState.bufPoint = 0;
 	gCurFileState.file_open_flag = 0;
 }
+#define PB_HEIGHT	25
+#define SB_OFFSET	(PB_HEIGHT + 10)
+#define ROW_SIZE	40
+#define COL(x) (200 + 5 + ((140+5) * x))
+#define COL_T(x) COL(x) + STATE_PIC_X_PIXEL
+#define ROW(y) (SB_OFFSET + (ROW_SIZE*y))
+#define TEXT_L(phx, phy) ui_create_std_text(COL_T(phx), ROW(phy), 80, STATE_PIC_Y_PIXEL, hPrintingWnd, 0)
+#define BUTTON_L(phx, phy, file) ui_create_state_button(COL(phx), ROW(phy), hPrintingWnd, file);
+
+static void update_pause_button() {
+	char * fn;
+	char * tn;
+	if(gCfgItems.standby_mode==1 && mksReprint.mks_printer_state == MKS_REPRINTED && button_disp_pause_state==1) {
+		fn="bmp_pause.bin";
+		tn=printing_menu.pause;
+	} else {
+		if(
+				(mksReprint.mks_printer_state == MKS_REPRINTING)
+				|| (mksReprint.mks_printer_state == MKS_PAUSING)
+				|| (mksReprint.mks_printer_state == MKS_PAUSED)) {
+			fn="bmp_resume.bin";
+			tn=printing_menu.resume;
+			BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_resume.bin",1);
+		} else {
+			fn="bmp_pause.bin";
+			tn=printing_menu.pause;
+		}
+	}
+	BUTTON_SetBmpFileName(buttonPause.btnHandle, fn, 1);
+	if(gCfgItems.multiple_language != 0)
+		BUTTON_SetText(buttonPause.btnHandle, tn);
+}
+
+#define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
+//#define is_dual_extruders() (1)
+
+void draw_printing()
+{
+	int dual_extrude;
+	dual_extrude = is_dual_extruders();
+
+	FRESULT res;
+	int i;
+	ui_reset_disp_stack(PRINTING_UI);
+	ui_clear_screen();
+	ui_initialize_screen_gui();
+
+	hPrintingWnd = ui_std_window(cbPrintingWin);
 
 
+	buttonTime.btnHandle = BUTTON_L(0,0,"bmp_time_state.bin");
+	printTimeLeft = TEXT_L(0, 0);
+
+	buttonExt1.btnHandle = BUTTON_L(0, 1, "bmp_ext1_state.bin");
+	E1_Temp = TEXT_L(0, 1);
+
+	if (dual_extrude) {
+		buttonExt2.btnHandle = BUTTON_L(1, 1, "bmp_ext2_state.bin");
+		E2_Temp = TEXT_L(1, 1);
+	}
+	buttonBedstate.btnHandle = BUTTON_L(0, 2, "bmp_bed_state.bin");
+	Bed_Temp = TEXT_L(0, 2);
+
+	buttonFanstate.btnHandle = BUTTON_L(1, 2, "bmp_fan_state.bin");
+	Fan_Pwm = TEXT_L(1, 2);
+
+	buttonZpos.btnHandle = BUTTON_L(1, 0, "bmp_zpos_state.bin");
+	Zpos = TEXT_L(1, 0);
+
+	printingBar = PROGBAR_CreateEx(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd, WM_CF_SHOW, 0, 0);
+	PROGBAR_SetBarColor(printingBar, 0, gCfgItems.printing_bar_color_left);
+	PROGBAR_SetBarColor(printingBar, 1, gCfgItems.printing_bar_color_right);
+	PROGBAR_SetTextColor(printingBar, 0, gCfgItems.printing_bar_text_color_left);
+	PROGBAR_SetTextColor(printingBar, 1, gCfgItems.printing_bar_text_color_right);
+	PROGBAR_SetFont(printingBar, &FONT_TITLE);
+
+	buttonPause.btnHandle = ui_create_150_80_button(5, 204, hPrintingWnd, 0, 0);
+	buttonStop.btnHandle = ui_create_150_80_button(165,204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
+	buttonOperat.btnHandle = ui_create_150_80_button(325,204, hPrintingWnd, "bmp_operate.bin", printing_menu.option);
+	update_pause_button();
+		disp_sprayer_tem_printing();
+		disp_bed_temp_printing();
+		disp_fan_speed_printing();
+		//disp_printing_speed();
+}
+
+
+#if 0
 void draw_printing()
 {
 	FRESULT res;
@@ -517,6 +602,8 @@ void draw_printing()
 		disp_fan_speed_printing();
 }
 
+#endif
+
 void reset_print_time()
 {
 	print_time.hours = 0;
@@ -554,20 +641,6 @@ void disp_print_time() {
 	TEXT_SetText(Zpos, buf);
 }
 
-void print_time_run()
-{
-	static uint8_t lastSec = 0;
-	
-	if(disp_state == PRINTING_UI)
-	{
-		if(lastSec != print_time.seconds)
-		{
-			disp_print_time();
-		}
-		lastSec =  print_time.seconds;
-	}
-}
-
 void disp_sprayer_tem_printing()
 {
 	char buf[30] = {0};
@@ -583,7 +656,7 @@ void disp_sprayer_tem_printing()
 		memset(buf, 0, sizeof(buf));
 		sprintf(buf, printing_menu.temp1, (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
 		TEXT_SetText(E1_Temp, buf);	
-	    if(mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0){
+	    if(is_dual_extruders()){
            TEXT_SetBkColor(E2_Temp,gCfgItems.background_color);
            TEXT_SetTextColor(E2_Temp,gCfgItems.title_color);
 		   memset(buf,0,sizeof(buf));

@@ -16313,7 +16313,17 @@ void SysTick_Handler_User()
 			if(print_time.start == 1)
 			{
 				print_time.seconds++;
-			}
+				if(print_time.seconds >= 60)
+				{
+					print_time.seconds = 0;
+					print_time.minutes++;
+					if(print_time.minutes >= 60)
+					{
+						print_time.minutes = 0;
+						print_time.hours++;
+					}
+
+				}			}
 			display_hold_cnt++;
 		}
 		if((TimeIncrease * TICK_CYCLE % 1000) == 0)

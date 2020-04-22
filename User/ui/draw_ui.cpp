@@ -65,6 +65,7 @@
 //Screen TFT_screen;
 
 value_state value;
+PRINT_TIME  print_time;
 
 static float zpos_bak = -1;
 extern volatile uint8_t temper_error_flg;
@@ -72,6 +73,7 @@ extern volatile uint8_t temper_error_flg;
 extern volatile int16_t logo_time;
 //extern PR_STATUS printerStaus;
 extern uint8_t temp_update_flag;
+
 
 extern uint8_t print_start_flg;
 extern uint8_t from_flash_pic;
@@ -647,7 +649,11 @@ void GUI_RefreshPage() {
 				disp_printing_speed();
 			}
 			#endif
-			print_time_run();
+			static uint8_t lastSec = 0;
+			if(lastSec != print_time.seconds) {
+				lastSec = print_time.seconds;
+				disp_print_time();
+			}
 			break;
 		case OPERATE_UI:
 			if(temperature_change_frequency == 1) {

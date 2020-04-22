@@ -155,21 +155,21 @@ extern value_state value;
 /*
 typedef struct Screen_size
 {
-	uint8_t display_style;//ÆÁÄ»Ê×Ò³ÏÔÊ¾·ç¸ñ¡£
-	uint8_t firstpage_gap;//¼òÔ¼°æÊ×Ò³°´Å¥¼ä¸ô¡£	
+	uint8_t display_style;//ï¿½ï¿½Ä»ï¿½ï¿½Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+	uint8_t firstpage_gap;//ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½	
 
-	uint8_t gap_h;//°´Å¥¼äµÄË®Æ½¼ä¸ô
-	uint8_t gap_v;//°´Å¥¼äµÄ´¹Ö±¼ä¸ô
+	uint8_t gap_h;//ï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½
+	uint8_t gap_v;//ï¿½ï¿½Å¥ï¿½ï¿½Ä´ï¿½Ö±ï¿½ï¿½ï¿½
 	
-	uint16_t width;//ÆÁÄ»µÄ¿íX
-	uint16_t high;//ÆÁÄ»µÄ¸ßY
+	uint16_t width;//ï¿½ï¿½Ä»ï¿½Ä¿ï¿½X
+	uint16_t high;//ï¿½ï¿½Ä»ï¿½Ä¸ï¿½Y
 	
-	uint16_t btn_x_pixel;//°´Å¥µÄ¿íx
-	uint16_t btn_y_pixel;//°´Å¥µÄ¸ßy
+	uint16_t btn_x_pixel;//ï¿½ï¿½Å¥ï¿½Ä¿ï¿½x
+	uint16_t btn_y_pixel;//ï¿½ï¿½Å¥ï¿½Ä¸ï¿½y
 	
-	uint16_t title_xpos;//±êÌâÀ¸µÄxÎ»ÖÃ
-	uint16_t title_ypos;//±êÌâÀ¸µÄyÎ»ÖÃ
-	uint16_t title_high;//±êÌâÀ¸µÄ¸ß¶È
+	uint16_t title_xpos;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xÎ»ï¿½ï¿½
+	uint16_t title_ypos;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½yÎ»ï¿½ï¿½
+	uint16_t title_high;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
 
 	
 }Screen;
@@ -177,7 +177,7 @@ typedef struct Screen_size
 extern Screen TFT_screen;
 */
 
-//#define SAVE_FROM_SD				//¶ÏµçÐø´ò±£´æÔÚSDÖÐ¡£
+//#define SAVE_FROM_SD				//ï¿½Ïµï¿½ï¿½ï¿½ï¿½ò±£´ï¿½ï¿½ï¿½SDï¿½Ð¡ï¿½
 
 #define VERSION_WITH_PIC	1
 extern uint32_t To_pre_view;
@@ -399,6 +399,7 @@ typedef struct
 	
 } PRINT_TIME;
 
+extern PRINT_TIME  print_time;
 
 
 
@@ -553,7 +554,7 @@ extern void gcode_has_preview(char *path);
 //extern uint8_t drawicon_preview(char *path,int xsize_small,int ysize_small,int xsize_big,int ysize_big,char sel);
 
 // HC-chen 2017.7.27
-//°´Å¥±³¾°É«
+//ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½É«
 #define PreHeat_bk_color 0x008bff
 #define Move_bk_color 0x2311e8
 #define Zero_bk_color 0x8c00ed
@@ -632,54 +633,54 @@ extern void gcode_has_preview(char *path);
 #define Off_machine_sel_bk_color 0x9efcff
 #define Off_machine_bk_color 0x505050
 #define Print_file_name_bk_color 0x290c14
-//°´Å¥×ÖÌåÏÔÊ¾
-#define Simple_PreHeat "Ô¤ÈÈ"
-#define Complex_PreHeat "îAŸá"
+//ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
+#define Simple_PreHeat "Ô¤ï¿½ï¿½"
+#define Complex_PreHeat "ï¿½Aï¿½ï¿½"
 #define English_PreHeat "PreHeat"
-#define Simple_Move "ÒÆ¶¯"
-#define Complex_Move "ÒÆ„Ó"
+#define Simple_Move "ï¿½Æ¶ï¿½"
+#define Complex_Move "ï¿½Æ„ï¿½"
 #define English_Move "Move"
-#define Simple_Home "¹éÁã"
-#define Complex_Home "šwÁã"
+#define Simple_Home "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Home "ï¿½wï¿½ï¿½"
 #define English_Home "Home"
-#define Simple_Printing "´òÓ¡"
-#define Complex_Printing "´òÓ¡"
+#define Simple_Printing "ï¿½ï¿½Ó¡"
+#define Complex_Printing "ï¿½ï¿½Ó¡"
 #define English_Printing "Printing"
-#define Simple_Extrude "¼·³ö"
-#define Complex_Extrude "”D³ö"
+#define Simple_Extrude "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Extrude "ï¿½Dï¿½ï¿½"
 #define English_Extrude "Extrude"
-#define Simple_Leveling "µ÷Æ½"
-#define Complex_Leveling "Õ{Æ½"
+#define Simple_Leveling "ï¿½ï¿½Æ½"
+#define Complex_Leveling "ï¿½{Æ½"
 #define English_Leveling "Leveling"
-#define Simple_AutoLeveling "×Ô¶¯µ÷Æ½"
-#define Complex_AutoLeveling "×Ô„ÓÕ{Æ½"
+#define Simple_AutoLeveling "ï¿½Ô¶ï¿½ï¿½ï¿½Æ½"
+#define Complex_AutoLeveling "ï¿½Ô„ï¿½ï¿½{Æ½"
 #define English_AutoLeveling "Auto Leveling"
-#define Simple_Set "ÉèÖÃ"
-#define Complex_Set "ÔOÖÃ"
+#define Simple_Set "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Set "ï¿½Oï¿½ï¿½"
 #define English_Set "Set"
-#define Simple_More "¸ü¶à"
-#define Complex_More "¸ü¶à"
+#define Simple_More "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_More "ï¿½ï¿½ï¿½ï¿½"
 #define English_More "More"
-#define Simple_Add "Ôö¼Ó"
-#define Complex_Add "Ôö¼Ó"
+#define Simple_Add "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Add "ï¿½ï¿½ï¿½ï¿½"
 #define English_Add "Add"
-#define Simple_Dec"¼õÉÙ"
-#define Complex_Dec "œpÉÙ"
+#define Simple_Dec"ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Dec "ï¿½pï¿½ï¿½"
 #define English_Dec "Dec"
-#define Simple_E1 "ÅçÍ·1"
-#define Complex_E1 "‡Šî^1"
+#define Simple_E1 "ï¿½ï¿½Í·1"
+#define Complex_E1 "ï¿½ï¿½ï¿½^1"
 #define English_E1 "E1"
-#define Simple_E2 "ÅçÍ·2"
-#define Complex_E2 "‡Šî^2"
+#define Simple_E2 "ï¿½ï¿½Í·2"
+#define Complex_E2 "ï¿½ï¿½ï¿½^2"
 #define English_E2 "E2"
-#define temperature1 "1¡æ"
-#define temperature5 "5¡æ"
-#define temperature10 "10¡æ"
-#define Simple_Close "¹Ø±Õ"
-#define Complex_Close "êPé]"
+#define temperature1 "1ï¿½ï¿½"
+#define temperature5 "5ï¿½ï¿½"
+#define temperature10 "10ï¿½ï¿½"
+#define Simple_Close "ï¿½Ø±ï¿½"
+#define Complex_Close "ï¿½Pï¿½]"
 #define English_Close "Close"
-#define Simple_Back "·µ»Ø"
-#define Complex_Back "·µ»Ø"
+#define Simple_Back "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Back "ï¿½ï¿½ï¿½ï¿½"
 #define English_Back "Back"
 #define Move_X_Add "X+"
 #define Move_X_Dec "X-"
@@ -694,99 +695,99 @@ extern void gcode_has_preview(char *path);
 #define Home_X "X"
 #define Home_Y "Y"
 #define Home_Z "Z"
-#define Simple_PageUp "ÉÏÒ»Ò³"
-#define Complex_PageUp "ÉÏÒ»í“"
+#define Simple_PageUp "ï¿½ï¿½Ò»Ò³"
+#define Complex_PageUp "ï¿½ï¿½Ò»ï¿½"
 #define English_PageUp "Page Up"
-#define Simple_PageDown "ÏÂÒ»Ò³"
-#define Complex_PageDown "ÏÂÒ»í“"
+#define Simple_PageDown "ï¿½ï¿½Ò»Ò³"
+#define Complex_PageDown "ï¿½ï¿½Ò»ï¿½"
 #define English_PageDown "Page Down"
-#define Simple_Operate "²Ù×÷"
-#define Complex_Operate "²Ù×÷"
+#define Simple_Operate "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Operate "ï¿½ï¿½ï¿½ï¿½"
 #define English_Operate "Option"
-#define Simple_Operate "²Ù×÷"
-#define Complex_Operate "²Ù×÷"
+#define Simple_Operate "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Operate "ï¿½ï¿½ï¿½ï¿½"
 #define English_Operate "Option"
-#define Simple_Pause "ÔÝÍ£"
-#define Complex_Pause "•ºÍ£"
+#define Simple_Pause "ï¿½ï¿½Í£"
+#define Complex_Pause "ï¿½ï¿½Í£"
 #define English_Pause "Pause"
 #define Simple_Stop "Í£Ö¹"
 #define Complex_Stop "Í£Ö¹"
 #define English_Stop "Stop"
-#define Simple_Temperature "ÎÂ¶È"
-#define Complex_Temperature "œØ¶È"
+#define Simple_Temperature "ï¿½Â¶ï¿½"
+#define Complex_Temperature "ï¿½Ø¶ï¿½"
 #define English_Temperature "Temperature"
-#define Simple_Speed "±äËÙ"
-#define Complex_Speed "×ƒËÙ"
+#define Simple_Speed "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Speed "×ƒï¿½ï¿½"
 #define English_Speed "Speed"
-#define Simple_Speed "ËÙ¶È"
-#define Complex_Speed "ËÙ¶È"
+#define Simple_Speed "ï¿½Ù¶ï¿½"
+#define Complex_Speed "ï¿½Ù¶ï¿½"
 #define English_Speed "Speed"
-#define Simple_Resume "»Ö¸´"
-#define Complex_Resume "»Ö¸´"
+#define Simple_Resume "ï¿½Ö¸ï¿½"
+#define Complex_Resume "ï¿½Ö¸ï¿½"
 #define English_Resume "Resume"
-#define Simple_In "½øÁÏ"
-#define Complex_In "ßMÁÏ"
+#define Simple_In "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_In "ï¿½Mï¿½ï¿½"
 #define English_In "In"
-#define Simple_Out "ÍËÁÏ"
-#define Complex_Out "ÍËÁÏ"
+#define Simple_Out "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Out "ï¿½ï¿½ï¿½ï¿½"
 #define English_Out "Out"
-#define Simple_Slow "ÂýËÙ"
-#define Complex_Slow "ÂýËÙ"
+#define Simple_Slow "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Slow "ï¿½ï¿½ï¿½ï¿½"
 #define English_Slow "Slow"
-#define Simple_Normal "³£ËÙ"
-#define Complex_Normal "³£ËÙ"
+#define Simple_Normal "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Normal "ï¿½ï¿½ï¿½ï¿½"
 #define English_Normal "Normal"
-#define Simple_High "¸ßËÙ"
-#define Complex_High "¸ßËÙ"
+#define Simple_High "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_High "ï¿½ï¿½ï¿½ï¿½"
 #define English_High "High"
-#define Simple_First "µÚÒ»µã"
-#define Complex_First "µÚÒ»üc"
+#define Simple_First "ï¿½ï¿½Ò»ï¿½ï¿½"
+#define Complex_First "ï¿½ï¿½Ò»ï¿½c"
 #define English_First "First"
-#define Simple_Second "µÚ¶þµã"
-#define Complex_Second "µÚ¶þüc"
+#define Simple_Second "ï¿½Ú¶ï¿½ï¿½ï¿½"
+#define Complex_Second "ï¿½Ú¶ï¿½ï¿½c"
 #define English_Second "Second"
-#define Simple_Third "µÚÈýµã"
-#define Complex_Third "µÚÈýüc"
+#define Simple_Third "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Third "ï¿½ï¿½ï¿½ï¿½ï¿½c"
 #define English_Third "Third"
-#define Simple_Fourth "µÚËÄµã"
-#define Complex_Fourth "µÚËÄüc"
+#define Simple_Fourth "ï¿½ï¿½ï¿½Äµï¿½"
+#define Complex_Fourth "ï¿½ï¿½ï¿½ï¿½ï¿½c"
 #define English_Fourth "Fourth"
-#define Simple_Five "µÚÎåµã"
-#define Complex_Five "µÚÎåüc"
+#define Simple_Five "ï¿½ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Five "ï¿½ï¿½ï¿½ï¿½ï¿½c"
 #define English_Five "Fifth"
-#define Simple_Full "È«ËÙ"
-#define Complex_Full "È«ËÙ"
+#define Simple_Full "È«ï¿½ï¿½"
+#define Complex_Full "È«ï¿½ï¿½"
 #define English_Full "Full"
-#define Simple_Half "°ëËÙ"
-#define Complex_Half "°ëËÙ"
+#define Simple_Half "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Half "ï¿½ï¿½ï¿½ï¿½"
 #define English_Half "Half"
-#define Simple_ManualOff_machine "ÊÖ¶¯¹Ø»ú"
-#define Complex_ManualOff_machine "ÊÖ„ÓêP™C"
+#define Simple_ManualOff_machine "ï¿½Ö¶ï¿½ï¿½Ø»ï¿½"
+#define Complex_ManualOff_machine "ï¿½Ö„ï¿½ï¿½Pï¿½C"
 #define English_ManualOff_machine "Manual off"
-#define Simple_AutoOff_machine "×Ô¶¯¹Ø»ú"
-#define Complex_AutoOff_machine "×Ô„ÓêP™C"
+#define Simple_AutoOff_machine "ï¿½Ô¶ï¿½ï¿½Ø»ï¿½"
+#define Complex_AutoOff_machine "ï¿½Ô„ï¿½ï¿½Pï¿½C"
 #define English_AutoOff_machine "Auto off"
 #define English_Wifi "WIFI"
-#define Simple_Fan "·çÉÈ"
-#define Complex_Fan "ïLÉÈ"
+#define Simple_Fan "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Fan "ï¿½Lï¿½ï¿½"
 #define English_Fan "Fan"
-#define Simple_About "¹ØÓÚ"
-#define Complex_About "êPì¶"
+#define Simple_About "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_About "ï¿½Pï¿½"
 #define English_About "About"
-#define Simple_Continue "¶ÏµãÐø´ò"
-#define Complex_Continue "”àücÀm´ò"
+#define Simple_Continue "ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Continue "ï¿½ï¿½ï¿½cï¿½mï¿½ï¿½"
 #define English_Continue "Continue"
-#define Simple_Change "»»ÁÏ"
-#define Complex_Change "“QÁÏ"
+#define Simple_Change "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Change "ï¿½Qï¿½ï¿½"
 #define English_Change "Change"
-#define Simple_M_off "¹Ø±Õµç»ú"
-#define Complex_M_off "êPé]ëŠ™C"
+#define Simple_M_off "ï¿½Ø±Õµï¿½ï¿½"
+#define Complex_M_off "ï¿½Pï¿½]ëŠ™C"
 #define English_M_off "M-off"
-#define Simple_Bed "ÈÈ´²"
-#define Complex_Bed "Ÿá´²"
+#define Simple_Bed "ï¿½È´ï¿½"
+#define Complex_Bed "ï¿½á´²"
 #define English_Bed "Bed"
-#define Simple_Filament "»»ÁÏ"
-#define Complex_Filament "“QÁÏ"
+#define Simple_Filament "ï¿½ï¿½ï¿½ï¿½"
+#define Complex_Filament "ï¿½Qï¿½ï¿½"
 #define English_Filament "Filament"
 
 #if defined(__cplusplus)

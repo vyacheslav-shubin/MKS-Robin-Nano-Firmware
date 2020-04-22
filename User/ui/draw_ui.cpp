@@ -1056,45 +1056,31 @@ void Draw_default_preview(int xpos_pixel,int ypos_pixel,uint8_t sel)
 	int i;
 	uint16_t temp_p;
 	
-	for(index = 0; index < 10; index ++)//200*200
-	{
-		if(sel == 1)
-		{
+	for(index = 0; index < 10; index ++) { //200*200
+		if(sel == 1) {
 			flash_view_Read(bmp_public_buf, 8000);//20k
-		}
-		else
-		{
+		} else {
 			default_view_Read(bmp_public_buf, 8000);//20k
 		}
-
 		i = 0;
-		
 		LCD_setWindowArea(xpos_pixel, y_off * 20+ypos_pixel, 200,20);     //200*200
-
 		LCD_WriteRAM_Prepare(); 
-		for(_y = y_off * 20; _y < (y_off + 1) * 20; _y++)
-		{
-			for (x_off = 0; x_off < 200; x_off++) 
-			{
-				if(sel==1)
-				{
+		for(_y = y_off * 20; _y < (y_off + 1) * 20; _y++) {
+			for (x_off = 0; x_off < 200; x_off++) {
+				if(sel==1) {
 					temp_p = (uint16_t)(bmp_public_buf[i]|bmp_public_buf[i+1]<<8);
 					p_index = &temp_p;
-				}
-				else
-				{
+				} else {
 					p_index = (uint16_t *)(&bmp_public_buf[i]); 	
 				}
 				LCD_WriteRAM(*p_index);
 				i += 2;
-				
 			}
 			if(i >= 8000)
 				break;
 		}
 		y_off++;		
 	}
-
 }
 
 int ascii2dec_test1(char *ascii)
@@ -1133,120 +1119,55 @@ extern int once_flag;
 extern "C" void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
 extern "C" void SPI_FLASH_SectorErase(u32 SectorAddr);
 
-void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
-{
-#if defined(TFT35)
+void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel) {
 	uint8_t ress;
 	UINT read,write;
 	volatile uint32_t i,j;
 	volatile uint16_t *p_index;
 	int res;
-
-	//memset(bmp_public_buf,0,sizeof(bmp_public_buf));
-	res = f_open(file, curFileName, FA_OPEN_EXISTING | FA_READ);//	
-	if(res == FR_OK)
-	{
+	res = f_open(file, curFileName, FA_OPEN_EXISTING | FA_READ);
+	if(res == FR_OK) {
 		f_lseek(file, (PREVIEW_LITTLE_PIC_SIZE+To_pre_view)+size*row+8);
-		//ress = f_read(file, buff_pic, size, &read);
-		//if(ress == FR_OK)
-		{
-	      	LCD_setWindowArea(xpos_pixel, ypos_pixel+row, 200,1);
-			LCD_WriteRAM_Prepare();
-			j=0;
-			i=0;
+		LCD_setWindowArea(xpos_pixel, ypos_pixel + row, 200,1);
+		LCD_WriteRAM_Prepare();
+		j=0; i=0;
+		while(j<400) {
+			f_read(file, buff_pic, 400, &read);
+			for(i=0;i<400;i+=2, j++)
+				bmp_public_buf[j]= ascii2dec_test1((char*)&buff_pic[i])<<4|ascii2dec_test1((char*)&buff_pic[i+1]);
+		}
+		for(i=0;i<400;) {
+			p_index = (uint16_t *)(&bmp_public_buf[i]);
+			if(*p_index == 0x0000)*p_index=gCfgItems.preview_bk_color;
+			LCD_WriteRAM(*p_index);
+			i=i+2;
+		}
+		if(row<20)
+			SPI_FLASH_SectorErase(BAK_VIEW_ADDR+row*4096);
 
-			while(1)
-			{
-				f_read(file, buff_pic, 400, &read);
-				for(i=0;i<400;)
-				{
-					bmp_public_buf[j]= ascii2dec_test1((char*)&buff_pic[i])<<4|ascii2dec_test1((char*)&buff_pic[i+1]);
-					//bmp_public_buf[j]= ascii2dec_test1((char*)&buff_pic[8+i])<<4|ascii2dec_test1((char*)&buff_pic[8+i+1]);
-					i+=2;
-					j++;
+		SPI_FLASH_BufferWrite(bmp_public_buf, BAK_VIEW_ADDR+row*400, 400);
+		row++;
+		if(row >= 200) {
+			size = 809;
+			row = 0;
+
+			gcode_preview_over = 0;
+			f_close(file);
+			if(card.openFile(curFileName, true)) {
+				feedrate_percentage = 100;
+				saved_feedrate_percentage = feedrate_percentage;
+				planner.flow_percentage[0] = 100;
+				planner.e_factor[0]= planner.flow_percentage[0]*0.01;
+				if(mksCfg.extruders==2) {
+					planner.flow_percentage[1] = 100;
+					planner.e_factor[1]= planner.flow_percentage[1]*0.01;
 				}
-
-				//if(i>800)break;
-				//#if defined(TFT70)
-				//if(j>400)
-				//{
-				//	f_read(file, buff_pic, 1, &read);
-				//	break;
-				//}
-				//#elif defined(TFT35)
-				if(j>=400)
-				{
-					//f_read(file, buff_pic, 1, &read);
-					break;
-				}
-				//#endif
-
-			}
-			for(i=0;i<400;)
-			{
-				p_index = (uint16_t *)(&bmp_public_buf[i]);
-				if(*p_index == 0x0000)*p_index=gCfgItems.preview_bk_color;
-		    	LCD_WriteRAM(*p_index);
-				i=i+2;
-			}
-			if(row<20)
-			{
-				SPI_FLASH_SectorErase(BAK_VIEW_ADDR+row*4096);
-			}
-			SPI_FLASH_BufferWrite(bmp_public_buf, BAK_VIEW_ADDR+row*400, 400);
-			row++;
-			if(row >= 200)
-			{
-				size = 809;
-				row = 0;
-
-				gcode_preview_over = 0;
-				//flash_preview_begin = 1;
-
-				f_close(file);
-
-				/*if(gCurFileState.file_open_flag != 0xaa)
-				{
-
-
-					reset_file_info();
-
-					res = f_open(file, curFileName, FA_OPEN_EXISTING | FA_READ);
-
-					if(res == FR_OK)
-					{
-						f_lseek(file,PREVIEW_SIZE+To_pre_view);
-						gCurFileState.file_open_flag = 0xaa;
-
-						//bakup_file_path((uint8_t *)curFileName, strlen(curFileName));
-
-						srcfp = file;
-
-						mksReprint.mks_printer_state = MKS_WORKING;
-
-						once_flag = 0;
-					}
-
-				}	*/
-				if(card.openFile(curFileName, true))
-				{
-				    feedrate_percentage = 100;
-	                            saved_feedrate_percentage = feedrate_percentage;
-	                            planner.flow_percentage[0] = 100;
-	                            planner.e_factor[0]= planner.flow_percentage[0]*0.01;
-	                            if(mksCfg.extruders==2)
-	                            {
-	                                planner.flow_percentage[1] = 100;
-	                                planner.e_factor[1]= planner.flow_percentage[1]*0.01;
-	                            }
-					card.startFileprint();
-					once_flag = 0;
-				}
+				card.startFileprint();
+				once_flag = 0;
 			}
 		}
 		f_close(file);
 	}
-#endif
 }
 
 void disp_pre_gcode(int xpos_pixel,int ypos_pixel)

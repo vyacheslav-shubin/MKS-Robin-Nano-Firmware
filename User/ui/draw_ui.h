@@ -188,7 +188,7 @@ extern uint8_t default_preview_flg;
 //**#define LCD_WIDTH	320
 //**#define LCD_HEIGHT	240
 
-#define PREVIEW_LITTLE_PIC_SIZE		40910//400*100+9*101+1
+#define PREVIEW_LITTLE_PIC_SIZE		10460//200*50+9*51+1
 #define PREVIEW_SIZE			202720//(PREVIEW_LITTLE_PIC_SIZE+800*200+201*9+1)
 
 #if (0)

@@ -71,6 +71,8 @@ extern volatile uint8_t pause_from_high_level;
 extern volatile uint8_t pause_from_low_level;
 extern uint8_t button_disp_pause_state;
 
+void update_printing_1s(void);
+
 static void cbPrintingWin(WM_MESSAGE * pMsg) {
 
 struct PressEvt *press_event;
@@ -95,7 +97,7 @@ switch (pMsg->MsgId)
 				if(gcode_preview_over != 1)
 				{
 					last_disp_state = PRINTING_UI;
-					Clear_printing();
+					clear_printing();
 					if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (gCurFileState.totalSend == 100) )
 					{
 						f_close(srcfp);
@@ -143,14 +145,14 @@ switch (pMsg->MsgId)
 			                                    ||((MKS_MT_DET2_OP == Bit_SET)&&(gCfgItems.filament_det1_level_flg == 1)))
 			                                	{
 			                                		last_disp_state = PRINTING_UI;
-			                    			  Clear_printing();
+			                    			  clear_printing();
 			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);  
 			                                	}
 							else	if(((MKS_MT_DET1_OP == Bit_RESET)&&(gCfgItems.filament_det0_level_flg == 0))
 			                                    ||((MKS_MT_DET2_OP == Bit_RESET)&&(gCfgItems.filament_det1_level_flg == 0)))
 			                                	{
 			                                		last_disp_state = PRINTING_UI;
-			                    			  Clear_printing();
+			                    			  clear_printing();
 			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);  
 			                                	}
 								else
@@ -174,14 +176,14 @@ switch (pMsg->MsgId)
 			                                    ||((MKS_MT_DET2_OP == Bit_SET)&&(gCfgItems.filament_det1_level_flg == 1)))
 							   	{
 							   		last_disp_state = PRINTING_UI;
-			                    			  Clear_printing();
+			                    			  clear_printing();
 			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS); 
 							   	}
 								else if(((MKS_MT_DET1_OP == Bit_RESET)&&(gCfgItems.filament_det0_level_flg == 0))
 			                                    ||((MKS_MT_DET2_OP == Bit_RESET)&&(gCfgItems.filament_det1_level_flg == 0)))
 							   	{
 							   		last_disp_state = PRINTING_UI;
-			                    			  Clear_printing();
+			                    			  clear_printing();
 			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS); 
 							   	}
 								else
@@ -234,7 +236,7 @@ switch (pMsg->MsgId)
 			                                    else
 			                                    {
 					                                     last_disp_state = PRINTING_UI;
-					                    			Clear_printing();
+					                    			clear_printing();
 			                    					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);   
 			                                    }
 			                                }
@@ -256,7 +258,7 @@ switch (pMsg->MsgId)
 			                                    else
 			                                    {
 					                                     last_disp_state = PRINTING_UI;
-					                    			Clear_printing();
+					                    			clear_printing();
 			                    					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);   
 			                                    }
 			                                }
@@ -326,7 +328,7 @@ switch (pMsg->MsgId)
 					if(mksReprint.mks_printer_state != MKS_IDLE)
 					{
 						last_disp_state = PRINTING_UI;
-						Clear_printing();
+						clear_printing();
 						draw_dialog(DIALOG_TYPE_STOP);
 					}
 				}
@@ -428,10 +430,7 @@ void draw_printing()
 	buttonStop.btnHandle = ui_create_150_80_button(165,204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
 	buttonOperat.btnHandle = ui_create_150_80_button(325,204, hPrintingWnd, "bmp_operate.bin", printing_menu.option);
 	update_pause_button();
-		disp_sprayer_tem_printing();
-		disp_bed_temp_printing();
-		disp_fan_speed_printing();
-		//disp_printing_speed();
+	update_printing_1s();
 }
 
 
@@ -604,103 +603,14 @@ void draw_printing()
 
 #endif
 
-void reset_print_time()
-{
-	print_time.hours = 0;
-	print_time.minutes = 0;
-	print_time.seconds = 0;
-	print_time.ms_10 = 0;
-}
-
-void start_print_time()
-{
-	print_time.start = 1;
-}
-
-void stop_print_time()
-{
-	print_time.start = 0;
-}
-
 extern uint32_t rcv_ok_nums;
-void disp_print_time() {
-	char buf[30] = {0};
-	
-	TEXT_SetBkColor(printTimeLeft,  gCfgItems.background_color);
-	TEXT_SetTextColor(printTimeLeft, gCfgItems.title_color);
-	TEXT_SetBkColor(Zpos,gCfgItems.background_color);
-	TEXT_SetTextColor(Zpos,gCfgItems.title_color);
-		
-	memset(buf, 0, sizeof(buf));
-	sprintf(buf, "%d%d:%d%d:%d%d", print_time.hours/10, print_time.hours%10, print_time.minutes/10, print_time.minutes%10,  print_time.seconds/10, print_time.seconds%10);
-	TEXT_SetText(printTimeLeft, buf);
-	memset(buf, ' ', sizeof(buf)-1);
-	TEXT_SetText(Zpos, buf);
-	memset(buf, 0, sizeof(buf));
-	sprintf(buf,"%.3f",current_position[Z_AXIS]);
-	TEXT_SetText(Zpos, buf);
-}
 
-void disp_sprayer_tem_printing()
-{
-	char buf[30] = {0};
-	volatile uint8_t i0 = 0;
-	
-	//if(gCfgItems.sprayerNum == 2)
-	{		
-		
-		TEXT_SetBkColor(E1_Temp,  gCfgItems.background_color);
-		TEXT_SetTextColor(E1_Temp, gCfgItems.title_color);
-
-
-		memset(buf, 0, sizeof(buf));
-		sprintf(buf, printing_menu.temp1, (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
-		TEXT_SetText(E1_Temp, buf);	
-	    if(is_dual_extruders()){
-           TEXT_SetBkColor(E2_Temp,gCfgItems.background_color);
-           TEXT_SetTextColor(E2_Temp,gCfgItems.title_color);
-		   memset(buf,0,sizeof(buf));
-		   sprintf(buf, printing_menu.temp2, (int)thermalManager.current_temperature[1], (int)thermalManager.target_temperature[1]);
-		   TEXT_SetText(E2_Temp, buf);
-        }
-	}
+void print_time_to_str(PRINT_TIME * pt, char * buf) {
+	sprintf(buf, "%d%d:%d%d:%d%d", pt->hours/10, pt->hours%10, pt->minutes/10, pt->minutes%10,  pt->seconds/10, pt->seconds%10);
 }
 
 static int8_t fan_dir = 0;
 
-#if VERSION_WITH_PIC
-
-void disp_fan_move_printing()
-{
-	disp_fan_speed_printing();
-}
-#endif
-
-void disp_bed_temp_printing()
-{
-	char buf[30] = {0};
-
-		TEXT_SetBkColor(Bed_Temp,  gCfgItems.background_color);
-		TEXT_SetTextColor(Bed_Temp, gCfgItems.title_color);
-
-		
-		memset(buf, 0, sizeof(buf));
-		sprintf(buf, printing_menu.bed_temp, (int)thermalManager.current_temperature_bed,  (int)thermalManager.target_temperature_bed);
-		TEXT_SetText(Bed_Temp, buf);
-}
-
-void disp_fan_speed_printing()
-{
-	char buf[30] = {0};
-	
-	TEXT_SetBkColor(Fan_Pwm,  gCfgItems.background_color);
-	TEXT_SetTextColor(Fan_Pwm, gCfgItems.title_color);
-
-
-	memset(buf, 0, sizeof(buf));
-	sprintf(buf, "%3d", fanSpeeds[0]);
-	TEXT_SetText(Fan_Pwm, buf);
-}
 
 void disp_printing_speed()
 {
@@ -727,24 +637,42 @@ void setProBarRate()
 	int rate;
 	volatile long long rate_tmp_r;
 	
-	if(from_flash_pic != 1)
-	{
-		rate_tmp_r =(long long)card.sdpos * 100;
+	if(from_flash_pic != 1) {
+		rate_tmp_r =(long long) card.sdpos * 100;
 		rate = rate_tmp_r / card.filesize;
-	}
-	else
-	{
+	} else {
 		rate_tmp_r =(long long)card.sdpos;
 		rate = (rate_tmp_r-(PREVIEW_SIZE+To_pre_view))* 100 / (card.filesize-(PREVIEW_SIZE+To_pre_view));
 	}
 	gCurFileState.totalSend = rate;
-	
 	if(rate <= 0)
 		return;
 
-	if(disp_state == PRINTING_UI)
-	{
-		PROGBAR_SetValue(printingBar, rate );
+
+	if(disp_state == PRINTING_UI) {
+
+		char buf[30] = {0};
+		memset(buf, 0, sizeof(buf));
+
+		if (rate==0) {
+			strcpy(buf, "??:??:??");
+		} else {
+			int total = print_time.seconds + print_time.minutes * 60 + print_time.hours * 3600;
+			total = (total * 100 / rate) - total;
+			PRINT_TIME pt;
+			pt.seconds = total % 60;
+			total = total / 60;
+			pt.minutes = total % 60;
+			pt.hours = total / 60;
+			print_time_to_str(&pt, buf);
+		}
+	    SERIAL_ECHOPAIR("PB_V:", rate);
+	    SERIAL_EOL();
+	    SERIAL_ECHOPAIR("PB_T", buf);
+	    SERIAL_EOL();
+
+		PROGBAR_SetValue(printingBar, rate);
+		PROGBAR_SetText(printingBar, buf);
 
 		if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (rate == 100) )
 		{
@@ -755,7 +683,7 @@ void setProBarRate()
 				#if VERSION_WITH_PIC	
 				flash_preview_begin = 0;
 				default_preview_flg = 0;
-				Clear_printing();
+				clear_printing();
 				draw_dialog(DIALOG_TYPE_FINISH_PRINT);
 				if(gCfgItems.multiple_language != 0)
 				{
@@ -769,14 +697,46 @@ void setProBarRate()
 	}	
 }
 
-void Clear_printing()
-{
-	GUI_SetBkColor(gCfgItems.background_color);
-	if(WM_IsWindow(hPrintingWnd))
-	{
-		WM_DeleteWindow(hPrintingWnd);
-		//GUI_Exec();
+void update_printing_1s(void) {
+	char buf[30] = {0};
+	memset(buf, 0, sizeof(buf));
+	sprintf(buf, printing_menu.temp1, (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
+	ui_set_text_value(E1_Temp, buf);
+	if(is_dual_extruders()){
+		memset(buf,0,sizeof(buf));
+		sprintf(buf, printing_menu.temp2, (int)thermalManager.current_temperature[1], (int)thermalManager.target_temperature[1]);
+		ui_set_text_value(E2_Temp, buf);
 	}
-	
-	//GUI_Clear();
+
+	memset(buf, 0, sizeof(buf));
+	sprintf(buf, printing_menu.bed_temp, (int)thermalManager.current_temperature_bed,  (int)thermalManager.target_temperature_bed);
+	ui_set_text_value(Bed_Temp, buf);
+
+
+	memset(buf, 0, sizeof(buf));
+	print_time_to_str(&print_time, buf);
+	ui_set_text_value(printTimeLeft, buf);
+
+	memset(buf, 0, sizeof(buf));
+	sprintf(buf,"%.3f",current_position[Z_AXIS]);
+	ui_set_text_value(Zpos, buf);
+
+	memset(buf, 0, sizeof(buf));
+	sprintf(buf, "%3d", fanSpeeds[0]);
+	ui_set_text_value(Fan_Pwm, buf);
+}
+
+void refresh_printing() {
+	if (is_ui_timing(F_UI_TIMING_SEC)) {
+		ui_timing_clear(F_UI_TIMING_SEC);
+		update_printing_1s();
+
+		if(gcode_preview_over == 0)
+			setProBarRate();
+	}
+}
+
+void clear_printing()
+{
+	ui_drop_window(hPrintingWnd);
 }

@@ -62,7 +62,7 @@ uint32_t rePrintOffset;
 extern volatile int16_t logo_time;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 extern uint8_t  Get_Temperature_Flg;
 //extern PR_STATUS printerStaus;
@@ -155,7 +155,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg)
 					mksReprint.mks_printer_state = MKS_STOP;
 
 					#ifdef SAVE_FROM_SD					
-					//É¾³ýÐø´òÊý¾ÝÎÄ¼þ¡£
+					//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 					if(gCfgItems.pwroff_save_mode == 0)
 					{
 						if(gCfgItems.fileSysType == FILE_SYS_SD)
@@ -333,14 +333,14 @@ static void cbDlgWin(WM_MESSAGE * pMsg)
 							if(mksReprint.resume == MKS_RESUME_PWDWN) 
 								mks_getPositionXYZE();
 							
-							//ÉèÖÃÎÄ¼þÆ«ÒÆ
+							//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Æ«ï¿½ï¿½
 							if(gCfgItems.pwrdn_mtrdn_level_flg != 1)
 								card.setIndex(mksReprint.sdpos);
 							else
 								card.setIndex(mksReprint.sdpos_from_epr);
 
 							
-							//ÉèÖÃ½ø¶ÈºÍÊ±¼ä
+							//ï¿½ï¿½ï¿½Ã½ï¿½ï¿½Èºï¿½Ê±ï¿½ï¿½
 							//print_job_timer.setTime(mksReprint.accumulator,mksReprint.startTimestamp,mksReprint.stopTimestamp);
 							//cli();
 							//HAL_SetTick(mksReprint.uwTick);
@@ -483,7 +483,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg)
 			else if(pMsg->hWinSrc == buttonCancle.btnHandle)
 			{			
 				unsigned int tmpFlag;
-				Chk_close_machine_flg = 0;//È¡ÏûÖ®ºóÔò¶Ô´òÍê¹Ø»ú±êÖ¾ÇåÁã£¬·ÀÖ¹³ö´í¡£
+				Chk_close_machine_flg = 0;//È¡ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½
 #if defined(TFT35)
                 if((DialogType == DIALOG_TYPE_STOP))
 				{
@@ -531,7 +531,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg)
 					HAL::AT24CXX_Read(BAK_REPRINT_INFO, (uint8_t *)&tmpFlag,  4);
 					tmpFlag &= ~(0xff << 24);
 					tmpFlag |= printer_normal << 24;
-					HAL::AT24CXX_Write(BAK_REPRINT_INFO, (uint8_t *)&tmpFlag,  4); 		// Ðø´ò±êÖ¾(uint8_t) | checkXor(uint8_t) | checkSum(uint16_t)
+					HAL::AT24CXX_Write(BAK_REPRINT_INFO, (uint8_t *)&tmpFlag,  4); 		// ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾(uint8_t) | checkXor(uint8_t) | checkSum(uint16_t)
 					#endif
 					
 					mksReprint.mks_printer_state = MKS_IDLE;
@@ -638,7 +638,7 @@ void draw_dialog(uint8_t type)
 	}
 
 	#endif
-	//sprintf(buf, "ÕýÔÚ´òÓ¡->²Ù×÷:%s", curFilePath);
+	//sprintf(buf, "ï¿½ï¿½ï¿½Ú´ï¿½Ó¡->ï¿½ï¿½ï¿½ï¿½:%s", curFilePath);
 	//GUI_DispStringAt(buf, 0, 0);
 
 	//GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
@@ -656,7 +656,7 @@ void draw_dialog(uint8_t type)
 		else if(DialogType == DIALOG_TYPE_UPLOAD_FILE)// esp ä¸Šä¼ æ–‡ä»¶
 		{
 			hStopDlgWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbDlgWin, 0);
-			printStopDlgText = TEXT_CreateEx(0,0, LCD_WIDTH, imgHeight/2, hStopDlgWnd, WM_CF_SHOW, TEXT_CF_LEFT,  alloc_win_id(), "Uploading......");
+		printStopDlgText = TEXT_CreateEx(0,0, LCD_WIDTH, imgHeight/2, hStopDlgWnd, WM_CF_SHOW, TEXT_CF_LEFT,  alloc_win_id(), "Uploading......");
 			TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
 			TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
 			TEXT_SetTextAlign(printStopDlgText, GUI_TA_VCENTER | GUI_TA_HCENTER);				
@@ -949,7 +949,7 @@ void draw_dialog(uint8_t type)
 		//BUTTON_SetTextAlign(buttonOk, GUI_TA_VCENTER | GUI_TA_HCENTER);
 		//BUTTON_SetTextAlign(buttonCancle, GUI_TA_VCENTER | GUI_TA_HCENTER);
 
-		//¶Ô°´Å¥×ö²Á³ý±êÖ¾ÉèÖÃ¡£
+		//ï¿½Ô°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½Ã¡ï¿½
 		//BUTTON_SetBmpFileName(buttonOk,NULL,1);
 		//BUTTON_SetBmpFileName(buttonCancle,NULL,1);
 

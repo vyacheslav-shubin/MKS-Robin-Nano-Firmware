@@ -67,6 +67,21 @@
 value_state value;
 PRINT_TIME  print_time;
 
+void start_print_time() {
+	print_time.start = 1;
+}
+
+void stop_print_time() {
+	print_time.start = 0;
+}
+
+void reset_print_time() {
+	print_time.hours = 0;
+	print_time.minutes = 0;
+	print_time.seconds = 0;
+	print_time.ms_10 = 0;
+}
+
 static float zpos_bak = -1;
 extern volatile uint8_t temper_error_flg;
 
@@ -280,6 +295,43 @@ char *getDispText(int index) {
 
 static char titleText[100] = {0};
 
+static uint32_t temperature_change_frequency_cnt = 0;
+
+uint8_t	ui_timing_flags = 0;
+
+void ui_timings(void) {
+	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
+		ui_timing_set(F_UI_TIMING_HALF_SEC);
+
+	if(!(TimeIncrease * TICK_CYCLE % 1000)) { //1 sec
+		ui_timing_set(F_UI_TIMING_SEC);
+		if(print_time.start == 1) {
+			print_time.seconds++;
+			if(print_time.seconds >= 60) {
+				print_time.seconds = 0;
+				print_time.minutes++;
+				if(print_time.minutes >= 60) {
+					print_time.minutes = 0;
+					print_time.hours++;
+				}
+			}
+		}
+	}
+
+
+	temperature_change_frequency_cnt++;
+	if((temperature_change_frequency_cnt>=2000) && (temperature_change_frequency!=1)) {
+		temperature_change_frequency_cnt = 0;
+		temperature_change_frequency = 1;
+	}
+
+	if(!(TimeIncrease * TICK_CYCLE % 3000))	// 3s
+	{
+		printing_rate_update_flag = 1;
+	}
+}
+
+
 char *creat_title_text() {
 	int index = 0;
 	char *tmpText = 0;
@@ -354,7 +406,7 @@ void clear_cur_ui() {
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 		case PRINT_READY_UI:	Clear_ready_print(); 	break;
 		case PRINT_FILE_UI:		Clear_print_file(); 	break;
-		case PRINTING_UI:		Clear_printing(); 		break;
+		case PRINTING_UI:		clear_printing(); 		break;
 		case MOVE_MOTOR_UI:		Clear_move_motor(); 	break;
 		case OPERATE_UI:		Clear_operate();		break;
 		case PAUSE_UI:			Clear_pause();			break;
@@ -623,38 +675,7 @@ void GUI_RefreshPage() {
 			}
 			break;
 		case PRINT_FILE_UI: break;
-		case PRINTING_UI:
-			if (temperature_change_frequency) {
-				temperature_change_frequency = 0;
-				disp_sprayer_tem_printing();
-				disp_bed_temp_printing();
-				disp_print_time();
-			} if (printing_rate_update_flag) {
-				printing_rate_update_flag = 0;
-				if(gcode_preview_over == 0)
-							setProBarRate(/*get_printing_rate(srcfp)*/);
-			}
-			if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
-				fan_move_flag = 1;
-			#if VERSION_WITH_PIC
-			if(fan_move_flag) {
-				fan_move_flag = 0;
-				disp_fan_move_printing();
-			}
-			#endif
-
-			#if tan_mask
-			if(move_speed_flg == 1) {
-				move_speed_flg =0;
-				disp_printing_speed();
-			}
-			#endif
-			static uint8_t lastSec = 0;
-			if(lastSec != print_time.seconds) {
-				lastSec = print_time.seconds;
-				disp_print_time();
-			}
-			break;
+		case PRINTING_UI: refresh_printing(); break;
 		case OPERATE_UI:
 			if(temperature_change_frequency == 1) {
 				temperature_change_frequency = 0;

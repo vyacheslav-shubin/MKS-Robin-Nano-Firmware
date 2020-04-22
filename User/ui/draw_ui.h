@@ -156,22 +156,22 @@ extern value_state value;
 typedef struct Screen_size
 {
 	uint8_t display_style;//��Ļ��ҳ��ʾ���
-	uint8_t firstpage_gap;//��Լ����ҳ��ť�����	
+	uint8_t firstpage_gap;//��Լ����ҳ��ť�����
 
 	uint8_t gap_h;//��ť���ˮƽ���
 	uint8_t gap_v;//��ť��Ĵ�ֱ���
-	
+
 	uint16_t width;//��Ļ�Ŀ�X
 	uint16_t high;//��Ļ�ĸ�Y
-	
+
 	uint16_t btn_x_pixel;//��ť�Ŀ�x
 	uint16_t btn_y_pixel;//��ť�ĸ�y
-	
+
 	uint16_t title_xpos;//��������xλ��
 	uint16_t title_ypos;//��������yλ��
 	uint16_t title_high;//�������ĸ߶�
 
-	
+
 }Screen;
 
 extern Screen TFT_screen;
@@ -198,7 +198,7 @@ extern uint8_t default_preview_flg;
 #define titleHeight	40
 
 
-#define imgHeight		(LCD_HEIGHT - titleHeight)	
+#define imgHeight		(LCD_HEIGHT - titleHeight)
 
 #define TITLE_XPOS		3
 #define TITLE_YPOS		5
@@ -297,7 +297,7 @@ extern uint8_t default_preview_flg;
 
 #define imgHeight		 (LCD_HEIGHT - titleHeight)//(TFT_screen.high-TFT_screen.title_high)//
 
-#define SIMPLE_FIRST_PAGE_GRAP	21	
+#define SIMPLE_FIRST_PAGE_GRAP	21
 
 #define TITLE_XPOS	 0//TFT_screen.title_xpos//	3
 #define TITLE_YPOS		0//TFT_screen.title_ypos//5
@@ -400,8 +400,6 @@ typedef struct
 } PRINT_TIME;
 
 extern PRINT_TIME  print_time;
-
-
 
 typedef enum
 {
@@ -531,6 +529,21 @@ extern TCHAR curFileName[100];
 extern char curFileName[100];
 #endif
 
+extern uint8_t ui_timing_flags;
+#define F_UI_TIMING_HALF_SEC		1<<0
+#define F_UI_TIMING_SEC				1<<1
+
+#define is_ui_timing(FLAG) (ui_timing_flags & FLAG)
+#define ui_timing_set(FLAG) (ui_timing_flags |= FLAG)
+#define ui_timing_clear(FLAG) (ui_timing_flags &= (~FLAG))
+
+extern void ui_timings(void);
+
+extern void start_print_time();
+extern void stop_print_time();
+extern void reset_print_time();
+
+extern void reset_file_info();
 
 //extern PR_STATUS printerStaus;
 extern void DRAW_LOGO();

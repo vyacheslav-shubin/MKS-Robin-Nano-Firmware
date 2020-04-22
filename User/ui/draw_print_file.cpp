@@ -373,11 +373,11 @@ void draw_print_file()
 	}
 	else if(gCfgItems.language == LANG_COMPLEX_CHINESE)
 	{		
-		GUI_DispStringAt("ÕıÔÚİdÈë......", 300, 200);
+		GUI_DispStringAt("ï¿½ï¿½ï¿½ï¿½ï¿½dï¿½ï¿½......", 300, 200);
 	}	
 	else
 	{		
-		GUI_DispStringAt("ÕıÔÚÔØÈë......", 300, 200);
+		GUI_DispStringAt("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½......", 300, 200);
 	}
 #endif	
 	
@@ -470,12 +470,12 @@ void search_files()
 	else if(gCfgItems.language == LANG_COMPLEX_CHINESE)
 	{
 		GUI_DispStringAt(creat_title_text(), X_ADD, X_INTERVAL);
-		GUI_DispStringAt("ÕıÔÚİdÈë......", 300, 200);
+		GUI_DispStringAt("ï¿½ï¿½ï¿½ï¿½ï¿½dï¿½ï¿½......", 300, 200);
 	}
 	else
 	{
 		GUI_DispStringAt(creat_title_text(), X_ADD, X_INTERVAL);
-		GUI_DispStringAt("ÕıÔÚÔØÈë......", 300, 200);
+		GUI_DispStringAt("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½......", 300, 200);
 	}
 #endif
 	GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
@@ -555,7 +555,7 @@ void search_files()
 	if(card.gcodeFileList.index == 0)
 	{
 		//buttonF[0] = BUTTON_CreateEx(0,  0, LCD_WIDTH / 4 - 1, imgHeight / 2 - 1,hPrintFileWnd, BUTTON_CF_SHOW, 0, 103);
-		//BUTTON_SetText(buttonF[0], "æ— æ–‡ä»?);
+		//BUTTON_SetText(buttonF[0], "æ— æ–‡ï¿½?);
 		
 		//GUI_UC_SetEncodeUTF8();
 		//GUI_Exec();
@@ -571,13 +571,13 @@ void search_files()
 			}	
 			else if(gCfgItems.language == LANG_COMPLEX_CHINESE)
 			{
-				GUI_DispStringAt("ŸoÎÄ¼ş! ", 350, 200);
-				GUI_DispStringAt("Õˆ²åÈëSD¿¨ / U±P!", 310, 250);
+				GUI_DispStringAt("ï¿½oï¿½Ä¼ï¿½! ", 350, 200);
+				GUI_DispStringAt("Õˆï¿½ï¿½ï¿½ï¿½SDï¿½ï¿½ / Uï¿½P!", 310, 250);
 			}
 			else
 			{
-				GUI_DispStringAt("ÎŞÎÄ¼ş !", 350, 200);
-				GUI_DispStringAt("Çë²åÈëSD¿¨ / UÅÌ!", 310, 250);
+				GUI_DispStringAt("ï¿½ï¿½ï¿½Ä¼ï¿½ !", 350, 200);
+				GUI_DispStringAt("ï¿½ï¿½ï¿½ï¿½ï¿½SDï¿½ï¿½ / Uï¿½ï¿½!", 310, 250);
 			}
 			#endif
 			GUI_DispStringAt(file_menu.no_file_and_check, (LCD_WIDTH-200)/2, imgHeight/2);
@@ -592,11 +592,11 @@ void search_files()
 			}	
 			else if(gCfgItems.language == LANG_COMPLEX_CHINESE)
 			{
-				GUI_DispStringAt("ŸoÎÄ¼ş! ", 300, 200);
+				GUI_DispStringAt("ï¿½oï¿½Ä¼ï¿½! ", 300, 200);
 			}
 			else
 			{
-				GUI_DispStringAt("ÎŞÎÄ¼ş ! ",300, 200);
+				GUI_DispStringAt("ï¿½ï¿½ï¿½Ä¼ï¿½ ! ",300, 200);
 			}
 			#endif
 			GUI_DispStringAt(file_menu.no_file, (LCD_WIDTH-64)/2,imgHeight/2);
@@ -854,7 +854,11 @@ void disp_udisk_files(int seq)
 	}
 	else
 	{
-	#if defined(TFT35)
+		BUTTON_SetBmpFileName(buttonF[i].btnHandle, "bmp_file.bin",1);
+		BUTTON_SetBitmapEx(buttonF[i].btnHandle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
+#if 0
+		//TODO: ÑÑ‚Ğ¾Ñ‚ ĞºĞ¾Ğ´ Ğ½Ğµ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ°ĞµÑ‚
+		#if defined(TFT35)
 		if(have_pre_pic((char *)card.gcodeFileList.fileName[j]))
 		{
 			BUTTON_SetBmpFileNamePath(buttonF[i].btnHandle, NULL,card.gcodeFileList.fileName[j],1);
@@ -873,6 +877,7 @@ void disp_udisk_files(int seq)
 		#if defined(TFT70)
 		BUTTON_SetBitmapEx(buttonF[i].btnHandle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
 		#endif
+#endif
 	}
 
 #endif

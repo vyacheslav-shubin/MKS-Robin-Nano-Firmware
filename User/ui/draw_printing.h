@@ -13,14 +13,6 @@ extern void clear_printing();
 extern void refresh_printing();
 
 
-extern void setProBarValue(int added);
-#if tan_mask
-extern void setProBarRate(int rate);
-#else
-extern void setProBarRate();
-#endif
-
-
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */
 #endif

@@ -1112,7 +1112,7 @@ int ascii2dec_test1(char *ascii)
 		result = *(ascii) - 'A' + 0x0a;
 	else
 		return 0;
-		
+
 
 	return result;
 }
@@ -1141,7 +1141,7 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
 	volatile uint32_t i,j;
 	volatile uint16_t *p_index;
 	int res;
-	
+
 	//memset(bmp_public_buf,0,sizeof(bmp_public_buf));
 	res = f_open(file, curFileName, FA_OPEN_EXISTING | FA_READ);//	
 	if(res == FR_OK)
@@ -1151,10 +1151,10 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
 		//if(ress == FR_OK)
 		{
 	      	LCD_setWindowArea(xpos_pixel, ypos_pixel+row, 200,1);
-			LCD_WriteRAM_Prepare(); 
+			LCD_WriteRAM_Prepare();
 			j=0;
 			i=0;
-			
+
 			while(1)
 			{
 				f_read(file, buff_pic, 400, &read);
@@ -1165,26 +1165,26 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
 					i+=2;
 					j++;
 				}
-				
+
 				//if(i>800)break;
 				//#if defined(TFT70)
 				//if(j>400)
 				//{
 				//	f_read(file, buff_pic, 1, &read);
 				//	break;
-				//}				
+				//}
 				//#elif defined(TFT35)
 				if(j>=400)
 				{
 					//f_read(file, buff_pic, 1, &read);
 					break;
-				}				
+				}
 				//#endif
 
 			}
 			for(i=0;i<400;)
 			{
-				p_index = (uint16_t *)(&bmp_public_buf[i]); 
+				p_index = (uint16_t *)(&bmp_public_buf[i]);
 				if(*p_index == 0x0000)*p_index=gCfgItems.preview_bk_color;
 		    	LCD_WriteRAM(*p_index);
 				i=i+2;
@@ -1199,7 +1199,7 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
 			{
 				size = 809;
 				row = 0;
-				
+
 				gcode_preview_over = 0;
 				//flash_preview_begin = 1;
 
@@ -1207,10 +1207,10 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
 
 				/*if(gCurFileState.file_open_flag != 0xaa)
 				{
-					
-				
+
+
 					reset_file_info();
-					
+
 					res = f_open(file, curFileName, FA_OPEN_EXISTING | FA_READ);
 
 					if(res == FR_OK)
@@ -1226,8 +1226,8 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
 
 						once_flag = 0;
 					}
-					
-				}	*/	
+
+				}	*/
 				if(card.openFile(curFileName, true))
 				{
 				    feedrate_percentage = 100;
@@ -1237,8 +1237,8 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel)
 	                            if(mksCfg.extruders==2)
 	                            {
 	                                planner.flow_percentage[1] = 100;
-	                                planner.e_factor[1]= planner.flow_percentage[1]*0.01;  
-	                            }                            
+	                                planner.e_factor[1]= planner.flow_percentage[1]*0.01;
+	                            }
 					card.startFileprint();
 					once_flag = 0;
 				}
@@ -1270,62 +1270,27 @@ void disp_pre_gcode(int xpos_pixel,int ypos_pixel)
 
 void preview_gcode_prehandle(char *path)
 {
-	uint8_t re;
 	UINT read;
 	uint32_t pre_read_cnt = 0;
-	uint32_t *p1,*p2;
+	char *p;
 	
-	re = f_open(&TEST_FIL1, path, FA_OPEN_EXISTING | FA_READ);//	
-	#if 0
-	if(re == FR_OK)
-	{
-		f_lseek(&TEST_FIL1,PREVIEW_LITTLE_PIC_SIZE);//
-		f_read(&TEST_FIL1,&bmp_public_buf,8,&read);
-		if((bmp_public_buf[0] ==';')&&(bmp_public_buf[1] =='g')
-			&&(bmp_public_buf[2] =='i')&&(bmp_public_buf[3] =='m')
-			&&(bmp_public_buf[4] =='a')&&(bmp_public_buf[5] =='g')
-			&&(bmp_public_buf[6] =='e')&&(bmp_public_buf[7] ==':'))	
-		{
-			gcode_preview_over = 1;
-			from_flash_pic = 1;
-			HAL::AT24CXX_Write(BAK_PREVIEW_FROM_FLASH_ADDR, &from_flash_pic,1);
-		}
-		else
-		{
-			gcode_preview_over = 0;
-			default_preview_flg = 1;
-			from_flash_pic = 0; 
-			HAL::AT24CXX_Write(BAK_PREVIEW_FROM_FLASH_ADDR, &from_flash_pic,1);
-		}
-	}
-	#else
-	if(re==FR_OK)
-	{
-		//p1 = (int32_t *)&bmp_public_buf[0];
-		
+	gcode_preview_over = 0;
+	default_preview_flg = 0;
+	from_flash_pic = 0;
+	if(f_open(&TEST_FIL1, path, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
 		f_read(&TEST_FIL1,&bmp_public_buf[0],1024,&read);
+		p = strstr((const char *)&bmp_public_buf[0],(const char *)";simage:");
 		
-		p2 = (uint32_t *)strstr((const char *)&bmp_public_buf[0],(const char *)";simage:");
-		if(p2)
-		{
-			pre_read_cnt = (uint32_t)p2-(uint32_t)((uint32_t *)(&bmp_public_buf[0]));
-			//pre_sread_cnt = (uint32_t)ps4-(uint32_t)((uint32_t *)(&bmp_public_buf[0]));
-
+		if (p) {
+			pre_read_cnt = (uint32_t)p-(uint32_t)((uint32_t *)(&bmp_public_buf[0]));
 			To_pre_view = pre_read_cnt;
-			//f_lseek(&TEST_FIL1,PREVIEW_LITTLE_PIC_SIZE+pre_read_cnt);
 			gcode_preview_over = 1;
 			from_flash_pic = 1;
-			epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);			
-		}
-		else
-		{
-			gcode_preview_over = 0;
+		} else {
 			default_preview_flg = 1;
-			from_flash_pic = 0; 
-			epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);		
 		}
+		epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
 	}
-	#endif
 }
 #endif
 
@@ -1342,13 +1307,13 @@ void gcode_has_preview(char *path)
 	if(re==FR_OK)
 	{
 		f_read(&TEST_FIL1,&bmp_public_buf[0],1024,&read);
-		
+
 		p2 = (uint32_t *)strstr((const char *)&bmp_public_buf[0],(const char *)";simage:");
 		if(p2)
 		{
 			pre_read_cnt = (uint32_t)p2-(uint32_t)((uint32_t *)(&bmp_public_buf[0]));
 			To_pre_view = pre_read_cnt;
-            
+
 			from_flash_pic = 1;
 			epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);			
 		}

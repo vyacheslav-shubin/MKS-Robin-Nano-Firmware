@@ -433,210 +433,13 @@ void draw_printing()
 	update_printing_1s();
 }
 
-
-#if 0
-void draw_printing()
-{
-	FRESULT res;
-	int i;
-
-	disp_state_stack._disp_index = 0;
-	memset(disp_state_stack._disp_state, 0, sizeof(disp_state_stack._disp_state));
-	disp_state_stack._disp_state[disp_state_stack._disp_index] = PRINTING_UI;
-
-	disp_state = PRINTING_UI;
-
-	GUI_SetBkColor(gCfgItems.background_color);
-	GUI_SetColor(gCfgItems.title_color);
-	GUI_Clear();
-
-
-	GUI_UC_SetEncodeNone();
-	GUI_SetFont(&GUI_FontHZ16);
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
-
-    if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-    {
-      GUI_SetFont(&GUI_FontHZ16);
-      BUTTON_SetDefaultFont(&GUI_FontHZ16);
-      TEXT_SetDefaultFont(&GUI_FontHZ16);  
-      GUI_UC_SetEncodeNone();
-    }
-    else
-    {
-      GUI_SetFont(&FONT_TITLE);
-      BUTTON_SetDefaultFont(&FONT_TITLE);
-      TEXT_SetDefaultFont(&FONT_TITLE);                    
-      GUI_UC_SetEncodeUTF8();
-    }
-
-    
-		hPrintingWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbPrintingWin, 0);
-		
-		buttonExt1.btnHandle = BUTTON_CreateEx(205,100,STATE_PIC_X_PIXEL,STATE_PIC_Y_PIXEL,hPrintingWnd, BUTTON_CF_SHOW, 0, 301);
-			E1_Temp = TEXT_CreateEx(205+STATE_PIC_X_PIXEL, 100, 80, STATE_PIC_Y_PIXEL, hPrintingWnd, WM_CF_SHOW, TEXT_CF_LEFT|TEXT_CF_VCENTER,  GUI_ID_TEXT0, " ");
-			if(mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
-			{
-				buttonExt2.btnHandle = BUTTON_CreateEx(340+10,100,STATE_PIC_X_PIXEL,STATE_PIC_Y_PIXEL,hPrintingWnd, BUTTON_CF_SHOW, 0, 302);
-				E2_Temp = TEXT_CreateEx(340+STATE_PIC_X_PIXEL+10,100,80,STATE_PIC_Y_PIXEL, hPrintingWnd, WM_CF_SHOW, TEXT_CF_LEFT|TEXT_CF_VCENTER,  GUI_ID_TEXT0, " ");
-			}
-				buttonBedstate.btnHandle = BUTTON_CreateEx(205,150,STATE_PIC_X_PIXEL,STATE_PIC_Y_PIXEL,hPrintingWnd, BUTTON_CF_SHOW, 0, 303);
-				Bed_Temp = TEXT_CreateEx(205+STATE_PIC_X_PIXEL,150,80,STATE_PIC_Y_PIXEL, hPrintingWnd, WM_CF_SHOW, TEXT_CF_LEFT|TEXT_CF_VCENTER,	GUI_ID_TEXT0, " ");
-			buttonFanstate.btnHandle = BUTTON_CreateEx(340+10,150,STATE_PIC_X_PIXEL,STATE_PIC_Y_PIXEL,hPrintingWnd, BUTTON_CF_SHOW, 0, 304);
-			Fan_Pwm = TEXT_CreateEx(340+STATE_PIC_X_PIXEL+10, 150, 80, STATE_PIC_Y_PIXEL, hPrintingWnd, WM_CF_SHOW, TEXT_CF_LEFT|TEXT_CF_VCENTER,  GUI_ID_TEXT0, " ");
-		
-			printingBar = PROGBAR_CreateEx(205,0, 270, 40, hPrintingWnd, WM_CF_SHOW, 0, 0);
-
-			buttonTime.btnHandle = BUTTON_CreateEx(205,50,STATE_PIC_X_PIXEL,STATE_PIC_Y_PIXEL,hPrintingWnd, BUTTON_CF_SHOW, 0, 305);		
-			printTimeLeft = TEXT_CreateEx(205+STATE_PIC_X_PIXEL,50,80, STATE_PIC_Y_PIXEL, hPrintingWnd, WM_CF_SHOW, TEXT_CF_LEFT|TEXT_CF_VCENTER,	GUI_ID_TEXT0, " ");
-		
-			buttonZpos.btnHandle = BUTTON_CreateEx(340+10,50,STATE_PIC_X_PIXEL,STATE_PIC_Y_PIXEL,hPrintingWnd, BUTTON_CF_SHOW, 0, 306);
-			Zpos = TEXT_CreateEx(340+STATE_PIC_X_PIXEL+10, 50, 80, STATE_PIC_Y_PIXEL, hPrintingWnd, WM_CF_SHOW, TEXT_CF_LEFT|TEXT_CF_VCENTER, GUI_ID_TEXT0, " ");
-		
-			PROGBAR_SetBarColor(printingBar, 0, gCfgItems.printing_bar_color_left);
-			PROGBAR_SetBarColor(printingBar, 1, gCfgItems.printing_bar_color_right);
-			PROGBAR_SetTextColor(printingBar, 0, gCfgItems.printing_bar_text_color_left);
-			PROGBAR_SetTextColor(printingBar, 1, gCfgItems.printing_bar_text_color_right);
-			
-			PROGBAR_SetFont(printingBar, &FONT_TITLE);
-			
-			buttonPause.btnHandle = BUTTON_CreateEx(5,204,150,80,hPrintingWnd, BUTTON_CF_SHOW, 0, 306);//alloc_win_id());
-			buttonStop.btnHandle = BUTTON_CreateEx(165,204,150,80,hPrintingWnd, BUTTON_CF_SHOW, 0, 307);//alloc_win_id());
-			buttonOperat.btnHandle = BUTTON_CreateEx(325,204,150,80,hPrintingWnd, BUTTON_CF_SHOW, 0, 305);//alloc_win_id());
-
-			BUTTON_SetBmpFileName(buttonTime.btnHandle, "bmp_time_state.bin",0);
-			BUTTON_SetBmpFileName(buttonZpos.btnHandle, "bmp_zpos_state.bin",0);
-			
-
-		BUTTON_SetBmpFileName(buttonExt1.btnHandle, "bmp_ext1_state.bin",0);
-		if(mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
-		{
-			BUTTON_SetBmpFileName(buttonExt2.btnHandle, "bmp_ext2_state.bin",0);
-		}
-			BUTTON_SetBmpFileName(buttonBedstate.btnHandle, "bmp_bed_state.bin",0);
-		BUTTON_SetBmpFileName(buttonFanstate.btnHandle, "bmp_fan_state.bin",0);
-		
-		BUTTON_SetBitmapEx(buttonTime.btnHandle, 0, &bmp_struct_50, 0, 0);
-		BUTTON_SetBitmapEx(buttonZpos.btnHandle, 0, &bmp_struct_50, 0, 0);				
-		BUTTON_SetBitmapEx(buttonExt1.btnHandle, 0, &bmp_struct_50, 0, 0);	
-		if(mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
-		{
-			BUTTON_SetBitmapEx(buttonExt2.btnHandle, 0, &bmp_struct_50, 0, 0);
-		}
-			BUTTON_SetBitmapEx(buttonBedstate.btnHandle, 0, &bmp_struct_50, 0, 0);
-		BUTTON_SetBitmapEx(buttonFanstate.btnHandle, 0, &bmp_struct_50, 0, 0);
-		BUTTON_SetBitmapEx(buttonZpos.btnHandle, 0, &bmp_struct_50, 0, 0);
-		if(gCfgItems.standby_mode==1 && mksReprint.mks_printer_state == MKS_REPRINTED && button_disp_pause_state==1)
-		{
-			BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-		}
-		else
-		{
-			if((mksReprint.mks_printer_state == MKS_REPRINTING)
-				||(mksReprint.mks_printer_state == MKS_PAUSING)
-				||(mksReprint.mks_printer_state == MKS_PAUSED))
-			{
-				BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_resume.bin",1);
-			}
-			else
-			{
-				BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-			}
-		}
-		BUTTON_SetBmpFileName(buttonStop.btnHandle, "bmp_stop.bin",1);
-		BUTTON_SetBmpFileName(buttonOperat.btnHandle, "bmp_operate.bin",1);
-		
-		BUTTON_SetBkColor(buttonPause.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-		BUTTON_SetBkColor(buttonPause.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-		BUTTON_SetBkColor(buttonStop.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-		BUTTON_SetBkColor(buttonStop.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-		BUTTON_SetBkColor(buttonOperat.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-		BUTTON_SetBkColor(buttonOperat.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-		
-		BUTTON_SetTextColor(buttonPause.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-		BUTTON_SetTextColor(buttonPause.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-		BUTTON_SetTextColor(buttonStop.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-		BUTTON_SetTextColor(buttonStop.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-		BUTTON_SetTextColor(buttonOperat.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-		BUTTON_SetTextColor(buttonOperat.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-
-	
-		BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0); 
-		BUTTON_SetBitmapEx(buttonStop.btnHandle, 0, &bmp_struct_150, 0, 0);
-		BUTTON_SetBitmapEx(buttonOperat.btnHandle, 0, &bmp_struct_150, 0, 0);
-	
-		TEXT_SetBkColor(Zpos,  gCfgItems.background_color);
-		TEXT_SetTextColor(Zpos, gCfgItems.title_color);
-		TEXT_SetBkColor(printTimeLeft,	gCfgItems.background_color);
-		TEXT_SetTextColor(printTimeLeft, gCfgItems.title_color);	
-		TEXT_SetBkColor(E1_Temp,  gCfgItems.background_color);
-		TEXT_SetTextColor(E1_Temp, gCfgItems.title_color);
-        if(mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0){
-		    TEXT_SetBkColor(E2_Temp,  gCfgItems.background_color);
-		    TEXT_SetTextColor(E2_Temp, gCfgItems.title_color);
-        }
-		TEXT_SetBkColor(Bed_Temp,  gCfgItems.background_color);
-		TEXT_SetTextColor(Bed_Temp, gCfgItems.title_color);
-		TEXT_SetBkColor(Fan_Pwm,  gCfgItems.background_color);
-		TEXT_SetTextColor(Fan_Pwm, gCfgItems.title_color);
-		
-		BUTTON_SetTextAlign(buttonOperat.btnHandle,GUI_TA_VCENTER | GUI_CUSTOM_POS);
-		BUTTON_SetTextAlign(buttonStop.btnHandle,GUI_TA_VCENTER | GUI_CUSTOM_POS);
-		BUTTON_SetTextAlign(buttonPause.btnHandle,GUI_TA_VCENTER | GUI_CUSTOM_POS);		
-		if(gCfgItems.multiple_language != 0)
-		{
-			BUTTON_SetText(buttonOperat.btnHandle, printing_menu.option);
-			BUTTON_SetText(buttonStop.btnHandle,printing_menu.stop);
-            if((mksReprint.mks_printer_state == MKS_REPRINTING)
-                ||(mksReprint.mks_printer_state == MKS_PAUSING)
-                ||(mksReprint.mks_printer_state == MKS_PAUSED))
-
-                BUTTON_SetText(buttonPause.btnHandle, printing_menu.resume);
-			else
-				BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);		
-		}
-		
-		disp_sprayer_tem_printing();
-		disp_bed_temp_printing();
-		disp_fan_speed_printing();
-}
-
-#endif
-
-extern uint32_t rcv_ok_nums;
-
 void print_time_to_str(PRINT_TIME * pt, char * buf) {
 	sprintf(buf, "%d%d:%d%d:%d%d", pt->hours/10, pt->hours%10, pt->minutes/10, pt->minutes%10,  pt->seconds/10, pt->seconds%10);
 }
 
-static int8_t fan_dir = 0;
-
-
-void disp_printing_speed()
-{
-	char buf[30] = {0};
-	
-	TEXT_SetBkColor(Printing_speed,0x000000);
-	TEXT_SetTextColor(Printing_speed,gCfgItems.title_color);
-
-
-	memset(buf, 0, sizeof(buf));
-	sprintf(buf, "%3d%%", gCfgItems.printSpeed);
-	TEXT_SetText(Printing_speed, buf);
-}
-
-void setProBarValue(int added)
-{
-	if(added <= 0)
-		return;
-}
-
-
-void setProBarRate()
-{
+int get_rate(void) {
 	int rate;
 	volatile long long rate_tmp_r;
-	
 	if(from_flash_pic != 1) {
 		rate_tmp_r =(long long) card.sdpos * 100;
 		rate = rate_tmp_r / card.filesize;
@@ -646,55 +449,36 @@ void setProBarRate()
 	}
 	gCurFileState.totalSend = rate;
 	if(rate <= 0)
-		return;
+		rate = 0;
+	return rate;
+}
 
-
-	if(disp_state == PRINTING_UI) {
-
+void update_progress(int rate) {
+	PROGBAR_SetValue(printingBar, rate);
+	if (rate!=0) {
 		char buf[30] = {0};
 		memset(buf, 0, sizeof(buf));
+		sprintf(buf, "%d%% - ", rate);
 
-		if (rate==0) {
-			strcpy(buf, "??:??:??");
-		} else {
-			int total = print_time.seconds + print_time.minutes * 60 + print_time.hours * 3600;
-			total = (total * 100 / rate) - total;
-			PRINT_TIME pt;
-			pt.seconds = total % 60;
-			total = total / 60;
-			pt.minutes = total % 60;
-			pt.hours = total / 60;
-			print_time_to_str(&pt, buf);
-		}
-	    SERIAL_ECHOPAIR("PB_V:", rate);
-	    SERIAL_EOL();
-	    SERIAL_ECHOPAIR("PB_T", buf);
-	    SERIAL_EOL();
-
-		PROGBAR_SetValue(printingBar, rate);
+		int total = print_time.seconds + print_time.minutes * 60 + print_time.hours * 3600;
+		total = (total * 100 / rate) - total;
+		PRINT_TIME pt;
+		pt.seconds = total % 60;
+		total = total / 60;
+		pt.minutes = total % 60;
+		pt.hours = total / 60;
+		print_time_to_str(&pt, &buf[strlen(buf)]);
 		PROGBAR_SetText(printingBar, buf);
+	}
+}
 
-		if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (rate == 100) )
-		{
-			//memset((char *)gCfgItems.z_display_pos,0,sizeof(gCfgItems.z_display_pos));
-			if(once_flag == 0)
-			{					
-				stop_print_time();				
-				#if VERSION_WITH_PIC	
-				flash_preview_begin = 0;
-				default_preview_flg = 0;
-				clear_printing();
-				draw_dialog(DIALOG_TYPE_FINISH_PRINT);
-				if(gCfgItems.multiple_language != 0)
-				{
-					BUTTON_SetText(buttonOperat.btnHandle, common_menu.text_back);	
-				}				
-				#endif
-				once_flag = 1;
-			}					
-		}
-		
-	}	
+
+void do_finish_print(void) {
+	stop_print_time();
+	flash_preview_begin = 0;
+	default_preview_flg = 0;
+	clear_printing();
+	draw_dialog(DIALOG_TYPE_FINISH_PRINT);
 }
 
 void update_printing_1s(void) {
@@ -729,10 +513,18 @@ void update_printing_1s(void) {
 void refresh_printing() {
 	if (is_ui_timing(F_UI_TIMING_SEC)) {
 		ui_timing_clear(F_UI_TIMING_SEC);
-		update_printing_1s();
 
-		if(gcode_preview_over == 0)
-			setProBarRate();
+		int rate = get_rate();
+
+		//TODO: убрать отсюда
+		gCurFileState.totalSend = rate;
+
+		if((mksReprint.mks_printer_state == MKS_IDLE) && (rate == 100)) {
+			do_finish_print();
+		} else {
+			update_printing_1s();
+			update_progress(rate);
+		}
 	}
 }
 

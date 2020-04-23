@@ -5,12 +5,14 @@
 #include "cardreader.h"
 #include "tim.h"
 
-extern uint8_t	ui_suicide_enabled = 0;
 extern CardReader card;
 UPLOAD_INFO upload_file_info = {0, 0};
 
-uint8_t once_flag = 0; //printing
+UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}};
 
+void print_time_to_str(PRINT_TIME * pt, char * buf) {
+	sprintf(buf, "%d%d:%d%d:%d%d", pt->hours/10, pt->hours%10, pt->minutes/10, pt->minutes%10,  pt->seconds/10, pt->seconds%10);
+}
 
 void ui_start_print_process(void) {
 	if(card.openFile(curFileName, true)) {
@@ -23,7 +25,7 @@ void ui_start_print_process(void) {
 			planner.e_factor[1]= planner.flow_percentage[1]*0.01;
 		}
 		card.startFileprint();
-		once_flag = 0;
+		ui_print_process.once = 0;
 	}
 }
 
@@ -119,13 +121,44 @@ BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFi
 	return ui_create_state_button_id(x, y, hWinParent, pFile, alloc_win_id());
 }
 
-TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text) {
-	TEXT_Handle res;
-	res = TEXT_CreateEx(x, y, w, h, hWinParent, WM_CF_SHOW, TEXT_CF_LEFT|TEXT_CF_VCENTER,  GUI_ID_TEXT0, text?text:" ");
+
+BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const char* text) {
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 140,50, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	BUTTON_SetText(btn, text);
+	BUTTON_SetBkColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_color);
+	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_color);
+	BUTTON_SetTextColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_textcolor);
+	BUTTON_SetTextColor(btn, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_textcolor);
+	BUTTON_SetTextAlign(btn, GUI_TA_VCENTER | GUI_TA_HCENTER);
+	BUTTON_SetBmpFileName(btn, 0, 1);
+	return btn;
+}
+
+TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, char *text) {
+	TEXT_Handle res = TEXT_CreateEx(x, y, w, h, hWinParent, WM_CF_SHOW, flags,  GUI_ID_TEXT0, 0);
 	TEXT_SetBkColor(res,  gCfgItems.background_color);
 	TEXT_SetTextColor(res, gCfgItems.title_color);
 	return res;
 }
+
+TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text) {
+	return ui_create_std_text_f(x, y, w, h, hWinParent, TEXT_CF_HCENTER|TEXT_CF_VCENTER, text);
+}
+
+TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text) {
+	return ui_create_std_text_f(x, y, w, h, hWinParent, TEXT_CF_LEFT|TEXT_CF_VCENTER, text);
+}
+
+extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWndParent) {
+	PROGBAR_Handle bar = PROGBAR_CreateEx(x, y, w, h, hWndParent, WM_CF_SHOW, 0, 0);
+	PROGBAR_SetBarColor(bar, 0, gCfgItems.printing_bar_color_left);
+	PROGBAR_SetBarColor(bar, 1, gCfgItems.printing_bar_color_right);
+	PROGBAR_SetTextColor(bar, 0, gCfgItems.printing_bar_text_color_left);
+	PROGBAR_SetTextColor(bar, 1, gCfgItems.printing_bar_text_color_right);
+	PROGBAR_SetFont(bar, &FONT_TITLE);
+	return bar;
+}
+
 
 
 void ui_set_text_value(TEXT_Handle handle, char* val) {

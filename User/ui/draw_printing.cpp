@@ -122,7 +122,7 @@ switch (pMsg->MsgId)
 					}
 				}
 			} else if (pMsg->hWinSrc == buttonAutoClose) {
-				gCfgItems.suicide.do_execute = ~gCfgItems.suicide.do_execute;
+				ui_print_process.suicide.enabled = ~ui_print_process.suicide.enabled;
 				update_auto_close_button();
 			}
 		}
@@ -178,7 +178,7 @@ static void update_pause_button() {
 void update_auto_close_button() {
     BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct90X30,0,5);
     BUTTON_SetTextAlign(buttonAutoClose, GUI_TA_CENTER|GUI_TA_VCENTER );
-	if (gCfgItems.suicide.do_execute) {
+	if (ui_print_process.suicide.enabled) {
 	    BUTTON_SetBmpFileName(buttonAutoClose, "bmp_enable.bin",1);
 	    BUTTON_SetText(buttonAutoClose, machine_menu.high_level);
 	} else {
@@ -229,12 +229,7 @@ void draw_printing()
     update_auto_close_button();
 
 
-	printingBar = PROGBAR_CreateEx(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd, WM_CF_SHOW, 0, 0);
-	PROGBAR_SetBarColor(printingBar, 0, gCfgItems.printing_bar_color_left);
-	PROGBAR_SetBarColor(printingBar, 1, gCfgItems.printing_bar_color_right);
-	PROGBAR_SetTextColor(printingBar, 0, gCfgItems.printing_bar_text_color_left);
-	PROGBAR_SetTextColor(printingBar, 1, gCfgItems.printing_bar_text_color_right);
-	PROGBAR_SetFont(printingBar, &FONT_TITLE);
+	printingBar = ui_create_std_progbar(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd);
 
 	buttonPause = ui_create_150_80_button(5, 204, hPrintingWnd, 0, 0);
 	buttonStop = ui_create_150_80_button(165,204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
@@ -243,9 +238,6 @@ void draw_printing()
 	update_printing_1s();
 }
 
-void print_time_to_str(PRINT_TIME * pt, char * buf) {
-	sprintf(buf, "%d%d:%d%d:%d%d", pt->hours/10, pt->hours%10, pt->minutes/10, pt->minutes%10,  pt->seconds/10, pt->seconds%10);
-}
 
 int get_rate(void) {
 	int rate;
@@ -284,15 +276,11 @@ void update_progress(int rate) {
 
 
 void do_finish_print(void) {
-	if (gCfgItems.suicide.do_execute) {
-		enqueue_and_echo_commands_P(PSTR("M81"));
-	} else {
-		stop_print_time();
-		flash_preview_begin = 0;
-		default_preview_flg = 0;
-		clear_printing();
-		draw_dialog(DIALOG_TYPE_FINISH_PRINT);
-	}
+	stop_print_time();
+	flash_preview_begin = 0;
+	default_preview_flg = 0;
+	clear_printing();
+	draw_dialog(DIALOG_TYPE_FINISH_PRINT);
 }
 
 void update_printing_1s(void) {

@@ -1184,11 +1184,6 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 							preview_gcode_prehandle(curFileName);
 							#endif
 							draw_printing();
-							/*if(card.openFile(curFileName, true))
-							{
-								card.startFileprint();
-								once_flag = 0;
-							}*/
 							if(gcode_preview_over != 1)
 							{
 								if(card.openFile(curFileName, true))
@@ -1203,7 +1198,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 					                                planner.e_factor[1]= planner.flow_percentage[1]*0.01;  
 					                            }                            
 									card.startFileprint();
-									once_flag = 0;
+									ui_print_process.once = 0;
 								}
 							}
 

@@ -691,8 +691,7 @@ void GUI_RefreshPage() {
 			}
 			break;
 		case DIALOG_UI:
-			filament_dialog_handle();
-			wifi_scan_handle();
+			refresh_dialog();
 			break;		
 		case MESHLEVELING_UI:
             disp_zpos();

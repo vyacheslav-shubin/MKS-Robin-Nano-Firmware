@@ -77,7 +77,7 @@ static TEXT_Handle printStopDlgText,filament_temper,printfilename,fileNameText;
 
 static BUTTON_Handle buttonOk, buttonCancle, buttonRePrint;
 
-static PROGBAR_Handle FilamentBar;
+static PROGBAR_Handle progressBar;
 uint32_t filament_rate;
 
 uint8_t DialogType;
@@ -140,10 +140,13 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 	uint8_t i2c_cnt =  0;
 	volatile uint8_t tmp = 0xff;
 	uint8_t BakfilePathLen;
+
 	switch (pMsg->MsgId) {
 		case WM_PAINT:
+		 	break;
 		case WM_TOUCH:
 		case WM_TOUCH_CHILD:
+			ui_print_process.suicide.count_down = SUICIDE_WAIT;
 	 	break;
 
 		case WM_NOTIFY_PARENT:
@@ -283,240 +286,169 @@ void draw_dialog(uint8_t type)
 	int i;
 	
 	ui_push_disp_stack(DIALOG_UI);
+	//ui_initialize_screen_gui();
 	ui_clear_screen();
 
 	buttonOk = 0;
 	buttonCancle = 0;
 	DialogType = type;
+
+	hStopDlgWnd = 0;
+
 	if(disp_state_stack._disp_index > 1)
 		GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
+
 	if(DialogType == DIALOG_TYPE_UPDATE_ESP_FIRMARE) {
 		GUI_DispStringAt(DIALOG_UPDATE_WIFI_FIRMWARE_EN, 40, 120);
 	} else if(DialogType == DIALOG_TYPE_UPDATE_ESP_DATA) {
 		GUI_DispStringAt(DIALOG_UPDATE_WIFI_WEB_EN, 40, 100);
-	} else if(DialogType == DIALOG_TYPE_UPLOAD_FILE) {
-		hStopDlgWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbDlgWin, 0);
-		printStopDlgText = TEXT_CreateEx(0,0, LCD_WIDTH, imgHeight/2, hStopDlgWnd, WM_CF_SHOW, TEXT_CF_LEFT,  alloc_win_id(), "Uploading......");
-		TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
-		TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
-		TEXT_SetTextAlign(printStopDlgText, GUI_TA_VCENTER | GUI_TA_HCENTER);
-		if(upload_result == 1) {
-			TEXT_SetText(printStopDlgText, DIALOG_UPLOAD_ING_EN);
-		} else if(upload_result == 2) {
-			buttonOk = BUTTON_CreateEx((LCD_WIDTH-DIALOG_BTN_XPIEL)/2,(imgHeight)/2, DIALOG_BTN_XPIEL, DIALOG_BTN_YPIEL,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-			TEXT_SetText(printStopDlgText, DIALOG_UPLOAD_ERROR_EN);
-			BUTTON_SetText(buttonOk, DIALOG_CONFIRM_EN);
-		} else if(upload_result == 3) {
-			//TODO: upload_size, upload_time - отдельной структурой
-			char buf[200];
-			int _index = 0;
-			memset(buf,0,sizeof(200));
-			buttonOk= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight)/2, 140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-			strcpy(buf, DIALOG_UPLOAD_FINISH_EN);
-			_index = strlen(buf);
-			buf[_index] = '\n';
-			_index++;
-			strcat(buf, DIALOG_UPLOAD_SIZE_EN);
-			_index = strlen(buf);
-			buf[_index] = ':';
-			_index++;
-			sprintf(&buf[_index], " %.1d KBytes\n", upload_file_info.size / 1024);
-			strcat(buf, DIALOG_UPLOAD_TIME_EN);
-			_index = strlen(buf);
-			buf[_index] = ':';
-			_index++;
-			sprintf(&buf[_index], " %d s\n", upload_file_info.time);
-			strcat(buf, DIALOG_UPLOAD_SPEED_EN);
-			_index = strlen(buf);
-			buf[_index] = ':';
-			_index++;
-			sprintf(&buf[_index], " %d KBytes/s\n", upload_file_info.size / upload_file_info.time / 1024);
-			TEXT_SetText(printStopDlgText, buf);
-			BUTTON_SetText(buttonOk, "OK");
-		}
-	} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
-		hStopDlgWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbDlgWin, 0);
-		buttonRePrint= BUTTON_CreateEx((LCD_WIDTH-320)/2,(imgHeight-60)/2,140,50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-		buttonOk= BUTTON_CreateEx((LCD_WIDTH-320)/2+40+140,(imgHeight-60)/2,140,50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-		printStopDlgText = TEXT_CreateEx(0,(imgHeight-40)/2-90, LCD_WIDTH, 30, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), " ");
-		fileNameText = TEXT_CreateEx(0,(imgHeight-40)/2-90+30, LCD_WIDTH, 30, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), " ");
-
-		TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
-		TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
-
-		TEXT_SetBkColor(fileNameText, gCfgItems.background_color);
-		TEXT_SetTextColor(fileNameText, gCfgItems.title_color);
-			
-		TEXT_SetText(printStopDlgText, print_file_dialog_menu.print_finish);
-		memset(tmpCurFileStr,0,sizeof(tmpCurFileStr));
-		strcat(tmpCurFileStr,print_file_dialog_menu.print_time);
-		sprintf(&tmpCurFileStr[strlen(print_file_dialog_menu.print_time)], "%d%d:%d%d:%d%d", print_time.hours/10, print_time.hours%10, print_time.minutes/10, print_time.minutes%10,  print_time.seconds/10, print_time.seconds%10);
-		TEXT_SetText(fileNameText, tmpCurFileStr);
-    	BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-		BUTTON_SetText(buttonRePrint, print_file_dialog_menu.reprint);
-		BUTTON_SetBkColor(buttonRePrint, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_color);
-		BUTTON_SetBkColor(buttonRePrint, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_color);
-		BUTTON_SetTextColor(buttonRePrint, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_textcolor);
-		BUTTON_SetTextColor(buttonRePrint, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_textcolor);
-		BUTTON_SetTextAlign(buttonRePrint, GUI_TA_VCENTER | GUI_TA_HCENTER);
-		BUTTON_SetBmpFileName(buttonRePrint,NULL,1);
-	} else if(DialogType == WIFI_ENABLE_TIPS) {
-		hStopDlgWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbDlgWin, 0);
-		buttonCancle= BUTTON_CreateEx((LCD_WIDTH-120)/2,(imgHeight-60)/2,120,60,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-		printStopDlgText = TEXT_CreateEx(0,(imgHeight-40)/2-90, LCD_WIDTH, 60, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), " ");
-		TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
-		TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
-		TEXT_SetText(printStopDlgText, print_file_dialog_menu.wifi_enable_tips);
-		BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
 	} else {
-		hStopDlgWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbDlgWin, 0);
-		printStopDlgText = TEXT_CreateEx(0,(imgHeight-40)/2-90, LCD_WIDTH, 70, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), " ");
-		TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
-		TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
-			
-		if((DialogType == DIALOG_TYPE_M80_FAIL)
-				||(DialogType == DIALOG_TYPE_FILAMENT_LOAD_COMPLETED)
-				||(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED))
-		{
-			buttonOk= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight-40)/2, 140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT) {
-			buttonCancle= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight-40)/2,140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-			filament_temper = TEXT_CreateEx(0,(imgHeight-40)/2-30, LCD_WIDTH, 30, hStopDlgWnd, WM_CF_SHOW, GUI_TA_TOP | GUI_TA_HCENTER,  alloc_win_id(), " ");
-			TEXT_SetTextColor(filament_temper, gCfgItems.title_color);
-			TEXT_SetBkColor(filament_temper, gCfgItems.background_color);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT) {
-			buttonCancle= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight-40)/2,140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-			filament_temper = TEXT_CreateEx(0,(imgHeight-40)/2-30, LCD_WIDTH, 30, hStopDlgWnd, WM_CF_SHOW, GUI_TA_TOP | GUI_TA_HCENTER,  alloc_win_id(), " ");
-			TEXT_SetTextColor(filament_temper, gCfgItems.title_color);
-			TEXT_SetBkColor(filament_temper, gCfgItems.background_color);
-		} else if((DialogType == DIALOG_TYPE_FILAMENT_LOADING)||(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING)) {
-			FilamentBar = PROGBAR_CreateEx((LCD_WIDTH-400)/2, (imgHeight-40)/2-30, 400, 25, hStopDlgWnd, WM_CF_SHOW, 0, 0);
-			PROGBAR_SetBarColor(FilamentBar, 0, GUI_GREEN);
-			PROGBAR_SetValue(FilamentBar,filament_rate);
-			PROGBAR_SetText(FilamentBar," ");
-			buttonCancle= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight-40)/2,140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
-			buttonOk= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight-40)/2,140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-		} else {
-			buttonOk= BUTTON_CreateEx((LCD_WIDTH-320)/2,(imgHeight-40)/2,140,50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-			buttonCancle= BUTTON_CreateEx((LCD_WIDTH-320)/2+40+140,(imgHeight-40)/2,140,50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-		}
-		if(DialogType == DIALOG_TYPE_STOP) {
-			TEXT_SetText(printStopDlgText, print_file_dialog_menu.cancle_print);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_PRINT_FILE) {
-			print_start_flg = 1;
-			if(gCfgItems.breakpoint_reprint_flg == 1) {
-				TEXT_SetText(printStopDlgText,  print_file_dialog_menu.print_from_breakpoint);
-				BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-				BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-			} else {
-				printStopDlgText = TEXT_CreateEx(0,(imgHeight-40)/2-120, LCD_WIDTH, 40, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), NULL);
-				printfilename = TEXT_CreateEx(0,(imgHeight-40)/2-60, LCD_WIDTH, 30, hStopDlgWnd, WM_CF_SHOW, TEXT_CF_HCENTER|TEXT_CF_TOP,  alloc_win_id(), NULL);
-				TEXT_SetBkColor(printfilename, gCfgItems.background_color);
-				TEXT_SetTextColor(printfilename, gCfgItems.title_color );
-				TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
-				TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
-				if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
-				  GUI_SetFont(&GUI_FontHZ16);
-				  BUTTON_SetDefaultFont(&GUI_FontHZ16);
-				  TEXT_SetDefaultFont(&GUI_FontHZ16);
-				  GUI_UC_SetEncodeNone();
-				} else {
-                	GUI_SetFont(&FONT_TITLE);
-                    BUTTON_SetDefaultFont(&FONT_TITLE);
-                    TEXT_SetDefaultFont(&FONT_TITLE);
-                    GUI_UC_SetEncodeUTF8();
-				}
-				TEXT_SetText(printStopDlgText, print_file_dialog_menu.print_file);
-				BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-				BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
+		hStopDlgWnd = ui_std_window(cbDlgWin);
 
-				GUI_Exec();
-				GUI_UC_SetEncodeNone();
+		if(DialogType == DIALOG_TYPE_UPLOAD_FILE) {
 
-				TEXT_SetFont(printfilename,&GUI_FontHZ16);
-				memset(codebuff,0,sizeof(codebuff));
-				strcpy((char*)codebuff,&curFileName[3]);
-				TEXT_SetText(printfilename, (char*)codebuff);
-				GUI_Exec();
-				if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
-					GUI_SetFont(&GUI_FontHZ16);
-					BUTTON_SetDefaultFont(&GUI_FontHZ16);
-					TEXT_SetDefaultFont(&GUI_FontHZ16);
-					GUI_UC_SetEncodeNone();
-				} else {
-					GUI_SetFont(&FONT_TITLE);
-					BUTTON_SetDefaultFont(&FONT_TITLE);
-					TEXT_SetDefaultFont(&FONT_TITLE);
-					GUI_UC_SetEncodeUTF8();
-				}
+			printStopDlgText = TEXT_CreateEx(0,0, LCD_WIDTH, imgHeight/2, hStopDlgWnd, WM_CF_SHOW, TEXT_CF_LEFT,  alloc_win_id(), "Uploading......");
+			TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
+			TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
+			TEXT_SetTextAlign(printStopDlgText, GUI_TA_VCENTER | GUI_TA_HCENTER);
+			if(upload_result == 1) {
+				TEXT_SetText(printStopDlgText, DIALOG_UPLOAD_ING_EN);
+			} else if(upload_result == 2) {
+				buttonOk = BUTTON_CreateEx((LCD_WIDTH-DIALOG_BTN_XPIEL)/2,(imgHeight)/2, DIALOG_BTN_XPIEL, DIALOG_BTN_YPIEL,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+				TEXT_SetText(printStopDlgText, DIALOG_UPLOAD_ERROR_EN);
+			} else if(upload_result == 3) {
+				//TODO: upload_size, upload_time - отдельной структурой
+				char buf[200];
+				int _index = 0;
+				memset(buf,0,sizeof(200));
+				buttonOk= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight)/2, 140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+				strcpy(buf, DIALOG_UPLOAD_FINISH_EN);
+				_index = strlen(buf);
+				buf[_index] = '\n';
+				_index++;
+				strcat(buf, DIALOG_UPLOAD_SIZE_EN);
+				_index = strlen(buf);
+				buf[_index] = ':';
+				_index++;
+				sprintf(&buf[_index], " %.1d KBytes\n", upload_file_info.size / 1024);
+				strcat(buf, DIALOG_UPLOAD_TIME_EN);
+				_index = strlen(buf);
+				buf[_index] = ':';
+				_index++;
+				sprintf(&buf[_index], " %d s\n", upload_file_info.time);
+				strcat(buf, DIALOG_UPLOAD_SPEED_EN);
+				_index = strlen(buf);
+				buf[_index] = ':';
+				_index++;
+				sprintf(&buf[_index], " %d KBytes/s\n", upload_file_info.size / upload_file_info.time / 1024);
+				TEXT_SetText(printStopDlgText, buf);
 			}
-		} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
-			TEXT_SetText(printStopDlgText, file_menu.no_file_and_check);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_M80_FAIL) {
-			TEXT_SetText(printStopDlgText, print_file_dialog_menu.close_machine_error);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-		} else if(DialogType == DIALOG_TYPE_UNBIND) {
-			TEXT_SetText(printStopDlgText, common_menu.unbind_printer_tips);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_heat);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_heat_confirm);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_LOADING) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_loading);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_COMPLETED) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_completed);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_heat);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_UNLOAD_COMPLETED) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_heat_confirm);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unloading);
-			BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED) {
-			TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_completed);
-			BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
-		} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
-			TEXT_SetText(printStopDlgText, print_file_dialog_menu.filament_no_press);
-    		BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
+		} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
+			ui_set_text_value(printStopDlgText, print_file_dialog_menu.print_finish);
+
+			buttonRePrint = ui_create_dialog_button((LCD_WIDTH-320)/2,(imgHeight-60)/2, hStopDlgWnd, print_file_dialog_menu.reprint);
+			buttonOk = ui_create_dialog_button((LCD_WIDTH-320)/2+40+140,(imgHeight-60)/2,hStopDlgWnd, 0);
+
+			printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-90, LCD_WIDTH, 30, hStopDlgWnd, 0);
+			fileNameText = ui_create_dialog_text(0,(imgHeight-40)/2-90+30, LCD_WIDTH, 30, hStopDlgWnd, 0);
+
+			memset(tmpCurFileStr,0,sizeof(tmpCurFileStr));
+			strcat(tmpCurFileStr,print_file_dialog_menu.print_time);
+			print_time_to_str(&print_time, &tmpCurFileStr[strlen(print_file_dialog_menu.print_time)]);
+			ui_set_text_value(fileNameText, &curFileName[3]);
+			if (ui_print_process.suicide.enabled) {
+				progressBar = ui_create_std_progbar((LCD_WIDTH-400)/2, (imgHeight-60)/2 + 80, 400, 25, hStopDlgWnd);
+				PROGBAR_SetValue(progressBar, 0);
+			}
+
+		} else if(DialogType == WIFI_ENABLE_TIPS) {
+			buttonCancle= BUTTON_CreateEx((LCD_WIDTH-120)/2,(imgHeight-60)/2,120,60,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+			printStopDlgText = TEXT_CreateEx(0,(imgHeight-40)/2-90, LCD_WIDTH, 60, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), " ");
+			TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
+			TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
+			TEXT_SetText(printStopDlgText, print_file_dialog_menu.wifi_enable_tips);
+		} else {
+
+			printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-90, LCD_WIDTH, 70, hStopDlgWnd, 0);
+
+			if(
+					(DialogType == DIALOG_TYPE_M80_FAIL)
+					||(DialogType == DIALOG_TYPE_FILAMENT_LOAD_COMPLETED)
+					||(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED)
+			) {
+				buttonOk= ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT) {
+				buttonCancle= ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
+				filament_temper = ui_create_dialog_text(0,(imgHeight-40)/2-30, LCD_WIDTH, 30, hStopDlgWnd, 0);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT) {
+				buttonCancle= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight-40)/2,140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+				filament_temper = ui_create_std_text_f(0,(imgHeight-40)/2-30, LCD_WIDTH, 30, hStopDlgWnd, GUI_TA_TOP | GUI_TA_HCENTER, 0);
+			} else if((DialogType == DIALOG_TYPE_FILAMENT_LOADING)||(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING)) {
+				progressBar = PROGBAR_CreateEx((LCD_WIDTH-400)/2, (imgHeight-40)/2-30, 400, 25, hStopDlgWnd, WM_CF_SHOW, 0, 0);
+				PROGBAR_SetBarColor(progressBar, 0, GUI_GREEN);
+				PROGBAR_SetValue(progressBar,filament_rate);
+				PROGBAR_SetText(progressBar," ");
+				buttonCancle = ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
+				buttonOk = ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
+			} else {
+				buttonOk= ui_create_dialog_button((LCD_WIDTH-320)/2,(imgHeight-40)/2,hStopDlgWnd, 0);
+				buttonCancle= ui_create_dialog_button((LCD_WIDTH-320)/2+40+140,(imgHeight-40)/2,hStopDlgWnd, 0);
+			}
+
+
+			if(DialogType == DIALOG_TYPE_STOP) {
+				ui_set_text_value(printStopDlgText, print_file_dialog_menu.cancle_print);
+			} else if(DialogType == DIALOG_TYPE_PRINT_FILE) {
+				print_start_flg = 1;
+				if(gCfgItems.breakpoint_reprint_flg == 1) {
+					ui_set_text_value(printStopDlgText,  print_file_dialog_menu.print_from_breakpoint);
+				} else {
+					printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-120, LCD_WIDTH, 40, hStopDlgWnd, print_file_dialog_menu.print_file);
+					printfilename = ui_create_std_text_f(0,(imgHeight-40)/2-60, LCD_WIDTH, 30, hStopDlgWnd, GUI_TA_TOP | GUI_TA_HCENTER, 0);
+					/*
+					memset(codebuff,0,sizeof(codebuff));
+					strcpy((char*)codebuff,&curFileName[3]);
+					*/
+					ui_set_text_value(printfilename, &curFileName[3]);
+				}
+			} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
+				TEXT_SetText(printStopDlgText, file_menu.no_file_and_check);
+			} else if(DialogType == DIALOG_TYPE_M80_FAIL) {
+				TEXT_SetText(printStopDlgText, print_file_dialog_menu.close_machine_error);
+			} else if(DialogType == DIALOG_TYPE_UNBIND) {
+				TEXT_SetText(printStopDlgText, common_menu.unbind_printer_tips);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_heat);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_heat_confirm);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOADING) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_loading);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_COMPLETED) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_completed);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_heat);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_UNLOAD_COMPLETED) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_heat_confirm);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unloading);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED) {
+				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_completed);
+			} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
+				TEXT_SetText(printStopDlgText, print_file_dialog_menu.filament_no_press);
+			}
 		}
 	}
-	if(buttonOk) {
-		BUTTON_SetBkColor(buttonOk, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_color);
-		BUTTON_SetBkColor(buttonOk, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_color);
-		BUTTON_SetTextColor(buttonOk, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_textcolor);
-		BUTTON_SetTextColor(buttonOk, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_textcolor);
-		BUTTON_SetTextAlign(buttonOk, GUI_TA_VCENTER | GUI_TA_HCENTER);
-		BUTTON_SetBmpFileName(buttonOk,NULL,1);
-	}
-	if(buttonCancle) {
-		BUTTON_SetBkColor(buttonCancle, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_color);
-		BUTTON_SetBkColor(buttonCancle, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_color);
-		BUTTON_SetTextColor(buttonCancle, BUTTON_CI_UNPRESSED, gCfgItems.dialog_btn_textcolor);
-		BUTTON_SetTextColor(buttonCancle, BUTTON_CI_PRESSED, gCfgItems.dialog_btn_textcolor);
-		BUTTON_SetTextAlign(buttonCancle, GUI_TA_VCENTER | GUI_TA_HCENTER);
-		BUTTON_SetBmpFileName(buttonCancle,NULL,1);
-	}
+	if (buttonOk)
+		BUTTON_SetText(buttonOk, print_file_dialog_menu.confirm);
+	if (buttonCancle)
+		BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
 }
 
 
 void filament_setbar() {
-	PROGBAR_SetBarColor(FilamentBar, 0, GUI_GREEN);
-	PROGBAR_SetValue(FilamentBar,filament_rate);
+	PROGBAR_SetBarColor(progressBar, 0, GUI_GREEN);
+	PROGBAR_SetValue(progressBar,filament_rate);
 }
 
 void filament_sprayer_temp() {
@@ -530,9 +462,7 @@ void filament_sprayer_temp() {
 	TEXT_SetText(filament_temper, (char *)buf);
 }
 void filament_dialog_handle() {
-	if((temperature_change_frequency == 1)
-	 &&((DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT)
-	||(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT))) {
+	if (temperature_change_frequency == 1) {
 		temperature_change_frequency = 0;
 		filament_sprayer_temp();
 	}
@@ -603,17 +533,15 @@ void filament_dialog_handle() {
 uint8_t command_send_flag;
 void wifi_scan_handle() {
 	char buf[6]={0};
-	if(DialogType == WIFI_ENABLE_TIPS) {
-		if(command_send_flag == 1) {
-			if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
-				last_disp_state = PRINT_READY_UI;
-				Clear_ready_print();
-				draw_Wifi();
-			} else {
-				last_disp_state = DIALOG_UI;
-				Clear_dialog();
-				draw_Wifi_list();
-			}
+	if(command_send_flag == 1) {
+		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
+			last_disp_state = PRINT_READY_UI;
+			Clear_ready_print();
+			draw_Wifi();
+		} else {
+			last_disp_state = DIALOG_UI;
+			Clear_dialog();
+			draw_Wifi_list();
 		}
 	}
 }
@@ -621,4 +549,31 @@ void wifi_scan_handle() {
 
 void Clear_dialog() {
 	ui_drop_window(hStopDlgWnd);
+}
+
+void refresh_dialog() {
+	switch (DialogType) {
+		case DIALOG_TYPE_FILAMENT_LOAD_HEAT:
+		case DIALOG_TYPE_FILAMENT_UNLOAD_HEAT:
+			filament_dialog_handle();
+			break;
+		case WIFI_ENABLE_TIPS:
+			wifi_scan_handle();
+			break;
+		case DIALOG_TYPE_FINISH_PRINT:
+			if (ui_print_process.suicide.enabled) {
+				if (is_ui_timing(F_UI_TIMING_SEC)) {
+					ui_timing_clear(F_UI_TIMING_SEC);
+					PROGBAR_SetValue(progressBar, 100 - ui_print_process.suicide.count_down*100/SUICIDE_WAIT);
+					if (ui_print_process.suicide.count_down--==0) {
+						ui_print_process.suicide.enabled=0;
+						Clear_dialog();
+						ui_clear_screen();
+						enqueue_and_echo_commands_P(PSTR("M81"));
+					}
+				}
+			}
+			break;
+
+	}
 }

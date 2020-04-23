@@ -4,6 +4,7 @@
 #include "draw_ui.h"
 #include "GUI.h"
 #include "BUTTON.h"
+#include "PROGBAR.h"
 #include "TEXT.h"
 
 #if defined(__cplusplus)
@@ -16,10 +17,25 @@ typedef struct {
 }
 UPLOAD_INFO;
 
-extern UPLOAD_INFO upload_file_info;
-extern uint8_t	ui_suicide_enabled;
-extern uint8_t	once_flag; //printing
+#define 	SUICIDE_WAIT 	60
 
+typedef struct {
+	volatile uint8_t enabled;
+	volatile uint8_t do_execute;
+	volatile uint8_t count_down;
+} SUICIDE_CFG;
+
+
+typedef struct {
+	uint8_t		once; //printing
+	SUICIDE_CFG	suicide;
+} UI_PRINT_PROCESS;
+
+extern UI_PRINT_PROCESS ui_print_process;
+
+extern UPLOAD_INFO upload_file_info;
+
+extern void print_time_to_str(PRINT_TIME * pt, char * buf);
 
 extern void ui_push_disp_stack(DISP_STATE ui_id);
 extern void ui_reset_disp_stack(DISP_STATE ui_id);
@@ -39,11 +55,16 @@ extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, c
 extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile);
 extern BUTTON_Handle ui_create_state_button_id(int x, int y, WM_HWIN hWinParent, char *pFile, uint32_t id);
 
-extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
+extern BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const char* text);
 
+
+extern TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, char *text);
+extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
+extern TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
 extern void ui_set_text_value(TEXT_Handle handle, char* val);
 
 
+extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
 
 extern uint8_t ui_timing_flags;
 #define F_UI_TIMING_HALF_SEC		1<<0

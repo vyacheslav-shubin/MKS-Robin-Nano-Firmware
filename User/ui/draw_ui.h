@@ -529,15 +529,9 @@ extern TCHAR curFileName[100];
 extern char curFileName[100];
 #endif
 
-extern uint8_t ui_timing_flags;
-#define F_UI_TIMING_HALF_SEC		1<<0
-#define F_UI_TIMING_SEC				1<<1
-
-#define is_ui_timing(FLAG) (ui_timing_flags & FLAG)
-#define ui_timing_set(FLAG) (ui_timing_flags |= FLAG)
-#define ui_timing_clear(FLAG) (ui_timing_flags &= (~FLAG))
-
-extern void ui_timings(void);
+extern volatile uint32_t TimeIncrease;
+extern uint16_t temperature_change_frequency_cnt;
+extern uint8_t temperature_change_frequency;
 
 extern void start_print_time();
 extern void stop_print_time();

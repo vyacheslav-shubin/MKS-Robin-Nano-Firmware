@@ -60,22 +60,15 @@ extern uint8_t button_disp_pause_state;
 
 void update_printing_1s(void);
 void update_pause_button(void);
+void update_auto_close_button(void);
 
 static void cbPrintingWin(WM_MESSAGE * pMsg) {
-
-struct PressEvt *press_event;
 
 switch (pMsg->MsgId)
 {
 	case WM_PAINT:
-		break;
 	case WM_TOUCH:
-	 	press_event = (struct PressEvt *)pMsg->Data.p;
-		
-		break;
 	case WM_TOUCH_CHILD:
-		press_event = (struct PressEvt *)pMsg->Data.p;
-
 		break;
 		
 	case WM_NOTIFY_PARENT:
@@ -129,6 +122,9 @@ switch (pMsg->MsgId)
 						draw_dialog(DIALOG_TYPE_STOP);
 					}
 				}
+			} else if (pMsg->hWinSrc == buttonAutoClose) {
+				gCfgItems.suicide.do_execute = ~gCfgItems.suicide.do_execute;
+				update_auto_close_button();
 			}
 		}
 		break;
@@ -147,6 +143,7 @@ void reset_file_info()
 	gCurFileState.bufPoint = 0;
 	gCurFileState.file_open_flag = 0;
 }
+
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
 #define ROW_SIZE	40
@@ -179,8 +176,22 @@ static void update_pause_button() {
 		BUTTON_SetText(buttonPause, tn);
 }
 
+void update_auto_close_button() {
+    BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct90X30,0,5);
+    BUTTON_SetTextAlign(buttonAutoClose, GUI_TA_CENTER|GUI_TA_VCENTER );
+	if (gCfgItems.suicide.do_execute) {
+	    BUTTON_SetBmpFileName(buttonAutoClose, "bmp_enable.bin",1);
+	    BUTTON_SetText(buttonAutoClose, machine_menu.high_level);
+	} else {
+	    BUTTON_SetBmpFileName(buttonAutoClose, "bmp_disable.bin",1);
+	    BUTTON_SetText(buttonAutoClose, machine_menu.low_level);
+	}
+}
+
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
+
+
 
 void draw_printing()
 {
@@ -215,11 +226,8 @@ void draw_printing()
 	buttonZpos = BUTTON_L(1, 0, "bmp_zpos_state.bin");
 	Zpos = TEXT_L(1, 0);
 
-	buttonAutoClose = BUTTON_CreateEx(COL(1), ROW(3), 90, 40, hPrintingWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-    BUTTON_SetBmpFileName(buttonAutoClose, "bmp_enable.bin",1);
-    BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct90X30,0,5);
-    BUTTON_SetTextAlign(buttonAutoClose, GUI_TA_LEFT|GUI_TA_VCENTER );
-    BUTTON_SetText(buttonAutoClose, machine_menu.high_level);
+	buttonAutoClose = BUTTON_CreateEx(COL(1), ROW(3) + 10, 90, 40, hPrintingWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+    update_auto_close_button();
 
 
 	printingBar = PROGBAR_CreateEx(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd, WM_CF_SHOW, 0, 0);
@@ -277,11 +285,15 @@ void update_progress(int rate) {
 
 
 void do_finish_print(void) {
-	stop_print_time();
-	flash_preview_begin = 0;
-	default_preview_flg = 0;
-	clear_printing();
-	draw_dialog(DIALOG_TYPE_FINISH_PRINT);
+	if (gCfgItems.suicide.do_execute) {
+		enqueue_and_echo_commands_P(PSTR("M81"));
+	} else {
+		stop_print_time();
+		flash_preview_begin = 0;
+		default_preview_flg = 0;
+		clear_printing();
+		draw_dialog(DIALOG_TYPE_FINISH_PRINT);
+	}
 }
 
 void update_printing_1s(void) {

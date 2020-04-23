@@ -278,6 +278,7 @@
 #include "draw_ready_print.h"
 
 #include "draw_ui.h"
+#include "ui_tools.h"
 #include "wifi_module.h"
 #include "draw_printing.h"
 #include "draw_pause_ui.h"
@@ -315,7 +316,6 @@ extern uint32_t filament_rate;
 
 
 volatile uint32_t TimeIncrease;
-uint8_t volatile printing_rate_update_flag;
 uint8_t preview_no_display;
 
 extern uint8_t from_flash_pic;

@@ -1,4 +1,8 @@
 #include "ui_tools.h"
+#include "draw_ui.h"
+#include "tim.h"
+
+extern uint8_t	ui_suicide_enabled = 0;
 
 void ui_push_disp_stack(DISP_STATE ui_id) {
     if(disp_state_stack._disp_state[disp_state_stack._disp_index] != ui_id)
@@ -106,3 +110,32 @@ void ui_set_text_value(TEXT_Handle handle, char* val) {
 	TEXT_SetTextColor(handle,gCfgItems.title_color);
 	TEXT_SetText(handle, val);
 }
+
+void ui_timings(void) {
+	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
+		ui_timing_set(F_UI_TIMING_HALF_SEC);
+
+	if(!(TimeIncrease * TICK_CYCLE % 1000)) { //1 sec
+		ui_timing_set(F_UI_TIMING_SEC);
+		if(print_time.start == 1) {
+			print_time.seconds++;
+			if(print_time.seconds >= 60) {
+				print_time.seconds = 0;
+				print_time.minutes++;
+				if(print_time.minutes >= 60) {
+					print_time.minutes = 0;
+					print_time.hours++;
+				}
+			}
+		}
+	}
+
+	//TODO: К херам (!!)
+	temperature_change_frequency_cnt++;
+	if((temperature_change_frequency_cnt>=2000) && (temperature_change_frequency!=1)) {
+		temperature_change_frequency_cnt = 0;
+		temperature_change_frequency = 1;
+	}
+
+}
+

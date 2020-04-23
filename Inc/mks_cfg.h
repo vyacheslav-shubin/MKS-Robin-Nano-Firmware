@@ -484,6 +484,10 @@ typedef struct{
 #define set_xy_point(point, xv, yv) {point.x = xv; point.y = yv; }
 
 typedef struct {
+	volatile uint8_t do_execute;
+} SUICIDE_CFG;
+
+typedef struct {
 	volatile int8_t custom_pic_flag;
 
 		int32_t value_bk_color;
@@ -572,7 +576,8 @@ typedef struct {
 	
 		volatile uint8_t extern_chinese_flg;//�ⲿ�ֿ⡣
 	
-		volatile uint8_t print_finish_close_machine_flg;	
+		volatile uint8_t print_finish_close_machine_flg;
+		SUICIDE_CFG suicide;
 	
 		//volatile uint32_t filamentchange_speed;//�����ٶ�
 		//volatile uint8_t filamentchange_step;//���ϲ��� 

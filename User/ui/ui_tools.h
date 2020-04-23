@@ -10,6 +10,7 @@
 extern "C" {
 #endif
 
+extern uint8_t	ui_suicide_enabled;
 
 extern void ui_push_disp_stack(DISP_STATE ui_id);
 extern void ui_reset_disp_stack(DISP_STATE ui_id);
@@ -34,6 +35,16 @@ extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinPa
 extern void ui_set_text_value(TEXT_Handle handle, char* val);
 
 
+
+extern uint8_t ui_timing_flags;
+#define F_UI_TIMING_HALF_SEC		1<<0
+#define F_UI_TIMING_SEC				1<<1
+
+#define is_ui_timing(FLAG) (ui_timing_flags & FLAG)
+#define ui_timing_set(FLAG) (ui_timing_flags |= FLAG)
+#define ui_timing_clear(FLAG) (ui_timing_flags &= (~FLAG))
+
+extern void ui_timings(void);
 
 
 

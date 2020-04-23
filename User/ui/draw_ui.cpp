@@ -112,6 +112,7 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmzero;
 extern uint8_t gcode_preview_over;
 
 uint8_t temperature_change_frequency = 1;
+uint16_t temperature_change_frequency_cnt;
 //unsigned char bmp_public_buf[16*1024] = {0};
 
 extern uint8_t wifi_refresh_flg;
@@ -149,8 +150,6 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmpreheat;
 extern CFG_ITMES gCfgItems;
 
 extern int X_ADD,X_INTERVAL;
-extern uint8_t volatile printing_rate_update_flag;
-extern volatile uint32_t TimeIncrease;
 static volatile uint8_t fan_move_flag;
 //extern FILE_PRINT_STATE gCurFileState ;
 extern uint8_t fan_change_flag;
@@ -295,41 +294,7 @@ char *getDispText(int index) {
 
 static char titleText[100] = {0};
 
-static uint32_t temperature_change_frequency_cnt = 0;
-
 uint8_t	ui_timing_flags = 0;
-
-void ui_timings(void) {
-	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
-		ui_timing_set(F_UI_TIMING_HALF_SEC);
-
-	if(!(TimeIncrease * TICK_CYCLE % 1000)) { //1 sec
-		ui_timing_set(F_UI_TIMING_SEC);
-		if(print_time.start == 1) {
-			print_time.seconds++;
-			if(print_time.seconds >= 60) {
-				print_time.seconds = 0;
-				print_time.minutes++;
-				if(print_time.minutes >= 60) {
-					print_time.minutes = 0;
-					print_time.hours++;
-				}
-			}
-		}
-	}
-
-
-	temperature_change_frequency_cnt++;
-	if((temperature_change_frequency_cnt>=2000) && (temperature_change_frequency!=1)) {
-		temperature_change_frequency_cnt = 0;
-		temperature_change_frequency = 1;
-	}
-
-	if(!(TimeIncrease * TICK_CYCLE % 3000))	// 3s
-	{
-		printing_rate_update_flag = 1;
-	}
-}
 
 
 char *creat_title_text() {

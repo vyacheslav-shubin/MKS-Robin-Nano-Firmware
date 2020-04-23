@@ -79,6 +79,7 @@ void mkstft_ui_load()
 		epr_read_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_points[4].y,sizeof(gCfgItems.leveling_points[0].y));
 
 		epr_read_data(EPR_AUTO_CLOSE_MACHINE,(uint8_t *)&gCfgItems.print_finish_close_machine_flg,sizeof(gCfgItems.print_finish_close_machine_flg));
+		gCfgItems.suicide.do_execute = gCfgItems.print_finish_close_machine_flg;
 		epr_read_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
 
 		//sean 19.8.16
@@ -248,6 +249,7 @@ void mkstft_ui_init()
 		gCfgItems.mask_det_Function = 0;
 
 		gCfgItems.print_finish_close_machine_flg = 0;
+		gCfgItems.suicide.do_execute = gCfgItems.print_finish_close_machine_flg;
 
 		//gCfgItems.preheat_max_desireSprayerTemp = 275;
 		//gCfgItems.preheat_max_desireBedTemp = 150;

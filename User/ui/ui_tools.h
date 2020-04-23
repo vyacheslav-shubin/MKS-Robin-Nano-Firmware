@@ -10,7 +10,16 @@
 extern "C" {
 #endif
 
+typedef struct {
+	volatile uint32_t time;
+	volatile uint32_t size;
+}
+UPLOAD_INFO;
+
+extern UPLOAD_INFO upload_file_info;
 extern uint8_t	ui_suicide_enabled;
+extern uint8_t	once_flag; //printing
+
 
 extern void ui_push_disp_stack(DISP_STATE ui_id);
 extern void ui_reset_disp_stack(DISP_STATE ui_id);
@@ -46,6 +55,7 @@ extern uint8_t ui_timing_flags;
 
 extern void ui_timings(void);
 
+extern void ui_start_print_process(void);
 
 
 #if defined(__cplusplus)

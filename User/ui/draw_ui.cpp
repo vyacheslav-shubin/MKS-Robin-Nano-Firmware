@@ -3,6 +3,8 @@
 #include "PROGBAR.h"
 #include "string_deal.h"
 #include "draw_ui.h"
+#include "ui_tools.h"
+#include "marlin.h"
 #include "draw_ready_print.h"
 //#include "gcode.h"
 //#include "printer.h"
@@ -1080,7 +1082,6 @@ uint8_t gcode_preview_over;
 uint8_t flash_preview_begin;
 uint8_t default_preview_flg;
 //uint8_t from_flash_pic;
-extern int once_flag;
 extern "C" void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
 extern "C" void SPI_FLASH_SectorErase(u32 SectorAddr);
 
@@ -1118,18 +1119,9 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel) {
 
 			gcode_preview_over = 0;
 			f_close(file);
-			if(card.openFile(curFileName, true)) {
-				feedrate_percentage = 100;
-				saved_feedrate_percentage = feedrate_percentage;
-				planner.flow_percentage[0] = 100;
-				planner.e_factor[0]= planner.flow_percentage[0]*0.01;
-				if(mksCfg.extruders==2) {
-					planner.flow_percentage[1] = 100;
-					planner.e_factor[1]= planner.flow_percentage[1]*0.01;
-				}
-				card.startFileprint();
-				once_flag = 0;
-			}
+
+			ui_start_print_process();
+
 		}
 		f_close(file);
 	}

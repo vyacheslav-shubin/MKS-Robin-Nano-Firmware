@@ -1,8 +1,31 @@
 #include "ui_tools.h"
 #include "draw_ui.h"
+#include "marlin.h"
+#include "planner.h"
+#include "cardreader.h"
 #include "tim.h"
 
 extern uint8_t	ui_suicide_enabled = 0;
+extern CardReader card;
+UPLOAD_INFO upload_file_info = {0, 0};
+
+uint8_t once_flag = 0; //printing
+
+
+void ui_start_print_process(void) {
+	if(card.openFile(curFileName, true)) {
+		feedrate_percentage = 100;
+		saved_feedrate_percentage = feedrate_percentage;
+		planner.flow_percentage[0] = 100;
+		planner.e_factor[0]= planner.flow_percentage[0]*0.01;
+		if(mksCfg.extruders==2) {
+			planner.flow_percentage[1] = 100;
+			planner.e_factor[1]= planner.flow_percentage[1]*0.01;
+		}
+		card.startFileprint();
+		once_flag = 0;
+	}
+}
 
 void ui_push_disp_stack(DISP_STATE ui_id) {
     if(disp_state_stack._disp_state[disp_state_stack._disp_index] != ui_id)

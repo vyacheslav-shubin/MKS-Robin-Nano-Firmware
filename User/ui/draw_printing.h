@@ -6,7 +6,6 @@
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
-extern int once_flag;
 
 extern void draw_printing();
 extern void clear_printing();

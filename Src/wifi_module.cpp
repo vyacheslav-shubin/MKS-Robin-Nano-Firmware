@@ -7,6 +7,7 @@
 //#include "mks_tft_com.h"
 //#include "Printer.h"
 #include "draw_ui.h"
+#include "ui_tools.h"
 //#include "usb_core.h"
 #include "wifi_module.h"
 //#include "sd_usr.h"
@@ -79,10 +80,7 @@ extern volatile uint8_t get_temp_flag;
 #define WIFI_MODE	2	//WIFI MODE
 #define WIFI_AP_MODE	3//AP??
 
-int upload_result = 0; //0:´«ÊäÎ´Æô¶¯£»1:´«Êä½øÐÐÖÐ£»2:´«ÊäÒì³££¬ÖÐÖ¹£»3:´«ÊäÍê³É¡£
-
-uint32_t upload_time = 0; //´«ÊäÊ±¼ä
-uint32_t upload_size = 0; //´«Êä´óÐ¡
+int upload_result = 0; //0:ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½2:ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½3:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¡ï¿½
 
 volatile WIFI_STATE wifi_link_state;
 WIFI_PARA wifiPara;
@@ -208,7 +206,7 @@ static void dma_init()
 	NVIC_InitTypeDef NVIC_InitStructure;
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
-	/*DMA ÖÐ¶Ï*/
+	/*DMA ï¿½Ð¶ï¿½*/
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 	NVIC_InitStructure.NVIC_IRQChannel=DMA1_Channel5_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0;
@@ -233,7 +231,7 @@ static void dma_init()
 
 	DMA_ITConfig(DMA1_Channel5, DMA_IT_TC | DMA_IT_HT , ENABLE);
 	
-	DMA_Cmd(DMA1_Channel5, ENABLE); //Ê¹ÄÜDMAÍ¨µÀ5
+	DMA_Cmd(DMA1_Channel5, ENABLE); //Ê¹ï¿½ï¿½DMAÍ¨ï¿½ï¿½5
 
 	//USART_DMACmd (SZ_STM32_COM3, USART_DMAReq_Tx, ENABLE);
 	USART_DMACmd (USART1, USART_DMAReq_Rx, ENABLE);
@@ -358,12 +356,12 @@ void esp_port_begin(uint8_t interrupt)
 		//SZ_STM32_COMInit(COM1, 115200);
 		__HAL_UART_ENABLE_IT(USART1, USART_IT_RXNE);
 
-		USART_InitStructure.USART_BaudRate = 115200;				//´®¿ÚµÄ²¨ÌØÂÊ£¬ÀýÈç115200 ×î¸ß´ï4.5Mbits/s
-		USART_InitStructure.USART_WordLength = USART_WordLength_8b; //Êý¾Ý×Ö³¤¶È(8Î»»ò9Î»)
-		USART_InitStructure.USART_StopBits = USART_StopBits_1;		//¿ÉÅäÖÃµÄÍ£Ö¹Î»-Ö§³Ö1»ò2¸öÍ£Ö¹Î»
-		USART_InitStructure.USART_Parity = USART_Parity_No; 		//ÎÞÆæÅ¼Ð£Ñé  
-		USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //ÎÞÓ²¼þÁ÷¿ØÖÆ
-		USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //Ë«¹¤Ä£Ê½£¬Ê¹ÄÜ·¢ËÍºÍ½ÓÊÕ
+		USART_InitStructure.USART_BaudRate = 115200;				//ï¿½ï¿½ï¿½ÚµÄ²ï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½115200 ï¿½ï¿½ß´ï¿½4.5Mbits/s
+		USART_InitStructure.USART_WordLength = USART_WordLength_8b; //ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½ï¿½ï¿½(8Î»ï¿½ï¿½9Î»)
+		USART_InitStructure.USART_StopBits = USART_StopBits_1;		//ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Í£Ö¹Î»-Ö§ï¿½ï¿½1ï¿½ï¿½2ï¿½ï¿½Í£Ö¹Î»
+		USART_InitStructure.USART_Parity = USART_Parity_No; 		//ï¿½ï¿½ï¿½ï¿½Å¼Ð£ï¿½ï¿½  
+		USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //Ë«ï¿½ï¿½Ä£Ê½ï¿½ï¿½Ê¹ï¿½Ü·ï¿½ï¿½ÍºÍ½ï¿½ï¿½ï¿½
 
 		__HAL_RCC_USART1_CLK_ENABLE();
 
@@ -1042,7 +1040,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 								}
 	 							else if(strncmp((char *)&tmpStr[index], "0:", 2) == 0)
 	 							{
-	 							    //robin robin_mini robin_nano²»Ö§³ÖUÅÌ
+	 							    //robin robin_mini robin_nanoï¿½ï¿½Ö§ï¿½ï¿½Uï¿½ï¿½
 	 								//gCfgItems.fileSysType = FILE_SYS_USB;
 																		
 								}
@@ -1768,7 +1766,7 @@ static void net_msg_handle(uint8_t * msg, uint16_t msgLen)
 		memcpy(wifi_firm_ver, (const char *)&msg[16 + wifiNameLen + wifiKeyLen + hostLen + id_len], ver_len);
 	}
 
-	if(cfg_wifi_flag == 1)//¸ù¾ÝÅäÖÃÎÄ¼þÅäÖÃÐÂµÄWIFI
+	if(cfg_wifi_flag == 1)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½WIFI
 	{
 		if((wifiPara.mode != gCfgItems.wifi_mode_sel)
 			|| (strncmp(wifiPara.ap_name, (const char *)gCfgItems.wifi_ap, 32) != 0)
@@ -1779,7 +1777,7 @@ static void net_msg_handle(uint8_t * msg, uint16_t msgLen)
 		else
 			cfg_wifi_flag = 0;
 	}
-	if(cfg_cloud_flag == 1)//¸ù¾ÝÅäÖÃÎÄ¼þÅäÖÃÐÂµÄÔÆ·þÎñ
+	if(cfg_cloud_flag == 1)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½Æ·ï¿½ï¿½ï¿½
 	{
 		if(((cloud_para.state >> 4) != gCfgItems.cloud_enable)
 			|| (strncmp(cloud_para.hostUrl, (const char *)gCfgItems.cloud_hostUrl, 96) != 0)
@@ -1972,7 +1970,7 @@ void utf8_2_gbk(uint8_t *source,uint8_t Len)
 		}
 		else if(char_byte_num == 0XF0)
 		{
-			//--4byte ²»³£¼û
+			//--4byte ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			i += 4;
 			//char_i += 3;
 		}
@@ -2091,8 +2089,8 @@ static void file_fragment_msg_handle(uint8_t * msg, uint16_t msgLen)
 
 	if((frag & FRAG_MASK) != (uint32_t)(lastFragment  + 1))
 	{
-		/*²»ÊÇÔ¤ÆÚµÄ·ÖÆ¬ºÅ*/
-		/*ÖØ·¢´¦Àí*/
+		/*ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ÚµÄ·ï¿½Æ¬ï¿½ï¿½*/
+		/*ï¿½Ø·ï¿½ï¿½ï¿½ï¿½ï¿½*/
 		memset(file_writer.write_buf, 0, sizeof(file_writer.write_buf));
 		file_writer.write_index = 0;
 	//	f_close(&save_File);
@@ -2141,9 +2139,8 @@ static void file_fragment_msg_handle(uint8_t * msg, uint16_t msgLen)
 
 			file_writer.tick_end = getWifiTick();
 
-			upload_time = getWifiTickDiff(file_writer.tick_begin, file_writer.tick_end) / 1000;
-
-			upload_size = f_size(&save_File);
+			upload_file_info.time = getWifiTickDiff(file_writer.tick_begin, file_writer.tick_end) / 1000;
+			upload_file_info.size = f_size(&save_File);
 			
 			wifi_link_state = WIFI_CONNECTED;	
 
@@ -2160,7 +2157,7 @@ void esp_data_parser(char *cmdRxBuf, int len)
 	int32_t head_pos;
 	int32_t tail_pos;
 	uint16_t cpyLen;
-	int16_t leftLen = len; //Ê£Óà³¤¶È
+	int16_t leftLen = len; //Ê£ï¿½à³¤ï¿½ï¿½
 	uint8_t loop_again = 0;
 
 	ESP_PROTOC_FRAME esp_frame;
@@ -2170,7 +2167,7 @@ void esp_data_parser(char *cmdRxBuf, int len)
 	{
 		loop_again = 0;
 		
-		/* 1. ²éÕÒÖ¡Í·*/
+		/* 1. ï¿½ï¿½ï¿½ï¿½Ö¡Í·*/
 		if(esp_msg_index != 0)
 		{
 			
@@ -2187,7 +2184,7 @@ void esp_data_parser(char *cmdRxBuf, int len)
 				
 			if(tail_pos == -1)
 			{
-				//Ã»ÓÐÖ¡Î²
+				//Ã»ï¿½ï¿½Ö¡Î²
 				if(esp_msg_index >= sizeof(esp_msg_buf))
 				{
 					memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
@@ -2202,12 +2199,12 @@ void esp_data_parser(char *cmdRxBuf, int len)
 			head_pos = charAtArray((uint8_t const *)&cmdRxBuf[len - leftLen], leftLen, ESP_PROTOC_HEAD);
 			if(head_pos == -1)
 			{
-				//Ã»ÓÐÖ¡Í·
+				//Ã»ï¿½ï¿½Ö¡Í·
 				return;
 			}
 			else
 			{
-				//ÏÈ»º´æµ½buf	
+				//ï¿½È»ï¿½ï¿½æµ½buf	
 				memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
 				memcpy(esp_msg_buf, &cmdRxBuf[len - leftLen + head_pos], leftLen - head_pos);
 
@@ -2221,7 +2218,7 @@ void esp_data_parser(char *cmdRxBuf, int len)
 				
 				if(tail_pos == -1)
 				{
-					//ÕÒµ½Ö¡Í·£¬Ã»ÓÐÖ¡Î²	
+					//ï¿½Òµï¿½Ö¡Í·ï¿½ï¿½Ã»ï¿½ï¿½Ö¡Î²	
 					if(esp_msg_index >= sizeof(esp_msg_buf))
 					{
 						memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
@@ -2233,13 +2230,13 @@ void esp_data_parser(char *cmdRxBuf, int len)
 			}
 		}
 		
-		/*3. ÕÒµ½ÍêÕûµÄÒ»Ö¡	, ÅÐ¶ÏÊý¾Ý³¤¶È*/
+		/*3. ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö¡	, ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½*/
 		esp_frame.type = esp_msg_buf[1];
 		if((esp_frame.type != ESP_TYPE_NET) && (esp_frame.type != ESP_TYPE_GCODE)
 			 && (esp_frame.type != ESP_TYPE_FILE_FIRST) && (esp_frame.type != ESP_TYPE_FILE_FRAGMENT)
 			 &&(esp_frame.type != ESP_TYPE_WIFI_LIST))
 		{
-			//Êý¾ÝÀàÐÍ²»ÕýÈ·£¬¶ªÆú
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
 			esp_msg_index = 0;
 			return;
@@ -2247,17 +2244,17 @@ void esp_data_parser(char *cmdRxBuf, int len)
 		
 		esp_frame.dataLen = esp_msg_buf[2] + (esp_msg_buf[3] << 8);
 
-		/*Êý¾Ý³¤¶ÈµÄÅÐ¶Ï²»Ò»¶¨·ûºÏµÄ£¬ÔÚÖ¡³¤¶È²»µÈÓÚ¶¨³¤µÄÇé¿öÏÂ*/
+		/*ï¿½ï¿½ï¿½Ý³ï¿½ï¿½Èµï¿½ï¿½Ð¶Ï²ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÄ£ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 		/*if(esp_frame.dataLen > esp_msg_index - 5)
 		{
-			//Êý¾Ý³¤¶È²»ÕýÈ·£¬¶ªÆú
+			//ï¿½ï¿½ï¿½Ý³ï¿½ï¿½È²ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
 			esp_msg_index = 0;
 			return;
 		}*/
 		if(4 + esp_frame.dataLen > sizeof(esp_msg_buf))
 		{
-			//Êý¾Ý³¤¶È²»ÕýÈ·£¬¶ªÆú
+			//ï¿½ï¿½ï¿½Ý³ï¿½ï¿½È²ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
 			esp_msg_index = 0;
 			return;
@@ -2267,14 +2264,14 @@ void esp_data_parser(char *cmdRxBuf, int len)
 		{
 			if(esp_msg_index >= sizeof(esp_msg_buf))
 			{
-				//Ö¡Î²²»ÕýÈ·£¬¶ªÆú
+				//Ö¡Î²ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
 				esp_msg_index = 0;
 			}
 			return;
 		}
 		
-		/*4. °´ÕÕÀàÐÍ·Ö±ð´¦ÀíÊý¾Ý*/		
+		/*4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/		
 		esp_frame.data = &esp_msg_buf[4];
 		switch(esp_frame.type)
 		{
@@ -2302,8 +2299,8 @@ void esp_data_parser(char *cmdRxBuf, int len)
 				break;
 				
 		}
-		/*5. °ÑÒÑ´¦ÀíµÄÊý¾Ý½Øµô*/
-	//	esp_msg_index = 0; //Ä¿Ç°ÊÇ¹Ì¶¨Ö¡³¤¶È£¬²»×öÈßÓà´¦Àí
+		/*5. ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½Øµï¿½*/
+	//	esp_msg_index = 0; //Ä¿Ç°ï¿½Ç¹Ì¶ï¿½Ö¡ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à´¦ï¿½ï¿½
 		esp_msg_index = cut_msg_head(esp_msg_buf, esp_msg_index, esp_frame.dataLen  + 5);
 		if(esp_msg_index > 0)
 		{
@@ -2967,20 +2964,20 @@ static int esp_dma_pre(volatile uint8_t *pBuffer, uint32_t NumByteToRead)
 	{
 		SPI_I2S_SendData(SPI2, 0x12);
 	}*/
-	DMA1_Channel5->CCR &= ~( 1 << 0 ) ;         //¹Ø±ÕDMAÍ¨µÀ5
-	DMA1_Channel5->CMAR = (u32)pBuffer ; //ÉèÖÃDMA´æ´¢Æ÷µØÖ·£¬×¢ÒâMSIZE
+	DMA1_Channel5->CCR &= ~( 1 << 0 ) ;         //ï¿½Ø±ï¿½DMAÍ¨ï¿½ï¿½5
+	DMA1_Channel5->CMAR = (u32)pBuffer ; //ï¿½ï¿½ï¿½ï¿½DMAï¿½æ´¢ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½×¢ï¿½ï¿½MSIZE
 
-	DMA1_Channel5->CNDTR = 0x0000   ;           //´«ÊäÊýÁ¿¼Ä´æÆ÷ÇåÁã
-	DMA1_Channel5->CNDTR = NumByteToRead ;         //´«ÊäÊýÁ¿ÉèÖÃÎªbuffersize¸ö
+	DMA1_Channel5->CNDTR = 0x0000   ;           //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	DMA1_Channel5->CNDTR = NumByteToRead ;         //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªbuffersizeï¿½ï¿½
 
-	DMA1->IFCR = 0xF0000 ;                         //Çå³ýÍ¨µÀ5µÄ±êÖ¾Î»
+	DMA1->IFCR = 0xF0000 ;                         //ï¿½ï¿½ï¿½Í¨ï¿½ï¿½5ï¿½Ä±ï¿½Ö¾Î»
 	
-	DMA1_Channel5->CCR |= 1 << 0 ;              //¿ªÆôDMAÍ¨µÀ5
+	DMA1_Channel5->CCR |= 1 << 0 ;              //ï¿½ï¿½ï¿½ï¿½DMAÍ¨ï¿½ï¿½5
 	
 	//while((DMA1->ISR & (0x200))== 0); //not polling , use interrupt
 #endif	
 
-	hdma_usart1_rx.Instance->CR &= ~( 1 << 0 ) ;         //¹Ø±ÕDMAÍ¨µÀ
+	hdma_usart1_rx.Instance->CR &= ~( 1 << 0 ) ;         //ï¿½Ø±ï¿½DMAÍ¨ï¿½ï¿½
 	hdma_usart1_rx.Instance->NDTR = NumByteToRead;
 	hdma_usart1_rx.Instance->M0AR = (uint32_t)pBuffer;
   
@@ -3918,7 +3915,7 @@ void wifi_init()
 	{
 		//------tan 20171008 modify begin------
 		#if 0
-			/*PD9ÏÈ×÷ÎªÊäÈë£¬Éý¼¶Ê±ºò×÷ÎªÊä³ö*/
+			/*PD9ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½*/
 			
 			RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE );	 
 			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;//
@@ -3926,13 +3923,13 @@ void wifi_init()
 			GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 			GPIO_Init(GPIOD, &GPIO_InitStructure);
 
-			/*PD8×÷ÎªÊä³ö£¬ÓÃÓÚÖ¸Ê¾STM32×¼±¸ºÃ´«ËÍ*/
+			/*PD8ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸Ê¾STM32×¼ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½*/
 			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;//
 			GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;   
 			GPIO_Init(GPIOD, &GPIO_InitStructure);
 		#endif
 		
-		/*PC7×÷ÎªÊä³ö£¬ÓÃÓÚÖ¸Ê¾STM32×¼±¸ºÃ´«ËÍ*/
+		/*PC7ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸Ê¾STM32×¼ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½*/
 		__HAL_RCC_GPIOC_CLK_ENABLE();	 
 		GPIO_InitStruct.Pin = GPIO_Pin_7;//
 		GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -3940,7 +3937,7 @@ void wifi_init()
 		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 		HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 		
-		/*PA8ÏÈ×÷ÎªÊäÈë£¬Éý¼¶Ê±ºò×÷ÎªÊä³ö*/
+		/*PA8ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½*/
 		 #if V1_0_V1_1
 	        #if V1_0_V1_1
 			__HAL_RCC_GPIOA_CLK_ENABLE();	
@@ -4194,7 +4191,7 @@ void mksWifiIrqHandlerUser()
 
         /* clear interrupt */
         __HAL_UART_CLEAR_FLAG(wifi_com, USART_IT_RXNE);
-        /* ½ÓÊÕÍê³É */
+        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     }
 
     /* If overrun condition occurs, clear the ORE flag 
@@ -4217,10 +4214,10 @@ void mksWifiIrqHandlerUser()
 }
 #if 1
 /**-------------------------------------------------------
-  * @º¯ÊýÃû USART1_IRQHandler
-  * @¹¦ÄÜ   ´®¿Ú1ÖÐ¶Ï´¦Àíº¯Êý
-  * @²ÎÊý   ÎÞ
-  * @·µ»ØÖµ ÎÞ
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ USART1_IRQHandler
+  * @ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½1ï¿½Ð¶Ï´ï¿½ï¿½ï¿½ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½Öµ ï¿½ï¿½
 ***------------------------------------------------------*/
 extern "C" void USART1_IRQHandler(void);   //**
 
@@ -4228,14 +4225,14 @@ void USART1_IRQHandler(void)
 {
 	uint16_t temp;
 	
-    /* ¿ªÊ¼ÁÙ½ç×ÊÔ´·ÃÎÊ£¬½ûÖ¹ÖÐ¶Ï */
+    /* ï¿½ï¿½Ê¼ï¿½Ù½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½ */
 	__ASM volatile("cpsid i");
 	if(huart1.Instance->SR & 0x0020)
 	{
-    	/* µ÷ÓÃ¹²ÓÃµÄ´®¿ÚÖÐ¶Ï´¦Àí×Óº¯Êý */
+    	/* ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ÃµÄ´ï¿½ï¿½ï¿½ï¿½Ð¶Ï´ï¿½ï¿½ï¿½ï¿½Óºï¿½ï¿½ï¿½ */
   		if(gCfgItems.wifi_type == ESP_WIFI) 
 			mksWifiIrqHandlerUser();
-    	/* ½áÊøÁÙ½ç×ÊÔ´·ÃÎÊ£¬¿ª·ÅÖÐ¶Ï */
+    	/* ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ */
     
 
 		//return;

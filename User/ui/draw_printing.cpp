@@ -35,7 +35,6 @@ extern volatile uint8_t temper_error_flg;
 
 int8_t curFilePath[30];
 
-int once_flag = 0;
 
 static GUI_HWIN hPrintingWnd;
 static PROGBAR_Handle printingBar;

@@ -108,12 +108,31 @@ extern uint8_t disp_in_file_dir;
 
 extern int upload_result ;
 
-extern uint32_t upload_time ;
-extern uint32_t upload_size;
+
 extern uint8_t gcode_preview_over;
 extern volatile WIFI_STATE wifi_link_state;
 extern WIFI_PARA wifiPara;
 extern uint8_t command_send_flag;
+
+void dialog_print_file() {
+	reset_print_time();
+	start_print_time();
+	if(gCfgItems.breakpoint_reprint_flg == 1) {
+		gCfgItems.breakpoint_z_pos= current_position[Z_AXIS];
+		epr_read_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
+		if(from_flash_pic != 0) {
+			flash_preview_begin = 1;
+		} else {
+			default_preview_flg = 1;
+		}
+	} else {
+		preview_gcode_prehandle(curFileName);
+	}
+	if(gcode_preview_over != 1) {
+		ui_start_print_process();
+	}
+	draw_printing();
+}
 
 static void cbDlgWin(WM_MESSAGE * pMsg) {
 	int8_t sel_item;
@@ -149,34 +168,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 								Clear_dialog();
 								draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
 							} else {
-								reset_print_time();
-								start_print_time();
-								if(gCfgItems.breakpoint_reprint_flg == 1) {
-									gCfgItems.breakpoint_z_pos= current_position[Z_AXIS];
-									epr_read_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
-									if(from_flash_pic != 0) {
-										flash_preview_begin = 1;
-									} else {
-										default_preview_flg = 1;
-									}	
-								} else {
-									preview_gcode_prehandle(curFileName);
-								}
-								draw_printing();
-								if(gcode_preview_over != 1) {
-									if(card.openFile(curFileName, true)) {
-									    feedrate_percentage = 100;
-									    saved_feedrate_percentage = feedrate_percentage;
-									    planner.flow_percentage[0] = 100;
-									    planner.e_factor[0]= planner.flow_percentage[0]*0.01;
-									    if(mksCfg.extruders==2) {
-									    	planner.flow_percentage[1] = 100;
-									    	planner.e_factor[1]= planner.flow_percentage[1]*0.01;
-									    }
-										card.startFileprint();
-										once_flag = 0;
-									}
-								}
+								dialog_print_file();
 							}
 						}
 					} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
@@ -278,32 +270,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 				if(strlen(curFileName)>(100-1)) {
 					draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
 				} else {
-					reset_print_time();
-					start_print_time();
-					if(gCfgItems.breakpoint_reprint_flg == 1) {
-						gCfgItems.breakpoint_z_pos= current_position[Z_AXIS];
-						epr_read_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
-						if(from_flash_pic != 0) {
-							flash_preview_begin = 1;
-						} else {
-							default_preview_flg = 1;
-						}
-					} else {
-						preview_gcode_prehandle(curFileName);
-					}
-					draw_printing();
-					if(card.openFile(curFileName, true)) {
-						feedrate_percentage = 100;
-						saved_feedrate_percentage = feedrate_percentage;
-						planner.flow_percentage[0] = 100;
-                        planner.e_factor[0]= planner.flow_percentage[0]*0.01;
-                        if(mksCfg.extruders==2) {
-                        	planner.flow_percentage[1] = 100;
-                            planner.e_factor[1]= planner.flow_percentage[1]*0.01;
-                        }
-                        card.startFileprint();
-                        once_flag = 0;
-					}
+					dialog_print_file();
 				}
 			}
 		}
@@ -353,17 +320,17 @@ void draw_dialog(uint8_t type)
 			_index = strlen(buf);
 			buf[_index] = ':';
 			_index++;
-			sprintf(&buf[_index], " %.1d KBytes\n", upload_size / 1024);
+			sprintf(&buf[_index], " %.1d KBytes\n", upload_file_info.size / 1024);
 			strcat(buf, DIALOG_UPLOAD_TIME_EN);
 			_index = strlen(buf);
 			buf[_index] = ':';
 			_index++;
-			sprintf(&buf[_index], " %d s\n", upload_time);
+			sprintf(&buf[_index], " %d s\n", upload_file_info.time);
 			strcat(buf, DIALOG_UPLOAD_SPEED_EN);
 			_index = strlen(buf);
 			buf[_index] = ':';
 			_index++;
-			sprintf(&buf[_index], " %d KBytes/s\n", upload_size / upload_time / 1024);
+			sprintf(&buf[_index], " %d KBytes/s\n", upload_file_info.size / upload_file_info.time / 1024);
 			TEXT_SetText(printStopDlgText, buf);
 			BUTTON_SetText(buttonOk, "OK");
 		}

@@ -1321,6 +1321,9 @@
                 <name>$PROJ_DIR$\..\Src\adc.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Src\sh_tools.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Src\bsp_driver_sd.c</name>
             </file>
             <file>

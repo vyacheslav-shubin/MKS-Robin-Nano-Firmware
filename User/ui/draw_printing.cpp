@@ -9,6 +9,7 @@
 #include "text.h"
 #include "draw_operate.h"
 #include "ui_tools.h"
+#include "sh_tools.h"
 #include "pic_manager.h"
 
 #include "draw_ready_print.h"
@@ -67,15 +68,15 @@ uint8_t pause_resum=0;
 extern uint8_t gcode_preview_over;
 
 extern uint8_t from_flash_pic;
-extern volatile uint8_t pause_from_high_level;
-extern volatile uint8_t pause_from_low_level;
 extern uint8_t button_disp_pause_state;
 
 void update_printing_1s(void);
+void update_pause_button(void);
 
 static void cbPrintingWin(WM_MESSAGE * pMsg) {
 
 struct PressEvt *press_event;
+
 switch (pMsg->MsgId)
 {
 	case WM_PAINT:
@@ -90,243 +91,51 @@ switch (pMsg->MsgId)
 		break;
 		
 	case WM_NOTIFY_PARENT:
-		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED)
-		{
-			if(pMsg->hWinSrc == buttonOperat.btnHandle)
-			{
-				if(gcode_preview_over != 1)
-				{
+		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
+			if(pMsg->hWinSrc == buttonOperat.btnHandle) {
+				if(gcode_preview_over != 1) {
 					last_disp_state = PRINTING_UI;
 					clear_printing();
-					if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (gCurFileState.totalSend == 100) )
-					{
+					if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (gCurFileState.totalSend == 100)) {
 						f_close(srcfp);
-
 						reset_file_info();
 						draw_ready_print();
-					}
-					else
-					{
+					} else {
 						draw_operate();
 					}
 				}
-			}
-			else if(pMsg->hWinSrc == buttonPause.btnHandle)
-			{
-				if(gcode_preview_over != 1)
-				{
-					if(mksReprint.mks_printer_state == MKS_WORKING)
-					{
+			} else if(pMsg->hWinSrc == buttonPause.btnHandle) {
+				if(gcode_preview_over != 1) {
+					if(mksReprint.mks_printer_state == MKS_WORKING) {
 						stop_print_time();
-						if(mksCfg.extruders==2)
-						{
+						if(mksCfg.extruders==2) {
 							gCfgItems.curSprayerChoose_bak= active_extruder;
 							gCfgItems.moveSpeed_bak = feedrate_mm_s;
 						}
-      						card.pauseSDPrint();
-      						print_job_timer.pause();
+      					card.pauseSDPrint();
+      					print_job_timer.pause();
 						mksReprint.mks_printer_state = MKS_PAUSING;
- 
-						BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_resume.bin",1);
-						BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-						if(gCfgItems.multiple_language != 0)
-						{
-								BUTTON_SetText(buttonPause.btnHandle, printing_menu.resume);	
-						}						
-					}
-					else if(mksReprint.mks_printer_state == MKS_PAUSED)
-					{
-				   
-		                        	 if(mksCfg.extruders==2)
-			                        {
-			                              if(pause_from_high_level==1)
-			                              {
-			                                if(((MKS_MT_DET1_OP == Bit_SET)&&(gCfgItems.filament_det0_level_flg == 1))
-			                                    ||((MKS_MT_DET2_OP == Bit_SET)&&(gCfgItems.filament_det1_level_flg == 1)))
-			                                	{
-			                                		last_disp_state = PRINTING_UI;
-			                    			  clear_printing();
-			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);  
-			                                	}
-							else	if(((MKS_MT_DET1_OP == Bit_RESET)&&(gCfgItems.filament_det0_level_flg == 0))
-			                                    ||((MKS_MT_DET2_OP == Bit_RESET)&&(gCfgItems.filament_det1_level_flg == 0)))
-			                                	{
-			                                		last_disp_state = PRINTING_UI;
-			                    			  clear_printing();
-			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);  
-			                                	}
-								else
-			                                {
-			                                        pause_from_high_level=0;
-			                                        start_print_time();
-			                                        pause_resum = 1;
-			                                        mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-								BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-								BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-								if(gCfgItems.multiple_language != 0)
-								{
-									BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);	
-								}
-			                                }
-			                                 
-			                              }
-							   else if(pause_from_low_level==1)
-							   {
-							   	if(((MKS_MT_DET1_OP == Bit_SET)&&(gCfgItems.filament_det0_level_flg == 1))
-			                                    ||((MKS_MT_DET2_OP == Bit_SET)&&(gCfgItems.filament_det1_level_flg == 1)))
-							   	{
-							   		last_disp_state = PRINTING_UI;
-			                    			  clear_printing();
-			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS); 
-							   	}
-								else if(((MKS_MT_DET1_OP == Bit_RESET)&&(gCfgItems.filament_det0_level_flg == 0))
-			                                    ||((MKS_MT_DET2_OP == Bit_RESET)&&(gCfgItems.filament_det1_level_flg == 0)))
-							   	{
-							   		last_disp_state = PRINTING_UI;
-			                    			  clear_printing();
-			                    			  draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS); 
-							   	}
-								else
-			                                {
-			                                        pause_from_low_level=0;
-			                                        start_print_time();
-			                                        pause_resum = 1;
-			                                        mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-								BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-								BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-								if(gCfgItems.multiple_language != 0)
-								{
-									BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);	
-								}
-			                                }
-			                                 
-							   }
-			                              else
-			                              {
-			                                    start_print_time();
-			                                    pause_resum = 1;
-			                                    mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-								BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-								BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-								if(gCfgItems.multiple_language != 0)
-								{
-									BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);	
-								}
-			                              }
-			                        }
-		                        	else
-			                        {
-			                            //if(gCfgItems.filament_det0_level_flg == 1)
-			                            //{
-			                                if(pause_from_high_level==1)
-			                                {
-			                                    if(MKS_MT_DET1_OP == Bit_RESET)
-			                                    {
-			                                        pause_from_high_level=0;
-			                                        start_print_time();
-			                                        pause_resum = 1;
-			                                        mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-								   	BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-									BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-									if(gCfgItems.multiple_language != 0)
-									{
-										BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);	
-									}
-			                                    }
-			                                    else
-			                                    {
-					                                     last_disp_state = PRINTING_UI;
-					                    			clear_printing();
-			                    					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);   
-			                                    }
-			                                }
-							     else if(pause_from_low_level==1)
-			                                {
-			                                    if(MKS_MT_DET1_OP == Bit_SET)
-			                                    {
-			                                        pause_from_low_level=0;
-			                                        start_print_time();
-			                                        pause_resum = 1;
-			                                        mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-								   	BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-									BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-									if(gCfgItems.multiple_language != 0)
-									{
-										BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);	
-									}
-			                                    }
-			                                    else
-			                                    {
-					                                     last_disp_state = PRINTING_UI;
-					                    			clear_printing();
-			                    					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);   
-			                                    }
-			                                }
-			                                else
-			                                {
-			                                    start_print_time();
-			                                    pause_resum = 1;
-			                                    mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-							        BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-								BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-								if(gCfgItems.multiple_language != 0)
-								{
-									BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);	
-								}
-			                                }
-			                        }
-					}
-					else if(mksReprint.mks_printer_state == MKS_REPRINTING)
-					{
+
+					} else if(mksReprint.mks_printer_state == MKS_PAUSED) {
+						if (is_filament_fail()) {
+                    		last_disp_state = PRINTING_UI;
+                    		clear_printing();
+                    		draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
+                    		return;
+						} else {
+                    		start_print_time();
+                    		pause_resum = 1;
+                            mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
+						}
+					} else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
 						start_print_time();
 						mksReprint.mks_printer_state = MKS_REPRINTED;
-						BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-						BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_150, 0, 0);
-						if(gCfgItems.multiple_language != 0)
-						{
-							BUTTON_SetText(buttonPause.btnHandle, printing_menu.pause);	
-						}
-					#if tan_mask
-						#ifdef SAVE_FROM_SD
-						if(gCfgItems.pwroff_save_mode != 0)
-						#endif
-						{
-							rePrintProcess();
-						}
-						#ifdef SAVE_FROM_SD
-						else
-						{
-							if((RE_PRINT_STATUS)gCfgItems.rePrintFlag == printer_pwdwn_reprint)
-							{
-								rePrintProcess_pwrdwn();
-							}
-							else
-							{
-								rePrintProcess();
-							}
-						}
-						#endif
-
-						printerStaus = pr_working;
-						start_print_time();
-						MX_I2C1_Init(400000);//�ָ���ӡ�����ٶȸĳ�400k
-						BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_pause.bin",1);
-						#if defined(TFT70)
-						BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct, 48, 21);	
-						#elif defined(TFT35)
-						BUTTON_SetBitmapEx(buttonPause.btnHandle, 0, &bmp_struct_92, 0, 0);	
-						
-						#endif
-					#endif
 					}
+					update_pause_button();
 				}
-			}
-			else if(pMsg->hWinSrc == buttonStop.btnHandle)
-			{	
-				if(gcode_preview_over != 1)
-				{
-					if(mksReprint.mks_printer_state != MKS_IDLE)
-					{
+			} else if(pMsg->hWinSrc == buttonStop.btnHandle) {
+				if(gcode_preview_over != 1) {
+					if(mksReprint.mks_printer_state != MKS_IDLE) {
 						last_disp_state = PRINTING_UI;
 						clear_printing();
 						draw_dialog(DIALOG_TYPE_STOP);
@@ -372,7 +181,6 @@ static void update_pause_button() {
 				|| (mksReprint.mks_printer_state == MKS_PAUSED)) {
 			fn="bmp_resume.bin";
 			tn=printing_menu.resume;
-			BUTTON_SetBmpFileName(buttonPause.btnHandle, "bmp_resume.bin",1);
 		} else {
 			fn="bmp_pause.bin";
 			tn=printing_menu.pause;

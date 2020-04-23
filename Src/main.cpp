@@ -53,6 +53,7 @@
 #include "Marlin.h"
 #include "Marlin_export.h"
 #include "mks_test.h"
+#include "sh_tools.h"
 #include "mks_reprint.h"
     
 #include "spi_flash.h"
@@ -466,21 +467,10 @@ uint32_t poweroff_det_low_cnt;
 uint8_t poweroff_det_high_flg;
 uint32_t poweroff_det_high_cnt;
 
-uint8_t filament_det1_flg;
-uint32_t filament_det1_cnt;
-uint8_t filament_det1_low_flg;
-uint32_t filament_det1_low_cnt;
-uint8_t filament_det1_high_flg;
-uint32_t filament_det1_high_cnt;
-uint8_t filament_det1_check;
 
-uint8_t filament_det2_flg;
-uint32_t filament_det2_cnt;
-uint8_t filament_det2_low_flg;
-uint32_t filament_det2_low_cnt;
-uint8_t filament_det2_high_flg;
-uint32_t filament_det2_high_cnt;
-uint8_t filament_det2_check;
+uint32_t filament_fail_flag;
+uint32_t filament_fail_cnt = 0;
+
 
 volatile unsigned long BeeperFreq=0;
 volatile unsigned char BeeperCnt=0;
@@ -750,6 +740,34 @@ void PowerOff_Filament_Check()
 			}
 		}
 	}
+
+	if ((mksReprint.mks_printer_state == MKS_WORKING) && is_filament_fail()) {
+
+		filament_fail_flag = 1;
+
+		if (filament_fail_cnt >= 1000) {
+			clear_cur_ui();
+			stop_print_time();
+			card.pauseSDPrint();
+			print_job_timer.pause();
+			mksReprint.mks_printer_state = MKS_PAUSING;
+
+			if(from_flash_pic==1)
+				flash_preview_begin = 1;
+			else
+				default_preview_flg = 1;
+
+			draw_printing();
+			mksBpAlrmEn = 1;
+			delaycnt = 0;
+		}
+
+	} else {
+		filament_fail_flag = 0;
+		filament_fail_cnt = 0;
+	}
+
+#if 0
 	//���ϼ��2
 	if((mksCfg.extruders == 2)&&(mksReprint.mks_printer_state == MKS_WORKING)&&(gCfgItems.mask_det_Function!=1))//��ӡ���������ͣ����
 	{
@@ -793,10 +811,10 @@ void PowerOff_Filament_Check()
       					card.pauseSDPrint();
       					print_job_timer.pause();
 						mksReprint.mks_printer_state = MKS_PAUSING;
-                        
+
                         pause_from_high_level=1;
 
-						
+
 						#if defined(TFT35)
 						if(from_flash_pic==1)
 							flash_preview_begin = 1;
@@ -841,7 +859,7 @@ void PowerOff_Filament_Check()
 						mksReprint.mks_printer_state = MKS_PAUSING;
 
 						pause_from_low_level=1;
-                        
+
                         			#if defined(TFT35)
 						if(from_flash_pic==1)
 							flash_preview_begin = 1;
@@ -909,10 +927,10 @@ void PowerOff_Filament_Check()
       					card.pauseSDPrint();
       					print_job_timer.pause();
 						mksReprint.mks_printer_state = MKS_PAUSING;
-                        
+
                         pause_from_high_level=1;
 
-                        
+
                         			#if defined(TFT35)
 						if(from_flash_pic==1)
 							flash_preview_begin = 1;
@@ -980,6 +998,7 @@ void PowerOff_Filament_Check()
 			}
 		}
 	}
+#endif
 }
 #if 0
 /** System Clock Configuration

@@ -10,10 +10,10 @@
 
 
 
-#define MIN_FILE_PRINTED	 100 //5000	// ÎÄ¼şÖÁÉÙ¶ÁÈ¡ MIN_FILE_PRINTED bytes ºó£¬²Å±£´æĞø´òÊı¾İ
+#define MIN_FILE_PRINTED	 100 //5000	// ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½È¡ MIN_FILE_PRINTED bytes ï¿½ó£¬²Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
-#define MKS_RETROVERSION  -2.0		// ÔİÍ£Ê± ¼·³öÍ· »Ø³é MKS_RETROVERSION mm
+#define MKS_RETROVERSION  -2.0		// ï¿½ï¿½Í£Ê± ï¿½ï¿½ï¿½ï¿½Í· ï¿½Ø³ï¿½ MKS_RETROVERSION mm
 
 #define TIMER_START 1
 #define TIMER_STOP 0
@@ -21,21 +21,23 @@
 typedef enum
 {
 	MKS_RESUME_IDLE	= 0,
-	MKS_RESUME_PAUSE,		// ÔİÍ£Ğø´ò(¶Ïµã)
-	MKS_RESUME_PWDWN,		// ¶ÏµçĞø´ò(¶Ï²ã)
+	MKS_RESUME_PAUSE,		// ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½(ï¿½Ïµï¿½)
+	MKS_RESUME_PWDWN,		// ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Ï²ï¿½)
 	
 } MKS_RESUME_STATE;
 
 typedef enum
 {
-	MKS_IDLE=0xa6,	// ¿ÕÏĞ
-	MKS_WORKING,	// ´òÓ¡
-	MKS_RESUMING,//»Ö¸´ÖĞ
-	MKS_PAUSING,	// ÔİÍ£ÖĞ	--½ÓÊÕµ½ÁËÔİÍ£Ö¸Áî£¬µ«ÊÇ´òÓ¡Í·»¹Î´Í£Ö¹ÒÆ¶¯
-	MKS_PAUSED,		// ÔİÍ£	 	--´òÓ¡Í·ÒÑ¾­Í£Ö¹ÒÆ¶¯
-	MKS_REPRINTING,	// Ğø´òÖĞ	--¼ì²âµ½ÁËĞèÒªĞø´ò£¬µ«ÊÇÓÃ»§»¹Ã»ÓĞ°´È·¶¨
-	MKS_REPRINTED,	// Ğø´ò	 	--ÓÃ»§ È·¶¨ ÁËĞø´ò
-	MKS_STOP,//Í£Ö¹´òÓ¡
+	MKS_IDLE=0xa6,	// ï¿½ï¿½ï¿½ï¿½
+	MKS_WORKING,	// ï¿½ï¿½Ó¡
+	MKS_RESUMING,	// ï¿½Ö¸ï¿½ï¿½ï¿½
+	MKS_PAUSING,	// ï¿½ï¿½Í£ï¿½ï¿½	--ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½Í£Ö¸ï¿½î£¬ï¿½ï¿½ï¿½Ç´ï¿½Ó¡Í·ï¿½ï¿½Î´Í£Ö¹ï¿½Æ¶ï¿½
+	MKS_PAUSED,		// ï¿½ï¿½Í£	 	--ï¿½ï¿½Ó¡Í·ï¿½Ñ¾ï¿½Í£Ö¹ï¿½Æ¶ï¿½
+	//ĞĞ° ĞºĞ¾Ğ¹ Ğ¾Ğ½Ğ¾ Ğ»ÑĞ´?
+	MKS_REPRINTING,	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	--ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ò£¬µï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ã»ï¿½Ğ°ï¿½È·ï¿½ï¿½
+	MKS_REPRINTED,	// ï¿½ï¿½ï¿½ï¿½	 	--ï¿½Ã»ï¿½ È·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+	MKS_STOP,//Í£Ö¹ï¿½ï¿½Ó¡
 } MKS_PRINTER_STATE;
 
 
@@ -44,19 +46,19 @@ typedef struct
 {
 	char dirname[20];
 	char filename[100];
-	float mks_pausePrint_x;	//ÔİÍ£Î»ÖÃÉè¶¨
+	float mks_pausePrint_x;	//ï¿½ï¿½Í£Î»ï¿½ï¿½ï¿½è¶¨
 	float mks_pausePrint_y;
 	float mks_pausePrint_z;
-	float mks_pausePrint_e;	//¼·³ö²¹³¥Á¿
+	float mks_pausePrint_e;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	long  waitEndMoves;	
 	float current_position[4];
 	float destination[4];
 	MKS_PRINTER_STATE mks_printer_state;	
 
-	uint32_t sdpos;		//Ğø´òÎÄ¼şsdpos
+	uint32_t sdpos;		//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½sdpos
 	uint32_t sdpos_bak;
 	uint32_t sdpos_from_epr;
-	uint32_t pftpos;	//mks_pft.sysÎÄ¼şsdpos
+	uint32_t pftpos;	//mks_pft.sysï¿½Ä¼ï¿½sdpos
 	bool refresh;
 
 	uint16_t target_temperature_0;

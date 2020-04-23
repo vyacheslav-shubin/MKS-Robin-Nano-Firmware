@@ -1,6 +1,7 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
+#include "sh_tools.h"
 #include "draw_pause_ui.h"
 #include "draw_ui.h"
 #include "fontLib.h"
@@ -31,7 +32,7 @@ extern volatile uint8_t pause_from_low_level;
 static GUI_HWIN hPauseWnd;
 extern  uint8_t pause_resum;
 
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 extern uint8_t from_flash_pic;
 
 extern uint8_t  Get_Temperature_Flg;
@@ -67,113 +68,27 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
 			break;
 			
 		case WM_NOTIFY_PARENT:
-			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED)
-			{
-				if(pMsg->hWinSrc == buttonStop.btnHandle)
-				{
+			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
+				if(pMsg->hWinSrc == buttonStop.btnHandle) {
 					last_disp_state = PAUSE_UI;
 					Clear_pause();
-				
 					draw_dialog(DIALOG_TYPE_STOP);
 					
-				}
-				else if(pMsg->hWinSrc == buttonRecover.btnHandle)
-				{
-				    if(mksReprint.mks_printer_state == MKS_PAUSED)
-                    {  
-					    //¶ÏÁÏ¼ì²âÎª¸ßµçÆ½´¥·¢Ê±£¬Ö»ÓÐÔÚ×°ÉÏÁÏ£¬
-					    //¼ì²â¹Ü½ÅÎªµÍµçÆ½Ê±£¬°´»Ö¸´°´Å¥²ÅÓÐÐ§¡£
-                        if(mksCfg.extruders==2)
-                        {
-                           if((gCfgItems.filament_det0_level_flg == 1)||(gCfgItems.filament_det1_level_flg == 1))
-                           {
-                              if(pause_from_high_level==1)
-                              {
-                                if(((MKS_MT_DET1_OP == Bit_RESET)&&(gCfgItems.filament_det0_level_flg == 1))
-                                    ||((MKS_MT_DET2_OP == Bit_RESET)&&(gCfgItems.filament_det1_level_flg == 1)))
-                                {
-                                        pause_from_high_level=0;
-                                        start_print_time();
-                                        pause_resum = 1;
-                                        mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-                                        last_disp_state = PAUSE_UI;
-                                        Clear_pause();
-                                        draw_operate();   
-                                }
-                                else
-                                {
-                                        last_disp_state = PAUSE_UI;
-                    					Clear_pause();
-                    					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);    
-                                }
-                              }
-                              else
-                              {
-                                    start_print_time();
-                                    pause_resum = 1;
-                                    mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-                                    last_disp_state = PAUSE_UI;
-                                    Clear_pause();
-                                    draw_operate();
-                              }
-                           }
-                           else
-                           {
-                                start_print_time();
-                                pause_resum = 1;
-                                mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-                                last_disp_state = PAUSE_UI;
-                                Clear_pause();
-                                draw_operate();   
-                           }
-                        }
-                        else
-                        {
-                            if(gCfgItems.filament_det0_level_flg == 1)
-                            {
-                                if(pause_from_high_level==1)
-                                {
-                                    if(MKS_MT_DET1_OP == Bit_RESET)
-                                    {
-                                        pause_from_high_level=0;
-                                        start_print_time();
-                                        pause_resum = 1;
-                                        mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-                                        last_disp_state = PAUSE_UI;
-                                        Clear_pause();
-                                        draw_operate();   
-                                    }
-                                    else
-                                    {
-                                        last_disp_state = PAUSE_UI;
-                    					Clear_pause();
-                    					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);   
-                                    }
-                                }
-                                else
-                                {
-                                    start_print_time();
-                                    pause_resum = 1;
-                                    mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-                                    last_disp_state = PAUSE_UI;
-                                    Clear_pause();
-                                    draw_operate();   
-                                }
-                            }
-                           else
-                           {
-                                start_print_time();
-                                pause_resum = 1;
-                                mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-                                last_disp_state = PAUSE_UI;
-                                Clear_pause();
-                                draw_operate();   
-                           }                            
-                        }
-                        
-                    }
-                    else if(mksReprint.mks_printer_state == MKS_REPRINTING)
-                    {
+				} else if(pMsg->hWinSrc == buttonRecover.btnHandle) {
+				    if(mksReprint.mks_printer_state == MKS_PAUSED) {
+				    	if (is_filament_fail()) {
+                            last_disp_state = PAUSE_UI;
+        					Clear_pause();
+        					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
+				    	} else {
+                            start_print_time();
+                            pause_resum = 1;
+                            mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
+                            last_disp_state = PAUSE_UI;
+                            Clear_pause();
+                            draw_operate();
+				    	}
+				    } else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
 						start_print_time();
 						mksReprint.mks_printer_state = MKS_REPRINTED;
                         last_disp_state = PAUSE_UI;
@@ -230,7 +145,7 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
 						#endif
 						printerStaus = pr_working;
 						start_print_time();
-						MX_I2C1_Init(400000);//»Ö¸´´òÓ¡£¬½«ËÙ¶È¸Ä³É400k
+						MX_I2C1_Init(400000);//ï¿½Ö¸ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È¸Ä³ï¿½400k
 					}
 					if(printerStaus == pr_pause)
 					{

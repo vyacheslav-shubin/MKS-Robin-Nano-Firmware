@@ -16213,28 +16213,15 @@ void loop() {
 #if 1
 uint16_t z_high_count;
 
+extern uint8_t filament_fail_flag;
+extern uint32_t filament_fail_cnt;
+
 extern uint8_t poweroff_det_flg;
 extern uint32_t poweroff_det_cnt;
 extern uint8_t poweroff_det_low_flg;
 extern uint32_t poweroff_det_low_cnt;
 extern uint8_t poweroff_det_high_flg;
 extern uint32_t poweroff_det_high_cnt;
-
-extern uint8_t filament_det1_flg;
-extern uint32_t filament_det1_cnt;
-extern uint8_t filament_det1_low_flg;
-extern uint32_t filament_det1_low_cnt;
-extern uint8_t filament_det1_high_flg;
-extern uint32_t filament_det1_high_cnt;
-extern uint8_t filament_det1_check;
-
-extern uint8_t filament_det2_flg;
-extern uint32_t filament_det2_cnt;
-extern uint8_t filament_det2_low_flg;
-extern uint32_t filament_det2_low_cnt;
-extern uint8_t filament_det2_high_flg;
-extern uint32_t filament_det2_high_cnt;
-extern uint8_t filament_det2_check;
 
 uint32_t wifi_loop_cycle = 500;
 extern char wifi_check_time;
@@ -16306,39 +16293,14 @@ void SysTick_Handler_User()
 			z_high_count=1;
 		}
 
+	if (filament_fail_flag)
+		filament_fail_cnt++;
+
 	if(poweroff_det_flg==1)
 	{
 		poweroff_det_cnt++;
 	}
 		
-	if(filament_det1_flg==1)
-	{
-		filament_det1_cnt++;
-	}
-
-	if(filament_det1_low_flg==1)
-	{
-		filament_det1_low_cnt++;
-	}
-
-	if(filament_det1_high_flg==1)
-	{
-		filament_det1_high_cnt++;
-	}
-	if(filament_det2_flg==1)
-	{
-		filament_det2_cnt++;
-	}
-
-	if(filament_det2_low_flg==1)
-	{
-		filament_det2_low_cnt++;
-	}
-
-	if(filament_det2_high_flg==1)
-	{
-		filament_det2_high_cnt++;
-	}
 
 	if(poweroff_det_low_flg==1)
 	{

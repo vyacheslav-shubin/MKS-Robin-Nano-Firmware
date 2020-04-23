@@ -37,28 +37,16 @@ int8_t curFilePath[30];
 
 int once_flag = 0;
 
-//////////FIL *srcfp;
-
-static GUI_HWIN hPrintingWnd, hRetDlgWnd;
+static GUI_HWIN hPrintingWnd;
 static PROGBAR_Handle printingBar;
-static TEXT_Handle printTimeLeft, printSpeed, sprayTem1, sprayTem2, BedTem, fanSpeed;
-static BUTTON_STRUCT button1, button2,button3,button4,button5,buttonE1, buttonE2, buttonFan, buttonBed, buttonOk, buttonCancle, btnRetMainPage;
-static TEXT_Handle printRetDlgText;
+static TEXT_Handle printTimeLeft;
 
-static BUTTON_STRUCT buttonPause,buttonStop,buttonOperat,buttonExt1, buttonExt2, buttonFanstate, buttonBedstate,buttonPrintSpeed,buttonTime,buttonZpos,buttonAutoclose;
-static TEXT_Handle printZposRight,E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp,Printing_speed,Zpos,Autoclose;
+static BUTTON_Handle buttonPause, buttonStop, buttonOperat, buttonExt1, buttonExt2, buttonFanstate, buttonBedstate, buttonTime, buttonZpos;
+static BUTTON_Handle buttonAutoClose;
+static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp,Zpos, textSpeed;
 static CHECKBOX_Handle auto_close;
-///////static FIL curFile;
 
-static FIL curFile;
-extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern GUI_BITMAP bmp_struct;
-
-extern volatile int16_t logo_time;
-//extern PR_STATUS printerStaus;
 extern FILE_PRINT_STATE gCurFileState;
-extern int X_ADD;
-extern int X_INTERVAL;   //**ͼƬ���
 
 uint8_t print_start_flg = 0;
 
@@ -92,7 +80,7 @@ switch (pMsg->MsgId)
 		
 	case WM_NOTIFY_PARENT:
 		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
-			if(pMsg->hWinSrc == buttonOperat.btnHandle) {
+			if(pMsg->hWinSrc == buttonOperat) {
 				if(gcode_preview_over != 1) {
 					last_disp_state = PRINTING_UI;
 					clear_printing();
@@ -104,7 +92,7 @@ switch (pMsg->MsgId)
 						draw_operate();
 					}
 				}
-			} else if(pMsg->hWinSrc == buttonPause.btnHandle) {
+			} else if(pMsg->hWinSrc == buttonPause) {
 				if(gcode_preview_over != 1) {
 					if(mksReprint.mks_printer_state == MKS_WORKING) {
 						stop_print_time();
@@ -133,7 +121,7 @@ switch (pMsg->MsgId)
 					}
 					update_pause_button();
 				}
-			} else if(pMsg->hWinSrc == buttonStop.btnHandle) {
+			} else if(pMsg->hWinSrc == buttonStop) {
 				if(gcode_preview_over != 1) {
 					if(mksReprint.mks_printer_state != MKS_IDLE) {
 						last_disp_state = PRINTING_UI;
@@ -186,9 +174,9 @@ static void update_pause_button() {
 			tn=printing_menu.pause;
 		}
 	}
-	BUTTON_SetBmpFileName(buttonPause.btnHandle, fn, 1);
+	BUTTON_SetBmpFileName(buttonPause, fn, 1);
 	if(gCfgItems.multiple_language != 0)
-		BUTTON_SetText(buttonPause.btnHandle, tn);
+		BUTTON_SetText(buttonPause, tn);
 }
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
@@ -208,24 +196,31 @@ void draw_printing()
 	hPrintingWnd = ui_std_window(cbPrintingWin);
 
 
-	buttonTime.btnHandle = BUTTON_L(0,0,"bmp_time_state.bin");
+	buttonTime = BUTTON_L(0,0,"bmp_time_state.bin");
 	printTimeLeft = TEXT_L(0, 0);
 
-	buttonExt1.btnHandle = BUTTON_L(0, 1, "bmp_ext1_state.bin");
+	buttonExt1 = BUTTON_L(0, 1, "bmp_ext1_state.bin");
 	E1_Temp = TEXT_L(0, 1);
 
 	if (dual_extrude) {
-		buttonExt2.btnHandle = BUTTON_L(1, 1, "bmp_ext2_state.bin");
+		buttonExt2 = BUTTON_L(1, 1, "bmp_ext2_state.bin");
 		E2_Temp = TEXT_L(1, 1);
 	}
-	buttonBedstate.btnHandle = BUTTON_L(0, 2, "bmp_bed_state.bin");
+	buttonBedstate = BUTTON_L(0, 2, "bmp_bed_state.bin");
 	Bed_Temp = TEXT_L(0, 2);
 
-	buttonFanstate.btnHandle = BUTTON_L(1, 2, "bmp_fan_state.bin");
+	buttonFanstate = BUTTON_L(1, 2, "bmp_fan_state.bin");
 	Fan_Pwm = TEXT_L(1, 2);
 
-	buttonZpos.btnHandle = BUTTON_L(1, 0, "bmp_zpos_state.bin");
+	buttonZpos = BUTTON_L(1, 0, "bmp_zpos_state.bin");
 	Zpos = TEXT_L(1, 0);
+
+	buttonAutoClose = BUTTON_CreateEx(COL(1), ROW(3), 90, 40, hPrintingWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+    BUTTON_SetBmpFileName(buttonAutoClose, "bmp_enable.bin",1);
+    BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct90X30,0,5);
+    BUTTON_SetTextAlign(buttonAutoClose, GUI_TA_LEFT|GUI_TA_VCENTER );
+    BUTTON_SetText(buttonAutoClose, machine_menu.high_level);
+
 
 	printingBar = PROGBAR_CreateEx(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd, WM_CF_SHOW, 0, 0);
 	PROGBAR_SetBarColor(printingBar, 0, gCfgItems.printing_bar_color_left);
@@ -234,9 +229,9 @@ void draw_printing()
 	PROGBAR_SetTextColor(printingBar, 1, gCfgItems.printing_bar_text_color_right);
 	PROGBAR_SetFont(printingBar, &FONT_TITLE);
 
-	buttonPause.btnHandle = ui_create_150_80_button(5, 204, hPrintingWnd, 0, 0);
-	buttonStop.btnHandle = ui_create_150_80_button(165,204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
-	buttonOperat.btnHandle = ui_create_150_80_button(325,204, hPrintingWnd, "bmp_operate.bin", printing_menu.option);
+	buttonPause = ui_create_150_80_button(5, 204, hPrintingWnd, 0, 0);
+	buttonStop = ui_create_150_80_button(165,204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
+	buttonOperat = ui_create_150_80_button(325,204, hPrintingWnd, "bmp_operate.bin", printing_menu.option);
 	update_pause_button();
 	update_printing_1s();
 }
@@ -316,6 +311,7 @@ void update_printing_1s(void) {
 	memset(buf, 0, sizeof(buf));
 	sprintf(buf, "%3d", fanSpeeds[0]);
 	ui_set_text_value(Fan_Pwm, buf);
+
 }
 
 void refresh_printing() {

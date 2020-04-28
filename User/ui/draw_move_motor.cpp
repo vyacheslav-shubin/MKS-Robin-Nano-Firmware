@@ -15,7 +15,7 @@
 #endif
 
 
-static BUTTON_STRUCT buttonXI, buttonXD, buttonYI, buttonYD, buttonZI, buttonZD, buttonV,  buttonRet;
+static BUTTON_Handle buttonXI, buttonXD, buttonYI, buttonYD, buttonZI, buttonZD, buttonV,  buttonRet;
 GUI_HWIN hMoveMotorWnd;
 
 void disp_move_dist(void);
@@ -33,7 +33,7 @@ const struct move_step_info move_steps[STEPS_COUNT] = {
 		{0.1,"bmp_step_move0_1.bin"},
 		{1,"bmp_step_move1.bin"},
 		{10, "bmp_step_move10.bin"},
-		{50, "bmp_step_move10.bin"}
+		{50, "bmp_step_move50.bin"}
 };
 
 static void move_motor_exec(int direction, char* axe) {
@@ -56,24 +56,24 @@ static void cbMoveMotorWin(WM_MESSAGE * pMsg) {
 
 		case WM_NOTIFY_PARENT:
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
-				if(pMsg->hWinSrc == buttonXI.btnHandle) {
+				if(pMsg->hWinSrc == buttonXI) {
 					move_motor_exec(1, "X");
-				} else if(pMsg->hWinSrc == buttonXD.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonXD) {
 					move_motor_exec(-1, "X");
-				} else if(pMsg->hWinSrc == buttonYI.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonYI) {
 					move_motor_exec(1, "Y");
-				} else if(pMsg->hWinSrc == buttonYD.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonYD) {
 					move_motor_exec(-1, "Y");
-				} else if(pMsg->hWinSrc == buttonZI.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonZI) {
 					move_motor_exec(1, "Z");
-				} else if(pMsg->hWinSrc == buttonZD.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonZD) {
 					move_motor_exec(-1, "Z");
-				} else if(pMsg->hWinSrc == buttonRet.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonRet) {
 					feedrate_mm_s = gCfgItems.moveSpeed_bak;
 					last_disp_state = MOVE_MOTOR_UI;
 					clear_move_motor();
 					draw_return_ui();
-				} else if(pMsg->hWinSrc == buttonV.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonV) {
 					move_step_index++;
 					if (move_step_index>=STEPS_COUNT)
 						move_step_index = 0;
@@ -98,27 +98,27 @@ void draw_move_motor() {
 
 	hMoveMotorWnd = ui_std_window(cbMoveMotorWin);
 
-	buttonXI.btnHandle = ui_std_button(0, 0, hMoveMotorWnd, "bmp_xAdd.bin", move_menu.x_add);
-	buttonYI.btnHandle = ui_std_button(1, 0, hMoveMotorWnd, "bmp_yAdd.bin", move_menu.y_add);
-	buttonZI.btnHandle = ui_std_button(2, 0, hMoveMotorWnd, "bmp_zAdd.bin", move_menu.z_add);
+	buttonXI = ui_std_button(0, 0, hMoveMotorWnd, "bmp_xAdd.bin", move_menu.x_add);
+	buttonYI = ui_std_button(1, 0, hMoveMotorWnd, "bmp_yAdd.bin", move_menu.y_add);
+	buttonZI = ui_std_button(2, 0, hMoveMotorWnd, "bmp_zAdd.bin", move_menu.z_add);
 	
-	buttonXD.btnHandle = ui_std_button(0, 1, hMoveMotorWnd, "bmp_xDec.bin", move_menu.x_dec);
-	buttonYD.btnHandle = ui_std_button(1, 1, hMoveMotorWnd, "bmp_yDec.bin", move_menu.y_dec);
-	buttonZD.btnHandle = ui_std_button(2, 1, hMoveMotorWnd, "bmp_zDec.bin", move_menu.z_dec);
+	buttonXD = ui_std_button(0, 1, hMoveMotorWnd, "bmp_xDec.bin", move_menu.x_dec);
+	buttonYD = ui_std_button(1, 1, hMoveMotorWnd, "bmp_yDec.bin", move_menu.y_dec);
+	buttonZD = ui_std_button(2, 1, hMoveMotorWnd, "bmp_zDec.bin", move_menu.z_dec);
 
-	buttonV.btnHandle = ui_std_button(3, 0, hMoveMotorWnd, 0, 0);
-	buttonRet.btnHandle = ui_std_button_return(hMoveMotorWnd);
+	buttonV = ui_std_button(3, 0, hMoveMotorWnd, 0, 0);
+	buttonRet = ui_std_button_return(hMoveMotorWnd);
 
 	disp_move_dist();
 }
 
 void disp_move_dist() {
 	char buf[30] = {0};
-	BUTTON_SetBmpFileName(buttonV.btnHandle, move_steps[move_step_index].pic ,1);
+	BUTTON_SetBmpFileName(buttonV, move_steps[move_step_index].pic ,1);
 	if(gCfgItems.multiple_language != 0)
 	{
-		sprintf(buf, "%f mm", move_steps[move_step_index].step);
-		BUTTON_SetText(buttonV.btnHandle,buf);
+		sprintf(buf, "%3.1f mm", move_steps[move_step_index].step);
+		BUTTON_SetText(buttonV,buf);
 	}	
 }
 

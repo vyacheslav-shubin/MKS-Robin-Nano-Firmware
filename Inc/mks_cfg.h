@@ -546,6 +546,7 @@ typedef struct {
 		volatile int16_t moveSpeed; //�ƶ��ٶ�
 		volatile int8_t extruSpeed_bak; //�����ٶ�
 		volatile int16_t moveSpeed_bak; //�ƶ��ٶ�		
+		volatile float move_dist;
 		volatile int8_t language; //����
 		volatile int8_t baud; 	//������
 		

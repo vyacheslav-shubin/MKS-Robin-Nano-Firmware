@@ -222,11 +222,13 @@ void mkstft_ui_init()
 		gCfgItems.fileSysType = FILE_SYS_SD;
 		gCfgItems.stepHeat = 10;
 		gCfgItems.curSprayerChoose = 0;
+		//gCfgItems.move_dist = 1;
 		gCfgItems.moveSpeed = 3000;
 		gCfgItems.extruSpeed = 1;
 		gCfgItems.extruStep = 5;
 		gCfgItems.stepPrintSpeed = 5;
 		gCfgItems.printSpeed = 100;
+
 		gCfgItems.printExtSpeed0 = 100;
 
 		gCfgItems.leveling_mode = 0;

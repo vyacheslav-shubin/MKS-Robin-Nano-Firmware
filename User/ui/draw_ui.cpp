@@ -374,7 +374,7 @@ void clear_cur_ui() {
 		case PRINT_READY_UI:	Clear_ready_print(); 	break;
 		case PRINT_FILE_UI:		Clear_print_file(); 	break;
 		case PRINTING_UI:		clear_printing(); 		break;
-		case MOVE_MOTOR_UI:		Clear_move_motor(); 	break;
+		case MOVE_MOTOR_UI:		clear_move_motor(); 	break;
 		case OPERATE_UI:		Clear_operate();		break;
 		case PAUSE_UI:			Clear_pause();			break;
 		case EXTRUSION_UI:		Clear_extrusion();		break;

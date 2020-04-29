@@ -202,6 +202,8 @@ GUI_BITMAP bmp_struct_150 = {
   NULL  /* Pointer to palette */
  ,GUI_DRAW_BMPM565
 };
+
+
 GUI_BITMAP bmp_struct_117x25 = {
   50,
   50,

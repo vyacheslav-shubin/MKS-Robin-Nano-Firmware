@@ -22,7 +22,7 @@ GUI_HWIN hMoveBabyStepWnd;
 
 
 
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 static float babystep_dist=0.01;
 static uint8_t has_adjust_z = 0; 
@@ -232,15 +232,15 @@ void disp_babystep_dist()
 		
 	if((int)(100 *babystep_dist) == 1)
 	{
-		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_step_move0_01.bin",1);
+		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_moveStep1.bin",1);
 	}
 	else if((int)(100*babystep_dist) == 5)
 	{
-		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_step_move0_05.bin",1);
+		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_moveStep2.bin",1);
 	}
 	else if((int)(100*babystep_dist) == 10)
 	{
-		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_step_move0_1.bin",1);
+		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_moveStep3.bin",1);
 	}
 	if(gCfgItems.multiple_language != 0)
 	{

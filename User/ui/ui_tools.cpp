@@ -1,4 +1,5 @@
 #include "ui_tools.h"
+#include "GUI.h"
 #include "draw_ui.h"
 #include "marlin.h"
 #include "planner.h"
@@ -108,6 +109,24 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pF
 		BUTTON_SetText(btn, text);
 	return btn;
 }
+
+GUI_BITMAP bmp_struct_100x80 = { 100, 80, 160, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+
+
+BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 100, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	BUTTON_SetBmpFileName(btn, pFile,1);
+	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);
+	BUTTON_SetBkColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
+	BUTTON_SetTextColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
+	BUTTON_SetTextColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
+	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_100x80, 0, 0);
+	BUTTON_SetTextAlign(btn, GUI_TA_VCENTER | GUI_CUSTOM_POS);
+	if(gCfgItems.multiple_language != 0)
+		BUTTON_SetText(btn, text);
+	return btn;
+}
+
 
 BUTTON_Handle ui_create_state_button_id(int x, int y, WM_HWIN hWinParent, char *pFile, uint32_t id) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, STATE_PIC_X_PIXEL, STATE_PIC_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, id);

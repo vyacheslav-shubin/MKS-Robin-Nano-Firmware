@@ -31,6 +31,8 @@ typedef struct {
 	SUICIDE_CFG	suicide;
 } UI_PRINT_PROCESS;
 
+extern GUI_BITMAP bmp_struct_100x80;
+
 extern UI_PRINT_PROCESS ui_print_process;
 
 extern UPLOAD_INFO upload_file_info;
@@ -54,6 +56,7 @@ extern void ui_initialize_screen_gui(void);
 
 extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
 extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
+extern BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
 extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile);
 extern BUTTON_Handle ui_create_state_button_id(int x, int y, WM_HWIN hWinParent, char *pFile, uint32_t id);
 

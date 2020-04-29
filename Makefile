@@ -173,6 +173,10 @@ make_sd: make_sd_bin mks
 	if [ -d "$(SD_CARD)/robin_nano35_cfg.CUR" ]; then mv $(SD_CARD)/robin_nano35_cfg.CUR $(SD_CARD)/robin_nano35_cfg.txt; fi
 	rm -f /media/shubin/5DB9-A287/ROBIN_NANO35.CUR
 
+sync_pics:
+	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi
+	cp -r -u -v $(PIC_OUTPUT) $(SD_CARD)
+
 
 #picocom --echo --baud 115200 /dev/ttyUSB0
 

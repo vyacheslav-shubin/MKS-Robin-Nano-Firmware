@@ -37,7 +37,7 @@ extern uint8_t command_send_flag;
 
 extern volatile char *codebufpoint;
 extern char cmd_code[201];
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 extern uint32_t choose_ret;
 extern uint8_t disp_in_file_dir;
 	
@@ -356,7 +356,7 @@ void draw_Set()
 	BUTTON_SetBmpFileName(buttonFan.btnHandle, "bmp_fan.bin",1);
 	BUTTON_SetBmpFileName(buttonAbout.btnHandle, "bmp_about.bin",1);
 	//if(gCfgItems.display_style != 0){
-		BUTTON_SetBmpFileName(buttonMachinePara.btnHandle, "bmp_machine_para.bin",1);
+		BUTTON_SetBmpFileName(buttonMachinePara.btnHandle, "bmp_machinePara.bin",1);
 		BUTTON_SetBitmapEx(buttonMachinePara.btnHandle,0,&bmp_struct,BMP_PIC_X,BMP_PIC_Y);
 		if(gCfgItems.multiple_language != 0)
 		{

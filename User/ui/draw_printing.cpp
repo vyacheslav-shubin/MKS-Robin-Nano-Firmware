@@ -154,37 +154,32 @@ void reset_file_info()
 
 static void update_pause_button() {
 	char * fn;
-	char * tn;
 	if(gCfgItems.standby_mode==1 && mksReprint.mks_printer_state == MKS_REPRINTED && button_disp_pause_state==1) {
-		fn="bmp_pause.bin";
-		tn=printing_menu.pause;
+		fn="bmp_pause100.bin";
 	} else {
 		if(
 				(mksReprint.mks_printer_state == MKS_REPRINTING)
 				|| (mksReprint.mks_printer_state == MKS_PAUSING)
 				|| (mksReprint.mks_printer_state == MKS_PAUSED)) {
-			fn="bmp_resume.bin";
-			tn=printing_menu.resume;
+			fn="bmp_resume100.bin";
 		} else {
-			fn="bmp_pause.bin";
-			tn=printing_menu.pause;
+			fn="bmp_pause100.bin";
 		}
 	}
 	BUTTON_SetBmpFileName(buttonPause, fn, 1);
-	if(gCfgItems.multiple_language != 0)
-		BUTTON_SetText(buttonPause, tn);
+	BUTTON_SetBitmapEx(buttonPause, 0, &bmp_struct_100x80, 0, 0);
+
 }
 
 void update_auto_close_button() {
-    BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct90X30,0,5);
-    BUTTON_SetTextAlign(buttonAutoClose, GUI_TA_CENTER|GUI_TA_VCENTER );
+	char * fn;
 	if (ui_print_process.suicide.enabled) {
-	    BUTTON_SetBmpFileName(buttonAutoClose, "bmp_enable.bin",1);
-	    BUTTON_SetText(buttonAutoClose, machine_menu.high_level);
+		fn = "bmp_autoOffEnabled100.bin";
 	} else {
-	    BUTTON_SetBmpFileName(buttonAutoClose, "bmp_disable.bin",1);
-	    BUTTON_SetText(buttonAutoClose, machine_menu.low_level);
+		fn = "bmp_autoOffDisabled100.bin";
 	}
+    BUTTON_SetBmpFileName(buttonAutoClose, fn, 1);
+    BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct_100x80,0,0);
 }
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
@@ -227,15 +222,16 @@ void draw_printing()
 	Zpos = TEXT_L(1, 0);
 
 
-	#define _col(ph_x) (INTERVAL_H + (150+INTERVAL_H)*ph_x)
+	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
 
 	printingBar = ui_create_std_progbar(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd);
 
-	buttonPause = ui_create_150_80_button(_col(0), 204, hPrintingWnd, 0, 0);
-	buttonStop = ui_create_150_80_button(_col(1),204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
-	buttonOperat = ui_create_150_80_button(_col(2),204, hPrintingWnd, "bmp_operate.bin", printing_menu.option);
+	buttonPause = ui_create_100_80_button(_col(0), 204, hPrintingWnd, 0, 0);
+	buttonStop = ui_create_100_80_button(_col(1),204, hPrintingWnd, "bmp_stop100.bin", 0);
+	buttonOperat = ui_create_100_80_button(_col(2),204, hPrintingWnd, "bmp_operate100.bin", 0);
 
-	buttonAutoClose = BUTTON_CreateEx(COL(0), ROW(3), 90, 40, hPrintingWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+	buttonAutoClose = ui_create_100_80_button(_col(3) + 70,204, hPrintingWnd, 0, 0);
+
     update_auto_close_button();
 
 	update_pause_button();

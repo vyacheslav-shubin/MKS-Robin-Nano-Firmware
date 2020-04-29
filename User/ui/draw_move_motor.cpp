@@ -30,10 +30,10 @@ struct move_step_info{
 #define STEPS_COUNT 4
 
 const struct move_step_info move_steps[STEPS_COUNT] = {
-		{0.1,"bmp_step_move0_1.bin"},
-		{1,"bmp_step_move1.bin"},
-		{10, "bmp_step_move10.bin"},
-		{50, "bmp_step_move50.bin"}
+		{0.1,"bmp_moveStep1.bin"},
+		{1,"bmp_moveStep2.bin"},
+		{10, "bmp_moveStep3.bin"},
+		{50, "bmp_moveStepHuge.bin"}
 };
 
 static void move_motor_exec(int direction, char* axe) {

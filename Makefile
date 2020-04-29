@@ -4,7 +4,8 @@ TOOL_PREFIX=arm-none-eabi
 
 #include/c++/7.3.1/arm-none-eabi/thumb/v7-m/bits/c++config.h
 
-EWARM_TOOL=./src-list.pl
+EWARM_TOOL=python ./src-list.py 
+#./src-list.pl
 
 MODULES		= Middlewares Src User Drivers
 BUILD_BASE	= build
@@ -14,10 +15,20 @@ C_SRC		:= $(shell $(EWARM_TOOL) src | grep .c$$)
 CPP_SRC		:= $(shell $(EWARM_TOOL) src | grep .cpp$$)
 ASM_SRC		:= Startup/startup_stm32f103vetx.s
 
+
 ASM_OBJ			:= $(patsubst %.s,$(BUILD_BASE)/%.o,$(ASM_SRC))
 C_OBJ			:= $(patsubst %.c,$(BUILD_BASE)/%.o,$(C_SRC))
 CPP_OBJ			:= $(patsubst %.cpp,$(BUILD_BASE)/%.o,$(CPP_SRC))
-OBJ_LIST_FILE	:=  $(BUILD_BASE)/obj.list
+
+OBJ_LIST_FILE	:= $(BUILD_BASE)/obj.list
+
+PIC_LIST_FILE	:= $(BUILD_BASE)/pic.list
+PIC_INPUT		:= res/ui
+PIC_OUTPUT		:=	$(BUILD_BASE)/mks_pic
+
+PICS		:= $(patsubst $(PIC_INPUT)/%,%,$(shell find $(PIC_INPUT) -name *.png))
+BIN_PICS	:= $(patsubst %.png,$(BUILD_BASE)/mks_pic/bmp_%.bin,$(PICS))
+
 
 LIBS		:= $(shell $(EWARM_TOOL) lib)
 
@@ -49,8 +60,15 @@ COMMON_ARGS = -Os -mcpu=cortex-m3 -mthumb -fsigned-char -fno-move-loop-invariant
 CXX_ARGS = -fabi-version=0 -fno-use-cxa-atexit -fno-threadsafe-statics
 
 
+print_pic_src:
+	echo $(PICS)
+
+print_pic_out:
+	echo $(BIN_PICS)
+
 prepare:
 	mkdir -p $(BUILD_BASE)
+	mkdir -p $(BUILD_BASE)/mks_pic
 	mkdir -p $(PATCH_DIR)
 	ln -s -f ../../Middlewares/GUI/GUI.h $(PATCH_DIR)/gui.h
 	ln -s -f ../../Middlewares/GUI/BUTTON.h $(PATCH_DIR)/button.h
@@ -105,6 +123,11 @@ $1: $2
 	#$(GCC) -fpermissive -ffunction-sections -fdata-sections -std=gnu++14 $2 $(COMMON_ARGS) $(CXX_ARGS) $(DEFINE_OPT) -c $(INCLIDE_OPT) -o $1
 endef
 
+define compile-pics
+$1: $2
+	python pic-build.py $2 $1
+endef
+
 $(FIRMWARE).elf: $(OBJ_LIST_FILE)
 	$(CXX) -Os -o $(FIRMWARE).elf $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ) $(LIBS) -mcpu=cortex-m3 -T"$(LD_SCRIPT)" -Wl,-Map="$(FIRMWARE).map" -Wl,--gc-sections -static  --specs=nano.specs --specs=nosys.specs  -u_printf_float -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	#$(CXX) -o $(FIRMWARE).elf $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ) $(LIBS) -T"$(LD_SCRIPT)" -Wl,-Map="$(FIRMWARE).map" $(COMMON_ARGS)b -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
@@ -115,13 +138,20 @@ $(OBJ_LIST_FILE): $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)
 
 obj: $(OBJ_LIST_FILE)
 
+$(PIC_LIST_FILE): $(BIN_PICS)
+	echo $(BIN_PICS)>$(PIC_LIST_FILE)
+	
+pics: $(PIC_LIST_FILE)
+
+$(foreach src,$(PICS), $(eval $(call compile-pics, $(patsubst %.png, $(PIC_OUTPUT)/bmp_%.bin, $(src)), $(PIC_INPUT)/$(src) )))
+
 $(foreach src,$(ASM_SRC), $(eval $(call compile-asm-objects, $(patsubst %.s, $(BUILD_BASE)/%.o, $(src)), $(src) )))
 
 $(foreach src,$(C_SRC), $(eval $(call compile-c-objects, $(patsubst %.c, $(BUILD_BASE)/%.o, $(src)), $(src) )))
 
 $(foreach src,$(CPP_SRC), $(eval $(call compile-cpp-objects, $(patsubst %.cpp, $(BUILD_BASE)/%.o, $(src)), $(src) )))
 
-.PHONY: all 
+.PHONY: all prepare
 
 
 clean: remove_all prepare

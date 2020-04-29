@@ -45,7 +45,9 @@ extern void ui_drop_window(WM_HWIN wnd);
 extern void ui_initialize_screen_gui(void);
 
 //with placeholder
-#define ui_std_button(ph_x, ph_y, hwnd, img, title) ui_create_std_button(INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*ph_x,  INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * ph_y, hwnd, img, title)
+#define ui_std_col(ph_x) (INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*ph_x)
+#define ui_std_row(ph_y) (INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * ph_y)
+#define ui_std_button(ph_x, ph_y, hwnd, img, title) ui_create_std_button(ui_std_col(ph_x),  ui_std_row(ph_y), hwnd, img, title)
 #define ui_std_button_return(hwnd) ui_std_button(3, 1, hwnd, "bmp_return.bin", common_menu.text_back)
 #define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cb, 0)
 

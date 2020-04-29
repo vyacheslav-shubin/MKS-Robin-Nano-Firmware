@@ -194,6 +194,7 @@ void update_auto_close_button() {
 
 void draw_printing()
 {
+
 	int dual_extrude;
 	dual_extrude = is_dual_extruders();
 
@@ -225,15 +226,18 @@ void draw_printing()
 	buttonZpos = BUTTON_L(1, 0, "bmp_zpos_state.bin");
 	Zpos = TEXT_L(1, 0);
 
-	buttonAutoClose = BUTTON_CreateEx(COL(1), ROW(3) + 10, 90, 40, hPrintingWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-    update_auto_close_button();
 
+	#define _col(ph_x) (INTERVAL_H + (150+INTERVAL_H)*ph_x)
 
 	printingBar = ui_create_std_progbar(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd);
 
-	buttonPause = ui_create_150_80_button(5, 204, hPrintingWnd, 0, 0);
-	buttonStop = ui_create_150_80_button(165,204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
-	buttonOperat = ui_create_150_80_button(325,204, hPrintingWnd, "bmp_operate.bin", printing_menu.option);
+	buttonPause = ui_create_150_80_button(_col(0), 204, hPrintingWnd, 0, 0);
+	buttonStop = ui_create_150_80_button(_col(1),204, hPrintingWnd, "bmp_stop.bin", printing_menu.stop);
+	buttonOperat = ui_create_150_80_button(_col(2),204, hPrintingWnd, "bmp_operate.bin", printing_menu.option);
+
+	buttonAutoClose = BUTTON_CreateEx(COL(0), ROW(3), 90, 40, hPrintingWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+    update_auto_close_button();
+
 	update_pause_button();
 	update_printing_1s();
 }

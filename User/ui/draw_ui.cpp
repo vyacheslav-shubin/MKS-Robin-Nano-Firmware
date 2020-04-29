@@ -429,7 +429,7 @@ void clear_cur_ui() {
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
 		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
 		case NUMBER_KEY_UI:		Clear_NumberKey();		break;
-		case BABY_STEP_UI:		Clear_babyStep();		break;
+		case BABY_STEP_UI:		clear_babyStep();		break;
 		default:	break;
 	}
 	GUI_Clear();
@@ -665,8 +665,9 @@ void GUI_RefreshPage() {
 				}
 				break;
 					
-		case MOVE_MOTOR_UI:
-			if(mksReprint.mks_printer_state == MKS_IDLE) {
+		case MOVE_MOTOR_UI: refresh_move_motor(); break;
+/*
+		if(mksReprint.mks_printer_state == MKS_IDLE) {
 				if((z_high_count==1)&&(temper_error_flg != 1)) {
 					z_high_count = 0;
 					memset((char *)gCfgItems.move_z_coordinate,' ',sizeof(gCfgItems.move_z_coordinate));
@@ -676,7 +677,7 @@ void GUI_RefreshPage() {
 				}
 			}
 			break;
-
+*/
 		case WIFI_UI:
 			if(wifi_refresh_flg == 1) {
 				disp_wifi_state();
@@ -748,12 +749,7 @@ void GUI_RefreshPage() {
 					break;
 			}
             break;
-		case BABY_STEP_UI:
-			if(temperature_change_frequency == 1) {
-				temperature_change_frequency = 0;
-				disp_z_offset_value();
-			}
-			break;
+		case BABY_STEP_UI: refresh_babyStep();	break;
 	    default:
 	    	break;
 				

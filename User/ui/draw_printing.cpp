@@ -146,10 +146,11 @@ void reset_file_info()
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
 #define ROW_SIZE	40
-#define COL(x) (200 + 5 + ((140+5) * x))
+#define COL(x) (200 + 5 + ((120+5) * x))
 #define COL_T(x) COL(x) + STATE_PIC_X_PIXEL
 #define ROW(y) (SB_OFFSET + (ROW_SIZE*y))
 #define TEXT_L(phx, phy) ui_create_std_text(COL_T(phx), ROW(phy), 80, STATE_PIC_Y_PIXEL, hPrintingWnd, 0)
+#define TEXT_L100(phx, phy) ui_create_std_text(COL_T(phx), ROW(phy), 100, STATE_PIC_Y_PIXEL, hPrintingWnd, 0)
 #define BUTTON_L(phx, phy, file) ui_create_state_button(COL(phx), ROW(phy), hPrintingWnd, file);
 
 static void update_pause_button() {
@@ -219,7 +220,7 @@ void draw_printing()
 	Fan_Pwm = TEXT_L(1, 2);
 
 	buttonZpos = BUTTON_L(1, 0, "bmp_zpos_state.bin");
-	Zpos = TEXT_L(1, 0);
+	Zpos = TEXT_L100(1, 0);
 
 
 	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
@@ -283,6 +284,8 @@ void do_finish_print(void) {
 	draw_dialog(DIALOG_TYPE_FINISH_PRINT);
 }
 
+extern float zprobe_zoffset; // Initialized by settings.load()
+
 void update_printing_1s(void) {
 	char buf[30] = {0};
 	memset(buf, 0, sizeof(buf));
@@ -304,7 +307,11 @@ void update_printing_1s(void) {
 	ui_set_text_value(printTimeLeft, buf);
 
 	memset(buf, 0, sizeof(buf));
-	sprintf(buf,"%.3f",current_position[Z_AXIS]);
+	if (abs(zprobe_zoffset)<0.001) {
+		sprintf(buf,"%.3f",current_position[Z_AXIS]);
+	} else {
+		sprintf(buf,"%.2f/%.2f",current_position[Z_AXIS], zprobe_zoffset);
+	}
 	ui_set_text_value(Zpos, buf);
 
 	memset(buf, 0, sizeof(buf));

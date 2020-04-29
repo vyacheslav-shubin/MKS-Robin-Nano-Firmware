@@ -6,9 +6,8 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
 extern void draw_babyStep();
-extern void disp_babystep_dist();
-extern void Clear_babyStep();
-extern void disp_z_offset_value();
+extern void clear_babyStep();
+extern void refresh_babyStep();
 
 #if defined(__cplusplus)
 }    /* Make sure we have C-declarations in C++ programs */

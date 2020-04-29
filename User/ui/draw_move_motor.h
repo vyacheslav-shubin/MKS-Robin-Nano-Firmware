@@ -7,6 +7,7 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 
 extern void draw_move_motor();
 extern void clear_move_motor();
+extern void refresh_move_motor();
 
 #if defined(__cplusplus)
 }    /* Make sure we have C-declarations in C++ programs */

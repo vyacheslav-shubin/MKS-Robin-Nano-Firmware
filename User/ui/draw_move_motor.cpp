@@ -112,6 +112,25 @@ void draw_move_motor() {
 	disp_move_dist();
 }
 
+
+void update_zyz_offset_value() {
+	char buf[30];
+	memset(buf,0,sizeof(buf));
+	GUI_SetColor(gCfgItems.background_color);
+	GUI_FillRect(200, TITLE_YPOS, LCD_WIDTH, titleHeight);
+	GUI_SetColor(gCfgItems.title_color);
+	sprintf(buf,"X:%1.2f Y:%1.2f Z:%1.2f", current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]);
+	GUI_DispStringAt((const char *)buf,200, TITLE_YPOS);
+}
+
+void refresh_move_motor() {
+	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
+		ui_timing_clear(F_UI_TIMING_HALF_SEC);
+		update_zyz_offset_value();
+	}
+}
+
+
 void disp_move_dist() {
 	char buf[30] = {0};
 	BUTTON_SetBmpFileName(buttonV, move_steps[move_step_index].pic ,1);

@@ -1,267 +1,141 @@
 #include "draw_babyStep.h"
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
+#include "ui_tools.h"
 #include "draw_ui.h"
-#include "fontLib.h"
-//#include "printer.h"
-//#include "gcode.h"
 #include <math.h>
 #include <stdint.h>
 #include "stdint.h"
 #include "Marlin.h"
 #include "mks_reprint.h"
 
-#ifndef GUI_FLASH
-#define GUI_FLASH
-#endif
 
-
-static BUTTON_STRUCT buttonXI, buttonXD, buttonYI, buttonYD, buttonZI, buttonZD, buttonV,  buttonRet;
+static BUTTON_Handle buttonXI, buttonXD, buttonYI, buttonYD, buttonZI, buttonZD, buttonV,  buttonRet;
 GUI_HWIN hMoveBabyStepWnd;
 
+void babystep_update_v_button(void);
+void babystep_update_z_offset_value(void);
 
+struct baby_step_info{
+	float	distance;
+	char*	pic;
+};
 
+#define BABY_STEP_INFO_COUNT 3
 
-extern int X_ADD,X_INTERVAL;   //**ͼƬ���
+const struct baby_step_info baby_step[BABY_STEP_INFO_COUNT] =  {
+		{0.01, "bmp_moveStep1.bin"},
+		{0.05, "bmp_moveStep2.bin"},
+		{0.1, "bmp_moveStep3.bin"}
+};
 
-static float babystep_dist=0.01;
+uint8_t current_info = 0;
 static uint8_t has_adjust_z = 0; 
+
+static void do_babystep(int direction, char* axe) {
+	char baby_buf[30]={0};
+	memset(baby_buf,0,sizeof(baby_buf));
+	sprintf(baby_buf, "M290 %s%.3f", axe,  direction * baby_step[current_info].distance);
+	excute_m290(baby_buf);
+}
 
 static void cbBabyStepMotorWin(WM_MESSAGE * pMsg) {
 	
-	struct PressEvt *press_event;
 	char baby_buf[30]={0};
 
 	switch (pMsg->MsgId) {
-	case WM_PAINT:
-	//GUI_SetBkColor(GUI_BLACK);
-	//	GUI_Clear();
-	//GUI_DispString("window");
-		break;
-	case WM_TOUCH:
-	 	press_event = (struct PressEvt *)pMsg->Data.p;
-		
-		break;
-	case WM_TOUCH_CHILD:
-	  press_event = (struct PressEvt *)pMsg->Data.p;
-		
-	  break;
+		case WM_PAINT:
+		case WM_TOUCH:
+		case WM_TOUCH_CHILD:
+			break;
 
-	case WM_NOTIFY_PARENT:
-		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED)
-		{
-		
-			press_event = (struct PressEvt *)pMsg->Data.p;
-
-			
-			if(pMsg->hWinSrc == buttonXI.btnHandle)
-			{
-				memset(baby_buf,0,sizeof(baby_buf));
-				sprintf(baby_buf, "M290 X%.3f",babystep_dist);
-				excute_m290(baby_buf);
-			}
-			else if(pMsg->hWinSrc == buttonXD.btnHandle)
-			{
-				memset(baby_buf,0,sizeof(baby_buf));
-				sprintf(baby_buf, "M290 X%.3f\n",((float)0-babystep_dist));
-				excute_m290(baby_buf);
-			}
-			else if(pMsg->hWinSrc == buttonYI.btnHandle)
-			{
-				memset(baby_buf,0,sizeof(baby_buf));
-				sprintf(baby_buf, "M290 Y%.3f\n",babystep_dist);
-				excute_m290(baby_buf);
-			}
-			else if(pMsg->hWinSrc == buttonYD.btnHandle)
-			{
-				memset(baby_buf,0,sizeof(baby_buf));
-				sprintf(baby_buf, "M290 Y%.3f\n",((float)0-babystep_dist));
-				excute_m290(baby_buf);
-			}
-			else if(pMsg->hWinSrc == buttonZI.btnHandle)
-			{
-				has_adjust_z = 1;
-				memset(baby_buf,0,sizeof(baby_buf));
-				sprintf(baby_buf, "M290 Z%.3f",babystep_dist);
-				excute_m290(baby_buf);
-			}
-			else if(pMsg->hWinSrc == buttonZD.btnHandle)
-			{
-				has_adjust_z = 1;
-				memset(baby_buf,0,sizeof(baby_buf));
-				sprintf(baby_buf, "M290 Z%.3f",((float)0-babystep_dist));
-				excute_m290(baby_buf);
-				
-			}
-			else if(pMsg->hWinSrc == buttonRet.btnHandle)
-			{
-				 
-				if(has_adjust_z == 1)
-				{
-					excute_m500();
+		case WM_NOTIFY_PARENT:
+			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
+				if(pMsg->hWinSrc == buttonXI) {
+					do_babystep(1, "X");
+				} else if(pMsg->hWinSrc == buttonXD) {
+					do_babystep(-1, "X");
+				} else if(pMsg->hWinSrc == buttonYI) {
+					do_babystep(1, "Y");
+				} else if(pMsg->hWinSrc == buttonYD) {
+					do_babystep(-1, "Y");
+				} else if(pMsg->hWinSrc == buttonZI) {
+					has_adjust_z = 1;
+					do_babystep(1, "Z");
+				} else if(pMsg->hWinSrc == buttonZD) {
+					do_babystep(-1, "Z");
+				} else if(pMsg->hWinSrc == buttonRet) {
+					if(has_adjust_z == 1)
+						excute_m500();
+					has_adjust_z = 0;
+					last_disp_state = BABY_STEP_UI;
+					clear_babyStep();
+					draw_return_ui();
+				} else if(pMsg->hWinSrc == buttonV) {
+					current_info++;
+					if (current_info>=BABY_STEP_INFO_COUNT)
+						current_info = 0;
+					babystep_update_v_button();
 				}
-				has_adjust_z = 0;
-				
-				last_disp_state = BABY_STEP_UI;
-				Clear_babyStep();
-				draw_return_ui();
-								
 			}
-			else if(pMsg->hWinSrc == buttonV.btnHandle)
-			{
-				if(abs((int)(100 * babystep_dist)) == 1)
-				{
-					babystep_dist = 0.05;
-				}
-				else if(abs((int)(100 * babystep_dist)) == 5)
-				{
-					babystep_dist = 0.1;
-				}
-				else 
-				{
-					babystep_dist = 0.01;
-				}
-				
-				disp_babystep_dist();
-				
-			}
-			
-			
-		}
-		break;
-	default:
-	WM_DefaultProc(pMsg);
+			break;
+		default:
+			WM_DefaultProc(pMsg);
 	}
 }
 
 
-void draw_babyStep()
-{
-	
-  	//char buffer_z[15]={0};
-	
-	if(disp_state_stack._disp_state[disp_state_stack._disp_index] != BABY_STEP_UI)
-	{
-		disp_state_stack._disp_index++;
-		disp_state_stack._disp_state[disp_state_stack._disp_index] = BABY_STEP_UI;
-	}
-	disp_state = BABY_STEP_UI;
-	
-	GUI_SetBkColor(gCfgItems.background_color);
-	GUI_SetColor(gCfgItems.title_color);
-	GUI_Clear();
-
+void draw_babyStep() {
+	ui_push_disp_stack(BABY_STEP_UI);
+	ui_clear_screen();
 	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 
-	hMoveBabyStepWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbBabyStepMotorWin, 0);
+	hMoveBabyStepWnd = ui_std_window(cbBabyStepMotorWin);
+	buttonXI = ui_std_button(0, 0, hMoveBabyStepWnd, "bmp_xAdd.bin", move_menu.x_add);
+	buttonYI = ui_std_button(1, 0, hMoveBabyStepWnd, "bmp_yAdd.bin", move_menu.y_add);
+	buttonZI = ui_std_button(2, 0, hMoveBabyStepWnd, "bmp_zAdd.bin", move_menu.z_add);
 
-	buttonXI.btnHandle = BUTTON_CreateEx(INTERVAL_V, 0,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 101);
-	buttonYI.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL+INTERVAL_V*2, 0,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 102);
-	buttonZI.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*2+INTERVAL_V*3,  0,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 103);
+	buttonXD = ui_std_button(0, 1, hMoveBabyStepWnd, "bmp_xDec.bin", move_menu.x_dec);
+	buttonYD = ui_std_button(1, 1, hMoveBabyStepWnd, "bmp_yDec.bin", move_menu.y_dec);
+	buttonZD = ui_std_button(2, 1, hMoveBabyStepWnd, "bmp_zDec.bin", move_menu.z_dec);
 
-	
-	buttonXD.btnHandle = BUTTON_CreateEx(INTERVAL_V,  BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 105);
-	buttonYD.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL+INTERVAL_V*2,  BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 106);
-	buttonZD.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*2+INTERVAL_V*3,  BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 107);
 
-	buttonV.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*3+INTERVAL_V*4,  0,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 108);
-	buttonRet.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*3+INTERVAL_V*4,  BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL, BTN_Y_PIXEL,hMoveBabyStepWnd, BUTTON_CF_SHOW, 0, 109);
+	buttonV = ui_std_button(3, 0, hMoveBabyStepWnd, 0, 0);
+	buttonRet = ui_std_button_return(hMoveBabyStepWnd);
 
-	#if VERSION_WITH_PIC	
-
-	BUTTON_SetBmpFileName(buttonXI.btnHandle, "bmp_xAdd.bin",1);
-	BUTTON_SetBmpFileName(buttonXD.btnHandle, "bmp_xDec.bin",1);
-	BUTTON_SetBmpFileName(buttonYI.btnHandle, "bmp_yAdd.bin",1);
-	BUTTON_SetBmpFileName(buttonYD.btnHandle, "bmp_yDec.bin",1);
-	BUTTON_SetBmpFileName(buttonZI.btnHandle, "bmp_zAdd.bin",1);
-	BUTTON_SetBmpFileName(buttonZD.btnHandle, "bmp_zDec.bin",1);
-	//
-	BUTTON_SetBmpFileName(buttonRet.btnHandle, "bmp_return.bin",1);
-	
-	#endif
-
-	BUTTON_SetBitmapEx(buttonXI.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonXD.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonYI.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonYD.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonZI.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonZD.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonV.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonRet.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	
-	
-
-	if(gCfgItems.multiple_language != 0)
-	{
-		BUTTON_SetText(buttonXI.btnHandle, move_menu.x_add);
-		BUTTON_SetText(buttonXD.btnHandle,move_menu.x_dec);
-		BUTTON_SetText(buttonYI.btnHandle, move_menu.y_add);
-		BUTTON_SetText(buttonYD.btnHandle, move_menu.y_dec);
-		BUTTON_SetText(buttonZI.btnHandle, move_menu.z_add);
-		BUTTON_SetText(buttonZD.btnHandle, move_menu.z_dec);
-	    BUTTON_SetText(buttonRet.btnHandle, common_menu.text_back);
-	}
-	disp_z_offset_value();
-	disp_babystep_dist();
-
-	
-	
-/////	GUI_Exec();
-
-	
+	babystep_update_z_offset_value();
+	babystep_update_v_button();
 }
 
-#if HAS_BED_PROBE
 extern float zprobe_zoffset; // Initialized by settings.load()
-#endif
 
-void disp_z_offset_value()
-{
+void babystep_update_z_offset_value() {
 	char buf[20];
 	memset(buf,0,sizeof(buf));
 	GUI_SetColor(gCfgItems.background_color);
 	GUI_FillRect(290, TITLE_YPOS, LCD_WIDTH, titleHeight);
 	GUI_SetColor(gCfgItems.title_color);
-	sprintf(buf,"offset Z: %6.3f",zprobe_zoffset);
+	sprintf(buf,"offset Z: %6.3f", zprobe_zoffset);
 	GUI_DispStringAt((const char *)buf,290, TITLE_YPOS);
 }
 
-void disp_babystep_dist()
-{
-	//char buf[30] = {0};
-		
-	if((int)(100 *babystep_dist) == 1)
-	{
-		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_moveStep1.bin",1);
-	}
-	else if((int)(100*babystep_dist) == 5)
-	{
-		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_moveStep2.bin",1);
-	}
-	else if((int)(100*babystep_dist) == 10)
-	{
-		BUTTON_SetBmpFileName(buttonV.btnHandle, "bmp_moveStep3.bin",1);
-	}
-	if(gCfgItems.multiple_language != 0)
-	{
-		if((int)(100 * babystep_dist) == 1)
-			BUTTON_SetText(buttonV.btnHandle,move_menu.step_001mm);
-		else if((int)(100 * babystep_dist) == 5)
-			BUTTON_SetText(buttonV.btnHandle,move_menu.step_005mm);
-		else if((int)(100 * babystep_dist) == 10)
-			BUTTON_SetText(buttonV.btnHandle,move_menu.step_01mm);
+void babystep_update_v_button() {
+	BUTTON_SetBmpFileName(buttonV, baby_step[current_info].pic,1);
+	if(gCfgItems.multiple_language != 0) {
+		char buf[20];
+		sprintf(buf,"%1.2f", baby_step[current_info].distance);
+		BUTTON_SetText(buttonV,buf);
 	}	
 }
 
-void Clear_babyStep()
-{
-	GUI_SetBkColor(gCfgItems.background_color);
-	if(WM_IsWindow(hMoveBabyStepWnd))
-	{
-		WM_DeleteWindow(hMoveBabyStepWnd);
-		//GUI_Exec();
+void refresh_babyStep() {
+	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
+		ui_timing_clear(F_UI_TIMING_HALF_SEC);
+		babystep_update_z_offset_value();
 	}
-	
-	//GUI_Clear();
+}
+
+void clear_babyStep() {
+	ui_drop_window(hMoveBabyStepWnd);
 }
 

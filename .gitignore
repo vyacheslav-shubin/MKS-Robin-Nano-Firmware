@@ -3,3 +3,5 @@ EWARM/mksRobinNano/List/*
 EWARM/mksRobinNano/Exe/*
 EWARM/mksRobinNano/Obj/*
 
+/r1.gcode
+/r2.gcode

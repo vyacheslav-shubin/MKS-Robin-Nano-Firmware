@@ -86,23 +86,33 @@ void ui_initialize_screen_gui(void) {
     }
 }
 
-
-BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, BTN_X_PIXEL, BTN_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
-	BUTTON_SetBmpFileName(btn, pFile, 1);
-	BUTTON_SetBitmapEx(btn, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	if(gCfgItems.multiple_language != 0)
-		BUTTON_SetText(btn, text);
-	return btn;
-}
-
-BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 150, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
-	BUTTON_SetBmpFileName(btn, pFile,1);
+void ui_buttonpreset(BUTTON_Handle btn) {
 	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);
 	BUTTON_SetBkColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
 	BUTTON_SetTextColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
 	BUTTON_SetTextColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
+}
+
+BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, BTN_X_PIXEL, BTN_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	ui_update_std_button(btn, pFile, text);
+	return btn;
+}
+
+void ui_update_std_button(BUTTON_Handle btn, char* file, char* title) {
+	ui_buttonpreset(btn);
+	BUTTON_SetBmpFileName(btn, file, 1);
+	BUTTON_SetBitmapEx(btn, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
+	if(gCfgItems.multiple_language != 0)
+		BUTTON_SetText(btn, title);
+}
+
+
+
+BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 150, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	ui_buttonpreset(btn);
+	BUTTON_SetBmpFileName(btn, pFile,1);
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_150, 0, 0);
 	BUTTON_SetTextAlign(btn, GUI_TA_VCENTER | GUI_CUSTOM_POS);
 	if(gCfgItems.multiple_language != 0)
@@ -115,11 +125,8 @@ GUI_BITMAP bmp_struct_100x80 = { 100, 80, 160, 16, (unsigned char *)bmp_public_b
 
 BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 100, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	ui_buttonpreset(btn);
 	BUTTON_SetBmpFileName(btn, pFile,1);
-	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetTextColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_100x80, 0, 0);
 	BUTTON_SetTextAlign(btn, GUI_TA_VCENTER | GUI_CUSTOM_POS);
 	if(gCfgItems.multiple_language != 0)
@@ -134,6 +141,7 @@ BUTTON_Handle ui_create_state_button_id(int x, int y, WM_HWIN hWinParent, char *
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_50, 0, 0);
 	return btn;
 }
+
 
 
 BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile) {
@@ -177,7 +185,6 @@ extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN 
 	PROGBAR_SetFont(bar, &FONT_TITLE);
 	return bar;
 }
-
 
 
 void ui_set_text_value(TEXT_Handle handle, char* val) {

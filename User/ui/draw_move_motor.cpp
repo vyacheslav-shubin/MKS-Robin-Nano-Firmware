@@ -22,14 +22,9 @@ void disp_move_dist(void);
 
 static int move_step_index = 0;
 
-struct move_step_info{
-	float step;
-	char* pic;
-};
-
 #define STEPS_COUNT 4
 
-const struct move_step_info move_steps[STEPS_COUNT] = {
+const STEP_INFO move_steps[STEPS_COUNT] = {
 		{0.1,"bmp_moveStep1.bin"},
 		{1,"bmp_moveStep2.bin"},
 		{10, "bmp_moveStep3.bin"},

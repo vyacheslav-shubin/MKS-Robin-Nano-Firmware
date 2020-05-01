@@ -378,7 +378,7 @@ void clear_cur_ui() {
 		case OPERATE_UI:		Clear_operate();		break;
 		case PAUSE_UI:			Clear_pause();			break;
 		case EXTRUSION_UI:		Clear_extrusion();		break;
-		case PRE_HEAT_UI:		Clear_preHeat();		break;
+		case PRE_HEAT_UI:		clear_preHeat();		break;
 		case CHANGE_SPEED_UI:	Clear_changeSpeed();	break;
 		case FAN_UI:			Clear_fan();			break;
 		case SET_UI:			Clear_Set();			break;
@@ -627,12 +627,7 @@ void GUI_RefreshPage() {
 				disp_sprayer_temp();
 			}
 			break;
-		case PRE_HEAT_UI:
-			if(temperature_change_frequency == 1) {
-				temperature_change_frequency = 0;
-				disp_desire_temp();
-			}
-			break;
+		case PRE_HEAT_UI: refresh_preHeat(); break;
 		case PRINT_READY_UI:
 			if(gCfgItems.display_style == 2) {
 				if(temperature_change_frequency){

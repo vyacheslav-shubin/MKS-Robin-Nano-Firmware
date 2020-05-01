@@ -48,7 +48,8 @@ MKS_FIRMWARE 	:= $(BUILD_BASE)/$(MKS_BIN_FILE)
 
 LD_SCRIPT=MKS_ROBIN.ld
 
-SD_CARD=/media/shubin/5DB9-A287
+#SD_CARD=/media/shubin/5DB9-A287
+SD_CARD=/media/shubin/EF10-90D6
 
 #LD_SCRIPT=STM32F103VETX_FLASH.ld
 
@@ -171,7 +172,8 @@ make_sd: make_sd_bin mks
 	if [ -d "$(SD_CARD)/bak_font" ]; then mv $(SD_CARD)/bak_font  $(SD_CARD)/mks_font; fi
 	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi
 	if [ -d "$(SD_CARD)/robin_nano35_cfg.CUR" ]; then mv $(SD_CARD)/robin_nano35_cfg.CUR $(SD_CARD)/robin_nano35_cfg.txt; fi
-	rm -f /media/shubin/5DB9-A287/ROBIN_NANO35.CUR
+	rm -f $(SD_CARD)/ROBIN_NANO35.CUR
+
 
 sync_pics:
 	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi

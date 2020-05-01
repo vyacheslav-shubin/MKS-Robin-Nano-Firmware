@@ -16,14 +16,9 @@ GUI_HWIN hMoveBabyStepWnd;
 void babystep_update_v_button(void);
 void babystep_update_z_offset_value(void);
 
-struct baby_step_info{
-	float	distance;
-	char*	pic;
-};
-
 #define BABY_STEP_INFO_COUNT 3
 
-const struct baby_step_info baby_step[BABY_STEP_INFO_COUNT] =  {
+const STEP_INFO baby_step[BABY_STEP_INFO_COUNT] =  {
 		{0.01, "bmp_moveStep1.bin"},
 		{0.05, "bmp_moveStep2.bin"},
 		{0.1, "bmp_moveStep3.bin"}
@@ -35,7 +30,7 @@ static uint8_t has_adjust_z = 0;
 static void do_babystep(int direction, char* axe) {
 	char baby_buf[30]={0};
 	memset(baby_buf,0,sizeof(baby_buf));
-	sprintf(baby_buf, "M290 %s%.3f", axe,  direction * baby_step[current_info].distance);
+	sprintf(baby_buf, "M290 %s%.3f", axe,  direction * baby_step[current_info].step);
 	excute_m290(baby_buf);
 }
 
@@ -123,7 +118,7 @@ void babystep_update_v_button() {
 	BUTTON_SetBmpFileName(buttonV, baby_step[current_info].pic,1);
 	if(gCfgItems.multiple_language != 0) {
 		char buf[20];
-		sprintf(buf,"%1.2f", baby_step[current_info].distance);
+		sprintf(buf,"%1.2f", baby_step[current_info].step);
 		BUTTON_SetText(buttonV,buf);
 	}	
 }

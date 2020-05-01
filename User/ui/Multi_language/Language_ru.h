@@ -14,8 +14,8 @@
 
 #define ADD_TEXT_RU			    "добавить"
 #define DEC_TEXT_RU			    "уменьшить"
-#define EXTRUDER_1_TEXT_RU		"экструдер1"
-#define EXTRUDER_2_TEXT_RU		"экструдер2"
+#define EXTRUDER_1_TEXT_RU		"экструдер 1"
+#define EXTRUDER_2_TEXT_RU		"экструдер 2"
 #define HEATBED_TEXT_RU			"стол"
 #define TEXT_1C_RU				"1℃"
 #define TEXT_5C_RU				"5℃"

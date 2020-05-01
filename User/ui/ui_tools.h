@@ -11,6 +11,14 @@
 extern "C" {
 #endif
 
+#define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
+//#define is_dual_extruders() (1)
+
+typedef struct{
+	float step;
+	char* pic;
+} STEP_INFO;
+
 typedef struct {
 	volatile uint32_t time;
 	volatile uint32_t size;
@@ -68,6 +76,7 @@ extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinPa
 extern TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
 extern void ui_set_text_value(TEXT_Handle handle, char* val);
 
+extern void ui_update_std_button(BUTTON_Handle handle, char* file, char* title);
 
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
 

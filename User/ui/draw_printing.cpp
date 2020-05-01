@@ -183,7 +183,6 @@ void update_auto_close_button() {
     BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct_100x80,0,0);
 }
 
-#define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
 
@@ -289,16 +288,16 @@ extern float zprobe_zoffset; // Initialized by settings.load()
 void update_printing_1s(void) {
 	char buf[30] = {0};
 	memset(buf, 0, sizeof(buf));
-	sprintf(buf, printing_menu.temp1, (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
+	sprintf(buf, "%d/%d°", (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
 	ui_set_text_value(E1_Temp, buf);
 	if(is_dual_extruders()){
 		memset(buf,0,sizeof(buf));
-		sprintf(buf, printing_menu.temp2, (int)thermalManager.current_temperature[1], (int)thermalManager.target_temperature[1]);
+		sprintf(buf, "%d/%d°", (int)thermalManager.current_temperature[1], (int)thermalManager.target_temperature[1]);
 		ui_set_text_value(E2_Temp, buf);
 	}
 
 	memset(buf, 0, sizeof(buf));
-	sprintf(buf, printing_menu.bed_temp, (int)thermalManager.current_temperature_bed,  (int)thermalManager.target_temperature_bed);
+	sprintf(buf, "%d/%d°", (int)thermalManager.current_temperature_bed,  (int)thermalManager.target_temperature_bed);
 	ui_set_text_value(Bed_Temp, buf);
 
 

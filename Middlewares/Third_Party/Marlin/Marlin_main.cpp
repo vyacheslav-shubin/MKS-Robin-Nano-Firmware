@@ -292,7 +292,7 @@ volatile uint8_t temper_error_type = 0;
 
 volatile uint8_t mks_heating_busy = 0;
 
-extern void PowerOff_Filament_Check();
+extern void filament_check();
 extern void display_temper_error();
 extern void Close_machine_display();
 
@@ -16147,7 +16147,7 @@ void loop() {
 
 	display_temper_error();
 	
-	PowerOff_Filament_Check();
+	filament_check();
 	
 	MYSERIAL.MoremenuCmd();
 

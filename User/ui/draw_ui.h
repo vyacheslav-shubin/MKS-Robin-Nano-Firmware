@@ -537,8 +537,6 @@ extern void start_print_time();
 extern void stop_print_time();
 extern void reset_print_time();
 
-extern void reset_file_info();
-
 //extern PR_STATUS printerStaus;
 extern void DRAW_LOGO();
 extern int8_t get_printing_rate(FIL *fileHandle);

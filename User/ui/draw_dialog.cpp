@@ -69,7 +69,6 @@ extern volatile unsigned long BeeperFreq;
 extern volatile uint8_t get_temp_flag;
 extern unsigned char SendOneTime;
 //int8_t  gCurDir[100];
-extern FILE_PRINT_STATE gCurFileState ;
 uint8_t Chk_close_machine_flg;
 extern unsigned char breakpoint_homeFlag;
 

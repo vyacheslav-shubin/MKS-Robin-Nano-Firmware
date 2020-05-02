@@ -11,6 +11,10 @@ UPLOAD_INFO upload_file_info = {0, 0};
 
 UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}};
 
+void reset_file_info() {
+	ui_print_process.rate = 0;
+}
+
 void print_time_to_str(PRINT_TIME * pt, char * buf) {
 	sprintf(buf, "%d%d:%d%d:%d%d", pt->hours/10, pt->hours%10, pt->minutes/10, pt->minutes%10,  pt->seconds/10, pt->seconds%10);
 }

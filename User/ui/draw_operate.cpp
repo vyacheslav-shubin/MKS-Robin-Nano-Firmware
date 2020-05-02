@@ -31,7 +31,6 @@ extern float feedrate_mm_s;
 static GUI_HWIN hOperateWnd, hStopDlgWnd;
 
 extern int8_t curFilePath[30];
-extern FILE_PRINT_STATE gCurFileState ;
 extern void reset_tx_fifo();
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
@@ -234,226 +233,6 @@ switch (pMsg->MsgId)
 	}
 }
 
-#if 0
-void draw_operate()
-{
-
-	int i;
-
-	if(disp_state_stack._disp_state[disp_state_stack._disp_index] != OPERATE_UI)
-	{
-		disp_state_stack._disp_index++;
-		disp_state_stack._disp_state[disp_state_stack._disp_index] = OPERATE_UI;
-	}
-	
-	disp_state = OPERATE_UI;
-		
-	GUI_SetBkColor(gCfgItems.background_color);
-	GUI_SetColor(gCfgItems.title_color);
-	GUI_Clear();
-
-	
-	//GUI_UC_SetEncodeNone();
-	//GUI_SetFont(&GUI_FontHZ16);
-	GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
-	//GUI_SetFont(&FONT_TITLE);
-	//GUI_UC_SetEncodeUTF8();
-	
-	hOperateWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbOperateWin, 0);
-
-	buttonTemperature.btnHandle = BUTTON_CreateEx(INTERVAL_V,0,BTN_X_PIXEL, BTN_Y_PIXEL, hOperateWnd, BUTTON_CF_SHOW, 0, 301);
-	buttonFan.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL+INTERVAL_V*2,0,BTN_X_PIXEL, BTN_Y_PIXEL, hOperateWnd, BUTTON_CF_SHOW, 0, 302);
-	buttonFilament.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*2+INTERVAL_V*3,0,BTN_X_PIXEL,BTN_Y_PIXEL, hOperateWnd, BUTTON_CF_SHOW, 0, 303);
-
-	if((mksReprint.mks_printer_state == MKS_PAUSING)||(mksReprint.mks_printer_state == MKS_PAUSED)||(mksReprint.mks_printer_state ==MKS_REPRINTING)||(mksReprint.mks_printer_state ==MKS_REPRINTED))
-	{
-		buttonSpeed.btnHandle = 0;
-		buttonAuto_Off.btnHandle = 0;
-		
-		buttonExtrude.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*3+INTERVAL_V*4,0,BTN_X_PIXEL,BTN_Y_PIXEL,hOperateWnd, BUTTON_CF_SHOW, 0, 106);
-		buttonMove.btnHandle = BUTTON_CreateEx(INTERVAL_V,BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL, BTN_Y_PIXEL,hOperateWnd, BUTTON_CF_SHOW, 0, 106);		
-		buttonMore_printing.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL+INTERVAL_V*2, BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL,BTN_Y_PIXEL,hOperateWnd, BUTTON_CF_SHOW, 0, 302);
-
-		if(gCfgItems.print_finish_close_machine_flg == 1)
-		{
-			buttonAuto_Off.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*2+INTERVAL_V*3,BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL,BTN_Y_PIXEL,hOperateWnd, BUTTON_CF_SHOW, 0, 107);
-		}
-
-	}
-	else //if(mksReprint.mks_printer_state ==MKS_WORKING)
-	{
-			buttonExtrude.btnHandle = 0;
-			buttonMove.btnHandle = 0;
-			
-			buttonSpeed.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*3+INTERVAL_V*4,0,BTN_X_PIXEL, BTN_Y_PIXEL,hOperateWnd, BUTTON_CF_SHOW, 0, 106);
-			buttonMore_printing.btnHandle = BUTTON_CreateEx(INTERVAL_V, BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL, BTN_Y_PIXEL,hOperateWnd, BUTTON_CF_SHOW, 0, 302);
-		
-			if(gCfgItems.print_finish_close_machine_flg == 1)
-			{
-				buttonAuto_Off.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL+INTERVAL_V*2,BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL,BTN_Y_PIXEL,hOperateWnd, BUTTON_CF_SHOW, 0, 302);
-			}
-	}
-
-	
-	buttonRet.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*3+INTERVAL_V*4, BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL, BTN_Y_PIXEL, hOperateWnd, BUTTON_CF_SHOW, 0, 306);
-
-	#if VERSION_WITH_PIC	
-
-	BUTTON_SetBmpFileName(buttonTemperature.btnHandle, "bmp_opt_temp.bin",1);
-	BUTTON_SetBmpFileName(buttonSpeed.btnHandle, "bmp_speed.bin",1);
-	BUTTON_SetBmpFileName(buttonFan.btnHandle, "bmp_fan.bin",1);
-	BUTTON_SetBmpFileName(buttonFilament.btnHandle, "bmp_filament.bin",1);
-	BUTTON_SetBmpFileName(buttonExtrude.btnHandle, "bmp_extrude_opr.bin",1);
-	BUTTON_SetBmpFileName(buttonMove.btnHandle, "bmp_move_opr.bin",1);
-	BUTTON_SetBmpFileName(buttonMore_printing.btnHandle, "bmp_more_opr.bin",1);
-	if(gCfgItems.print_finish_close_machine_flg == 1)
-	{
-		if(IsChooseAutoShutdown == 1)
-		{
-			BUTTON_SetBmpFileName(buttonAuto_Off.btnHandle, "bmp_auto_off.bin",1);
-			BUTTON_SetBkColor(buttonAuto_Off.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_state_sel_color);
-			BUTTON_SetBkColor(buttonAuto_Off.btnHandle,BUTTON_CI_UNPRESSED, gCfgItems.btn_state_sel_color);	
-			BUTTON_SetTextColor(buttonAuto_Off.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_state_sel_textcolor);
-			BUTTON_SetTextColor(buttonAuto_Off.btnHandle,BUTTON_CI_UNPRESSED, gCfgItems.btn_state_sel_textcolor);
-			
-			if(gCfgItems.multiple_language != 0)
-			{	
-				BUTTON_SetText(buttonAuto_Off.btnHandle,operation_menu.auto_off);
-			}
-
-		}
-		else
-		{
-			BUTTON_SetBmpFileName(buttonAuto_Off.btnHandle, "bmp_manual_off.bin",1);
-			BUTTON_SetBkColor(buttonAuto_Off.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_state_color);
-			BUTTON_SetBkColor(buttonAuto_Off.btnHandle,BUTTON_CI_UNPRESSED, gCfgItems.btn_state_color);
-			BUTTON_SetTextColor(buttonAuto_Off.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_state_textcolor);
-			BUTTON_SetTextColor(buttonAuto_Off.btnHandle,BUTTON_CI_UNPRESSED, gCfgItems.btn_state_textcolor);			
-			if(gCfgItems.multiple_language != 0)
-			{	
-				BUTTON_SetText(buttonAuto_Off.btnHandle,operation_menu.manual_off);
-			}			
-		}
-		BUTTON_SetBitmapEx(buttonAuto_Off.btnHandle,0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-
-		
-	}
-	BUTTON_SetBmpFileName(buttonRet.btnHandle, "bmp_return.bin",1);
-	
-	BUTTON_SetBitmapEx(buttonTemperature.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonSpeed.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonFan.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonFilament.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonExtrude.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonMove.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-#if 0
-	if(gCfgItems.print_finish_close_machine_flg == 1)
-	{
-		BUTTON_SetBitmapEx(buttonAuto_Off.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-		BUTTON_SetBitmapEx(buttonMore_printing.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	}
-	else
-#endif
-	{
-		BUTTON_SetBitmapEx(buttonMore_printing.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	}
-	
-	BUTTON_SetBitmapEx(buttonRet.btnHandle, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-
-	BUTTON_SetBkColor(buttonTemperature.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonTemperature.btnHandle,BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonSpeed.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonSpeed.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonFan.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonFan.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonFilament.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonFilament.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetTextColor(buttonTemperature.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonTemperature.btnHandle,BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonSpeed.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonSpeed.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonFan.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonFan.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonFilament.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonFilament.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-
-
-	BUTTON_SetBkColor(buttonMove.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonMove.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetTextColor(buttonMove.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonMove.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-	
-	BUTTON_SetBkColor(buttonExtrude.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonExtrude.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetTextColor(buttonExtrude.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonExtrude.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-
-	BUTTON_SetBkColor(buttonMore_printing.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_color);
-	BUTTON_SetBkColor(buttonMore_printing.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
-	BUTTON_SetTextColor(buttonMore_printing.btnHandle, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
-	BUTTON_SetTextColor(buttonMore_printing.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
-
-
-
-	BUTTON_SetBkColor(buttonRet.btnHandle, BUTTON_CI_PRESSED, gCfgItems.back_btn_color);
-	BUTTON_SetBkColor(buttonRet.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.back_btn_color);
-	BUTTON_SetTextColor(buttonRet.btnHandle, BUTTON_CI_PRESSED, gCfgItems.back_btn_textcolor);
-	BUTTON_SetTextColor(buttonRet.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.back_btn_textcolor);
-
-	if(gCfgItems.multiple_language != 0)
-	{
-		BUTTON_SetText(buttonFan.btnHandle, operation_menu.fan);
-		BUTTON_SetText(buttonFilament.btnHandle, operation_menu.filament);
-		BUTTON_SetText(buttonTemperature.btnHandle, operation_menu.temp);
-		BUTTON_SetText(buttonMore_printing.btnHandle, operation_menu.more);
-		BUTTON_SetText(buttonSpeed.btnHandle, operation_menu.speed);
-		BUTTON_SetText(buttonExtrude.btnHandle, operation_menu.extr);
-		BUTTON_SetText(buttonMove.btnHandle, operation_menu.move);
-		BUTTON_SetText(buttonRet.btnHandle, common_menu.text_back);
-	}
-
-	
-
-	#endif
-#if 0
-	if(gCfgItems.print_finish_close_machine_flg == 1)
-	{
-		Autoshutdown_display();
-	}
-#endif
-#if 0
-	Fill_State_BK = TEXT_CreateEx(LCD_WIDTH  / 4+X_ADD, 0, LCD_WIDTH / 2-X_INTERVAL, imgHeight / 2-X_INTERVAL, hOperateWnd, WM_CF_SHOW, TEXT_CF_LEFT,	GUI_ID_TEXT0, " ");
-	TEXT_SetBkColor(Fill_State_BK, gCfgItems.state_background_color);
-
-	textPrintTemp1 = TEXT_CreateEx(LCD_WIDTH  / 4 + 50, 120, LCD_WIDTH / 4 - 30, 80, hOperateWnd, WM_CF_SHOW, TEXT_CF_LEFT,	GUI_ID_TEXT1, " ");
-
-	textPrintTemp2 = TEXT_CreateEx(LCD_WIDTH  / 2+80 , 120, LCD_WIDTH / 4 - 90, 80, hOperateWnd, WM_CF_SHOW, TEXT_CF_LEFT,	GUI_ID_TEXT2, " ");
-	
-
-	TEXT_SetTextAlign(textPrintTemp1,  GUI_TA_VCENTER | GUI_TA_LEFT);
-	TEXT_SetTextAlign(textPrintTemp2,  GUI_TA_VCENTER | GUI_TA_LEFT);
-	
-	printingBar = PROGBAR_CreateEx(LCD_WIDTH  / 4 + 5, 40,  LCD_WIDTH / 2 - 10, 45, hOperateWnd, WM_CF_SHOW, 0, 0);
-	
-	PROGBAR_SetBarColor(printingBar, 0, GUI_GREEN);
-	
-	PROGBAR_SetTextColor(printingBar, 0, GUI_BLACK);
-	PROGBAR_SetFont(printingBar, &GUI_FontHZ_fontHz18);
-	
-	
-	PROGBAR_SetValue(printingBar, get_printing_rate(srcfp));
-      
-       
-	disp_temp_operate();
-#endif	
-	//GUI_Exec();
-	
-
-
-	
-}
-
-#endif
 
 #if defined(TFT35)
 void draw_operate()
@@ -637,38 +416,7 @@ void draw_operate()
 	
 
 	#endif
-#if 0
-	if(gCfgItems.print_finish_close_machine_flg == 1)
-	{
-		Autoshutdown_display();
-	}
-#endif
-#if 0
-	Fill_State_BK = TEXT_CreateEx(LCD_WIDTH  / 4+X_ADD, 0, LCD_WIDTH / 2-X_INTERVAL, imgHeight / 2-X_INTERVAL, hOperateWnd, WM_CF_SHOW, TEXT_CF_LEFT,	GUI_ID_TEXT0, " ");
-	TEXT_SetBkColor(Fill_State_BK, gCfgItems.state_background_color);
 
-	textPrintTemp1 = TEXT_CreateEx(LCD_WIDTH  / 4 + 50, 120, LCD_WIDTH / 4 - 30, 80, hOperateWnd, WM_CF_SHOW, TEXT_CF_LEFT,	GUI_ID_TEXT1, " ");
-
-	textPrintTemp2 = TEXT_CreateEx(LCD_WIDTH  / 2+80 , 120, LCD_WIDTH / 4 - 90, 80, hOperateWnd, WM_CF_SHOW, TEXT_CF_LEFT,	GUI_ID_TEXT2, " ");
-	
-
-	TEXT_SetTextAlign(textPrintTemp1,  GUI_TA_VCENTER | GUI_TA_LEFT);
-	TEXT_SetTextAlign(textPrintTemp2,  GUI_TA_VCENTER | GUI_TA_LEFT);
-	
-	printingBar = PROGBAR_CreateEx(LCD_WIDTH  / 4 + 5, 40,  LCD_WIDTH / 2 - 10, 45, hOperateWnd, WM_CF_SHOW, 0, 0);
-	
-	PROGBAR_SetBarColor(printingBar, 0, GUI_GREEN);
-	
-	PROGBAR_SetTextColor(printingBar, 0, GUI_BLACK);
-	PROGBAR_SetFont(printingBar, &GUI_FontHZ_fontHz18);
-	
-	
-	PROGBAR_SetValue(printingBar, get_printing_rate(srcfp));
-      
-       
-	disp_temp_operate();
-#endif	
-	//GUI_Exec();
 	
 #endif
 	
@@ -842,20 +590,7 @@ void setProBarRateOpera()
 	}
 	
 }
-/*
-void setProBarRateOpera(int rate)
-{
-	if(rate <= 0)
-		return;
-	gCurFileState.totalSend = rate;
-	
-	if(disp_state == OPERATE_UI)
-	{
-		PROGBAR_SetValue(printingBar, rate );
-	}
-	
-}
-*/
+
 void disp_temp_operate()
 {
 	char buf[50] = {0};

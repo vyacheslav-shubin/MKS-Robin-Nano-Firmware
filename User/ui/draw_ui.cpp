@@ -153,7 +153,6 @@ extern CFG_ITMES gCfgItems;
 
 extern int X_ADD,X_INTERVAL;
 static volatile uint8_t fan_move_flag;
-//extern FILE_PRINT_STATE gCurFileState ;
 extern uint8_t fan_change_flag;
 
 extern uint8_t DialogType;
@@ -581,28 +580,6 @@ void gui_view_init()
 			gCfgItems.touch_adj_yMax = 3776;
 		}
     }
-}
-
-int8_t get_printing_rate(FIL *fileHandle) {
-	int8_t rate;
-	if (
-			(fileHandle == 0)
-		|| (fileHandle->fptr == 0)
-		|| (fileHandle->fsize == 0)
-		|| (fileHandle->fptr > fileHandle->fsize)
-	)
-		return -1;
-	rate = (unsigned char)((float)f_tell(fileHandle)  * 100 / f_size(fileHandle));
-
-
-	if((rate == 100) && (mksReprint.mks_printer_state != MKS_IDLE))	
-		rate = 99;
-
-	if((rate == 99) && (mksReprint.mks_printer_state == MKS_IDLE))	
-		rate = 100;
-	
-	gCurFileState.totalSend = rate;
-	return  rate;
 }
 
 extern uint16_t z_high_count;

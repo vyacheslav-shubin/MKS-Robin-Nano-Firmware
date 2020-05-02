@@ -204,7 +204,6 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
 		}
 }
 
-extern FILE_PRINT_STATE gCurFileState ;
 void draw_pause()
 {
 	int i;
@@ -299,7 +298,6 @@ void draw_pause()
 	PROGBAR_SetTextColor(printingBar, 0, GUI_BLACK);
 	PROGBAR_SetFont(printingBar, &GUI_FontHZ_fontHz14);
 	
-	//PROGBAR_SetValue(printingBar, gCurFileState.totalSend);
 	setProBarRatePause();
     
 	disp_temp_pause();

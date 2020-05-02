@@ -13,8 +13,6 @@
 #include "pic_manager.h"
 
 #include "draw_ready_print.h"
-//#include "others.h"
-//#include "mks_tft_com.h"
 
 #include "draw_print_file.h"
 #include "pic.h"
@@ -27,7 +25,6 @@
 #ifndef GUI_FLASH
 #define GUI_FLASH
 #endif
-extern GUI_CONST_STORAGE GUI_FONT GUI_FontD36x48;
 
 extern FIL *srcfp;
 
@@ -42,10 +39,7 @@ static TEXT_Handle printTimeLeft;
 
 static BUTTON_Handle buttonPause, buttonStop, buttonOperat, buttonExt1, buttonExt2, buttonFanstate, buttonBedstate, buttonTime, buttonZpos;
 static BUTTON_Handle buttonAutoClose;
-static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp,Zpos, textSpeed;
-static CHECKBOX_Handle auto_close;
-
-extern FILE_PRINT_STATE gCurFileState;
+static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp,Zpos;
 
 uint8_t print_start_flg = 0;
 
@@ -62,85 +56,71 @@ void update_pause_button(void);
 void update_auto_close_button(void);
 
 static void cbPrintingWin(WM_MESSAGE * pMsg) {
-
-switch (pMsg->MsgId)
-{
-	case WM_PAINT:
-	case WM_TOUCH:
-	case WM_TOUCH_CHILD:
-		break;
-		
-	case WM_NOTIFY_PARENT:
-		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
-			if(pMsg->hWinSrc == buttonOperat) {
-				if(gcode_preview_over != 1) {
-					last_disp_state = PRINTING_UI;
-					clear_printing();
-					if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (gCurFileState.totalSend == 100)) {
-						f_close(srcfp);
-						reset_file_info();
-						draw_ready_print();
-					} else {
-						draw_operate();
-					}
-				}
-			} else if(pMsg->hWinSrc == buttonPause) {
-				if(gcode_preview_over != 1) {
-					if(mksReprint.mks_printer_state == MKS_WORKING) {
-						stop_print_time();
-						if(mksCfg.extruders==2) {
-							gCfgItems.curSprayerChoose_bak= active_extruder;
-							gCfgItems.moveSpeed_bak = feedrate_mm_s;
-						}
-      					card.pauseSDPrint();
-      					print_job_timer.pause();
-						mksReprint.mks_printer_state = MKS_PAUSING;
-
-					} else if(mksReprint.mks_printer_state == MKS_PAUSED) {
-						if (is_filament_fail()) {
-                    		last_disp_state = PRINTING_UI;
-                    		clear_printing();
-                    		draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
-                    		return;
-						} else {
-                    		start_print_time();
-                    		pause_resum = 1;
-                            mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-						}
-					} else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
-						start_print_time();
-						mksReprint.mks_printer_state = MKS_REPRINTED;
-					}
-					update_pause_button();
-				}
-			} else if(pMsg->hWinSrc == buttonStop) {
-				if(gcode_preview_over != 1) {
-					if(mksReprint.mks_printer_state != MKS_IDLE) {
+	switch (pMsg->MsgId) {
+		case WM_PAINT:
+		case WM_TOUCH:
+		case WM_TOUCH_CHILD:
+			break;
+		case WM_NOTIFY_PARENT:
+			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
+				if(pMsg->hWinSrc == buttonOperat) {
+					if(gcode_preview_over != 1) {
 						last_disp_state = PRINTING_UI;
 						clear_printing();
-						draw_dialog(DIALOG_TYPE_STOP);
+						if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (ui_print_process.rate == 100)) {
+							f_close(srcfp);
+							reset_file_info();
+							draw_ready_print();
+						} else {
+							draw_operate();
+						}
 					}
-				}
-			} else if (pMsg->hWinSrc == buttonAutoClose) {
-				ui_print_process.suicide.enabled = ~ui_print_process.suicide.enabled;
-				update_auto_close_button();
-			}
-		}
-		break;
-		
-	default:
-		WM_DefaultProc(pMsg);
-	}
-}
+				} else if(pMsg->hWinSrc == buttonPause) {
+					if(gcode_preview_over != 1) {
+						if(mksReprint.mks_printer_state == MKS_WORKING) {
+							stop_print_time();
+							if(mksCfg.extruders==2) {
+								gCfgItems.curSprayerChoose_bak= active_extruder;
+								gCfgItems.moveSpeed_bak = feedrate_mm_s;
+							}
+							card.pauseSDPrint();
+							print_job_timer.pause();
+							mksReprint.mks_printer_state = MKS_PAUSING;
 
-void reset_file_info()
-{
-	gCurFileState.fileSize = 0;
-	gCurFileState.totalRead = 0;
-	gCurFileState.totalSend = 0;
-	gCurFileState.bytesHaveRead = 0;
-	gCurFileState.bufPoint = 0;
-	gCurFileState.file_open_flag = 0;
+						} else if(mksReprint.mks_printer_state == MKS_PAUSED) {
+							if (is_filament_fail()) {
+								last_disp_state = PRINTING_UI;
+								clear_printing();
+								draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
+								return;
+							} else {
+								start_print_time();
+								pause_resum = 1;
+								mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
+							}
+						} else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
+							start_print_time();
+							mksReprint.mks_printer_state = MKS_REPRINTED;
+						}
+						update_pause_button();
+					}
+				} else if(pMsg->hWinSrc == buttonStop) {
+					if(gcode_preview_over != 1) {
+						if(mksReprint.mks_printer_state != MKS_IDLE) {
+							last_disp_state = PRINTING_UI;
+							clear_printing();
+							draw_dialog(DIALOG_TYPE_STOP);
+						}
+					}
+				} else if (pMsg->hWinSrc == buttonAutoClose) {
+					ui_print_process.suicide.enabled = ~ui_print_process.suicide.enabled;
+					update_auto_close_button();
+				}
+			}
+			break;
+		default:
+			WM_DefaultProc(pMsg);
+	}
 }
 
 #define PB_HEIGHT	25
@@ -249,7 +229,7 @@ int get_rate(void) {
 		rate_tmp_r =(long long)card.sdpos;
 		rate = (rate_tmp_r-(PREVIEW_SIZE+To_pre_view))* 100 / (card.filesize-(PREVIEW_SIZE+To_pre_view));
 	}
-	gCurFileState.totalSend = rate;
+	ui_print_process.rate = rate;
 	if(rate <= 0)
 		rate = 0;
 	return rate;
@@ -324,9 +304,6 @@ void refresh_printing() {
 		ui_timing_clear(F_UI_TIMING_SEC);
 
 		int rate = get_rate();
-
-		//TODO: убрать отсюда
-		gCurFileState.totalSend = rate;
 
 		if((mksReprint.mks_printer_state == MKS_IDLE) && (rate == 100)) {
 			do_finish_print();

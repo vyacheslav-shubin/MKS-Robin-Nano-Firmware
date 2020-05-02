@@ -1299,13 +1299,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 					//if((printerStaus == pr_working) || (printerStaus == pr_pause))
 					if((mksReprint.mks_printer_state == MKS_WORKING) || (mksReprint.mks_printer_state == MKS_PAUSED)|| (mksReprint.mks_printer_state == MKS_REPRINTING))
 					{
-						print_rate = gCurFileState.totalSend;//get_printing_rate(srcfp);
-						/*
-						if((printerStaus != pr_idle)  &&  (rate == 100))
-						{	
-							rate = 99;
-						}
-						*/
+						print_rate = ui_print_process.rate;
 						memset((char *)tempBuf, 0, sizeof(tempBuf));
 
 						sprintf((char *)tempBuf, "M27 %d\r\n", print_rate);

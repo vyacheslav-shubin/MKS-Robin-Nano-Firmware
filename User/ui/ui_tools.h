@@ -37,11 +37,14 @@ typedef struct {
 typedef struct {
 	uint8_t		once; //printing
 	SUICIDE_CFG	suicide;
+	uint8_t 	rate;
 } UI_PRINT_PROCESS;
 
 extern GUI_BITMAP bmp_struct_100x80;
 
 extern UI_PRINT_PROCESS ui_print_process;
+
+extern void reset_file_info();
 
 extern UPLOAD_INFO upload_file_info;
 

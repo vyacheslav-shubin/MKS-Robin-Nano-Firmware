@@ -37,7 +37,6 @@ char cfg_buf[CFG_BUF_LEN+1];
 char dst_buf[DST_BUF_LEN+1];
 char cmd_code[CMD_CODE_LEN+1];
 
-FILE_PRINT_STATE gCurFileState;
 CFG_PRINTER_ITMES mksCfg;
 TMP_PRINTER_ITMES mksTmp;
 CFG_ITMES gCfgItems;

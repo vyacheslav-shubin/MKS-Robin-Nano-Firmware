@@ -679,21 +679,6 @@ typedef struct {
 
 }CFG_ITMES;
 
-typedef struct   //**
-{
-	FIL curFile;
-	uint32_t fileSize;
-	uint16_t bytesHaveRead;
-	uint32_t totalRead;
-	uint32_t totalSend;
-	//uint8_t Gcode_Buf[GCODE_BUFFER_SIZE];
-	uint16_t bufPoint;
-	uint8_t file_open_flag;
-	
-} FILE_PRINT_STATE;
-
-extern FILE_PRINT_STATE gCurFileState;
-
 extern CFG_PRINTER_ITMES mksCfg;
 extern TMP_PRINTER_ITMES mksTmp;
 extern CFG_ITMES gCfgItems;

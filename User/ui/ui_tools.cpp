@@ -139,17 +139,16 @@ BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pF
 }
 
 
-BUTTON_Handle ui_create_state_button_id(int x, int y, WM_HWIN hWinParent, char *pFile, uint32_t id) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, STATE_PIC_X_PIXEL, STATE_PIC_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, id);
-	BUTTON_SetBmpFileName(btn, pFile,0);
+void ui_update_state_button(BUTTON_Handle btn, char *pFile) {
+	BUTTON_SetBmpFileName(btn, pFile, 0);
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_50, 0, 0);
-	return btn;
 }
 
 
-
 BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile) {
-	return ui_create_state_button_id(x, y, hWinParent, pFile, alloc_win_id());
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, STATE_PIC_X_PIXEL, STATE_PIC_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	ui_update_state_button(btn, pFile);
+	return btn;
 }
 
 

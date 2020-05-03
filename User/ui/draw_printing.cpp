@@ -3,6 +3,8 @@
 #include "PROGBAR.h"
 #include "CHECKBOX.h"
 #include "draw_printing.h"
+#include "draw_pre_heat.h"
+#include "draw_fan.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
@@ -32,7 +34,6 @@ extern volatile uint8_t temper_error_flg;
 
 int8_t curFilePath[30];
 
-
 static GUI_HWIN hPrintingWnd;
 static PROGBAR_Handle printingBar;
 static TEXT_Handle printTimeLeft;
@@ -51,9 +52,13 @@ extern uint8_t gcode_preview_over;
 extern uint8_t from_flash_pic;
 extern uint8_t button_disp_pause_state;
 
-void update_printing_1s(void);
-void update_pause_button(void);
-void update_auto_close_button(void);
+static void update_printing_1s(void);
+static void update_pause_button(void);
+static void update_auto_close_button(void);
+
+
+const char* FAN_STATES[3] {"bmp_fan_state0.bin", "bmp_fan_state1.bin", "bmp_fan_state2.bin"};
+
 
 static void cbPrintingWin(WM_MESSAGE * pMsg) {
 	switch (pMsg->MsgId) {
@@ -112,6 +117,14 @@ static void cbPrintingWin(WM_MESSAGE * pMsg) {
 							draw_dialog(DIALOG_TYPE_STOP);
 						}
 					}
+				} else if (pMsg->hWinSrc == buttonFanstate) {
+					last_disp_state = PRINTING_UI;
+					clear_printing();
+					draw_fan();
+				} else if ((pMsg->hWinSrc == buttonExt1) || (pMsg->hWinSrc == buttonBedstate) || ((pMsg->hWinSrc == buttonExt1) & is_dual_extruders())){
+					last_disp_state = PRINTING_UI;
+					clear_printing();
+					draw_preHeat();
 				} else if (pMsg->hWinSrc == buttonAutoClose) {
 					ui_print_process.suicide.enabled = ~ui_print_process.suicide.enabled;
 					update_auto_close_button();
@@ -134,7 +147,7 @@ static void cbPrintingWin(WM_MESSAGE * pMsg) {
 #define BUTTON_L(phx, phy, file) ui_create_state_button(COL(phx), ROW(phy), hPrintingWnd, file);
 
 static void update_pause_button() {
-	char * fn;
+	const char * fn;
 	if(gCfgItems.standby_mode==1 && mksReprint.mks_printer_state == MKS_REPRINTED && button_disp_pause_state==1) {
 		fn="bmp_pause100.bin";
 	} else {
@@ -153,23 +166,42 @@ static void update_pause_button() {
 }
 
 void update_auto_close_button() {
-	char * fn;
+	const char * fn;
 	if (ui_print_process.suicide.enabled) {
 		fn = "bmp_autoOffEnabled100.bin";
 	} else {
 		fn = "bmp_autoOffDisabled100.bin";
 	}
-    BUTTON_SetBmpFileName(buttonAutoClose, fn, 1);
+    BUTTON_SetBmpFileName(buttonAutoClose, fn, 0);
     BUTTON_SetBitmapEx(buttonAutoClose, 0, &bmp_struct_100x80,0,0);
 }
 
-//#define is_dual_extruders() (1)
 
+#include "spi_flash.h"
+void check_files() {
+	uint8_t cnt;
+	SPI_FLASH_BufferRead(&cnt,PIC_COUNTER_ADDR,1);
+	if(cnt == 0xff)
+		cnt = 0;
+	SERIAL_ECHOLNPAIR("COUNT:", cnt);
 
+	char buf[20];
+	int a = PIC_NAME_ADDR;
+	for(uint8_t i = 0;i < cnt;i++) {
+		uint8_t j = 0;
+		do {
+			SPI_FLASH_BufferRead(&buf[j],a++,1);
+		} while (buf[j++] != '\0');
 
-void draw_printing()
-{
+		//int sz;
+		//SPI_FLASH_BufferRead((char*)&sz,PIC_SIZE_ADDR+i*4,4);
+		SERIAL_ECHOLNPAIR("NAME:", buf);
+		//SERIAL_ECHOLNPAIR(" SIZE:", sz);
+	}
+}
 
+void draw_printing() {
+	check_files();
 	int dual_extrude;
 	dual_extrude = is_dual_extruders();
 
@@ -180,7 +212,6 @@ void draw_printing()
 	ui_initialize_screen_gui();
 
 	hPrintingWnd = ui_std_window(cbPrintingWin);
-
 
 	buttonTime = BUTTON_L(0,0,"bmp_time_state.bin");
 	printTimeLeft = TEXT_L(0, 0);
@@ -195,7 +226,7 @@ void draw_printing()
 	buttonBedstate = BUTTON_L(0, 2, "bmp_bed_state.bin");
 	Bed_Temp = TEXT_L(0, 2);
 
-	buttonFanstate = BUTTON_L(1, 2, "bmp_fan_state.bin");
+	buttonFanstate = BUTTON_L(1, 2, FAN_STATES[0]);
 	Fan_Pwm = TEXT_L(1, 2);
 
 	buttonZpos = BUTTON_L(1, 0, "bmp_zpos_state.bin");
@@ -213,7 +244,6 @@ void draw_printing()
 	buttonAutoClose = ui_create_100_80_button(_col(3) + 70,204, hPrintingWnd, 0, 0);
 
     update_auto_close_button();
-
 	update_pause_button();
 	update_printing_1s();
 }
@@ -294,12 +324,28 @@ void update_printing_1s(void) {
 	ui_set_text_value(Zpos, buf);
 
 	memset(buf, 0, sizeof(buf));
-	sprintf(buf, "%3d", fanSpeeds[0]);
+
+	long fs = fanSpeeds[0] * 100;
+	uint8_t pr=fs/255;
+	if ((pr==0) && (fanSpeeds[0]>0))
+		pr = 1;
+	sprintf(buf, "%d%%", pr);
 	ui_set_text_value(Fan_Pwm, buf);
 
 }
 
+
 void refresh_printing() {
+	static uint8_t fan_state = 0;
+	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
+		ui_timing_clear(F_UI_TIMING_HALF_SEC);
+		if (fanSpeeds[0]>1) {
+			fan_state++;
+			if (fan_state>2)
+				fan_state = 0;
+			ui_update_state_button(buttonFanstate, FAN_STATES[fan_state]);
+		}
+	}
 	if (is_ui_timing(F_UI_TIMING_SEC)) {
 		ui_timing_clear(F_UI_TIMING_SEC);
 

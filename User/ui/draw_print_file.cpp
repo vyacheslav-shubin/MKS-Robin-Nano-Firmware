@@ -1,11 +1,12 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_print_file.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "text.h"
+#include "TEXT.h"
+#include "ui_tools.h"
 #include "Draw_ready_print.h"
 //#include "stm32mks_timer.h"     //skyblue 2016-12-13
 #include "tim.h"        //skyblue 2016-12-13
@@ -701,9 +702,9 @@ void disp_udisk_files(int seq)
     #endif
     //#elif defined(TFT35)
     #if defined(TFT35)
-	buttonPu.btnHandle = BUTTON_CreateEx(OTHER_BTN_XPIEL*3+INTERVAL_V*4,0,OTHER_BTN_XPIEL,OTHER_BTN_YPIEL,hPrintFileWnd, BUTTON_CF_SHOW, 0, alloc_win_id());//alloc_win_id());
-	buttonPd.btnHandle = BUTTON_CreateEx(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL+INTERVAL_H,OTHER_BTN_XPIEL,OTHER_BTN_YPIEL,hPrintFileWnd, BUTTON_CF_SHOW, 0, alloc_win_id());//alloc_win_id());
-	buttonR.btnHandle = BUTTON_CreateEx(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL*2+INTERVAL_H*2,OTHER_BTN_XPIEL,OTHER_BTN_YPIEL,hPrintFileWnd, BUTTON_CF_SHOW, 0, alloc_win_id());//alloc_win_id());
+	buttonPu.btnHandle = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,0,hPrintFileWnd, "bmp_page_up.bin", 0);
+	buttonPd.btnHandle = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL+INTERVAL_H,hPrintFileWnd, "bmp_page_down.bin", 0);
+	buttonR.btnHandle = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL*2+INTERVAL_H*2, hPrintFileWnd, "bmp_page_back.bin", 0);
     #else
      buttonPu.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL+INTERVAL_V,BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL,BTN_Y_PIXEL,hPrintFileWnd, BUTTON_CF_SHOW, 0, alloc_win_id());//alloc_win_id());
      buttonPd.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*2+INTERVAL_V*2,BTN_Y_PIXEL+INTERVAL_H,BTN_X_PIXEL,BTN_Y_PIXEL,hPrintFileWnd, BUTTON_CF_SHOW, 0, alloc_win_id());//alloc_win_id());
@@ -712,8 +713,6 @@ void disp_udisk_files(int seq)
     //#endif
 #if VERSION_WITH_PIC	
 
-	BUTTON_SetBmpFileName(buttonPu.btnHandle, "bmp_pageUp.bin",1);
-	BUTTON_SetBmpFileName(buttonPd.btnHandle, "bmp_pageDown.bin",1);
 	#if 0
 	BUTTON_SetBmpFileName(buttonR.btnHandle, "bmp_return.bin",1);
 	BUTTON_SetBitmapEx(buttonPu.btnHandle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
@@ -722,11 +721,7 @@ void disp_udisk_files(int seq)
 	#endif
 	//#elif defined(TFT35)
 	#if defined(TFT35)
-	BUTTON_SetBmpFileName(buttonR.btnHandle, "bmp_back.bin",1);
 	//BUTTON_SetBmpFileName(buttonR.btnHandle, "bmp_return.bin",1);
-	BUTTON_SetBitmapEx(buttonPu.btnHandle, 0, &bmp_struct_92,BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonPd.btnHandle, 0, &bmp_struct_92,BMP_PIC_X, BMP_PIC_Y);
-	BUTTON_SetBitmapEx(buttonR.btnHandle, 0, &bmp_struct_92,BMP_PIC_X, BMP_PIC_Y);
     	#else
 	BUTTON_SetBmpFileName(buttonR.btnHandle, "bmp_return.bin",1);
 	BUTTON_SetBitmapEx(buttonPu.btnHandle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);

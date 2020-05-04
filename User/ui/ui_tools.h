@@ -96,6 +96,8 @@ extern void ui_timings(void);
 extern void ui_start_print_process(void);
 
 
+extern void ui_start_print_file();
+
 #if defined(__cplusplus)
 }
 #endif

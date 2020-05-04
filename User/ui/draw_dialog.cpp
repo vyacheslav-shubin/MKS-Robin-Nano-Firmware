@@ -113,26 +113,6 @@ extern volatile WIFI_STATE wifi_link_state;
 extern WIFI_PARA wifiPara;
 extern uint8_t command_send_flag;
 
-void dialog_print_file() {
-	reset_print_time();
-	start_print_time();
-	if(gCfgItems.breakpoint_reprint_flg == 1) {
-		gCfgItems.breakpoint_z_pos= current_position[Z_AXIS];
-		epr_read_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
-		if(from_flash_pic != 0) {
-			flash_preview_begin = 1;
-		} else {
-			default_preview_flg = 1;
-		}
-	} else {
-		preview_gcode_prehandle(curFileName);
-	}
-	if(gcode_preview_over != 1) {
-		ui_start_print_process();
-	}
-	draw_printing();
-}
-
 static void cbDlgWin(WM_MESSAGE * pMsg) {
 	int8_t sel_item;
 	uint32_t i;
@@ -167,10 +147,10 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 							draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
 						} else {
 							if (is_filament_fail()) {
-								Clear_dialog();
 								draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
 							} else {
-								dialog_print_file();
+								ui_start_print_file();
+								draw_printing();
 							}
 						}
 					} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
@@ -202,17 +182,14 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 					cloud_unbind();
 					draw_return_ui();
 				} else if(DialogType == DIALOG_TYPE_M80_FAIL) {
-					Clear_dialog();
 					draw_ready_print();
 				} else if(DialogType == DIALOG_TYPE_MESSEGE_ERR1) {
-					Clear_dialog();
 					draw_ready_print();
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED) {
 					filament_heat_completed_load = 1;
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_UNLOAD_COMPLETED) {
 					filament_heat_completed_unload = 1;
 				} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
-					Clear_dialog();
 					draw_ready_print();
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
 					if(last_disp_state==PRINTING_UI) {
@@ -272,7 +249,8 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 				if(strlen(curFileName)>(100-1)) {
 					draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
 				} else {
-					dialog_print_file();
+					ui_start_print_file();
+					draw_printing();
 				}
 			}
 		}

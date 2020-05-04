@@ -93,7 +93,6 @@ extern uint8_t temp_update_flag;
 
 
 extern uint8_t print_start_flg;
-extern uint8_t from_flash_pic;
 /******end********/
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz14;
 
@@ -110,8 +109,6 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmprinting;
 extern GUI_CONST_STORAGE GUI_BITMAP bmreturn;
 extern GUI_CONST_STORAGE GUI_BITMAP bmset;
 extern GUI_CONST_STORAGE GUI_BITMAP bmzero;
-
-extern uint8_t gcode_preview_over;
 
 uint8_t temperature_change_frequency = 1;
 uint16_t temperature_change_frequency_cnt;

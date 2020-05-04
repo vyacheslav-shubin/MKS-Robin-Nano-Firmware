@@ -72,13 +72,7 @@ static void cbPrintingWin(WM_MESSAGE * pMsg) {
 					if(gcode_preview_over != 1) {
 						last_disp_state = PRINTING_UI;
 						clear_printing();
-						if((mksReprint.mks_printer_state == MKS_IDLE)  &&  (ui_print_process.rate == 100)) {
-							f_close(srcfp);
-							reset_file_info();
-							draw_ready_print();
-						} else {
-							draw_operate();
-						}
+						draw_operate();
 					}
 				} else if(pMsg->hWinSrc == buttonPause) {
 					if(gcode_preview_over != 1) {
@@ -201,7 +195,7 @@ void check_files() {
 }
 
 void draw_printing() {
-	check_files();
+	//check_files();
 	int dual_extrude;
 	dual_extrude = is_dual_extruders();
 

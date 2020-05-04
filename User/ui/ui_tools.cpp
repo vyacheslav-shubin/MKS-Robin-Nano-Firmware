@@ -66,7 +66,6 @@ void ui_drop_window(WM_HWIN wnd) {
 	GUI_SetBkColor(gCfgItems.background_color);
 	if(WM_IsWindow(wnd)) {
 		WM_DeleteWindow(wnd);
-		//GUI_Exec();
 	}
 }
 
@@ -197,6 +196,8 @@ void ui_set_text_value(TEXT_Handle handle, char* val) {
 }
 
 void ui_timings(void) {
+	//TODO: добавить разрешение таймингов, тогда можно будет все завязать на этот механизм
+
 	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
 		ui_timing_set(F_UI_TIMING_HALF_SEC);
 
@@ -215,12 +216,31 @@ void ui_timings(void) {
 		}
 	}
 
-	//TODO: К херам (!!)
+	//TODO: К херам (!!) достаточно секундных обновлений
 	temperature_change_frequency_cnt++;
 	if((temperature_change_frequency_cnt>=2000) && (temperature_change_frequency!=1)) {
 		temperature_change_frequency_cnt = 0;
 		temperature_change_frequency = 1;
 	}
 
+}
+
+void ui_start_print_file() {
+	reset_print_time();
+	start_print_time();
+	if(gCfgItems.breakpoint_reprint_flg == 1) {
+		gCfgItems.breakpoint_z_pos= current_position[Z_AXIS];
+		epr_read_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
+		if(from_flash_pic != 0) {
+			flash_preview_begin = 1;
+		} else {
+			default_preview_flg = 1;
+		}
+	} else {
+		preview_gcode_prehandle(curFileName);
+	}
+	if(gcode_preview_over != 1) {
+		ui_start_print_process();
+	}
 }
 

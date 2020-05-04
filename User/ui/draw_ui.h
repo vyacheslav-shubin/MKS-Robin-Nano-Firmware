@@ -532,6 +532,8 @@ extern char curFileName[100];
 extern volatile uint32_t TimeIncrease;
 extern uint16_t temperature_change_frequency_cnt;
 extern uint8_t temperature_change_frequency;
+extern uint8_t gcode_preview_over;
+extern uint8_t from_flash_pic;
 
 extern void start_print_time();
 extern void stop_print_time();

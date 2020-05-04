@@ -63,10 +63,7 @@ static void cbZeroWin(WM_MESSAGE * pMsg) {
 
 void draw_zero()
 {	
-	ui_push_disp_stack(ZERO_UI);
-	ui_clear_screen();
-	
-	hZeroWnd = ui_std_window(cbZeroWin);
+	hZeroWnd = ui_std_init_window(ZERO_UI, cbZeroWin);
 
 	buttonAllZero = ui_std_button(0, 0, hZeroWnd, "bmp_zero.bin", home_menu.home_all);
 	buttonXZero = ui_std_button(1, 0, hZeroWnd, "bmp_zeroX.bin", home_menu.home_x);

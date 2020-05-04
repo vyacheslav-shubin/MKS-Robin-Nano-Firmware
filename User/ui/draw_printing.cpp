@@ -201,11 +201,7 @@ void draw_printing() {
 
 	FRESULT res;
 	int i;
-	ui_reset_disp_stack(PRINTING_UI);
-	ui_clear_screen();
-	ui_initialize_screen_gui();
-
-	hPrintingWnd = ui_std_window(cbPrintingWin);
+	hPrintingWnd = ui_std_init_window(PRINTING_UI, cbPrintingWin);
 
 	buttonTime = BUTTON_L(0,0,"bmp_time_state.bin");
 	printTimeLeft = TEXT_L(0, 0);

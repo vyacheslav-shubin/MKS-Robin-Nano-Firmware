@@ -69,25 +69,39 @@ void ui_drop_window(WM_HWIN wnd) {
 	}
 }
 
-void ui_initialize_screen_gui(void) {
-	GUI_UC_SetEncodeNone();
-	GUI_SetFont(&GUI_FontHZ16);
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
-    if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-    {
-      GUI_SetFont(&GUI_FontHZ16);
-      BUTTON_SetDefaultFont(&GUI_FontHZ16);
-      TEXT_SetDefaultFont(&GUI_FontHZ16);
-      GUI_UC_SetEncodeNone();
-    }
-    else
-    {
-      GUI_SetFont(&FONT_TITLE);
-      BUTTON_SetDefaultFont(&FONT_TITLE);
-      TEXT_SetDefaultFont(&FONT_TITLE);
-      GUI_UC_SetEncodeUTF8();
-    }
+void ui_set_encoding(void) {
+    if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
+    	GUI_SetFont(&GUI_FontHZ16);
+    	BUTTON_SetDefaultFont(&GUI_FontHZ16);
+    	TEXT_SetDefaultFont(&GUI_FontHZ16);
+    	GUI_UC_SetEncodeNone();
+    } else {
+    	GUI_SetFont(&FONT_TITLE);
+    	BUTTON_SetDefaultFont(&FONT_TITLE);
+    	TEXT_SetDefaultFont(&FONT_TITLE);
+    	GUI_UC_SetEncodeUTF8();
+	}
 }
+
+void ui_make_title(void) {
+//	GUI_UC_SetEncodeNone();
+//	GUI_SetFont(&GUI_FontHZ16);
+}
+
+void ui_init_page(void) {
+	ui_clear_screen();
+	ui_set_encoding();
+	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
+	ui_make_title();
+}
+
+WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb) {
+	ui_push_disp_stack(ui_id);
+	ui_init_page();
+	return ui_std_window(cb);
+}
+
+
 
 void ui_buttonpreset(BUTTON_Handle btn) {
 	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);

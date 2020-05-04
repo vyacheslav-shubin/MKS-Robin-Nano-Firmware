@@ -53,9 +53,13 @@ extern void print_time_to_str(PRINT_TIME * pt, char * buf);
 extern void ui_push_disp_stack(DISP_STATE ui_id);
 extern void ui_reset_disp_stack(DISP_STATE ui_id);
 extern void ui_pop_disp_stack(void);
+
 extern void ui_clear_screen(void);
+extern void ui_set_encoding(void);
+extern void ui_make_title(void);
+extern void ui_init_page(void);
+extern WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb);
 extern void ui_drop_window(WM_HWIN wnd);
-extern void ui_initialize_screen_gui(void);
 
 //with placeholder
 #define ui_std_col(ph_x) (INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*ph_x)

@@ -81,11 +81,8 @@ static void cbBabyStepMotorWin(WM_MESSAGE * pMsg) {
 
 
 void draw_babyStep() {
-	ui_push_disp_stack(BABY_STEP_UI);
-	ui_clear_screen();
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
+	hMoveBabyStepWnd = ui_std_init_window(BABY_STEP_UI, cbBabyStepMotorWin);
 
-	hMoveBabyStepWnd = ui_std_window(cbBabyStepMotorWin);
 	buttonXI = ui_std_button(0, 0, hMoveBabyStepWnd, "bmp_xAdd.bin", move_menu.x_add);
 	buttonYI = ui_std_button(1, 0, hMoveBabyStepWnd, "bmp_yAdd.bin", move_menu.y_add);
 	buttonZI = ui_std_button(2, 0, hMoveBabyStepWnd, "bmp_zAdd.bin", move_menu.z_add);

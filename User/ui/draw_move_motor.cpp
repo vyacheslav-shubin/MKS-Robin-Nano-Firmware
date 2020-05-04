@@ -85,13 +85,7 @@ static void cbMoveMotorWin(WM_MESSAGE * pMsg) {
 void draw_move_motor() {
 	
   	char buffer_z[15]={0};
-
-	ui_push_disp_stack(MOVE_MOTOR_UI);
-	ui_clear_screen();
-
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
-
-	hMoveMotorWnd = ui_std_window(cbMoveMotorWin);
+	hMoveMotorWnd = ui_std_init_window(MOVE_MOTOR_UI, cbMoveMotorWin);
 
 	buttonXI = ui_std_button(0, 0, hMoveMotorWnd, "bmp_xAdd.bin", move_menu.x_add);
 	buttonYI = ui_std_button(1, 0, hMoveMotorWnd, "bmp_yAdd.bin", move_menu.y_add);

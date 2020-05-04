@@ -183,10 +183,8 @@ static void cbPreHeatWin(WM_MESSAGE * pMsg) {
 void draw_preHeat() {
 	
 	int i;
-	ui_push_disp_stack(PRE_HEAT_UI);
-	ui_clear_screen();
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);	
-	
+	hPreHeatWnd = ui_std_init_window(PRE_HEAT_UI, cbPreHeatWin);
+
 	int row_offset;
 	int row_size;
 	if (is_dual_extruders()) {
@@ -197,7 +195,6 @@ void draw_preHeat() {
 		row_size = 45;
 	}
 	
-	hPreHeatWnd = ui_std_window(cbPreHeatWin);
 
 	buttonInc = ui_std_button(1, 0, hPreHeatWnd, "bmp_Add.bin", preheat_menu.add);
 	buttonDec = ui_std_button(2, 0, hPreHeatWnd, "bmp_Dec.bin", preheat_menu.dec);

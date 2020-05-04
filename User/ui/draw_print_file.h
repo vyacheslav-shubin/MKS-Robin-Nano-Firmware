@@ -13,9 +13,7 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
 extern void draw_print_file();
-extern void search_files();
-extern void disp_udisk_files(int seq);
-extern void Clear_print_file();
+extern void clear_print_file();
 
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */

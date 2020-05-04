@@ -368,7 +368,7 @@ void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 		case PRINT_READY_UI:	Clear_ready_print(); 	break;
-		case PRINT_FILE_UI:		Clear_print_file(); 	break;
+		case PRINT_FILE_UI:		clear_print_file(); 	break;
 		case PRINTING_UI:		clear_printing(); 		break;
 		case MOVE_MOTOR_UI:		clear_move_motor(); 	break;
 		case OPERATE_UI:		Clear_operate();		break;

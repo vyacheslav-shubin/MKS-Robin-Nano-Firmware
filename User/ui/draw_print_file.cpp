@@ -47,6 +47,8 @@ static BUTTON_STRUCT buttonPu, buttonPd, buttonR, buttonF[FILE_BTN_CNT], buttonO
 uint8_t back_flg = 0;	
 uint8_t disp_in_file_dir;
 
+void search_files();
+void disp_udisk_files(int seq);
 
 static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 	switch (pMsg->MsgId) {
@@ -76,7 +78,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 						} while(card.gcodeFileList.listVaild != 2);
 
 						if(card.gcodeFileList.index != 0) {
-							Clear_print_file();
+							clear_print_file();
 							disp_udisk_files(0);
 							dir_offset[curDirLever].curPage++;
 						}
@@ -109,7 +111,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 						} while(card.gcodeFileList.listVaild != 2);
 				
 						if(card.gcodeFileList.index != 0) {
-							Clear_print_file();
+							clear_print_file();
 							disp_udisk_files(1);
 							dir_offset[curDirLever].curPage--;
 						}
@@ -131,13 +133,13 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 						if(gCfgItems.breakpoint_reprint_flg == 1) {
 							gCfgItems.breakpoint_reprint_flg = 0;
 							last_disp_state = SET_UI;
-							Clear_print_file();
+							clear_print_file();
 							card.Sd_file_offset = 0;
 							card.Sd_file_cnt = 0;
 							draw_return_ui();
 						} else {
 							last_disp_state = PRINT_FILE_UI;
-							Clear_print_file();
+							clear_print_file();
 							card.Sd_file_offset = 0;
 							card.Sd_file_cnt = 0;
 							draw_ready_print();
@@ -148,7 +150,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 						ch =  (int8_t *)strrchr((char *)card.gCurDir, '/');
 						if(ch != 0) {
 							*ch = 0;
-							Clear_print_file();
+							clear_print_file();
 							dir_offset[curDirLever].curPage = 0;
 							dir_offset[curDirLever].cur_page_first_offset = 0;
 							dir_offset[curDirLever].cur_page_last_offset = 0;
@@ -165,7 +167,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 								if(card.gcodeFileList.fileAttr[j] == 1) { //dir
 									memset(card.gCurDir, 0, sizeof(card.gCurDir));
 									strcpy((char *)card.gCurDir,  (const char *)card.gcodeFileList.fileName[j]);
-									Clear_print_file();
+									clear_print_file();
 									curDirLever++;
 									search_files();
 								} else {
@@ -177,7 +179,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 									#endif
 									if((gCfgItems.language != LANG_SIMPLE_CHINESE)&&(gCfgItems.language != LANG_COMPLEX_CHINESE))
 										GUI_UC_SetEncodeUTF8();
-									Clear_print_file();
+									clear_print_file();
 									disp_in_file_dir = 0;
 
 									if (is_filament_fail()) {
@@ -276,11 +278,11 @@ void search_files() {
 					if(gCfgItems.breakpoint_reprint_flg == 1) {
 					    gCfgItems.breakpoint_reprint_flg = 0;
 						last_disp_state = SET_UI;
-						Clear_print_file();
+						clear_print_file();
 						draw_return_ui();
 					} else {
 						last_disp_state = PRINT_FILE_UI;
-						Clear_print_file();
+						clear_print_file();
 						draw_ready_print();
 					}
 				} else {
@@ -288,7 +290,7 @@ void search_files() {
 					ch =  (int8_t *)strrchr((const char *)card.gCurDir, '/');
 					if(ch != 0) {
 						*ch = 0;
-						Clear_print_file();
+						clear_print_file();
 						dir_offset[curDirLever].curPage = 0;
 						dir_offset[curDirLever].cur_page_first_offset = 0;
 						dir_offset[curDirLever].cur_page_last_offset = 0;
@@ -359,7 +361,7 @@ void disp_udisk_files(int seq) {
 	GUI_UC_SetEncodeUTF8();
 }
 
-void Clear_print_file() {
+void clear_print_file() {
 	ui_drop_window(hPrintFileWnd);
 	GUI_Clear();
 }

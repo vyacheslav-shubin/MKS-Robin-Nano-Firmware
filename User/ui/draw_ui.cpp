@@ -112,7 +112,6 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmzero;
 
 uint8_t temperature_change_frequency = 1;
 uint16_t temperature_change_frequency_cnt;
-//unsigned char bmp_public_buf[16*1024] = {0};
 
 extern uint8_t wifi_refresh_flg;
 extern void disp_wifi_state();
@@ -724,260 +723,47 @@ void GUI_RefreshPage() {
 				
 	}
 }
-//tan 20160830
-/*
-void BUTTON_SetBmpFileName(BUTTON_STRUCT *btnStruct, const uint8_t *picName)
-{
 
-	btnStruct->btnPic.XSize = 78;
-	btnStruct->btnPic.YSize = 104;
-	btnStruct->btnPic.BytesPerLine = 160;
-	btnStruct->btnPic.BitsPerPixel = 16;
-	btnStruct->btnPic.pPal = NULL;
-	btnStruct->btnPic.pMethods = GUI_DRAW_BMPM565;
-	btnStruct->btnPic.pData = bmp_public_buf;
-	bindBmpFileData(&btnStruct->btnPic.pData, (uint8_t *)picName);
-	
-	BUTTON_SetBitmapEx(btnStruct->btnHandle, 0, &btnStruct->btnPic, BMP_PIC_X, BMP_PIC_Y);
-
-	BUTTON_SetFocussable(btnStruct->btnHandle, 0);
-}
-*/
-//unsigned char bmp_public_buf[1280] = {0};
-#if 0
-FATFS SDFatFs_logo;  /* File system object for SD card logical drive */
-FIL MyFile_logo;     /* File object */
-static unsigned long lseek_length;
-void DRAW_LOGO()
-{
-	int index; 
-	int x_off = 0, y_off = 0;
-	int _x, _y;
-	uint16_t *p_index;
-	volatile int i;
+const char* logo_file = "1:/bmp_logo.bin";
 
 
-	bool testStatus = false;
+void draw_logo() {
+	FIL file;
+	int size = 320*480;
+	LCD_setWindowArea(0, 0, 480, 320);
+	LCD_WriteRAM_Prepare();
 
-	FRESULT res;																					/* FatFs function common result code */
-	uint32_t byteswritten, bytesread; 										/* File write/read counts */
-
-	/*##-1- Link the micro SD disk I/O driver ##################################*/
-	//���� SD �ײ����������� FATFS �ļ�ϵͳ������� MX_FATFS_Init()�������Ѿ����
-	//if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
-	{
-		/*##-2- Register the file system object to the FatFs module ##############*/
-		if(f_mount(&SDFatFs_logo, (TCHAR const*)SD_Path, 0) != FR_OK)
-		{
-			/* FatFs Initialization Error */
-			Error_Handler();
-		}
-		else
-		{
-			/*##-3- Create a FAT file system (format) on the logical drive #########*/
-			/* WARNING: Formatting the uSD card will delete all content on the device */
-			//�� SD �����и�ʽ��
-#if 0
-			if(f_mkfs((TCHAR const*)SD_Path, 0, 0) != FR_OK)
-			{
-				/* FatFs Format Error */
-				Error_Handler();
-			}
-			else
-#endif        
-			{ 			
-				/*##-4- Create and Open a new text file object with write access #####*/
-				if(f_open(&MyFile_logo, "1:\STM321.TXT", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
-				{
-					/* 'STM32.TXT' file Open for write Error */
-					Error_Handler();
+	int res = f_open(&file, logo_file, FA_OPEN_EXISTING | FA_READ);
+	if(res == FR_OK) {
+		while (size>0) {
+			UINT readed;
+			res = f_read(&file, bmp_public_buf, sizeof(bmp_public_buf), &readed);
+			if((res == FR_OK) && (readed!=0)) {
+				for(UINT i=0;i<readed;i+=2) {
+					uint16_t *color=(uint16_t *)&bmp_public_buf[i];
+					LCD_WriteRAM(*color);
+					if (--size==0)
+						break;
 				}
-				else
-				{
-					/*##-5- Write data to the text file ################################*/
-						for(index = 0; index < 20; index ++)
-						{
-							memset(bmp_public_buf,0,sizeof(bmp_public_buf));
-							Pic_Logo_Read((uint8_t *)"bmp_logo.bin", bmp_public_buf, 15360);
-							f_lseek(&MyFile_logo, lseek_length);
-							res = f_write(&MyFile_logo, bmp_public_buf, 15360, (uint32_t *)&byteswritten);
-							lseek_length += byteswritten;
-
-							i = 0;
-                            ili9320_SetCursor(0, y_off * 16);
-							LCD_setWindowArea(0, y_off * 16, 480,16);     //480*16
-							//LCD_setWindowArea(0, y_off * 16+120, 800,48);      //800*240  
-							LCD_WriteRAM_Prepare(); 
-							for(_y = y_off * 16; _y < (y_off + 1) * 16; _y++)
-							{
-								for (x_off = 0; x_off < 480; x_off++) 
-								{
-									p_index = (uint16_t *)(&bmp_public_buf[i]); 					
-									LCD_WriteRAM(*p_index);
-									i += 2;
-									
-								}
-								if(i >= 15360)
-									break;
-							}
-							y_off++;								
-						}
-					if((byteswritten == 0) || (res != FR_OK))
-					{
-						/* 'STM32.TXT' file Write or EOF Error */
-						Error_Handler();
-					}
-					else
-					{
-						/*##-6- Close the open text file #################################*/
-						f_close(&MyFile_logo);
-					}
-				}
+			} else
+				break;
+		}
+		f_close(&file);
+	} else {
+		int offset = 0;
+		while (size != 0) {
+			SPI_FLASH_BufferRead(bmp_public_buf,PIC_LOGO_ADDR+offset,sizeof(bmp_public_buf));
+			for (int i=0;i<sizeof(bmp_public_buf);i+=2) {
+				uint16_t *color=(uint16_t *)&bmp_public_buf[i];
+				LCD_WriteRAM(*color);
+				if (--size==0)
+					break;
 			}
+			offset+=sizeof(bmp_public_buf);
 		}
 	}
-
 }
 
-#else
-uint8_t logo_n[13] = "bmp_logo.bin";
-
-void DRAW_LOGO()
-{
-#if 0
-	int index; 
-	int x_off = 0, y_off = 0;
-	int _x, _y;
-	uint16_t *p_index;
-	volatile int i=0,j=0;
-#if 1
-	for(index = 0; index < 10; index ++)//480*320
-	{
-		Pic_Logo_Read(logo_n, bmp_public_buf, 30720);//15k
-		i = 0;
-		//ili9320_SetCursor(0, y_off * 16);
-		LCD_setWindowArea(0, (uint16_t)y_off * 32, 480,32);	  //480*16
-		
-		LCD_WriteRAM_Prepare(); 
-		for(_y = y_off * 32; _y < (y_off + 1) * 32; _y++)
-		{
-			for (x_off = 0; x_off < 480; x_off++) 
-			{
-				p_index = (uint16_t *)(&bmp_public_buf[i]); 					
-				LCD_WriteRAM(*p_index);
-				i += 2;
-				
-			}
-			if(i >= 30720)
-					break;
-		}
-		y_off++;		
-
-		
-	}
-LCD_setWindowArea(0, 0, 480, 320);	
-
-#else
-
-	for(index = 0; index < 320; index ++)//480*320
-	{
-		Pic_Logo_Read(logo_n, bmp_public_buf, 960);//15k
-		i = 0;
-        //ili9320_SetCursor(0, y_off * 16);
-		LCD_setWindowArea(0, (uint16_t)y_off * 1, 480,1);     //480*16
-		//LCD_setWindowArea(0, y_off * 16+120, 800,48);      //800*240  
-		
-		LCD_WriteRAM_Prepare(); 
-		for(_y = y_off * 1; _y < (y_off + 1) * 1; _y++)
-		{
-			for (x_off = 0; x_off < 480; x_off++) 
-			{
-				p_index = (uint16_t *)(&bmp_public_buf[i]); 					
-				LCD_WriteRAM(*p_index);
-				i += 2;
-				
-			}
-			if(i >= 15360)
-					break;
-		}
-		y_off++;		
-
-		
-	}
-	LCD_setWindowArea(0, 0, 480, 320);	
-#endif
-#endif
-#if VERSION_WITH_PIC    
-int index; 
-int x_off = 0, y_off = 0;
-int _x, _y;
-uint16_t *p_index;
-int i;
-#if 0
-for(index = 0; index < 10; index ++)
-{
-    Pic_Logo_Read(logo_n, bmp_public_buf, 15360);
-  
-    i = 0;
-    //GUI_DrawBitmap(&bmp_struct, x_off, y_off);
-    
-    LCD_setWindowArea(0, y_off * 24, 320, 24);
-    ili9320_SetCursor(0, y_off * 24);
-    LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */ 
-    for(_y = y_off * 24; _y < (y_off + 1) * 24; _y++)
-    {
-        for (x_off = 0; x_off < 320; x_off++) 
-        {
-            p_index = (uint16_t *)(&bmp_public_buf[i]);                     
-            LCD_WriteRAM(*p_index);
-            i += 2;
-            
-        }
-        if(i >= 15360)
-                break;
-    }
-    y_off++;        
-
-    
-}
-LCD_setWindowArea(0, 0, 319, 239);
-#else
-for(index = 0; index < 40; index ++)
-	{
-		Pic_Logo_Read(logo_n, bmp_public_buf, 7680);
-
-		
-		i = 0;
-		//GUI_DrawBitmap(&bmp_struct, x_off, y_off);
-		
-		LCD_setWindowArea(0, y_off * 8, 480, 8);
-		//ili9320_SetCursor(0, y_off * 8);
-		LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */ 
-		for(_y = y_off * 8; _y < (y_off + 1) * 8; _y++)
-		{
-			for (x_off = 0; x_off < 480; x_off++) 
-			{
-				p_index = (uint16_t *)(&bmp_public_buf[i]); 					
-				LCD_WriteRAM(*p_index);
-				i += 2;
-				
-			}
-			if(i >= 7680)
-					break;
-		}
-		y_off++;		
-
-		
-	}
-	LCD_setWindowArea(0, 0, 479, 319);
-
-#endif
-#endif  
-
-}
-#endif
-
-#if 1
 void Draw_default_preview(int xpos_pixel,int ypos_pixel,uint8_t sel)
 {
 	int index; 
@@ -1014,23 +800,18 @@ void Draw_default_preview(int xpos_pixel,int ypos_pixel,uint8_t sel)
 	}
 }
 
-int ascii2dec_test1(char *ascii)
-{
+char ascii2dec(char ascii) {
 	int result = 0;
-
 	if(ascii == 0)
 		return 0;
-
-	if(*(ascii) >= '0' && *(ascii) <= '9')
-		result = *(ascii) - '0';
-	else if(*(ascii) >= 'a' && *(ascii) <= 'f')
-		result = *(ascii) - 'a' + 0x0a;
-	else if(*(ascii) >= 'A' && *(ascii) <= 'F')
-		result = *(ascii) - 'A' + 0x0a;
+	if(ascii >= '0' && ascii <= '9')
+		result = ascii - '0';
+	else if(ascii >= 'a' && ascii <= 'f')
+		result = ascii - 'a' + 0x0a;
+	else if(ascii >= 'A' && ascii <= 'F')
+		result = ascii - 'A' + 0x0a;
 	else
 		return 0;
-
-
 	return result;
 }
 
@@ -1039,13 +820,12 @@ uint8_t preview_pic=0;
 
 FIL curFile_1;
 
-uint8_t buff_pic[512];
 uint32_t row;
-uint32_t size = 809;
 uint8_t gcode_preview_over;
 uint8_t flash_preview_begin;
 uint8_t default_preview_flg;
 //uint8_t from_flash_pic;
+
 extern "C" void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
 extern "C" void SPI_FLASH_SectorErase(u32 SectorAddr);
 
@@ -1057,35 +837,29 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel) {
 	int res;
 	res = f_open(file, curFileName, FA_OPEN_EXISTING | FA_READ);
 	if(res == FR_OK) {
-		f_lseek(file, (PREVIEW_LITTLE_PIC_SIZE+To_pre_view)+size*row+8);
+		f_lseek(file, (PREVIEW_LITTLE_PIC_SIZE+To_pre_view)+809*row+8); //809 - длина строки в preview
 		LCD_setWindowArea(xpos_pixel, ypos_pixel + row, 200,1);
 		LCD_WriteRAM_Prepare();
-		j=0; i=0;
-		while(j<400) {
-			f_read(file, buff_pic, 400, &read);
-			for(i=0;i<400;i+=2, j++)
-				bmp_public_buf[j]= ascii2dec_test1((char*)&buff_pic[i])<<4|ascii2dec_test1((char*)&buff_pic[i+1]);
-		}
-		for(i=0;i<400;) {
-			p_index = (uint16_t *)(&bmp_public_buf[i]);
-			if(*p_index == 0x0000)*p_index=gCfgItems.preview_bk_color;
-			LCD_WriteRAM(*p_index);
-			i=i+2;
+		f_read(file, bmp_public_buf, 800, &read);
+		i=0;j=0;
+		while (i<800) {
+			uint16_t *color = (uint16_t *)&(bmp_public_buf[j]);
+			bmp_public_buf[j++] = ascii2dec(bmp_public_buf[i++])<<4 | ascii2dec(bmp_public_buf[i++]);
+			bmp_public_buf[j++] = ascii2dec(bmp_public_buf[i++])<<4 | ascii2dec(bmp_public_buf[i++]);
+			if(*color == 0x0000) *color=gCfgItems.preview_bk_color;
+			LCD_WriteRAM(*color);
 		}
 		if(row<20)
 			SPI_FLASH_SectorErase(BAK_VIEW_ADDR+row*4096);
 
 		SPI_FLASH_BufferWrite(bmp_public_buf, BAK_VIEW_ADDR+row*400, 400);
+
 		row++;
 		if(row >= 200) {
-			size = 809;
 			row = 0;
-
 			gcode_preview_over = 0;
 			f_close(file);
-
 			ui_start_print_process();
-
 		}
 		f_close(file);
 	}
@@ -1134,7 +908,6 @@ void preview_gcode_prehandle(char *path)
 		epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
 	}
 }
-#endif
 
 void gcode_has_preview(char *path)
 {
@@ -1169,83 +942,3 @@ void gcode_has_preview(char *path)
     f_close(&TEST_FIL1);
 #endif
 }
-
-#if 0
-
-/*****************************************************/
-//path:�ļ�·��
-//xsize,ysize:��ʾԤ��ͼƬ��С;
-//sel:
-//		0:�ļ�Ŀ¼Ԥ����
-//		1:��ӡ�ļ�Ԥ��
-//
-uint8_t drawicon_preview(char *path,int xsize_small,int ysize_small,int xsize_big,int ysize_big,char sel)
-{
-
-	uint16_t *p_index;
-	int i=0;
-	char re;
-	UINT read;
-	char temp_test[8];
-	int row_1=0;
-    
-	re = f_open(&TEST_FIL,path, FA_OPEN_EXISTING | FA_READ);//huaping.gcode
-	if(re == FR_OK)
-	{
-        memset(bmp_public_buf,0,sizeof(bmp_public_buf));
-		if(sel == 1)//big pic
-		{
-			f_lseek(&TEST_FIL,xsize_small*ysize_small+8*(ysize_small+1));
-		}
-		f_read(&TEST_FIL,&bmp_public_buf,8,&read);
-		if((bmp_public_buf[0] ==';')&&(bmp_public_buf[1] =='s')
-			&&(bmp_public_buf[2] =='i')&&(bmp_public_buf[3] =='m')
-			&&(bmp_public_buf[4] =='a')&&(bmp_public_buf[5] =='g')
-			&&(bmp_public_buf[6] =='e')&&(bmp_public_buf[7] ==':'))
-		{
-			while(1)
-			{
-				f_read(&TEST_FIL,&temp_test,2,&read);
-				if(sel == 1)//big pic
-				{
-						bmp_public_buf[row_1*(xsize_big*4)+i/2] = (char)(ascii2dec_test(&temp_test[0])<<4|ascii2dec_test(&temp_test[1]));				
-				}
-				else
-	            {
-	              		bmp_public_buf[row_1*(xsize_small*2)+i/2] = (char)(ascii2dec_test(&temp_test[0])<<4|ascii2dec_test(&temp_test[1]));
-	            }
-				i=i+2;
-				if(sel == 1)//big pic
-				{
-					if(i>=(xsize_big*4))
-					{
-		                i=0;
-		                row_1++;
-		                f_read(&TEST_FIL,&temp_test,9,&read);					
-					}
-					if(row_1>ysize_big)
-						break;					
-				}
-				else
-				{
-					if(i>=(xsize_small*4))
-					{
-		                i=0;
-		                row_1++;
-		                f_read(&TEST_FIL,&temp_test,9,&read);					
-					}
-					if(row_1>ysize_small)
-						break;
-				}
-
-			}
-			f_close(&TEST_FIL);
-			return 1;
-		}
-	}
-	f_close(&TEST_FIL);
-	return 0;
-
-}
-#endif
-

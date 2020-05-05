@@ -101,14 +101,10 @@ extern uint8_t filament_heat_completed_unload;
 
 extern uint8_t filamentchange_Process;
 
-extern uint8_t temp_update_flag;
-
 extern uint8_t disp_in_file_dir;
 
 extern int upload_result ;
 
-
-extern uint8_t gcode_preview_over;
 extern volatile WIFI_STATE wifi_link_state;
 extern WIFI_PARA wifiPara;
 extern uint8_t command_send_flag;

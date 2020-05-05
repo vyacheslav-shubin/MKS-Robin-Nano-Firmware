@@ -263,7 +263,7 @@ uint8_t have_pre_pic(char *path)
 	UINT read;
 	int *ps1;
 	
-	re = f_open(&TEST_FIL,path, FA_OPEN_EXISTING | FA_READ);
+	re = f_open(&TEST_FIL, path, FA_OPEN_EXISTING | FA_READ);
 	
 	if(re == FR_OK)
 	{

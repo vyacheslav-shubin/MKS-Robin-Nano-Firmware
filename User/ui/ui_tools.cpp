@@ -5,6 +5,8 @@
 #include "planner.h"
 #include "cardreader.h"
 #include "tim.h"
+#include "ff.h"
+#include "ili9320.h"
 
 extern CardReader card;
 UPLOAD_INFO upload_file_info = {0, 0};
@@ -86,12 +88,12 @@ void ui_set_encoding(void) {
 void ui_make_title(void) {
 //	GUI_UC_SetEncodeNone();
 //	GUI_SetFont(&GUI_FontHZ16);
+	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 }
 
 void ui_init_page(void) {
 	ui_clear_screen();
 	ui_set_encoding();
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 	ui_make_title();
 }
 
@@ -256,5 +258,25 @@ void ui_start_print_file() {
 	if(gcode_preview_over != 1) {
 		ui_start_print_process();
 	}
+}
+
+void ui_gcode_small_preview(char *file_name,int xpos_pixel,int ypos_pixel) {
+	FIL file;
+	int res = f_open(&file, file_name, FA_OPEN_EXISTING | FA_READ);
+	if(res != FR_OK)
+		return;
+	LCD_setWindowArea(xpos_pixel, ypos_pixel, 50, 50);
+	LCD_WriteRAM_Prepare();
+	for (uint8_t i=0;i<50;i++) {
+		UINT read;
+		f_read(&file, bmp_public_buf, 209, &read);
+		if (read!=209)
+			break;
+		for(uint8_t j=8; j<208; j+=4) {
+			uint16_t color = (ascii2dec(bmp_public_buf[j+2])<<12) | (ascii2dec(bmp_public_buf[j+3])<<8) | (ascii2dec(bmp_public_buf[j])<<4) | (ascii2dec(bmp_public_buf[j+1]));
+			LCD_WriteRAM(color);
+		}
+	}
+	f_close(&file);
 }
 

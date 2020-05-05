@@ -37,12 +37,15 @@ TCHAR curFileName[100] = "notValid";
 char curFileName[100] = "notValid";
 #endif
 
-extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern int X_ADD,X_INTERVAL;
+typedef struct{
+	BUTTON_Handle handle;
+	char* fileName;
+} FILE_BUTTON;
 
 static int8_t pages;
-static TEXT_Handle printDlgAskText;
-static BUTTON_STRUCT buttonPu, buttonPd, buttonR, buttonF[FILE_BTN_CNT], buttonOk, buttonCancle;
+static BUTTON_Handle buttonPu, buttonPd, buttonR;
+
+static FILE_BUTTON buttonF[FILE_BTN_CNT];
 
 uint8_t back_flg = 0;	
 uint8_t disp_in_file_dir;
@@ -58,9 +61,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 			break;
 		case WM_NOTIFY_PARENT:
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
-				if(pMsg->hWinSrc == buttonPd.btnHandle) {
-					if((gCfgItems.language != LANG_SIMPLE_CHINESE)&&(gCfgItems.language != LANG_COMPLEX_CHINESE))
-						GUI_UC_SetEncodeUTF8();
+				if(pMsg->hWinSrc == buttonPd) {
 					if(dir_offset[curDirLever].cur_page_last_offset > 0) {
 						card.Sd_file_cnt = 0;
 						card.gcodeFileList.index = 0;
@@ -86,9 +87,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 						if(card.gcodeFileList.listVaild == 2)
 							dir_offset[curDirLever].cur_page_last_offset = 0;
 					}
-				} else if(pMsg->hWinSrc == buttonPu.btnHandle) {
-					if((gCfgItems.language != LANG_SIMPLE_CHINESE)&&(gCfgItems.language != LANG_COMPLEX_CHINESE))
-						GUI_UC_SetEncodeUTF8();
+				} else if(pMsg->hWinSrc == buttonPu) {
 					if(dir_offset[curDirLever].curPage > 0) {
 						card.Sd_file_cnt = 0;
 						card.gcodeFileList.index = 0;
@@ -117,19 +116,8 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 						}
 				
 					}
-				} else if(pMsg->hWinSrc == buttonR.btnHandle) {
+				} else if(pMsg->hWinSrc == buttonR) {
 					if(curDirLever == 0) {
-						if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
-							GUI_SetFont(&GUI_FontHZ16);
-							BUTTON_SetDefaultFont(&GUI_FontHZ16);
-							TEXT_SetDefaultFont(&GUI_FontHZ16);
-							GUI_UC_SetEncodeNone();
-						} else {
-							GUI_SetFont(&FONT_TITLE);
-							BUTTON_SetDefaultFont(&FONT_TITLE);
-							TEXT_SetDefaultFont(&FONT_TITLE);
-							GUI_UC_SetEncodeUTF8();
-						}
 						if(gCfgItems.breakpoint_reprint_flg == 1) {
 							gCfgItems.breakpoint_reprint_flg = 0;
 							last_disp_state = SET_UI;
@@ -162,7 +150,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 					int8_t i,j;
 					for(i = 0; i < FILE_BTN_CNT; i++) {
 						j = (back_flg == 1)?(FILE_BTN_CNT-1) - i:i;
-						if(pMsg->hWinSrc == buttonF[i].btnHandle) {
+						if(pMsg->hWinSrc == buttonF[i].handle) {
 							if(card.gcodeFileList.fileName[j][0] != 0) {
 								if(card.gcodeFileList.fileAttr[j] == 1) { //dir
 									memset(card.gCurDir, 0, sizeof(card.gCurDir));
@@ -177,8 +165,6 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 									#else
 									strcpy(curFileName, (const char *)card.gcodeFileList.fileName[j]);
 									#endif
-									if((gCfgItems.language != LANG_SIMPLE_CHINESE)&&(gCfgItems.language != LANG_COMPLEX_CHINESE))
-										GUI_UC_SetEncodeUTF8();
 									clear_print_file();
 									disp_in_file_dir = 0;
 
@@ -209,9 +195,8 @@ FATFS fs;
 void draw_print_file(){
 	int i;
 	ui_push_disp_stack(PRINT_FILE_UI);
-	ui_clear_screen();
+	ui_init_page();
 
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 	hPrintFileWnd = 0;
 	curDirLever = 0;	
 	dir_offset[curDirLever].curPage = 0;
@@ -235,10 +220,6 @@ void draw_print_file(){
 
 void search_files() {
 	uint32_t tick1, tick2;
-	if((gCfgItems.language != LANG_SIMPLE_CHINESE)&&(gCfgItems.language != LANG_COMPLEX_CHINESE))
-		GUI_UC_SetEncodeUTF8();
-
-	GUI_SetColor(gCfgItems.title_color);
 	GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
 	GUI_DispStringAt(file_menu.file_loading, (LCD_WIDTH-64)/2, imgHeight/2);
 
@@ -318,12 +299,15 @@ void disp_udisk_files(int seq) {
 	int8_t i, j;
 	GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
 	hPrintFileWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbPrintFileWin, 0);
-	buttonPu.btnHandle = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,0,hPrintFileWnd, "bmp_page_up.bin", 0);
-	buttonPd.btnHandle = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL+INTERVAL_H,hPrintFileWnd, "bmp_page_down.bin", 0);
-	buttonR.btnHandle = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL*2+INTERVAL_H*2, hPrintFileWnd, "bmp_page_back.bin", 0);
+	buttonPu = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,0,hPrintFileWnd, "bmp_page_up.bin", 0);
+	buttonPd = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL+INTERVAL_H,hPrintFileWnd, "bmp_page_down.bin", 0);
+	buttonR = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL*2+INTERVAL_H*2, hPrintFileWnd, "bmp_page_back.bin", 0);
 	GUI_Exec();
 
 	GUI_UC_SetEncodeNone();
+	char * file = 0;
+	memset(buttonF, 0, sizeof(buttonF));
+
     for(i = 0; i < FILE_BTN_CNT; i++) {
     	if(seq) {
 			j = (FILE_BTN_CNT-1) - i;
@@ -336,11 +320,11 @@ void disp_udisk_files(int seq) {
 			break;
 	
 		if(i < 3) {
-			buttonF[i].btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*i+INTERVAL_V*(i+1),  0, BTN_X_PIXEL, BTN_Y_PIXEL,hPrintFileWnd, BUTTON_CF_SHOW, 0, 103 + i);
+			buttonF[i].handle = ui_std_button(i, 0, hPrintFileWnd, 0, 0);
 		} else {
-			buttonF[i].btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*(i-3)+INTERVAL_V*((i-3)+1),  BTN_Y_PIXEL+INTERVAL_H, BTN_X_PIXEL, BTN_Y_PIXEL,hPrintFileWnd, BUTTON_CF_SHOW, 0, 107 + i);
+			buttonF[i].handle = ui_std_button(i-3, 1, hPrintFileWnd, 0, 0);
 		}     
-		BUTTON_SetFont(buttonF[i].btnHandle,&GUI_FontHZ16);
+		BUTTON_SetFont(buttonF[i].handle,&GUI_FontHZ16);
 		memset(tmpStr, 0, sizeof(tmpStr));
 		#if _LFN_UNICODE
 		cutFileName((TCHAR *)card.gcodeFileList.fileName[j], 16, 8,  tmpStr);
@@ -348,17 +332,40 @@ void disp_udisk_files(int seq) {
 		cutFileName((char *)card.gcodeFileList.fileName[j], 16, 8,  (char *)tmpStr);
         #endif        
 		if(card.gcodeFileList.fileAttr[j] == 1) { //dir
-			BUTTON_SetBmpFileName(buttonF[i].btnHandle, "bmp_dir.bin",1);
-			BUTTON_SetBitmapEx(buttonF[i].btnHandle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
+			BUTTON_SetBmpFileName(buttonF[i].handle, "bmp_dir.bin",1);
+			BUTTON_SetBitmapEx(buttonF[i].handle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
 		} else {
-			BUTTON_SetBmpFileName(buttonF[i].btnHandle, "bmp_file.bin",1);
-			BUTTON_SetBitmapEx(buttonF[i].btnHandle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
+			if(have_pre_pic((char *)card.gcodeFileList.fileName[j])) {
+				BUTTON_SetBmpFileName(buttonF[i].handle, "bmp_fileWPV.bin",1);
+				BUTTON_SetBitmapEx(buttonF[i].handle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
+				buttonF[i].fileName = card.gcodeFileList.fileName[j];
+			} else {
+				BUTTON_SetBmpFileName(buttonF[i].handle, "bmp_file.bin",1);
+				BUTTON_SetBitmapEx(buttonF[i].handle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
+			}
 		}
-		BUTTON_SetText(buttonF[i].btnHandle, (char const *)(tmpStr));
+		BUTTON_SetText(buttonF[i].handle, (char const *)(tmpStr));
 	}
 	GUI_Exec();
-	if((gCfgItems.language != LANG_SIMPLE_CHINESE)&&(gCfgItems.language != LANG_COMPLEX_CHINESE))
-	GUI_UC_SetEncodeUTF8();
+
+	for(uint8_t i=0;i<FILE_BTN_CNT;i++) {
+		if (buttonF[i].fileName) {
+			int x;
+			int y;
+			if (i<3) {
+				x = ui_std_col(i);
+				y = ui_std_row(0);
+			} else {
+				x = ui_std_col(i-3);
+				y = ui_std_row(1);
+			}
+			x+=33;
+			y+=28 + titleHeight;
+			ui_gcode_small_preview(buttonF[i].fileName, x, y);
+		}
+	}
+
+	ui_set_encoding();
 }
 
 void clear_print_file() {

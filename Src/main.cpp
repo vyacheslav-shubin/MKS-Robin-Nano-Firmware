@@ -252,7 +252,7 @@ int main(void)
   
   GUI_Init();
   //Lcd_Light_ON;
-  DRAW_LOGO();
+  draw_logo();
   Lcd_Light_ON; 
   logo_tick1 = getTick();
   gui_view_init();

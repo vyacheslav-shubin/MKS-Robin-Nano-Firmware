@@ -62,8 +62,8 @@ extern WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb);
 extern void ui_drop_window(WM_HWIN wnd);
 
 //with placeholder
-#define ui_std_col(ph_x) (INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*ph_x)
-#define ui_std_row(ph_y) (INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * ph_y)
+#define ui_std_col(ph_x) (INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*(ph_x))
+#define ui_std_row(ph_y) (INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * (ph_y))
 #define ui_std_button(ph_x, ph_y, hwnd, img, title) ui_create_std_button(ui_std_col(ph_x),  ui_std_row(ph_y), hwnd, img, title)
 #define ui_std_button_return(hwnd) ui_std_button(3, 1, hwnd, "bmp_return.bin", common_menu.text_back)
 #define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cb, 0)
@@ -101,6 +101,8 @@ extern void ui_start_print_process(void);
 
 
 extern void ui_start_print_file();
+
+extern void ui_gcode_small_preview(char * file_name,int xpos_pixel,int ypos_pixel);
 
 #if defined(__cplusplus)
 }

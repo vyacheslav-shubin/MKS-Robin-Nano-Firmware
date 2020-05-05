@@ -535,12 +535,14 @@ extern uint8_t temperature_change_frequency;
 extern uint8_t gcode_preview_over;
 extern uint8_t from_flash_pic;
 
+extern char ascii2dec(char ascii);
+
 extern void start_print_time();
 extern void stop_print_time();
 extern void reset_print_time();
 
 //extern PR_STATUS printerStaus;
-extern void DRAW_LOGO();
+extern void draw_logo();
 extern int8_t get_printing_rate(FIL *fileHandle);
 extern void disp_sel_lang(void);
 extern void draw_return_ui();

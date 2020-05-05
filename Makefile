@@ -180,7 +180,7 @@ sync_pics:
 	cp -r -u -v $(PIC_OUTPUT) $(SD_CARD)
 
 
-#picocom --imap lfcrlf --omap lfcrlf --echo --baud 115200 /dev/ttyUSB0
+#picocom --imap lfcrlf --echo --baud 115200 /dev/ttyUSB0
 
 
 

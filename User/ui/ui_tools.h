@@ -40,6 +40,15 @@ typedef struct {
 	uint8_t 	rate;
 } UI_PRINT_PROCESS;
 
+typedef struct {
+	BUTTON_Handle button_next;
+	BUTTON_Handle button_previous;
+	BUTTON_Handle button_back;
+	uint8_t	page;
+	uint8_t	page_count;
+} UI_PAGE_NAVIGATOR;
+
+
 extern GUI_BITMAP bmp_struct_100x80;
 
 extern UI_PRINT_PROCESS ui_print_process;
@@ -77,6 +86,9 @@ extern void ui_update_state_button(BUTTON_Handle btn, char *pFile);
 
 extern BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const char* text);
 
+extern BUTTON_Handle ui_create_check_button(int x, int y, WM_HWIN hWinParent, uint8_t state);
+extern void ui_update_check_button(BUTTON_Handle  btn, uint8_t state);
+
 
 extern TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, char *text);
 extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
@@ -86,6 +98,8 @@ extern void ui_set_text_value(TEXT_Handle handle, char* val);
 extern void ui_update_std_button(BUTTON_Handle handle, char* file, char* title);
 
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
+
+extern void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator);
 
 extern uint8_t ui_timing_flags;
 #define F_UI_TIMING_HALF_SEC		1<<0

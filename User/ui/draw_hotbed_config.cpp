@@ -18,7 +18,7 @@ static BUTTON_STRUCT button_next,button_previous,button_back;
 static BUTTON_STRUCT PID_P_text,PID_I_text,PID_D_text;
 static BUTTON_STRUCT PID_P,PID_I,PID_D;
 static BUTTON_STRUCT Bed_Enable_Text,Bed_Enable_Pic;
-static uint8_t current_page;//0:ÉÏÒ»Ò³£¬1:ÏÂÒ»Ò³
+static uint8_t current_page;//0:ï¿½ï¿½Ò»Ò³ï¿½ï¿½1:ï¿½ï¿½Ò»Ò³
 
 //inline void gcode_M501();
 
@@ -389,20 +389,20 @@ void draw_HotbedConfig()
 
      memset(cmd_code,0,sizeof(cmd_code));
      if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-		sprintf(cmd_code,"%d¡æ",mksCfg.bed_mintemp);
+		sprintf(cmd_code,"%dï¿½ï¿½",mksCfg.bed_mintemp);
      else
      		sprintf(cmd_code,TEMP_UNIT_SYBOL,mksCfg.bed_mintemp);
-     //sprintf(cmd_code,"5¡æ");
+     //sprintf(cmd_code,"5ï¿½ï¿½");
      BUTTON_SetText(MinTemp_value.btnHandle,cmd_code);
      memset(cmd_code,0,sizeof(cmd_code));
      if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-	 	sprintf(cmd_code,"%d¡æ",mksCfg.bed_maxtemp);
+	 	sprintf(cmd_code,"%dï¿½ï¿½",mksCfg.bed_maxtemp);
      else
      		sprintf(cmd_code,TEMP_UNIT_SYBOL,mksCfg.bed_maxtemp);
      BUTTON_SetText(MaxTemp_value.btnHandle,cmd_code);
 
 	button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hHotbedConfigWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-		BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+		BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
 		
 		BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
 	 BUTTON_SetBkColor(button_next.btnHandle, BUTTON_CI_PRESSED, gCfgItems.back_btn_color);
@@ -519,7 +519,7 @@ void draw_HotbedConfig()
      BUTTON_SetText(PID_D.btnHandle,cmd_code);
 
 	 button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hHotbedConfigWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
         BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0); 
 

@@ -22,7 +22,7 @@ inline void gcode_M501() {
   (void)settings.load();
 }
 
-static uint8_t current_page;//0:¨¦?¨°?¨°3¡ê?1:??¨°?¨°3
+static uint8_t current_page;//0:ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½3ï¿½ï¿½?1:??ï¿½ï¿½?ï¿½ï¿½3
 
 void PID_disp();
 
@@ -344,7 +344,7 @@ void draw_NozzleConfig()
         BUTTON_SetTextColor(MaxTemp_value.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.value_text_color); 
 
 		button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hNozzleConfigWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-		BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+		BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
 		
 		BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
         
@@ -354,13 +354,13 @@ void draw_NozzleConfig()
         
         memset(cmd_code,0,sizeof(cmd_code));
 	  if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-	  	sprintf(cmd_code,"%d¡æ",mksCfg.heater_0_mintemp);
+	  	sprintf(cmd_code,"%dï¿½ï¿½",mksCfg.heater_0_mintemp);
 	  else
         	sprintf(cmd_code,TEMP_UNIT_SYBOL,mksCfg.heater_0_mintemp);
         BUTTON_SetText(MinTemp_value.btnHandle,cmd_code);
         memset(cmd_code,0,sizeof(cmd_code));
 	 if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-	 	sprintf(cmd_code,"%d¡æ",mksCfg.heater_0_maxtemp);
+	 	sprintf(cmd_code,"%dï¿½ï¿½",mksCfg.heater_0_maxtemp);
 	 else
         	sprintf(cmd_code,TEMP_UNIT_SYBOL,mksCfg.heater_0_maxtemp);
         BUTTON_SetText(MaxTemp_value.btnHandle,cmd_code);
@@ -480,13 +480,13 @@ void draw_NozzleConfig()
         BUTTON_SetTextColor(Extrude_lowest_temper.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.value_text_color);
 
         button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hNozzleConfigWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
         BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);     
 
         memset(cmd_code,0,sizeof(cmd_code));
 	 if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-	 	sprintf(cmd_code,"%.1f¡æ",mksCfg.extrude_mintemp);
+	 	sprintf(cmd_code,"%.1fï¿½ï¿½",mksCfg.extrude_mintemp);
 	 else
         	sprintf(cmd_code,FLOAT_TEMP_UNIT_SYBOL,mksCfg.extrude_mintemp);
         BUTTON_SetText(Extrude_lowest_temper.btnHandle,cmd_code);        

@@ -11,7 +11,7 @@ static BUTTON_STRUCT XEndstop_Min,YEndstop_Min,ZEndstop_Min,XEndstop_Max,YEndsto
 static BUTTON_STRUCT XEndstop_Min_text,YEndstop_Min_text,ZEndstop_Min_text,XEndstop_Max_text,YEndstop_Max_text,ZEndstop_Max_text,MT_Endstop_text,LevelingEndstop_text;
 static BUTTON_STRUCT button_next,button_previous,button_back;
 
-static uint8_t current_page;//0:ÉÏÒ»Ò³£¬1:ÏÂÒ»Ò³
+static uint8_t current_page;//0:ï¿½ï¿½Ò»Ò³ï¿½ï¿½1:ï¿½ï¿½Ò»Ò³
 
 static void cbEndstopTypeWin(WM_MESSAGE * pMsg) {
 
@@ -350,7 +350,7 @@ void draw_EndstopType()
 
 
         button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hEndstopTypeWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
     
         BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
         
@@ -426,7 +426,7 @@ void draw_EndstopType()
 	  BUTTON_SetTextAlign(MT_Endstop.btnHandle,GUI_TA_HCENTER|GUI_TA_VCENTER );
 
         button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hEndstopTypeWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
         BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);
         

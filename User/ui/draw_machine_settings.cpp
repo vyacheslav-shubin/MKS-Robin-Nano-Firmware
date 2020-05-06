@@ -11,7 +11,7 @@ static BUTTON_STRUCT MachineArrow,StrokeArrow,HomeDirectionArrow,EndstopTypeArro
 static BUTTON_STRUCT buttonMachine,buttonStroke,buttonHomeDirection,buttonEndstopType,buttonFilament,buttonLeveling,DeltaLevelParaText;
 static BUTTON_STRUCT button_next,button_previous,button_back;
 
-static uint8_t current_page;//0:ÉÏÒ»Ò³£¬1:ÏÂÒ»Ò³
+static uint8_t current_page;//0:ï¿½ï¿½Ò»Ò³ï¿½ï¿½1:ï¿½ï¿½Ò»Ò³
 
 static void cbMachineSettingsWin(WM_MESSAGE * pMsg) {
 
@@ -208,7 +208,7 @@ void draw_MachineSettings()
         BUTTON_SetTextAlign(buttonEndstopType.btnHandle,GUI_TA_LEFT|GUI_TA_VCENTER );   
 
         button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hMachineSettingsWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
     
         BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
         
@@ -242,7 +242,7 @@ void draw_MachineSettings()
 	 //BUTTON_SetTextAlign(DeltaLevelParaText.btnHandle,GUI_TA_LEFT|GUI_TA_VCENTER ); 
 
         button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hMachineSettingsWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
         BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);
         

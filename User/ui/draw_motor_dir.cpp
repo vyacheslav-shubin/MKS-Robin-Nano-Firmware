@@ -13,7 +13,7 @@ static BUTTON_STRUCT XMotorDir,YMotorDir,ZMotorDir,E0MotorDir,E1MotorDir;
 
 static BUTTON_STRUCT button_next,button_previous,button_back;
 
-static uint8_t current_page;//0:ÉÏÒ»Ò³£¬1:ÏÂÒ»Ò³
+static uint8_t current_page;//0:ï¿½ï¿½Ò»Ò³ï¿½ï¿½1:ï¿½ï¿½Ò»Ò³
 
 static void btnHandle_rest()
 {
@@ -87,16 +87,16 @@ static void cbMotorDirWin(WM_MESSAGE * pMsg) {
 					if(mksCfg.invert_x_dir==1)
 					{
 						mksCfg.invert_x_dir=0;
-						BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_disable.bin",1);//ÕýÏò
+						BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_disable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_0);//ÕýÏò
+							BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_0);//ï¿½ï¿½ï¿½ï¿½
 					}
 					else
 					{
 						mksCfg.invert_x_dir=1;
-						BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_enable.bin",1);//·´Ïò
+						BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_enable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_1);//·´Ïò
+							BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_1);//ï¿½ï¿½ï¿½ï¿½
 					}
 					if((stepper.last_direction_bits & (1<<X_AXIS)) == 0)
 						stepper.last_direction_bits = stepper.last_direction_bits |(1<<X_AXIS);
@@ -109,16 +109,16 @@ static void cbMotorDirWin(WM_MESSAGE * pMsg) {
 					if(mksCfg.invert_y_dir==1)
 					{
 						mksCfg.invert_y_dir=0;
-						BUTTON_SetBmpFileName(YMotorDir.btnHandle, "bmp_disable.bin",1);//ÕýÏò
+						BUTTON_SetBmpFileName(YMotorDir.btnHandle, "bmp_disable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(YMotorDir.btnHandle, machine_menu.Invert_0);//ÕýÏò
+							BUTTON_SetText(YMotorDir.btnHandle, machine_menu.Invert_0);//ï¿½ï¿½ï¿½ï¿½
 					}
 					else
 					{
 						mksCfg.invert_y_dir=1;
-						BUTTON_SetBmpFileName(YMotorDir.btnHandle, "bmp_enable.bin",1);//·´Ïò
+						BUTTON_SetBmpFileName(YMotorDir.btnHandle, "bmp_enable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(YMotorDir.btnHandle, machine_menu.Invert_1);//·´Ïò
+							BUTTON_SetText(YMotorDir.btnHandle, machine_menu.Invert_1);//ï¿½ï¿½ï¿½ï¿½
 					}
 					if((stepper.last_direction_bits & (1<<Y_AXIS)) == 0)
 						stepper.last_direction_bits = stepper.last_direction_bits |(1<<Y_AXIS);
@@ -133,16 +133,16 @@ static void cbMotorDirWin(WM_MESSAGE * pMsg) {
 					if(mksCfg.invert_z_dir==1)
 					{
 						mksCfg.invert_z_dir=0;
-						BUTTON_SetBmpFileName(ZMotorDir.btnHandle, "bmp_disable.bin",1);//ÕýÏò
+						BUTTON_SetBmpFileName(ZMotorDir.btnHandle, "bmp_disable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(ZMotorDir.btnHandle, machine_menu.Invert_0);//ÕýÏò
+							BUTTON_SetText(ZMotorDir.btnHandle, machine_menu.Invert_0);//ï¿½ï¿½ï¿½ï¿½
 					}
 					else
 					{
 						mksCfg.invert_z_dir=1;
-						BUTTON_SetBmpFileName(ZMotorDir.btnHandle, "bmp_enable.bin",1);//·´Ïò
+						BUTTON_SetBmpFileName(ZMotorDir.btnHandle, "bmp_enable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(ZMotorDir.btnHandle, machine_menu.Invert_1);//·´Ïò
+							BUTTON_SetText(ZMotorDir.btnHandle, machine_menu.Invert_1);//ï¿½ï¿½ï¿½ï¿½
 					}
 					if((stepper.last_direction_bits & (1<<Z_AXIS)) == 0)
 						stepper.last_direction_bits = stepper.last_direction_bits |(1<<Z_AXIS);
@@ -157,16 +157,16 @@ static void cbMotorDirWin(WM_MESSAGE * pMsg) {
 					if(mksCfg.invert_e0_dir==1)
 					{
 						mksCfg.invert_e0_dir=0;
-						BUTTON_SetBmpFileName(E0MotorDir.btnHandle, "bmp_disable.bin",1);//ÕýÏò
+						BUTTON_SetBmpFileName(E0MotorDir.btnHandle, "bmp_disable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(E0MotorDir.btnHandle, machine_menu.Invert_0);//ÕýÏò
+							BUTTON_SetText(E0MotorDir.btnHandle, machine_menu.Invert_0);//ï¿½ï¿½ï¿½ï¿½
 					}
 					else
 					{
 						mksCfg.invert_e0_dir=1;
-						BUTTON_SetBmpFileName(E0MotorDir.btnHandle, "bmp_enable.bin",1);//·´Ïò
+						BUTTON_SetBmpFileName(E0MotorDir.btnHandle, "bmp_enable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(E0MotorDir.btnHandle, machine_menu.Invert_1);//·´Ïò
+							BUTTON_SetText(E0MotorDir.btnHandle, machine_menu.Invert_1);//ï¿½ï¿½ï¿½ï¿½
 					}
 					if((stepper.last_direction_bits & (1<<E_AXIS)) == 0)
 						stepper.last_direction_bits = stepper.last_direction_bits |(1<<E_AXIS);
@@ -182,16 +182,16 @@ static void cbMotorDirWin(WM_MESSAGE * pMsg) {
 					if(mksCfg.invert_e1_dir==1)
 					{
 						mksCfg.invert_e1_dir=0;
-						BUTTON_SetBmpFileName(E1MotorDir.btnHandle, "bmp_disable.bin",1);//ÕýÏò
+						BUTTON_SetBmpFileName(E1MotorDir.btnHandle, "bmp_disable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(E1MotorDir.btnHandle, machine_menu.Invert_0);//ÕýÏò
+							BUTTON_SetText(E1MotorDir.btnHandle, machine_menu.Invert_0);//ï¿½ï¿½ï¿½ï¿½
 					}
 					else
 					{
 						mksCfg.invert_e1_dir=1;
-						BUTTON_SetBmpFileName(E1MotorDir.btnHandle, "bmp_enable.bin",1);//·´Ïò
+						BUTTON_SetBmpFileName(E1MotorDir.btnHandle, "bmp_enable.bin",1);//ï¿½ï¿½ï¿½ï¿½
 						if(gCfgItems.multiple_language != 0)
-							BUTTON_SetText(E1MotorDir.btnHandle, machine_menu.Invert_1);//·´Ïò
+							BUTTON_SetText(E1MotorDir.btnHandle, machine_menu.Invert_1);//ï¿½ï¿½ï¿½ï¿½
 					}
 					if((stepper.last_direction_bits & (1<<E_AXIS)) == 0)
 						stepper.last_direction_bits = stepper.last_direction_bits |(1<<E_AXIS);
@@ -249,9 +249,9 @@ void draw_MotorDir()
         E0MotorDir.btnHandle = BUTTON_CreateEx(370,200,90,40,hMotorDirWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
 
         if(mksCfg.invert_x_dir==1)
-            BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_enable.bin",1);//·´Ïò
+            BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_enable.bin",1);//ï¿½ï¿½ï¿½ï¿½
         else
-            BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_disable.bin",1);//ÕýÏò
+            BUTTON_SetBmpFileName(XMotorDir.btnHandle, "bmp_disable.bin",1);//ï¿½ï¿½ï¿½ï¿½
         if(mksCfg.invert_y_dir==1)
             BUTTON_SetBmpFileName(YMotorDir.btnHandle, "bmp_enable.bin",1);
         else
@@ -286,7 +286,7 @@ void draw_MotorDir()
         BUTTON_SetTextAlign(E0MotorDir.btnHandle,GUI_TA_HCENTER|GUI_TA_VCENTER );
 
         button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hMotorDirWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
     
         BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
         
@@ -311,7 +311,7 @@ void draw_MotorDir()
         BUTTON_SetTextAlign(E1MotorDir.btnHandle,GUI_TA_HCENTER|GUI_TA_VCENTER );
 
         button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hMotorDirWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
         BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);
         
@@ -350,9 +350,9 @@ void draw_MotorDir()
             BUTTON_SetText(button_next.btnHandle,machine_menu.next);
 
             if(mksCfg.invert_x_dir==1)
-                BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_1);//·´Ïò
+                BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_1);//ï¿½ï¿½ï¿½ï¿½
             else
-                BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_0);//ÕýÏò
+                BUTTON_SetText(XMotorDir.btnHandle, machine_menu.Invert_0);//ï¿½ï¿½ï¿½ï¿½
             if(mksCfg.invert_y_dir==1)
                 BUTTON_SetText(YMotorDir.btnHandle, machine_menu.Invert_1);
             else

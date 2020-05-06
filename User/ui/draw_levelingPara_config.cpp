@@ -21,7 +21,7 @@ static BUTTON_STRUCT ProbeXYSpeed_default,ProbeZSpeed_default;
 
 static BUTTON_STRUCT button_next,button_previous,button_back;
 
-static uint8_t current_page;//0:ÉÏÒ»Ò³£¬1:ÏÂÒ»Ò³
+static uint8_t current_page;//0:ï¿½ï¿½Ò»Ò³ï¿½ï¿½1:ï¿½ï¿½Ò»Ò³
 
 inline void gcode_M500() {
   (void)settings.save();
@@ -102,10 +102,10 @@ static void cbLevelingParaWin(WM_MESSAGE * pMsg) {
                 }                
     			else if(pMsg->hWinSrc == AutoLevelEnable.btnHandle)
     			{
-    			//¶ÁÈ¡ÅäÖÃÎÄ¼þÖÐµÄmksCfg.bed_leveling_methodÖµÎª0,3,5
-    			//È»ºóÉÏÃæ3¸öÖµÖÐµÄ1¸öÐ´Èëeeprom
-    			//È»ºómksCfg.bed_leveling_method=1<<mksCfg.bed_leveling_method;
-    			//²»Ê¹ÄÜ×Ô¶¯µ÷Æ½,mksCfg.bed_leveling_method=NULL_BED_LEVELING;
+    			//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ðµï¿½mksCfg.bed_leveling_methodÖµÎª0,3,5
+    			//È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½Öµï¿½Ðµï¿½1ï¿½ï¿½Ð´ï¿½ï¿½eeprom
+    			//È»ï¿½ï¿½mksCfg.bed_leveling_method=1<<mksCfg.bed_leveling_method;
+    			//ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½Æ½,mksCfg.bed_leveling_method=NULL_BED_LEVELING;
                     if(mksCfg.bed_leveling_method == 8)
                     {
                         mksCfg.bed_leveling_method=0;
@@ -124,7 +124,7 @@ static void cbLevelingParaWin(WM_MESSAGE * pMsg) {
                             BUTTON_SetText(AutoLevelEnable.btnHandle,machine_menu.enable);                        
                     }
                     epr_write_data(EPR_BED_LEVELING_METHOD,&mksCfg.bed_leveling_method,1);
-			//Ð´Èëeepromºó×óÒÆmksCfg.bed_leveling_methodÎ»
+			//Ð´ï¿½ï¿½eepromï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mksCfg.bed_leveling_methodÎ»
 			////(1<<3)=8 ;(1<<5)=32
 			mksCfg.bed_leveling_method = (1<<mksCfg.bed_leveling_method);
 			epr_write_data(EPR_LEVELING_MODE,(uint8_t *)&gCfgItems.leveling_mode,sizeof(gCfgItems.leveling_mode));
@@ -245,7 +245,7 @@ static void cbLevelingParaWin(WM_MESSAGE * pMsg) {
                     memset(cmd_code,0,sizeof(cmd_code));
                     sprintf(cmd_code,"%.1f",zprobe_zoffset);
                     BUTTON_SetText(ProbeZoffset_value.btnHandle,cmd_code);
-                    gcode_M500();	//±£´æ²ÎÊý
+                    gcode_M500();	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     			} 
     			else if(pMsg->hWinSrc == ProbeXYSpeed_default.btnHandle)
     			{
@@ -355,7 +355,7 @@ void draw_LevelingPara()
         BUTTON_SetTextAlign(ProbeXoffset_default.btnHandle,GUI_TA_HCENTER|GUI_TA_VCENTER ); 
 
         button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hLevelingParaWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
     
         BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
 
@@ -432,7 +432,7 @@ void draw_LevelingPara()
         BUTTON_SetTextAlign(ProbeZSpeed_default.btnHandle,GUI_TA_HCENTER|GUI_TA_VCENTER );         
 
         button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hLevelingParaWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
         BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);
 

@@ -320,7 +320,7 @@ void draw_XYZLevelPara()
 	    BUTTON_SetText(level_point4_y_value.btnHandle,cmd_code);
 
 		button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hXYZLevelParaWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-           BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+           BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
            BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
 
 
@@ -376,7 +376,7 @@ void draw_XYZLevelPara()
 	    BUTTON_SetText(level_point5_y_value.btnHandle,cmd_code);
 
 	    button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hXYZLevelParaWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-           BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+           BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
            BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);
 

@@ -97,12 +97,12 @@ void ui_init_page(void) {
 	ui_make_title();
 }
 
+
 WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb) {
 	ui_push_disp_stack(ui_id);
 	ui_init_page();
 	return ui_std_window(cb);
 }
-
 
 
 void ui_buttonpreset(BUTTON_Handle btn) {
@@ -152,6 +152,22 @@ BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pF
 		BUTTON_SetText(btn, text);
 	return btn;
 }
+
+BUTTON_Handle ui_create_check_button(int x, int y, WM_HWIN hWinParent, uint8_t state) {
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 90, 40, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	ui_buttonpreset(btn);
+	BUTTON_SetTextAlign(btn,GUI_TA_HCENTER|GUI_TA_VCENTER);
+	ui_update_check_button(btn, state);
+    return btn;
+}
+
+
+void ui_update_check_button(BUTTON_Handle  btn, uint8_t state) {
+	BUTTON_SetBmpFileName(btn, state?"bmp_enable.bin":"bmp_disable.bin", 1);
+    BUTTON_SetBitmapEx(btn,0,&bmp_struct90X30, 0, 5);
+	BUTTON_SetText(btn, state?machine_menu.enable:machine_menu.disable);
+}
+
 
 
 void ui_update_state_button(BUTTON_Handle btn, char *pFile) {
@@ -259,6 +275,33 @@ void ui_start_print_file() {
 		ui_start_print_process();
 	}
 }
+
+void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator) {
+	navigator->button_back = BUTTON_CreateEx(400, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
+    BUTTON_SetBmpFileName(navigator->button_back, "bmp_back70x40.bin",1);
+    BUTTON_SetBitmapEx(navigator->button_back, 0, &bmp_struct70X40,0, 0);
+    navigator->button_next = 0;
+    navigator->button_previous = 0;
+
+    if (navigator->page_count>1) {
+    	if (navigator->page < navigator->page_count-1)
+    		navigator->button_next = BUTTON_CreateEx(320, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
+    	if (navigator->page > 0) {
+    		navigator->button_previous = BUTTON_CreateEx(navigator->button_next?240:320, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
+    	}
+    }
+
+	if (navigator->button_next!=0) {
+		BUTTON_SetBmpFileName(navigator->button_next, "bmp_next70x40.bin",1);
+		BUTTON_SetBitmapEx(navigator->button_next, 0, &bmp_struct70X40,0, 0);
+	}
+
+	if (navigator->button_previous!=0) {
+		BUTTON_SetBmpFileName(navigator->button_previous, "bmp_prev70x40.bin",1);
+		BUTTON_SetBitmapEx(navigator->button_previous, 0, &bmp_struct70X40,0, 0);
+	}
+}
+
 
 void ui_gcode_small_preview(char *file_name,int xpos_pixel,int ypos_pixel) {
 	FIL file;

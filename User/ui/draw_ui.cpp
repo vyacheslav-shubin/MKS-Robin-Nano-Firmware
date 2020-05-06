@@ -246,6 +246,7 @@ inline char * get_display_title_ref(int index) {
 		case CHANGE_SPEED_UI: 	return speed_menu.title;
 		case FAN_UI:			return fan_menu.title;
 		case PRE_HEAT_UI:
+
 				if(
 						(disp_state_stack._disp_state[disp_state_stack._disp_index - 1] == OPERATE_UI)) {
 					return preheat_menu.adjust_title;
@@ -601,14 +602,7 @@ void GUI_RefreshPage() {
 			}
 			break;
 		case PRE_HEAT_UI: refresh_preHeat(); break;
-		case PRINT_READY_UI:
-			if(gCfgItems.display_style == 2) {
-				if(temperature_change_frequency){
-					temperature_change_frequency=0;
-					disp_restro_state();
-				}
-			}
-			break;
+		case PRINT_READY_UI: break;
 		case PRINT_FILE_UI: break;
 		case PRINTING_UI: refresh_printing(); break;
 		case OPERATE_UI:

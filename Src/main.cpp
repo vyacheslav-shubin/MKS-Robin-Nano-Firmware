@@ -334,39 +334,7 @@ int main(void)
 
 #endif
   disp_language_init();	
-  
 
-
-  /*
-  if(DeviceCode==0x9488)
-  {
-	TFT_screen.display_style = gCfgItems.display_style;// 1:��Լ�棻0:����棻
-	TFT_screen.firstpage_gap = 32;
-	TFT_screen.gap_h = 2;
-	TFT_screen.gap_v = 2;
-	TFT_screen.width = 480;
-	TFT_screen.high = 320;
-	TFT_screen.btn_x_pixel = 117;
-	TFT_screen.btn_y_pixel = 140;
-	TFT_screen.title_xpos = 3;
-	TFT_screen.title_ypos = 5;
-	TFT_screen.title_high = 36;		
-  }
-  else //if(DeviceCode==0x1505)
-  {
-	TFT_screen.display_style = 0;//gCfgItems.display_style;// 1:��Լ�棻0:����棻
-	TFT_screen.firstpage_gap = 32;
-	TFT_screen.gap_h = 2;
-	TFT_screen.gap_v = 2;
-	TFT_screen.width = 320;
-	TFT_screen.high = 240;
-	TFT_screen.btn_x_pixel = 78;
-	TFT_screen.btn_y_pixel = 104;
-	TFT_screen.title_xpos = 0;
-	TFT_screen.title_ypos = 0;
-	TFT_screen.title_high = 30;    
-  }
-  */
 #if 1	
   gCfgItems.filament_loading_time = (uint32_t)((gCfgItems.filamentchange_load_length*60.0/gCfgItems.filamentchange_load_speed)+0.5);
   gCfgItems.filament_unloading_time = (uint32_t)((gCfgItems.filamentchange_unload_length*60.0/gCfgItems.filamentchange_unload_speed)+0.5);

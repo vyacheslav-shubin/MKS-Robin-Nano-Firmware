@@ -13,7 +13,7 @@ static BUTTON_STRUCT Xstroke_default,Ystroke_default,Zstroke_default,X_min_pos,X
 static TEXT_Handle Xstroke_text,Ystroke_text,Zstroke_text,X_min_pos_text,Y_min_pos_text,Z_min_pos_text;
 static BUTTON_STRUCT button_next,button_previous, button_back;
 
-static uint8_t current_page;//0:上一页，1:下一页
+static uint8_t current_page;//0:锟斤拷一页锟斤拷1:锟斤拷一页
 
 static void cbStrokeWin(WM_MESSAGE * pMsg) {
 
@@ -272,15 +272,15 @@ void draw_Stroke()
 	    //BUTTON_SetBmpFileName(Ystroke_text.btnHandle,NULL,1);
 	    //BUTTON_SetBmpFileName(Zstroke_text.btnHandle,NULL,1);
 	    
-	    BUTTON_SetBitmapEx(Xstroke.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(Xstroke.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 	    BUTTON_SetBitmapEx(Ystroke.btnHandle,0,&bmp_struct70X28,0,0);
 	    BUTTON_SetBitmapEx(Zstroke.btnHandle,0,&bmp_struct70X28,0,0);
-	    BUTTON_SetBitmapEx(X_min_pos.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(X_min_pos.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 		
-	    BUTTON_SetBitmapEx(Xstroke_default.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(Xstroke_default.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 	    BUTTON_SetBitmapEx(Ystroke_default.btnHandle,0,&bmp_struct70X28,0,0);
 	    BUTTON_SetBitmapEx(Zstroke_default.btnHandle,0,&bmp_struct70X28,0,0);
-	    BUTTON_SetBitmapEx(X_min_pos_default.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(X_min_pos_default.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 		
 	    
 	    TEXT_SetTextAlign(Xstroke_text,GUI_TA_LEFT|GUI_TA_VCENTER );
@@ -349,7 +349,7 @@ void draw_Stroke()
 	    BUTTON_SetTextColor(Zstroke_default.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.default_text_color);
 
 	    button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hStrokeWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-           BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+           BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
     
            BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
 
@@ -376,10 +376,10 @@ void draw_Stroke()
 	    BUTTON_SetBmpFileName(Y_min_pos_default.btnHandle, "bmp_default.bin",1);        
 	    BUTTON_SetBmpFileName(Z_min_pos_default.btnHandle, "bmp_default.bin",1);
 	    
-	    BUTTON_SetBitmapEx(Y_min_pos.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(Y_min_pos.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 	    BUTTON_SetBitmapEx(Z_min_pos.btnHandle,0,&bmp_struct70X28,0,0);
 		
-	    BUTTON_SetBitmapEx(Y_min_pos_default.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+	    BUTTON_SetBitmapEx(Y_min_pos_default.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
 	    BUTTON_SetBitmapEx(Z_min_pos_default.btnHandle,0,&bmp_struct70X28,0,0);
 	    
 	    TEXT_SetTextAlign(Y_min_pos_text,GUI_TA_LEFT|GUI_TA_VCENTER );
@@ -414,7 +414,7 @@ void draw_Stroke()
 	    BUTTON_SetTextColor(Z_min_pos_default.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.default_text_color); 
 
            button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hStrokeWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-           BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+           BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
            BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);
 	    BUTTON_SetBkColor(button_previous.btnHandle, BUTTON_CI_PRESSED, gCfgItems.back_btn_color);

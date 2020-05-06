@@ -15,7 +15,7 @@ static BUTTON_STRUCT PrintAcceleration_default,RetractAcceleration_default,Trave
 
 static BUTTON_STRUCT button_next,button_previous,button_back;
 
-static uint8_t current_page;//0:ÉÏÒ»Ò³£¬1:ÏÂÒ»Ò³
+static uint8_t current_page;//0:ï¿½ï¿½Ò»Ò³ï¿½ï¿½1:ï¿½ï¿½Ò»Ò³
 
 static void btnHandle_rest()
 {
@@ -318,7 +318,7 @@ void draw_Acceleration()
         BUTTON_SetTextColor(XAcceleration_value.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.value_text_color); 
 
         button_next.btnHandle = BUTTON_CreateEx(320,270,70,40,hAccelerationWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next.bin",1); 
+        BUTTON_SetBmpFileName(button_next.btnHandle, "bmp_next70x40.bin",1);
     
         BUTTON_SetBitmapEx(button_next.btnHandle, 0, &bmp_struct70X40,0, 0);
         
@@ -408,7 +408,7 @@ void draw_Acceleration()
         BUTTON_SetTextColor(E1Acceleration_value.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.value_text_color); 
 
         button_previous.btnHandle = BUTTON_CreateEx(320,270,70,40,hAccelerationWnd,BUTTON_CF_SHOW,0,alloc_win_id());
-        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_previous.bin",1); 
+        BUTTON_SetBmpFileName(button_previous.btnHandle, "bmp_prev70x40.bin",1);
         
         BUTTON_SetBitmapEx(button_previous.btnHandle, 0, &bmp_struct70X40,0, 0);
 

@@ -302,6 +302,36 @@ void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator) {
 	}
 }
 
+#define ROW(idx) (10+50*idx)
+#define X_TEXT 10
+#define X_RADIO 370
+#define X_ARROW 460
+
+void ui_make_check_pair(int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title, uint8_t state) {
+	pair->button_text = BUTTON_CreateEx(X_TEXT, ROW(row), 240, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
+    BUTTON_SetTextAlign(pair->button_text,GUI_TA_LEFT|GUI_TA_VCENTER);
+    BUTTON_SetText(pair->button_text, title);
+
+    pair->button_check = ui_create_check_button(X_RADIO, ROW(row), hWin, state);
+}
+
+void ui_make_arrow_pair(int row, WM_HWIN hWin, UI_ARROW_PAIR * pair, char* title) {
+	pair->button_text = BUTTON_CreateEx(X_TEXT, ROW(row), 450, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
+    BUTTON_SetTextAlign(pair->button_text,GUI_TA_LEFT|GUI_TA_VCENTER);
+    BUTTON_SetText(pair->button_text, title);
+    pair->button_arrow = BUTTON_CreateEx(X_ARROW,ROW(row),10,40,hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
+    BUTTON_SetBmpFileName(pair->button_arrow, "bmp_arrow.bin",1);
+    BUTTON_SetBitmapEx(pair->button_arrow,0,&bmp_struct10x17,BMP_PIC_X,12);
+}
+
+void ui_draw_config_lines() {
+	GUI_SetColor(0xff5449);
+	GUI_FillRect(10, 50, 470, 50);
+	GUI_FillRect(10, 100, 470, 100);
+	GUI_FillRect(10, 150, 470, 150);
+	GUI_FillRect(10, 200, 470, 200);
+}
+
 
 void ui_gcode_small_preview(char *file_name,int xpos_pixel,int ypos_pixel) {
 	FIL file;

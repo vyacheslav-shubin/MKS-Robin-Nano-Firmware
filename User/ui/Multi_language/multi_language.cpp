@@ -1,14 +1,15 @@
 #include "draw_ui.h"
 #include "Multi_language.h"
+#include "lang_common.h"
 #include "wifi_list.h"
 
 
 //********************************************//
-//”…”⁄œ÷ µ◊÷∑˚±‡¬ÎŒ Ã‚£¨À˘“‘“‘œ¬÷–Œƒ◊÷±ÿ–Î“‘ANSI±Í◊º∏Ò Ωœ‘ æ
-//"’˝‘⁄¥Ú”°""≤Ÿ◊˜""‘›Õ£"»˝∏ˆΩÁ√Êµƒ±ÍÃ‚¿∏÷ª◊ˆ"÷–”¢«–ªª"°£
-#define PRINTING_GBK							"’˝‘⁄¥Ú”°"
-#define PRINTING_OPERATION_GBK				"≤Ÿ◊˜"
-#define PRINTING_PAUSE_GBK						"‘›Õ£"
+//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ µÔøΩ÷∑ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ‚£¨ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ÷±ÔøΩÔøΩÔøΩÔøΩÔøΩANSIÔøΩÔøΩ◊ºÔøΩÔøΩ ΩÔøΩÔøΩ æ
+//"ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°""ÔøΩÔøΩÔøΩÔøΩ""ÔøΩÔøΩÕ£"ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩƒ±ÔøΩÔøΩÔøΩÔøΩÔøΩ÷ªÔøΩÔøΩ"ÔøΩÔøΩ”¢ÔøΩ–ªÔøΩ"ÔøΩÔøΩ
+#define PRINTING_GBK							"ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°"
+#define PRINTING_OPERATION_GBK				"ÔøΩÔøΩÔøΩÔøΩ"
+#define PRINTING_PAUSE_GBK						"ÔøΩÔøΩÕ£"
 
 #define PRINTING_OTHER_LANGUGE				"Printing"
 #define PRINTING_OPERATION_OTHER_LANGUGE		"Operation"
@@ -18,6 +19,7 @@
 #define PRINTING_AJUSTES_SP		"Ajustes"
 #define PRINTING_PAUSAR_SP			"Pausar"
 //*********************************************//
+
 
 
 common_menu_def common_menu;
@@ -54,7 +56,7 @@ machine_common_def machine_menu;
 
 void machine_setting_disp()
 {
-    //ª˙∆˜≤Œ ˝
+    //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
     MachinePara_menu.title = MACHINE_PARA_TITLE_EN;
     MachinePara_menu.MachineSetting = MACHINE_TYPE_CNOFIG_EN;
     MachinePara_menu.TemperatureSetting=TEMPERATURE_CONFIG_EN;
@@ -168,12 +170,6 @@ void machine_setting_disp()
     machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_EN;
 
     machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_EN;
-    machine_menu.MaxFeedRateConf=MAXFEEDRATE_CONF_EN;
-    machine_menu.AccelerationConf=ACCELERATION_CONF_EN;
-    machine_menu.JerkConf=JERKCONF_EN;
-    machine_menu.StepsConf=STEPSCONF_EN;
-    machine_menu.MotorDirConf=MOTORDIRCONF_EN;
-    machine_menu.HomeFeedRateConf=HOMEFEEDRATECONF_EN;
 
     machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_EN;
     machine_menu.XMaxFeedRate=X_MAXFEEDRATE_EN;
@@ -205,7 +201,6 @@ void machine_setting_disp()
     machine_menu.E0_Steps=E0_STEPS_EN;
     machine_menu.E1_Steps=E1_STEPS_EN;
 
-    machine_menu.MotorDirConfTitle=MOTORDIR_CONF_TITLE_EN;
     machine_menu.X_MotorDir=X_MOTORDIR_EN;
     machine_menu.Y_MotorDir=Y_MOTORDIR_EN;
     machine_menu.Z_MotorDir=Z_MOTORDIR_EN;
@@ -221,7 +216,6 @@ void machine_setting_disp()
 
     machine_menu.AdvancedConfTitle=ADVANCED_CONF_TITLE_EN;
     machine_menu.PwrOffDection=PWROFF_DECTION_EN;
-    machine_menu.PwrOffAfterPrint=PWROFF_AFTER_PRINT_EN;
     machine_menu.HaveUps=HAVE_UPS_EN;
     machine_menu.Z2andZ2Endstop=Z2_AND_Z2ENDSTOP_CONF_EN;
     machine_menu.EnablePinsInvert=ENABLE_PINS_CONF_EN;
@@ -248,8 +242,9 @@ void machine_setting_disp()
 	machine_menu.low_level = MOTOR_EN_LOW_LEVEL_EN;
 
 }
-void disp_language_init()
-{
+
+
+void disp_language_init() {
 	preheat_menu.value_state= TEXT_VALUE;
 	preheat_menu.step_1c= TEXT_1C;
 	preheat_menu.step_5c= TEXT_5C;
@@ -359,10 +354,14 @@ void disp_language_init()
 
 	operation_menu.babystep = TEXT_BABY_STEP_EN;
     
+
+	//todo: –í–µ—Å—å –∫–æ–¥ –ø–æ –ª–æ–∫–∞–ª–∏–∑–∞—Ü–∏–∏ —Å—é–¥–∞
+	make_lang_str();
+
 	switch(gCfgItems.language)
 	{
 		case LANG_SIMPLE_CHINESE:
-            //ª˙∆˜≤Œ ˝
+            //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
             MachinePara_menu.title = MACHINE_PARA_TITLE_CN;
             MachinePara_menu.MachineSetting = MACHINE_TYPE_CNOFIG_CN;
             MachinePara_menu.TemperatureSetting=TEMPERATURE_CONFIG_CN;
@@ -476,12 +475,6 @@ void disp_language_init()
             machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_CN;
 
             machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_CN;
-            machine_menu.MaxFeedRateConf=MAXFEEDRATE_CONF_CN;
-            machine_menu.AccelerationConf=ACCELERATION_CONF_CN;
-            machine_menu.JerkConf=JERKCONF_CN;
-            machine_menu.StepsConf=STEPSCONF_CN;
-            machine_menu.MotorDirConf=MOTORDIRCONF_CN;
-            machine_menu.HomeFeedRateConf=HOMEFEEDRATECONF_CN;
 
             machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_CN;
             machine_menu.XMaxFeedRate=X_MAXFEEDRATE_CN;
@@ -529,7 +522,6 @@ void disp_language_init()
           
             machine_menu.AdvancedConfTitle=ADVANCED_CONF_TITLE_CN;
             machine_menu.PwrOffDection=PWROFF_DECTION_CN;
-            machine_menu.PwrOffAfterPrint=PWROFF_AFTER_PRINT_CN;
             machine_menu.HaveUps=HAVE_UPS_CN;
             machine_menu.Z2andZ2Endstop=Z2_AND_Z2ENDSTOP_CONF_CN;
             machine_menu.EnablePinsInvert=ENABLE_PINS_CONF_CN;
@@ -559,7 +551,7 @@ void disp_language_init()
 			common_menu.print_special_title = PRINTING_GBK;
 			common_menu.pause_special_title = PRINTING_PAUSE_GBK;
 			common_menu.operate_special_title = PRINTING_OPERATION_GBK;			
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_CN;
 			main_menu.preheat=PREHEAT_TEXT_CN;
 			main_menu.move=MOVE_TEXT_CN;
@@ -582,7 +574,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_CN;
 			tool_menu.filament = TOOL_FILAMENT_CN;
 			tool_menu.more = TOOL_MORE_CN;
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_CN;
 			preheat_menu.title=TITLE_PREHEAT_CN;
 			preheat_menu.add=ADD_TEXT_CN;
@@ -596,19 +588,19 @@ void disp_language_init()
         	preheat_menu.step_1c= TEXT_1C_CN;
         	preheat_menu.step_5c= TEXT_5C_CN;
         	preheat_menu.step_10c= TEXT_10C_CN;            
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = MOVE_TEXT_CN;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_CN;
 			home_menu.stopmove = HOME_STOPMOVE_CN;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_CN;
 			file_menu.page_up=PAGE_UP_TEXT_CN;
 			file_menu.page_down=PAGE_DOWN_TEXT_CN;
 			file_menu.file_loading = FILE_LOADING_CN;
 			file_menu.no_file = NO_FILE_CN;
 			file_menu.no_file_and_check = NO_FILE_CN;//NO_FILE_AND_CHECK_CN;
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_CN;
 			extrude_menu.in=EXTRUDER_IN_TEXT_CN;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_CN;
@@ -619,14 +611,14 @@ void disp_language_init()
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_CN;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_CN;
             extrude_menu.temp_value = EXTRUDE_TEXT_VALUE_T_CN;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_CN;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_CN;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_CN;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_CN;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_CN;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_CN;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_CN;
 			set_menu.filesys=FILESYS_TEXT_CN;
 			set_menu.wifi=WIFI_TEXT_CN;
@@ -638,11 +630,11 @@ void disp_language_init()
 			set_menu.language=LANGUAGE_TEXT_CN;
             set_menu.machine_para = MACHINE_PARA_CN;
             
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_CN;
 			filesys_menu.sd_sys = SD_CARD_TEXT_CN;
 			filesys_menu.usb_sys = U_DISK_TEXT_CN;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_CN;
 			more_menu.zoffset = ZOFFSET_CN;
 			//WIFI
@@ -660,18 +652,18 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_CN;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_CN;
 			cloud_menu.disable = CLOUD_DISABLE_CN;
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = ABOUT_TEXT_CN;
 			about_menu.type = ABOUT_TYPE_TEXT_CN;
 			about_menu.version = ABOUT_VERSION_TEXT_CN;
 			about_menu.wifi = ABOUT_WIFI_TEXT_CN;	
 
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = FAN_TEXT_CN;
 			fan_menu.add = FAN_ADD_TEXT_CN;
 			fan_menu.dec = FAN_DEC_TEXT_CN;
 			fan_menu.state = FAN_TIPS1_TEXT_CN;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_CN;
 			filament_menu.in = FILAMENT_IN_TEXT_CN;
 			filament_menu.out = FILAMENT_OUT_TEXT_CN;
@@ -688,19 +680,19 @@ void disp_language_init()
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_CN;
 
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = TITLE_LANGUAGE_CN;
 			language_menu.next = PAGE_DOWN_TEXT_CN;
 			language_menu.up = PAGE_UP_TEXT_CN;
 			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_CN;
 			printing_menu.option = PRINTING_OPERATION_CN;
 			printing_menu.stop = PRINTING_STOP_CN;
 			printing_menu.pause = PRINTING_PAUSE_CN;
 			printing_menu.resume = PRINTING_RESUME_CN;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_CN;
 			operation_menu.pause = PRINTING_PAUSE_CN;
 			operation_menu.stop = PRINTING_STOP_CN;
@@ -713,7 +705,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_CN;
 			operation_menu.auto_off = AUTO_SHUTDOWN_CN;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_CN;			
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_CN;
 			pause_menu.resume = PRINTING_RESUME_CN;
 			pause_menu.stop = PRINTING_STOP_CN;
@@ -722,7 +714,7 @@ void disp_language_init()
 			pause_menu.filament= FILAMENT_TEXT_CN;
 			pause_menu.more = PRINTING_MORE_CN;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = PRINTING_CHANGESPEED_CN;
 			speed_menu.add = ADD_TEXT_CN;
 			speed_menu.dec = DEC_TEXT_CN;
@@ -730,7 +722,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_CN;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_CN;
 			speed_menu.move_speed = MOVE_SPEED_STATE_CN;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.title = TITLE_MORE_CN;
 			printing_more_menu.fan = FAN_TEXT_CN;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_CN;
@@ -764,7 +756,7 @@ void disp_language_init()
 #if 1            
 		#if 1
 		case LANG_COMPLEX_CHINESE:
-        //ª˙∆˜≤Œ ˝
+        //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
         MachinePara_menu.title = MACHINE_PARA_TITLE_T_CN;
         MachinePara_menu.MachineSetting = MACHINE_TYPE_CNOFIG_T_CN;
         MachinePara_menu.TemperatureSetting=TEMPERATURE_CONFIG_T_CN;
@@ -878,12 +870,6 @@ void disp_language_init()
         machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_T_CN;
 
         machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_T_CN;
-        machine_menu.MaxFeedRateConf=MAXFEEDRATE_CONF_T_CN;
-        machine_menu.AccelerationConf=ACCELERATION_CONF_T_CN;
-        machine_menu.JerkConf=JERKCONF_T_CN;
-        machine_menu.StepsConf=STEPSCONF_T_CN;
-        machine_menu.MotorDirConf=MOTORDIRCONF_T_CN;
-        machine_menu.HomeFeedRateConf=HOMEFEEDRATECONF_T_CN;
 
         machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_T_CN;
         machine_menu.XMaxFeedRate=X_MAXFEEDRATE_T_CN;
@@ -931,7 +917,6 @@ void disp_language_init()
 
         machine_menu.AdvancedConfTitle=ADVANCED_CONF_TITLE_T_CN;
         machine_menu.PwrOffDection=PWROFF_DECTION_T_CN;
-        machine_menu.PwrOffAfterPrint=PWROFF_AFTER_PRINT_T_CN;
         machine_menu.HaveUps=HAVE_UPS_T_CN;
         machine_menu.Z2andZ2Endstop=Z2_AND_Z2ENDSTOP_CONF_T_CN;
         machine_menu.EnablePinsInvert=ENABLE_PINS_CONF_T_CN;
@@ -962,7 +947,7 @@ void disp_language_init()
 			common_menu.print_special_title = PRINTING_GBK;
 			common_menu.pause_special_title = PRINTING_PAUSE_GBK;
 			common_menu.operate_special_title = PRINTING_OPERATION_GBK;			
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_T_CN;
 			main_menu.preheat=PREHEAT_TEXT_T_CN;
 			main_menu.move=MOVE_TEXT_T_CN;
@@ -985,7 +970,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_T_CN;
 			tool_menu.filament = TOOL_FILAMENT_T_CN;
 			tool_menu.more = TOOL_MORE_T_CN;			
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_T_CN;
 			preheat_menu.title=TITLE_PREHEAT_T_CN;
 			preheat_menu.add=ADD_TEXT_T_CN;
@@ -998,20 +983,20 @@ void disp_language_init()
         	preheat_menu.step_1c= TEXT_1C_T_CN;
         	preheat_menu.step_5c= TEXT_5C_T_CN;
         	preheat_menu.step_10c= TEXT_10C_T_CN;             
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = MOVE_TEXT_T_CN;
 			more_menu.zoffset = ZOFFSET_T_CN;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_T_CN;
 			home_menu.stopmove = HOME_STOPMOVE_T_CN;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_T_CN;
 			file_menu.page_up=PAGE_UP_TEXT_T_CN;
 			file_menu.page_down=PAGE_DOWN_TEXT_T_CN;
 			file_menu.file_loading = FILE_LOADING_T_CN;
 			file_menu.no_file = NO_FILE_T_CN;
 			file_menu.no_file_and_check = NO_FILE_T_CN;//NO_FILE_AND_CHECK_T_CN;
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_T_CN;
 			extrude_menu.in=EXTRUDER_IN_TEXT_T_CN;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_T_CN;
@@ -1022,14 +1007,14 @@ void disp_language_init()
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_T_CN;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_T_CN;
             extrude_menu.temp_value = EXTRUDE_TEXT_VALUE_T_T_CN;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_CN;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_T_CN;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_T_CN;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_T_CN;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_T_CN;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_T_CN;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_T_CN;
 			set_menu.filesys=FILESYS_TEXT_T_CN;
 			set_menu.wifi=WIFI_TEXT_T_CN;
@@ -1040,11 +1025,11 @@ void disp_language_init()
 			set_menu.motoroff=MOTOR_OFF_TEXT_T_CN;
 			set_menu.language=LANGUAGE_TEXT_T_CN;
             set_menu.machine_para = MACHINE_PARA_T_CN;
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_T_CN;
 			filesys_menu.sd_sys = SD_CARD_TEXT_T_CN;
 			filesys_menu.usb_sys = U_DISK_TEXT_T_CN;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_T_CN;
 			//WIFI
 			wifi_menu.title=WIFI_TEXT;
@@ -1061,18 +1046,18 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_T_CN;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_T_CN;
 			cloud_menu.disable = CLOUD_DISABLE_T_CN;
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = ABOUT_TEXT_T_CN;
 			about_menu.type = ABOUT_TYPE_TEXT_T_CN;
 			about_menu.version = ABOUT_VERSION_TEXT_T_CN;
 			about_menu.wifi = ABOUT_WIFI_TEXT_T_CN;
 
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = FAN_TEXT_T_CN;
 			fan_menu.add = FAN_ADD_TEXT_T_CN;
 			fan_menu.dec = FAN_DEC_TEXT_T_CN;
 			fan_menu.state = FAN_TIPS1_TEXT_T_CN;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_T_CN;
 			filament_menu.in = FILAMENT_IN_TEXT_T_CN;
 			filament_menu.out = FILAMENT_OUT_TEXT_T_CN;
@@ -1089,19 +1074,19 @@ void disp_language_init()
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_T_CN;
 
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = TITLE_LANGUAGE_T_CN;
 			language_menu.next = PAGE_DOWN_TEXT_T_CN;
 			language_menu.up = PAGE_UP_TEXT_T_CN;
 			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_T_CN;
 			printing_menu.option = PRINTING_OPERATION_T_CN;
 			printing_menu.stop = PRINTING_STOP_T_CN;
 			printing_menu.pause = PRINTING_PAUSE_T_CN;
 			printing_menu.resume = PRINTING_RESUME_T_CN;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_T_CN;
 			operation_menu.pause = PRINTING_PAUSE_T_CN;
 			operation_menu.stop = PRINTING_STOP_T_CN;
@@ -1114,7 +1099,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_T_CN;
 			operation_menu.auto_off = AUTO_SHUTDOWN_T_CN;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_T_CN;			
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_T_CN;
 			pause_menu.resume = PRINTING_RESUME_T_CN;
 			pause_menu.stop = PRINTING_STOP_T_CN;
@@ -1123,7 +1108,7 @@ void disp_language_init()
 			pause_menu.filament= FILAMENT_TEXT_T_CN;
 			pause_menu.more = PRINTING_MORE_T_CN;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = PRINTING_CHANGESPEED_T_CN;
 			speed_menu.add = ADD_TEXT_T_CN;
 			speed_menu.dec = DEC_TEXT_T_CN;
@@ -1131,7 +1116,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_T_CN;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_T_CN;
 			speed_menu.move_speed = MOVE_SPEED_STATE_T_CN;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.title = TITLE_MORE_T_CN;
 			printing_more_menu.fan = FAN_TEXT_T_CN;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_T_CN;
@@ -1161,7 +1146,7 @@ void disp_language_init()
 			zoffset_menu.dec = ZOFFSET_DEC_T_CN;			
 			break;
 		case LANG_ENGLISH:
-            //ª˙∆˜≤Œ ˝
+            //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
                     MachinePara_menu.title = MACHINE_PARA_TITLE_EN;
                     MachinePara_menu.MachineSetting = MACHINE_TYPE_CNOFIG_EN;
                     MachinePara_menu.TemperatureSetting=TEMPERATURE_CONFIG_EN;
@@ -1275,12 +1260,6 @@ void disp_language_init()
                     machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_EN;
             
                     machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_EN;
-                    machine_menu.MaxFeedRateConf=MAXFEEDRATE_CONF_EN;
-                    machine_menu.AccelerationConf=ACCELERATION_CONF_EN;
-                    machine_menu.JerkConf=JERKCONF_EN;
-                    machine_menu.StepsConf=STEPSCONF_EN;
-                    machine_menu.MotorDirConf=MOTORDIRCONF_EN;
-                    machine_menu.HomeFeedRateConf=HOMEFEEDRATECONF_EN;
             
                     machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_EN;
                     machine_menu.XMaxFeedRate=X_MAXFEEDRATE_EN;
@@ -1328,7 +1307,6 @@ void disp_language_init()
             
                     machine_menu.AdvancedConfTitle=ADVANCED_CONF_TITLE_EN;
                     machine_menu.PwrOffDection=PWROFF_DECTION_EN;
-                    machine_menu.PwrOffAfterPrint=PWROFF_AFTER_PRINT_EN;
                     machine_menu.HaveUps=HAVE_UPS_EN;
                     machine_menu.Z2andZ2Endstop=Z2_AND_Z2ENDSTOP_CONF_EN;
                     machine_menu.EnablePinsInvert=ENABLE_PINS_CONF_EN;
@@ -1359,7 +1337,7 @@ void disp_language_init()
 			common_menu.print_special_title = PRINTING_OTHER_LANGUGE;
 			common_menu.pause_special_title = PRINTING_PAUSE_OTHER_LANGUGE;
 			common_menu.operate_special_title = PRINTING_OPERATION_OTHER_LANGUGE;			
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_EN;
 			main_menu.preheat=PREHEAT_TEXT_EN;
 			main_menu.move=MOVE_TEXT_EN;
@@ -1382,7 +1360,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_EN;
 			tool_menu.filament = TOOL_FILAMENT_EN;
 			tool_menu.more = TOOL_MORE_EN;			
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_EN;
 			preheat_menu.title=TITLE_PREHEAT_EN;
 			preheat_menu.add=ADD_TEXT_EN;
@@ -1391,19 +1369,19 @@ void disp_language_init()
 			preheat_menu.ext2=EXTRUDER_2_TEXT_EN;
 			preheat_menu.hotbed=HEATBED_TEXT_EN;
 			preheat_menu.off=CLOSE_TEXT_EN;
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = TITLE_MOVE_EN;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_EN;
 			home_menu.stopmove = HOME_STOPMOVE_EN;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_EN;
 			file_menu.page_up=PAGE_UP_TEXT_EN;
 			file_menu.page_down=PAGE_DOWN_TEXT_EN;
 			file_menu.file_loading = FILE_LOADING_EN;
 			file_menu.no_file = NO_FILE_EN;
 			file_menu.no_file_and_check = NO_FILE_EN;//NO_FILE_AND_CHECK_EN;			
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_EN;
 			extrude_menu.in=EXTRUDER_IN_TEXT_EN;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_EN;
@@ -1413,14 +1391,14 @@ void disp_language_init()
 			extrude_menu.normal=EXTRUDE_MEDIUM_SPEED_TEXT_EN;
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_EN;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_EN;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_EN;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_EN;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_EN;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_EN;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_EN;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_EN;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_EN;
 			set_menu.filesys=FILESYS_TEXT_EN;
 			set_menu.wifi=WIFI_TEXT_EN;
@@ -1431,10 +1409,10 @@ void disp_language_init()
 			set_menu.motoroff=MOTOR_OFF_TEXT_EN;
 			set_menu.language=LANGUAGE_TEXT_EN;
             set_menu.machine_para = MACHINE_PARA_EN;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_EN;
 			more_menu.zoffset = ZOFFSET_EN;
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_EN;
 			filesys_menu.sd_sys = SD_CARD_TEXT_EN;
 			filesys_menu.usb_sys = U_DISK_TEXT_EN;
@@ -1453,17 +1431,17 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_EN;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_EN;
 			cloud_menu.disable = CLOUD_DISABLE_EN;
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = TITLE_ABOUT_EN;
 			about_menu.type = ABOUT_TYPE_TEXT_EN;
 			about_menu.version = ABOUT_VERSION_TEXT_EN;
 			about_menu.wifi = ABOUT_WIFI_TEXT_EN;			
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = TITLE_FAN_EN;
 			fan_menu.add = FAN_ADD_TEXT_EN;
 			fan_menu.dec = FAN_DEC_TEXT_EN;
 			fan_menu.state = FAN_TIPS1_TEXT_EN;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_EN;
 			filament_menu.in = FILAMENT_IN_TEXT_EN;
 			filament_menu.out = FILAMENT_OUT_TEXT_EN;
@@ -1479,18 +1457,18 @@ void disp_language_init()
 			filament_menu.filament_dialog_unloading = FILAMENT_DIALOG_UNLOADING_TIPS_EN;
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_EN;
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = TITLE_LANGUAGE_EN;
 			language_menu.next = PAGE_DOWN_TEXT_EN;
 			language_menu.up = PAGE_UP_TEXT_EN;			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_EN;
 			printing_menu.option = PRINTING_OPERATION_EN;
 			printing_menu.stop = PRINTING_STOP_EN;
 			printing_menu.pause = PRINTING_PAUSE_EN;
 			printing_menu.resume = PRINTING_RESUME_EN;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_EN;
 			operation_menu.pause = PRINTING_PAUSE_EN;
 			operation_menu.stop = PRINTING_STOP_EN;
@@ -1503,7 +1481,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_EN;
 			operation_menu.auto_off = AUTO_SHUTDOWN_EN;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_EN;			
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_EN;
 			pause_menu.resume = PRINTING_RESUME_EN;
 			pause_menu.stop = PRINTING_STOP_EN;
@@ -1512,7 +1490,7 @@ void disp_language_init()
 			pause_menu.filament = FILAMENT_TEXT_EN;
 			pause_menu.more = PRINTING_MORE_EN;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = TITLE_CHANGESPEED_EN;
 			speed_menu.add = ADD_TEXT_EN;
 			speed_menu.dec = DEC_TEXT_EN;
@@ -1520,7 +1498,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_EN;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_EN;
 			speed_menu.move_speed = MOVE_SPEED_STATE_EN;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.title = TITLE_MORE_EN;
 			printing_more_menu.fan = FAN_TEXT_EN;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_EN;
@@ -1556,7 +1534,7 @@ void disp_language_init()
 			common_menu.print_special_title = PRINTING_OTHER_LANGUGE;
 			common_menu.pause_special_title = PRINTING_PAUSE_OTHER_LANGUGE;
 			common_menu.operate_special_title = PRINTING_OPERATION_OTHER_LANGUGE;			
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_RU;
 			main_menu.preheat=PREHEAT_TEXT_RU;
 			main_menu.move=MOVE_TEXT_RU;
@@ -1579,7 +1557,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_RU;
 			tool_menu.filament = TOOL_FILAMENT_RU;
 			tool_menu.more = TOOL_MORE_RU;			
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_RU;
 			preheat_menu.title=TITLE_PREHEAT_RU;
 			preheat_menu.add=ADD_TEXT_RU;
@@ -1588,19 +1566,19 @@ void disp_language_init()
 			preheat_menu.ext2=EXTRUDER_2_TEXT_RU;
 			preheat_menu.hotbed=HEATBED_TEXT_RU;
 			preheat_menu.off=CLOSE_TEXT_RU;
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = MOVE_TEXT_RU;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_RU;
 			home_menu.stopmove = HOME_STOPMOVE_RU;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_RU;
 			file_menu.page_up=PAGE_UP_TEXT_RU;
 			file_menu.page_down=PAGE_DOWN_TEXT_RU;
 			file_menu.file_loading = FILE_LOADING_RU;
 			file_menu.no_file = NO_FILE_RU;
 			file_menu.no_file_and_check = NO_FILE_RU;//NO_FILE_AND_CHECK_RU;			
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_RU;
 			extrude_menu.in=EXTRUDER_IN_TEXT_RU;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_RU;
@@ -1610,14 +1588,14 @@ void disp_language_init()
 			extrude_menu.normal=EXTRUDE_MEDIUM_SPEED_TEXT_RU;
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_RU;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_RU;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_RU;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_RU;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_RU;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_RU;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_RU;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_RU;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_RU;
 			set_menu.filesys=FILESYS_TEXT_RU;
 			set_menu.wifi=WIFI_TEXT_RU;
@@ -1627,10 +1605,10 @@ void disp_language_init()
 			set_menu.breakpoint=BREAK_POINT_TEXT_RU;
 			set_menu.motoroff=MOTOR_OFF_TEXT_RU;
 			set_menu.language=LANGUAGE_TEXT_RU;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_RU;	
 			more_menu.zoffset = ZOFFSET_RU;
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_RU;
 			filesys_menu.sd_sys = SD_CARD_TEXT_RU;
 			filesys_menu.usb_sys = U_DISK_TEXT_RU;			
@@ -1650,17 +1628,17 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_RU;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_RU;
 			cloud_menu.disable = CLOUD_DISABLE_RU;			
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = ABOUT_TEXT_RU;
 			about_menu.type = ABOUT_TYPE_TEXT_RU;
 			about_menu.version = ABOUT_VERSION_TEXT_RU;
 			about_menu.wifi = ABOUT_WIFI_TEXT_RU;			
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = FAN_TEXT_RU;
 			fan_menu.add = FAN_ADD_TEXT_RU;
 			fan_menu.dec = FAN_DEC_TEXT_RU;
 			fan_menu.state = FAN_TIPS1_TEXT_RU;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_RU;
 			filament_menu.in = FILAMENT_IN_TEXT_RU;
 			filament_menu.out = FILAMENT_OUT_TEXT_RU;
@@ -1676,18 +1654,18 @@ void disp_language_init()
 			filament_menu.filament_dialog_unloading = FILAMENT_DIALOG_UNLOADING_TIPS_RU;
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_RU;
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = LANGUAGE_TEXT_RU;
 			language_menu.next = PAGE_DOWN_TEXT_RU;
 			language_menu.up = PAGE_UP_TEXT_RU;
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_RU;
 			printing_menu.option = PRINTING_OPERATION_RU;
 			printing_menu.stop = PRINTING_STOP_RU;
 			printing_menu.pause = PRINTING_PAUSE_RU;
 			printing_menu.resume = PRINTING_RESUME_RU;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_RU;
 			operation_menu.pause = PRINTING_PAUSE_RU;
 			operation_menu.stop = PRINTING_STOP_RU;
@@ -1700,7 +1678,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_RU;
 			operation_menu.auto_off = AUTO_SHUTDOWN_RU;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_RU;			
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_RU;
 			pause_menu.resume = PRINTING_RESUME_RU;
 			pause_menu.stop = PRINTING_STOP_RU;
@@ -1709,7 +1687,7 @@ void disp_language_init()
 			pause_menu.filament= FILAMENT_TEXT_RU;
 			pause_menu.more = PRINTING_MORE_RU;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = PRINTING_CHANGESPEED_RU;
 			speed_menu.add = ADD_TEXT_RU;
 			speed_menu.dec = DEC_TEXT_RU;
@@ -1717,7 +1695,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_RU;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_RU;
 			speed_menu.move_speed = MOVE_SPEED_STATE_RU;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.title = TITLE_MORE_RU;
 			printing_more_menu.fan = FAN_TEXT_RU;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_RU;
@@ -1752,7 +1730,7 @@ void disp_language_init()
 			common_menu.print_special_title = PRINTING_SP;
 			common_menu.pause_special_title = PRINTING_PAUSAR_SP;
 			common_menu.operate_special_title = PRINTING_AJUSTES_SP;			
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_SP;
 			main_menu.preheat=PREHEAT_TEXT_SP;
 			main_menu.move=MOVE_TEXT_SP;
@@ -1775,7 +1753,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_SP;
 			tool_menu.filament = TOOL_FILAMENT_SP;
 			tool_menu.more = TOOL_MORE_SP;			
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_SP;
 			preheat_menu.title=TITLE_PREHEAT_SP;
 			preheat_menu.add=ADD_TEXT_SP;
@@ -1784,23 +1762,23 @@ void disp_language_init()
 			preheat_menu.ext2=EXTRUDER_2_TEXT_SP;
 			preheat_menu.hotbed=HEATBED_TEXT_SP;
 			preheat_menu.off=CLOSE_TEXT_SP;
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = MOVE_TEXT_SP;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_SP;
 			home_menu.home_x= HOME_X_TEXT_SP;
 			home_menu.home_y= HOME_Y_TEXT_SP;
 			home_menu.home_z= HOME_Z_TEXT_SP;
 			home_menu.home_all= HOME_ALL_TEXT_SP;
 			home_menu.stopmove = HOME_STOPMOVE_SP;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_SP;
 			file_menu.page_up=PAGE_UP_TEXT_SP;
 			file_menu.page_down=PAGE_DOWN_TEXT_SP;
 			file_menu.file_loading = FILE_LOADING_SP;
 			file_menu.no_file = NO_FILE_SP;
 			file_menu.no_file_and_check = NO_FILE_SP;//NO_FILE_AND_CHECK_SP;			
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_SP;
 			extrude_menu.in=EXTRUDER_IN_TEXT_SP;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_SP;
@@ -1810,14 +1788,14 @@ void disp_language_init()
 			extrude_menu.normal=EXTRUDE_MEDIUM_SPEED_TEXT_SP;
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_SP;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_SP;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_SP;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_SP;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_SP;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_SP;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_SP;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_SP;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_SP;
 			set_menu.filesys=FILESYS_TEXT_SP;
 			set_menu.wifi=WIFI_TEXT_SP;
@@ -1827,10 +1805,10 @@ void disp_language_init()
 			set_menu.breakpoint=BREAK_POINT_TEXT_SP;
 			set_menu.motoroff=MOTOR_OFF_TEXT_SP;
 			set_menu.language=LANGUAGE_TEXT_SP;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_SP;
 			more_menu.zoffset = ZOFFSET_SP;
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_SP;
 			filesys_menu.sd_sys = SD_CARD_TEXT_SP;
 			filesys_menu.usb_sys = U_DISK_TEXT_SP;		
@@ -1850,17 +1828,17 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_SP;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_SP;
 			cloud_menu.disable = CLOUD_DISABLE_SP;			
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = ABOUT_TEXT_SP;
 			about_menu.type = ABOUT_TYPE_TEXT_SP;
 			about_menu.version = ABOUT_VERSION_TEXT_SP;
 			about_menu.wifi = ABOUT_WIFI_TEXT_SP;				
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = FAN_TEXT_SP;
 			fan_menu.add = FAN_ADD_TEXT_SP;
 			fan_menu.dec = FAN_DEC_TEXT_SP;
 			fan_menu.state = FAN_TIPS1_TEXT_SP;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_SP;
 			filament_menu.in = FILAMENT_IN_TEXT_SP;
 			filament_menu.out = FILAMENT_OUT_TEXT_SP;
@@ -1876,18 +1854,18 @@ void disp_language_init()
 			filament_menu.filament_dialog_unloading = FILAMENT_DIALOG_UNLOADING_TIPS_SP;
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_SP;
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = LANGUAGE_TEXT_SP;
 			language_menu.next = PAGE_DOWN_TEXT_SP;
 			language_menu.up = PAGE_UP_TEXT_SP;			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_SP;
 			printing_menu.option = PRINTING_OPERATION_SP;
 			printing_menu.stop = PRINTING_STOP_SP;
 			printing_menu.pause = PRINTING_PAUSE_SP;
 			printing_menu.resume = PRINTING_RESUME_SP;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_SP;
 			operation_menu.pause = PRINTING_PAUSE_SP;
 			operation_menu.stop = PRINTING_STOP_SP;
@@ -1900,7 +1878,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_SP;
 			operation_menu.auto_off = AUTO_SHUTDOWN_SP;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_SP;
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_RU;
 			pause_menu.resume = PRINTING_RESUME_SP;
 			pause_menu.stop = PRINTING_STOP_SP;
@@ -1909,7 +1887,7 @@ void disp_language_init()
 			pause_menu.filament= FILAMENT_TEXT_SP;
 			pause_menu.more = PRINTING_MORE_SP;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = PRINTING_CHANGESPEED_SP;
 			speed_menu.add = ADD_TEXT_SP;
 			speed_menu.dec = DEC_TEXT_SP;
@@ -1917,7 +1895,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_SP;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_SP;
 			speed_menu.move_speed = MOVE_SPEED_STATE_SP;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.title= TITLE_MORE_SP;
 			printing_more_menu.fan = FAN_TEXT_SP;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_SP;
@@ -1956,7 +1934,7 @@ void disp_language_init()
 			common_menu.pause_special_title = PRINTING_PAUSE_OTHER_LANGUGE;
 			common_menu.operate_special_title = PRINTING_OPERATION_OTHER_LANGUGE;
 
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_FR;
 			main_menu.preheat=PREHEAT_TEXT_FR;
 			main_menu.move=MOVE_TEXT_FR;
@@ -1979,7 +1957,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_FR;
 			tool_menu.filament = TOOL_FILAMENT_FR;
 			tool_menu.more = TOOL_MORE_FR;			
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_FR;
 			preheat_menu.title=TITLE_PREHEAT_FR;
 			preheat_menu.add=ADD_TEXT_FR;
@@ -1988,16 +1966,16 @@ void disp_language_init()
 			preheat_menu.ext2=EXTRUDER_2_TEXT_FR;
 			preheat_menu.hotbed =HEATBED_TEXT_FR;
 			preheat_menu.off=CLOSE_TEXT_FR;
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = MOVE_TEXT_FR;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_FR;
 			home_menu.stopmove = HOME_STOPMOVE_FR;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_FR;
 			file_menu.page_up=PAGE_UP_TEXT_FR;
 			file_menu.page_down=PAGE_DOWN_TEXT_FR;
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_FR;
 			extrude_menu.in=EXTRUDER_IN_TEXT_FR;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_FR;
@@ -2007,14 +1985,14 @@ void disp_language_init()
 			extrude_menu.normal=EXTRUDE_MEDIUM_SPEED_TEXT_FR;
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_FR;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_FR;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_FR;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_FR;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_FR;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_FR;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_FR;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_FR;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_FR;
 			set_menu.filesys=FILESYS_TEXT_FR;
 			set_menu.wifi=WIFI_TEXT_FR;
@@ -2024,10 +2002,10 @@ void disp_language_init()
 			set_menu.breakpoint=BREAK_POINT_TEXT_FR;
 			set_menu.motoroff=MOTOR_OFF_TEXT_FR;
 			set_menu.language=LANGUAGE_TEXT_FR;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_FR;
 			more_menu.zoffset = ZOFFSET_FR;
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_FR;
 			filesys_menu.sd_sys = SD_CARD_TEXT_FR;
 			filesys_menu.usb_sys = U_DISK_TEXT_FR;
@@ -2050,17 +2028,17 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_FR;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_FR;
 			cloud_menu.disable = CLOUD_DISABLE_FR;
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = ABOUT_TEXT_FR;
 			about_menu.type = ABOUT_TYPE_TEXT_FR;
 			about_menu.version = ABOUT_VERSION_TEXT_FR;
 			about_menu.wifi = ABOUT_WIFI_TEXT_FR;				
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = FAN_TEXT_FR;
 			fan_menu.add = FAN_ADD_TEXT_FR;
 			fan_menu.dec = FAN_DEC_TEXT_FR;
 			fan_menu.state = FAN_TIPS1_TEXT_FR;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_FR;
 			filament_menu.in = FILAMENT_IN_TEXT_FR;
 			filament_menu.out = FILAMENT_OUT_TEXT_FR;
@@ -2076,17 +2054,17 @@ void disp_language_init()
 			filament_menu.filament_dialog_unloading = FILAMENT_DIALOG_UNLOADING_TIPS_FR;
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_FR;
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = LANGUAGE_TEXT_FR;
 			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_FR;
 			printing_menu.option = PRINTING_OPERATION_FR;
 			printing_menu.stop = PRINTING_STOP_FR;
 			printing_menu.pause = PRINTING_PAUSE_FR;
 			printing_menu.resume = PRINTING_RESUME_FR;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_FR;
 			operation_menu.pause = PRINTING_PAUSE_FR;
 			operation_menu.stop = PRINTING_STOP_FR;
@@ -2099,7 +2077,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_FR;
 			operation_menu.auto_off = AUTO_SHUTDOWN_FR;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_FR;			
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_FR;
 			pause_menu.resume = PRINTING_RESUME_FR;
 			pause_menu.stop = PRINTING_STOP_FR;
@@ -2108,7 +2086,7 @@ void disp_language_init()
 			pause_menu.filament = FILAMENT_TEXT_FR;
 			pause_menu.more = PRINTING_MORE_FR;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = PRINTING_CHANGESPEED_FR;
 			speed_menu.add = ADD_TEXT_FR;
 			speed_menu.dec = DEC_TEXT_FR;
@@ -2116,7 +2094,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_FR;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_FR;
 			speed_menu.move_speed = MOVE_SPEED_STATE_FR;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.fan = FAN_TEXT_FR;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_FR;
 			printing_more_menu.manual = MANUAL_SHUTDOWN_FR;
@@ -2153,7 +2131,7 @@ void disp_language_init()
 			common_menu.pause_special_title = PRINTING_PAUSE_OTHER_LANGUGE;
 			common_menu.operate_special_title = PRINTING_OPERATION_OTHER_LANGUGE;
 
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_IT;
 			main_menu.preheat=PREHEAT_TEXT_IT;
 			main_menu.move=MOVE_TEXT_IT;
@@ -2176,7 +2154,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_IT;
 			tool_menu.filament = TOOL_FILAMENT_IT;
 			tool_menu.more = TOOL_MORE_IT;			
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_IT;
 			preheat_menu.title=TITLE_PREHEAT_IT;
 			preheat_menu.add=ADD_TEXT_IT;
@@ -2185,19 +2163,19 @@ void disp_language_init()
 			preheat_menu.ext2=EXTRUDER_2_TEXT_IT;
 			preheat_menu.hotbed=HEATBED_TEXT_IT;
 			preheat_menu.off=CLOSE_TEXT_IT;
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = MOVE_TEXT_IT;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_IT;
 			home_menu.stopmove = HOME_STOPMOVE_IT;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_IT;
 			file_menu.page_up=PAGE_UP_TEXT_IT;
 			file_menu.page_down=PAGE_DOWN_TEXT_IT;
 			file_menu.file_loading = FILE_LOADING_IT;
 			file_menu.no_file = NO_FILE_IT;
 			file_menu.no_file_and_check = NO_FILE_IT;//NO_FILE_AND_CHECK_IT;				
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_IT;
 			extrude_menu.in=EXTRUDER_IN_TEXT_IT;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_IT;
@@ -2207,14 +2185,14 @@ void disp_language_init()
 			extrude_menu.normal=EXTRUDE_MEDIUM_SPEED_TEXT_IT;
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_IT;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_IT;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_IT;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_IT;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_IT;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_IT;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_IT;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_IT;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_IT;
 			set_menu.filesys=FILESYS_TEXT_IT;
 			set_menu.wifi=WIFI_TEXT_IT;
@@ -2224,10 +2202,10 @@ void disp_language_init()
 			set_menu.breakpoint=BREAK_POINT_TEXT_IT;
 			set_menu.motoroff=MOTOR_OFF_TEXT_IT;
 			set_menu.language=LANGUAGE_TEXT_IT;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_IT;
 			more_menu.zoffset = ZOFFSET_IT;
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_IT;
 			filesys_menu.sd_sys = SD_CARD_TEXT_IT;
 			filesys_menu.usb_sys = U_DISK_TEXT_IT;
@@ -2247,17 +2225,17 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_IT;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_IT;
 			cloud_menu.disable = CLOUD_DISABLE_IT;
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = ABOUT_TEXT_IT;
 			about_menu.type = ABOUT_TYPE_TEXT_IT;
 			about_menu.version = ABOUT_VERSION_TEXT_IT;
 			about_menu.wifi = ABOUT_WIFI_TEXT_IT;				
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = FAN_TEXT_IT;
 			fan_menu.add = FAN_ADD_TEXT_IT;
 			fan_menu.dec = FAN_DEC_TEXT_IT;
 			fan_menu.state = FAN_TIPS1_TEXT_IT;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_IT;
 			filament_menu.in = FILAMENT_IN_TEXT_IT;
 			filament_menu.out = FILAMENT_OUT_TEXT_IT;
@@ -2273,17 +2251,17 @@ void disp_language_init()
 			filament_menu.filament_dialog_unloading = FILAMENT_DIALOG_UNLOADING_TIPS_IT;
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_IT;
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = LANGUAGE_TEXT_IT;
 			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_IT;
 			printing_menu.option = PRINTING_OPERATION_IT;
 			printing_menu.stop = PRINTING_STOP_IT;
 			printing_menu.pause = PRINTING_PAUSE_IT;
 			printing_menu.resume = PRINTING_RESUME_IT;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_IT;
 			operation_menu.pause = PRINTING_PAUSE_IT;
 			operation_menu.stop = PRINTING_STOP_IT;
@@ -2296,7 +2274,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_IT;
 			operation_menu.auto_off = AUTO_SHUTDOWN_IT;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_IT;
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_IT;
 			pause_menu.resume = PRINTING_RESUME_IT;
 			pause_menu.stop = PRINTING_STOP_IT;
@@ -2305,7 +2283,7 @@ void disp_language_init()
 			pause_menu.filament = FILAMENT_TEXT_IT;
 			pause_menu.more = PRINTING_MORE_IT;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = PRINTING_CHANGESPEED_IT;
 			speed_menu.add = ADD_TEXT_IT;
 			speed_menu.dec = DEC_TEXT_IT;
@@ -2313,7 +2291,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_IT;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_IT;
 			speed_menu.move_speed = MOVE_SPEED_STATE_IT;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.fan = FAN_TEXT_IT;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_IT;
 			printing_more_menu.manual = MANUAL_SHUTDOWN_IT;
@@ -2341,127 +2319,9 @@ void disp_language_init()
 			zoffset_menu.dec = ZOFFSET_DEC_IT;			
 			break;
 
-			#if 0
-		case LANG_KOREAN:
-			common_menu.text_back=BACK_TEXT_KR;
-			//÷˜“≥√Ê
-			main_menu.title=TITLE_READYPRINT_KR;
-			main_menu.preheat=PREHEAT_TEXT_KR;
-			main_menu.move=MOVE_TEXT_KR;
-			main_menu.home=HOME_TEXT_KR;
-			main_menu.print=PRINT_TEXT_KR;
-			main_menu.extrude=EXTRUDE_TEXT_KR;
-			main_menu.leveling=LEVELING_TEXT_KR;
-			main_menu.autoleveling=AUTO_LEVELING_TEXT_KR;
-			main_menu.set=SET_TEXT_KR;
-			main_menu.more=MORE_TEXT_KR;
-			//‘§»»
-			preheat_menu.adjust_title = TITLE_ADJUST_KR;
-			preheat_menu.title=TITLE_PREHEAT_KR;
-			preheat_menu.add=ADD_TEXT_KR;
-			preheat_menu.dec=DEC_TEXT_KR;
-			preheat_menu.ext1=EXTRUDER_1_TEXT_KR;
-			preheat_menu.ext2=EXTRUDER_2_TEXT_KR;
-			preheat_menu.off=CLOSE_TEXT_KR;
-			//“∆∂Ø
-			move_menu.title = MOVE_TEXT_KR;
-			//πÈ¡„
-			home_menu.title=TITLE_HOME_KR;
-			//Œƒº˛ƒø¬º
-			file_menu.title=TITLE_CHOOSEFILE_KR;
-			file_menu.page_up=PAGE_UP_TEXT_KR;
-			file_menu.page_down=PAGE_DOWN_TEXT_KR;
-			//º∑≥ˆ
-			extrude_menu.title=TITLE_EXTRUDE_KR;
-			extrude_menu.in=EXTRUDER_IN_TEXT_KR;
-			extrude_menu.out=EXTRUDER_OUT_TEXT_KR;
-			extrude_menu.ext1=EXTRUDER_1_TEXT_KR;
-			extrude_menu.ext2=EXTRUDER_2_TEXT_KR;
-			extrude_menu.low=EXTRUDE_LOW_SPEED_TEXT_KR;
-			extrude_menu.normal=EXTRUDE_MEDIUM_SPEED_TEXT_KR;
-			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_KR;
-			//µ˜∆Ω
-			leveling_menu.title=TITLE_LEVELING_KR;
-			leveling_menu.position1=LEVELING_POINT1_TEXT_KR;
-			leveling_menu.position2=LEVELING_POINT2_TEXT_KR;
-			leveling_menu.position3=LEVELING_POINT3_TEXT_KR;
-			leveling_menu.position4=LEVELING_POINT4_TEXT_KR;
-			leveling_menu.position5=LEVELING_POINT5_TEXT_KR;
-			//…Ë÷√
-			set_menu.title=TITLE_SET_KR;
-			set_menu.wifi=WIFI_TEXT_KR;
-			set_menu.about=ABOUT_TEXT_KR;
-			set_menu.fan=FAN_TEXT_KR;
-			set_menu.filament=FILAMENT_TEXT_KR;
-			set_menu.breakpoint=BREAK_POINT_TEXT_KR;
-			set_menu.motoroff=MOTOR_OFF_TEXT_KR;
-			set_menu.language=LANGUAGE_TEXT_KR;
-			//∏¸∂‡
-			//strcpy(more_menu.back,BACK_TEXT_EN);	
-			//WIFI
-			wifi_menu.title=WIFI_NAME_TEXT_KR;
-			wifi_menu.key = WIFI_KEY_TEXT_KR;
-			wifi_menu.ip = WIFI_IP_TEXT_KR;
-			wifi_menu.state= WIFI_STA_TEXT_KR;
-			wifi_menu.cloud= CLOSE_TEXT_KR;
-			//πÿ”⁄
-			about_menu.title = ABOUT_TEXT_KR;
-			//∑Á…»
-			fan_menu.title = FAN_TEXT_KR;
-			fan_menu.add = FAN_ADD_TEXT_KR;
-			fan_menu.dec = FAN_DEC_TEXT_KR;
-			fan_menu.state = FAN_TIPS1_TEXT;
-			//ªª¡œ
-			filament_menu.title = TITLE_FILAMENT_TEXT_KR;
-			filament_menu.in = FILAMENT_IN_TEXT_KR;
-			filament_menu.out = FILAMENT_OUT_TEXT_KR;
-			filament_menu.ext1 = FILAMENT_EXT0_TEXT_KR;
-			filament_menu.ext2 = FILAMENT_EXT1_TEXT_KR;
-
-			//”Ô—‘
-			language_menu.title = LANGUAGE_TEXT_KR;
-			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
-			printing_menu.title = TITLE_PRINTING_KR;
-			printing_menu.option = PRINTING_OPERATION_KR;
-			printing_menu.stop = PRINTING_STOP_KR;
-			printing_menu.pause = PRINTING_PAUSE_KR;
-			printing_menu.resume = PRINTING_RESUME_KR;
-
-			//≤Ÿ◊˜ΩÁ√Ê
-			operation_menu.title = TITLE_OPERATION_KR;
-			operation_menu.pause = PRINTING_PAUSE_KR;
-			operation_menu.stop = PRINTING_STOP_KR;
-			operation_menu.temp = PRINTING_TEMP_KR;
-			operation_menu.speed = PRINTING_CHANGESPEED_KR;
-			operation_menu.more = PRINTING_MORE_KR;
-			//‘›Õ£ΩÁ√Ê
-			pause_menu.title= PRINTING_PAUSE_KR;
-			pause_menu.resume = PRINTING_RESUME_KR;
-			pause_menu.stop = PRINTING_STOP_KR;
-			pause_menu.extrude = PRINTING_EXTRUDER_KR;
-			pause_menu.move = PRINTING_MOVE_KR;
-			pause_menu.temp = PRINTING_TEMP_KR;
-			pause_menu.more = PRINTING_MORE_KR;
-
-			//±‰ÀŸΩÁ√Ê
-			speed_menu.title = PRINTING_CHANGESPEED_KR;
-			speed_menu.add = ADD_TEXT_KR;
-			speed_menu.dec = DEC_TEXT_KR;
-			speed_menu.move = MOVE_SPEED_KR;
-			speed_menu.extrude = EXTRUDER_SPEED_KR;
-			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_KR;
-			speed_menu.move_speed = MOVE_SPEED_STATE_KR;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
-			printing_more_menu.fan = FAN_TEXT_KR;
-			printing_more_menu.auto_close = AUTO_SHUTDOWN_KR;
-			printing_more_menu.manual = MANUAL_SHUTDOWN_KR;
-			printing_more_menu.filament = FILAMENT_TEXT_KR;						
-			break;		
-		#endif	
-#endif        
+#endif
 		default:
-		//ª˙∆˜≤Œ ˝
+		//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
                     MachinePara_menu.title = MACHINE_PARA_TITLE_EN;
                     MachinePara_menu.MachineSetting = MACHINE_TYPE_CNOFIG_EN;
                     MachinePara_menu.TemperatureSetting=TEMPERATURE_CONFIG_EN;
@@ -2575,12 +2435,6 @@ void disp_language_init()
                     machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_EN;
             
                     machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_EN;
-                    machine_menu.MaxFeedRateConf=MAXFEEDRATE_CONF_EN;
-                    machine_menu.AccelerationConf=ACCELERATION_CONF_EN;
-                    machine_menu.JerkConf=JERKCONF_EN;
-                    machine_menu.StepsConf=STEPSCONF_EN;
-                    machine_menu.MotorDirConf=MOTORDIRCONF_EN;
-                    machine_menu.HomeFeedRateConf=HOMEFEEDRATECONF_EN;
             
                     machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_EN;
                     machine_menu.XMaxFeedRate=X_MAXFEEDRATE_EN;
@@ -2628,7 +2482,6 @@ void disp_language_init()
             
                     machine_menu.AdvancedConfTitle=ADVANCED_CONF_TITLE_EN;
                     machine_menu.PwrOffDection=PWROFF_DECTION_EN;
-                    machine_menu.PwrOffAfterPrint=PWROFF_AFTER_PRINT_EN;
                     machine_menu.HaveUps=HAVE_UPS_EN;
                     machine_menu.Z2andZ2Endstop=Z2_AND_Z2ENDSTOP_CONF_EN;
                     machine_menu.EnablePinsInvert=ENABLE_PINS_CONF_EN;
@@ -2659,7 +2512,7 @@ void disp_language_init()
 			common_menu.print_special_title = PRINTING_OTHER_LANGUGE;
 			common_menu.pause_special_title = PRINTING_PAUSE_OTHER_LANGUGE;
 			common_menu.operate_special_title = PRINTING_OPERATION_OTHER_LANGUGE;			
-			//÷˜“≥√Ê
+			//ÔøΩÔøΩ“≥ÔøΩÔøΩ
 			main_menu.title=TITLE_READYPRINT_EN;
 			main_menu.preheat=PREHEAT_TEXT_EN;
 			main_menu.move=MOVE_TEXT_EN;
@@ -2682,7 +2535,7 @@ void disp_language_init()
             tool_menu.autoleveling = TOOL_AUTO_LEVELING_EN;
 			tool_menu.filament = TOOL_FILAMENT_EN;
 			tool_menu.more = TOOL_MORE_EN;			
-			//‘§»»
+			//‘§ÔøΩÔøΩ
 			preheat_menu.adjust_title = TITLE_ADJUST_EN;
 			preheat_menu.title=TITLE_PREHEAT_EN;
 			preheat_menu.add=ADD_TEXT_EN;
@@ -2691,19 +2544,19 @@ void disp_language_init()
 			preheat_menu.ext2=EXTRUDER_2_TEXT_EN;
 			preheat_menu.hotbed=HEATBED_TEXT_EN;
 			preheat_menu.off=CLOSE_TEXT_EN;
-			//“∆∂Ø
+			//ÔøΩ∆∂ÔøΩ
 			move_menu.title = TITLE_MOVE_EN;
-			//πÈ¡„
+			//ÔøΩÔøΩÔøΩÔøΩ
 			home_menu.title=TITLE_HOME_EN;
 			home_menu.stopmove = HOME_STOPMOVE_EN;
-			//Œƒº˛ƒø¬º
+			//ÔøΩƒºÔøΩƒø¬º
 			file_menu.title=TITLE_CHOOSEFILE_EN;
 			file_menu.page_up=PAGE_UP_TEXT_EN;
 			file_menu.page_down=PAGE_DOWN_TEXT_EN;
 			file_menu.file_loading = FILE_LOADING_EN;
 			file_menu.no_file = NO_FILE_EN;
 			file_menu.no_file_and_check = NO_FILE_EN;//NO_FILE_AND_CHECK_EN;			
-			//º∑≥ˆ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			extrude_menu.title=TITLE_EXTRUDE_EN;
 			extrude_menu.in=EXTRUDER_IN_TEXT_EN;
 			extrude_menu.out=EXTRUDER_OUT_TEXT_EN;
@@ -2713,14 +2566,14 @@ void disp_language_init()
 			extrude_menu.normal=EXTRUDE_MEDIUM_SPEED_TEXT_EN;
 			extrude_menu.high=EXTRUDE_HIGH_SPEED_TEXT_EN;
 			extrude_menu.temper_text=EXTRUDER_TEMP_TEXT_EN;
-			//µ˜∆Ω
+			//ÔøΩÔøΩ∆Ω
 			leveling_menu.title=TITLE_LEVELING_EN;
 			leveling_menu.position1=LEVELING_POINT1_TEXT_EN;
 			leveling_menu.position2=LEVELING_POINT2_TEXT_EN;
 			leveling_menu.position3=LEVELING_POINT3_TEXT_EN;
 			leveling_menu.position4=LEVELING_POINT4_TEXT_EN;
 			leveling_menu.position5=LEVELING_POINT5_TEXT_EN;
-			//…Ë÷√
+			//ÔøΩÔøΩÔøΩÔøΩ
 			set_menu.title=TITLE_SET_EN;
 			set_menu.filesys=FILESYS_TEXT_EN;
 			set_menu.wifi=WIFI_TEXT_EN;
@@ -2731,10 +2584,10 @@ void disp_language_init()
 			set_menu.motoroff=MOTOR_OFF_TEXT_EN;
 			set_menu.language=LANGUAGE_TEXT_EN;
             set_menu.machine_para = MACHINE_PARA_EN;
-			//∏¸∂‡
+			//ÔøΩÔøΩÔøΩÔøΩ
 			more_menu.title = TITLE_MORE_EN;
 			more_menu.zoffset = ZOFFSET_EN;
-			//Œƒº˛œµÕ≥
+			//ÔøΩƒºÔøΩœµÕ≥
 			filesys_menu.title = TITLE_FILESYS_EN;
 			filesys_menu.sd_sys = SD_CARD_TEXT_EN;
 			filesys_menu.usb_sys = U_DISK_TEXT_EN;
@@ -2753,17 +2606,17 @@ void disp_language_init()
 			cloud_menu.unbinding = CLOUD_UNBINDED_EN;
 			cloud_menu.disconnected = CLOUD_DISCONNECTED_EN;
 			cloud_menu.disable = CLOUD_DISABLE_EN;
-			//πÿ”⁄
+			//ÔøΩÔøΩÔøΩÔøΩ
 			about_menu.title = TITLE_ABOUT_EN;
 			about_menu.type = ABOUT_TYPE_TEXT_EN;
 			about_menu.version = ABOUT_VERSION_TEXT_EN;
 			about_menu.wifi = ABOUT_WIFI_TEXT_EN;			
-			//∑Á…»
+			//ÔøΩÔøΩÔøΩÔøΩ
 			fan_menu.title = TITLE_FAN_EN;
 			fan_menu.add = FAN_ADD_TEXT_EN;
 			fan_menu.dec = FAN_DEC_TEXT_EN;
 			fan_menu.state = FAN_TIPS1_TEXT_EN;
-			//ªª¡œ
+			//ÔøΩÔøΩÔøΩÔøΩ
 			filament_menu.title = TITLE_FILAMENT_EN;
 			filament_menu.in = FILAMENT_IN_TEXT_EN;
 			filament_menu.out = FILAMENT_OUT_TEXT_EN;
@@ -2779,18 +2632,18 @@ void disp_language_init()
 			filament_menu.filament_dialog_unloading = FILAMENT_DIALOG_UNLOADING_TIPS_EN;
 			filament_menu.filament_dialog_unload_completed = FILAMENT_DIALOG_UNLOAD_COMPLETE_TIPS_EN;
 
-			//”Ô—‘
+			//ÔøΩÔøΩÔøΩÔøΩ
 			language_menu.title = TITLE_LANGUAGE_EN;
 			language_menu.next = PAGE_DOWN_TEXT_EN;
 			language_menu.up = PAGE_UP_TEXT_EN;			
-			//’˝‘⁄¥Ú”°ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩ⁄¥ÔøΩ”°ÔøΩÔøΩÔøΩÔøΩ
 			printing_menu.title = TITLE_PRINTING_EN;
 			printing_menu.option = PRINTING_OPERATION_EN;
 			printing_menu.stop = PRINTING_STOP_EN;
 			printing_menu.pause = PRINTING_PAUSE_EN;
 			printing_menu.resume = PRINTING_RESUME_EN;
 
-			//≤Ÿ◊˜ΩÁ√Ê
+			//ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			operation_menu.title = TITLE_OPERATION_EN;
 			operation_menu.pause = PRINTING_PAUSE_EN;
 			operation_menu.stop = PRINTING_STOP_EN;
@@ -2803,7 +2656,7 @@ void disp_language_init()
 			operation_menu.move = PRINTING_MOVE_EN;
 			operation_menu.auto_off = AUTO_SHUTDOWN_EN;
 			operation_menu.manual_off = MANUAL_SHUTDOWN_EN;			
-			//‘›Õ£ΩÁ√Ê
+			//ÔøΩÔøΩÕ£ÔøΩÔøΩÔøΩÔøΩ
 			pause_menu.title= TITLE_PAUSE_EN;
 			pause_menu.resume = PRINTING_RESUME_EN;
 			pause_menu.stop = PRINTING_STOP_EN;
@@ -2812,7 +2665,7 @@ void disp_language_init()
 			pause_menu.filament = FILAMENT_TEXT_EN;
 			pause_menu.more = PRINTING_MORE_EN;
 
-			//±‰ÀŸΩÁ√Ê
+			//ÔøΩÔøΩÔøΩŸΩÔøΩÔøΩÔøΩ
 			speed_menu.title = TITLE_CHANGESPEED_EN;
 			speed_menu.add = ADD_TEXT_EN;
 			speed_menu.dec = DEC_TEXT_EN;
@@ -2820,7 +2673,7 @@ void disp_language_init()
 			speed_menu.extrude = EXTRUDER_SPEED_EN;
 			speed_menu.extrude_speed = EXTRUDER_SPEED_STATE_EN;
 			speed_menu.move_speed = MOVE_SPEED_STATE_EN;
-			//¥Ú”°÷–---∏¸∂‡ΩÁ√Ê
+			//ÔøΩÔøΩ”°ÔøΩÔøΩ---ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 			printing_more_menu.title = TITLE_MORE_EN;
 			printing_more_menu.fan = FAN_TEXT_EN;
 			printing_more_menu.auto_close = AUTO_SHUTDOWN_EN;

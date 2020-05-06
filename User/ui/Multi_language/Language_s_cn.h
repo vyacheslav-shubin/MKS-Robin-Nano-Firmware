@@ -119,12 +119,6 @@
 #define HOTBED_MAX_TEMPERATURE_CN				"最高温度"
 
 #define MOTOR_CONF_TITLE_CN						"机器参数>电机设置"
-#define MAXFEEDRATE_CONF_CN						"最大速度设置"
-#define ACCELERATION_CONF_CN					"加速度设置"
-#define JERKCONF_CN										"突变速度设置"
-#define STEPSCONF_CN										"脉冲设置"
-#define MOTORDIRCONF_CN								"电机方向设置"
-#define HOMEFEEDRATECONF_CN						"归零速度设置"
 
 #define MAXFEEDRATE_CONF_TITLE_CN			"机器参数>最大速度"
 #define X_MAXFEEDRATE_CN								"X轴最大速度"
@@ -172,7 +166,6 @@
 
 #define ADVANCED_CONF_TITLE_CN					"机器参数>高级设置"
 #define PWROFF_DECTION_CN								"断电检测模块"
-#define PWROFF_AFTER_PRINT_CN						"启动打完关机功能"
 #define HAVE_UPS_CN											"机器配备UPS电源"
 #define Z2_AND_Z2ENDSTOP_CONF_CN				"双Z轴双限位功能设置"
 #define ENABLE_PINS_CONF_CN							"电机使能脚电平设置"

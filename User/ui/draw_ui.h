@@ -21,6 +21,7 @@
 #include "string_deal.h"
 #include "pic.h"
 #include "Multi_language.h"
+#include "lang_common.h"
 #include "draw_meshleveling.h"
 #include "draw_machine_para.h"
 #include "draw_ready_print.h"

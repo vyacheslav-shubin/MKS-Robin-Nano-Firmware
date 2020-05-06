@@ -48,6 +48,17 @@ typedef struct {
 	uint8_t	page_count;
 } UI_PAGE_NAVIGATOR;
 
+typedef struct {
+	BUTTON_Handle button_text;
+	BUTTON_Handle button_check;
+} UI_CHECK_PAIR;
+
+typedef struct {
+	BUTTON_Handle button_text;
+	BUTTON_Handle button_arrow;
+} UI_ARROW_PAIR;
+
+
 
 extern GUI_BITMAP bmp_struct_100x80;
 
@@ -99,7 +110,15 @@ extern void ui_update_std_button(BUTTON_Handle handle, char* file, char* title);
 
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
 
+
+extern void ui_draw_config_lines();
 extern void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator);
+extern void ui_make_check_pair(int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title, uint8_t state);
+
+#define ui_compare_arrow_pair(handle, pair) (((handle)==pair.button_text) || ((handle)==pair.button_arrow))
+extern void ui_make_arrow_pair(int row, WM_HWIN hWin, UI_ARROW_PAIR * pair, char* title);
+
+
 
 extern uint8_t ui_timing_flags;
 #define F_UI_TIMING_HALF_SEC		1<<0

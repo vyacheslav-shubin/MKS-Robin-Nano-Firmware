@@ -118,12 +118,6 @@
 #define HOTBED_MAX_TEMPERATURE_T_CN				"最高溫度"
 
 #define MOTOR_CONF_TITLE_T_CN						"機器參數>電機設置"
-#define MAXFEEDRATE_CONF_T_CN						"最大速度設置"
-#define ACCELERATION_CONF_T_CN					"加速度設置"
-#define JERKCONF_T_CN										"突變速度設置"
-#define STEPSCONF_T_CN										"脈衝設置"
-#define MOTORDIRCONF_T_CN								"電機方向設置"
-#define HOMEFEEDRATECONF_T_CN						"歸零速度設置"
 
 #define MAXFEEDRATE_CONF_TITLE_T_CN			"機器參數>最大速度"
 #define X_MAXFEEDRATE_T_CN								"X軸最大速度"
@@ -171,7 +165,6 @@
 
 #define ADVANCED_CONF_TITLE_T_CN					"機器參數>高級設置"
 #define PWROFF_DECTION_T_CN								"斷電檢測模塊"
-#define PWROFF_AFTER_PRINT_T_CN						"啟動打完關機功能"
 #define HAVE_UPS_T_CN											"機器配備UPS電壓"
 #define Z2_AND_Z2ENDSTOP_CONF_T_CN				"雙z軸雙限位功能設置"
 #define ENABLE_PINS_CONF_T_CN							"電機使能腳電平設置"

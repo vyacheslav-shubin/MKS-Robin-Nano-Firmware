@@ -133,12 +133,6 @@
 #define HOTBED_MAX_TEMPERATURE_EN			"Maximum temperature"
 
 #define MOTOR_CONF_TITLE_EN					"Machine Settings>Motor settings"
-#define MAXFEEDRATE_CONF_EN					"Maximum speed settings"
-#define ACCELERATION_CONF_EN				"Acceleration settings"
-#define JERKCONF_EN							"Jerk settings"
-#define STEPSCONF_EN						"Steps settings"
-#define MOTORDIRCONF_EN						"Motor direction settings"
-#define HOMEFEEDRATECONF_EN					"Home speed setting"
 
 #define MAXFEEDRATE_CONF_TITLE_EN			"Machine Settings>Maximum speed"
 #define X_MAXFEEDRATE_EN					"X axis maximum speed"
@@ -186,7 +180,6 @@
 
 #define ADVANCED_CONF_TITLE_EN					"Machine Settings>Advance"
 #define PWROFF_DECTION_EN						"power off dection module"
-#define PWROFF_AFTER_PRINT_EN					"Auto Shutdown after print"
 #define HAVE_UPS_EN								"Has UPS power supply"
 #define Z2_AND_Z2ENDSTOP_CONF_EN				"Z2 Settings"
 #define ENABLE_PINS_CONF_EN						"Enable pins level settings"

@@ -509,7 +509,7 @@ void wifi_scan_handle() {
 	if(command_send_flag == 1) {
 		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
 			last_disp_state = PRINT_READY_UI;
-			Clear_ready_print();
+			clear_ready_print();
 			draw_Wifi();
 		} else {
 			last_disp_state = DIALOG_UI;

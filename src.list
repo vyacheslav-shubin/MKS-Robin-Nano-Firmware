@@ -167,3 +167,5 @@ User/ui/QRENCODE/qrspec.c
 User/ui/QRENCODE/rscode.c
 User/ui/QRENCODE/split.c
 User/ui/ui_tools.cpp
+User/ui/Multi_language/lang_std.c
+User/ui/Multi_language/lang_ru.c

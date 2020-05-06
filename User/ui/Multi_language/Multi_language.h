@@ -2,6 +2,7 @@
 #define MULTI_LANGUAGE_H
 
 #include "main.h"
+#include "lang_common.h"
 #include "Language_en.h"
 #include "Language_s_cn.h"
 #include "Language_t_cn.h"
@@ -20,28 +21,12 @@ extern void disp_language_init();
 #endif
 
 //语言
-#define LANG_SIMPLE_CHINESE		1
-#define LANG_COMPLEX_CHINESE	2
-#define LANG_ENGLISH						3
-#define LANG_JAPAN							4
-#define LANG_GERMAN						5		
-#define LANG_FRENCH						6
-#define LANG_RUSSIAN						7
-#define LANG_KOREAN						8
-#define LANG_TURKISH						9
-#define LANG_SPANISH						10
-#define LANG_GREEK							11
-#define LANG_ITALY							12
-#define LANG_PORTUGUESE				13
-
-
 
 #define FONT_BUTTON	GUI_FontHZ_fontHz14
 #define FONT_STATE_INF	GUI_FontHZ_fontHz14
 #define FONT_TITLE		GUI_FontHZ_fontHz14
 
-typedef struct machine_common_disp
-{
+typedef struct machine_common_disp {
 	const char *default_value;
 	
 	const char *next;
@@ -150,12 +135,6 @@ typedef struct machine_common_disp
 	const char *HotbedMaxTemperature;
 
 	const char *MotorConfTitle;
-	const char *MaxFeedRateConf;
-	const char *AccelerationConf;
-	const char *JerkConf;
-	const char *StepsConf;
-	const char *MotorDirConf;
-	const char *HomeFeedRateConf;
 
 	const char *MaxFeedRateConfTitle;
 	const char *XMaxFeedRate;
@@ -680,63 +659,6 @@ typedef struct TemperatureSettings_menu_disp
 }TemperatureSettings_menu_def;
 extern TemperatureSettings_menu_def TemperatureSettings_menu;
 
-/*****************************************/
-//********************************************//
-//#if defined(TFT70)
-//#define TEXT_VALUE                  "%d℃/%d℃"
-//#elif defined(TFT35)
-#define TEXT_VALUE                  "%d/%d"
-//#endif
-
-#define TEXT_VALUE_T                  ": %d℃"
-#define TEXT_VALUE_mm                 ": %dmm"
-#define TEXT_VALUE_cm                 ": %dcm"
-#define TEXT_VALUE_m                  ": %dm"
-
-#define TEMP_UNIT_SYBOL               "%d℃"
-#define FLOAT_TEMP_UNIT_SYBOL               "%.1f℃"
-
-#define TEXT_1C						"1℃"
-#define TEXT_5C						"5℃"
-#define TEXT_10C					"10℃"
-
-#define AXIS_X_ADD_TEXT			    "X+"
-#define AXIS_X_DEC_TEXT			    "X-"
-#define AXIS_Y_ADD_TEXT			    "Y+"
-#define AXIS_Y_DEC_TEXT			    "Y-"
-#define AXIS_Z_ADD_TEXT			    "Z+"
-#define AXIS_Z_DEC_TEXT			    "Z-"
-#define TEXT_001MM					"0.01mm"
-#define TEXT_005MM					"0.05mm"
-#define TEXT_01MM					"0.1mm"
-#define TEXT_1MM					"1mm"
-#define TEXT_10MM					"10mm"
-
-#define EXTRUDE_1MM_TEXT			"1mm"
-#define EXTRUDE_5MM_TEXT			"5mm"
-#define EXTRUDE_10MM_TEXT		    "10mm"
-
-#define STEP_1PERCENT				"1%"
-#define STEP_5PERCENT				"5%"
-#define STEP_10PERCENT				"10%"
-
-#define LANGUAGE_S_CN				"简体"
-#define LANGUAGE_T_CN				"繁体"
-#define LANGUAGE_EN					"English"
-#define LANGUAGE_JP					"日本語"
-#define LANGUAGE_GE					"Deutsch"
-#define LANGUAGE_FR					"français"
-#define LANGUAGE_IT                 "Italia"
-#define LANGUAGE_PR                 "português"
-#define LANGUAGE_KR                 "Korean"
-#define LANGUAGE_BR                 "Brazil"
-#define LANGUAGE_RU                 "русский"
-#define LANGUAGE_SP                 "español"
-
-#define HOME_X_TEXT					"X"
-#define HOME_Y_TEXT					"Y"
-#define HOME_Z_TEXT					"Z"
-#define HOME_ALL_TEXT				"All"
 #if defined(MKS_ROBIN_NANO)
 #define ABOUT_TYPE_TEXT				"MKS Robin Nano"
 #elif defined(MKS_ROBIN_MINI)

@@ -5,16 +5,14 @@
 
 
 #if defined(__cplusplus)
-extern "C" {     /* Make sure we have C-declarations in C++ programs */
+extern "C" {
 #endif
 
 extern void draw_ready_print(void);
-extern void Clear_ready_print();
-extern void disp_fan_move();
-extern void disp_restro_state();
-//extern void disp_temp_ready_print();
+extern void clear_ready_print();
+
 #if defined(__cplusplus)
-}    /* Make sure we have C-declarations in C++ programs */
+}
 #endif
 
 #endif

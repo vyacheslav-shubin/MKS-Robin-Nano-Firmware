@@ -4,15 +4,12 @@ TOOL_PREFIX=arm-none-eabi
 
 #include/c++/7.3.1/arm-none-eabi/thumb/v7-m/bits/c++config.h
 
-EWARM_TOOL=python ./src-list.py 
-#./src-list.pl
+#EWARM_TOOL=python ./src-list.py 
 
-MODULES		= Middlewares Src User Drivers
 BUILD_BASE	= build
 
-SRC_DIR		:= $(MODULES)
-C_SRC		:= $(shell $(EWARM_TOOL) src | grep .c$$)
-CPP_SRC		:= $(shell $(EWARM_TOOL) src | grep .cpp$$)
+C_SRC		:= $(shell cat src.list | grep .c$$)
+CPP_SRC		:= $(shell cat src.list| grep .cpp$$)	 
 ASM_SRC		:= Startup/startup_stm32f103vetx.s
 
 
@@ -29,15 +26,13 @@ PIC_OUTPUT		:=	$(BUILD_BASE)/mks_pic
 PICS		:= $(patsubst $(PIC_INPUT)/%,%,$(shell find $(PIC_INPUT) -name *.png))
 BIN_PICS	:= $(patsubst %.png,$(BUILD_BASE)/mks_pic/bmp_%.bin,$(PICS))
 
+LIBS		:= Middlewares/GUI/GUI.a
 
-LIBS		:= $(shell $(EWARM_TOOL) lib)
-
-
-INCLUDE		:= $(shell $(EWARM_TOOL) include)
+INCLUDE		:= $(shell cat include.list)
 PATCH_DIR	:= $(BUILD_BASE)/patch
 INCLUDE		:= $(INCLUDE) $(PATCH_DIR)
-DEFINES		:= $(shell $(EWARM_TOOL) define)
-
+DEFINES		:= USE_HAL_DRIVER STM32F103xE STM32F10X_HD USE_HAL_LIB MKS_ROBIN_NANO TFT35
+ 
 INCLIDE_OPT	:= $(addprefix -I,$(INCLUDE))
 DEFINE_OPT	:= $(addprefix -D,$(DEFINES))
 

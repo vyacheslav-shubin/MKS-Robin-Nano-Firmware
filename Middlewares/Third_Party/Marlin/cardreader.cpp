@@ -53,7 +53,7 @@ void CardReader::automount()	{}
 void CardReader::checkautostart(bool force)
 {
 #if 0
-  if(usbOK == false)        //U?¨¬??¨®D1¨°??
+  if(usbOK == false)        //U?ï¿½ï¿½??ï¿½ï¿½D1ï¿½ï¿½??
   {
     if (SD_DET_IP != SD_DETECT_INVERTED)    
     {
@@ -80,7 +80,7 @@ void CardReader::checkautostart(bool force)
   }
   #endif
 #if unused //
-  if (SD_DET_IP != SD_DETECT_INVERTED)  //?TSD?¡§,?¨¬2a¦Ì?U?¨¬¡ê?1¨°??
+  if (SD_DET_IP != SD_DETECT_INVERTED)  //?TSD?ï¿½ï¿½,?ï¿½ï¿½2aï¿½ï¿½?U?ï¿½ï¿½ï¿½ï¿½?1ï¿½ï¿½??
   {
     if((usbOK == false)&& (Appli_state == APPLICATION_READY))
     {
@@ -96,7 +96,7 @@ void CardReader::checkautostart(bool force)
     }
   } 
   
-  if((Appli_state == APPLICATION_DISCONNECT) &&(usbOK == true))     //?¨¬2a¦Ì?U?¨¬???a¡ê?D???
+  if((Appli_state == APPLICATION_DISCONNECT) &&(usbOK == true))     //?ï¿½ï¿½2aï¿½ï¿½?U?ï¿½ï¿½???aï¿½ï¿½?D???
   {
     //unmount();
     sdprinting = false;
@@ -116,7 +116,7 @@ void CardReader::checkFilesys(unsigned char filesys)
 	switch(filesys)
 	{
 	case FILE_SYS_SD:
-	  //if(filesys == FILE_SYS_SD)        //U?¨¬??¨®D1¨°??
+	  //if(filesys == FILE_SYS_SD)        //U?ï¿½ï¿½??ï¿½ï¿½D1ï¿½ï¿½??
 	  {
 	      if (SD_DET_IP != SD_DETECT_INVERTED)    
 	      {
@@ -145,7 +145,7 @@ void CardReader::checkFilesys(unsigned char filesys)
 	 break;
 	 case FILE_SYS_USB:
 #if unused
-	  //if (SD_DET_IP != SD_DETECT_INVERTED)  //?TSD?¡§,?¨¬2a¦Ì?U?¨¬¡ê?1¨°??
+	  //if (SD_DET_IP != SD_DETECT_INVERTED)  //?TSD?ï¿½ï¿½,?ï¿½ï¿½2aï¿½ï¿½?U?ï¿½ï¿½ï¿½ï¿½?1ï¿½ï¿½??
 		  {
 		    if((usbOK == false)&& (Appli_state == APPLICATION_READY))
 		    {
@@ -160,7 +160,7 @@ void CardReader::checkFilesys(unsigned char filesys)
 		      
 		    }
 		  } 
-	  	  if((Appli_state == APPLICATION_DISCONNECT) &&(usbOK == true))     //?¨¬2a¦Ì?U?¨¬???a¡ê?D???
+	  	  if((Appli_state == APPLICATION_DISCONNECT) &&(usbOK == true))     //?ï¿½ï¿½2aï¿½ï¿½?U?ï¿½ï¿½???aï¿½ï¿½?D???
 		  {
 		    //unmount();
 		    sdprinting = false;
@@ -491,7 +491,7 @@ void CardReader::continuePrint(bool intern)
     }
     //Printer::setMenuMode(MENU_MODE_SD_PAUSED, false);
     sdmode = 1;
-    FALA_5V_CTRL = FALA_ON;    // ¡ä¨°?a¡¤¡§¨¤-¦Ì?¨¨Y
+    FALA_5V_CTRL = FALA_ON;    // ï¿½ä¨°?aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½?ï¿½ï¿½Y
 #endif    
 }
 void CardReader::stopSDPrint() {
@@ -583,7 +583,7 @@ bool CardReader::openFile(char* filename,bool silent, bool replace_current/*=tru
 	  if(sdprinting)			return false;
 	  f_close(&curFile);
 
-  if(filename[2] != '/')     //???t??2?¡ä??¨¬¡¤??¡¤??
+  if(filename[2] != '/')     //???t??2?ï¿½ï¿½??ï¿½ï¿½ï¿½ï¿½??ï¿½ï¿½??
   {    
    if(card.cardOK)
 	   strcat(newname,SD_Path);
@@ -877,151 +877,70 @@ uint8_t CardReader::Explore_Disk (char* path , uint8_t recu_level)
  return res;
 }
 
-void CardReader::ShowSDFiles(void)
-	{
-	  FILINFO fno;
-	  DIR dir;
-	  TCHAR *fn;
-      const TCHAR gFileName[5] = {'.', 'g', 'c', 'o', '\0'};
-      const TCHAR gFileNameCap[5] = {'.', 'G', 'C', 'O', '\0'};
-	  TCHAR tmp[200];
-	  int res;
+void CardReader::ShowSDFiles(void) {
+	FILINFO fno;
+	DIR dir;
+	TCHAR *fn;
+#if _LFN_UNICODE
+	const TCHAR gFileName[5] = {'.', 'g', 'c', 'o', '\0'};
+	const TCHAR gFileNameCap[5] = {'.', 'G', 'C', 'O', '\0'};
+#endif
+	TCHAR tmp[200];
+	int res;
 	
-  #if _USE_LFN
+	#if _USE_LFN
 		static TCHAR lfn[_MAX_LFN + 1];
 		fno.lfname = lfn;
 		fno.lfsize = _MAX_LFN + 1;
-#endif
-	 
-	
-	 //f_mount(1, &fs);
-	 #if 0//
-          if ((SD_DET_IP == SD_DETECT_INVERTED)&&(usbOK == false))                 
-            f_mount(&fs, (TCHAR const*)SD_Path, 0);     //skyblue 2016-12-13
-          else
-            f_mount(&fs, (TCHAR const*)USBH_Path, 0);
 	#endif
-    
-#if defined(MKS_ROBIN2)    
-	if (gCfgItems.fileSysType == FILE_SYS_SD)                 
-         f_mount(&fs, (TCHAR const*)SD_Path, 0);     //skyblue 2016-12-13
-    else
-         f_mount(&fs, (TCHAR const*)USBH_Path, 0);	
-#else//robin robin_mini robin_nanoÖ»ÓÐSD¿¨·½Ê½
-     f_mount(&fs, (TCHAR const*)SD_Path, 0);
-#endif
-
-	 if (f_opendir(&dir, gCurDir) == FR_OK) 
-	  {
+	f_mount(&fs, (TCHAR const*)SD_Path, 0);
+	if (f_opendir(&dir, gCurDir) == FR_OK) {
 		Sd_file_cnt = 0;
-			gcodeFileList.listVaild= 2;
-		for (;;) 
-		{
+		gcodeFileList.listVaild= 2;
+		for (;;) {
 			res = f_readdir(&dir, &fno);
-			if (res != FR_OK || fno.fname[0] == 0) 
-			{
+			if (res != FR_OK || fno.fname[0] == 0) {
 				gcodeFileList.listVaild= 2;
 				break;
 			}
-			if ( fno.fname[0] == '.') 
+			if ((fno.fname[0] == '.') || (fno.fattrib & (AM_SYS|AM_HID)))
 				continue;
 	
-			if ((fno.lfname[0] == 0) || (fno.lfname == 0))
-				fn = fno.fname;
-			else
-				fn = fno.lfname;
-	
-			/*	 if (fno.fattrib & AM_DIR) 
-			{
-			continue;
-			} 
-			else */
-			if(Sd_file_cnt == Sd_file_offset)
-			{
-				//Sd_file_offset++;
+			fn = ((fno.lfname[0] == 0) || (fno.lfname == 0))?fno.fname:fno.lfname;
+
+			if(Sd_file_cnt == Sd_file_offset) {
 				#if _LFN_UNICODE
 				if((wcsstr((const wchar_t *)fn, (const wchar_t *)gFileName)) || (wcsstr((const wchar_t *)fn, (const wchar_t *)gFileNameCap)) || (fno.fattrib & AM_DIR))
 				#else
-					if((strstr(fn, ".gco")) || (strstr(fn, ".GCO")) || (fno.fattrib & AM_DIR))
+				if((strstr(fn, ".gco")) || (strstr(fn, ".GCO")) || (fno.fattrib & AM_DIR))
 				#endif
 				{
-					  //Sd_display_file_cnt++;
-					  
-					  tmp[0] = '\0';
-					  strcpy(tmp, (char const*)gCurDir);
-					  strcat(tmp, "/");
-					  #if _LFN_UNICODE
-					  wcscat((wchar_t *)tmp, (const wchar_t *)fn);
-					  #else
-					  strcat(tmp, fn);
-					  #endif
-	
-					  gcodeFileList.listVaild= 1;
-	
-					if(fno.fattrib & AM_DIR)
-					{
-						gcodeFileList.fileAttr[gcodeFileList.index] = 1;
-					}
-					else
-					{
-						gcodeFileList.fileAttr[gcodeFileList.index] = 0;
-					}
-	
+					tmp[0] = '\0';
+					strcpy(tmp, (char const*)gCurDir);
+					strcat(tmp, "/");
+					#if _LFN_UNICODE
+					wcscat((wchar_t *)tmp, (const wchar_t *)fn);
+					#else
+					strcat(tmp, fn);
+					#endif
+					gcodeFileList.listVaild= 1;
+					gcodeFileList.fileAttr[gcodeFileList.index] = (fno.fattrib & AM_DIR)? 1 : 0;
 					#if _LFN_UNICODE
 					wcscpy((wchar_t *)gcodeFileList.fileName[gcodeFileList.index], (const wchar_t *)tmp);
 					#else
 					strcpy((char *)gcodeFileList.fileName[gcodeFileList.index], (const char *)tmp);
 					#endif
 					gcodeFileList.index++;
-					
-					
-				}
-				else
-				{
+				} else {
 					gcodeFileList.listVaild= 0;
 				}
 				break;
 			}
-			
 			Sd_file_cnt++;
-			
-			 
 		}
-#if 0
-		while (f_readdir(&dirs, &finfo) == FR_OK)  
-		{
-		  if (finfo.fattrib & AM_ARC) 
-		  {
-			if(!finfo.fname[0]) 
-			  break;		 
-			  printf("\n\r file name is: %s\n",finfo.fname);
-			  printf("\n\r file size is: %d ", finfo.fsize); 
-	
-			  if(File_type_Check( (u8 *)finfo.fname, "txt"))
-			  { 
-				BufferSet(buffer, 0, 100);
-				res = f_open(&fsrc, finfo.fname, FA_OPEN_EXISTING | FA_READ);
-				res = f_read(&fsrc, buffer, 100, &br);
-				printf("\n\r file contex is: \n\r%s\n\r", buffer); 
-				f_close(&fsrc); 							  
-			  }
-		  }
-		  else
-		  {
-			printf("\n\r Path name is: %s", finfo.fname); 
-			continue;//break;
-		  }
-		} 
-		  res = f_open(&fsrc, "armjishu.txt", FA_CREATE_ALWAYS | FA_WRITE);
-		  res = f_write(&fsrc, &armjishu, sizeof(armjishu), &bw);
-		  f_close(&fsrc);
-	#endif
-	  
-	 }
-	 else
+	} else
 		 gcodeFileList.listVaild= 2;
-	 
-	}
+}
 
 int CardReader::ascii2dec(char *ascii, char width)
 {

@@ -256,35 +256,7 @@ int ascii2dec_test(char *ascii)
 	return result;
 	#endif
 }
-uint8_t have_pre_pic(char *path)
-{
-#if 1
-	char re;
-	UINT read;
-	int *ps1;
-	
-	re = f_open(&TEST_FIL, path, FA_OPEN_EXISTING | FA_READ);
-	
-	if(re == FR_OK)
-	{
-		f_read(&TEST_FIL,&bmp_public_buf[0],1024,&read);
-		ps1 = (uint32_t *)strstr(bmp_public_buf,";simage:");
-		if(ps1)
-		{
-				f_close(&TEST_FIL);
-				return 1;			
-		}
-		else
-		{
-				f_close(&TEST_FIL);
-				return 0;			
-		}
-	}
 
-	f_close(&TEST_FIL);
-	return 0;
-	#endif
-}
 
 #if 1
 /*****************************************************/

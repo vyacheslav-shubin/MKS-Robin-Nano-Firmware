@@ -40,6 +40,7 @@ char curFileName[100] = "notValid";
 typedef struct{
 	BUTTON_Handle handle;
 	char* fileName;
+	int preview_offset;
 } FILE_BUTTON;
 
 static int8_t pages;
@@ -52,6 +53,7 @@ uint8_t disp_in_file_dir;
 
 void search_files();
 void disp_udisk_files(int seq);
+void draw_preview();
 
 static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 	switch (pMsg->MsgId) {
@@ -335,8 +337,8 @@ void disp_udisk_files(int seq) {
 			BUTTON_SetBmpFileName(buttonF[i].handle, "bmp_dir.bin",1);
 			BUTTON_SetBitmapEx(buttonF[i].handle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
 		} else {
-			if(have_pre_pic((char *)card.gcodeFileList.fileName[j])) {
-				BUTTON_SetBmpFileName(buttonF[i].handle, "bmp_fileWPV.bin",1);
+			if(ui_file_with_preview(card.gcodeFileList.fileName[j], &buttonF[i].preview_offset)) {
+				BUTTON_SetBmpFileName(buttonF[i].handle, "bmp_file_WPV.bin",1);
 				BUTTON_SetBitmapEx(buttonF[i].handle, 0, &bmp_struct,BMP_PIC_X, BMP_PIC_Y);
 				buttonF[i].fileName = card.gcodeFileList.fileName[j];
 			} else {
@@ -348,6 +350,11 @@ void disp_udisk_files(int seq) {
 	}
 	GUI_Exec();
 
+	draw_preview();
+	ui_set_encoding();
+}
+
+void draw_preview() {
 	for(uint8_t i=0;i<FILE_BTN_CNT;i++) {
 		if (buttonF[i].fileName) {
 			int x;
@@ -361,11 +368,9 @@ void disp_udisk_files(int seq) {
 			}
 			x+=33;
 			y+=28 + titleHeight;
-			ui_gcode_small_preview(buttonF[i].fileName, x, y);
+			ui_gcode_small_preview(buttonF[i].fileName, buttonF[i].preview_offset, x, y);
 		}
 	}
-
-	ui_set_encoding();
 }
 
 void clear_print_file() {

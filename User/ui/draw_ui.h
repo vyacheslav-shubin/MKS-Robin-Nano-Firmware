@@ -405,7 +405,6 @@ extern void GUI_RefreshPage(void);
 extern void save_preview_to_flash(char *path,int xpos_pixel,int ypos_pixel);
 extern void disp_pre_gcode(int xpos_pixel,int ypos_pixel);
 extern void preview_gcode_prehandle(char *path);
-extern uint8_t have_pre_pic(char *path);
 extern void gcode_has_preview(char *path);
 
 #define PreHeat_bk_color 0x008bff

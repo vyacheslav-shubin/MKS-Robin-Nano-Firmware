@@ -132,8 +132,6 @@
 #define HOTBED_MIN_TEMPERATURE_EN			"lowest temperature"
 #define HOTBED_MAX_TEMPERATURE_EN			"Maximum temperature"
 
-#define MOTOR_CONF_TITLE_EN					"Machine Settings>Motor settings"
-
 #define MAXFEEDRATE_CONF_TITLE_EN			"Machine Settings>Maximum speed"
 #define X_MAXFEEDRATE_EN					"X axis maximum speed"
 #define Y_MAXFEEDRATE_EN					"Y axis maximum speed"

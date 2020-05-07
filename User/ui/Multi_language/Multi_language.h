@@ -134,8 +134,6 @@ typedef struct machine_common_disp {
 	const char *HotbedMinTemperature;
 	const char *HotbedMaxTemperature;
 
-	const char *MotorConfTitle;
-
 	const char *MaxFeedRateConfTitle;
 	const char *XMaxFeedRate;
 	const char *YMaxFeedRate;
@@ -167,6 +165,8 @@ typedef struct machine_common_disp {
 	const char *E1_Steps;
 
 	const char *MotorDirConfTitle;
+
+	//TODO: не нужно
 	const char *X_MotorDir;
 	const char *Y_MotorDir;
 	const char *Z_MotorDir;

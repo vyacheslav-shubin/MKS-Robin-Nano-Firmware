@@ -218,6 +218,7 @@ static char TitleText[30];
 
 inline char * get_display_title_ref(int index) {
 	switch(disp_state_stack._disp_state[index]) {
+		case MOTORDIR_UI:	return lang_str.axes_inversion;
 		case PRINT_READY_UI:	return main_menu.title;
 		case PRINT_FILE_UI:		return file_menu.title;
 		case PRINTING_UI:

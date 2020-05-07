@@ -195,7 +195,7 @@ void check_files() {
 }
 
 void draw_printing() {
-	//check_files();
+	check_files();
 	int dual_extrude;
 	dual_extrude = is_dual_extruders();
 

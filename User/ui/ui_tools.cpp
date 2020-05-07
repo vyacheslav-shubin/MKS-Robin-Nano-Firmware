@@ -311,9 +311,16 @@ void ui_make_check_pair(int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title
 	pair->button_text = BUTTON_CreateEx(X_TEXT, ROW(row), 240, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
     BUTTON_SetTextAlign(pair->button_text,GUI_TA_LEFT|GUI_TA_VCENTER);
     BUTTON_SetText(pair->button_text, title);
-
     pair->button_check = ui_create_check_button(X_RADIO, ROW(row), hWin, state);
 }
+
+void ui_make_half_row_check_pair(int col, int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title, uint8_t state) {
+	pair->button_text = BUTTON_CreateEx(X_TEXT + 240 * col , ROW(row), 240-60, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
+    BUTTON_SetTextAlign(pair->button_text,GUI_TA_LEFT|GUI_TA_VCENTER);
+    BUTTON_SetText(pair->button_text, title);
+    pair->button_check = ui_create_check_button(240*(col+1)-110, ROW(row), hWin, state);
+}
+
 
 void ui_make_arrow_pair(int row, WM_HWIN hWin, UI_ARROW_PAIR * pair, char* title) {
 	pair->button_text = BUTTON_CreateEx(X_TEXT, ROW(row), 450, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
@@ -332,12 +339,46 @@ void ui_draw_config_lines() {
 	GUI_FillRect(10, 200, 470, 200);
 }
 
+extern void ui_draw_config_half_lines() {
+	GUI_SetColor(0xff5449);
+	GUI_FillRect(10, 50, 230, 50);
+	GUI_FillRect(10, 100, 230, 100);
+	GUI_FillRect(10, 150, 230, 150);
+	GUI_FillRect(10, 200, 230, 200);
 
-void ui_gcode_small_preview(char *file_name,int xpos_pixel,int ypos_pixel) {
+	GUI_FillRect(250, 50, 470, 50);
+	GUI_FillRect(250, 100, 470, 100);
+	GUI_FillRect(250, 150, 470, 150);
+	GUI_FillRect(250, 200, 470, 200);
+}
+
+
+uint8_t ui_file_with_preview(char *path, int *withoffset) {
+	#define PREPERD_SIZE 512
+	FIL file;
+	if (f_open(&file, path, FA_OPEN_EXISTING | FA_READ) != FR_OK)
+		return 0;
+	memset(bmp_public_buf, 0, PREPERD_SIZE+1);
+	UINT readed;
+	f_read(&file,bmp_public_buf,PREPERD_SIZE,&readed);
+	if (readed != PREPERD_SIZE)
+		return 0;
+	f_close(&file);
+	char * pos = strstr(bmp_public_buf,";simage:");
+	if (pos==0)
+		return 0;
+	else {
+		*withoffset = (int)pos-(int)bmp_public_buf;
+		return 1;
+	}
+}
+
+void ui_gcode_small_preview(char *file_name, int offset, int xpos_pixel,int ypos_pixel) {
 	FIL file;
 	int res = f_open(&file, file_name, FA_OPEN_EXISTING | FA_READ);
 	if(res != FR_OK)
 		return;
+	f_lseek(&file, offset);
 	LCD_setWindowArea(xpos_pixel, ypos_pixel, 50, 50);
 	LCD_WriteRAM_Prepare();
 	for (uint8_t i=0;i<50;i++) {

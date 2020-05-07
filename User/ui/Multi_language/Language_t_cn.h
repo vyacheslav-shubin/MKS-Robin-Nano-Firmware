@@ -117,8 +117,6 @@
 #define HOTBED_MIN_TEMPERATURE_T_CN				"最低溫度"
 #define HOTBED_MAX_TEMPERATURE_T_CN				"最高溫度"
 
-#define MOTOR_CONF_TITLE_T_CN						"機器參數>電機設置"
-
 #define MAXFEEDRATE_CONF_TITLE_T_CN			"機器參數>最大速度"
 #define X_MAXFEEDRATE_T_CN								"X軸最大速度"
 #define Y_MAXFEEDRATE_T_CN								"Y軸最大速度"

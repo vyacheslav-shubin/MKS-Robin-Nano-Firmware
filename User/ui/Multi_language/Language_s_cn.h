@@ -118,8 +118,6 @@
 #define HOTBED_MIN_TEMPERATURE_CN				"最低温度"
 #define HOTBED_MAX_TEMPERATURE_CN				"最高温度"
 
-#define MOTOR_CONF_TITLE_CN						"机器参数>电机设置"
-
 #define MAXFEEDRATE_CONF_TITLE_CN			"机器参数>最大速度"
 #define X_MAXFEEDRATE_CN								"X轴最大速度"
 #define Y_MAXFEEDRATE_CN								"Y轴最大速度"

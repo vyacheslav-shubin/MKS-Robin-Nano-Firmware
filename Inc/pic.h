@@ -31,7 +31,6 @@ extern GUI_BITMAP bmp_struct_50x50;
 extern GUI_BITMAP bmp_struct_141x60;
 #endif
 extern uint8_t drawicon_preview(char *path,int xsize_small,int ysize_small,uint8_t part);
-extern uint8_t have_pre_pic(char *path);
 
 
 #if VERSION_WITH_PIC	

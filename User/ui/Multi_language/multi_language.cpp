@@ -169,8 +169,6 @@ void machine_setting_disp()
     machine_menu.HotbedMinTemperature=HOTBED_MIN_TEMPERATURE_EN;
     machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_EN;
 
-    machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_EN;
-
     machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_EN;
     machine_menu.XMaxFeedRate=X_MAXFEEDRATE_EN;
     machine_menu.YMaxFeedRate=Y_MAXFEEDRATE_EN;
@@ -473,8 +471,6 @@ void disp_language_init() {
             machine_menu.HotbedAjustType=HOTBED_ADJUST_CN;
             machine_menu.HotbedMinTemperature=HOTBED_MIN_TEMPERATURE_CN;
             machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_CN;
-
-            machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_CN;
 
             machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_CN;
             machine_menu.XMaxFeedRate=X_MAXFEEDRATE_CN;
@@ -869,8 +865,6 @@ void disp_language_init() {
         machine_menu.HotbedMinTemperature=HOTBED_MIN_TEMPERATURE_T_CN;
         machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_T_CN;
 
-        machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_T_CN;
-
         machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_T_CN;
         machine_menu.XMaxFeedRate=X_MAXFEEDRATE_T_CN;
         machine_menu.YMaxFeedRate=Y_MAXFEEDRATE_T_CN;
@@ -1258,8 +1252,6 @@ void disp_language_init() {
                     machine_menu.HotbedAjustType=HOTBED_ADJUST_EN;
                     machine_menu.HotbedMinTemperature=HOTBED_MIN_TEMPERATURE_EN;
                     machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_EN;
-            
-                    machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_EN;
             
                     machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_EN;
                     machine_menu.XMaxFeedRate=X_MAXFEEDRATE_EN;
@@ -2433,8 +2425,6 @@ void disp_language_init() {
                     machine_menu.HotbedAjustType=HOTBED_ADJUST_EN;
                     machine_menu.HotbedMinTemperature=HOTBED_MIN_TEMPERATURE_EN;
                     machine_menu.HotbedMaxTemperature=HOTBED_MAX_TEMPERATURE_EN;
-            
-                    machine_menu.MotorConfTitle=MOTOR_CONF_TITLE_EN;
             
                     machine_menu.MaxFeedRateConfTitle=MAXFEEDRATE_CONF_TITLE_EN;
                     machine_menu.XMaxFeedRate=X_MAXFEEDRATE_EN;

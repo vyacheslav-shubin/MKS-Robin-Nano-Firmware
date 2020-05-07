@@ -112,8 +112,11 @@ extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN 
 
 
 extern void ui_draw_config_lines();
+extern void ui_draw_config_half_lines();
+
 extern void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator);
 extern void ui_make_check_pair(int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title, uint8_t state);
+extern void ui_make_half_row_check_pair(int col, int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title, uint8_t state);
 
 #define ui_compare_arrow_pair(handle, pair) (((handle)==pair.button_text) || ((handle)==pair.button_arrow))
 extern void ui_make_arrow_pair(int row, WM_HWIN hWin, UI_ARROW_PAIR * pair, char* title);
@@ -135,7 +138,8 @@ extern void ui_start_print_process(void);
 
 extern void ui_start_print_file();
 
-extern void ui_gcode_small_preview(char * file_name,int xpos_pixel,int ypos_pixel);
+extern uint8_t ui_file_with_preview(char *path, int * withoffset);
+extern void ui_gcode_small_preview(char * file_name, int offset, int xpos_pixel,int ypos_pixel);
 
 #if defined(__cplusplus)
 }

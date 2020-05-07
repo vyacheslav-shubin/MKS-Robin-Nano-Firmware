@@ -8,7 +8,7 @@
 typedef struct {
 	const char * power_off_after_print;
 	const char * simple_main_ui;
-	const char * axes_inversion;
+	const char * axis_inversion;
 	const char * motor_steps_settings;
 	const char * home_speed_settings;
 	const char * acceleration_settings;

@@ -430,9 +430,6 @@ typedef struct fan_menu_disp
 	const char *title;
 	const char *add;
 	const char *dec; 
-	const char *full;
-	const char *half;
-	const char *off;
 	const char *back;
 	
 	const char *state;
@@ -666,12 +663,6 @@ extern TemperatureSettings_menu_def TemperatureSettings_menu;
 #endif
 #define ABOUT_VERSION_TEXT			"1.0.3"
 //#define ABOUT_WIFI_TEXT				"WiFi:"
-
-#define FAN_OPEN_TEXT				"100%"
-#define FAN_HALF_TEXT				"50%"
-#define FAN_CLOSE_TEXT				"0%"
-//#define FAN_TIPS1_TEXT				"FAN"
-//#define FAN_TIPS2_TEXT				"FAN\nClose"
 
 #define WIFI_TEXT					"WIFI"
 #define WIFI_IP_TEXT			"IP: "

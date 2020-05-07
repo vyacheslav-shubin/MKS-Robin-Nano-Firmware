@@ -218,7 +218,7 @@ static char TitleText[30];
 
 inline char * get_display_title_ref(int index) {
 	switch(disp_state_stack._disp_state[index]) {
-		case MOTORDIR_UI:	return lang_str.axes_inversion;
+		case MOTORDIR_UI:	return lang_str.axis_inversion;
 		case PRINT_READY_UI:	return main_menu.title;
 		case PRINT_FILE_UI:		return file_menu.title;
 		case PRINTING_UI:
@@ -377,7 +377,7 @@ void clear_cur_ui() {
 		case EXTRUSION_UI:		Clear_extrusion();		break;
 		case PRE_HEAT_UI:		clear_preHeat();		break;
 		case CHANGE_SPEED_UI:	Clear_changeSpeed();	break;
-		case FAN_UI:			Clear_fan();			break;
+		case FAN_UI:			clear_fan();			break;
 		case SET_UI:			Clear_Set();			break;
 		case ZERO_UI:			clear_zero();			break;
 		case SPRAYER_UI:								break;
@@ -620,13 +620,7 @@ void GUI_RefreshPage() {
 				disp_temp_pause();
 			}
 			break;
-			case FAN_UI:
-				if(temperature_change_frequency == 1)
-				{
-					temperature_change_frequency = 0;
-					disp_fan_speed();
-				}
-				break;
+			case FAN_UI: refresh_fan(); break;
 					
 		case MOVE_MOTOR_UI: refresh_move_motor(); break;
 /*

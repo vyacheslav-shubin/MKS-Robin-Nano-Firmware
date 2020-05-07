@@ -108,7 +108,7 @@ void _draw_MotorSettings() {
     ui_make_page_navigator(hMotorSettingsWnd, &navigator);
 
     if(navigator.page == 0) {
-    	ui_make_arrow_pair(0, hMotorSettingsWnd, &ui.motor_dir, lang_str.axes_inversion);
+    	ui_make_arrow_pair(0, hMotorSettingsWnd, &ui.motor_dir, lang_str.axis_inversion);
     	ui_make_arrow_pair(1, hMotorSettingsWnd, &ui.motor_steps, lang_str.motor_steps_settings);
     	ui_make_arrow_pair(2, hMotorSettingsWnd, &ui.motor_feed_rate, lang_str.home_speed_settings);
     	ui_make_arrow_pair(3, hMotorSettingsWnd, &ui.motor_acceleration, lang_str.acceleration_settings);

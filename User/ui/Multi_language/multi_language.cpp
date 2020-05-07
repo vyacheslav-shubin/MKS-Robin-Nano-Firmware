@@ -274,10 +274,6 @@ void disp_language_init() {
 	extrude_menu.step_5mm = EXTRUDE_5MM_TEXT;
 	extrude_menu.step_10mm = EXTRUDE_10MM_TEXT;
 
-	fan_menu.full = FAN_OPEN_TEXT;
-	fan_menu.half = FAN_HALF_TEXT;
-	fan_menu.off = FAN_CLOSE_TEXT;
-
 	speed_menu.step_1percent = STEP_1PERCENT;
 	speed_menu.step_5percent = STEP_5PERCENT;
 	speed_menu.step_10percent = STEP_10PERCENT;

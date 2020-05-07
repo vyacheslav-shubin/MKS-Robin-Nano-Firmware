@@ -40,7 +40,7 @@ static TEXT_Handle printTimeLeft;
 
 static BUTTON_Handle buttonPause, buttonStop, buttonOperat, buttonExt1, buttonExt2, buttonFanstate, buttonBedstate, buttonTime, buttonZpos;
 static BUTTON_Handle buttonAutoClose;
-static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp,Zpos;
+static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp, Zpos;
 
 uint8_t print_start_flg = 0;
 
@@ -56,8 +56,6 @@ static void update_printing_1s(void);
 static void update_pause_button(void);
 static void update_auto_close_button(void);
 
-
-const char* FAN_STATES[3] {"bmp_fan_state0.bin", "bmp_fan_state1.bin", "bmp_fan_state2.bin"};
 
 
 static void cbPrintingWin(WM_MESSAGE * pMsg) {
@@ -286,55 +284,31 @@ void do_finish_print(void) {
 extern float zprobe_zoffset; // Initialized by settings.load()
 
 void update_printing_1s(void) {
-	char buf[30] = {0};
-	memset(buf, 0, sizeof(buf));
-	sprintf(buf, "%d/%d°", (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
-	ui_set_text_value(E1_Temp, buf);
+	sprintf(ui_buf1_20, "%d/%d°", (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
+	ui_set_text_value(E1_Temp, ui_buf1_20);
 	if(is_dual_extruders()){
-		memset(buf,0,sizeof(buf));
-		sprintf(buf, "%d/%d°", (int)thermalManager.current_temperature[1], (int)thermalManager.target_temperature[1]);
-		ui_set_text_value(E2_Temp, buf);
+		sprintf(ui_buf1_20, "%d/%d°", (int)thermalManager.current_temperature[1], (int)thermalManager.target_temperature[1]);
+		ui_set_text_value(E2_Temp, ui_buf1_20);
 	}
+	sprintf(ui_buf1_20, "%d/%d°", (int)thermalManager.current_temperature_bed,  (int)thermalManager.target_temperature_bed);
+	ui_set_text_value(Bed_Temp, ui_buf1_20);
 
-	memset(buf, 0, sizeof(buf));
-	sprintf(buf, "%d/%d°", (int)thermalManager.current_temperature_bed,  (int)thermalManager.target_temperature_bed);
-	ui_set_text_value(Bed_Temp, buf);
+	print_time_to_str(&print_time, ui_buf1_20);
+	ui_set_text_value(printTimeLeft, ui_buf1_20);
 
-
-	memset(buf, 0, sizeof(buf));
-	print_time_to_str(&print_time, buf);
-	ui_set_text_value(printTimeLeft, buf);
-
-	memset(buf, 0, sizeof(buf));
 	if (abs(zprobe_zoffset)<0.001) {
-		sprintf(buf,"%.3f",current_position[Z_AXIS]);
+		sprintf(ui_buf1_20,"%.3f",current_position[Z_AXIS]);
 	} else {
-		sprintf(buf,"%.2f/%.2f",current_position[Z_AXIS], zprobe_zoffset);
+		sprintf(ui_buf1_20,"%.2f/%.2f",current_position[Z_AXIS], zprobe_zoffset);
 	}
-	ui_set_text_value(Zpos, buf);
-
-	memset(buf, 0, sizeof(buf));
-
-	long fs = fanSpeeds[0] * 100;
-	uint8_t pr=fs/255;
-	if ((pr==0) && (fanSpeeds[0]>0))
-		pr = 1;
-	sprintf(buf, "%d%%", pr);
-	ui_set_text_value(Fan_Pwm, buf);
-
+	ui_set_text_value(Zpos, ui_buf1_20);
 }
 
 
 void refresh_printing() {
-	static uint8_t fan_state = 0;
 	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
 		ui_timing_clear(F_UI_TIMING_HALF_SEC);
-		if (fanSpeeds[0]>1) {
-			fan_state++;
-			if (fan_state>2)
-				fan_state = 0;
-			ui_update_state_button(buttonFanstate, FAN_STATES[fan_state]);
-		}
+		ui_update_fan_button(buttonFanstate, Fan_Pwm);
 	}
 	if (is_ui_timing(F_UI_TIMING_SEC)) {
 		ui_timing_clear(F_UI_TIMING_SEC);

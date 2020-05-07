@@ -9,9 +9,14 @@
 #include "ili9320.h"
 
 extern CardReader card;
+
+char ui_buf1_20[20];
+
 UPLOAD_INFO upload_file_info = {0, 0};
 
 UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}};
+
+const char* FAN_STATES[3] {"bmp_fan_state0.bin", "bmp_fan_state1.bin", "bmp_fan_state2.bin"};
 
 void reset_file_info() {
 	ui_print_process.rate = 0;
@@ -392,5 +397,22 @@ void ui_gcode_small_preview(char *file_name, int offset, int xpos_pixel,int ypos
 		}
 	}
 	f_close(&file);
+}
+
+void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text) {
+	static uint8_t fan_state = 0;
+	if (fanSpeeds[0]>1) {
+		fan_state++;
+		if (fan_state>2)
+			fan_state = 0;
+		ui_update_state_button(button, FAN_STATES[fan_state]);
+	}
+	long fs = fanSpeeds[0] * 100;
+	uint8_t pr=fs/255;
+	if ((pr==0) && (fanSpeeds[0]>0))
+		pr = 1;
+	sprintf(ui_buf1_20, "%d/%d%%", fanSpeeds[0], pr);
+	ui_set_text_value(text, ui_buf1_20);
+
 }
 

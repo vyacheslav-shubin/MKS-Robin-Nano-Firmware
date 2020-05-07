@@ -14,6 +14,9 @@ extern "C" {
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
+extern const char* FAN_STATES[3];
+extern char ui_buf1_20[20];
+
 typedef struct{
 	float step;
 	char* pic;
@@ -140,6 +143,8 @@ extern void ui_start_print_file();
 
 extern uint8_t ui_file_with_preview(char *path, int * withoffset);
 extern void ui_gcode_small_preview(char * file_name, int offset, int xpos_pixel,int ypos_pixel);
+
+extern void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text);
 
 #if defined(__cplusplus)
 }

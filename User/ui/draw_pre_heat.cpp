@@ -176,7 +176,7 @@ static void cbPreHeatWin(WM_MESSAGE * pMsg) {
 #define COL(x) ui_std_col(x)
 #define COL_T(x) COL(x) + STATE_PIC_X_PIXEL
 #define ROW(y) (row_offset + (row_size*y))
-#define COL_INDEX 0
+#define COL_INDEX 1
 #define TEXT_L(phy) ui_create_std_text(COL_T(COL_INDEX)+10, ROW(phy), 80, STATE_PIC_Y_PIXEL, hPreHeatWnd, 0)
 #define BUTTON_L(phy, file) ui_create_state_button(COL(COL_INDEX)+10, ROW(phy), hPreHeatWnd, file);
 
@@ -196,7 +196,7 @@ void draw_preHeat() {
 	}
 	
 
-	buttonInc = ui_std_button(1, 0, hPreHeatWnd, "bmp_Add.bin", preheat_menu.add);
+	buttonInc = ui_std_button(0, 0, hPreHeatWnd, "bmp_Add.bin", preheat_menu.add);
 	buttonDec = ui_std_button(2, 0, hPreHeatWnd, "bmp_Dec.bin", preheat_menu.dec);
 	buttonPreset =  ui_std_button(3, 0, hPreHeatWnd, 0, 0);
 

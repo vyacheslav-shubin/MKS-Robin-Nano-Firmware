@@ -159,7 +159,8 @@ copy_fw: ren_exists copy_bin
 
 $(SD_CARD)/$(MKS_BIN_FILE): $(MKS_FIRMWARE)
 	rm -f $(SD_CARD)/ROBIN_NANO35.CUR
-	if [ -d "$(SD_CARD)" ]; then cp $(MKS_FIRMWARE) $(SD_CARD)/$(MKS_BIN_FILE); fi
+	mountpoint -q /media/shubin/sd || udisksctl mount -b /dev/sdc1
+	cp $(MKS_FIRMWARE) $(SD_CARD)/$(MKS_BIN_FILE)
 
 make_sd_bin: $(SD_CARD)/$(MKS_BIN_FILE)
 

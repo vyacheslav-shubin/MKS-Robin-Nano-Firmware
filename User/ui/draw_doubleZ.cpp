@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_ui.h"
 
 #ifndef GUI_FLASH
@@ -154,7 +154,7 @@ void draw_DoubleZ()
     BUTTON_SetBmpFileName(DoubleEndstop_text.btnHandle,NULL,1);
     BUTTON_SetBmpFileName(SecondEndStop_text.btnHandle,NULL,1);
 
-    BUTTON_SetBitmapEx(DoubleZ_sel.btnHandle,0,&bmp_struct90X30,0,5);//图片大小为90x30
+    BUTTON_SetBitmapEx(DoubleZ_sel.btnHandle,0,&bmp_struct90X30,0,5);//图片锟斤拷小为90x30
     BUTTON_SetBitmapEx(DoubleEndstop_sel.btnHandle,0,&bmp_struct90X30,0,5);
     BUTTON_SetBitmapEx(SecondEndStop_zmin.btnHandle,0,&bmp_struct70X28,0,0);
     BUTTON_SetBitmapEx(SecondEndStop_zmax.btnHandle,0,&bmp_struct70X28,0,0);

@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_Sprayer.h"
 #include "draw_ui.h"
@@ -14,7 +14,7 @@ static GUI_HWIN hSprayerWnd;
 
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 static BUTTON_STRUCT buttonSingle, buttonDouble, buttonRet;
 
@@ -84,7 +84,7 @@ void draw_Sprayer()
 	GUI_Clear();
 	//GUI_SetFont(&FONT_TITLE);
 
-	//GUI_DispStringAt("×¼±¸´òÓ¡->ÉèÖÃ->ÅçÍ·Êý", 0, 0);
+	//GUI_DispStringAt("×¼ï¿½ï¿½ï¿½ï¿½Ó¡->ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½Í·ï¿½ï¿½", 0, 0);
 	GUI_DispStringAt(creat_title_text(),  X_ADD, X_INTERVAL);
 	
 	hSprayerWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbSprayerWin, 0);

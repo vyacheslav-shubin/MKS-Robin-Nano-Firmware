@@ -1,10 +1,10 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "text.h"
+#include "TEXT.h"
 #include "draw_FileTransfer_ui.h"
 #include "draw_ready_print.h"
 
@@ -102,16 +102,16 @@ void draw_dialog_filetransfer(uint8_t WifiTransferDialogType)
 	{
 		if(WifiTransferDialogType == 0)
 		{
-			GUI_DispStringAt("ÎÄ¼þ´«ÊäÊ§°Ü!", 80, titleHeight  + 75);
+			GUI_DispStringAt("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½!", 80, titleHeight  + 75);
 
 		}
 		else if(WifiTransferDialogType == 1)
 		{
-			GUI_DispStringAt("ÎÄ¼þ´«Êä³É¹¦!", 80, titleHeight  + 75);
+			GUI_DispStringAt("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½!", 80, titleHeight  + 75);
 		}
 		else if(WifiTransferDialogType == 2)
 		{	
-			GUI_DispStringAt("Çë¼ì²éÊÇ·ñ²åÈë´æ´¢Éè±¸!", 40, titleHeight  + 75);
+			GUI_DispStringAt("ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½è±¸!", 40, titleHeight  + 75);
 		}
 
 	}
@@ -132,7 +132,7 @@ void draw_dialog_filetransfer(uint8_t WifiTransferDialogType)
 	}
 	else
 	{
-		BUTTON_SetText(buttonReturn.btnHandle, "·µ»Ø\n");
+		BUTTON_SetText(buttonReturn.btnHandle, "ï¿½ï¿½ï¿½ï¿½\n");
 	}	
 
 	BUTTON_SetBkColor(buttonReturn.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.background_color);
@@ -214,7 +214,7 @@ void draw_filetansfer(uint8_t file_unzip_flg)
 		}
 		else
 		{
-			TEXT_SetText(FileTransferText,"½ÓÊÕÎÄ¼þÖÐ");
+			TEXT_SetText(FileTransferText,"ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½");
 		}
 	}
 	else if(gCfgItems.fileSysType == FILE_SYS_USB)
@@ -234,11 +234,11 @@ void draw_filetansfer(uint8_t file_unzip_flg)
 		{
 			if(file_unzip_flg == 1)
 			{
-				TEXT_SetText(FileTransferText,"ÎÄ¼þ½âÑ¹ÖÐ");
+				TEXT_SetText(FileTransferText,"ï¿½Ä¼ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½");
 			}
 			else
 			{
-				TEXT_SetText(FileTransferText,"ÎÄ¼þ½ÓÊÕÖÐ");
+				TEXT_SetText(FileTransferText,"ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 		}		
 	}

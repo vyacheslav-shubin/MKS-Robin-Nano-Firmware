@@ -27,7 +27,7 @@
 #include "wifi_module.h"
 #endif    
 #include "serial.h"  
-#include "gui.h"
+#include "GUI.h"
 
 #include "draw_ui.h"
 #include "draw_ready_print.h"
@@ -336,7 +336,7 @@ void Test_GPIO_Init()
  	GPIO_InitTypeDef GPIO_InitStructure;
 	
 	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOE, ENABLE );
-	//¿ØÖÆ½ÅPW_OFF(PB2)
+	//ï¿½ï¿½ï¿½Æ½ï¿½PW_OFF(PB2)
 	GPIO_InitStructure.Pin = WIFI_IO2_Pin;
 	GPIO_InitStructure.Mode =GPIO_MODE_OUTPUT_PP ;
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;	
@@ -385,26 +385,26 @@ void Test_GPIO()
 
     if((GPIO_TEST_STATE.pw_det_sta == 1)&&(GPIO_TEST_STATE.mt_det_sta == 1)&&(GPIO_TEST_STATE.mt_det2_sta == 1))
 	{
-		GUI_DispStringAt("¶Ïµç¶ÏÁÏ½Ó¿ÚÕý³£", 10, 60);
+		GUI_DispStringAt("ï¿½Ïµï¿½ï¿½ï¿½Ï½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½", 10, 60);
 	}
 	else
 	{
 		GUI_SetBkColor(gCfgItems.background_color);
-		GUI_SetColor(0X0000ff);//	ºìÉ«×ÖÌå
-		GUI_DispStringAt("¶Ïµç¶ÏÁÏ½Ó¿ÚÒì³£", 10, 60);
+		GUI_SetColor(0X0000ff);//	ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
+		GUI_DispStringAt("ï¿½Ïµï¿½ï¿½ï¿½Ï½Ó¿ï¿½ï¿½ì³£", 10, 60);
 		GUI_SetBkColor(gCfgItems.background_color);
 		GUI_SetColor(gCfgItems.title_color);		
 	}
     /*
 	if((GPIO_TEST_STATE.t1_cs_sta== 1))
 	{
-		GUI_DispStringAt("ÈÈµçÅ¼½Ó¿ÚÕý³£", 0, 150);
+		GUI_DispStringAt("ï¿½Èµï¿½Å¼ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½", 0, 150);
 	}
 	else
 	{
 		GUI_SetBkColor(gCfgItems.background_color);
-		GUI_SetColor(0X0000ff);//	ºìÉ«×ÖÌå
-		GUI_DispStringAt("ÈÈµçÅ¼½Ó¿ÚÒì³£", 0, 150);
+		GUI_SetColor(0X0000ff);//	ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
+		GUI_DispStringAt("ï¿½Èµï¿½Å¼ï¿½Ó¿ï¿½ï¿½ì³£", 0, 150);
 		GUI_SetBkColor(gCfgItems.background_color);
 		GUI_SetColor(gCfgItems.title_color);		
 	}
@@ -414,13 +414,13 @@ void Test_GPIO()
 		&&(GPIO_TEST_STATE.endstopz1_sta== 1)
 		&&(GPIO_TEST_STATE.endstopz2_sta== 1))
 	{
-		GUI_DispStringAt("ÏÞÎ»½Ó¿ÚÕý³£", 10, 90);
+		GUI_DispStringAt("ï¿½ï¿½Î»ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½", 10, 90);
 	}
 	else
 	{
 		GUI_SetBkColor(gCfgItems.background_color);
-		GUI_SetColor(0X0000ff);//	ºìÉ«×ÖÌå
-		GUI_DispStringAt("ÏÞÎ»½Ó¿ÚÒì³£", 10, 90);
+		GUI_SetColor(0X0000ff);//	ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
+		GUI_DispStringAt("ï¿½ï¿½Î»ï¿½Ó¿ï¿½ï¿½ì³£", 10, 90);
 		GUI_SetBkColor(gCfgItems.background_color);
 		GUI_SetColor(gCfgItems.title_color);
 	}
@@ -606,7 +606,7 @@ bool mksSdCardTest()
   uint32_t byteswritten, bytesread;                     /* File write/read counts */
 
   /*##-1- Link the micro SD disk I/O driver ##################################*/
-  //Á´½Ó SD µ×²ãÇý¶¯º¯Êýµ½ FATFS ÎÄ¼þÏµÍ³£¬Õâ¸öÔÚ MX_FATFS_Init()º¯ÊýÖÐÒÑ¾­Íê³É
+  //ï¿½ï¿½ï¿½ï¿½ SD ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ FATFS ï¿½Ä¼ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MX_FATFS_Init()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½
   //if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
   {
     /*##-2- Register the file system object to the FatFs module ##############*/
@@ -619,7 +619,7 @@ bool mksSdCardTest()
     {
       /*##-3- Create a FAT file system (format) on the logical drive #########*/
       /* WARNING: Formatting the uSD card will delete all content on the device */
-      //¶Ô SD ¿¨½øÐÐ¸ñÊ½»¯
+      //ï¿½ï¿½ SD ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½Ê½ï¿½ï¿½
 #if 0
       if(f_mkfs((TCHAR const*)SD_Path, 0, 0) != FR_OK)
       {
@@ -1016,13 +1016,13 @@ void mksHardwareTest()
 		{
 		  //cnt_test++;
           
-		  if(testCnt % 2000 > 1000)	//µç»ú·½Ïò¿ØÖÆ
+		  if(testCnt % 2000 > 1000)	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{XDIR_OP = 0;YDIR_OP = 0;ZDIR_OP = 0;E0DIR_OP = 0;E1DIR_OP = 0;}
 		  else
 			  {XDIR_OP = 1;YDIR_OP = 1;ZDIR_OP = 1;E0DIR_OP = 1;E1DIR_OP = 1;}
-		  //ÒòÎª¼·³öÍ·2¿ØÎÂ¹Ü½ÅÓë·çÉÈ¶¨Ê±Æ÷¸´ÓÃ£¬
-		  //ËùÒÔÅçÍ·2¿ØÎÂÖ¸Ê¾µÆ»áÉÁË¸
-		  if(testCnt % 2000 > 1000)   //MOS¿ØÖÆ
+		  //ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Í·2ï¿½ï¿½ï¿½Â¹Ü½ï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½
+		  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·2ï¿½ï¿½ï¿½ï¿½Ö¸Ê¾ï¿½Æ»ï¿½ï¿½ï¿½Ë¸
+		  if(testCnt % 2000 > 1000)   //MOSï¿½ï¿½ï¿½ï¿½
 			{BED_OP=1;HEATER1_OP=1;HEATER2_OP=1;MKS_FAN_TIM = 10000;}
 		  else
 			{BED_OP=0;HEATER1_OP=0;HEATER2_OP=0;MKS_FAN_TIM = 0;}
@@ -1118,7 +1118,7 @@ void draw_Hardwaretest()
 	GUI_SetFont(&GUI_FontHZ16);
 
 /*---------------------------------------------------------------------------*/
-//¹Ü½Å²âÊÔ
+//ï¿½Ü½Å²ï¿½ï¿½ï¿½
 	Test_GPIO();
 	
 /*---------------------------------------------------------------------------*/
@@ -1138,7 +1138,7 @@ void draw_Hardwaretest()
     {
         //BUTTON_SetText(buttonRet.btnHandle, common_menu.text_back);
     }
-    GUI_DispStringAt("Ó²¼þ²âÊÔ-(Èí¼þÄÚ²¿°æ±¾V1.0.1_001)", 20, 0);
+    GUI_DispStringAt("Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-(ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½æ±¾V1.0.1_001)", 20, 0);
     mksHardwareTest();
 
 }

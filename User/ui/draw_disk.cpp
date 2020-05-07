@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_disk.h"
 #include "draw_ui.h"
@@ -16,7 +16,7 @@ static GUI_HWIN hDiskWnd;
 
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 	
 static BUTTON_STRUCT buttonMainSd, buttonSd, buttonUdisk, buttonRet;
 
@@ -93,7 +93,7 @@ void draw_Disk()
 	GUI_Clear();
 	//GUI_SetFont(&FONT_TITLE);
 
-	//GUI_DispStringAt("×¼±¸´òÓ¡->ÉèÖÃ->ÎÄ¼þÏµÍ³", 0, 0);
+	//GUI_DispStringAt("×¼ï¿½ï¿½ï¿½ï¿½Ó¡->ï¿½ï¿½ï¿½ï¿½->ï¿½Ä¼ï¿½ÏµÍ³", 0, 0);
 	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 	
 	hDiskWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbDiskWin, 0);

@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_ui.h"
 
 #ifndef GUI_FLASH
@@ -173,7 +173,7 @@ void draw_HomeDir()
     BUTTON_SetBmpFileName(YHomeDir_Text.btnHandle,NULL,1);
     BUTTON_SetBmpFileName(ZHomeDir_Text.btnHandle,NULL,1);
 
-    BUTTON_SetBitmapEx(XHomeDir.btnHandle,0,&bmp_struct90X30,0,5);//图片大小为90x30
+    BUTTON_SetBitmapEx(XHomeDir.btnHandle,0,&bmp_struct90X30,0,5);//图片锟斤拷小为90x30
     BUTTON_SetBitmapEx(YHomeDir.btnHandle,0,&bmp_struct90X30,0,5);
     BUTTON_SetBitmapEx(ZHomeDir.btnHandle,0,&bmp_struct90X30,0,5);
     

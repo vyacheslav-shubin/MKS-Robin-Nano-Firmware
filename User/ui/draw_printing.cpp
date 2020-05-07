@@ -8,7 +8,7 @@
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "text.h"
+#include "TEXT.h"
 #include "draw_operate.h"
 #include "ui_tools.h"
 #include "sh_tools.h"
@@ -18,7 +18,7 @@
 
 #include "draw_print_file.h"
 #include "pic.h"
-#include "marlin.h"
+#include "Marlin.h"
 #include "mks_reprint.h"
 #include "stm32f10x_gpio.h"
 

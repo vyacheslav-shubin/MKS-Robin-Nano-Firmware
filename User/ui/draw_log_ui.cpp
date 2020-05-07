@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_log_ui.h"
 #include "draw_ui.h"
@@ -14,7 +14,7 @@ GUI_HWIN hLogWnd;
 
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 static BUTTON_STRUCT button9600, button57600,button250000, button115200, buttonRet;
 
@@ -113,7 +113,7 @@ void draw_Connect()
 	GUI_Clear();
 	//GUI_SetFont(&FONT_TITLE);
 
-	//GUI_DispStringAt("ÕýÔÚ´òÓ¡->ÉèÖÃ->Á¬½Ó", 0, 0);
+	//GUI_DispStringAt("ï¿½ï¿½ï¿½Ú´ï¿½Ó¡->ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½", 0, 0);
 	GUI_DispStringAt(creat_title_text(),  X_ADD, X_INTERVAL);
 	
 	hLogWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbLogWin, 0);

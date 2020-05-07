@@ -1,9 +1,9 @@
-#include "gui.h"
-#include "button.h"
-#include "text.h"
+#include "GUI.h"
+#include "BUTTON.h"
+#include "TEXT.h"
 #include "draw_ui.h"
 #include "draw_meshleveling.h"
-#include "marlin.h"
+#include "Marlin.h"
 static GUI_HWIN hMeshLevelingWnd;
 static BUTTON_STRUCT buttonRet,buttonMesh,buttonZadd,buttonZdec,buttonZstep;
 static TEXT_Handle LevelingMsg,Zpos,PointNumb;

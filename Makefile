@@ -29,8 +29,8 @@ BIN_PICS	:= $(patsubst %.png,$(BUILD_BASE)/mks_pic/bmp_%.bin,$(PICS))
 LIBS		:= Middlewares/GUI/GUI.a
 
 INCLUDE		:= $(shell cat include.list)
-PATCH_DIR	:= $(BUILD_BASE)/patch
-INCLUDE		:= $(INCLUDE) $(PATCH_DIR)
+#PATCH_DIR	:= $(BUILD_BASE)/patch
+#INCLUDE		:= $(INCLUDE) 
 DEFINES		:= USE_HAL_DRIVER STM32F103xE STM32F10X_HD USE_HAL_LIB MKS_ROBIN_NANO TFT35
  
 INCLIDE_OPT	:= $(addprefix -I,$(INCLUDE))
@@ -65,25 +65,25 @@ print_pic_out:
 prepare:
 	mkdir -p $(BUILD_BASE)
 	mkdir -p $(BUILD_BASE)/mks_pic
-	mkdir -p $(PATCH_DIR)
-	ln -s -f ../../Middlewares/GUI/GUI.h $(PATCH_DIR)/gui.h
-	ln -s -f ../../Middlewares/GUI/BUTTON.h $(PATCH_DIR)/button.h
-	ln -s -f ../../Middlewares/GUI/TEXT.h $(PATCH_DIR)/text.h
-	ln -s -f ../../Middlewares/Third_Party/Marlin/Marlin.h $(PATCH_DIR)/marlin.h
-	ln -s -f ../../User/ui/draw_ready_print.h $(PATCH_DIR)/Draw_ready_print.h
-	ln -s -f ../../Middlewares/Third_Party/Marlin/Configuration_adv.h $(PATCH_DIR)/configuration_adv.h
-	ln -s -f ../../Drivers/BSP/variant/fastio_Robin2.h $(PATCH_DIR)/fastio_robin2.h
-	ln -s -f ../../Drivers/BSP/Components/w25qxx/spi_flash.h $(PATCH_DIR)/SPI_Flash.h
-	ln -s -f ../../User/ui/draw_Sprayer.h $(PATCH_DIR)/draw_sprayer.h
-	ln -s -f ../../Middlewares/Third_Party/Marlin/Conditionals_post.h $(PATCH_DIR)/conditionals_post.h
-	ln -s -f ../../Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h $(PATCH_DIR)/stm32F10x_gpio.h
-	ln -s -f ../../Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_tim.h $(PATCH_DIR)/stm32F10x_tim.h
-	ln -s -f ../../Drivers/BSP/variant/mks_variant.h $(PATCH_DIR)/Mks_variant.h
-	ln -s -f ../../User/ui/draw_LevelingSettings.h $(PATCH_DIR)/draw_levelingsettings.h
-	ln -s -f ../../User/ui/draw_doubleZ.h $(PATCH_DIR)/draw_doublez.h
-	ln -s -f ../../Middlewares/Third_Party/Marlin/Configuration.h $(PATCH_DIR)/configuration.h
-	ln -s -f ../../User/ui/QRENCODE/QR_Encode.h $(PATCH_DIR)/qr_encode.h
-	ln -s -f ../../Middlewares/Third_Party/FatFs/src/ff.h $(PATCH_DIR)/Ff.h
+	#mkdir -p $(PATCH_DIR)
+	#ln -s -f ../../Middlewares/GUI/GUI.h $(PATCH_DIR)/gui.h
+	#ln -s -f ../../Middlewares/GUI/BUTTON.h $(PATCH_DIR)/button.h
+	#ln -s -f ../../Middlewares/GUI/TEXT.h $(PATCH_DIR)/text.h
+	#ln -s -f ../../Middlewares/Third_Party/Marlin/Marlin.h $(PATCH_DIR)/marlin.h
+	#ln -s -f ../../User/ui/draw_ready_print.h $(PATCH_DIR)/Draw_ready_print.h
+	#ln -s -f ../../Middlewares/Third_Party/Marlin/Configuration_adv.h $(PATCH_DIR)/configuration_adv.h
+	#ln -s -f ../../Drivers/BSP/variant/fastio_Robin2.h $(PATCH_DIR)/fastio_robin2.h
+	#ln -s -f ../../Drivers/BSP/Components/w25qxx/spi_flash.h $(PATCH_DIR)/SPI_Flash.h
+	#ln -s -f ../../User/ui/draw_Sprayer.h $(PATCH_DIR)/draw_sprayer.h
+	#ln -s -f ../../Middlewares/Third_Party/Marlin/Conditionals_post.h $(PATCH_DIR)/conditionals_post.h
+	#ln -s -f ../../Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h $(PATCH_DIR)/stm32F10x_gpio.h
+	#ln -s -f ../../Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_tim.h $(PATCH_DIR)/stm32F10x_tim.h
+	#ln -s -f ../../Drivers/BSP/variant/mks_variant.h $(PATCH_DIR)/Mks_variant.h
+	#ln -s -f ../../User/ui/draw_LevelingSettings.h $(PATCH_DIR)/draw_levelingsettings.h
+	#ln -s -f ../../User/ui/draw_doubleZ.h $(PATCH_DIR)/draw_doublez.h
+	#ln -s -f ../../Middlewares/Third_Party/Marlin/Configuration.h $(PATCH_DIR)/configuration.h
+	#ln -s -f ../../User/ui/QRENCODE/QR_Encode.h $(PATCH_DIR)/qr_encode.h
+	#ln -s -f ../../Middlewares/Third_Party/FatFs/src/ff.h $(PATCH_DIR)/Ff.h
 
 
 $(FIRMWARE).bin: $(FIRMWARE).elf

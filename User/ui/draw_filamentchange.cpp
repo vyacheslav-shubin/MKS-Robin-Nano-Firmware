@@ -1,22 +1,16 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_filamentchange.h"
 #include "draw_ui.h"
-//#include "printer.h"
-#include "text.h"
-//#include "gcode.h"
+#include "TEXT.h"
 #include "draw_pre_heat.h"
-//#include "mks_tft_fifo.h"
-//#include "mks_tft_com.h"
 #include "draw_printing.h"
-#include "marlin.h"
+#include "Marlin.h"
 #include "temperature.h"
 #include "mks_reprint.h"
 #include "draw_pause_ui.h"
 extern float feedrate_mm_s;
 
-//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸Áî·¢ËÍ¶ÓÁÐ
-//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸Áî½ÓÊÕ¶ÓÁÐ
 extern int X_ADD,X_INTERVAL;
 
 GUI_HWIN hFilamentChangeWnd;
@@ -399,8 +393,8 @@ void FilamentChange_handle()
 	case 3:
 		initFIFO(&gcodeCmdTxFIFO);
 		filamentchange_Process = 0;	
-		pushFIFO(&gcodeCmdTxFIFO, (unsigned char *)ABSOLUTE_COORD_COMMAN);//È·±£ºóÐøÒÔ¾ø¶Ô×ø±êÖ´ÐÐ
-		//ÒÆ¶¯ºóÂíÉÏ±£´æÊý¾Ý
+		pushFIFO(&gcodeCmdTxFIFO, (unsigned char *)ABSOLUTE_COORD_COMMAN);//È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½
+		//ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(last_disp_state == PRINT_MORE_UI)
 			positionSaveFlag = 1;		
 		break;

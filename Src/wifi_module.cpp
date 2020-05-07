@@ -28,9 +28,9 @@
 //#include "fs_usr.h"
 #include "stm32f1xx_hal_dma.h"
 #include "tim.h"
-#include "fastio_robin2.h"
+#include "fastio_Robin2.h"
 
-#include "marlin.h"
+#include "Marlin.h"
 #include "cardreader.h"
 #include "mks_reprint.h"
 #include "draw_wifi_list.h"

@@ -63,7 +63,7 @@
 //#endif    
 #include "serial.h"  
 
-#include "gui.h"
+#include "GUI.h"
 #include "ili9320.h"
 #include "draw_ui.h"
 #include "draw_ready_print.h"

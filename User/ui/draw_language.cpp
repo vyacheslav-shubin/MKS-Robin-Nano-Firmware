@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_language.h"
 #include "draw_ui.h"
@@ -248,7 +248,7 @@ void draw_Language()
       GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
     }
 
-	//GUI_DispStringAt("×¼±¸´òÓ¡->ÉèÖÃ->ÓïÑÔ", 0, 0);
+	//GUI_DispStringAt("×¼ï¿½ï¿½ï¿½ï¿½Ó¡->ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½", 0, 0);
 	//GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
 	
 	hLanguageWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbLanguageWin, 0);
@@ -392,7 +392,7 @@ void disp_sel_item()
 		{
 			switch(gCfgItems.language)
 			{
-			//µÚ¶þÒ³ÓïÑÔÏÔÊ¾
+			//ï¿½Ú¶ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
 			case LANG_GERMAN:
 			BUTTON_SetBmpFileName(buttonGerman, "bmp_german_sel.bin",0);
 			BUTTON_SetBmpFileName(buttonFrench, "bmp_french.bin",0);

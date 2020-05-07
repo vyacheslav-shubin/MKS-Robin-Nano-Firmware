@@ -1,8 +1,8 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_ui.h"
 
-#include "marlin.h"
+#include "Marlin.h"
 #include "mks_reprint.h"
 #include "cardreader.h"
 
@@ -14,8 +14,6 @@ static GUI_HWIN hMachineTypeWnd;
 static BUTTON_STRUCT XYZ_Sel,Delta_Sel,Corexy_Sel;
 static BUTTON_STRUCT buttonXYZ,buttonDelta,buttonCorexy;
 static BUTTON_STRUCT button_back;
-
-//extern CardReader card;
 
 static void cbMachineTypeWin(WM_MESSAGE * pMsg) {
 
@@ -128,7 +126,7 @@ void draw_MachineType()
     BUTTON_SetBmpFileName(buttonDelta.btnHandle,NULL,1);
     BUTTON_SetBmpFileName(buttonCorexy.btnHandle,NULL,1);
 
-    BUTTON_SetBitmapEx(XYZ_Sel.btnHandle,0,&bmp_struct26X26,64,7);//图片大小为26x26
+    BUTTON_SetBitmapEx(XYZ_Sel.btnHandle,0,&bmp_struct26X26,64,7);//图片锟斤拷小为26x26
     BUTTON_SetBitmapEx(Delta_Sel.btnHandle,0,&bmp_struct26X26,64,7);
     BUTTON_SetBitmapEx(Corexy_Sel.btnHandle,0,&bmp_struct26X26,64,7);
     

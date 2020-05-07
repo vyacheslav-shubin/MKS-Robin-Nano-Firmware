@@ -28,7 +28,7 @@
 #ifndef CONDITIONALS_POST_H
 #define CONDITIONALS_POST_H
 #include "mks_cfg.h"
-#include "configuration.h"
+#include "Configuration.h"
   //#define IS_SCARA (ENABLED(MORGAN_SCARA) || ENABLED(MAKERARM_SCARA))
   //#define IS_KINEMATIC (ENABLED(DELTA) || IS_SCARA)
   //#define IS_CARTESIAN !IS_KINEMATIC

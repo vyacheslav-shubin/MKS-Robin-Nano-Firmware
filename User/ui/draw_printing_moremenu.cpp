@@ -1,15 +1,13 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_ui.h"
 #include "fontLib.h"
-//#include "printer.h"
-//#include "sd_usr.h"
 #include "draw_printing_moremenu.h"
 #include "draw_filamentchange.h"
 #include "draw_fan.h"
 #include "pic_manager.h"
-#include "SPI_Flash.h"
-#include "marlin.h"
+#include "spi_flash.h"
+#include "Marlin.h"
 #include "mks_reprint.h"
 #include "draw_pre_heat.h"
 #include "draw_change_speed.h"
@@ -25,7 +23,7 @@ extern volatile uint8_t  mksPrinterStatusFlag;
 static GUI_HWIN hPrintmoreWnd;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 static BUTTON_STRUCT buttonFilament_P,buttonFan_P,buttonoff_P,morefunc1,morefunc2,morefunc3,morefunc4,morefunc5,morefunc6,morefunc7,buttonRet;
 static BUTTON_STRUCT buttonPreHeat,buttonSpeed;

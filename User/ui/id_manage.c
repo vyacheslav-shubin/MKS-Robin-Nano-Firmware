@@ -1,5 +1,5 @@
 #include "stdint.h"
-#include "gui.h"
+#include "GUI.h"
 #include "id_manage.h"
 
 #define ID_USED 	1

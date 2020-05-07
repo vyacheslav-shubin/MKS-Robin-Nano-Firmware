@@ -1,7 +1,7 @@
 #include "type_define.h"
 #include "string.h"
 #include "pic_manager.h"
-#include "gui.h"
+#include "GUI.h"
 #include "spi_flash.h"
 #include "mks_cfg.h"
 #include "draw_ui.h"
@@ -9,10 +9,10 @@ extern uint8_t DMA_ERRO_FLAG;
 
 
 /***************************************************************************
- º¯ÊýÃû£ºPicMsg_Init()
-ÊäÈë²ÎÊý£ºÎÞ
-Êä³ö²ÎÊý£ºÎÞ
-¹¦ÄÜÃèÊö£ºÊµÏÖ¶ÁÈ¡´æ´¢ÔÚflashÖÐµÄÍ¼Æ¬ÐÅÏ¢£¬½øÐÐ³õÊ¼»¯¸³Öµ
+ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PicMsg_Init()
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö¶ï¿½È¡ï¿½æ´¢ï¿½ï¿½flashï¿½Ðµï¿½Í¼Æ¬ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Öµ
 ****************************************************************************/
 /*
 void PicMsg_Init(void)
@@ -31,14 +31,14 @@ void PicMsg_Init(void)
 
 	for(i = 0;i < Pic_cnt1;i++)
 	{
-		//¶ÁÈ¡Í¼Æ¬Ãû³Æ
+		//ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
 		j = 0;
 		do
 		{
 			W25QXX_Read(&PIC[i].name[j],PIC_NAME_ADDR + tmp_cnt,1);
 			tmp_cnt++;
 		}while(PIC[i].name[j++] != '\0');
-		//¶ÁÈ¡Í¼Æ¬´óÐ¡Öµ
+		//ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½Ð¡Öµ
 		W25QXX_Read(PIC[i].size.bytes,PIC_SIZE_ADDR+i*4,4);
 	}
 	
@@ -63,14 +63,14 @@ void Pic_Read(uint8_t *Pname,uint8_t *P_Rbuff)
 	
 	for(i=0;i<Pic_cnt;i++)
 	{
-		//¶ÁÈ¡Í¼Æ¬Ãû³Æ
+		//ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
 		j = 0;
 		do
 		{
 			SPI_FLASH_BufferRead(&PIC.name[j],PIC_NAME_ADDR + tmp_cnt,1);
 			tmp_cnt++;
 		}while(PIC.name[j++] != '\0');
-		//¶ÁÈ¡Í¼Æ¬´óÐ¡Öµ
+		//ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½Ð¡Öµ
 		SPI_FLASH_BufferRead(PIC.size.bytes,PIC_SIZE_ADDR+i*4,4);
 		
 		if((strcmp((char*)Pname,(char*)PIC.name))==0)
@@ -110,7 +110,7 @@ void Pic_Read(uint8_t *Pname,uint8_t *P_Rbuff,uint8_t part,uint8_t allcnt)
     {
     	for(i=0;i<gCfgItems.total_pic;i++)
     	{
-    		//¶ÁÈ¡Í¼Æ¬Ãû³Æ
+    		//ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
     		j = 0;
     		do
     		{
@@ -120,13 +120,13 @@ void Pic_Read(uint8_t *Pname,uint8_t *P_Rbuff,uint8_t part,uint8_t allcnt)
 
     		if((strcmp((char*)Pname,(char*)PIC.name))==0)
     		{
-        		//¶ÁÈ¡Í¼Æ¬´óÐ¡Öµ
+        		//ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½Ð¡Öµ
         		SPI_FLASH_BufferRead(PIC.size.bytes,PIC_SIZE_ADDR+i*4,4);
 				if(PIC.size.dwords < sizeof(bmp_public_buf))//Ð¡Í¼Æ¬
 				{
 					little_image_flag=1;
 				}
-                pic_addr_offset=PIC.size.dwords>>2;   //·ÖÁ½²¿·ÖÏÔÊ¾ 		
+                pic_addr_offset=PIC.size.dwords>>2;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ 		
     		    pic_row=i;
     		    break;
     		}

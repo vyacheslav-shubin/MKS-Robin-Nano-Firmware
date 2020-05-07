@@ -43,8 +43,8 @@ extern "C"{
 #if defined ( STM32F10X_HD ) || defined (STM32F10X_MD)
 //#include <stm32f10x_conf.h>
 #endif
-#include "stm32F10x_gpio.h"
-#include "stm32F10x_tim.h"
+#include "stm32f10x_gpio.h"
+#include "stm32f10x_tim.h"
 // Includes STM32F40x CMSIS
 #ifdef STM32F40_41xxx
 #include <stm32f4xx_conf.h>

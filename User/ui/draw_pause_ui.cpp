@@ -6,7 +6,7 @@
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "text.h"
+#include "TEXT.h"
 #include "draw_printing.h"
 #include "draw_extrusion.h"
 #include "draw_pause_ui.h"
@@ -19,7 +19,7 @@
 
 #include "mks_cfg.h"
 #include "ff.h"
-#include "marlin.h"
+#include "Marlin.h"
 #include "mks_reprint.h"
 #include "stm32f10x_gpio.h"
 

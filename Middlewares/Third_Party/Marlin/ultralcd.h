@@ -26,7 +26,7 @@
 #include "MarlinConfig.h"
 
 #include "Marlin.h"
-#include "gui.h"
+#include "GUI.h"
 
 #if ENABLED(ULTRA_LCD)
 

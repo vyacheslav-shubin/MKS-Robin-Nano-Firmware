@@ -1,6 +1,6 @@
 #include "draw_more.h"
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_ui.h"
 //#include "printer.h"
 #include "fontLib.h"
@@ -18,8 +18,8 @@ static BUTTON_STRUCT buttonzoffset,buttonCustom1, buttonCustom2, buttonCustom3, 
 GUI_HWIN hMoreWnd;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸Áî·¢ËÍ¶ÓÁÐ
-//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸Áî½ÓÊÕ¶ÓÁÐ
+//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸ï¿½î·¢ï¿½Í¶ï¿½ï¿½ï¿½
+//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½
 
 /*
 extern char cmd1_code[200];
@@ -40,7 +40,7 @@ volatile unsigned char *codebufpoint = x;
 unsigned char codebuff[100];              //**
 char x[1]={0};
 volatile char *codebufpoint = x;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 #if tan_mask
 //void pushButtonCodeToFifo(uint8_t *buttoncode)
@@ -52,7 +52,7 @@ void pushButtonCodeToFifo(void)
 	{
 		memset(codebuff,0,sizeof(codebuff));
 		
-		while(*(codebufpoint) != 0x3b)//ÃüÁîÐÐÒÔ·ÖºÅÎª½áÊø·û¡£
+		while(*(codebufpoint) != 0x3b)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·Öºï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			codebuff[i] = *codebufpoint;
 			i++;

@@ -20,7 +20,7 @@
 
 #include "draw_bind.h"
 #include "mks_cfg.h"
-#include "marlin.h"
+#include "Marlin.h"
 #include "cardreader.h"
 #include "mks_reprint.h"
 #include "planner.h"

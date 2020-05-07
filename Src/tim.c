@@ -44,7 +44,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "tim.h"
-#include "Mks_variant.h"
+#include "mks_variant.h"
 /* USER CODE BEGIN 0 */
 volatile uint32_t _dwTickCount=0 ;
 unsigned long millis()
@@ -341,7 +341,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-//bltouch PWM¹Ü½Å
+//bltouch PWMï¿½Ü½ï¿½
 		GPIO_InitStruct.Pin = TOUCH_Pin;
 		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 		GPIO_InitStruct.Pull = GPIO_NOPULL;

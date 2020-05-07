@@ -1,9 +1,7 @@
 #include "draw_change_speed.h"
 #include "draw_ui.h"
 #include "id_manage.h"
-//#include "mks_tft_fifo.h"
-//#include "mks_tft_com.h"
-#include "marlin.h"
+#include "Marlin.h"
 #include "planner.h"
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -13,9 +11,9 @@ GUI_HWIN hChangeSpeedWnd;
 
 
 //extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸Áî·¢ËÍ¶ÓÁÐ
-//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸Áî½ÓÊÕ¶ÓÁÐ
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸ï¿½î·¢ï¿½Í¶ï¿½ï¿½ï¿½
+//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 static TEXT_Handle textPrintSpeed,textSpeedVal;
 
@@ -247,7 +245,7 @@ void draw_changeSpeed()
 	GUI_SetColor(gCfgItems.title_color);
 	GUI_Clear();
 
-	//GUI_DispStringAt("ÕýÔÚ´òÓ¡->²Ù×÷->±äËÙ", 0, 0);
+	//GUI_DispStringAt("ï¿½ï¿½ï¿½Ú´ï¿½Ó¡->ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½", 0, 0);
 	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 	
 	hChangeSpeedWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbChangeSpeedWin, 0);

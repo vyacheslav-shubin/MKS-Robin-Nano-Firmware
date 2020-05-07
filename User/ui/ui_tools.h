@@ -11,6 +11,10 @@
 extern "C" {
 #endif
 
+const char img_fan_state0 = "bmp_fan_state0.bin";
+const char img_fan_state1 = "bmp_fan_state1.bin";
+const char img_fan_state2 = "bmp_fan_state2.bin";
+
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
@@ -96,7 +100,7 @@ extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char
 extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
 extern BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
 extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile);
-extern void ui_update_state_button(BUTTON_Handle btn, char *pFile);
+extern void ui_update_state_button(BUTTON_Handle btn, const char *pFile);
 
 extern BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const char* text);
 

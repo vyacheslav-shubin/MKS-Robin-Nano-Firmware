@@ -1,11 +1,11 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_zoffset.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "text.h"
+#include "TEXT.h"
 #include "mks_cfg.h"
 #include "mks_tft_fifo.h"
 #include "mks_tft_com.h"
@@ -17,8 +17,8 @@ GUI_HWIN hZoffsetWnd;
 static TEXT_Handle textZoffset,textZoffsetValue;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸Áî·¢ËÍ¶ÓÁÐ
-extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸Áî½ÓÊÕ¶ÓÁÐ
+extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸ï¿½î·¢ï¿½Í¶ï¿½ï¿½ï¿½
+extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½
 
 static BUTTON_STRUCT buttonInc, buttonDec, buttonStep01, buttonStep05, buttonStep1, buttonRet;
 

@@ -1,5 +1,5 @@
-#include "button.h"
-#include "text.h"
+#include "BUTTON.h"
+#include "TEXT.h"
 #include "draw_ui.h"
 #include "draw_main.h"
 

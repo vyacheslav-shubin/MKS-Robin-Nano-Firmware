@@ -1,14 +1,12 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_extrusion.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
 
-#include "text.h"
-//#include "mks_tft_fifo.h"
-//#include "mks_tft_com.h"
+#include "TEXT.h"
 #include "Marlin.h"
 #include "temperature.h"
 #include "mks_reprint.h"
@@ -20,9 +18,9 @@
 GUI_HWIN hExtrusionWnd;
 static TEXT_Handle textPrintTemp, textExtruAmount,textPrintTemp_CHIN;
 
-//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸Áî·¢ËÍ¶ÓÁÐ
-//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸Áî½ÓÊÕ¶ÓÁ
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode Ö¸ï¿½î·¢ï¿½Í¶ï¿½ï¿½ï¿½
+//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	Ö¸ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 extern uint8_t  Get_Temperature_Flg;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
@@ -131,7 +129,7 @@ static void cbExtrusionWin(WM_MESSAGE * pMsg) {
 						extructAmount += gCfgItems.extruStep;
 						disp_extru_amount();
 					}
-					//ÒÆ¶¯ºóÂíÉÏ±£´æÊý¾Ý
+					//ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					//if(printerStaus== pr_pause)
 					//	positionSaveFlag = 1;		
 				}
@@ -175,7 +173,7 @@ static void cbExtrusionWin(WM_MESSAGE * pMsg) {
 #endif
 						extructAmount -= gCfgItems.extruStep;
 						disp_extru_amount();
-						//ÒÆ¶¯ºóÂíÉÏ±£´æÊý¾Ý
+						//ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						//if(printerStaus== pr_pause)
 						//	positionSaveFlag = 1;
 					}
@@ -333,9 +331,9 @@ void draw_extrusion()
 		BUTTON_SetText(buttonRet.btnHandle,common_menu.text_back);	
 	}
 
-	textExtruAmount = TEXT_CreateEx(BTN_X_PIXEL+INTERVAL_V*2, BTN_Y_PIXEL/4, BTN_X_PIXEL*2+INTERVAL_V,30, hExtrusionWnd, WM_CF_SHOW, TEXT_CF_HCENTER,	GUI_ID_TEXT2, "×Ü¼·³öÁ¿");
+	textExtruAmount = TEXT_CreateEx(BTN_X_PIXEL+INTERVAL_V*2, BTN_Y_PIXEL/4, BTN_X_PIXEL*2+INTERVAL_V,30, hExtrusionWnd, WM_CF_SHOW, TEXT_CF_HCENTER,	GUI_ID_TEXT2, "ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½");
 
-	textPrintTemp = TEXT_CreateEx(BTN_X_PIXEL+INTERVAL_V*2, BTN_Y_PIXEL/2, BTN_X_PIXEL*2+INTERVAL_V, 30, hExtrusionWnd, WM_CF_SHOW, TEXT_CF_HCENTER,	GUI_ID_TEXT1, "ÅçÍ·ÎÂ¶È");
+	textPrintTemp = TEXT_CreateEx(BTN_X_PIXEL+INTERVAL_V*2, BTN_Y_PIXEL/2, BTN_X_PIXEL*2+INTERVAL_V, 30, hExtrusionWnd, WM_CF_SHOW, TEXT_CF_HCENTER,	GUI_ID_TEXT1, "ï¿½ï¿½Í·ï¿½Â¶ï¿½");
 	
 	extructAmount = 0;
 	

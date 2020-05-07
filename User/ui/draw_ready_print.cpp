@@ -20,7 +20,7 @@
 #include "draw_manual_leveling.h"
 #include "draw_tool.h"
 #include "draw_meshleveling.h"
-#include "marlin.h"
+#include "Marlin.h"
 #include "temperature.h"
 #ifndef GUI_FLASH
 #define GUI_FLASH

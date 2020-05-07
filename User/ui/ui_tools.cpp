@@ -1,7 +1,7 @@
 #include "ui_tools.h"
 #include "GUI.h"
 #include "draw_ui.h"
-#include "marlin.h"
+#include "Marlin.h"
 #include "planner.h"
 #include "cardreader.h"
 #include "tim.h"
@@ -16,7 +16,7 @@ UPLOAD_INFO upload_file_info = {0, 0};
 
 UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}};
 
-const char* FAN_STATES[3] {"bmp_fan_state0.bin", "bmp_fan_state1.bin", "bmp_fan_state2.bin"};
+const char* FAN_STATES[3] {img_fan_state0, img_fan_state1, img_fan_state2};
 
 void reset_file_info() {
 	ui_print_process.rate = 0;
@@ -175,7 +175,7 @@ void ui_update_check_button(BUTTON_Handle  btn, uint8_t state) {
 
 
 
-void ui_update_state_button(BUTTON_Handle btn, char *pFile) {
+void ui_update_state_button(BUTTON_Handle btn, const char *pFile) {
 	BUTTON_SetBmpFileName(btn, pFile, 0);
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_50, 0, 0);
 }

@@ -1,5 +1,5 @@
 //#include "draw_ui.h"
-#include "gui.h"
+#include "GUI.h"
 #include "pic.h"
 #include "ff.h"
 #include "mks_cfg.h"

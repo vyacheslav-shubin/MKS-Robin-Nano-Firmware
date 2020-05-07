@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_ui.h"
 
 #ifndef GUI_FLASH
@@ -131,10 +131,10 @@ void draw_HomeSpeed()
     //BUTTON_SetBmpFileName(YHomeSpeed_text.btnHandle,NULL,1);
     BUTTON_SetBmpFileName(ZHomeSpeed_text.btnHandle,NULL,1);
     
-    BUTTON_SetBitmapEx(XYHomeSpeed.btnHandle,0,&bmp_struct70X28,0,0);//图片大小为70x28
+    BUTTON_SetBitmapEx(XYHomeSpeed.btnHandle,0,&bmp_struct70X28,0,0);//图片锟斤拷小为70x28
     //BUTTON_SetBitmapEx(YHomeSpeed.btnHandle,0,&bmp_struct70X28,0,0);
     BUTTON_SetBitmapEx(ZHomeSpeed.btnHandle,0,&bmp_struct70X28,0,0);
-    //BUTTON_SetBitmapEx(XHomeSpeed_default.btnHandle,0,&bmp_struct90X30,0,5);//图片大小为70x28
+    //BUTTON_SetBitmapEx(XHomeSpeed_default.btnHandle,0,&bmp_struct90X30,0,5);//图片锟斤拷小为70x28
     //BUTTON_SetBitmapEx(YHomeSpeed_default.btnHandle,0,&bmp_struct90X30,0,5);
     //BUTTON_SetBitmapEx(ZHomeSpeed_default.btnHandle,0,&bmp_struct90X30,0,5);
     

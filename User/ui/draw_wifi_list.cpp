@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_ui.h"
 #include "fontLib.h"
@@ -25,7 +25,7 @@ static GUI_HWIN hWifiWnd;
 static TEXT_Handle textWifiTitle,Wifi_Page_text;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 GUI_BITMAP bmp_struct_18x14 = {
   18,//80, /* XSize */

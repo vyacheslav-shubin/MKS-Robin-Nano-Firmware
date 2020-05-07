@@ -18,7 +18,7 @@
 #include "sh_tools.h"
 
 #include "Marlin.h"
-#include "configuration_adv.h"
+#include "Configuration_adv.h"
 #include "cardreader.h"
 
 #ifndef GUI_FLASH

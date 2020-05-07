@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_temp_ui.h"
 #include "draw_ui.h"
@@ -75,7 +75,7 @@ void draw_temp()
 	GUI_Clear();
 	//GUI_SetFont(&FONT_TITLE);
 
-	GUI_DispStringAt("×¼±¸´òÓ¡:ÉèÖÃ:ÎÂ¶È", 0, 0);
+	GUI_DispStringAt("×¼ï¿½ï¿½ï¿½ï¿½Ó¡:ï¿½ï¿½ï¿½ï¿½:ï¿½Â¶ï¿½", 0, 0);
 	
 	hTempWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbTempWin, 0);
 

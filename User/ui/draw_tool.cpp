@@ -1,14 +1,9 @@
-#include "gui.h"
-//#include "button.h"
-//#include "PROGBAR.h"
+#include "GUI.h"
 #include "draw_tool.h"
 #include "draw_ui.h"
 #include "draw_print_file.h"
 #include "pic.h"
-//#include "fontLib.h"
 #include "draw_move_motor.h"
-//#include "text.h"
-//#include "printer.h"
 #include "draw_more.h"
 #include "draw_manual_leveling.h"
 #include "draw_filamentchange.h"
@@ -18,7 +13,6 @@
 #include "pic_manager.h"
 #include "spi_flash.h"
 #include "draw_meshleveling.h"
-//#include "sd_usr.h"
 #include "temperature.h"
 #ifndef GUI_FLASH
 #define GUI_FLASH

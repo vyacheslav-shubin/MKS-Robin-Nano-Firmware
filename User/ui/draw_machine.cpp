@@ -1,5 +1,5 @@
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_machine.h"
 #include "draw_ui.h"
@@ -86,7 +86,7 @@ void draw_Machine()
 	GUI_Clear();
 	//GUI_SetFont(&FONT_TITLE);
 
-	//GUI_DispStringAt("×¼±¸´òÓ¡->ÉèÖÃ->»úÐÍ", 0, 0);
+	//GUI_DispStringAt("×¼ï¿½ï¿½ï¿½ï¿½Ó¡->ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½", 0, 0);
 	GUI_DispStringAt(creat_title_text(), 0, 0);
 	
 	hMachineWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbMachineWin, 0);

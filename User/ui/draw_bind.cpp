@@ -1,17 +1,17 @@
 #include "stm32f1xx.h"
-#include "gui.h"
-#include "button.h"
+#include "GUI.h"
+#include "BUTTON.h"
 #include "draw_bind.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "text.h"
+#include "TEXT.h"
 
 #include "wifi_module.h"
 
 //typedef unsigned char bool;
 
-#include "qr_encode.h"
+#include "QR_Encode.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -213,13 +213,13 @@ void draw_bind()
 	{
 		buttonReleaseBind = BUTTON_CreateEx(0 , 50, LCD_WIDTH / 4, 40, hBindWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
 	
-		//BUTTON_SetText(buttonReleaseBind, "  ½â½‰");
+		//BUTTON_SetText(buttonReleaseBind, "  ï¿½â½‰");
 	}
 	else
 	{
 		buttonReleaseBind = BUTTON_CreateEx(0 , 50, LCD_WIDTH / 4, 40, hBindWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
 	
-		//BUTTON_SetText(buttonReleaseBind, "  ½â°ó  ");
+		//BUTTON_SetText(buttonReleaseBind, "  ï¿½ï¿½ï¿½  ");
 	}
 	*/
 	

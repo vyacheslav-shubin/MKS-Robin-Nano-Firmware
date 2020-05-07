@@ -33,7 +33,7 @@
 #include "draw_home_dir.h"
 #include "draw_endstop_type.h"
 #include "draw_filament_settings.h"
-#include "draw_levelingsettings.h"
+#include "draw_LevelingSettings.h"
 #include "draw_levelingPara_config.h"
 #include "draw_deltaLevelPare.h"
 #include "draw_XYZLevelPara.h"
@@ -46,7 +46,7 @@
 #include "draw_nozzle_config.h"
 #include "draw_hotbed_config.h"
 #include "draw_advanced.h"
-#include "draw_doublez.h"
+#include "draw_doubleZ.h"
 #include "draw_EnablePin_Invert.h"
 #include "draw_number_key.h"
 

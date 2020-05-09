@@ -538,9 +538,6 @@ typedef struct speed_menu_disp
 	const char *dec; 
 	const char *extrude;
 	const char *move;
-	const char *step_1percent;
-	const char *step_5percent;
-	const char *step_10percent;
 	const char *back;
 	const char *move_speed;
 	const char *extrude_speed;

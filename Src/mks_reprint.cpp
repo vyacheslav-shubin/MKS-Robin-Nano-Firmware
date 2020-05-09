@@ -1,6 +1,7 @@
 #include "at24cxx.h"
 #include "mks_reprint.h"
 #include "mks_cfg.h"
+#include "UI.h"
 #include "fatfs.h"
 #include "draw_printing.h"
 #include "usb_host.h"
@@ -1061,62 +1062,6 @@ void mks_G28(char *g_command)
                 }
 }
 
-extern uint8_t leveling_first_time;
-
-#if 0
-void mks_leveling_moveZ(float Z)
-{
-      char string[20];
-    //�ƶ���ӡͷZλ��
-	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
-	strcpy(mksReprint.command_queue,"G1 Z");
-	memset(string,0,sizeof(string));
-	sprintf(string,"%.3f F%.3f",mksReprint.destination[2]+Z,planner.max_feedrate_mm_s[Z_AXIS]*60);
-	strcat(mksReprint.command_queue,string);
-	//current_command_args = 
-	//parser.command_ptr = &mksReprint.command_queue[0];
-	parser.parse(mksReprint.command_queue);
-	gcode_G0_G1();
-	stepper.synchronize();
-}
-void mks_leveling_moveXY(float X,float Y)
-{
-      char string[20];
-    //�ƶ���ӡͷX,Yλ��
-	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
-	strcpy(mksReprint.command_queue,"G1 X");
-	memset(string,0,sizeof(string));
-	sprintf(string,"%.3f",X);
-	strcat(mksReprint.command_queue,string);
-
-	strcat(mksReprint.command_queue," Y");
-	memset(string,0,sizeof(string));
-	sprintf(string,"%.3f F%.3f",Y,mksCfg.homing_feedrate_xy);
-	strcat(mksReprint.command_queue,string);
-	
-	//current_command_args = 
-	//parser.string_arg = &mksReprint.command_queue[3];
-	parser.parse(mksReprint.command_queue);
-	gcode_G0_G1();
-	stepper.synchronize();
-
-}
-
-void mks_manual_leveling(int16_t x,int16_t y)
-{
-    char string[20];
-    
-    if(leveling_first_time == 1)
-    {
-        leveling_first_time = 0;
-        mks_G28("G28");
-    } 
-    mksReprint.destination[2] = current_position[2];
-    mks_leveling_moveZ(10);
-    mks_leveling_moveXY((float)x,(float)y);
-    enqueue_and_echo_commands_P(PSTR("G1 Z0")); 
-}
-#endif
 
 void mks_contiuePrintPause()
 {
@@ -1691,7 +1636,7 @@ void mks_rePrintCheck()
 			logo_tick2 = getTick();
 			if((getTickDiff(logo_tick2, logo_tick1)>=3000))
 			{
-				draw_ready_print();
+				ui_app.showMainWidget();
 				break;
 			}
 		}		

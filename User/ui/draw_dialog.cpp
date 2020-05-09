@@ -1,5 +1,6 @@
 #include "stdint.h"
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_dialog.h"
@@ -7,7 +8,7 @@
 #include "ui_tools.h"
 #include "sh_tools.h"
 #include "draw_printing.h"
-#include "draw_ready_print.h"
+#include "UI.h"
 #include "draw_pause_ui.h"
 //#include "sdio_sdcard.h"
 #include "sdio.h"       //skyblue 2016-12-13
@@ -137,7 +138,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 						gCfgItems.breakpoint_z_pos = 0;
 						gCfgItems.breakpoint_flg=0;
 						reset_file_info();
-						draw_ready_print();
+						ui_app.showMainWidget();
 					} else if(DialogType == DIALOG_TYPE_PRINT_FILE) {
 						if(strlen(curFileName)>(100-1)) {
 							draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
@@ -178,15 +179,15 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 					cloud_unbind();
 					draw_return_ui();
 				} else if(DialogType == DIALOG_TYPE_M80_FAIL) {
-					draw_ready_print();
+					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_MESSEGE_ERR1) {
-					draw_ready_print();
+					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED) {
 					filament_heat_completed_load = 1;
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_UNLOAD_COMPLETED) {
 					filament_heat_completed_unload = 1;
 				} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
-					draw_ready_print();
+					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
 					if(last_disp_state==PRINTING_UI) {
 						if(from_flash_pic == 1)
@@ -235,8 +236,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
                     if(gCfgItems.pwroff_save_mode != 1)
 					    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
                     Clear_dialog();
-                    draw_ready_print();
-
+                    ui_app.showMainWidget();
                 }
 			} else if(pMsg->hWinSrc == buttonRePrint) {
 				//TODO: Сделать отдельной ф-ей совмещается с buttonOk
@@ -509,7 +509,7 @@ void wifi_scan_handle() {
 	if(command_send_flag == 1) {
 		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
 			last_disp_state = PRINT_READY_UI;
-			clear_ready_print();
+			main_ui.hide();
 			draw_Wifi();
 		} else {
 			last_disp_state = DIALOG_UI;

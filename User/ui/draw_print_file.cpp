@@ -6,6 +6,7 @@
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "TEXT.h"
+#include "UI.h"
 #include "ui_tools.h"
 #include "tim.h"
 #include "ff.h"
@@ -132,7 +133,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 							clear_print_file();
 							card.Sd_file_offset = 0;
 							card.Sd_file_cnt = 0;
-							draw_ready_print();
+							ui_app.showMainWidget();
 						}
 						disp_in_file_dir = 0;
 					} else {
@@ -266,7 +267,7 @@ void search_files() {
 					} else {
 						last_disp_state = PRINT_FILE_UI;
 						clear_print_file();
-						draw_ready_print();
+						ui_app.showMainWidget();
 					}
 				} else {
 					int8_t *ch = 0;

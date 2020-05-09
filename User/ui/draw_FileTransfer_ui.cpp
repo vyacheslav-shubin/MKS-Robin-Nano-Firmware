@@ -6,7 +6,7 @@
 #include "LISTBOX.h"
 #include "TEXT.h"
 #include "draw_FileTransfer_ui.h"
-#include "draw_ready_print.h"
+#include "UI.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -48,11 +48,8 @@ static void cbWifiFileDlgWin(WM_MESSAGE * pMsg) {
 			{
 				if(pMsg->hWinSrc == buttonReturn.btnHandle)
 				{
-					
 					Clear_WifiFileTransferdialog();
-					//Get_Temperature_Flg = 0;
-					draw_ready_print();
-
+					ui_app.showMainWidget();
 				}
 				
 			}

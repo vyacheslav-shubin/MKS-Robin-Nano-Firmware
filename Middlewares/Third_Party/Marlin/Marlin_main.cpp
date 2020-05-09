@@ -275,8 +275,6 @@
 
 #include "GUI.h"
 
-#include "draw_ready_print.h"
-
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "wifi_module.h"

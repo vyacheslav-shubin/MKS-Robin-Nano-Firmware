@@ -66,7 +66,6 @@
 #include "GUI.h"
 #include "ili9320.h"
 #include "draw_ui.h"
-#include "draw_ready_print.h"
 #include "draw_printing.h"
 #include "sdio_sdcard.h"
 #include "draw_pause_ui.h"
@@ -367,43 +366,15 @@ int main(void)
       }
   #endif
   
-/*
-  if(gCfgItems.fileSysType == FILE_SYS_USB)
-  {
-  	card.initusb();
-  }
-  else
-*/
   {
   	card.initsd();
   }
   mks_rePrintCheck();
 
-/*
-  if(SD_DET_IP == 0)
-  {
-  	mks_rePrintCheck();
-  }
-  else//û�жϵ�����
-  {
-	  while(1)
-	  {
-		  logo_tick2 = getTick();
-		  if(getTickDiff(logo_tick2, logo_tick1)>=3000)
-		  {
-			  draw_ready_print();
-			  break;
-		  }
-	  }  
-  }
-  */
-
-
   if(gCfgItems.wifi_type == ESP_WIFI)
   {
 	wifi_init();
   }
-  /* USER CODE END 2 */
 #endif
 
 

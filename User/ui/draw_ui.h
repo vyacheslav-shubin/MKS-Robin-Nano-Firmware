@@ -24,7 +24,6 @@
 #include "lang_common.h"
 #include "draw_meshleveling.h"
 #include "draw_machine_para.h"
-#include "draw_ready_print.h"
 #include "draw_machine_settings.h"
 #include "draw_temperature_settings.h"
 #include "draw_motor_settings.h"

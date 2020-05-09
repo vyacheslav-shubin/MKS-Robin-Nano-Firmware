@@ -28,4 +28,17 @@ void lang_std(void) {
 	lang_str.acceleration_settings = "Acceleration settings";
 	lang_str.maximum_speed_settings = "Maximum speed settings";
 	lang_str.jerk_settings = "Jerk settings";
+
+	lang_str.preheat = "Preheat";
+	lang_str.extrusion = "Extrusion";
+	lang_str.move = "Move";
+	lang_str.home = "Home";
+	lang_str.leveling = "Leveling";
+	lang_str.filament = "Filament";
+	lang_str.back = "Back";
+	lang_str.more = "More";
+	lang_str.print = "Print";
+	lang_str.settings = "Settings";
+	lang_str.tools = "Tools";
+
 }

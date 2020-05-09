@@ -14,8 +14,6 @@
 #include "sh_tools.h"
 #include "pic_manager.h"
 
-#include "draw_ready_print.h"
-
 #include "draw_print_file.h"
 #include "pic.h"
 #include "Marlin.h"
@@ -38,9 +36,9 @@ static GUI_HWIN hPrintingWnd;
 static PROGBAR_Handle printingBar;
 static TEXT_Handle printTimeLeft;
 
-static BUTTON_Handle buttonPause, buttonStop, buttonOperat, buttonExt1, buttonExt2, buttonFanstate, buttonBedstate, buttonTime, buttonZpos;
+static BUTTON_Handle buttonPause, buttonStop, buttonOperat, buttonExt1, buttonExt2, buttonFanstate, buttonBedstate, buttonTime, buttonZpos, buttonSpeed;
 static BUTTON_Handle buttonAutoClose;
-static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp, Zpos;
+static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp, Zpos, textSpeed;
 
 uint8_t print_start_flg = 0;
 
@@ -193,7 +191,7 @@ void check_files() {
 }
 
 void draw_printing() {
-	check_files();
+	//check_files();
 	int dual_extrude;
 	dual_extrude = is_dual_extruders();
 
@@ -201,23 +199,28 @@ void draw_printing() {
 	int i;
 	hPrintingWnd = ui_std_init_window(PRINTING_UI, cbPrintingWin);
 
-	buttonTime = BUTTON_L(0,0,"bmp_time_state.bin");
+	buttonTime = BUTTON_L(0,0, img_state_time);
 	printTimeLeft = TEXT_L(0, 0);
 
-	buttonExt1 = BUTTON_L(0, 1, "bmp_ext1_state.bin");
+	buttonExt1 = BUTTON_L(0, 1, img_state_extruder1);
 	E1_Temp = TEXT_L(0, 1);
 
 	if (dual_extrude) {
-		buttonExt2 = BUTTON_L(1, 1, "bmp_ext2_state.bin");
+		buttonExt2 = BUTTON_L(1, 1, img_state_extruder2);
 		E2_Temp = TEXT_L(1, 1);
 	}
-	buttonBedstate = BUTTON_L(0, 2, "bmp_bed_state.bin");
+
+	buttonBedstate = BUTTON_L(0, 2, img_state_bed);
 	Bed_Temp = TEXT_L(0, 2);
+
+	//buttonSpeed = BUTTON_L(0, 3, img_state_speed);
+	//textSpeed = TEXT_L(0, 3);
+
 
 	buttonFanstate = BUTTON_L(1, 2, FAN_STATES[0]);
 	Fan_Pwm = TEXT_L(1, 2);
 
-	buttonZpos = BUTTON_L(1, 0, "bmp_zpos_state.bin");
+	buttonZpos = BUTTON_L(1, 0, img_state_z);
 	Zpos = TEXT_L100(1, 0);
 
 
@@ -256,9 +259,7 @@ int get_rate(void) {
 void update_progress(int rate) {
 	PROGBAR_SetValue(printingBar, rate);
 	if (rate!=0) {
-		char buf[30] = {0};
-		memset(buf, 0, sizeof(buf));
-		sprintf(buf, "%d%% - ", rate);
+		sprintf(ui_buf1_20, "%d%% - ", rate);
 
 		int total = print_time.seconds + print_time.minutes * 60 + print_time.hours * 3600;
 		total = (total * 100 / rate) - total;
@@ -267,8 +268,8 @@ void update_progress(int rate) {
 		total = total / 60;
 		pt.minutes = total % 60;
 		pt.hours = total / 60;
-		print_time_to_str(&pt, &buf[strlen(buf)]);
-		PROGBAR_SetText(printingBar, buf);
+		print_time_to_str(&pt, &ui_buf1_20[strlen(ui_buf1_20)]);
+		PROGBAR_SetText(printingBar, ui_buf1_20);
 	}
 }
 

@@ -30,9 +30,9 @@ typedef struct {
 #define PRESET_COUNT 3
 
 const PREHEAT_PRESET preset[PRESET_COUNT] = {
-		{"bmp_pla.bin", 200, 60},
-		{"bmp_sbs.bin", 230, 90},
-		{"bmp_petg.bin", 240, 75},
+		{img_preset_pla, 200, 60},
+		{img_preset_sbs, 230, 90},
+		{img_preset_petg, 240, 75},
 };
 
 uint8_t current_preset = 0;
@@ -40,19 +40,14 @@ uint8_t current_preset = 0;
 #define STEPS_COUNT	3
 
 const STEP_INFO temp_steps[STEPS_COUNT] = {
-		{1,"bmp_step1_degree.bin"},
-		{5,"bmp_step5_degree.bin"},
-		{10, "bmp_step10_degree.bin"},
+		{1,img_degree_step1},
+		{5,img_degree_step5},
+		{10, img_degree_step10},
 };
 
 uint8_t current_temp_step = 0;
 
-typedef struct{
-	const char* pic;
-	const char** title;
-} HEATER_SELECTOR_META;
-
-const HEATER_SELECTOR_META selector_meta[3] {
+const BUTTON_META selector_meta[3] {
 	{"bmp_bed.bin", &preheat_menu.hotbed},
 	{"bmp_extru1.bin", &preheat_menu.ext1},
 	{"bmp_extru2.bin", &preheat_menu.ext2},
@@ -196,8 +191,8 @@ void draw_preHeat() {
 	}
 	
 
-	buttonInc = ui_std_button(0, 0, hPreHeatWnd, "bmp_Add.bin", preheat_menu.add);
-	buttonDec = ui_std_button(2, 0, hPreHeatWnd, "bmp_Dec.bin", preheat_menu.dec);
+	buttonInc = ui_std_button(0, 0, hPreHeatWnd, img_plus, preheat_menu.add);
+	buttonDec = ui_std_button(2, 0, hPreHeatWnd, img_minus, preheat_menu.dec);
 	buttonPreset =  ui_std_button(3, 0, hPreHeatWnd, 0, 0);
 
 	buttonSelector = ui_std_button(0, 1, hPreHeatWnd, 0, 0);
@@ -207,17 +202,17 @@ void draw_preHeat() {
 
 
 
-	buttonExt1 = BUTTON_L(0, "bmp_ext1_state.bin");
+	buttonExt1 = BUTTON_L(0, img_state_extruder1);
 	textExt1 = TEXT_L(0);
 
 	if (is_dual_extruders()) {
-		buttonExt2 = BUTTON_L(1, "bmp_ext2_state.bin");
+		buttonExt2 = BUTTON_L(1, img_state_extruder2);
 		textExt2 = TEXT_L(1);
 
-		buttonBed = BUTTON_L(2, "bmp_bed_state.bin");
+		buttonBed = BUTTON_L(2, img_state_bed);
 		textBed = TEXT_L(2);
 	} else {
-		buttonBed = BUTTON_L(1, "bmp_bed_state.bin");
+		buttonBed = BUTTON_L(1, img_state_bed);
 		textBed = TEXT_L(1);
 	}
 

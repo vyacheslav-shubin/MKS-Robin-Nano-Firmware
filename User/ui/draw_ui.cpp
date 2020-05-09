@@ -1,11 +1,11 @@
 #include "GUI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
+#include "UI.h"
 #include "string_deal.h"
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "Marlin.h"
-#include "draw_ready_print.h"
 #include "draw_machine.h"
 #include "draw_log_ui.h"
 #include "draw_language.h"
@@ -51,7 +51,6 @@
 #include "draw_bind.h"
 #include "draw_disk.h"
 #include "draw_zoffset.h"
-#include "draw_tool.h"
 #include "fatfs.h"
 
 #include "Marlin.h"
@@ -121,6 +120,8 @@ uint8_t from_flash_pic;
 
 DISP_STATE_STACK disp_state_stack;
 DISP_STATE disp_state = MAIN_UI;
+
+//TODO: эта переменная не нужна...
 DISP_STATE last_disp_state;
 
 char BMP_PIC_X = 0 ;
@@ -307,8 +308,12 @@ char *creat_title_text() {
 	#endif
 	
 	memset(titleText, 0, sizeof(titleText));
+	SERIAL_ECHOLNPAIR("DISP_INDEX: ", disp_state_stack._disp_index);
+
 	while(index <= disp_state_stack._disp_index) {
+		SERIAL_ECHOLNPAIR("INDEX: ", index);
 		tmpText = getDispText(index);
+		SERIAL_ECHOLNPAIR("TITLE: ", tmpText);
 		if((*tmpText == 0) || (tmpText == 0)) {
 			index++;
 			continue;
@@ -366,7 +371,7 @@ void disp_sel_lang()
 void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
-		case PRINT_READY_UI:	clear_ready_print(); 	break;
+		case PRINT_READY_UI:	main_ui.hide(); 		break;
 		case PRINT_FILE_UI:		clear_print_file(); 	break;
 		case PRINTING_UI:		clear_printing(); 		break;
 		case MOVE_MOTOR_UI:		clear_move_motor(); 	break;
@@ -393,7 +398,7 @@ void clear_cur_ui() {
 		case LEVELING_UI:		clear_leveling();		break;
 		case BIND_UI:			Clear_Bind();			break;
 		case ZOFFSET_UI:								break;
-		case TOOL_UI:			Clear_Tool();			break;
+		case TOOL_UI:			tools_ui.hide();		break;
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
         case HARDWARE_TEST_UI:	Clear_Hardwaretest();	break;
         case WIFI_LIST_UI:		Clear_Wifi_list();		break;
@@ -434,7 +439,7 @@ void draw_return_ui() {
 	if(disp_state_stack._disp_index > 0) {
 		disp_state_stack._disp_index--;
 		switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
-			case PRINT_READY_UI: 	draw_ready_print();		break;
+			case PRINT_READY_UI: 	main_ui.show();			break;
 			case PRINT_FILE_UI: 	draw_print_file();		break;
 			case PRINTING_UI:
 				if(from_flash_pic == 1)
@@ -459,10 +464,6 @@ void draw_return_ui() {
 			case MACHINE_UI:	break;
 			case LANGUAGE_UI:		draw_Language();		break;
 			case ABOUT_UI:			draw_About();			break;
-
-#if tan_mask
-			case LOG_UI:			draw_Connect();			break;
-#endif
 			case CALIBRATE_UI:	break;
 			case DISK_UI:		break;
 			case WIFI_UI:			draw_Wifi();			break;
@@ -471,10 +472,7 @@ void draw_return_ui() {
 			case FILAMENTCHANGE_UI:	draw_FilamentChange();	break;
 			case LEVELING_UI:		draw_leveling();		break;
 			case BIND_UI:			draw_bind();			break;
-#if tan_mask
-			case ZOFFSET_UI:		draw_Zoffset();			break;
-#endif
-			case TOOL_UI:			draw_tool();			break;
+			case TOOL_UI:			tools_ui.show();		break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;
             case WIFI_LIST_UI:		draw_Wifi_list();		break;
@@ -585,7 +583,7 @@ extern volatile WIFI_STATE wifi_link_state;
 void GUI_RefreshPage() {
   	__IO uint32_t i =0;
 	switch(disp_state) {
-		case MAIN_UI:	draw_ready_print(); break;
+		case MAIN_UI:	main_ui.show(); 	break;
 		case ZERO_UI:
 			if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
 		    	  refresh_zero();

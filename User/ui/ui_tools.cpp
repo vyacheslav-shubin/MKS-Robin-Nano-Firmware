@@ -93,6 +93,7 @@ void ui_set_encoding(void) {
 void ui_make_title(void) {
 //	GUI_UC_SetEncodeNone();
 //	GUI_SetFont(&GUI_FontHZ16);
+	SERIAL_ECHOLNPAIR("TITLE: ", creat_title_text());
 	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 }
 
@@ -117,13 +118,13 @@ void ui_buttonpreset(BUTTON_Handle btn) {
 	BUTTON_SetTextColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
 }
 
-BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
+BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, BTN_X_PIXEL, BTN_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
 	ui_update_std_button(btn, pFile, text);
 	return btn;
 }
 
-void ui_update_std_button(BUTTON_Handle btn, char* file, char* title) {
+void ui_update_std_button(BUTTON_Handle btn, const char* file, char* title) {
 	ui_buttonpreset(btn);
 	BUTTON_SetBmpFileName(btn, file, 1);
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
@@ -133,7 +134,7 @@ void ui_update_std_button(BUTTON_Handle btn, char* file, char* title) {
 
 
 
-BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
+BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 150, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
 	ui_buttonpreset(btn);
 	BUTTON_SetBmpFileName(btn, pFile,1);
@@ -147,7 +148,7 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pF
 GUI_BITMAP bmp_struct_100x80 = { 100, 80, 160, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 
 
-BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text) {
+BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 100, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
 	ui_buttonpreset(btn);
 	BUTTON_SetBmpFileName(btn, pFile,1);
@@ -181,7 +182,7 @@ void ui_update_state_button(BUTTON_Handle btn, const char *pFile) {
 }
 
 
-BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile) {
+BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, STATE_PIC_X_PIXEL, STATE_PIC_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
 	ui_update_state_button(btn, pFile);
 	return btn;

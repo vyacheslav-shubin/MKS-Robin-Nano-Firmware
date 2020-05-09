@@ -30,7 +30,7 @@
 #include "GUI.h"
 
 #include "draw_ui.h"
-#include "draw_ready_print.h"
+#include "UI.h"
 /*----------------------------------------------------------------*/
 struct HARDWARE_TEST_STATE
 {
@@ -1090,7 +1090,7 @@ static void cbHardwaretestWin(WM_MESSAGE * pMsg) {
 				      GUI_UC_SetEncodeUTF8();
 				    }
 					Clear_Hardwaretest();
-					draw_ready_print();
+					ui_app.showMainWidget();
 				}
 				
 			}

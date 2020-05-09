@@ -11,15 +11,58 @@
 extern "C" {
 #endif
 
-const char img_fan_state0 = "bmp_fan_state0.bin";
-const char img_fan_state1 = "bmp_fan_state1.bin";
-const char img_fan_state2 = "bmp_fan_state2.bin";
+#define img_fan_state0		"bmp_fan_state0.bin"
+#define img_fan_state1		"bmp_fan_state1.bin"
+#define img_fan_state2		"bmp_fan_state2.bin"
+
+#define img_degree_step1	"bmp_step1_degree.bin"
+#define img_degree_step5  	"bmp_step5_degree.bin"
+#define img_degree_step10  	"bmp_step10_degree.bin"
+
+#define img_percent_step1  	"bmp_step1_percent.bin"
+#define img_percent_step5  	"bmp_step5_percent.bin"
+#define img_percent_step10 	"bmp_step10_percent.bin"
+
+
+#define img_preset_pla  	"bmp_pla.bin"
+#define img_preset_sbs  	"bmp_sbs.bin"
+#define img_preset_petg  	"bmp_petg.bin"
+
+#define img_plus  			"bmp_Add.bin"
+#define img_minus  			"bmp_Dec.bin"
+
+
+#define img_state_extruder1  	"bmp_ext1_state.bin"
+#define img_state_extruder2  	"bmp_ext2_state.bin"
+#define img_state_bed  			"bmp_bed_state.bin"
+#define img_state_z  			"bmp_zpos_state.bin"
+#define img_state_time  		"bmp_time_state.bin"
+#define img_state_speed  		"bmp_speed_state.bin"
+
+#define img_preheat				"bmp_preHeat.bin"
+#define img_back				"bmp_return.bin"
+
+#define img_extrusion			"bmp_extruct.bin"
+#define img_move				"bmp_mov.bin"
+#define img_home				"bmp_zero.bin"
+#define img_leveling_manual		"bmp_leveling.bin"
+#define img_leveling_auto		"bmp_autoleveling.bin"
+#define img_filament			"bmp_filamentchange.bin"
+#define img_more				"bmp_more.bin"
+#define img_print				"bmp_printing.bin"
+#define img_settings			"bmp_set.bin"
+#define img_tools				"bmp_tool.bin"
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
 extern const char* FAN_STATES[3];
 extern char ui_buf1_20[20];
+
+typedef struct{
+	const char* pic;
+	const char** title;
+} BUTTON_META;
 
 typedef struct{
 	float step;
@@ -96,10 +139,10 @@ extern void ui_drop_window(WM_HWIN wnd);
 #define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cb, 0)
 
 
-extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
-extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
-extern BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, char *pFile, const char* text);
-extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, char *pFile);
+extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
+extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
+extern BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
+extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
 extern void ui_update_state_button(BUTTON_Handle btn, const char *pFile);
 
 extern BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const char* text);
@@ -113,7 +156,7 @@ extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinPa
 extern TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
 extern void ui_set_text_value(TEXT_Handle handle, char* val);
 
-extern void ui_update_std_button(BUTTON_Handle handle, char* file, char* title);
+extern void ui_update_std_button(BUTTON_Handle handle, const char* file, char* title);
 
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
 

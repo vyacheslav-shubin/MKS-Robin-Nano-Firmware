@@ -11,7 +11,6 @@
 
 static GUI_HWIN hLevelingWnd;
 
-uint8_t leveling_first_time=0;
 extern char cmd_code[201];
 extern char x[1];
 extern volatile char *codebufpoint;
@@ -56,7 +55,6 @@ static void cbLevelingWin(WM_MESSAGE * pMsg) {
 		case WM_NOTIFY_PARENT:
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
 				if(pMsg->hWinSrc == buttonRet) {
-					leveling_first_time=0;
 					clear_leveling();
 					draw_return_ui();
 				} else if(pMsg->hWinSrc == buttonleveling1) {

@@ -14,6 +14,18 @@ typedef struct {
 	const char * acceleration_settings;
 	const char * maximum_speed_settings;
 	const char * jerk_settings;
+
+	const char * preheat;
+	const char * extrusion;
+	const char * move;
+	const char * home;
+	const char * leveling;
+	const char * filament;
+	const char * back;
+	const char * more;
+	const char * print;
+	const char * settings;
+	const char * tools;
 } CONFIG_LANG;
 
 #if defined(__cplusplus)
@@ -72,10 +84,6 @@ extern void lang_ru(void);
 #define EXTRUDE_1MM_TEXT			"1mm"
 #define EXTRUDE_5MM_TEXT			"5mm"
 #define EXTRUDE_10MM_TEXT		    "10mm"
-
-#define STEP_1PERCENT				"1%"
-#define STEP_5PERCENT				"5%"
-#define STEP_10PERCENT				"10%"
 
 #define LANGUAGE_S_CN				"简体"
 #define LANGUAGE_T_CN				"繁体"

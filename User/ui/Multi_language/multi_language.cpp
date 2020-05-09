@@ -272,11 +272,6 @@ void disp_language_init() {
 	extrude_menu.count_value_m= TEXT_VALUE_m;
 	extrude_menu.step_1mm = EXTRUDE_1MM_TEXT;
 	extrude_menu.step_5mm = EXTRUDE_5MM_TEXT;
-	extrude_menu.step_10mm = EXTRUDE_10MM_TEXT;
-
-	speed_menu.step_1percent = STEP_1PERCENT;
-	speed_menu.step_5percent = STEP_5PERCENT;
-	speed_menu.step_10percent = STEP_10PERCENT;
 
 	language_menu.chinese_s = LANGUAGE_S_CN;
 	language_menu.chinese_t = LANGUAGE_T_CN;

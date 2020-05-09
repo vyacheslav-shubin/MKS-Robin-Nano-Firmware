@@ -139,13 +139,11 @@ User/ui/draw_pre_heat.cpp
 User/ui/draw_print_file.cpp
 User/ui/draw_printing.cpp
 User/ui/draw_printing_moremenu.cpp
-User/ui/draw_ready_print.cpp
 User/ui/draw_set.cpp
 User/ui/draw_steps.cpp
 User/ui/draw_stroke.cpp
 User/ui/draw_temperature_settings.cpp
 User/ui/draw_Tips.cpp
-User/ui/draw_tool.cpp
 User/ui/draw_ui.cpp
 User/ui/draw_wifi.cpp
 User/ui/draw_wifi_list.cpp
@@ -169,3 +167,8 @@ User/ui/QRENCODE/split.c
 User/ui/ui_tools.cpp
 User/ui/Multi_language/lang_std.c
 User/ui/Multi_language/lang_ru.c
+User/ui/widgets/Application.cpp
+User/ui/widgets/Widget.cpp
+User/ui/widgets/StdWidget.cpp
+User/ui/widgets/MainUI.cpp
+User/ui/widgets/ToolsUI.cpp

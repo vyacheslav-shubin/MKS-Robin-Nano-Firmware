@@ -6,6 +6,7 @@
 #include "fontLib.h"
 #include "LISTBOX.h"
 #include "draw_disk.h"
+#include "UI.h"
 
 #include "draw_machine.h"
 #include "draw_log_ui.h"
@@ -21,7 +22,6 @@
 #include "draw_manual_leveling.h"
 #include "draw_wifi_list.h"
 #include "wifi_module.h"
-#include "draw_ready_print.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -75,34 +75,9 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 					last_disp_state = SET_UI;
 					Clear_Set();
 					//draw_return_ui();
-					draw_ready_print();
+					ui_app.showMainWidget();
 				}	
  
-				#if 0
-				else if(pMsg->hWinSrc == buttonVarify.btnHandle)
-				{
-
-					last_disp_state = SET_UI;
-					Clear_Set();
-					draw_calibrate();
-
-				}
-				#endif	
-#if tan_mask
-				else if(pMsg->hWinSrc == buttonDisk.btnHandle)
-				{
-					last_disp_state = SET_UI;
-					Clear_Set();
-					draw_Disk();
-				}
-
-				else if(pMsg->hWinSrc == buttonVarify.btnHandle)
-				{
-					last_disp_state = SET_UI;
-					Clear_Set();
-					draw_calibrate();
-				}
-#endif
 				else if(pMsg->hWinSrc == buttonLanguage.btnHandle)
 				{
 					last_disp_state = SET_UI;

@@ -36,10 +36,7 @@
 /******add********/
 #include "draw_main.h"
 #include "tim.h"
-//#include "mks_tft_com.h"
-#include "draw_manual_leveling.h"
 #include "Configuration.h"
-//#include "mks_tft_reprint.h"
 #include "Configuration_adv.h"
 #include "types.h"
 #include "mks_reprint.h"
@@ -308,12 +305,12 @@ char *creat_title_text() {
 	#endif
 	
 	memset(titleText, 0, sizeof(titleText));
-	SERIAL_ECHOLNPAIR("DISP_INDEX: ", disp_state_stack._disp_index);
+	//SERIAL_ECHOLNPAIR("DISP_INDEX: ", disp_state_stack._disp_index);
 
 	while(index <= disp_state_stack._disp_index) {
-		SERIAL_ECHOLNPAIR("INDEX: ", index);
+		//SERIAL_ECHOLNPAIR("INDEX: ", index);
 		tmpText = getDispText(index);
-		SERIAL_ECHOLNPAIR("TITLE: ", tmpText);
+		//SERIAL_ECHOLNPAIR("TITLE: ", tmpText);
 		if((*tmpText == 0) || (tmpText == 0)) {
 			index++;
 			continue;

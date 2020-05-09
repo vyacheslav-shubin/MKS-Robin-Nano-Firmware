@@ -45,6 +45,7 @@ extern "C" {
 #define img_extrusion			"bmp_extruct.bin"
 #define img_move				"bmp_mov.bin"
 #define img_home				"bmp_zero.bin"
+#define img_home_z				"bmp_zeroZ.bin"
 #define img_leveling_manual		"bmp_leveling.bin"
 #define img_leveling_auto		"bmp_autoleveling.bin"
 #define img_filament			"bmp_filamentchange.bin"
@@ -53,11 +54,18 @@ extern "C" {
 #define img_settings			"bmp_set.bin"
 #define img_tools				"bmp_tool.bin"
 
+#define img_leveling_point1		"bmp_leveling1.bin"
+#define img_leveling_point2		"bmp_leveling2.bin"
+#define img_leveling_point3		"bmp_leveling3.bin"
+#define img_leveling_point4		"bmp_leveling4.bin"
+#define img_leveling_point5		"bmp_leveling5.bin"
+
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
 extern const char* FAN_STATES[3];
 extern char ui_buf1_20[20];
+extern char ui_buf1_80[80];
 
 typedef struct{
 	const char* pic;

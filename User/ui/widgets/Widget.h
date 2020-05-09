@@ -28,6 +28,9 @@ public:
 	virtual char * getTitle();
 	virtual void show(Widget * caller);
 	void show() {this->show(0);};
+	virtual void refresh();
+	virtual void refresh_05() {};
+	virtual void refresh_1s() {};
 	void hide();
 
 	friend Application;

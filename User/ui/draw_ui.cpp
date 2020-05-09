@@ -395,7 +395,7 @@ void clear_cur_ui() {
 		case DIALOG_UI:			Clear_dialog();			break;
 		case FILETRANSFERSTATE_UI:						break;
 		case PRINT_MORE_UI:		Clear_Printmore();		break;
-		case LEVELING_UI:		clear_leveling();		break;
+		case LEVELING_UI:		manual_leveling_ui.hide();		break;
 		case BIND_UI:			Clear_Bind();			break;
 		case ZOFFSET_UI:								break;
 		case TOOL_UI:			tools_ui.hide();		break;
@@ -470,7 +470,7 @@ void draw_return_ui() {
 			case MORE_UI:			draw_More();			break;
 			case PRINT_MORE_UI:		draw_printmore();		break;
 			case FILAMENTCHANGE_UI:	draw_FilamentChange();	break;
-			case LEVELING_UI:		draw_leveling();		break;
+			case LEVELING_UI:		manual_leveling_ui.show();		break;
 			case BIND_UI:			draw_bind();			break;
 			case TOOL_UI:			tools_ui.show();		break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
@@ -588,10 +588,7 @@ void GUI_RefreshPage() {
 			if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
 		    	  refresh_zero();
 		    break;
-		case LEVELING_UI:
-			if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
-				refresh_leveling();
-			break;
+		case LEVELING_UI: manual_leveling_ui.refresh(); break;
 		case EXTRUSION_UI:
 			if(temperature_change_frequency == 1) {
 				temperature_change_frequency = 0;

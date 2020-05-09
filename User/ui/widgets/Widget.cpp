@@ -25,6 +25,16 @@ void Widget::on_message(WM_MESSAGE * pMsg) {
 	}
 }
 
+void Widget::refresh() {
+	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
+		ui_timing_clear(F_UI_TIMING_HALF_SEC);
+		this->refresh_05();
+	}
+	if (is_ui_timing(F_UI_TIMING_SEC)) {
+		ui_timing_clear(F_UI_TIMING_SEC);
+		this->refresh_1s();
+	}
+}
 
 char * Widget::getTitle() {
 

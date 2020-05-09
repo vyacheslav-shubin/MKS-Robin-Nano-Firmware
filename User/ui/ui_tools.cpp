@@ -11,6 +11,7 @@
 extern CardReader card;
 
 char ui_buf1_20[20];
+char ui_buf1_80[80];
 
 UPLOAD_INFO upload_file_info = {0, 0};
 

@@ -151,24 +151,7 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 					Clear_Set();
 					draw_FilamentChange();
 				}				
-				/*else if(pMsg->hWinSrc == buttonFunction_1.btnHandle)
-				{
-					
-					if(gCfgItems.leveling_mode == 1)
-					{
-						SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_FUNCTION2_ADDR,201);
-						codebufpoint = cmd_code;
-					}
-					else
-					{
-						last_disp_state = SET_UI;
-						Clear_Set();
-						draw_leveling();
-					}
-					
-					
-				}*/
-                 
+
 				else if(pMsg->hWinSrc == buttonFan.btnHandle)
 				{
 					last_disp_state = SET_UI;

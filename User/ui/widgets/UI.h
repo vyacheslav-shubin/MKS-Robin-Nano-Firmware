@@ -11,7 +11,7 @@
 #include "Application.h"
 #include "MainUI.h"
 #include "ToolsUI.h"
-
+#include "ManualLevelingUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

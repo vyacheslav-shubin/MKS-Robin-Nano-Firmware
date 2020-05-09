@@ -124,7 +124,6 @@ User/ui/draw_leveling_settings.cpp
 User/ui/draw_machine_para.cpp
 User/ui/draw_machine_settings.cpp
 User/ui/draw_machine_type.cpp
-User/ui/draw_manual_leveling.cpp
 User/ui/draw_MaxFeedRate.cpp
 User/ui/draw_mesh_leveling.cpp
 User/ui/draw_more.cpp
@@ -172,3 +171,4 @@ User/ui/widgets/Widget.cpp
 User/ui/widgets/StdWidget.cpp
 User/ui/widgets/MainUI.cpp
 User/ui/widgets/ToolsUI.cpp
+User/ui/widgets/ManualLevelingUI.cpp

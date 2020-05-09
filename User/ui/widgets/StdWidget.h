@@ -17,6 +17,7 @@ protected:
 	BUTTON_Handle createButtonRet();
 	void action_back();
 	void action_leveling();
+	void draw_xyz();
 public:
 	StdWidget(DISP_STATE id) : Widget(id) {};
 };

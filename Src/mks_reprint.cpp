@@ -3,7 +3,6 @@
 #include "mks_cfg.h"
 #include "UI.h"
 #include "fatfs.h"
-#include "draw_printing.h"
 #include "usb_host.h"
 #include "ili9320.h"
 #include "draw_pause_ui.h"
@@ -1423,7 +1422,7 @@ void mks_contiuePrint_UI()
 	lcd_setstatus("Resume print?");
 	
 	card.openFile(mksReprint.filename, true);
-	strcpy(curFileName,mksReprint.filename);
+	strcpy(ui_print_process.file_name,mksReprint.filename);
 	if(!card.isFileOpen())	//�������ļ�ʧ��
 	{
 	#if tan_mask
@@ -1484,7 +1483,7 @@ void mks_contiuePrint_UI()
     				{
     					default_preview_flg = 1;
     				}		
-    				draw_printing();
+    				printing_ui.show();
 			    #else
                     disp_state_stack._disp_index = 0;
 	                memset(disp_state_stack._disp_state, 0, sizeof(disp_state_stack._disp_state));

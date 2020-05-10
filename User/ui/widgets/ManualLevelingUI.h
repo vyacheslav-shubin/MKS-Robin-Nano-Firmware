@@ -27,8 +27,8 @@ private:
 protected:
 	virtual void createControls();
 	virtual void on_button(WM_HWIN hBtn);
-public:
 	virtual void refresh_05();
+public:
 	ManualLevelingUI() : StdWidget(LEVELING_UI) {};
 };
 

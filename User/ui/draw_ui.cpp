@@ -12,7 +12,6 @@
 #include "draw_about.h"
 #include "draw_wifi.h"
 #include "draw_print_file.h"
-#include "draw_printing.h"
 #include "draw_move_motor.h"
 #include "draw_operate.h"
 #include "draw_pause_ui.h"
@@ -130,13 +129,6 @@ static   GUI_HWIN hMainWnd;
 static  BUTTON_STRUCT button4;//button1, button2, button3, button4;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-#if _LFN_UNICODE
-extern TCHAR curFileName[100];
-//TCHAR curFileName[150];
-#else
-extern char curFileName[100];
-//char curFileName[150];
-#endif
 
 extern GUI_CONST_STORAGE GUI_BITMAP bmlogo;
 extern GUI_CONST_STORAGE GUI_BITMAP bmpreheat;
@@ -299,9 +291,9 @@ char *creat_title_text() {
 	memset(tmpCurFileStr, 0, sizeof(tmpCurFileStr));
 
 	#if _LFN_UNICODE
-	cutFileName((TCHAR *)curFileName, 16, 16, (TCHAR *)tmpCurFileStr);	
+	cutFileName((TCHAR *)ui_print_process.file_name, 16, 16, (TCHAR *)tmpCurFileStr);
 	#else
-	cutFileName(curFileName, 16, 16, tmpCurFileStr);
+	cutFileName(ui_print_process.file_name, 16, 16, tmpCurFileStr);
 	#endif
 	
 	memset(titleText, 0, sizeof(titleText));
@@ -370,7 +362,7 @@ void clear_cur_ui() {
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 		case PRINT_READY_UI:	main_ui.hide(); 		break;
 		case PRINT_FILE_UI:		clear_print_file(); 	break;
-		case PRINTING_UI:		clear_printing(); 		break;
+		case PRINTING_UI:		printing_ui.hide();		break;
 		case MOVE_MOTOR_UI:		clear_move_motor(); 	break;
 		case OPERATE_UI:		Clear_operate();		break;
 		case PAUSE_UI:			Clear_pause();			break;
@@ -443,7 +435,7 @@ void draw_return_ui() {
 					flash_preview_begin = 1;
 				else
 					default_preview_flg = 1; 
-				draw_printing();
+				printing_ui.show();
 				break;
 			case MOVE_MOTOR_UI: 	draw_move_motor();		break;
 			case OPERATE_UI:		draw_operate();			break;
@@ -595,7 +587,7 @@ void GUI_RefreshPage() {
 		case PRE_HEAT_UI: refresh_preHeat(); break;
 		case PRINT_READY_UI: break;
 		case PRINT_FILE_UI: break;
-		case PRINTING_UI: refresh_printing(); break;
+		case PRINTING_UI: printing_ui.refresh(); break;
 		case OPERATE_UI:
 			if(temperature_change_frequency == 1) {
 				temperature_change_frequency = 0;
@@ -814,7 +806,7 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel) {
 	volatile uint32_t i,j;
 	volatile uint16_t *p_index;
 	int res;
-	res = f_open(file, curFileName, FA_OPEN_EXISTING | FA_READ);
+	res = f_open(file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ);
 	if(res == FR_OK) {
 		f_lseek(file, (PREVIEW_LITTLE_PIC_SIZE+To_pre_view)+809*row+8); //809 - длина строки в preview
 		LCD_setWindowArea(xpos_pixel, ypos_pixel + row, 200,1);

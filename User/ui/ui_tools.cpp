@@ -15,7 +15,7 @@ char ui_buf1_80[80];
 
 UPLOAD_INFO upload_file_info = {0, 0};
 
-UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}};
+UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}, 0, {0}};
 
 const char* FAN_STATES[3] {img_fan_state0, img_fan_state1, img_fan_state2};
 
@@ -28,10 +28,7 @@ void print_time_to_str(PRINT_TIME * pt, char * buf) {
 }
 
 void ui_start_print_process(void) {
-	SERIAL_ECHOLN("ui_start_print:");
-
-	if(card.openFile(curFileName, true)) {
-		SERIAL_ECHOLNPAIR("FILE:", curFileName);
+	if(card.openFile(ui_print_process.file_name, true)) {
 		feedrate_percentage = 100;
 		saved_feedrate_percentage = feedrate_percentage;
 		planner.flow_percentage[0] = 100;
@@ -152,14 +149,11 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const ch
 GUI_BITMAP bmp_struct_100x80 = { 100, 80, 160, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 
 
-BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text) {
+BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 100, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
 	ui_buttonpreset(btn);
 	BUTTON_SetBmpFileName(btn, pFile,1);
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_100x80, 0, 0);
-	BUTTON_SetTextAlign(btn, GUI_TA_VCENTER | GUI_CUSTOM_POS);
-	if(gCfgItems.multiple_language != 0)
-		BUTTON_SetText(btn, text);
 	return btn;
 }
 
@@ -279,7 +273,7 @@ void ui_start_print_file() {
 			default_preview_flg = 1;
 		}
 	} else {
-		preview_gcode_prehandle(curFileName);
+		preview_gcode_prehandle(ui_print_process.file_name);
 	}
 	if(gcode_preview_over != 1) {
 		ui_start_print_process();

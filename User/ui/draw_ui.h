@@ -371,12 +371,6 @@ extern DISP_STATE disp_state;
 extern DISP_STATE last_disp_state;
 extern DISP_STATE_STACK disp_state_stack;
 
-#if _LFN_UNICODE
-extern TCHAR curFileName[100];
-#else
-extern char curFileName[100];
-#endif
-
 extern volatile uint32_t TimeIncrease;
 extern uint16_t temperature_change_frequency_cnt;
 extern uint8_t temperature_change_frequency;

@@ -274,11 +274,11 @@
 #include "wifi_module.h"
 
 #include "GUI.h"
+#include "UI.h"
 
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "wifi_module.h"
-#include "draw_printing.h"
 #include "draw_pause_ui.h"
 #include "sdio_sdcard.h"
 #include "draw_keyboard.h"
@@ -1380,7 +1380,7 @@ void display_sd_error()
           //card.sdprinting=false;
           SD_Init();
           card.initsd();
-          if(card.reopenfile(curFileName))
+          if(card.reopenfile(ui_print_process.file_name))
           {
             card.setIndex(card.sdpos);
           }
@@ -7715,7 +7715,7 @@ inline void gcode_M17() {
     // Simplify3D includes the size, so zero out all spaces (#7227)
     for (char *fn = parser.string_arg; *fn; ++fn) if (*fn == ' ') *fn = '\0';
     card.openFile(parser.string_arg, true);
-    strcpy(curFileName, mksReprint.filename);//(uint8_t *)&mksReprint.filename[0]
+    strcpy(ui_print_process.file_name, mksReprint.filename);//(uint8_t *)&mksReprint.filename[0]
   }
 #endif
   /**
@@ -13060,9 +13060,9 @@ void process_parsed_command() {
             reset_print_time();
             start_print_time();
             #if defined(TFT35)
-            preview_gcode_prehandle(curFileName);
+            preview_gcode_prehandle(ui_print_process.file_name);
             #endif
-            draw_printing();            
+            printing_ui.show();
            }
           break;
         case 25: // M25: Pause SD print
@@ -13081,7 +13081,7 @@ void process_parsed_command() {
             	else
             		default_preview_flg = 1;							
 
-            	draw_printing();
+            	printing_ui.show();
                #else
                draw_pause();
 		#endif

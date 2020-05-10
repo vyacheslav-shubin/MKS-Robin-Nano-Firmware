@@ -14,8 +14,6 @@
 #include <string.h>
 #include <draw_set.h>
 #include "sdio.h"
-
-#include "draw_printing.h"
 #include "sh_tools.h"
 
 #include "Marlin.h"
@@ -31,12 +29,6 @@ GUI_HWIN hPrintFileWnd, hAlertWin, hPrintFileDlgWnd;
 uint8_t trig_browser_flag;
 int8_t curDirLever = 0;
 DIR_OFFSET dir_offset[10];
-
-#if _LFN_UNICODE
-TCHAR curFileName[100] = "notValid";
-#else
-char curFileName[100] = "notValid";
-#endif
 
 typedef struct{
 	BUTTON_Handle handle;
@@ -162,11 +154,11 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 									curDirLever++;
 									search_files();
 								} else {
-									memset(curFileName, 0, sizeof(curFileName));
+									memset(ui_print_process.file_name, 0, sizeof(ui_print_process.file_name));
 									#if _LFN_UNICODE
-									wcscpy((wchar_t *)curFileName, (const wchar_t*)card.gcodeFileList.fileName[j]);
+									wcscpy((wchar_t *)ui_print_process.file_name, (const wchar_t*)card.gcodeFileList.fileName[j]);
 									#else
-									strcpy(curFileName, (const char *)card.gcodeFileList.fileName[j]);
+									strcpy(ui_print_process.file_name, (const char *)card.gcodeFileList.fileName[j]);
 									#endif
 									clear_print_file();
 									disp_in_file_dir = 0;
@@ -175,7 +167,7 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 										draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
 									} else {
 										ui_start_print_file();
-										draw_printing();
+										printing_ui.show();
 									}
 
 
@@ -302,9 +294,9 @@ void disp_udisk_files(int seq) {
 	int8_t i, j;
 	GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
 	hPrintFileWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbPrintFileWin, 0);
-	buttonPu = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,0,hPrintFileWnd, "bmp_page_up.bin", 0);
-	buttonPd = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL+INTERVAL_H,hPrintFileWnd, "bmp_page_down.bin", 0);
-	buttonR = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL*2+INTERVAL_H*2, hPrintFileWnd, "bmp_page_back.bin", 0);
+	buttonPu = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,0,hPrintFileWnd, "bmp_page_up.bin");
+	buttonPd = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL+INTERVAL_H,hPrintFileWnd, "bmp_page_down.bin");
+	buttonR = ui_create_100_80_button(OTHER_BTN_XPIEL*3+INTERVAL_V*4,OTHER_BTN_YPIEL*2+INTERVAL_H*2, hPrintFileWnd, "bmp_page_back.bin");
 	GUI_Exec();
 
 	GUI_UC_SetEncodeNone();

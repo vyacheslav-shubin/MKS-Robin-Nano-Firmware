@@ -15,7 +15,6 @@
 #include "wifi_upload.h"
 #include "usart.h"
 #include "stm32f10x_usart.h"
-#include "draw_printing.h"
 #include "draw_pause_ui.h"
 #include "UI.h"
 #include "draw_dialog.h"
@@ -662,7 +661,7 @@ void get_file_list(char *path)
 		{
 			//SD_Initialize();
 			strcpy(card.gCurDir, "1:");
-			curFileName[0]=(char )'1';
+			ui_print_process.file_name[0]=(char )'1';
 			//MX_SDIO_SD_Init();
 
 			//strcpy((char *)sd.gCurDir, path);      //skyblue-modify
@@ -675,7 +674,7 @@ void get_file_list(char *path)
 #if unused
 		//reset_usb_state();	
 		strcpy(card.gCurDir, "0:");	
-		curFileName[0]=(char )'0';	
+		ui_print_process.file_name[0]=(char )'0';
 		FATFS_LinkDriver_sd(&USBH_Driver, card.gCurDir);
 #endif
 	}
@@ -1108,7 +1107,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 						{
 							if(strlen((char *)&tmpStr[index]) < 80)
 							{
-								memset(curFileName, 0, sizeof(curFileName));
+								memset(ui_print_process.file_name, 0, sizeof(ui_print_process.file_name));
 
 								if(gCfgItems.wifi_type == ESP_WIFI)
 								{
@@ -1126,24 +1125,24 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 									{
 										if(gCfgItems.fileSysType == FILE_SYS_SD)
 										{
-											strcat((char *)curFileName, "1:");
+											strcat((char *)ui_print_process.file_name, "1:");
 										}
 										else
 										{
-											//strcat((char *)curFileName, "0:");
+											//strcat((char *)ui_print_process.file_name, "0:");
 										}
 										if(tmpStr[index] != '/')
-											strcat((char *)curFileName, "/");
+											strcat((char *)ui_print_process.file_name, "/");
 									}
-									strcat((char *)curFileName, (char *)&tmpStr[index]);
+									strcat((char *)ui_print_process.file_name, (char *)&tmpStr[index]);
 									
 									
 								}
 								else
 								{
-									strcpy(curFileName, (char *)&tmpStr[index]);
+									strcpy(ui_print_process.file_name, (char *)&tmpStr[index]);
 								}
-								res = f_open(&temp_file, curFileName, FA_OPEN_EXISTING | FA_READ);
+								res = f_open(&temp_file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ);
 								if(res == FR_OK)
 								{
 									send_to_wifi("File selected\r\n", strlen("File selected\r\n"));
@@ -1152,7 +1151,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 								else
 								{
 									send_to_wifi("file.open failed\r\n", strlen("file.open failed\r\n"));
-									strcpy(curFileName, "notValid");
+									ui_print_process.file_name[0] = 0;
 								}
 								send_to_wifi("ok\r\n", strlen("ok\r\n"));
 								
@@ -1166,8 +1165,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 					break;
 
 				case 24:
-					if(strcmp(curFileName, "notValid") != 0)
-            		{
+					if(ui_print_process.file_name[0] != 0) {
 	            				/*start or resume print file*/	
 						//Get_Temperature_Flg = 1;
 						//get_temp_flag = 1;
@@ -1181,12 +1179,12 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 							reset_print_time();
 							start_print_time();
 							#if defined(TFT35)
-							preview_gcode_prehandle(curFileName);
+							preview_gcode_prehandle(ui_print_process.file_name);
 							#endif
-							draw_printing();
+							printing_ui.show();
 							if(gcode_preview_over != 1)
 							{
-								if(card.openFile(curFileName, true))
+								if(card.openFile(ui_print_process.file_name, true))
 								{
 								    feedrate_percentage = 100;
 					                            saved_feedrate_percentage = feedrate_percentage;
@@ -1218,7 +1216,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 								default_preview_flg = 1;							
 							//draw_printing();
 							#endif
-                            draw_printing();
+							printing_ui.show();
 							
 							//MX_I2C1_Init(400000);
 						}
@@ -1234,7 +1232,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 							else
 								default_preview_flg = 1;							
 							
-							draw_printing();
+							printing_ui.show();
 							#endif
 						}		
 					}
@@ -1259,7 +1257,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 							default_preview_flg = 1;							
 						
 						//draw_pause();
-						draw_printing();
+						printing_ui.show();
 			                      #else
 			                      draw_pause();
 						#endif
@@ -1455,11 +1453,11 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 					if((mksReprint.mks_printer_state == MKS_WORKING) || (mksReprint.mks_printer_state == MKS_PAUSED))
 					{
 						memset(tempBuf,0,sizeof(tempBuf));
-						if(strlen((char *)curFileName) > (100-1))
+						if(strlen((char *)ui_print_process.file_name) > (100-1))
 						{
 							return;
 						}
-						sprintf((char *)tempBuf, "M994 %s;%d\n", curFileName, f_size(srcfp));
+						sprintf((char *)tempBuf, "M994 %s;%d\n", ui_print_process.file_name, f_size(srcfp));
 						wifi_ret_ack();
 						send_to_wifi((char *)tempBuf, strlen((char *)tempBuf));	
 					}

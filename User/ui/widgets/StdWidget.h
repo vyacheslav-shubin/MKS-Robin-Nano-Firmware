@@ -10,8 +10,15 @@
 
 #include "Widget.h"
 
+typedef struct {
+	BUTTON_Handle button;
+	TEXT_Handle	label;
+} STATE_BUTTON;
+
 class StdWidget : public Widget{
 protected:
+	void createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title);
+	void updateStateButton(STATE_BUTTON * btn, const char * img, const char * title);
 	BUTTON_Handle createButton(int x, int y, const char * picture, const char * title);
 	BUTTON_Handle createButtonAt(int phx, int phy, const char * picture, const char * title);
 	BUTTON_Handle createButtonRet();

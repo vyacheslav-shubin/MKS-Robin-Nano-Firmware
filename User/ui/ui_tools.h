@@ -15,6 +15,20 @@ extern "C" {
 #define img_fan_state1		"bmp_fan_state1.bin"
 #define img_fan_state2		"bmp_fan_state2.bin"
 
+#define img_state_extruder1  	"bmp_ext1_state.bin"
+#define img_state_extruder2  	"bmp_ext2_state.bin"
+#define img_state_bed  			"bmp_bed_state.bin"
+#define img_state_z  			"bmp_zpos_state.bin"
+#define img_state_time  		"bmp_time_state.bin"
+#define img_state_speed  		"bmp_speed_state.bin"
+
+#define img_print_pause  		"bmp_pause100.bin"
+#define img_print_resume  		"bmp_resume100.bin"
+#define img_print_stop  		"bmp_stop100.bin"
+#define img_print_tools  		"bmp_operate100.bin"
+#define img_print_auto_power_off	"bmp_autoOffEnabled100.bin"
+#define img_print_manual_power_off	"bmp_autoOffDisabled100.bin"
+
 #define img_degree_step1	"bmp_step1_degree.bin"
 #define img_degree_step5  	"bmp_step5_degree.bin"
 #define img_degree_step10  	"bmp_step10_degree.bin"
@@ -31,13 +45,6 @@ extern "C" {
 #define img_plus  			"bmp_Add.bin"
 #define img_minus  			"bmp_Dec.bin"
 
-
-#define img_state_extruder1  	"bmp_ext1_state.bin"
-#define img_state_extruder2  	"bmp_ext2_state.bin"
-#define img_state_bed  			"bmp_bed_state.bin"
-#define img_state_z  			"bmp_zpos_state.bin"
-#define img_state_time  		"bmp_time_state.bin"
-#define img_state_speed  		"bmp_speed_state.bin"
 
 #define img_preheat				"bmp_preHeat.bin"
 #define img_back				"bmp_return.bin"
@@ -93,9 +100,10 @@ typedef struct {
 
 
 typedef struct {
-	uint8_t		once; //printing
-	SUICIDE_CFG	suicide;
-	uint8_t 	rate;
+	char			once; //printing
+	SUICIDE_CFG		suicide;
+	char 			rate;
+	char			file_name[100];
 } UI_PRINT_PROCESS;
 
 typedef struct {
@@ -149,7 +157,7 @@ extern void ui_drop_window(WM_HWIN wnd);
 
 extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
 extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
-extern BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
+extern BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
 extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
 extern void ui_update_state_button(BUTTON_Handle btn, const char *pFile);
 

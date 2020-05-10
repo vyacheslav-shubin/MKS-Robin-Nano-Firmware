@@ -6,7 +6,7 @@
 #include "fontLib.h"
 #include "LISTBOX.h"
 #include "TEXT.h"
-#include "draw_printing.h"
+#include "UI.h"
 #include "draw_pause_ui.h"
 #include "draw_pre_heat.h"
 #include "draw_fan.h"
@@ -113,7 +113,7 @@ switch (pMsg->MsgId)
 				last_disp_state = OPERATE_UI;
 				Clear_operate();
 				//draw_return_ui();
-				draw_printing();
+				printing_ui.show();
 			}
 			else if(pMsg->hWinSrc == buttonTemperature.btnHandle)
 			{

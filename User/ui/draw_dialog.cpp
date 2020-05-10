@@ -7,7 +7,6 @@
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "sh_tools.h"
-#include "draw_printing.h"
 #include "UI.h"
 #include "draw_pause_ui.h"
 //#include "sdio_sdcard.h"
@@ -140,14 +139,14 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 						reset_file_info();
 						ui_app.showMainWidget();
 					} else if(DialogType == DIALOG_TYPE_PRINT_FILE) {
-						if(strlen(curFileName)>(100-1)) {
+						if(strlen(ui_print_process.file_name)>(100-1)) {
 							draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
 						} else {
 							if (is_filament_fail()) {
 								draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
 							} else {
 								ui_start_print_file();
-								draw_printing();
+								printing_ui.show();
 							}
 						}
 					} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
@@ -242,11 +241,11 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 				//TODO: Сделать отдельной ф-ей совмещается с buttonOk
 
 				Clear_dialog();
-				if(strlen(curFileName)>(100-1)) {
+				if(strlen(ui_print_process.file_name)>(100-1)) {
 					draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
 				} else {
 					ui_start_print_file();
-					draw_printing();
+					printing_ui.show();
 				}
 			}
 		}
@@ -328,7 +327,7 @@ void draw_dialog(uint8_t type)
 			memset(tmpCurFileStr,0,sizeof(tmpCurFileStr));
 			strcat(tmpCurFileStr,print_file_dialog_menu.print_time);
 			print_time_to_str(&print_time, &tmpCurFileStr[strlen(print_file_dialog_menu.print_time)]);
-			ui_set_text_value(fileNameText, &curFileName[3]);
+			ui_set_text_value(fileNameText, &ui_print_process.file_name[3]);
 			if (ui_print_process.suicide.enabled) {
 				progressBar = ui_create_std_progbar((LCD_WIDTH-400)/2, (imgHeight-60)/2 + 80, 400, 25, hStopDlgWnd);
 				PROGBAR_SetValue(progressBar, 0);
@@ -381,9 +380,9 @@ void draw_dialog(uint8_t type)
 					printfilename = ui_create_std_text_f(0,(imgHeight-40)/2-60, LCD_WIDTH, 30, hStopDlgWnd, GUI_TA_TOP | GUI_TA_HCENTER, 0);
 					/*
 					memset(codebuff,0,sizeof(codebuff));
-					strcpy((char*)codebuff,&curFileName[3]);
+					strcpy((char*)codebuff,&ui_print_process.file_name[3]);
 					*/
-					ui_set_text_value(printfilename, &curFileName[3]);
+					ui_set_text_value(printfilename, &ui_print_process.file_name[3]);
 				}
 			} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
 				TEXT_SetText(printStopDlgText, file_menu.no_file_and_check);

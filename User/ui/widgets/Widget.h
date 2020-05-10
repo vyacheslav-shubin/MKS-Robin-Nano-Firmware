@@ -21,6 +21,8 @@ protected:
 	GUI_HWIN hWnd = 0;
 	virtual void createControls() {};
 	virtual void on_button(WM_HWIN hBtn) {};
+	virtual void refresh_05() {};
+	virtual void refresh_1s() {};
 public:
 	Widget(DISP_STATE id) {this->id=id;};
 	virtual void on_message(WM_MESSAGE * pMsg);
@@ -29,8 +31,6 @@ public:
 	virtual void show(Widget * caller);
 	void show() {this->show(0);};
 	virtual void refresh();
-	virtual void refresh_05() {};
-	virtual void refresh_1s() {};
 	void hide();
 
 	friend Application;

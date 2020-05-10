@@ -66,7 +66,7 @@
 #include "GUI.h"
 #include "ili9320.h"
 #include "draw_ui.h"
-#include "draw_printing.h"
+#include "UI.h"
 #include "sdio_sdcard.h"
 #include "draw_pause_ui.h"
 #include "pic_manager.h"
@@ -557,7 +557,7 @@ void filament_check() {
 				flash_preview_begin = 1;
 			else
 				default_preview_flg = 1;
-			draw_printing();
+			printing_ui.show();
 			mksBpAlrmEn = 1;
 			delaycnt = 0;
 		}

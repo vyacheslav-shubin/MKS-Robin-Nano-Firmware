@@ -1,8 +1,10 @@
+#include "../../trash/draw_printing.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
+#include "UI.h"
 #include "PROGBAR.h"
 #include "CHECKBOX.h"
-#include "draw_printing.h"
 #include "draw_pre_heat.h"
 #include "draw_fan.h"
 #include "draw_ui.h"
@@ -40,13 +42,12 @@ static BUTTON_Handle buttonPause, buttonStop, buttonOperat, buttonExt1, buttonEx
 static BUTTON_Handle buttonAutoClose;
 static TEXT_Handle E1_Temp, E2_Temp, Fan_Pwm, Bed_Temp, Zpos, textSpeed;
 
-uint8_t print_start_flg = 0;
 
 uint8_t pause_resum=0;
+uint8_t print_start_flg = 0;
 
 
 extern uint8_t gcode_preview_over;
-
 extern uint8_t from_flash_pic;
 extern uint8_t button_disp_pause_state;
 
@@ -191,6 +192,8 @@ void check_files() {
 }
 
 void draw_printing() {
+	printing_ui.show();
+	return;
 	//check_files();
 	int dual_extrude;
 	dual_extrude = is_dual_extruders();
@@ -224,15 +227,15 @@ void draw_printing() {
 	Zpos = TEXT_L100(1, 0);
 
 
-	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
 
 	printingBar = ui_create_std_progbar(COL(0), 0, 270, PB_HEIGHT, hPrintingWnd);
 
-	buttonPause = ui_create_100_80_button(_col(0), 204, hPrintingWnd, 0, 0);
-	buttonStop = ui_create_100_80_button(_col(1),204, hPrintingWnd, "bmp_stop100.bin", 0);
-	buttonOperat = ui_create_100_80_button(_col(2),204, hPrintingWnd, "bmp_operate100.bin", 0);
+	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
+	buttonPause = ui_create_100_80_button(_col(0), 204, hPrintingWnd, 0);
+	buttonStop = ui_create_100_80_button(_col(1),204, hPrintingWnd, "bmp_stop100.bin");
+	buttonOperat = ui_create_100_80_button(_col(2),204, hPrintingWnd, "bmp_operate100.bin");
 
-	buttonAutoClose = ui_create_100_80_button(_col(3) + 70,204, hPrintingWnd, 0, 0);
+	buttonAutoClose = ui_create_100_80_button(_col(3) + 70,204, hPrintingWnd, 0);
 
     update_auto_close_button();
 	update_pause_button();
@@ -314,6 +317,8 @@ void update_printing_1s(void) {
 
 
 void refresh_printing() {
+	printing_ui.refresh();
+	return;
 	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
 		ui_timing_clear(F_UI_TIMING_HALF_SEC);
 		ui_update_fan_button(buttonFanstate, Fan_Pwm);
@@ -335,7 +340,8 @@ void refresh_printing() {
 	}
 }
 
-void clear_printing()
-{
+void clear_printing(){
+	printing_ui.hide();
+	return;
 	ui_drop_window(hPrintingWnd);
 }

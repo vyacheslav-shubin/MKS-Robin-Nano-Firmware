@@ -19,7 +19,6 @@
 #include "draw_fan.h"
 #include "draw_print_file.h"
 #include "draw_filamentchange.h"
-#include "draw_manual_leveling.h"
 #include "draw_wifi_list.h"
 #include "wifi_module.h"
 

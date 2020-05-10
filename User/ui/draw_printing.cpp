@@ -241,8 +241,13 @@ void draw_printing() {
 
 
 int get_rate(void) {
+	if (gcode_preview_over)
+		return 0;
 	int rate;
-	volatile long long rate_tmp_r;
+	volatile long long rate_tmp_r =(long long) card.sdpos * 100;
+	rate = rate_tmp_r / card.filesize;
+
+/*	volatile long long rate_tmp_r;
 	if(from_flash_pic != 1) {
 		rate_tmp_r =(long long) card.sdpos * 100;
 		rate = rate_tmp_r / card.filesize;
@@ -253,6 +258,8 @@ int get_rate(void) {
 	ui_print_process.rate = rate;
 	if(rate <= 0)
 		rate = 0;
+		*/
+	ui_print_process.rate = rate;
 	return rate;
 }
 
@@ -316,6 +323,9 @@ void refresh_printing() {
 
 		int rate = get_rate();
 
+		SERIAL_ECHOLNPAIR("RATE:", rate);
+		SERIAL_ECHOLNPAIR("card.sdpos:", card.sdpos);
+		SERIAL_ECHOLNPAIR("card.filesize:", card.filesize);
 		if((mksReprint.mks_printer_state == MKS_IDLE) && (rate == 100)) {
 			do_finish_print();
 		} else {

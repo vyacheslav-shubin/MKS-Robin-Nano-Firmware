@@ -834,13 +834,12 @@ void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel) {
 		SPI_FLASH_BufferWrite(bmp_public_buf, BAK_VIEW_ADDR+row*400, 400);
 
 		row++;
+		f_close(file);
 		if(row >= 200) {
 			row = 0;
 			gcode_preview_over = 0;
-			f_close(file);
 			ui_start_print_process();
 		}
-		f_close(file);
 	}
 }
 
@@ -888,36 +887,25 @@ void preview_gcode_prehandle(char *path)
 	}
 }
 
-void gcode_has_preview(char *path)
-{
-#if 1
+void gcode_has_preview(char *path) {
 	uint8_t re;
 	UINT read;
 	uint32_t pre_read_cnt = 0;
 	uint32_t *p1,*p2;
 	
 	re = f_open(&TEST_FIL1, path, FA_OPEN_EXISTING | FA_READ);//	
-	#if 1
-	if(re==FR_OK)
-	{
+	if(re==FR_OK) {
 		f_read(&TEST_FIL1,&bmp_public_buf[0],1024,&read);
-
 		p2 = (uint32_t *)strstr((const char *)&bmp_public_buf[0],(const char *)";simage:");
-		if(p2)
-		{
+		if(p2) {
 			pre_read_cnt = (uint32_t)p2-(uint32_t)((uint32_t *)(&bmp_public_buf[0]));
 			To_pre_view = pre_read_cnt;
-
 			from_flash_pic = 1;
 			epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);			
-		}
-		else
-		{
+		} else {
 			from_flash_pic = 0; 
 			epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);		
 		}
 	}
-	#endif
     f_close(&TEST_FIL1);
-#endif
 }

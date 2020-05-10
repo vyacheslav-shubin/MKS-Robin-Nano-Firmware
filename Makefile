@@ -44,7 +44,7 @@ MKS_FIRMWARE 	:= $(BUILD_BASE)/$(MKS_BIN_FILE)
 LD_SCRIPT=MKS_ROBIN.ld
 
 #SD_CARD=/media/shubin/5DB9-A287
-SD_CARD=/media/shubin/sd
+SD_CARD=/media/shubin/sd1
 
 #LD_SCRIPT=STM32F103VETX_FLASH.ld
 

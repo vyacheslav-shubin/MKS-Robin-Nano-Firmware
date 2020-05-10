@@ -28,7 +28,10 @@ void print_time_to_str(PRINT_TIME * pt, char * buf) {
 }
 
 void ui_start_print_process(void) {
+	SERIAL_ECHOLN("ui_start_print:");
+
 	if(card.openFile(curFileName, true)) {
+		SERIAL_ECHOLNPAIR("FILE:", curFileName);
 		feedrate_percentage = 100;
 		saved_feedrate_percentage = feedrate_percentage;
 		planner.flow_percentage[0] = 100;

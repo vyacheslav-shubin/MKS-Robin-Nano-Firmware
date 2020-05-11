@@ -157,24 +157,6 @@ void _preview(int x,int y, int src) {
 	}
 }
 
-void __preview(int x,int y, int src) {
-	int index = 0;
-	int pass = 0;
-	/*LCD_setWindowArea(x, y, 200, 200);     //200*200
-	LCD_WriteRAM_Prepare();
-	while (index<200*200) {
-		SPI_FLASH_BufferRead(bmp_public_buf, src + pass++ * sizeof(bmp_public_buf), sizeof(bmp_public_buf));
-		int k = 0;
-		do {
-			uint16_t *color;
-			color = (uint16_t *)(&bmp_public_buf[k]);
-			LCD_WriteRAM(*color);
-			k+=2;
-			index++;
-		} while ((index<200*200) && (k<sizeof(bmp_public_buf)));
-	}*/
-
-}
 
 void _preview_cache() {
 	FIL file;

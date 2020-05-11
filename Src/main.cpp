@@ -106,18 +106,6 @@ uint16_t test_epr;
 int main(void)
 {
 
-  /* USER CODE BEGIN 1 */
-        //�ж���������
-        //SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
-        //SCB->VTOR = 0x08000000 | (0x7000 & (uint32_t)0x1FFFFF80);  /* Vector Table Relocation in Internal FLASH */
-                                                                //��bootloaderʱ������Ϊ0x5000, Options ->Linker ->Edit...-> 0x08005000
-                                                                 //��bootloaderʱ������Ϊ0x0000, Options ->Linker ->Edit...-> 0x08000000 
-
-  /* USER CODE END 1 */
-
-  /* MCU Configuration----------------------------------------------------------*/
-  
-
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
   //��bootloaderʱ������Ϊ0x7000, Options ->Linker ->Edit...-> Vector Table ->0x08007000
@@ -131,12 +119,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
- // MX_FSMC_Init();
-  //MX_FATFS_Init();
-  //MX_RTC_Init();
-  //MX_I2C1_Init();
   AT24CXX_Init();
-  //MX_SDIO_SD_Init();
   SD_Init();
   MX_SPI2_Init();
   DMAx_Init();
@@ -144,7 +127,6 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
-  //MX_TIM5_Init();
   MX_ADC1_Init();
   
 #if defined(MKS_ROBINPRO) 
@@ -155,12 +137,6 @@ int main(void)
 
   MX_USART3_UART_Init();
 
-#if unused
-  MX_USB_HOST_Init();
-#endif
-  //MX_DAC_Init();
-  //MX_SPI1_Init();
-  //MX_IWDG_Init();     //ι��
   /* Initialize interrupts */
   MX_NVIC_Init();
 
@@ -176,23 +152,7 @@ int main(void)
 	WIFISERIAL.begin(115200);   
 #endif
 
-  //ʹ��SPI����
   SPI_Cmd(SPI2, ENABLE); 
-  //GUI_Init();
-  //Lcd_Light_ON;
-  //DRAW_LOGO();
-  //Lcd_Light_ON; 
-  //logo_tick1 = getTick();
-  //gui_view_init();
-  //init_win_id();
-  /*---------test begin-----------*/
- //LCD_Init();
- //mksEeprom_test();
- //mksW25Q64Test();
- //mksSdCardTest();
- //mksUSBTest();
-    /*---------test end-------------*/
-	//����PWM
 #if defined(MKS_ROBINPRO) || defined(MKS_ROBIN_NANO)
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
 #elif defined(MKS_ROBIN) || defined(MKS_ROBIN2) 
@@ -205,11 +165,9 @@ int main(void)
 #endif 
 
 #if defined(MKS_ROBIN_NANO) 
-        HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-        MKS_TOUCH_TIM = 0;
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	MKS_TOUCH_TIM = 0;
 #endif 
-
-	
 
     MKS_FAN_TIM = 0;
 
@@ -222,36 +180,20 @@ int main(void)
       Error_Handler();
     HAL_NVIC_DisableIRQ(DMA1_Channel1_IRQn);//�ر�DMA1_Channel1_IRQn�ж�
  
-    //����PWM
-    /*
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-    TIM1->CCR1 = 0;
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-    TIM3->CCR1 = 0;
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-    TIM3->CCR2 = 0;
-
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
-    TIM3->CCR3 = 0;
-  */
-  
- mkstft_ui_init();
+    mkstft_ui_init();
     
-#if 1
 
  mksTmp.cfg_hardware_test_enable = 0;
 
-  if(SD_DET_IP == 0)
-  {
-  	card.initsd();
-  	card.mksConfiguration();
+  if(SD_DET_IP == 0) {
+	card.initsd();
+	card.mksConfiguration();
   }
 
   SPI_FLASH_BufferRead((u8*)&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR,1);
   
-  GUI_Init();
   //Lcd_Light_ON;
-  draw_logo();
+  ui_app.start();
   Lcd_Light_ON; 
   logo_tick1 = getTick();
   gui_view_init();
@@ -259,17 +201,10 @@ int main(void)
 
   setTouchBound(gCfgItems.touch_adj_xMin, gCfgItems.touch_adj_xMax, gCfgItems.touch_adj_yMax, gCfgItems.touch_adj_yMin);
 
-  //ˢдͼƬ����
   SPI_FLASH_BufferRead((u8*)&gCfgItems.total_pic,PIC_COUNTER_ADDR,1);
-  #if 0//tan_mask
-  else
-  {
-    FATFS_UnLinkDriver(SD_Path); 
-  }
-  #endif
 
-  switch(gCfgItems.language_bak)
-  {
+
+  switch(gCfgItems.language_bak) {
   	case 1:
 		gCfgItems.language_bak= LANG_SIMPLE_CHINESE;
 		break;
@@ -293,15 +228,12 @@ int main(void)
 		break;
   }
   
-  if(gCfgItems.multiple_language == 0)
-  {
-	if(gCfgItems.language_bak != 0)
-	{
+  if(gCfgItems.multiple_language == 0) {
+	if(gCfgItems.language_bak != 0) {
 		gCfgItems.language = gCfgItems.language_bak;
 		AT24CXX_Write(EPR_LANGUAGE,(uint8_t *)&gCfgItems.language,1);	
 	}
   }
-  //GUI_SetFont(&FONT_TITLE);
 
   setup();
 
@@ -313,90 +245,43 @@ int main(void)
     BUTTON_SetDefaultBkColor(gCfgItems.btn_color, BUTTON_CI_PRESSED);
     BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_UNPRESSED);
     BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_PRESSED);
-#endif  
-  //gCfgItems.language = LANG_SIMPLE_CHINESE;
-#if 1
-  if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-  {
+
+  if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
     GUI_SetFont(&GUI_FontHZ16);
     BUTTON_SetDefaultFont(&GUI_FontHZ16);
     TEXT_SetDefaultFont(&GUI_FontHZ16);  
     GUI_UC_SetEncodeNone();
-  }
-  else
-  {
+  } else {
     GUI_SetFont(&FONT_TITLE);
     BUTTON_SetDefaultFont(&FONT_TITLE);
     TEXT_SetDefaultFont(&FONT_TITLE);                    
     GUI_UC_SetEncodeUTF8();
   }
-
-#endif
   disp_language_init();	
 
-#if 1	
   gCfgItems.filament_loading_time = (uint32_t)((gCfgItems.filamentchange_load_length*60.0/gCfgItems.filamentchange_load_speed)+0.5);
   gCfgItems.filament_unloading_time = (uint32_t)((gCfgItems.filamentchange_unload_length*60.0/gCfgItems.filamentchange_unload_speed)+0.5);
 
   if(gCfgItems.pwroff_save_mode == 1)
-  {
   	FALA_CTRL = 1;
-	//
-  }
 
   mks_initPrint();
   memset(&wifi_list,0,sizeof(&wifi_list));
-#if 1
-    
-      //mksTmp.cfg_hardware_test_enable = 1;  //for test
-    
-      if(mksTmp.cfg_hardware_test_enable)   //����Ӳ������
-      {
-       /*
-        GUI_SetBkColor(gCfgItems.background_color);
-        GUI_SetColor(gCfgItems.title_color);
-        GUI_Clear();
-        GUI_UC_SetEncodeNone();
-        GUI_SetFont(&GUI_FontHZ16);
-        GUI_DispStringAt("Ӳ������-(����ڲ��汾V1.0.0_000)", 20, 0);
-        mksHardwareTest();
-        */
-        mksCfg.extruders=2;
-        draw_Hardwaretest();
-      }
-  #endif
-  
-  {
-  	card.initsd();
+  if(mksTmp.cfg_hardware_test_enable) {
+	mksCfg.extruders=2;
+	draw_Hardwaretest();
   }
+  card.initsd();
   mks_rePrintCheck();
 
   if(gCfgItems.wifi_type == ESP_WIFI)
-  {
 	wifi_init();
-  }
-#endif
-
-
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  while (1) {
       if(mksTmp.cfg_hardware_test_enable==1)
-      {
         mksHardwareTest();
-      }
-      /* USER CODE END WHILE */
-      //IsrTemperatureHandler();
-      /* USER CODE BEGIN 3 */
       loop();
-      #if unused  
-      MX_USB_HOST_Process();
-      #endif
-     // mksEeprom_test();
   }
-  /* USER CODE END 3 */
-
 }
 
 uint8_t poweroff_det_flg;
@@ -419,7 +304,6 @@ volatile unsigned char mksBpAlrmEn=0;
 static uint8_t beeper_cnt;
 static uint8_t check_beeper_cnt;
 
-extern uint8_t from_flash_pic;
 __IO uint32_t delaycnt = 0;
 __IO uint8_t beeper_flg = 0;
 
@@ -553,10 +437,6 @@ void filament_check() {
 			card.pauseSDPrint();
 			print_job_timer.pause();
 			mksReprint.mks_printer_state = MKS_PAUSING;
-			if(from_flash_pic==1)
-				flash_preview_begin = 1;
-			else
-				default_preview_flg = 1;
 			printing_ui.show();
 			mksBpAlrmEn = 1;
 			delaycnt = 0;

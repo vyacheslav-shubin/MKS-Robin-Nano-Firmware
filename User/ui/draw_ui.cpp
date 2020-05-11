@@ -4,6 +4,8 @@
 #include "UI.h"
 #include "string_deal.h"
 #include "draw_ui.h"
+
+#include "../../trash/draw_main.h"
 #include "ui_tools.h"
 #include "Marlin.h"
 #include "draw_machine.h"
@@ -33,7 +35,6 @@
 #include "draw_printing_moremenu.h"
 #include "draw_filamentchange.h"
 /******add********/
-#include "draw_main.h"
 #include "tim.h"
 #include "Configuration.h"
 #include "Configuration_adv.h"
@@ -89,20 +90,6 @@ extern uint8_t print_start_flg;
 /******end********/
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz14;
 
-extern GUI_CONST_STORAGE GUI_BITMAP bmpreheat;
-extern GUI_CONST_STORAGE GUI_BITMAP bmadd;
-extern GUI_CONST_STORAGE GUI_BITMAP bmdec;
-extern GUI_CONST_STORAGE GUI_BITMAP bmdir;
-extern GUI_CONST_STORAGE GUI_BITMAP bmextru;
-extern GUI_CONST_STORAGE GUI_BITMAP bmfile;
-extern GUI_CONST_STORAGE GUI_BITMAP bmmov;
-extern GUI_CONST_STORAGE GUI_BITMAP bmpageDown;
-extern GUI_CONST_STORAGE GUI_BITMAP bmpageUp;
-extern GUI_CONST_STORAGE GUI_BITMAP bmprinting;
-extern GUI_CONST_STORAGE GUI_BITMAP bmreturn;
-extern GUI_CONST_STORAGE GUI_BITMAP bmset;
-extern GUI_CONST_STORAGE GUI_BITMAP bmzero;
-
 uint8_t temperature_change_frequency = 1;
 uint16_t temperature_change_frequency_cnt;
 
@@ -112,7 +99,6 @@ extern void disp_wifi_state();
 extern void filament_dialog_handle(void);
 
 FIL TEST_FIL1;
-uint8_t from_flash_pic;
 
 DISP_STATE_STACK disp_state_stack;
 DISP_STATE disp_state = MAIN_UI;
@@ -187,18 +173,11 @@ void GUI_callback()
 }
 
 
-void titleText_cat(char *str, int strSize, char *addPart)
-{
+void titleText_cat(char *str, int strSize, char *addPart) {
 	if(str == 0 || addPart == 0)
-	{
 		return;
-	}
-
 	if(strlen(str) + strlen(addPart) >= strSize)
-	{
 		return;
-	}
-
 	strcat(str, addPart);
 }
 
@@ -430,13 +409,7 @@ void draw_return_ui() {
 		switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 			case PRINT_READY_UI: 	main_ui.show();			break;
 			case PRINT_FILE_UI: 	draw_print_file();		break;
-			case PRINTING_UI:
-				if(from_flash_pic == 1)
-					flash_preview_begin = 1;
-				else
-					default_preview_flg = 1; 
-				printing_ui.show();
-				break;
+			case PRINTING_UI: printing_ui.show(); 			break;
 			case MOVE_MOTOR_UI: 	draw_move_motor();		break;
 			case OPERATE_UI:		draw_operate();			break;
 			case PAUSE_UI:			draw_pause();			break;
@@ -698,7 +671,7 @@ void GUI_RefreshPage() {
 const char* logo_file = "1:/bmp_logo.bin";
 
 
-void draw_logo() {
+void _draw_logo() {
 	FIL file;
 	int size = 320*480;
 	LCD_setWindowArea(0, 0, 480, 320);
@@ -735,169 +708,4 @@ void draw_logo() {
 	}
 }
 
-void Draw_default_preview(int xpos_pixel,int ypos_pixel,uint8_t sel)
-{
-	int index; 
-	int x_off = 0, y_off = 0;
-	int _x, _y;
-	uint16_t *p_index;
-	int i;
-	uint16_t temp_p;
-	
-	for(index = 0; index < 10; index ++) { //200*200
-		if(sel == 1) {
-			flash_view_Read(bmp_public_buf, 8000);//20k
-		} else {
-			default_view_Read(bmp_public_buf, 8000);//20k
-		}
-		i = 0;
-		LCD_setWindowArea(xpos_pixel, y_off * 20+ypos_pixel, 200,20);     //200*200
-		LCD_WriteRAM_Prepare(); 
-		for(_y = y_off * 20; _y < (y_off + 1) * 20; _y++) {
-			for (x_off = 0; x_off < 200; x_off++) {
-				if(sel==1) {
-					temp_p = (uint16_t)(bmp_public_buf[i]|bmp_public_buf[i+1]<<8);
-					p_index = &temp_p;
-				} else {
-					p_index = (uint16_t *)(&bmp_public_buf[i]); 	
-				}
-				LCD_WriteRAM(*p_index);
-				i += 2;
-			}
-			if(i >= 8000)
-				break;
-		}
-		y_off++;		
-	}
-}
 
-char ascii2dec(char ascii) {
-	int result = 0;
-	if(ascii == 0)
-		return 0;
-	if(ascii >= '0' && ascii <= '9')
-		result = ascii - '0';
-	else if(ascii >= 'a' && ascii <= 'f')
-		result = ascii - 'a' + 0x0a;
-	else if(ascii >= 'A' && ascii <= 'F')
-		result = ascii - 'A' + 0x0a;
-	else
-		return 0;
-	return result;
-}
-
-uint8_t preview_pic=0;
-
-
-FIL curFile_1;
-
-uint32_t row;
-uint8_t gcode_preview_over;
-uint8_t flash_preview_begin;
-uint8_t default_preview_flg;
-//uint8_t from_flash_pic;
-
-extern "C" void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-extern "C" void SPI_FLASH_SectorErase(u32 SectorAddr);
-
-void gcode_preview(FIL *file,int xpos_pixel,int ypos_pixel) {
-	uint8_t ress;
-	UINT read,write;
-	volatile uint32_t i,j;
-	volatile uint16_t *p_index;
-	int res;
-	res = f_open(file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ);
-	if(res == FR_OK) {
-		f_lseek(file, (PREVIEW_LITTLE_PIC_SIZE+To_pre_view)+809*row+8); //809 - длина строки в preview
-		LCD_setWindowArea(xpos_pixel, ypos_pixel + row, 200,1);
-		LCD_WriteRAM_Prepare();
-		f_read(file, bmp_public_buf, 800, &read);
-		i=0;j=0;
-		while (i<800) {
-			uint16_t *color = (uint16_t *)&(bmp_public_buf[j]);
-			bmp_public_buf[j++] = ascii2dec(bmp_public_buf[i++])<<4 | ascii2dec(bmp_public_buf[i++]);
-			bmp_public_buf[j++] = ascii2dec(bmp_public_buf[i++])<<4 | ascii2dec(bmp_public_buf[i++]);
-			if(*color == 0x0000) *color=gCfgItems.preview_bk_color;
-			LCD_WriteRAM(*color);
-		}
-		if(row<20)
-			SPI_FLASH_SectorErase(BAK_VIEW_ADDR+row*4096);
-
-		SPI_FLASH_BufferWrite(bmp_public_buf, BAK_VIEW_ADDR+row*400, 400);
-
-		row++;
-		f_close(file);
-		if(row >= 200) {
-			row = 0;
-			gcode_preview_over = 0;
-			ui_start_print_process();
-		}
-	}
-}
-
-void disp_pre_gcode(int xpos_pixel,int ypos_pixel)
-{
-	if(gcode_preview_over==1)
-	{
-		gcode_preview(&TEST_FIL1,xpos_pixel,ypos_pixel);
-	}
-	if(flash_preview_begin == 1)
-	{
-		flash_preview_begin = 0;
-		Draw_default_preview(xpos_pixel,ypos_pixel,1);	
-	}
-	if(default_preview_flg == 1)
-	{
-		Draw_default_preview(xpos_pixel,ypos_pixel,0);
-		default_preview_flg = 0;
-	}
-
-}
-
-void preview_gcode_prehandle(char *path)
-{
-	UINT read;
-	uint32_t pre_read_cnt = 0;
-	char *p;
-	
-	gcode_preview_over = 0;
-	default_preview_flg = 0;
-	from_flash_pic = 0;
-	if(f_open(&TEST_FIL1, path, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
-		f_read(&TEST_FIL1,&bmp_public_buf[0],1024,&read);
-		p = strstr((const char *)&bmp_public_buf[0],(const char *)";simage:");
-		
-		if (p) {
-			pre_read_cnt = (uint32_t)p-(uint32_t)((uint32_t *)(&bmp_public_buf[0]));
-			To_pre_view = pre_read_cnt;
-			gcode_preview_over = 1;
-			from_flash_pic = 1;
-		} else {
-			default_preview_flg = 1;
-		}
-		epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
-	}
-}
-
-void gcode_has_preview(char *path) {
-	uint8_t re;
-	UINT read;
-	uint32_t pre_read_cnt = 0;
-	uint32_t *p1,*p2;
-	
-	re = f_open(&TEST_FIL1, path, FA_OPEN_EXISTING | FA_READ);//	
-	if(re==FR_OK) {
-		f_read(&TEST_FIL1,&bmp_public_buf[0],1024,&read);
-		p2 = (uint32_t *)strstr((const char *)&bmp_public_buf[0],(const char *)";simage:");
-		if(p2) {
-			pre_read_cnt = (uint32_t)p2-(uint32_t)((uint32_t *)(&bmp_public_buf[0]));
-			To_pre_view = pre_read_cnt;
-			from_flash_pic = 1;
-			epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);			
-		} else {
-			from_flash_pic = 0; 
-			epr_write_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);		
-		}
-	}
-    f_close(&TEST_FIL1);
-}

@@ -148,10 +148,6 @@ extern value_state value;
 
 
 #define VERSION_WITH_PIC	1
-extern uint32_t To_pre_view;
-
-extern uint8_t flash_preview_begin;
-extern uint8_t default_preview_flg;
 
 #define PREVIEW_LITTLE_PIC_SIZE		10460//200*50+9*51+1
 #define PREVIEW_SIZE			202720//(PREVIEW_LITTLE_PIC_SIZE+800*200+201*9+1)
@@ -374,16 +370,13 @@ extern DISP_STATE_STACK disp_state_stack;
 extern volatile uint32_t TimeIncrease;
 extern uint16_t temperature_change_frequency_cnt;
 extern uint8_t temperature_change_frequency;
-extern uint8_t gcode_preview_over;
 extern uint8_t from_flash_pic;
-
-extern char ascii2dec(char ascii);
 
 extern void start_print_time();
 extern void stop_print_time();
 extern void reset_print_time();
 
-extern void draw_logo();
+extern void _draw_logo();
 extern int8_t get_printing_rate(FIL *fileHandle);
 extern void disp_sel_lang(void);
 extern void draw_return_ui();
@@ -395,11 +388,9 @@ extern void push_cb_stack(int16_t event_id);
 extern void GUI_callback(void);
 
 extern void GUI_RefreshPage(void);
-extern void save_preview_to_flash(char *path,int xpos_pixel,int ypos_pixel);
-extern void disp_pre_gcode(int xpos_pixel,int ypos_pixel);
-extern void preview_gcode_prehandle(char *path);
-extern void gcode_has_preview(char *path);
 
+
+#if 0
 #define PreHeat_bk_color 0x008bff
 #define Move_bk_color 0x2311e8
 #define Zero_bk_color 0x8c00ed
@@ -634,6 +625,7 @@ extern void gcode_has_preview(char *path);
 #define Simple_Filament "����"
 #define Complex_Filament "�Q��"
 #define English_Filament "Filament"
+#endif
 
 #if defined(__cplusplus)
 }

@@ -14,6 +14,8 @@ class Widget;
 
 class Application {
 public:
+	void start();
+	void drawLogo();
 	void back_ui();
 	void push(Widget * widget);
 	void showMainWidget();

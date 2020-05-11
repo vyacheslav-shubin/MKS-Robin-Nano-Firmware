@@ -118,7 +118,6 @@ extern IP_PARA ipPara;
 extern CLOUD_PARA cloud_para;
 
 extern uint8_t command_send_flag;
-extern uint8_t gcode_preview_over;
 
 //extern USB_OTG_CORE_HANDLE          USB_OTG_Core;
 //extern USBH_HOST                     USB_Host;
@@ -1174,30 +1173,26 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 	            				
 						if(mksReprint.mks_printer_state == MKS_IDLE)
 						{
+							//TODO:
+
 							clear_cur_ui();
 							reset_file_info();
 							reset_print_time();
 							start_print_time();
-							#if defined(TFT35)
-							preview_gcode_prehandle(ui_print_process.file_name);
-							#endif
 							printing_ui.show();
-							if(gcode_preview_over != 1)
+							if(card.openFile(ui_print_process.file_name, true))
 							{
-								if(card.openFile(ui_print_process.file_name, true))
-								{
-								    feedrate_percentage = 100;
-					                            saved_feedrate_percentage = feedrate_percentage;
-					                            planner.flow_percentage[0] = 100;
-					                            planner.e_factor[0]= planner.flow_percentage[0]*0.01;
-					                            if(mksCfg.extruders==2)
-					                            {
-					                                planner.flow_percentage[1] = 100;
-					                                planner.e_factor[1]= planner.flow_percentage[1]*0.01;  
-					                            }                            
-									card.startFileprint();
-									ui_print_process.once = 0;
-								}
+								feedrate_percentage = 100;
+											saved_feedrate_percentage = feedrate_percentage;
+											planner.flow_percentage[0] = 100;
+											planner.e_factor[0]= planner.flow_percentage[0]*0.01;
+											if(mksCfg.extruders==2)
+											{
+												planner.flow_percentage[1] = 100;
+												planner.e_factor[1]= planner.flow_percentage[1]*0.01;
+											}
+								card.startFileprint();
+								ui_print_process.once = 0;
 							}
 
 							
@@ -1205,20 +1200,10 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 						else if(mksReprint.mks_printer_state == MKS_PAUSED)
 						{
 							pause_resum = 1;
-							//mksReprint.mks_printer_state = MKS_WORKING;
 							mksReprint.mks_printer_state = MKS_RESUMING;
 							clear_cur_ui();
 							start_print_time();
-                            				#if defined(TFT35)
-							if(from_flash_pic==1)
-								flash_preview_begin = 1;
-							else
-								default_preview_flg = 1;							
-							//draw_printing();
-							#endif
 							printing_ui.show();
-							
-							//MX_I2C1_Init(400000);
 						}
 						else if(mksReprint.mks_printer_state == MKS_REPRINTING)
 						{
@@ -1226,14 +1211,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 							mksReprint.mks_printer_state = MKS_REPRINTED;
 							clear_cur_ui();
 							start_print_time();
-                            			#if 1
-							if(from_flash_pic==1)
-								flash_preview_begin = 1;
-							else
-								default_preview_flg = 1;							
-							
 							printing_ui.show();
-							#endif
 						}		
 					}
 					send_to_wifi("ok\r\n", strlen("ok\r\n"));
@@ -1250,18 +1228,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line)
 						card.pauseSDPrint();
       					print_job_timer.pause();
 						mksReprint.mks_printer_state = MKS_PAUSING;
-						#if defined(TFT35)
-						if(from_flash_pic==1)
-							flash_preview_begin = 1;
-						else
-							default_preview_flg = 1;							
-						
-						//draw_pause();
 						printing_ui.show();
-			                      #else
-			                      draw_pause();
-						#endif
-
 						send_to_wifi("ok\r\n", strlen("ok\r\n"));
 
 						//MX_I2C1_Init(100000);

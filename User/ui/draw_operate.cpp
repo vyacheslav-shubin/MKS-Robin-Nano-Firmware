@@ -41,11 +41,6 @@ static TEXT_Handle textPrintTemp1, textPrintTemp2, printStopDlgText,Fill_State_B
 static BUTTON_STRUCT buttonPause, buttonStop, buttonTemperature, buttonSpeed, buttonMore_printing, buttonRet, buttonOk, buttonCancle,buttonFan;
 static BUTTON_STRUCT buttonFilament,buttonAuto_Off,buttonExtrude,buttonMove,buttonBabystep;
 
-//extern PR_STATUS printerStaus;
-extern uint8_t flash_preview_begin;
-extern uint8_t from_flash_pic;
-extern uint8_t default_preview_flg;
-
 uint8_t pause_flag;
 
 uint8_t IsChooseAutoShutdown = 0;
@@ -72,47 +67,11 @@ switch (pMsg->MsgId)
 		
 	case WM_NOTIFY_PARENT:
 		#if 1
-		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED)
-		{
-			#if !defined(TFT35)
-			if(pMsg->hWinSrc == buttonPause.btnHandle)
-			{
-				stop_print_time();
-                		if(mksCfg.extruders==2)
-				{
-					gCfgItems.curSprayerChoose_bak= active_extruder;
-					gCfgItems.moveSpeed_bak = feedrate_mm_s;
-				}
-				if(mksReprint.mks_printer_state == MKS_WORKING)
-				{
-					//MX_I2C1_Init(100000);
-	      				card.pauseSDPrint();
-	      				print_job_timer.pause();  
-	                    		mksReprint.mks_printer_state = MKS_PAUSING;
-	                    		last_disp_state = OPERATE_UI;
-					Clear_operate();
-					draw_pause();
-				}
-			}
-			else if(pMsg->hWinSrc == buttonStop.btnHandle)
-			{	
-				last_disp_state = OPERATE_UI;
-				Clear_operate();
-				draw_dialog(DIALOG_TYPE_STOP);
-			}
-			else 
-				#endif
+		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
 		    if(pMsg->hWinSrc == buttonRet.btnHandle)
 			{
-			#if defined(TFT35)
-				if(from_flash_pic==1)
-					flash_preview_begin = 1;
-				else
-					default_preview_flg = 1;
-			#endif
 				last_disp_state = OPERATE_UI;
 				Clear_operate();
-				//draw_return_ui();
 				printing_ui.show();
 			}
 			else if(pMsg->hWinSrc == buttonTemperature.btnHandle)
@@ -562,6 +521,7 @@ void draw_operate()
 #endif
 void setProBarRateOpera()
 {
+	/*
 
 	int rate;
 	volatile long long rate_tmp_op;
@@ -587,6 +547,7 @@ void setProBarRateOpera()
 	{
 		PROGBAR_SetValue(printingBar, rate );
 	}
+	*/
 	
 }
 

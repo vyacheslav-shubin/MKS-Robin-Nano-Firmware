@@ -11,6 +11,9 @@
 #include "mks_reprint.h"
 #include "sh_tools.h"
 #include "draw_dialog.h"
+#include "spi_flash.h"
+#include "ili9320.h"
+#include "pic_manager.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -29,9 +32,6 @@ void PrintingUI::createStateButtonAt(char col, char row, STATE_BUTTON * btn, con
 }
 
 void _calc_rate(void) {
-	if (gcode_preview_over) {
-		ui_print_process.rate = 0;
-	} else {
 		int rate;
 		volatile long long rate_tmp_r =(long long) card.sdpos * 100;
 		rate = rate_tmp_r / card.filesize;
@@ -49,7 +49,6 @@ void _calc_rate(void) {
 			rate = 0;
 			*/
 		ui_print_process.rate = rate;
-	}
 }
 
 void PrintingUI::updateProgress() {
@@ -71,8 +70,6 @@ void PrintingUI::updateProgress() {
 
 void PrintingUI::doFinishPrint() {
 	stop_print_time();
-	flash_preview_begin = 0;
-	default_preview_flg = 0;
 	this->hide();
 	draw_dialog(DIALOG_TYPE_FINISH_PRINT);
 }
@@ -145,6 +142,111 @@ void PrintingUI::updatePauseButton() {
 	BUTTON_SetBitmapEx(this->ui.pause, 0, &bmp_struct_100x80, 0, 0);
 }
 
+//DEFAULT_VIEW_ADDR
+//BAK_VIEW_ADDR
+void _preview(int x,int y, int src) {
+	for (int sector=0;sector<10;sector++) {
+		SPI_FLASH_BufferRead(bmp_public_buf, src + sector * 8000, 8000);
+		int k=0;
+		LCD_setWindowArea(x, y+sector*20, 200, 20);     //200*200
+		LCD_WriteRAM_Prepare();
+		while(k<8000) {
+			LCD_WriteRAM(*((uint16_t *)(&bmp_public_buf[k])));
+			k+=2;
+		}
+	}
+}
+
+void __preview(int x,int y, int src) {
+	int index = 0;
+	int pass = 0;
+	/*LCD_setWindowArea(x, y, 200, 200);     //200*200
+	LCD_WriteRAM_Prepare();
+	while (index<200*200) {
+		SPI_FLASH_BufferRead(bmp_public_buf, src + pass++ * sizeof(bmp_public_buf), sizeof(bmp_public_buf));
+		int k = 0;
+		do {
+			uint16_t *color;
+			color = (uint16_t *)(&bmp_public_buf[k]);
+			LCD_WriteRAM(*color);
+			k+=2;
+			index++;
+		} while ((index<200*200) && (k<sizeof(bmp_public_buf)));
+	}*/
+
+}
+
+void _preview_cache() {
+	FIL file;
+	UINT readed;
+	volatile uint32_t i,j;
+	int res;
+	res = f_open(&file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ);
+	if(res == FR_OK) {
+		f_lseek(&file, (PREVIEW_LITTLE_PIC_SIZE+ui_print_process.preview_offset) + 809 * ui_print_process.preview_row + 8); //809 - длина строки в preview
+		f_read(&file, bmp_public_buf, 800, &readed);
+		i=0;j=0;
+		while (i<800) {
+			uint16_t *color = (uint16_t *)&(bmp_public_buf[j]);
+			bmp_public_buf[j++] = ascii2dec(bmp_public_buf[i++])<<4 | ascii2dec(bmp_public_buf[i++]);
+			bmp_public_buf[j++] = ascii2dec(bmp_public_buf[i++])<<4 | ascii2dec(bmp_public_buf[i++]);
+			if(*color == 0x0000) *color=gCfgItems.preview_bk_color;
+		}
+		if(ui_print_process.preview_row<20)
+			SPI_FLASH_SectorErase(BAK_VIEW_ADDR+ui_print_process.preview_row*4096);
+
+		SPI_FLASH_BufferWrite(bmp_public_buf, BAK_VIEW_ADDR+ui_print_process.preview_row*400, 400);
+
+		ui_print_process.preview_row++;
+		f_close(&file);
+		if(ui_print_process.preview_row >= 200) {
+			ui_print_process.preview_row = 0;
+			ui_print_process.preview_state_flags |= 1<<PREVIEW_CACHED_BIT;
+			char done=1;
+			epr_write_data(EPR_PREVIEW_FROM_FLASH, &done,1);
+		}
+	} else {
+		ui_print_process.preview_state_flags = 0;
+	}
+}
+
+
+
+
+void PrintingUI::refresh() {
+	StdWidget::refresh();
+	if (!this->ui.preview_done) {
+		if (ui_print_process.preview_state_flags & (1<<PREVIEW_CHECKED_BIT)) {
+			if (ui_print_process.preview_state_flags & (1<<PREVIEW_EXISTS_BIT)) {
+				if (ui_print_process.preview_state_flags & (1<<PREVIEW_CACHED_BIT)) {
+					_preview(2, 36, BAK_VIEW_ADDR);
+					this->ui.preview_done = 1;
+				} else {
+					_preview_cache();
+				}
+			} else {
+				_preview(2, 36, DEFAULT_VIEW_ADDR);
+				this->ui.preview_done = 1;
+			}
+		} else {
+			if (ui_print_process.file_name[0]!=0) {
+				ui_print_process.preview_state_flags = 1<<PREVIEW_CHECKED_BIT;
+				unsigned char has_preview;
+				epr_read_data(EPR_PREVIEW_FROM_FLASH, &has_preview, 1);
+				if (has_preview) {
+					ui_print_process.preview_state_flags = PREVIEW_CACHED;
+				} else {
+					if (ui_file_with_preview(ui_print_process.file_name, &ui_print_process.preview_offset)) {
+						ui_print_process.preview_state_flags |= 1<<PREVIEW_EXISTS_BIT;
+						ui_print_process.preview_row = 0;
+						_preview(2, 36, DEFAULT_VIEW_ADDR);
+					}
+				}
+			}
+		}
+	}
+}
+
 
 void PrintingUI::refresh_05() {
 	ui_update_fan_button(ui.fan.button, ui.fan.label);
@@ -166,44 +268,38 @@ void PrintingUI::refresh_1s() {
 
 void PrintingUI::on_button(WM_HWIN hBtn) {
 	if(hBtn == ui.tools) {
-		if(gcode_preview_over != 1) {
-			this->hide();
-			draw_operate();
-		}
+		this->hide();
+		draw_operate();
 	} else if(hBtn == ui.pause) {
-		if(gcode_preview_over != 1) {
-			if(mksReprint.mks_printer_state == MKS_WORKING) {
-				stop_print_time();
-				if(mksCfg.extruders==2) {
-					gCfgItems.curSprayerChoose_bak= active_extruder;
-					gCfgItems.moveSpeed_bak = feedrate_mm_s;
-				}
-				card.pauseSDPrint();
-				print_job_timer.pause();
-				mksReprint.mks_printer_state = MKS_PAUSING;
+		if(mksReprint.mks_printer_state == MKS_WORKING) {
+			stop_print_time();
+			if(mksCfg.extruders==2) {
+				gCfgItems.curSprayerChoose_bak= active_extruder;
+				gCfgItems.moveSpeed_bak = feedrate_mm_s;
+			}
+			card.pauseSDPrint();
+			print_job_timer.pause();
+			mksReprint.mks_printer_state = MKS_PAUSING;
 
-			} else if(mksReprint.mks_printer_state == MKS_PAUSED) {
-				if (is_filament_fail()) {
-					this->hide();
-					draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
-					return;
-				} else {
-					start_print_time();
-					pause_resum = 1;
-					mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
-				}
-			} else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
-				start_print_time();
-				mksReprint.mks_printer_state = MKS_REPRINTED;
-			}
-			this->updatePauseButton();
-		}
-	} else if(hBtn == ui.stop) {
-		if(gcode_preview_over != 1) {
-			if(mksReprint.mks_printer_state != MKS_IDLE) {
+		} else if(mksReprint.mks_printer_state == MKS_PAUSED) {
+			if (is_filament_fail()) {
 				this->hide();
-				draw_dialog(DIALOG_TYPE_STOP);
+				draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
+				return;
+			} else {
+				start_print_time();
+				pause_resum = 1;
+				mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
 			}
+		} else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
+			start_print_time();
+			mksReprint.mks_printer_state = MKS_REPRINTED;
+		}
+		this->updatePauseButton();
+	} else if(hBtn == ui.stop) {
+		if(mksReprint.mks_printer_state != MKS_IDLE) {
+			this->hide();
+			draw_dialog(DIALOG_TYPE_STOP);
 		}
 	} else if (hBtn == ui.fan.button) {
 		this->hide();

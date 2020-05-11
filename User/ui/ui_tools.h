@@ -99,19 +99,28 @@ typedef struct {
 } SUICIDE_CFG;
 
 
+#define PREVIEW_CHECKED_BIT		0
+#define PREVIEW_EXISTS_BIT		1
+#define PREVIEW_CACHED_BIT		2
+#define PREVIEW_CACHED 			((1<<PREVIEW_CHECKED_BIT) | (1<<PREVIEW_CACHED_BIT) | (1 << PREVIEW_EXISTS_BIT))
+
 typedef struct {
-	char			once; //printing
+	unsigned char	once; //printing
 	SUICIDE_CFG		suicide;
-	char 			rate;
+	unsigned char 	rate;
 	char			file_name[100];
+
+	unsigned char	preview_row;
+	int				preview_offset;
+	unsigned char	preview_state_flags;
 } UI_PRINT_PROCESS;
 
 typedef struct {
 	BUTTON_Handle button_next;
 	BUTTON_Handle button_previous;
 	BUTTON_Handle button_back;
-	uint8_t	page;
-	uint8_t	page_count;
+	unsigned char page;
+	unsigned char page_count;
 } UI_PAGE_NAVIGATOR;
 
 typedef struct {
@@ -204,6 +213,7 @@ extern void ui_start_print_process(void);
 
 extern void ui_start_print_file();
 
+extern char ascii2dec(char ascii);
 extern uint8_t ui_file_with_preview(char *path, int * withoffset);
 extern void ui_gcode_small_preview(char * file_name, int offset, int xpos_pixel,int ypos_pixel);
 

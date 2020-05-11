@@ -316,7 +316,6 @@ extern uint32_t filament_rate;
 volatile uint32_t TimeIncrease;
 uint8_t preview_no_display;
 
-extern uint8_t from_flash_pic;
 volatile uint8_t loop_start=0;
 #endif
 
@@ -1359,15 +1358,6 @@ void display_sd_error()
               leds.set_off();
             #endif
             card.checkautostart(true);
-			
-			#if 1
-			
-			
-			//�䨰����1??��?��
-			//if((gCfgItems.print_finish_close_machine_flg == 1)&&(IsChooseAutoShutdown==1))
-			//    Close_machine_display();
-
-            #endif 				
           }
         }
         else if (n == -1) {
@@ -1398,17 +1388,7 @@ void display_sd_error()
 	  {
 		  GUI_RefreshPage();
 	  }
-	  #if defined(TFT70)
-	  disp_pre_gcode(3,40);
-	  #elif defined(TFT35)
-	  //#if defined(MKS_ROBIN2)
-	  if(preview_no_display != 1)
-	  {
-		  disp_pre_gcode(2,36);
-	  }
-	  //#endif
-	  #endif
-	  
+
 	  GUI_TOUCH_Exec(); 	  
 	  GUI_Exec(); 
 
@@ -13059,9 +13039,6 @@ void process_parsed_command() {
             reset_file_info();
             reset_print_time();
             start_print_time();
-            #if defined(TFT35)
-            preview_gcode_prehandle(ui_print_process.file_name);
-            #endif
             printing_ui.show();
            }
           break;
@@ -13075,16 +13052,7 @@ void process_parsed_command() {
             
             	card.pauseSDPrint();
             	print_job_timer.pause();
-		#if defined(TFT35)
-            	if(from_flash_pic==1)
-            		flash_preview_begin = 1;
-            	else
-            		default_preview_flg = 1;							
-
             	printing_ui.show();
-               #else
-               draw_pause();
-		#endif
             }          
           break;
         case 998:	//M998: Stop SD print
@@ -15714,17 +15682,6 @@ void idle(
   {
 	  GUI_RefreshPage();
   }
-  #if defined(TFT70)
-  disp_pre_gcode(3,40);
-  #elif defined(TFT35)
-  //#if defined(MKS_ROBIN2)
-  if(preview_no_display != 1)
-  {
-	  disp_pre_gcode(2,36);
-  }
-  //#endif
-  #endif
-  
   GUI_TOUCH_Exec(); 	  
   GUI_Exec(); 
 

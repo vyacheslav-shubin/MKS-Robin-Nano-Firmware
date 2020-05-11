@@ -25,13 +25,14 @@ protected:
 	virtual void refresh_1s() {};
 public:
 	Widget(DISP_STATE id) {this->id=id;};
+	bool is_active();
 	virtual void on_message(WM_MESSAGE * pMsg);
 	virtual ~Widget() {};
 	virtual char * getTitle();
 	virtual void show(Widget * caller);
-	void show() {this->show(0);};
+	virtual void show() {this->show(0);};
 	virtual void refresh();
-	void hide();
+	virtual void hide();
 
 	friend Application;
 };

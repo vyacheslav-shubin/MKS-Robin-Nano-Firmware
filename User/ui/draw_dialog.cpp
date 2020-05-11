@@ -81,9 +81,6 @@ uint32_t filament_rate;
 
 uint8_t DialogType;
 extern uint8_t print_start_flg;
-extern uint8_t flash_preview_begin;
-extern uint8_t from_flash_pic;
-extern uint8_t default_preview_flg;
 
 extern uint8_t pause_flag;
 
@@ -188,12 +185,6 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 				} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
 					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
-					if(last_disp_state==PRINTING_UI) {
-						if(from_flash_pic == 1)
-							flash_preview_begin = 1;
-						else
-							default_preview_flg = 1; 
-					}
 					draw_return_ui();
 				} else {
 					draw_return_ui();
@@ -201,12 +192,6 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 			} else if(pMsg->hWinSrc == buttonCancle) {
 				unsigned int tmpFlag;
 				Chk_close_machine_flg = 0;
-                if((DialogType == DIALOG_TYPE_STOP)) {
-					if(from_flash_pic == 1)
-						flash_preview_begin = 1;
-					else
-						default_preview_flg = 1;
-				}
 				if(DialogType == DIALOG_TYPE_PRINT_FILE) {
 					disp_in_file_dir = 1;
 				}

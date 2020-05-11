@@ -32,7 +32,6 @@ static GUI_HWIN hPauseWnd;
 extern  uint8_t pause_resum;
 
 extern int X_ADD,X_INTERVAL;   //**ͼƬ���
-extern uint8_t from_flash_pic;
 
 extern uint8_t  Get_Temperature_Flg;
 extern volatile uint8_t get_temp_flag;
@@ -309,7 +308,8 @@ void draw_pause()
 
 void setProBarRatePause()
 {
-  //int rate = (long long)(sd.sdpos * 100) / sd.filesize;
+  /*
+	//int rate = (long long)(sd.sdpos * 100) / sd.filesize;
     int rate;
   	volatile long long rate_tmp_pa;
 	//rate_tmp_pa = (long long)card.sdpos * 100;
@@ -334,7 +334,7 @@ void setProBarRatePause()
 	{
 		PROGBAR_SetValue(printingBar, rate );
 	}
-	
+	*/
 }
 
 void disp_temp_pause()

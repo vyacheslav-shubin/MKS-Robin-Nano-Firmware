@@ -48,7 +48,6 @@ uint8_t print_start_flg = 0;
 
 
 extern uint8_t gcode_preview_over;
-extern uint8_t from_flash_pic;
 extern uint8_t button_disp_pause_state;
 
 static void update_printing_1s(void);

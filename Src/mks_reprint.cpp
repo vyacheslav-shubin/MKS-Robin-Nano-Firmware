@@ -9,7 +9,6 @@
 extern "C" u16 DeviceCode;
 extern uint8_t pause_resum;
 extern uint32_t logo_tick1,logo_tick2;
-extern uint8_t from_flash_pic;
 
 uint8_t continue_print_error_flg = 0;
 
@@ -181,215 +180,139 @@ void mkstft_ui_set_epr()
 	}		
 		
 }
-void mkstft_ui_init()
-{
-		gCfgItems.value_bk_color = 0xFFFFFF;
-        	gCfgItems.value_text_color = 0x000000;
 
-        	gCfgItems.default_bk_color = 0xff5449;
-        	gCfgItems.default_text_color = 0xFFFFFF;
-			
-		gCfgItems.background_color = 0x494949;//
-		gCfgItems.title_color = 0xFFFFFF;//
-		gCfgItems.state_background_color = 0x1A1A1A;//
-		gCfgItems.state_text_color = 0xFFFFFF;//
-		gCfgItems.btn_color = 0X1A1A1A;
-		gCfgItems.btn_textcolor = 0xffffff;
-		gCfgItems.btn_state_color = 0X1A1A1A;//0x505050;
-		gCfgItems.btn_state_textcolor = 0xffffff;
-		gCfgItems.btn_state_sel_color = 0X1A1A1A;//0x9dfcff;
-		gCfgItems.btn_state_sel_textcolor = 0xFFFFFF;
-		gCfgItems.back_btn_color = 0xff5449;
-		gCfgItems.back_btn_textcolor = 0xFFFFFF;
-		gCfgItems.printing_bar_color_left= 0x00ff00;
-		gCfgItems.printing_bar_color_right= 0xAAAAAA ;
-		gCfgItems.printing_bar_text_color_left = 0x000000;
-		gCfgItems.printing_bar_text_color_right = 0x000000;
-		gCfgItems.dialog_btn_color = 0xff0000;
-		gCfgItems.dialog_btn_textcolor = 0xffffff;
-		gCfgItems.printfile_color = 0x000000;
-		gCfgItems.printfile_textcolor = 0xffffff;
+void mkstft_ui_init() {
+	gCfgItems.value_bk_color = 0xFFFFFF;
+	gCfgItems.value_text_color = 0x000000;
 
-		gCfgItems.multiple_language = 1;
-		gCfgItems.language = 3;
+	gCfgItems.default_bk_color = 0xff5449;
+	gCfgItems.default_text_color = 0xFFFFFF;
 		
-		//gCfgItems.touch_adj_flag = 0;
-		//gCfgItems.touch_adj_xMin = 201;
-		//gCfgItems.touch_adj_xMax = 3919;
-		//gCfgItems.touch_adj_yMin = 3776;
-		//gCfgItems.touch_adj_yMax = 164; 
+	gCfgItems.background_color = 0x494949;//
+	gCfgItems.title_color = 0xFFFFFF;//
+	gCfgItems.state_background_color = 0x1A1A1A;//
+	gCfgItems.state_text_color = 0xFFFFFF;//
+	gCfgItems.btn_color = 0X1A1A1A;
+	gCfgItems.btn_textcolor = 0xffffff;
+	gCfgItems.btn_state_color = 0X1A1A1A;//0x505050;
+	gCfgItems.btn_state_textcolor = 0xffffff;
+	gCfgItems.btn_state_sel_color = 0X1A1A1A;//0x9dfcff;
+	gCfgItems.btn_state_sel_textcolor = 0xFFFFFF;
+	gCfgItems.back_btn_color = 0xff5449;
+	gCfgItems.back_btn_textcolor = 0xFFFFFF;
+	gCfgItems.printing_bar_color_left= 0x00ff00;
+	gCfgItems.printing_bar_color_right= 0xAAAAAA ;
+	gCfgItems.printing_bar_text_color_left = 0x000000;
+	gCfgItems.printing_bar_text_color_right = 0x000000;
+	gCfgItems.dialog_btn_color = 0xff0000;
+	gCfgItems.dialog_btn_textcolor = 0xffffff;
+	gCfgItems.printfile_color = 0x000000;
+	gCfgItems.printfile_textcolor = 0xffffff;
 
-		gCfgItems.fileSysType = FILE_SYS_SD;
-		gCfgItems.stepHeat = 10;
-		gCfgItems.curSprayerChoose = 0;
-		//gCfgItems.move_dist = 1;
-		gCfgItems.moveSpeed = 3000;
-		gCfgItems.extruSpeed = 1;
-		gCfgItems.extruStep = 5;
-		gCfgItems.stepPrintSpeed = 5;
-		gCfgItems.printSpeed = 100;
+	gCfgItems.multiple_language = 1;
+	gCfgItems.language = 3;
 
-		gCfgItems.printExtSpeed0 = 100;
+	gCfgItems.fileSysType = FILE_SYS_SD;
+	gCfgItems.stepHeat = 10;
+	gCfgItems.curSprayerChoose = 0;
+	//gCfgItems.move_dist = 1;
+	gCfgItems.moveSpeed = 3000;
+	gCfgItems.extruSpeed = 1;
+	gCfgItems.extruStep = 5;
+	gCfgItems.stepPrintSpeed = 5;
+	gCfgItems.printSpeed = 100;
 
-		gCfgItems.leveling_mode = 0;
-		gCfgItems.leveling_point_number = 4;
+	gCfgItems.printExtSpeed0 = 100;
 
-		set_xy_point(gCfgItems.leveling_points[0],50,50);
-		set_xy_point(gCfgItems.leveling_points[1],180,50);
-		set_xy_point(gCfgItems.leveling_points[2],180,180);
-		set_xy_point(gCfgItems.leveling_points[3],50,180);
-		set_xy_point(gCfgItems.leveling_points[4],115,115);
-		
-		gCfgItems.leveling_xy_speed = 3000;
-		gCfgItems.leveling_z_speed = 1500;
-		
-		gCfgItems.insert_det_module = 0;
-		gCfgItems.have_ups = 0;
-		gCfgItems.filament_det0_level_flg=0;
-		gCfgItems.filament_det1_level_flg=0;
-		gCfgItems.mask_det_Function = 0;
+	gCfgItems.leveling_mode = 0;
+	gCfgItems.leveling_point_number = 4;
 
-		gCfgItems.print_finish_close_machine_flg = 0;
-		ui_print_process.suicide.enabled = gCfgItems.print_finish_close_machine_flg;
+	set_xy_point(gCfgItems.leveling_points[0],50,50);
+	set_xy_point(gCfgItems.leveling_points[1],180,50);
+	set_xy_point(gCfgItems.leveling_points[2],180,180);
+	set_xy_point(gCfgItems.leveling_points[3],50,180);
+	set_xy_point(gCfgItems.leveling_points[4],115,115);
 
-		//gCfgItems.preheat_max_desireSprayerTemp = 275;
-		//gCfgItems.preheat_max_desireBedTemp = 150;
+	gCfgItems.leveling_xy_speed = 3000;
+	gCfgItems.leveling_z_speed = 1500;
 
-		strcpy((char *)gCfgItems.z_display_pos,(char *)"0.000");
-		gCfgItems.custom_bed_flag = 1;
+	gCfgItems.insert_det_module = 0;
+	gCfgItems.have_ups = 0;
+	gCfgItems.filament_det0_level_flg=0;
+	gCfgItems.filament_det1_level_flg=0;
+	gCfgItems.mask_det_Function = 0;
 
-		gCfgItems.filament_load_limit_temper = 200;
-		gCfgItems.filamentchange_load_speed = 1000;
-		gCfgItems.filamentchange_load_length = 100;
-		gCfgItems.filament_unload_limit_temper = 200;
-		gCfgItems.filamentchange_unload_speed = 1000;
-		gCfgItems.filamentchange_unload_length = 100;
+	gCfgItems.print_finish_close_machine_flg = 0;
+	ui_print_process.suicide.enabled = gCfgItems.print_finish_close_machine_flg;
 
-		gCfgItems.MoreItem_pic_cnt = 0;
-		gCfgItems.func_btn1_display_flag = 1;
-		
-		/*wifi_cfg*/
-		gCfgItems.wifi_mode_sel = 1;//1ΪAPģʽ������Ϊclientģʽ��Ĭ��ΪAPģʽ��
-		memset(&wifiPara, 0, sizeof(wifiPara));
-		memset(&ipPara, 0, sizeof(ipPara));
-		strcpy(wifiPara.ap_name,WIFI_AP_NAME);
-		strcpy(wifiPara.keyCode,WIFI_KEY_CODE);
-		//clientģʽ��ʼֵ
-		strcpy(ipPara.ip_addr,IP_ADDR);
-		strcpy(ipPara.mask,IP_MASK);
-		strcpy(ipPara.gate,IP_GATE);
-		strcpy(ipPara.dns,IP_DNS);
-		
-		ipPara.dhcp_flag = IP_DHCP_FLAG;
-		
-		//APģʽ��ʼֵ
-		strcpy(ipPara.dhcpd_ip,AP_IP_ADDR);
-		strcpy(ipPara.dhcpd_mask,AP_IP_MASK);
-		strcpy(ipPara.dhcpd_gate,AP_IP_GATE);
-		strcpy(ipPara.dhcpd_dns,AP_IP_DNS);
-		strcpy(ipPara.start_ip_addr,IP_START_IP);
-		strcpy(ipPara.end_ip_addr,IP_END_IP);
-		
-		ipPara.dhcpd_flag = AP_IP_DHCP_FLAG;
-		
-		gCfgItems.wifi_type = ESP_WIFI;
-		
-		strcpy((char*)gCfgItems.cloud_hostUrl, "baizhongyun.cn");
-		gCfgItems.cloud_port = 10086;
+	strcpy((char *)gCfgItems.z_display_pos,(char *)"0.000");
+	gCfgItems.custom_bed_flag = 1;
 
-		
-		gCfgItems.cloud_enable = 1;
-		
-		gCfgItems.btn_text_offset = 23;//23;
-		gCfgItems.display_style = 0;//1;
+	gCfgItems.filament_load_limit_temper = 200;
+	gCfgItems.filamentchange_load_speed = 1000;
+	gCfgItems.filamentchange_load_length = 100;
+	gCfgItems.filament_unload_limit_temper = 200;
+	gCfgItems.filamentchange_unload_speed = 1000;
+	gCfgItems.filamentchange_unload_length = 100;
 
-		gCfgItems.pwroff_save_mode = 0;
+	gCfgItems.MoreItem_pic_cnt = 0;
+	gCfgItems.func_btn1_display_flag = 1;
 
-		gCfgItems.breakpoint_reprint_flg = 0;
-		gCfgItems.breakpoint_flg=0;
-		gCfgItems.wifi_scan = 0;
-		gCfgItems.wifi_btn_state = 0;
-		gCfgItems.pause_unload_len = 0;
-		gCfgItems.resume_load_len = 0;
-		gCfgItems.resume_speed = 1000;
-		gCfgItems.singleNozzle=0;
-		gCfgItems.overturn_180 = 0;
-		gCfgItems.standby_mode=0;
-		gCfgItems.standby_time=0;
-		gCfgItems.pulseDelay=5;
-		gCfgItems.print_finish_count=180;
-		mkstft_ui_set_epr();
-        
-        /*gCfgItems.touch_adj_xMin = 3518;
-	    gCfgItems.touch_adj_xMax = 389;
-	    gCfgItems.touch_adj_yMin = 284;
-	    gCfgItems.touch_adj_yMax = 3770;
+	/*wifi_cfg*/
+	gCfgItems.wifi_mode_sel = 1;//1ΪAPģʽ������Ϊclientģʽ��Ĭ��ΪAPģʽ��
+	memset(&wifiPara, 0, sizeof(wifiPara));
+	memset(&ipPara, 0, sizeof(ipPara));
+	strcpy(wifiPara.ap_name,WIFI_AP_NAME);
+	strcpy(wifiPara.keyCode,WIFI_KEY_CODE);
+	//clientģʽ��ʼֵ
+	strcpy(ipPara.ip_addr,IP_ADDR);
+	strcpy(ipPara.mask,IP_MASK);
+	strcpy(ipPara.gate,IP_GATE);
+	strcpy(ipPara.dns,IP_DNS);
 
-        if(DeviceCode == 0x9341)
-    	{
-    		//gCfgItems.touch_adj_flag = 0;
-    		gCfgItems.touch_adj_xMin = 400;
-    		gCfgItems.touch_adj_xMax = 3836;
-    		gCfgItems.touch_adj_yMin = 3805;
-    		gCfgItems.touch_adj_yMax = 212;
+	ipPara.dhcp_flag = IP_DHCP_FLAG;
 
-    	}
-    	else if(DeviceCode == 0x8989)
-    	{
-    		//gCfgItems.touch_adj_flag = 0;
-    		gCfgItems.touch_adj_xMin = 389;
-    		gCfgItems.touch_adj_xMax = 3518;
-    		gCfgItems.touch_adj_yMin = 284;
-    		gCfgItems.touch_adj_yMax = 3770;
-    	}
-    	else if(DeviceCode == 0x1505)
-    	{
-    		//gCfgItems.touch_adj_flag = 0;
-    		gCfgItems.touch_adj_xMin = 304;
-    		gCfgItems.touch_adj_xMax = 3875;
-    		gCfgItems.touch_adj_yMin = 313;
-    		gCfgItems.touch_adj_yMax = 3875;
+	//APģʽ��ʼֵ
+	strcpy(ipPara.dhcpd_ip,AP_IP_ADDR);
+	strcpy(ipPara.dhcpd_mask,AP_IP_MASK);
+	strcpy(ipPara.dhcpd_gate,AP_IP_GATE);
+	strcpy(ipPara.dhcpd_dns,AP_IP_DNS);
+	strcpy(ipPara.start_ip_addr,IP_START_IP);
+	strcpy(ipPara.end_ip_addr,IP_END_IP);
 
-    	}	
-        else if(DeviceCode==0x8552)
-        {
-    		//gCfgItems.touch_adj_flag = 0;
-    		gCfgItems.touch_adj_xMin = 352;
-    		gCfgItems.touch_adj_xMax = 3924;
-    		gCfgItems.touch_adj_yMin = 3840;
-    		gCfgItems.touch_adj_yMax = 201;       
-        }
-        else if(DeviceCode == 0X9488)
-        {
-        	//gCfgItems.touch_adj_xMin = 201;
-    		//gCfgItems.touch_adj_xMax = 3919;
-    		//gCfgItems.touch_adj_yMin = 3776;
-    		//gCfgItems.touch_adj_yMax = 164;
-    		if(gCfgItems.overturn_180 != 0xEE)
-		{
-			gCfgItems.touch_adj_flag = 0;
-			gCfgItems.touch_adj_xMin = 201;
-			gCfgItems.touch_adj_xMax = 3919;
-			gCfgItems.touch_adj_yMin = 3776;
-			gCfgItems.touch_adj_yMax = 164;	
-		}
-		else
-		{
-			gCfgItems.touch_adj_flag = 0;
-			gCfgItems.touch_adj_xMin = 3919;
-			gCfgItems.touch_adj_xMax = 201;
-			gCfgItems.touch_adj_yMin = 164;
-			gCfgItems.touch_adj_yMax = 3776;			
-		}
-        }*/
-		//bmp_struct.XSize = BTN_PIC_X_PIXEL;
-		//bmp_struct.YSize = BTN_PIC_Y_PIXEL;
-	
-		BMP_PIC_X = BTN_PIC_X_OFFSET;
-		BMP_PIC_Y = BTN_PIC_Y_OFFSET;
-        
+	ipPara.dhcpd_flag = AP_IP_DHCP_FLAG;
 
+	gCfgItems.wifi_type = ESP_WIFI;
+
+	strcpy((char*)gCfgItems.cloud_hostUrl, "baizhongyun.cn");
+	gCfgItems.cloud_port = 10086;
+
+
+	gCfgItems.cloud_enable = 1;
+
+	gCfgItems.btn_text_offset = 23;//23;
+	gCfgItems.display_style = 0;//1;
+
+	gCfgItems.pwroff_save_mode = 0;
+
+	gCfgItems.breakpoint_reprint_flg = 0;
+	gCfgItems.breakpoint_flg=0;
+	gCfgItems.wifi_scan = 0;
+	gCfgItems.wifi_btn_state = 0;
+	gCfgItems.pause_unload_len = 0;
+	gCfgItems.resume_load_len = 0;
+	gCfgItems.resume_speed = 1000;
+	gCfgItems.singleNozzle=0;
+	gCfgItems.overturn_180 = 0;
+	gCfgItems.standby_mode=0;
+	gCfgItems.standby_time=0;
+	gCfgItems.pulseDelay=5;
+	gCfgItems.print_finish_count=180;
+	mkstft_ui_set_epr();
+	BMP_PIC_X = BTN_PIC_X_OFFSET;
+	BMP_PIC_Y = BTN_PIC_Y_OFFSET;
 }
+
 DATA_REPRINT_ITMES mksReprint;
 void mks_initPrint()
 {
@@ -1415,87 +1338,40 @@ void mks_clearDir()
 }
 extern void Beeper(uint32_t cnt);
 
-void mks_contiuePrint_UI()
-{
-
-	
+void mks_contiuePrint_UI() {
 	lcd_setstatus("Resume print?");
-	
+
+    SERIAL_PROTOCOLLN("CONTINUE PRINT");
+    ui_print_process.preview_state_flags = 0;
 	card.openFile(mksReprint.filename, true);
 	strcpy(ui_print_process.file_name,mksReprint.filename);
-	if(!card.isFileOpen())	//�������ļ�ʧ��
-	{
-	#if tan_mask
-		mksReprint.mks_printer_state = MKS_IDLE;
-		epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
-
-		lcd_setstatus("Resume print failed!");
-		return;
-	#endif
+	if(!card.isFileOpen()) {
         Beeper(1200);
 		draw_dialog(DIALOG_TYPE_REPRINT_NO_FILE);
-	}
-	else
-	{	
-	    if((mksReprint.sdpos > MIN_FILE_PRINTED)||(mksReprint.sdpos_from_epr>MIN_FILE_PRINTED))
-        {   
+	} else {
+	    if((mksReprint.sdpos > MIN_FILE_PRINTED)||(mksReprint.sdpos_from_epr>MIN_FILE_PRINTED)) {
     		epr_write_data(EPR_SAV_FILENAME, (uint8_t *)&mksReprint.filename[0],sizeof(mksReprint.filename)); 
     		card.sdprinting = 0;
 
     		if(mksReprint.resume == MKS_RESUME_PWDWN) 
     			mks_getPositionXYZE();
     		
-
-    		//�����ļ�ƫ��
     		if(gCfgItems.pwroff_save_mode != 1)
     			card.setIndex(mksReprint.sdpos);
     		else
     			card.setIndex(mksReprint.sdpos_from_epr);
-    		
-
-    		//���ý��Ⱥ�ʱ��
-    		//print_job_timer.setTime(mksReprint.accumulator,mksReprint.startTimestamp,mksReprint.stopTimestamp);
-    		//cli();
-    		//HAL_SetTick(mksReprint.uwTick);
-    		//sei();
     		current_position[X_AXIS] = mksReprint.current_position[0];
     		current_position[Y_AXIS] = mksReprint.current_position[1];
     		current_position[Z_AXIS] = mksReprint.current_position[2];
     		if(gCfgItems.pwroff_save_mode != 1)
-    		{
     			mks_clearDir();
-         
-    		}
-    		while(1)
-    		{
+    		while(1) {
     			logo_tick2 = getTick();
-    			if((getTickDiff(logo_tick2, logo_tick1)>=3000)
-    				||(gCfgItems.fileSysType == FILE_SYS_USB))
-    			{
-    			    #if defined(TFT35)
-    				AT24CXX_Read(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
-    				
-    				if(from_flash_pic != 0)
-    				{
-    					flash_preview_begin = 1;
-    				}
-    				else
-    				{
-    					default_preview_flg = 1;
-    				}		
-    				printing_ui.show();
-			    #else
-                    disp_state_stack._disp_index = 0;
-	                memset(disp_state_stack._disp_state, 0, sizeof(disp_state_stack._disp_state));
-	                disp_state_stack._disp_state[disp_state_stack._disp_index] = PRINTING_UI;
-                	draw_pause();		
-			   #endif
+    			if((getTickDiff(logo_tick2, logo_tick1)>=3000) || (gCfgItems.fileSysType == FILE_SYS_USB))
     				break;
-    			}
     		}
-        }
-        else
-        {
+			printing_ui.show();
+        } else {
             mksReprint.resume = MKS_RESUME_IDLE;
             mksReprint.mks_printer_state = MKS_IDLE;
             if(gCfgItems.pwroff_save_mode != 1)
@@ -1503,8 +1379,6 @@ void mks_contiuePrint_UI()
             continue_print_error_flg = 1;
         }
 	}
-	
-	
 }
 
 /*
@@ -1527,45 +1401,14 @@ void mks_rePrintCheck() ʵ��
 void mks_rePrintCheck()
 {
 	bool pft_ok = false;
-    #if 0
-	if ((!card.cardOK)&&(!card.usbOK)) return; 
-	#if unused
-	//��Ҫȷ��USB�Ѿ�׼����
-	if(gCfgItems.fileSysType == FILE_SYS_USB)
-	{
-		while(1)
-		{
-			logo_tick2 = getTick();
-			if(getTickDiff(logo_tick2, logo_tick1)>=3000)
-			{
-				break;
-			}
-			MX_USB_HOST_Process();
-		}				
-	}	
-	#endif
-    #endif
 	epr_read_data((int)EPR_SAV_FLAG, (uint8_t*)&mksReprint.mks_printer_state, sizeof(mksReprint.mks_printer_state));
 	if(mksReprint.mks_printer_state == MKS_PAUSED)		//��ͣ����
 	{
 		mksReprint.mks_printer_state = MKS_REPRINTING;
 		mks_ReadFromEpr();		//��EERPOM��ȡ �������
-		//if(mksReprint.sdpos > MIN_FILE_PRINTED)
-		{
-			mksReprint.resume = MKS_RESUME_PAUSE;
-			mks_contiuePrint_UI();
+		mksReprint.resume = MKS_RESUME_PAUSE;
+		mks_contiuePrint_UI();
 
-		}
-/*
-		else
-		{
-			mksReprint.mks_printer_state = MKS_IDLE;
-            if(gCfgItems.pwroff_save_mode != 1)
-			    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
-			continue_print_error_flg = 1;
-
-		}
-*/
 	}
 	
 	else if(mksReprint.mks_printer_state == MKS_WORKING)	//�ϵ�����
@@ -1580,15 +1423,6 @@ void mks_rePrintCheck()
 				mks_contiuePrint_UI();
 
 			}
-/*
-			else
-			{
-				mksReprint.mks_printer_state = MKS_IDLE;
-                if(gCfgItems.pwroff_save_mode != 1)
-				    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
-				continue_print_error_flg = 1;
-			}			
-*/
 		}
 		else
 		{
@@ -1602,17 +1436,6 @@ void mks_rePrintCheck()
 				mksReprint.resume = MKS_RESUME_PWDWN;
 				mks_contiuePrint_UI();
 			}
-/*
-			else
-			{
-				mksReprint.mks_printer_state = MKS_IDLE;
-                if(gCfgItems.pwroff_save_mode != 1)
-				    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
-				//lcd_setstatus(WELCOME_MSG);
-				
-				continue_print_error_flg = 1;
-	         }
-*/
 		}
 	}
 	else

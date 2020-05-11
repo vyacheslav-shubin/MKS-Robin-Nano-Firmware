@@ -42,6 +42,18 @@ void ui_start_print_process(void) {
 	}
 }
 
+void ui_start_print_file() {
+	reset_print_time();
+	start_print_time();
+	ui_print_process.rate = 0;
+	ui_print_process.preview_state_flags = 0;
+	if(gCfgItems.breakpoint_reprint_flg == 1)
+		gCfgItems.breakpoint_z_pos = current_position[Z_AXIS];
+	char has_preview = 0;
+	epr_write_data(EPR_PREVIEW_FROM_FLASH, &has_preview,1);
+	ui_start_print_process();
+}
+
 void ui_push_disp_stack(DISP_STATE ui_id) {
     if(disp_state_stack._disp_state[disp_state_stack._disp_index] != ui_id)
     {
@@ -261,25 +273,6 @@ void ui_timings(void) {
 
 }
 
-void ui_start_print_file() {
-	reset_print_time();
-	start_print_time();
-	if(gCfgItems.breakpoint_reprint_flg == 1) {
-		gCfgItems.breakpoint_z_pos= current_position[Z_AXIS];
-		epr_read_data(EPR_PREVIEW_FROM_FLASH, &from_flash_pic,1);
-		if(from_flash_pic != 0) {
-			flash_preview_begin = 1;
-		} else {
-			default_preview_flg = 1;
-		}
-	} else {
-		preview_gcode_prehandle(ui_print_process.file_name);
-	}
-	if(gcode_preview_over != 1) {
-		ui_start_print_process();
-	}
-}
-
 void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator) {
 	navigator->button_back = BUTTON_CreateEx(400, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
     BUTTON_SetBmpFileName(navigator->button_back, "bmp_back70x40.bin",1);
@@ -413,5 +406,21 @@ void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text) {
 	sprintf(ui_buf1_20, "%d/%d%%", fanSpeeds[0], pr);
 	ui_set_text_value(text, ui_buf1_20);
 
+}
+
+
+char ascii2dec(char ascii) {
+	int result = 0;
+	if(ascii == 0)
+		return 0;
+	if(ascii >= '0' && ascii <= '9')
+		result = ascii - '0';
+	else if(ascii >= 'a' && ascii <= 'f')
+		result = ascii - 'a' + 0x0a;
+	else if(ascii >= 'A' && ascii <= 'F')
+		result = ascii - 'A' + 0x0a;
+	else
+		return 0;
+	return result;
 }
 

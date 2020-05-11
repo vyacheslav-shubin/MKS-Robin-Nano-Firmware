@@ -16,6 +16,10 @@ static void widget_callback(WM_MESSAGE * pMsg) {
 	current_widget->on_message(pMsg);
 }
 
+bool Widget::is_active() {
+	return this==current_widget;
+}
+
 void Widget::on_message(WM_MESSAGE * pMsg) {
 	switch (pMsg->MsgId) {
     	case WM_NOTIFY_PARENT:

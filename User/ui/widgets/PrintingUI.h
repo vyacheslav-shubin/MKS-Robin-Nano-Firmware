@@ -22,6 +22,7 @@ typedef struct{
 	BUTTON_Handle tools;
 	BUTTON_Handle power_control;
 	PROGBAR_Handle progress;
+	char preview_done;
 } PRINTING_UI_CONTROLS;
 
 class PrintingUI : public StdWidget{
@@ -39,6 +40,7 @@ protected:
 	virtual void createControls();
 	virtual void on_button(WM_HWIN hBtn);
 public:
+	virtual void refresh();
 	PrintingUI() : StdWidget(PRINTING_UI) {};
 };
 

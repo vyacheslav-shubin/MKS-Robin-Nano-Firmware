@@ -13033,14 +13033,9 @@ void process_parsed_command() {
         case 24: // M24: Start SD print
           gcode_M24(); 
           //TODO: shubin выкинуть отсюда в UI
-          if(mksReprint.mks_printer_state == MKS_WORKING)
-          {
-            clear_cur_ui();
-            reset_file_info();
-            reset_print_time();
-            start_print_time();
-            printing_ui.show();
-           }
+          if(mksReprint.mks_printer_state == MKS_WORKING) {
+        	  ui_app.startPrintFile();
+          }
           break;
         case 25: // M25: Pause SD print
             gcode_M25(); 

@@ -9,6 +9,7 @@
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "MainUI.h"
+#include "PrintingUI.h"
 #include "ff.h"
 #include "ili9320.h"
 #include "pic_manager.h"
@@ -19,6 +20,12 @@ Application ui_app;
 void Application::start() {
 	GUI_Init();
 	this->drawLogo();
+}
+
+void Application::startPrintFile() {
+	clear_cur_ui();
+	ui_start_print_file();
+	printing_ui.show();
 }
 
 void Application::showMainWidget() {

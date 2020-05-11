@@ -290,7 +290,7 @@ void PrintingUI::on_button(WM_HWIN hBtn) {
 		this->hide();
 		draw_preHeat();
 	} else if (hBtn == ui.power_control) {
-		ui_print_process.suicide.enabled = ~ui_print_process.suicide.enabled;
+		ui_print_process.suicide.enabled = ui_print_process.suicide.enabled?0:1;
 		this->updatePowerControlButton();
 	}
 

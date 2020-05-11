@@ -142,8 +142,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 							if (is_filament_fail()) {
 								draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
 							} else {
-								ui_start_print_file();
-								printing_ui.show();
+								ui_app.startPrintFile();
 							}
 						}
 					} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
@@ -225,12 +224,11 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 			} else if(pMsg->hWinSrc == buttonRePrint) {
 				//TODO: Сделать отдельной ф-ей совмещается с buttonOk
 
-				Clear_dialog();
 				if(strlen(ui_print_process.file_name)>(100-1)) {
+					Clear_dialog();
 					draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
 				} else {
-					ui_start_print_file();
-					printing_ui.show();
+					ui_app.startPrintFile();
 				}
 			}
 		}

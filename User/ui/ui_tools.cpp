@@ -19,6 +19,7 @@ UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}, 0, {0}};
 
 const char* FAN_STATES[3] {img_fan_state0, img_fan_state1, img_fan_state2};
 
+//не нужна!!
 void reset_file_info() {
 	ui_print_process.rate = 0;
 }

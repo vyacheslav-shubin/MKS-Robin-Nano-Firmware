@@ -160,14 +160,13 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 									#else
 									strcpy(ui_print_process.file_name, (const char *)card.gcodeFileList.fileName[j]);
 									#endif
-									clear_print_file();
 									disp_in_file_dir = 0;
 
 									if (is_filament_fail()) {
+										clear_print_file();
 										draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
 									} else {
-										ui_start_print_file();
-										printing_ui.show();
+										ui_app.startPrintFile();
 									}
 
 

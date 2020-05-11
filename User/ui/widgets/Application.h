@@ -15,6 +15,7 @@ class Widget;
 class Application {
 public:
 	void start();
+	void startPrintFile();
 	void drawLogo();
 	void back_ui();
 	void push(Widget * widget);

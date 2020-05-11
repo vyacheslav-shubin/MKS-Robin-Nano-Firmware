@@ -46,7 +46,7 @@
 /* Private defines ----------------------------------------------------------*/
 /*  global constant ----------------------------------------------------------*/
 
-#define ROBIN_PIN_NUMBER   29
+#define ROBIN_PIN_NUMBER   30
   GPIO_TypeDef* gArrayGpioPort[ROBIN_PIN_NUMBER] = {
 X_DIR_GPIO_Port,
 X_STEP_GPIO_Port,
@@ -79,7 +79,8 @@ TH2_GPIO_Port,
 
 MT_DET_GPIO_Port, //FIL_RUNOUT
 PW_OFF_GPIO_Port, //28
- 
+
+BEEPER_GPIO_Port, //29
 
 };
 
@@ -119,6 +120,7 @@ TH2_Pin,
 MT_DET_Pin, //FIL_RUNOUT
 PW_OFF_Pin, //28
 
+BEEPER_Pin, //29
 
 };  
 

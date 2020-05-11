@@ -73,7 +73,7 @@
 
 #define PS_ON_PIN          -1
 #define SUICIDE_PIN      	28
-  
+#define BEEPER_PIN			29
 #define KILL_PIN           -1
 
 #define HEATER_0_PIN       22   // EXTRUDER 1

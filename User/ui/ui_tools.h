@@ -50,8 +50,21 @@ extern "C" {
 #define img_fan_speed50			"bmp_speed127.bin"
 #define img_fan_speed100		"bmp_speed255.bin"
 
+#define img_move_step_1			"bmp_moveStep1.bin"
+#define img_move_step_2			"bmp_moveStep2.bin"
+#define img_move_step_3			"bmp_moveStep3.bin"
+#define img_move_step_huge		"bmp_moveStepHuge.bin"
+
 #define img_preheat				"bmp_preHeat.bin"
 #define img_back				"bmp_return.bin"
+
+#define img_x_plus				"bmp_xAdd.bin"
+#define img_x_minus				"bmp_xDec.bin"
+#define img_y_plus				"bmp_yAdd.bin"
+#define img_y_minus				"bmp_yDec.bin"
+#define img_z_plus				"bmp_zAdd.bin"
+#define img_z_minus				"bmp_zDec.bin"
+
 
 #define img_extrusion			"bmp_extruct.bin"
 #define img_move				"bmp_mov.bin"

@@ -2,6 +2,8 @@
 #define __MKS_REPRINT_H_
 
 #include "cardreader.h"
+#include "types.h"
+#include "Configuration_adv.h"
 
 
 #ifdef __cplusplus

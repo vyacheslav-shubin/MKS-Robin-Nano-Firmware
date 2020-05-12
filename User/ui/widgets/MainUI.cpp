@@ -7,6 +7,7 @@
 
 #include "MainUI.h"
 #include "ToolsUI.h"
+#include "MotorMoveUI.h"
 #include "ui_tools.h"
 
 #include "draw_print_file.h"
@@ -15,7 +16,6 @@
 MainUI main_ui;
 
 
-#include "draw_move_motor.h"
 #include "draw_more.h"
 #include "draw_filamentchange.h"
 #include "draw_pre_heat.h"
@@ -40,7 +40,7 @@ void MainUI::on_button(WM_HWIN hBtn) {
 		draw_More();
 	} else  if (hBtn==this->buttons.move) {
 		this->hide();
-		draw_move_motor();
+		motor_move_ui.show(this);
 	} else  if (hBtn==this->buttons.home) {
 		this->hide();
 		draw_zero();

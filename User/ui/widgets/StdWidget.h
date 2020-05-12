@@ -20,6 +20,7 @@ protected:
 	void createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title);
 	void updateStateButton(STATE_BUTTON * btn, const char * img, const char * title);
 	BUTTON_Handle createButton(int x, int y, const char * picture, const char * title);
+	void updateButton(BUTTON_Handle button, const char * picture, const char * title);
 	BUTTON_Handle createButtonAt(int phx, int phy, const char * picture, const char * title);
 	BUTTON_Handle createButtonRet();
 	BUTTON_Handle create100x80Button(int x, int y, const char * picture);

@@ -133,7 +133,7 @@ void ui_buttonpreset(BUTTON_Handle btn) {
 }
 
 BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, BTN_X_PIXEL, BTN_Y_PIXEL, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, BTN_X_PIXEL, BTN_Y_PIXEL, hWinParent, WM_CF_SHOW, 0, alloc_win_id());
 	ui_update_std_button(btn, pFile, text);
 	return btn;
 }

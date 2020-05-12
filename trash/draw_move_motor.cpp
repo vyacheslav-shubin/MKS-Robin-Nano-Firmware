@@ -1,4 +1,5 @@
-#include "draw_move_motor.h"
+#include "../../trash/draw_move_motor.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
 #include "draw_ui.h"
@@ -9,6 +10,7 @@
 #include <stdint.h>
 #include "stdint.h"
 #include "Marlin.h"
+#include "UI.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -83,6 +85,8 @@ static void cbMoveMotorWin(WM_MESSAGE * pMsg) {
 
 
 void draw_move_motor() {
+	motor_move_ui.show();
+	return;
 	
   	char buffer_z[15]={0};
 	hMoveMotorWnd = ui_std_init_window(MOVE_MOTOR_UI, cbMoveMotorWin);
@@ -113,6 +117,9 @@ void update_zyz_offset_value() {
 }
 
 void refresh_move_motor() {
+	motor_move_ui.refresh();
+	return;
+
 	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
 		ui_timing_clear(F_UI_TIMING_HALF_SEC);
 		update_zyz_offset_value();
@@ -132,6 +139,8 @@ void disp_move_dist() {
 
 
 void clear_move_motor() {
+	motor_move_ui.hide();
+	return;
 	ui_drop_window(hMoveMotorWnd);
 }
 

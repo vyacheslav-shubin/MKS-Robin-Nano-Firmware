@@ -22,6 +22,17 @@ void Application::start() {
 	this->drawLogo();
 }
 
+void Application::loop() {
+	if(wifi_link_state != WIFI_TRANS_FILE) {
+		if (this->current_ui)
+			this->current_ui->refresh();
+		else
+			GUI_RefreshPage();
+	}
+	GUI_TOUCH_Exec();
+	GUI_Exec();
+}
+
 void Application::startPrintFile() {
 	clear_cur_ui();
 	ui_start_print_file();

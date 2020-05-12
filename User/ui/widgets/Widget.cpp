@@ -10,14 +10,12 @@
 #include "ui_tools.h"
 #include "WM.h"
 
-static Widget * current_widget;
-
 static void widget_callback(WM_MESSAGE * pMsg) {
-	current_widget->on_message(pMsg);
+	ui_app.current_ui->on_message(pMsg);
 }
 
 bool Widget::is_active() {
-	return this==current_widget;
+	return this==ui_app.current_ui;
 }
 
 void Widget::on_message(WM_MESSAGE * pMsg) {
@@ -45,7 +43,7 @@ char * Widget::getTitle() {
 }
 
 void Widget::show(Widget * caller) {
-	current_widget = this;
+	ui_app.current_ui = this;
 	ui_app.push(this);
 	ui_init_page();
 	this->hWnd = ui_std_window(widget_callback);
@@ -56,5 +54,6 @@ void Widget::hide() {
 	ui_drop_window(this->hWnd);
 	this->hWnd = 0;
 	last_disp_state = this->id;
+	ui_app.current_ui = 0;
 }
 

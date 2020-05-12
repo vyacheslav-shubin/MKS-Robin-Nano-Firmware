@@ -12,13 +12,11 @@
 #include "draw_change_speed.h"
 #include "draw_printing_moremenu.h"
 #include "mks_cfg.h"
-#include "draw_move_motor.h"
 #include "draw_extrusion.h"
 #include "draw_filamentchange.h"
 
 #include "Marlin.h"
 #include "mks_reprint.h"
-#include "draw_babyStep.h"
 #ifndef GUI_FLASH
 #define GUI_FLASH
 #endif
@@ -156,7 +154,8 @@ switch (pMsg->MsgId)
 				
 				last_disp_state = OPERATE_UI;
 				Clear_operate();
-				draw_move_motor();
+
+				motor_move_ui.show();
 			}
 			#if 1
 			else if(pMsg->hWinSrc == buttonAuto_Off.btnHandle)
@@ -177,7 +176,7 @@ switch (pMsg->MsgId)
 			{
 				last_disp_state = OPERATE_UI;
 				Clear_operate();
-				draw_babyStep();
+				babystep_ui.show();
 			}
 			
             #endif

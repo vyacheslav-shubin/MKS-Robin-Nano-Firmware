@@ -31,6 +31,10 @@ BUTTON_Handle StdWidget::createButton(int x, int y, const char * picture, const 
 	return ui_create_std_button(x, y, this->hWnd, picture, title);
 }
 
+void StdWidget::updateButton(BUTTON_Handle button, const char * picture, const char * title) {
+	ui_update_std_button(button, picture, title);
+}
+
 BUTTON_Handle StdWidget::createButtonRet() {
 	return createButtonAt(3, 1, img_back, lang_str.back);
 }

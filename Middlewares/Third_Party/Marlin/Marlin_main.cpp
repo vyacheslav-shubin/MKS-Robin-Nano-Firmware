@@ -1384,13 +1384,7 @@ void display_sd_error()
 	  
 	  //wifi_looping();
 	  
-	  if(wifi_link_state != WIFI_TRANS_FILE)
-	  {
-		  GUI_RefreshPage();
-	  }
-
-	  GUI_TOUCH_Exec(); 	  
-	  GUI_Exec(); 
+	 ui_app.loop();
 
 	#endif
 
@@ -15673,12 +15667,7 @@ void idle(
   
   wifi_looping();
   
-  if(wifi_link_state != WIFI_TRANS_FILE)
-  {
-	  GUI_RefreshPage();
-  }
-  GUI_TOUCH_Exec(); 	  
-  GUI_Exec(); 
+  ui_app.loop();
 
 #endif
   #if ENABLED(I2C_POSITION_ENCODERS)

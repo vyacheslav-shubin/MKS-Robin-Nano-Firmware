@@ -1,4 +1,5 @@
-#include "draw_babyStep.h"
+#include "../../trash/draw_babyStep.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
 #include "ui_tools.h"
@@ -8,7 +9,7 @@
 #include "stdint.h"
 #include "Marlin.h"
 #include "mks_reprint.h"
-
+#include "UI.h"
 
 static BUTTON_Handle buttonXI, buttonXD, buttonYI, buttonYD, buttonZI, buttonZD, buttonV,  buttonRet;
 GUI_HWIN hMoveBabyStepWnd;
@@ -81,6 +82,8 @@ static void cbBabyStepMotorWin(WM_MESSAGE * pMsg) {
 
 
 void draw_babyStep() {
+	babystep_ui.show();
+	return;
 	hMoveBabyStepWnd = ui_std_init_window(BABY_STEP_UI, cbBabyStepMotorWin);
 
 	buttonXI = ui_std_button(0, 0, hMoveBabyStepWnd, "bmp_xAdd.bin", move_menu.x_add);
@@ -121,6 +124,8 @@ void babystep_update_v_button() {
 }
 
 void refresh_babyStep() {
+	babystep_ui.refresh();
+	return;
 	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
 		ui_timing_clear(F_UI_TIMING_HALF_SEC);
 		babystep_update_z_offset_value();
@@ -128,6 +133,8 @@ void refresh_babyStep() {
 }
 
 void clear_babyStep() {
+	babystep_ui.hide();
+	return;
 	ui_drop_window(hMoveBabyStepWnd);
 }
 

@@ -11,10 +11,14 @@
 class Widget;
 
 #include "Widget.h"
+#include "wifi_module.h"
 
 class Application {
 public:
+	Widget * current_ui = 0;
+	float storedFeedrate = 0;
 	void start();
+	void loop();
 	void startPrintFile();
 	void drawLogo();
 	void back_ui();

@@ -10,13 +10,13 @@
 #include "draw_extrusion.h"
 #include "draw_pause_ui.h"
 #include "draw_pre_heat.h"
-#include "draw_move_motor.h"
 #include "draw_operate.h"
 #include "draw_printing_moremenu.h"
 #include "draw_filamentchange.h"
 
 #include "mks_cfg.h"
 #include "ff.h"
+#include "UI.h"
 #include "Marlin.h"
 #include "mks_reprint.h"
 #include "stm32f10x_gpio.h"
@@ -171,7 +171,7 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
 				    gCfgItems.moveSpeed_bak = feedrate_mm_s;
 					last_disp_state = PAUSE_UI;
 					Clear_pause();
-					draw_move_motor();
+					motor_move_ui.show();
 				}
                 /*
 				else if(pMsg->hWinSrc == buttonFan.btnHandle)

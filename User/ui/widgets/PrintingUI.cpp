@@ -15,6 +15,7 @@
 #include "ili9320.h"
 #include "pic_manager.h"
 #include "FanUI.h"
+#include "BabystepUI.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -289,6 +290,11 @@ void PrintingUI::on_button(WM_HWIN hBtn) {
 	} else if ((hBtn == ui.ext1.button) || (hBtn == ui.ext2.button) || (hBtn == ui.bed.button)){
 		this->hide();
 		draw_preHeat();
+	} else if (hBtn == ui.z.button) {
+		if(mksReprint.mks_printer_state == MKS_WORKING) {
+			this->hide();
+			babystep_ui.show();
+		}
 	} else if (hBtn == ui.power_control) {
 		ui_print_process.suicide.enabled = ui_print_process.suicide.enabled?0:1;
 		this->updatePowerControlButton();

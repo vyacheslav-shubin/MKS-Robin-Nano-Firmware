@@ -100,7 +100,6 @@ Src/wifi_upload.cpp
 User/ui/draw_about.cpp
 User/ui/draw_acceleration.cpp
 User/ui/draw_advanced.cpp
-User/ui/draw_babyStep.cpp
 User/ui/draw_bind.cpp
 User/ui/draw_change_speed.cpp
 User/ui/draw_deltaLevelPare.cpp
@@ -128,7 +127,6 @@ User/ui/draw_mesh_leveling.cpp
 User/ui/draw_more.cpp
 User/ui/draw_motor_dir.cpp
 User/ui/draw_motor_settings.cpp
-User/ui/draw_move_motor.cpp
 User/ui/draw_nozzle_config.cpp
 User/ui/draw_number_key.cpp
 User/ui/draw_operate.cpp
@@ -172,3 +170,6 @@ User/ui/widgets/ToolsUI.cpp
 User/ui/widgets/ManualLevelingUI.cpp
 User/ui/widgets/PrintingUI.cpp
 User/ui/widgets/FanUI.cpp
+User/ui/widgets/XyzUI.cpp
+User/ui/widgets/BabystepUI.cpp
+User/ui/widgets/MotorMoveUI.cpp

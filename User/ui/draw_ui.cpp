@@ -15,7 +15,6 @@
 #include "draw_about.h"
 #include "draw_wifi.h"
 #include "draw_print_file.h"
-#include "draw_move_motor.h"
 #include "draw_operate.h"
 #include "draw_pause_ui.h"
 #include "draw_extrusion.h"
@@ -57,7 +56,6 @@
 #include "draw_keyboard.h"
 #include "draw_Tips.h"
 #include "wifi_module.h"
-#include "draw_babyStep.h"
 //Screen TFT_screen;
 
 value_state value;
@@ -342,7 +340,7 @@ void clear_cur_ui() {
 		case PRINT_READY_UI:	main_ui.hide(); 		break;
 		case PRINT_FILE_UI:		clear_print_file(); 	break;
 		case PRINTING_UI:		printing_ui.hide();		break;
-		case MOVE_MOTOR_UI:		clear_move_motor(); 	break;
+		case MOVE_MOTOR_UI:		motor_move_ui.hide(); 	break;
 		case OPERATE_UI:		Clear_operate();		break;
 		case PAUSE_UI:			Clear_pause();			break;
 		case EXTRUSION_UI:		Clear_extrusion();		break;
@@ -397,7 +395,7 @@ void clear_cur_ui() {
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
 		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
 		case NUMBER_KEY_UI:		Clear_NumberKey();		break;
-		case BABY_STEP_UI:		clear_babyStep();		break;
+		case BABY_STEP_UI:		babystep_ui.hide();		break;
 		default:	break;
 	}
 	GUI_Clear();
@@ -410,7 +408,7 @@ void draw_return_ui() {
 			case PRINT_READY_UI: 	main_ui.show();			break;
 			case PRINT_FILE_UI: 	draw_print_file();		break;
 			case PRINTING_UI: printing_ui.show(); 			break;
-			case MOVE_MOTOR_UI: 	draw_move_motor();		break;
+			case MOVE_MOTOR_UI: 	motor_move_ui.show();	break;
 			case OPERATE_UI:		draw_operate();			break;
 			case PAUSE_UI:			draw_pause();			break;
 			case EXTRUSION_UI:		draw_extrusion();		break;
@@ -466,7 +464,7 @@ void draw_return_ui() {
             case ENABLE_INVERT_UI:	draw_EnableInvert();	break;
             case NUMBER_KEY_UI:		draw_NumberKey();		break;
             case DIALOG_UI:			draw_dialog(DialogType);	break;
-            case BABY_STEP_UI:		draw_babyStep();		break;
+            case BABY_STEP_UI:		babystep_ui.show();		break;
 			default:
 				break;
 		}
@@ -545,12 +543,12 @@ extern volatile WIFI_STATE wifi_link_state;
 void GUI_RefreshPage() {
   	__IO uint32_t i =0;
 	switch(disp_state) {
-		case MAIN_UI:	main_ui.show(); 	break;
+		//case MAIN_UI:	main_ui.show(); 	break;
 		case ZERO_UI:
 			if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
 		    	  refresh_zero();
 		    break;
-		case LEVELING_UI: manual_leveling_ui.refresh(); break;
+		//case LEVELING_UI: manual_leveling_ui.refresh(); break;
 		case EXTRUSION_UI:
 			if(temperature_change_frequency == 1) {
 				temperature_change_frequency = 0;
@@ -560,7 +558,7 @@ void GUI_RefreshPage() {
 		case PRE_HEAT_UI: refresh_preHeat(); break;
 		case PRINT_READY_UI: break;
 		case PRINT_FILE_UI: break;
-		case PRINTING_UI: printing_ui.refresh(); break;
+		//case PRINTING_UI: printing_ui.refresh(); break;
 		case OPERATE_UI:
 			if(temperature_change_frequency == 1) {
 				temperature_change_frequency = 0;
@@ -575,21 +573,9 @@ void GUI_RefreshPage() {
 				disp_temp_pause();
 			}
 			break;
-		case FAN_UI: fan_ui.refresh();			break;
+		//case FAN_UI: fan_ui.refresh();				break;
 					
-		case MOVE_MOTOR_UI: refresh_move_motor(); break;
-/*
-		if(mksReprint.mks_printer_state == MKS_IDLE) {
-				if((z_high_count==1)&&(temper_error_flg != 1)) {
-					z_high_count = 0;
-					memset((char *)gCfgItems.move_z_coordinate,' ',sizeof(gCfgItems.move_z_coordinate));
-					GUI_DispStringAt((const char *)gCfgItems.move_z_coordinate,380, TITLE_YPOS);
-					sprintf((char *)gCfgItems.move_z_coordinate,"Z: %.3f",current_position[Z_AXIS]);
-					GUI_DispStringAt((const char *)gCfgItems.move_z_coordinate,380, TITLE_YPOS);
-				}
-			}
-			break;
-*/
+		//case MOVE_MOTOR_UI: motor_move_ui.refresh(); break;
 		case WIFI_UI:
 			if(wifi_refresh_flg == 1) {
 				disp_wifi_state();
@@ -661,7 +647,7 @@ void GUI_RefreshPage() {
 					break;
 			}
             break;
-		case BABY_STEP_UI: refresh_babyStep();	break;
+		//case BABY_STEP_UI: babystep_ui.refresh();	break;
 	    default:
 	    	break;
 				

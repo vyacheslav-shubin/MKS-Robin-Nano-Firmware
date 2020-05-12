@@ -26,6 +26,9 @@ typedef struct {
 	const char * print;
 	const char * settings;
 	const char * tools;
+
+	const char * plus;
+	const char * minus;
 } CONFIG_LANG;
 
 #if defined(__cplusplus)

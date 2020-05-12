@@ -5,6 +5,7 @@
 #include "string_deal.h"
 #include "draw_ui.h"
 
+#include "../../trash/draw_fan.h"
 #include "../../trash/draw_main.h"
 #include "ui_tools.h"
 #include "Marlin.h"
@@ -20,7 +21,6 @@
 #include "draw_extrusion.h"
 #include "draw_pre_heat.h"
 #include "draw_change_speed.h"
-#include "draw_fan.h"
 #include "draw_set.h"
 #include "draw_zero.h"
 #include "draw_Sprayer.h"
@@ -348,7 +348,7 @@ void clear_cur_ui() {
 		case EXTRUSION_UI:		Clear_extrusion();		break;
 		case PRE_HEAT_UI:		clear_preHeat();		break;
 		case CHANGE_SPEED_UI:	Clear_changeSpeed();	break;
-		case FAN_UI:			clear_fan();			break;
+		case FAN_UI:			fan_ui.hide();			break;
 		case SET_UI:			Clear_Set();			break;
 		case ZERO_UI:			clear_zero();			break;
 		case SPRAYER_UI:								break;
@@ -416,7 +416,7 @@ void draw_return_ui() {
 			case EXTRUSION_UI:		draw_extrusion();		break;
 			case PRE_HEAT_UI:		draw_preHeat();			break;
 			case CHANGE_SPEED_UI:	draw_changeSpeed();		break;
-			case FAN_UI:			draw_fan();				break;
+			case FAN_UI:			fan_ui.show(); 			break;
 			case SET_UI:			draw_Set();				break;
 			case ZERO_UI:
 				if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
@@ -575,7 +575,7 @@ void GUI_RefreshPage() {
 				disp_temp_pause();
 			}
 			break;
-			case FAN_UI: refresh_fan(); break;
+		case FAN_UI: fan_ui.refresh();			break;
 					
 		case MOVE_MOTOR_UI: refresh_move_motor(); break;
 /*

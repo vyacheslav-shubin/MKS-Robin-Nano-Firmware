@@ -13,6 +13,7 @@
 #include "ToolsUI.h"
 #include "ManualLevelingUI.h"
 #include "PrintingUI.h"
+#include "FanUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

@@ -1,12 +1,14 @@
+#include "../../trash/draw_fan.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
-#include "draw_fan.h"
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "TEXT.h"
 #include "Marlin.h"
 #include "tim.h"
+#include "UI.h"
 
 GUI_HWIN hFanWnd;
 
@@ -76,6 +78,9 @@ static void cbFanWin(WM_MESSAGE * pMsg) {
 #define BUTTON_L(file) ui_create_state_button(COL(COL_INDEX)+10, ROW(ROW_INDEX), hFanWnd, file);
 
 void draw_fan() {
+	fan_ui.show();
+	return;
+
 	hFanWnd = ui_std_init_window(FAN_UI, cbFanWin);
 
 	buttonAdd = ui_std_button(0, 0, hFanWnd, "bmp_Add.bin", fan_menu.add);
@@ -94,14 +99,10 @@ void update_fan_state(void) {
 	ui_update_fan_button(buttonFan, textFan);
 }
 
-void disp_fan_speed()
-{
-	char buf[10] = {0};
-	sprintf(buf, "%d", fanSpeeds[0]/*gCfgItems.fanSpeed*/);
-	ui_set_text_value(textFan, buf);
-}
 
 void refresh_fan() {
+	fan_ui.refresh();
+	return;
 	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
 		ui_timing_clear(F_UI_TIMING_HALF_SEC);
 		ui_update_fan_button(buttonFan, textFan);
@@ -109,6 +110,8 @@ void refresh_fan() {
 }
 
 void clear_fan() {
+	fan_ui.hide();
+	return;
 	ui_drop_window(hFanWnd);
 }
 

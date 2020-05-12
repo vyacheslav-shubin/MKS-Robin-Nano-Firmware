@@ -14,6 +14,7 @@
 #include "spi_flash.h"
 #include "ili9320.h"
 #include "pic_manager.h"
+#include "FanUI.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -80,7 +81,7 @@ void PrintingUI::createControls() {
 	ui.progress = ui_create_std_progbar(COL(0), 0, 270, PB_HEIGHT, this->hWnd);
 	this->createStateButtonAt(0, 0, &ui.time, img_state_time, 0);
 	this->createStateButtonAt(0, 2, &ui.bed, img_state_bed, 0);
-	this->createStateButtonAt(1, 2, &ui.fan, 0, 0);
+	this->createStateButtonAt(1, 2, &ui.fan, FAN_STATES[0], 0);
 	this->createStateButtonAt(1, 0, &ui.z, img_state_z, 0);
 
 	this->createStateButtonAt(0, 1, &ui.ext1, img_state_extruder1, 0);
@@ -89,13 +90,13 @@ void PrintingUI::createControls() {
 
 	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
 	#define _y 204
-	ui.pause = ui_create_100_80_button(_col(0), _y, this->hWnd, 0);
-	ui.stop = ui_create_100_80_button(_col(1),_y, this->hWnd, img_print_stop);
-	ui.tools = ui_create_100_80_button(_col(2),_y, this->hWnd, img_print_tools);
-	ui.power_control = ui_create_100_80_button(_col(3) + 70,_y, this->hWnd, 0);
+	ui.pause = this->create100x80Button(_col(0), _y, 0);
+	ui.stop = this->create100x80Button(_col(1),_y, img_print_stop);
+	ui.tools = this->create100x80Button(_col(2),_y, img_print_tools);
+	ui.power_control = this->create100x80Button(_col(3) + 70,_y, 0);
 	this->updatePowerControlButton();
 	this->updatePauseButton();
-	ui_update_fan_button(ui.fan.button, ui.fan.label);
+	this->updateFanState(&this->ui.fan);
 };
 
 void PrintingUI::updateStateButtons() {
@@ -231,7 +232,7 @@ void PrintingUI::refresh() {
 
 
 void PrintingUI::refresh_05() {
-	ui_update_fan_button(ui.fan.button, ui.fan.label);
+	this->updateFanState(&this->ui.fan);
 }
 
 void PrintingUI::refresh_1s() {
@@ -244,7 +245,6 @@ void PrintingUI::refresh_1s() {
 		this->updateProgress();
 	}
 }
-#include "draw_fan.h"
 #include "draw_pre_heat.h"
 #include "draw_operate.h"
 
@@ -285,7 +285,7 @@ void PrintingUI::on_button(WM_HWIN hBtn) {
 		}
 	} else if (hBtn == ui.fan.button) {
 		this->hide();
-		draw_fan();
+		fan_ui.show(this);
 	} else if ((hBtn == ui.ext1.button) || (hBtn == ui.ext2.button) || (hBtn == ui.bed.button)){
 		this->hide();
 		draw_preHeat();

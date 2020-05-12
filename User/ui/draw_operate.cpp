@@ -9,7 +9,6 @@
 #include "UI.h"
 #include "draw_pause_ui.h"
 #include "draw_pre_heat.h"
-#include "draw_fan.h"
 #include "draw_change_speed.h"
 #include "draw_printing_moremenu.h"
 #include "mks_cfg.h"
@@ -89,7 +88,7 @@ switch (pMsg->MsgId)
 				{
 					last_disp_state = OPERATE_UI;
 					Clear_operate();
-					draw_fan();
+					fan_ui.show();
 				}
 	            #endif
 			else if(pMsg->hWinSrc == buttonFilament.btnHandle)

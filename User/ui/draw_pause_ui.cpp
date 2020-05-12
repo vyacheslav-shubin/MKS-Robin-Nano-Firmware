@@ -9,7 +9,6 @@
 #include "TEXT.h"
 #include "draw_extrusion.h"
 #include "draw_pause_ui.h"
-#include "draw_fan.h"
 #include "draw_pre_heat.h"
 #include "draw_move_motor.h"
 #include "draw_operate.h"

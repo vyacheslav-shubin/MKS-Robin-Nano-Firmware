@@ -22,9 +22,11 @@ protected:
 	BUTTON_Handle createButton(int x, int y, const char * picture, const char * title);
 	BUTTON_Handle createButtonAt(int phx, int phy, const char * picture, const char * title);
 	BUTTON_Handle createButtonRet();
+	BUTTON_Handle create100x80Button(int x, int y, const char * picture);
 	void action_back();
 	void action_leveling();
 	void draw_xyz();
+	void updateFanState(STATE_BUTTON * stateButton);
 public:
 	StdWidget(DISP_STATE id) : Widget(id) {};
 };

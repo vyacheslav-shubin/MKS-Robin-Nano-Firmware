@@ -41,4 +41,7 @@ void lang_std(void) {
 	lang_str.settings = "Settings";
 	lang_str.tools = "Tools";
 
+	lang_str.plus = "More";
+	lang_str.minus = "Less";
+
 }

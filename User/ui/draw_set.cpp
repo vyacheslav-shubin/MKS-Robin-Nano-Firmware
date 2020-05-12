@@ -16,7 +16,6 @@
 //#include "touch_calibrate.h"
 #include "pic_manager.h"
 #include "spi_flash.h"
-#include "draw_fan.h"
 #include "draw_print_file.h"
 #include "draw_filamentchange.h"
 #include "draw_wifi_list.h"
@@ -155,7 +154,7 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 				{
 					last_disp_state = SET_UI;
 					Clear_Set();
-					draw_fan();
+					fan_ui.show();
 				}
 				else if(pMsg->hWinSrc == buttonFunction_1.btnHandle)
 				{	

@@ -13,7 +13,7 @@
 
 void StdWidget::createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title) {
 	btn->button = ui_create_state_button(x, y,this->hWnd, picture);
-	btn->label = ui_create_std_text(x + STATE_PIC_X_PIXEL, y, 100, STATE_PIC_Y_PIXEL, this->hWnd, title);
+	btn->label = ui_create_std_text(x + STATE_PIC_X_PIXEL, y, 80, STATE_PIC_Y_PIXEL, this->hWnd, title);
 }
 
 void StdWidget::updateStateButton(STATE_BUTTON * btn, const char * img, const char * title) {
@@ -34,6 +34,11 @@ BUTTON_Handle StdWidget::createButton(int x, int y, const char * picture, const 
 BUTTON_Handle StdWidget::createButtonRet() {
 	return createButtonAt(3, 1, img_back, lang_str.back);
 }
+
+BUTTON_Handle StdWidget::create100x80Button(int x, int y, const char * picture) {
+	return ui_create_100_80_button(x, y, this->hWnd, picture);
+}
+
 
 void StdWidget::action_leveling() {
 	if(gCfgItems.leveling_mode == 1) {
@@ -62,5 +67,9 @@ void StdWidget::draw_xyz() {
 	GUI_SetColor(gCfgItems.title_color);
 	sprintf(ui_buf1_20,"X:%1.2f Y:%1.2f Z:%1.2f", current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]);
 	GUI_DispStringAt(ui_buf1_20,200, TITLE_YPOS);
+}
+
+void StdWidget::updateFanState(STATE_BUTTON * stateButton) {
+	ui_update_fan_button(stateButton->button, stateButton->label);
 }
 

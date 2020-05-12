@@ -21,4 +21,8 @@ void lang_ru(void) {
 	lang_str.print = "Печать";
 	lang_str.settings = "Настройки";
 	lang_str.tools = "Инструменты";
+
+	lang_str.plus = "Добавить";
+	lang_str.minus = "Уменьшить";
+
 }

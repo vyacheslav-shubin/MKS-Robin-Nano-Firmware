@@ -46,6 +46,10 @@ extern "C" {
 #define img_minus  			"bmp_Dec.bin"
 
 
+#define img_fan_speed0			"bmp_speed0.bin"
+#define img_fan_speed50			"bmp_speed127.bin"
+#define img_fan_speed100		"bmp_speed255.bin"
+
 #define img_preheat				"bmp_preHeat.bin"
 #define img_back				"bmp_return.bin"
 

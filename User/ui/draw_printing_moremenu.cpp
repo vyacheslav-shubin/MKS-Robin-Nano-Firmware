@@ -4,7 +4,6 @@
 #include "fontLib.h"
 #include "draw_printing_moremenu.h"
 #include "draw_filamentchange.h"
-#include "draw_fan.h"
 #include "pic_manager.h"
 #include "spi_flash.h"
 #include "Marlin.h"
@@ -59,43 +58,7 @@ static void cbPrintmoreWin(WM_MESSAGE * pMsg) {
 					Clear_Printmore();
 					draw_return_ui();
 					
-				}
-				#if !defined(TFT35)
-				else if(pMsg->hWinSrc == buttonFan_P.btnHandle)
-				{
-					last_disp_state = PRINT_MORE_UI;
-					Clear_Printmore();
-					draw_fan();
-				}
-				else if(pMsg->hWinSrc == buttonPreHeat.btnHandle)
-				{
-					last_disp_state = PRINT_MORE_UI;
-					Clear_Printmore();
-					draw_preHeat();
-
-				}	
-				else if(pMsg->hWinSrc == buttonSpeed.btnHandle)
-				{
-					last_disp_state = PRINT_MORE_UI;
-					Clear_Printmore();
-					draw_changeSpeed();
-				}					
-				else if(pMsg->hWinSrc == buttonoff_P.btnHandle)
-				{
-					if(IsChooseAutoShutdown == 1)
-					{
-							IsChooseAutoShutdown = 0;		
-							Autoshutdown_display();
-					}
-					else
-					{
-							IsChooseAutoShutdown = 1;
-							Autoshutdown_display();
-					}
-				}
-				#endif
-				else if(pMsg->hWinSrc == morefunc1.btnHandle)
-				{
+				} else if(pMsg->hWinSrc == morefunc1.btnHandle) {
 					SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_MOREFUNC1_ADDR,201);
 					codebufpoint = (volatile unsigned char *)cmd_code;	
 				}

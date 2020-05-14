@@ -126,6 +126,16 @@ namespace shUI {
 		}
 	}
 
+	char isIdle() {
+		return mksReprint.mks_printer_state == MKS_IDLE;
+	}
+
+	char isPaused() {
+		return (mksReprint.mks_printer_state == MKS_PAUSING)
+				|| (mksReprint.mks_printer_state == MKS_PAUSED)
+				|| (mksReprint.mks_printer_state ==MKS_REPRINTING)
+				||(mksReprint.mks_printer_state ==MKS_REPRINTED);
+	}
 
 }
 

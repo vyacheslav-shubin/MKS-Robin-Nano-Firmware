@@ -17,6 +17,7 @@
 #include "FanUI.h"
 #include "BabystepUI.h"
 #include "PreheatUI.h"
+#include "PrintingToolsUI.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -247,12 +248,11 @@ void PrintingUI::refresh_1s() {
 		this->updateProgress();
 	}
 }
-#include "draw_operate.h"
 
 void PrintingUI::on_button(UI_BUTTON hBtn) {
 	if(hBtn == ui.tools) {
 		this->hide();
-		draw_operate();
+		printing_tools_ui.show(this);
 	} else if(hBtn == ui.pause) {
 		if(mksReprint.mks_printer_state == MKS_WORKING) {
 			stop_print_time();

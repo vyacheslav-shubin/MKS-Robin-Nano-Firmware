@@ -8,7 +8,6 @@
 #include "wifi_upload.h"
 #include "usart.h"
 #include "stm32f10x_usart.h"
-#include "draw_pause_ui.h"
 #include "UI.h"
 #include "draw_dialog.h"
 #include "draw_FileTransfer_ui.h"

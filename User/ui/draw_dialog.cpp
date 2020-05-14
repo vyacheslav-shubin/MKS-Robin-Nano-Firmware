@@ -8,15 +8,11 @@
 #include "ui_tools.h"
 #include "sh_tools.h"
 #include "UI.h"
-#include "draw_pause_ui.h"
-//#include "sdio_sdcard.h"
 #include "sdio.h"       //skyblue 2016-12-13
-//#include "mks_tft_com.h"
 #include "ff.h"
 #include "mks_cfg.h"
 #include "usb_host.h"
 #include "at24cxx.h"
-//#include "sd_usr.h"
 
 #include "draw_bind.h"
 #include "mks_cfg.h"
@@ -133,6 +129,8 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 							}
 						}
 					} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
+						//TODO: этот код из mks_contiuePrint_UI
+						ui_print_process.preview_state_flags = 0;
 						f_mount(&fs, (TCHAR const*)SD_Path, 0);
 						card.openFile(mksReprint.filename, true);
 						if(!card.isFileOpen()) {
@@ -144,7 +142,6 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 							if(gCfgItems.pwroff_save_mode != 1)
                                 mks_ReadFromFile();
 							epr_write_data(EPR_SAV_FILENAME, (uint8_t *)&mksReprint.filename[0],sizeof(mksReprint.filename)); 
-							draw_pause();
 							card.sdprinting = 0;
 							if(mksReprint.resume == MKS_RESUME_PWDWN) 
 								mks_getPositionXYZE();
@@ -156,6 +153,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 							current_position[Y_AXIS] = mksReprint.current_position[1];
 							current_position[Z_AXIS] = mksReprint.current_position[2];
 							mks_clearDir();
+							printing_ui.show();
 						}
 				} else if(DialogType == DIALOG_TYPE_UNBIND) {
 					cloud_unbind();

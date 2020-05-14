@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_PAUSE_UI_H_
 #define _DRAW_PAUSE_UI_H_
 

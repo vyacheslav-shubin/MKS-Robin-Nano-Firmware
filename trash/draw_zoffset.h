@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_ZOFFSET_H_
 #define _DRAW_ZOFFSET_H_
 

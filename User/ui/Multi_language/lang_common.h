@@ -40,7 +40,9 @@ typedef struct {
 	const char * unload;
 
 	const char * change;
-
+	const char * fan;
+	const char * speed;
+	const char * babysteps;
 } CONFIG_LANG;
 
 #if defined(__cplusplus)

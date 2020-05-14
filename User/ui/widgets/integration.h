@@ -61,6 +61,10 @@ typedef struct{
 	extern short getFilamentLoadUnloadMinTempereture(char direction);
 	extern void getFilamentLoadUnloadDistance(char direction, MOVE_DISTANCE * distance);
 
+	extern char isPaused();
+	extern char isIdle();
+
+
 }
 
 

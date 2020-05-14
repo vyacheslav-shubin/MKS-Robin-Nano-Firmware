@@ -1,14 +1,14 @@
+#include "../../trash/draw_pause_ui.h"
+#include "../../trash/draw_pause_ui.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
 #include "sh_tools.h"
-#include "draw_pause_ui.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
 #include "TEXT.h"
-#include "draw_pause_ui.h"
-#include "draw_operate.h"
 #include "draw_printing_moremenu.h"
 
 #include "mks_cfg.h"
@@ -80,7 +80,7 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
                             mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
                             last_disp_state = PAUSE_UI;
                             Clear_pause();
-                            draw_operate();
+                            printing_tools_ui.show()();
 				    	}
 				    } else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
 						start_print_time();
@@ -88,7 +88,7 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
                         last_disp_state = PAUSE_UI;
 						Clear_pause();
 						//draw_return_ui();
-						draw_operate();
+						printing_tools_ui.show();
                     }
                     
                     

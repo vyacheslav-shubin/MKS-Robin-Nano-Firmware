@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_FILAMENTCHANGE_H_
 #define _DRAW_FILAMENTCHANGE_H_
 #if defined(__cplusplus)

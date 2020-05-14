@@ -68,7 +68,6 @@
 #include "draw_ui.h"
 #include "UI.h"
 #include "sdio_sdcard.h"
-#include "draw_pause_ui.h"
 #include "pic_manager.h"
 #include "draw_wifi_list.h"
 extern "C" void setTouchBound(int32_t x0, int32_t x1, int32_t y0, int32_t y1 );

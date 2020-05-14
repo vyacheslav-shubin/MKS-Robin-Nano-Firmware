@@ -14,17 +14,25 @@ typedef struct {
 	UI_BUTTON	preheat;
 	UI_BUTTON 	fan;
 	UI_BUTTON 	speed;
-	UI_BUTTON 	extrusion;
+
 	UI_BUTTON 	babystep;
-	UI_BUTTON 	more;
-	UI_BUTTON 	more;
+	UI_BUTTON 	move;
+
+	UI_BUTTON 	filament;
+
 	UI_BUTTON 	ret;
-}TOOLS_UI_CONTROLS;
+}PRINTING_TOOLS_UI_CONTROLS;
 
 class PrintingToolsUI : public StdWidget {
+private:
+	PRINTING_TOOLS_UI_CONTROLS ui;
+protected:
+	virtual void createControls();
+	virtual void on_button(UI_BUTTON hBtn);
 public:
-	PrintingToolsUI();
-	virtual ~PrintingToolsUI();
+	PrintingToolsUI() : StdWidget(OPERATE_UI) {};
 };
+
+extern PrintingToolsUI printing_tools_ui;
 
 #endif /* USER_UI_WIDGETS_PRINTINGTOOLSUI_H_ */

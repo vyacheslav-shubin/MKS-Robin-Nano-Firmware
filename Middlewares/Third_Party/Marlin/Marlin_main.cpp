@@ -279,7 +279,6 @@
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "wifi_module.h"
-#include "draw_pause_ui.h"
 #include "sdio_sdcard.h"
 #include "draw_keyboard.h"
 #include "draw_Tips.h"
@@ -293,8 +292,6 @@ volatile uint8_t mks_heating_busy = 0;
 extern void filament_check();
 extern void display_temper_error();
 extern void Close_machine_display();
-
-extern uint8_t IsChooseAutoShutdown;
 
 extern uint8_t temperature_change_frequency;
 

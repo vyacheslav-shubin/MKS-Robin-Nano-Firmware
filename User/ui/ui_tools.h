@@ -69,6 +69,7 @@ extern "C" {
 
 
 #define img_move				"bmp_mov.bin"
+#define img_babystep			img_move
 #define img_home				"bmp_zero.bin"
 #define img_home_z				"bmp_zeroZ.bin"
 #define img_leveling_manual		"bmp_leveling.bin"
@@ -107,6 +108,9 @@ extern "C" {
 
 #define img_filament_load		"bmp_in.bin"
 #define img_filament_unload		"bmp_out.bin"
+
+#define img_fan				"bmp_fan.bin"
+#define img_speed			"bmp_speed.bin"
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)

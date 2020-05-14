@@ -4,7 +4,6 @@
 #include "draw_ui.h"
 #include "draw_set.h"
 
-#include "../../trash/draw_disk.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
 #include "UI.h"

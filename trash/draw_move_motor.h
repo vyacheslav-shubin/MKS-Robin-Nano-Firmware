@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_MOVE_MOTOR_H_
 #define _DRAW_MOVE_MOTOR_H_
 

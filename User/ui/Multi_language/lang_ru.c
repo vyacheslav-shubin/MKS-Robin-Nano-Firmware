@@ -35,4 +35,8 @@ void lang_ru(void) {
 	lang_str.unload = "Вытянуть";
 	lang_str.change = "Замена";
 
+	lang_str.fan = "Вентилятор";
+	lang_str.speed = "Скорость";
+	lang_str.babysteps = "Микрошаги";
+
 }

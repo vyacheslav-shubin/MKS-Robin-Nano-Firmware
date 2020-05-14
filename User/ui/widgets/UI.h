@@ -19,6 +19,7 @@
 #include "PreheatUI.h"
 #include "HomeUI.h"
 #include "FilamentUI.h"
+#include "PrintingToolsUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

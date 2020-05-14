@@ -5,7 +5,6 @@
 #include "fatfs.h"
 #include "usb_host.h"
 #include "ili9320.h"
-#include "draw_pause_ui.h"
 extern "C" u16 DeviceCode;
 extern uint8_t pause_resum;
 extern uint32_t logo_tick1,logo_tick2;
@@ -532,182 +531,92 @@ uint8_t print_finish_start_timer=TIMER_STOP;
 uint32_t print_finish_timer_count=0;
 uint8_t print_finish_close_machine=0;
 
-void mks_PrintStatePolling()
-{
-	if(mksReprint.mks_printer_state == MKS_PAUSING)
-		{
-		if( !planner.blocks_queued() &&  card.getsdpos()>MIN_FILE_PRINTED) 	//���� �ļ��� M109��M190ָ�� 
+void mks_PrintStatePolling() {
+	if(mksReprint.mks_printer_state == MKS_PAUSING) {
+		if( !planner.blocks_queued() &&  card.getsdpos()>MIN_FILE_PRINTED)
 			mksReprint.waitEndMoves++;
-		
-		if(mksReprint.waitEndMoves > 20)
-			{
+		if(mksReprint.waitEndMoves > 20) {
 			mksReprint.mks_printer_state = MKS_PAUSED;
             if(gCfgItems.pwroff_save_mode != 1)
-			    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //��ͣ��־��λ
+			    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));
 			mksReprint.waitEndMoves = 0;
 			mks_pausePrint();
-
-			}
 		}
-	else
-		{
-			mksReprint.waitEndMoves = 0;
-		}
-/*
-	Cartesian���� ��ͣ��LCD �ƶ�X,Y,Z����
-	DELTA ���� ��ͣ��X,Y,Z�����㣬���账��
-*/
-	//if(mksReprint.mks_printer_state == MKS_PAUSED && MACHINETPYE != DELTA)
-	if(mksReprint.mks_printer_state == MKS_PAUSED)		
-		{
-		if( abs(mksReprint.current_position[0] - current_position[X_AXIS]) > 0.0001 )
-			{
+	} else {
+		mksReprint.waitEndMoves = 0;
+	}
+	if(mksReprint.mks_printer_state == MKS_PAUSED) {
+		if( abs(mksReprint.current_position[0] - current_position[X_AXIS]) > 0.0001 ) {
 			mksReprint.current_position[0] = current_position[X_AXIS];
 			epr_write_data(EPR_SAV_CUR_X, (uint8_t *)&mksReprint.current_position[0],sizeof(mksReprint.current_position[0]));
-			}
-		if( abs(mksReprint.current_position[1] - current_position[Y_AXIS]) > 0.0001 )
-			{
+		}
+		if( abs(mksReprint.current_position[1] - current_position[Y_AXIS]) > 0.0001 ) {
 			mksReprint.current_position[1] = current_position[Y_AXIS];
 			epr_write_data(EPR_SAV_CUR_Y, (uint8_t *)&mksReprint.current_position[1],sizeof(mksReprint.current_position[1]));
-			}
-		if( abs(mksReprint.current_position[2] - current_position[Z_AXIS]) > 0.0001 )
-			{
+		}
+		if( abs(mksReprint.current_position[2] - current_position[Z_AXIS]) > 0.0001 ) {
 			mksReprint.current_position[2] = current_position[Z_AXIS];
 			epr_write_data(EPR_SAV_CUR_Z, (uint8_t *)&mksReprint.current_position[2],sizeof(mksReprint.current_position[2]));
-			}
 		}
-
-/*
-	�ļ�������ӡ��󣬱�־λ����
-*/
-    if(mksReprint.mks_printer_state == MKS_RESUMING)
-    {
-		if(pause_resum == 1)//��ͣ�ָ�
-		{
+	}
+    if(mksReprint.mks_printer_state == MKS_RESUMING) {
+		if(pause_resum == 1) {
 			pause_resum = 0;
-			//mks_resumePrint();
-			//mks_preExtrude(mksReprint.mks_pausePrint_e);
 			mks_preExtrude(gCfgItems.resume_load_len);
-			/*if(gCfgItems.resume_speed != 0)
-			{
-				char buf[10];
-				memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
-				memset(buf,0,sizeof(buf));
-				strcpy(mksReprint.command_queue,"G1 F");
-				sprintf(buf,"%d",gCfgItems.resume_speed);
-				strcat(mksReprint.command_queue,buf);
-			       parser.parse(mksReprint.command_queue);
-				gcode_G0_G1();
-				stepper.synchronize();
-			}*/
-			//�ƶ�X,Y
 			mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);
-            //����ֹͣ��֮�󣬺���Ķ�������Ҫִ�С�
-            if(mksReprint.mks_printer_state == MKS_STOP)
-            {
+            if(mksReprint.mks_printer_state == MKS_STOP) {
                 card.sdprinting = false;
                 return;
             }
-			//mks_preExtrude(gCfgItems.resume_load_len);
-			
-			//Z���½�
 			mks_moveZ(0);
-
 			mks_adjust_extrude_speed();
-			
 			card.startFileprint();
 			print_job_timer.start();
-
 		}        
     }
     
-	if(mksReprint.mks_printer_state == MKS_WORKING)
-	{
-	/*
-		if(pause_resum == 1)//��ͣ�ָ�
-		{
-			pause_resum = 0;
-			//mks_resumePrint();
-			mks_preExtrude(mksReprint.mks_pausePrint_e);
-			//�ƶ�X,Y
-			mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);
-            //����ֹͣ��֮�󣬺���Ķ�������Ҫִ�С�
-            if(mksReprint.mks_printer_state == MKS_STOP)
-            {
-                card.sdprinting = false;
-                return;
-            }
-			//Z���½�
-			mks_moveZ(0);
-
-			card.startFileprint();
-			print_job_timer.start();
-
-		}
-		*/
+	if(mksReprint.mks_printer_state == MKS_WORKING) {
 		if(card.sdprinting == 0)
 			mksReprint.sdprinting++;
 		else
 			mksReprint.sdprinting = 0;
 
-		if(mksReprint.sdprinting > 20)
-		{
+		if(mksReprint.sdprinting > 20) {
 			mksReprint.sdprinting = 0;
 			mksReprint.mks_printer_state = MKS_IDLE;
-            if(gCfgItems.pwroff_save_mode != 1)
-            {
+            if(gCfgItems.pwroff_save_mode != 1) {
 			    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  
-			//if(gCfgItems.pwroff_save_mode != 1)
 				mks_clearFile();
             }
-            //����ػ�
-            
-            if((gCfgItems.print_finish_close_machine_flg == 1)&&(IsChooseAutoShutdown==1))
-            {
-                //stepper.synchronize();
-			    //Close_machine_display();
-			       if(card.eof());
-				print_finish_start_timer=TIMER_START;
-            }
-
 		}
 	}
-	//ֹͣ��ӡ
-	if(mksReprint.mks_printer_state == MKS_STOP)
-	{
+
+	if(mksReprint.mks_printer_state == MKS_STOP) {
 		mksReprint.mks_printer_state = MKS_IDLE;
         if(gCfgItems.pwroff_save_mode != 1)
 		    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  
 	
 		clear_command_queue();
         quickstop_stepper();
-		//Z������
 		mksReprint.destination[2]=destination[Z_AXIS];
 		mks_moveZ(mksReprint.mks_pausePrint_z);
 		mks_G28("G28 X0 Y0");
-		//gcode_M998();
-		//card.stopSDPrint();
-		//clear_command_queue();
 		
 		print_job_timer.stop();
 		thermalManager.disable_all_heaters();
-	#if FAN_COUNT > 0
-		  for (uint8_t i = 0; i < FAN_COUNT; i++) 
-		  {
-		  	fanSpeeds[i] = 0;
+		#if FAN_COUNT > 0
+		for (uint8_t i = 0; i < FAN_COUNT; i++) {
+			fanSpeeds[i] = 0;
 			MKS_FAN_TIM = 0 ;
-		   }
-	#endif
+		}
+		#endif
 		wait_for_heatup = false;	
 
 		if(gCfgItems.pwroff_save_mode != 1)
 			mks_clearFile();		
 	}
-	//��ͣ,�ϵ�����
-	if(mksReprint.mks_printer_state == MKS_REPRINTED)
-		{
-		switch(MACHINETPYE)
-			{
+	if(mksReprint.mks_printer_state == MKS_REPRINTED) {
+		switch(MACHINETPYE) {
 			case Cartesian:
 			case COREXY:
 			case COREYX:	
@@ -721,41 +630,28 @@ void mks_PrintStatePolling()
 				break;
 			default: 
 				break;				
-			}
-			
 		}
+	}
 
-
-
-	//SD�ļ����� "��" ��Ϣ
-	
-	if(mksReprint.mks_printer_state == MKS_WORKING && card.sdprinting == true)
-		{
-			if(mksReprint.refresh)
-			{
-				if(card.getsdpos()>MIN_FILE_PRINTED)
-				{
-					mks_WriteToFile();
-				}
-				
-				mksReprint.refresh = false;
-			}
+	if(mksReprint.mks_printer_state == MKS_WORKING && card.sdprinting == true) {
+		if(mksReprint.refresh) {
+			if(card.getsdpos()>MIN_FILE_PRINTED)
+				mks_WriteToFile();
+			mksReprint.refresh = false;
 		}
+	}
 	//sean
-	if(has_adjust_speed==1)
-	{
+	if(has_adjust_speed==1) {
 		if(resume_printed_time >= 10000){
 			resume_printed_time=0;
 			mks_resume_extrude_speed();
 		}
 	}
-	if(mksReprint.mks_printer_state == MKS_IDLE && print_finish_close_machine == true)
-	{
+	if(mksReprint.mks_printer_state == MKS_IDLE && print_finish_close_machine == true) {
 		print_finish_close_machine = false;
 		stepper.synchronize();
 		Close_machine_display();
 	}
-	
 }
 
 
@@ -1338,6 +1234,7 @@ void mks_clearDir()
 }
 extern void Beeper(uint32_t cnt);
 
+
 void mks_contiuePrint_UI() {
 	lcd_setstatus("Resume print?");
 
@@ -1377,6 +1274,7 @@ void mks_contiuePrint_UI() {
             if(gCfgItems.pwroff_save_mode != 1)
                 epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
             continue_print_error_flg = 1;
+            ui_app.showMainWidget();
         }
 	}
 }

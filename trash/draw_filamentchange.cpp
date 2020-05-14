@@ -2,12 +2,12 @@
 
 #include "GUI.h"
 #include "BUTTON.h"
+#include "draw_pause_ui.h"
 #include "draw_ui.h"
 #include "TEXT.h"
 #include "Marlin.h"
 #include "temperature.h"
 #include "mks_reprint.h"
-#include "draw_pause_ui.h"
 extern float feedrate_mm_s;
 
 extern int X_ADD,X_INTERVAL;

@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_PRINTING_H_
 #define _DRAW_PRINTING_H_
 #include "stdint.h"

@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_DISK_H_
 #define _DRAW_DISK_H_
 

@@ -13,8 +13,6 @@
 #include "draw_about.h"
 #include "draw_wifi.h"
 #include "draw_print_file.h"
-#include "draw_operate.h"
-#include "draw_pause_ui.h"
 #include "draw_change_speed.h"
 #include "draw_set.h"
 #include "draw_Sprayer.h"
@@ -191,15 +189,6 @@ inline char * get_display_title_ref(int index) {
 				} else {
 					return operation_menu.title;
 				}
-		case PAUSE_UI:
-				if(
-						disp_state_stack._disp_state[disp_state_stack._disp_index] == PRINTING_UI
-						|| disp_state_stack._disp_state[disp_state_stack._disp_index] == OPERATE_UI
-						|| disp_state_stack._disp_state[disp_state_stack._disp_index] == PAUSE_UI) {
-					return common_menu.pause_special_title;
-				} else {
-					return pause_menu.title;
-				}
 		case FILAMENT_UI: 		return extrude_menu.title;
 		case CHANGE_SPEED_UI: 	return speed_menu.title;
 		case FAN_UI:			return fan_menu.title;
@@ -329,8 +318,6 @@ void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 		case PRINT_FILE_UI:		clear_print_file(); 	break;
-		case OPERATE_UI:		Clear_operate();		break;
-		case PAUSE_UI:			Clear_pause();			break;
 		case CHANGE_SPEED_UI:	Clear_changeSpeed();	break;
 		case SET_UI:			Clear_Set();			break;
 		case SPRAYER_UI:								break;
@@ -397,10 +384,9 @@ void draw_return_ui() {
 			case LEVELING_UI:		manual_leveling_ui.show();		break;
 			case TOOL_UI:			tools_ui.show();		break;
             case BABY_STEP_UI:		babystep_ui.show();		break;
+			case OPERATE_UI:		printing_tools_ui.show();			break;
 
 			case PRINT_FILE_UI: 	draw_print_file();		break;
-			case OPERATE_UI:		draw_operate();			break;
-			case PAUSE_UI:			draw_pause();			break;
 			case CHANGE_SPEED_UI:	draw_changeSpeed();		break;
 			case SET_UI:			draw_Set();				break;
 			case SPRAYER_UI: 	break;
@@ -524,24 +510,8 @@ void GUI_RefreshPage() {
 	switch(disp_state) {
 		case PRINT_READY_UI: break;
 		case PRINT_FILE_UI: break;
-		//case PRINTING_UI: printing_ui.refresh(); break;
-		case OPERATE_UI:
-			if(temperature_change_frequency == 1) {
-				temperature_change_frequency = 0;
-				disp_temp_operate();
-			}
-			setProBarRateOpera();
-			break;
+		case OPERATE_UI: break;
 
-		case PAUSE_UI:
-			if(temperature_change_frequency == 1){
-				temperature_change_frequency = 0;
-				disp_temp_pause();
-			}
-			break;
-		//case FAN_UI: fan_ui.refresh();				break;
-					
-		//case MOVE_MOTOR_UI: motor_move_ui.refresh(); break;
 		case WIFI_UI:
 			if(wifi_refresh_flg == 1) {
 				disp_wifi_state();
@@ -607,7 +577,6 @@ void GUI_RefreshPage() {
 					break;
 			}
             break;
-		//case BABY_STEP_UI: babystep_ui.refresh();	break;
 	    default:
 	    	break;
 				

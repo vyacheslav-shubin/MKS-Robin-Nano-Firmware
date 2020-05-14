@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_OPERATE_H_
 #define _DRAW_OPERATE_H_
 

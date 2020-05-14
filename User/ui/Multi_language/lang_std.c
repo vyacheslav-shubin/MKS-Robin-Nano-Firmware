@@ -52,4 +52,9 @@ void lang_std(void) {
 	lang_str.load = "Load";
 	lang_str.unload = "Unload";
 	lang_str.change = "Change";
+
+	lang_str.fan = "Fan";
+	lang_str.speed = "Speed";
+	lang_str.babysteps = "Babysteps";
+
 }

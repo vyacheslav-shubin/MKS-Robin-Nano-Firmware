@@ -11,14 +11,14 @@
 #include "StdWidget.h"
 
 typedef struct {
-	BUTTON_Handle leveling1;
-	BUTTON_Handle leveling2;
-	BUTTON_Handle leveling3;
-	BUTTON_Handle leveling4;
-	BUTTON_Handle leveling5;
-	BUTTON_Handle home;
-	BUTTON_Handle homeZ;
-	BUTTON_Handle back;
+	UI_BUTTON leveling1;
+	UI_BUTTON leveling2;
+	UI_BUTTON leveling3;
+	UI_BUTTON leveling4;
+	UI_BUTTON leveling5;
+	UI_BUTTON home;
+	UI_BUTTON homeZ;
+	UI_BUTTON back;
 } MANUAL_LEVELING_UI_CONTROLS;
 
 class ManualLevelingUI: public StdWidget  {
@@ -26,7 +26,7 @@ private:
 	MANUAL_LEVELING_UI_CONTROLS buttons;
 protected:
 	virtual void createControls();
-	virtual void on_button(WM_HWIN hBtn);
+	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_05();
 public:
 	ManualLevelingUI() : StdWidget(LEVELING_UI) {};

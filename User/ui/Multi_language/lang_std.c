@@ -30,7 +30,6 @@ void lang_std(void) {
 	lang_str.jerk_settings = "Jerk settings";
 
 	lang_str.preheat = "Preheat";
-	lang_str.extrusion = "Extrusion";
 	lang_str.move = "Move";
 	lang_str.home = "Home";
 	lang_str.leveling = "Leveling";
@@ -44,4 +43,13 @@ void lang_std(void) {
 	lang_str.plus = "More";
 	lang_str.minus = "Less";
 
+	lang_str.off = "Off";
+	lang_str.bed = "Bed";
+	lang_str.extruder1 = "Extruder 1";
+	lang_str.extruder2 = "Extruder 2";
+
+	lang_str.stop = "Stop";
+	lang_str.load = "Load";
+	lang_str.unload = "Unload";
+	lang_str.change = "Change";
 }

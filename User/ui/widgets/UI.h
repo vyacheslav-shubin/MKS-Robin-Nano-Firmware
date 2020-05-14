@@ -16,6 +16,9 @@
 #include "FanUI.h"
 #include "BabystepUI.h"
 #include "MotorMoveUI.h"
+#include "PreheatUI.h"
+#include "HomeUI.h"
+#include "FilamentUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

@@ -6,9 +6,8 @@
  */
 
 #include "StdWidget.h"
-#include "Configuration.h"
+#include "integration.h"
 #include "ui_tools.h"
-#include "Marlin.h"
 #include "ManualLevelingUI.h"
 
 void StdWidget::createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title) {
@@ -22,40 +21,44 @@ void StdWidget::updateStateButton(STATE_BUTTON * btn, const char * img, const ch
 	ui_set_text_value(btn->label, title);
 }
 
+void StdWidget::setButtonText(UI_BUTTON btn, char * text) {
+	BUTTON_SetText(btn, text);
+}
 
-BUTTON_Handle StdWidget::createButtonAt(int phx, int phy, const char * picture, const char * title) {
+
+UI_BUTTON StdWidget::createButtonAt(int phx, int phy, const char * picture, const char * title) {
 	return this->createButton(ui_std_col(phx),  ui_std_row(phy), picture, title);
 }
 
-BUTTON_Handle StdWidget::createButton(int x, int y, const char * picture, const char * title) {
+UI_BUTTON StdWidget::createButton(int x, int y, const char * picture, const char * title) {
 	return ui_create_std_button(x, y, this->hWnd, picture, title);
 }
 
-void StdWidget::updateButton(BUTTON_Handle button, const char * picture, const char * title) {
+void StdWidget::updateButton(UI_BUTTON button, const char * picture, const char * title) {
 	ui_update_std_button(button, picture, title);
 }
 
-BUTTON_Handle StdWidget::createButtonRet() {
+
+UI_BUTTON StdWidget::createButtonRet() {
 	return createButtonAt(3, 1, img_back, lang_str.back);
 }
 
-BUTTON_Handle StdWidget::create100x80Button(int x, int y, const char * picture) {
+UI_BUTTON StdWidget::create100x80Button(int x, int y, const char * picture) {
 	return ui_create_100_80_button(x, y, this->hWnd, picture);
 }
 
 
 void StdWidget::action_leveling() {
-	if(gCfgItems.leveling_mode == 1) {
-		if(BED_LEVELING_METHOD & MESH_BED_LEVELING) {
+	if(shUI::isManualLeveling()) {
+    	this->hide();
+    	manual_leveling_ui.show(this);
+	} else {
+		if(shUI::isMeshLeveling()) {
 	    	this->hide();
 	    	draw_meshleveling();
 		} else {
-		    //SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_AUTOLEVELING_ADDR,201);
-		    //codebufpoint = cmd_code;
+			shUI::doCustomLeveling();
 	    }
-	} else {
-    	this->hide();
-    	manual_leveling_ui.show(this);
 	}
 }
 
@@ -65,12 +68,14 @@ void StdWidget::action_back() {
 }
 
 
-void StdWidget::draw_xyz() {
+void StdWidget::drawXYZ() {
 	GUI_SetColor(gCfgItems.background_color);
 	GUI_FillRect(200, TITLE_YPOS, LCD_WIDTH, titleHeight);
 	GUI_SetColor(gCfgItems.title_color);
-	sprintf(ui_buf1_20,"X:%1.2f Y:%1.2f Z:%1.2f", current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS]);
-	GUI_DispStringAt(ui_buf1_20,200, TITLE_YPOS);
+	shUI::CURRENT_POSITION cp;
+	shUI::getCurrentPosition(&cp);
+	sprintf(ui_buf1_80,"X:%03.1f Y:%03.1f Z:%03.2f E:%04.1f", cp.x, cp.y, cp.z, cp.e);
+	GUI_DispStringAt(ui_buf1_80, 200, TITLE_YPOS);
 }
 
 void StdWidget::updateFanState(STATE_BUTTON * stateButton) {

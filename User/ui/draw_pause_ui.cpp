@@ -7,12 +7,9 @@
 #include "fontLib.h"
 #include "LISTBOX.h"
 #include "TEXT.h"
-#include "draw_extrusion.h"
 #include "draw_pause_ui.h"
-#include "draw_pre_heat.h"
 #include "draw_operate.h"
 #include "draw_printing_moremenu.h"
-#include "draw_filamentchange.h"
 
 #include "mks_cfg.h"
 #include "ff.h"
@@ -164,7 +161,7 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
 				    gCfgItems.extruSpeed_bak = feedrate_mm_s;
 					last_disp_state = PAUSE_UI;
 					Clear_pause();
-					draw_extrusion();
+					filament_ui.show();
 				}
 				else if(pMsg->hWinSrc == buttonMov.btnHandle)
 				{
@@ -191,7 +188,7 @@ static void cbPauseWin(WM_MESSAGE * pMsg) {
 				{
 					last_disp_state = PAUSE_UI;
 					Clear_pause();
-					draw_FilamentChange();
+					filament_ui.show();
 				}
 			}
 			break;

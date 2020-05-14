@@ -11,15 +11,15 @@
 #include "StdWidget.h"
 
 typedef struct {
-	BUTTON_Handle tools;
-	BUTTON_Handle settings;
-	BUTTON_Handle print;
-	BUTTON_Handle home;
-	BUTTON_Handle move;
-	BUTTON_Handle preheat;
-	BUTTON_Handle leveling;
-	BUTTON_Handle extrude;
-	BUTTON_Handle more;
+	UI_BUTTON tools;
+	UI_BUTTON settings;
+	UI_BUTTON print;
+	UI_BUTTON home;
+	UI_BUTTON move;
+	UI_BUTTON preheat;
+	UI_BUTTON leveling;
+	UI_BUTTON filament;
+	UI_BUTTON more;
 } MAIN_UI_CONTROLS;
 
 
@@ -28,7 +28,7 @@ private:
 	MAIN_UI_CONTROLS buttons;
 protected:
 	virtual void createControls();
-	virtual void on_button(WM_HWIN hBtn);
+	virtual void on_button(UI_BUTTON hBtn);
 public:
 	MainUI() : StdWidget(PRINT_READY_UI){};
 };

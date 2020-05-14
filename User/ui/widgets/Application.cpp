@@ -22,6 +22,14 @@ void Application::start() {
 	this->drawLogo();
 }
 
+void Application::closeCurrentWidget() {
+	if (this->current_ui)
+		this->current_ui->hide();
+	else
+		clear_cur_ui();
+}
+
+
 void Application::loop() {
 	if(wifi_link_state != WIFI_TRANS_FILE) {
 		if (this->current_ui)
@@ -34,7 +42,7 @@ void Application::loop() {
 }
 
 void Application::startPrintFile() {
-	clear_cur_ui();
+	this->closeCurrentWidget();
 	ui_start_print_file();
 	printing_ui.show();
 }

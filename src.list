@@ -107,8 +107,6 @@ User/ui/draw_dialog.cpp
 User/ui/draw_doubleZ.cpp
 User/ui/draw_EnablePin_Invert.cpp
 User/ui/draw_endstop_type.cpp
-User/ui/draw_extrusion.cpp
-User/ui/draw_filamentchange.cpp
 User/ui/draw_filament_settings.cpp
 User/ui/draw_FileTransfer_ui.cpp
 User/ui/draw_home_dir.cpp
@@ -131,7 +129,6 @@ User/ui/draw_nozzle_config.cpp
 User/ui/draw_number_key.cpp
 User/ui/draw_operate.cpp
 User/ui/draw_pause_ui.cpp
-User/ui/draw_pre_heat.cpp
 User/ui/draw_print_file.cpp
 User/ui/draw_printing_moremenu.cpp
 User/ui/draw_set.cpp
@@ -143,7 +140,6 @@ User/ui/draw_ui.cpp
 User/ui/draw_wifi.cpp
 User/ui/draw_wifi_list.cpp
 User/ui/draw_XYZLevelPara.cpp
-User/ui/draw_zero.cpp
 User/ui/id_manage.c
 User/ui/Multi_language/fontHz14.c
 User/ui/Multi_language/Helvetica26.c
@@ -162,6 +158,7 @@ User/ui/QRENCODE/split.c
 User/ui/ui_tools.cpp
 User/ui/Multi_language/lang_std.c
 User/ui/Multi_language/lang_ru.c
+User/ui/widgets/integration.cpp
 User/ui/widgets/Application.cpp
 User/ui/widgets/Widget.cpp
 User/ui/widgets/StdWidget.cpp
@@ -173,3 +170,6 @@ User/ui/widgets/FanUI.cpp
 User/ui/widgets/XyzUI.cpp
 User/ui/widgets/BabystepUI.cpp
 User/ui/widgets/MotorMoveUI.cpp
+User/ui/widgets/PreheatUI.cpp
+User/ui/widgets/HomeUI.cpp
+User/ui/widgets/FilamentUI.cpp

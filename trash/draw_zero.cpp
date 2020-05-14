@@ -1,6 +1,8 @@
+#include "../../trash/draw_zero.h"
+
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
-#include "draw_zero.h"
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "fontLib.h"
@@ -15,6 +17,9 @@ static GUI_HWIN hZeroWnd;
 static BUTTON_Handle buttonAllZero, buttonXZero, buttonYZero, buttonZZero, buttonRet, buttonDisable;
 
 void refresh_zero(void) {
+	home_ui.refresh();
+	return;
+
 	static uint8_t last_sec = 0;
 	char buf[20];
 	if(gCfgItems.multiple_language != 0) {
@@ -61,8 +66,9 @@ static void cbZeroWin(WM_MESSAGE * pMsg) {
 }
 
 
-void draw_zero()
-{	
+void draw_zero(){
+	home_ui.show();
+	return;
 	hZeroWnd = ui_std_init_window(ZERO_UI, cbZeroWin);
 
 	buttonAllZero = ui_std_button(0, 0, hZeroWnd, "bmp_zero.bin", home_menu.home_all);
@@ -76,8 +82,9 @@ void draw_zero()
 
 
 
-void clear_zero()
-{
+void clear_zero() {
+	home_ui.hide();
+	return;
 	ui_drop_window(hZeroWnd);
 }
 

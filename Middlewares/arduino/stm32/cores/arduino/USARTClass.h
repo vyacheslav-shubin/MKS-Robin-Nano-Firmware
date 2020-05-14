@@ -74,7 +74,6 @@ class USARTClass : public HardwareSerial
     int check( void );
 		void MoremenuCmd(void);
 		void Leveling_move_action(void);
-		void filamentchange(void);
 
     
 #if defined __GNUC__ /* GCC CS3 */

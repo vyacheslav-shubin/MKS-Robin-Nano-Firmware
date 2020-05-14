@@ -16,8 +16,8 @@ FanUI fan_ui;
 
 void FanUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
-	this->ui.plus = this->createButtonAt(0, 0, img_plus, lang_str.more);
-	this->ui.minus = this->createButtonAt(2, 0, img_minus, lang_str.minus);
+	this->ui.plus = ui_std_plus_button(0, 0);
+	this->ui.minus = ui_std_minus_button(2, 0);
 
 	this->createStateButton(ui_std_col(1), _row(1), &ui.fan, FAN_STATES[0], 0);
 
@@ -35,7 +35,7 @@ void FanUI::commitFanState() {
 	this->updateFanState(&this->ui.fan);
 }
 
-void FanUI::on_button(WM_HWIN hBtn) {
+void FanUI::on_button(UI_BUTTON hBtn) {
 	if(hBtn == this->ui.back) {
 		this->hide();
 		ui_app.back_ui();

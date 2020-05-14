@@ -416,9 +416,8 @@ void mksBeeperAlarm(void)
 		}
 }
 
-void Close_machine_display()
-{
-	clear_cur_ui();
+void Close_machine_display() {
+	ui_app.closeCurrentWidget();
 	disp_state = PRINT_READY_UI;
 	GUI_SetBkColor(gCfgItems.background_color);
 	GUI_SetColor(gCfgItems.title_color);
@@ -432,7 +431,7 @@ void filament_check() {
 	if ((mksReprint.mks_printer_state == MKS_WORKING) && is_filament_fail()) {
 		filament_fail_flag = 1;
 		if (filament_fail_cnt >= 1000) {
-			clear_cur_ui();
+			ui_app.closeCurrentWidget();
 			stop_print_time();
 			card.pauseSDPrint();
 			print_job_timer.pause();

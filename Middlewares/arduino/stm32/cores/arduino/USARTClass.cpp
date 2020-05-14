@@ -409,40 +409,5 @@ void USARTClass::Leveling_move_action(void)
 }
 #endif
 
-extern uint8_t filamentchange_Process;
-void USARTClass::filamentchange(void)
-{
-	uint8_t i;
-	char filament_temp[50]={0};
-	
-	switch(filamentchange_Process)
-	{
-		case 1:
-			if(USARTClass::check())
-			{
-				memset(filament_temp,0,sizeof(filament_temp));
-				sprintf((char*)filament_temp,"T%d\nG91\nG1 E%d F%d\nG90\n",gCfgItems.curSprayerChoose,gCfgItems.filamentchange_load_length,gCfgItems.filamentchange_load_speed);
-				for(i=0;i<strlen(filament_temp);i++)
-				{
-	      			_rx_buffer->store_char(filament_temp[i]) ;
-				}
-			}	
-			break;
-		case 2:
-		if(USARTClass::check())
-		{
-			memset(filament_temp,0,sizeof(filament_temp));
-			sprintf((char*)filament_temp,"T%d\nG91\nG1 E-%d F%d\nG90\n",gCfgItems.curSprayerChoose,gCfgItems.filamentchange_unload_length,gCfgItems.filamentchange_unload_speed);
-			for(i=0;i<strlen(filament_temp);i++)
-			{
-      			_rx_buffer->store_char(filament_temp[i]) ;
-			}
-		}			
-			break;
-		case 3:
-			
-			break;
-		default:break;
-	}
-}
+
 

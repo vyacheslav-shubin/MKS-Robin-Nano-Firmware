@@ -84,19 +84,6 @@ extern uint8_t print_start_flg;
 
 extern uint8_t pause_flag;
 
-extern uint8_t filament_loading_time_flg;
-extern uint32_t filament_loading_time_cnt;
-extern uint8_t filament_loading_completed;
-extern uint8_t filament_load_heat_flg;
-extern uint8_t filament_unload_heat_flg;
-extern uint8_t filament_unloading_time_flg;
-extern uint32_t filament_unloading_time_cnt;
-extern uint8_t filament_unloading_completed;
-
-extern uint8_t filament_heat_completed_load;
-extern uint8_t filament_heat_completed_unload;
-
-extern uint8_t filamentchange_Process;
 
 extern uint8_t disp_in_file_dir;
 
@@ -177,10 +164,6 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_MESSEGE_ERR1) {
 					ui_app.showMainWidget();
-				} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED) {
-					filament_heat_completed_load = 1;
-				} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_UNLOAD_COMPLETED) {
-					filament_heat_completed_unload = 1;
 				} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
 					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
@@ -197,24 +180,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 				Clear_dialog();
 				draw_return_ui();
 				
-				if((DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT)
-					||(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT)
-					||(DialogType == DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED)
-					||(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED)) {
-					thermalManager.target_temperature[gCfgItems.curSprayerChoose]= gCfgItems.desireSprayerTempBak;
-				} if((DialogType == DIALOG_TYPE_FILAMENT_LOADING)
-					||(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING)) {
-					enqueue_and_echo_commands_P(PSTR("M410"));
-					filamentchange_Process = 0;
-					filament_rate = 0;
-					filament_loading_completed = 0;
-					filament_unloading_completed = 0;
-					filament_loading_time_flg = 0;
-					filament_loading_time_cnt = 0;
-					filament_unloading_time_flg = 0;
-					filament_unloading_time_cnt = 0;
-					thermalManager.target_temperature[gCfgItems.curSprayerChoose]= gCfgItems.desireSprayerTempBak;
-				} if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
+				if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
 					mksReprint.mks_printer_state = MKS_IDLE;
                     if(gCfgItems.pwroff_save_mode != 1)
 					    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
@@ -328,22 +294,8 @@ void draw_dialog(uint8_t type)
 
 			if(
 					(DialogType == DIALOG_TYPE_M80_FAIL)
-					||(DialogType == DIALOG_TYPE_FILAMENT_LOAD_COMPLETED)
-					||(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED)
 			) {
 				buttonOk= ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT) {
-				buttonCancle= ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
-				filament_temper = ui_create_dialog_text(0,(imgHeight-40)/2-30, LCD_WIDTH, 30, hStopDlgWnd, 0);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT) {
-				buttonCancle= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight-40)/2,140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-				filament_temper = ui_create_std_text_f(0,(imgHeight-40)/2-30, LCD_WIDTH, 30, hStopDlgWnd, GUI_TA_TOP | GUI_TA_HCENTER, 0);
-			} else if((DialogType == DIALOG_TYPE_FILAMENT_LOADING)||(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING)) {
-				progressBar = PROGBAR_CreateEx((LCD_WIDTH-400)/2, (imgHeight-40)/2-30, 400, 25, hStopDlgWnd, WM_CF_SHOW, 0, 0);
-				PROGBAR_SetBarColor(progressBar, 0, GUI_GREEN);
-				PROGBAR_SetValue(progressBar,filament_rate);
-				PROGBAR_SetText(progressBar," ");
-				buttonCancle = ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
 			} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
 				buttonOk = ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
 			} else {
@@ -373,22 +325,6 @@ void draw_dialog(uint8_t type)
 				TEXT_SetText(printStopDlgText, print_file_dialog_menu.close_machine_error);
 			} else if(DialogType == DIALOG_TYPE_UNBIND) {
 				TEXT_SetText(printStopDlgText, common_menu.unbind_printer_tips);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_HEAT) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_heat);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_heat_confirm);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOADING) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_loading);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_LOAD_COMPLETED) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_load_completed);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_HEAT) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_heat);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_HEAT_UNLOAD_COMPLETED) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_heat_confirm);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unloading);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED) {
-				TEXT_SetText(printStopDlgText, filament_menu.filament_dialog_unload_completed);
 			} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
 				TEXT_SetText(printStopDlgText, print_file_dialog_menu.filament_no_press);
 			}
@@ -400,90 +336,6 @@ void draw_dialog(uint8_t type)
 		BUTTON_SetText(buttonCancle, print_file_dialog_menu.cancle);
 }
 
-
-void filament_setbar() {
-	PROGBAR_SetBarColor(progressBar, 0, GUI_GREEN);
-	PROGBAR_SetValue(progressBar,filament_rate);
-}
-
-void filament_sprayer_temp() {
-	int8_t buf[50] = {0};
-	int8_t buf1[30] = {0};
-	TEXT_SetTextColor(filament_temper, gCfgItems.title_color);
-	TEXT_SetBkColor(filament_temper, gCfgItems.background_color);
-	sprintf((char*)buf,"E%d: ",gCfgItems.curSprayerChoose+1);
-	sprintf((char *)buf1, filament_menu.stat_temp,(int)thermalManager.current_temperature[gCfgItems.curSprayerChoose],(int)thermalManager.target_temperature[gCfgItems.curSprayerChoose]);
-	strcat((char*)buf,(char*)buf1);
-	TEXT_SetText(filament_temper, (char *)buf);
-}
-void filament_dialog_handle() {
-	if (temperature_change_frequency == 1) {
-		temperature_change_frequency = 0;
-		filament_sprayer_temp();
-	}
-
-	if(filament_heat_completed_load==1) {
-		filament_heat_completed_load = 0;
-		Clear_dialog();
-		draw_dialog(DIALOG_TYPE_FILAMENT_LOADING);
-		stepper.synchronize();
-		filament_loading_time_flg = 1;
-		filament_loading_time_cnt = 0;
-		filamentchange_Process = 1;
-		MYSERIAL.filamentchange();
-	}
-
-	if(filament_heat_completed_unload == 1)
-	{
-		filament_heat_completed_unload = 0;
-		Clear_dialog();
-		draw_dialog(DIALOG_TYPE_FILAMENT_UNLOADING);
-		stepper.synchronize();
-		filament_unloading_time_flg = 1;
-		filament_unloading_time_cnt = 0;
-		filamentchange_Process = 2;
-		MYSERIAL.filamentchange();
-	}
-	
-	if(((abs((int)((int)thermalManager.current_temperature[gCfgItems.curSprayerChoose] - gCfgItems.filament_load_limit_temper))<=1)
-		||((int)thermalManager.current_temperature[gCfgItems.curSprayerChoose] > gCfgItems.filament_load_limit_temper))
-		&&(filament_load_heat_flg==1))
-	{
-		filament_load_heat_flg = 0;
-		Clear_dialog();
-		draw_dialog(DIALOG_TYPE_FILAMENT_HEAT_LOAD_COMPLETED);				
-	}
-	
-	if(filament_loading_completed==1)
-	{
-		filamentchange_Process = 0;
-		filament_rate = 0;
-		filament_loading_completed = 0;
-		Clear_dialog();
-		draw_dialog(DIALOG_TYPE_FILAMENT_LOAD_COMPLETED);
-	}
-	if(((abs((int)((int)thermalManager.current_temperature[gCfgItems.curSprayerChoose]- gCfgItems.filament_unload_limit_temper))<=1)
-		||((int)thermalManager.current_temperature[gCfgItems.curSprayerChoose] > gCfgItems.filament_unload_limit_temper))
-		&&(filament_unload_heat_flg==1))
-	{
-		filament_unload_heat_flg = 0;
-		Clear_dialog();
-		draw_dialog(DIALOG_TYPE_FILAMENT_HEAT_UNLOAD_COMPLETED);				
-	}
-	
-	if(filament_unloading_completed==1)
-	{
-		filamentchange_Process = 0;
-		filament_rate = 0;
-		filament_unloading_completed = 0;
-		Clear_dialog();
-		draw_dialog(DIALOG_TYPE_FILAMENT_UNLOAD_COMPLETED);
-	}
-
-	if((DialogType == DIALOG_TYPE_FILAMENT_LOADING)||(DialogType == DIALOG_TYPE_FILAMENT_UNLOADING)) {
-		filament_setbar();
-	}
-}
 
 uint8_t command_send_flag;
 void wifi_scan_handle() {
@@ -508,10 +360,6 @@ void Clear_dialog() {
 
 void refresh_dialog() {
 	switch (DialogType) {
-		case DIALOG_TYPE_FILAMENT_LOAD_HEAT:
-		case DIALOG_TYPE_FILAMENT_UNLOAD_HEAT:
-			filament_dialog_handle();
-			break;
 		case WIFI_ENABLE_TIPS:
 			wifi_scan_handle();
 			break;

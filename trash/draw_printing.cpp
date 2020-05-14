@@ -6,7 +6,6 @@
 #include "PROGBAR.h"
 #include "CHECKBOX.h"
 #include "draw_fan.h"
-#include "draw_pre_heat.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"

@@ -3,12 +3,10 @@
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "draw_printing_moremenu.h"
-#include "draw_filamentchange.h"
 #include "pic_manager.h"
 #include "spi_flash.h"
 #include "Marlin.h"
 #include "mks_reprint.h"
-#include "draw_pre_heat.h"
 #include "draw_change_speed.h"
 
 #ifndef GUI_FLASH

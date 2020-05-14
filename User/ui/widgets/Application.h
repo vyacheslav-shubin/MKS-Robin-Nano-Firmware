@@ -22,6 +22,7 @@ public:
 	void startPrintFile();
 	void drawLogo();
 	void back_ui();
+	void closeCurrentWidget();
 	void push(Widget * widget);
 	void showMainWidget();
 	void reset_stack(Widget * widget);

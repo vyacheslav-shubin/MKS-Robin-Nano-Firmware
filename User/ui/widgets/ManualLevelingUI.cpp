@@ -43,7 +43,7 @@ void ManualLevelingUI::createControls() {
 	buttons.back = this->createButtonRet();
 }
 
-void ManualLevelingUI::on_button(WM_HWIN hBtn) {
+void ManualLevelingUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==buttons.back) {
 		this->action_back();
 	} else if (hBtn==buttons.leveling1) {
@@ -65,7 +65,7 @@ void ManualLevelingUI::on_button(WM_HWIN hBtn) {
 
 void ManualLevelingUI::refresh_05() {
 	BUTTON_SetText(buttons.homeZ, _home_z_button_title());
-	this->draw_xyz();
+	this->drawXYZ();
 }
 
 

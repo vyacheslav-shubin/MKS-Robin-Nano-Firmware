@@ -16,7 +16,6 @@ typedef struct {
 	const char * jerk_settings;
 
 	const char * preheat;
-	const char * extrusion;
 	const char * move;
 	const char * home;
 	const char * leveling;
@@ -29,6 +28,19 @@ typedef struct {
 
 	const char * plus;
 	const char * minus;
+
+	const char * off;
+	const char * bed;
+	const char * extruder1;
+	const char * extruder2;
+
+	const char * stop;
+
+	const char * load;
+	const char * unload;
+
+	const char * change;
+
 } CONFIG_LANG;
 
 #if defined(__cplusplus)

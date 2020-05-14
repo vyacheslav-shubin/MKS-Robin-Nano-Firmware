@@ -1,7 +1,9 @@
+#include "../../trash/draw_extrusion.h"
+
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
-#include "draw_extrusion.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
@@ -82,7 +84,7 @@ static void cbExtrusionWin(WM_MESSAGE * pMsg) {
                         feedrate_mm_s = gCfgItems.extruSpeed_bak;
                     }
 					
-					last_disp_state = EXTRUSION_UI;
+					last_disp_state = FILAMENT_UI;
 					Clear_extrusion();
 					draw_return_ui();
 					
@@ -287,14 +289,16 @@ static void cbExtrusionWin(WM_MESSAGE * pMsg) {
 
 void draw_extrusion()
 {
+	filament_ui.show();
+	return;
 	int i;
 
-	if(disp_state_stack._disp_state[disp_state_stack._disp_index] != EXTRUSION_UI)
+	if(disp_state_stack._disp_state[disp_state_stack._disp_index] != FILAMENT_UI)
 	{
 		disp_state_stack._disp_index++;
-		disp_state_stack._disp_state[disp_state_stack._disp_index] = EXTRUSION_UI;
+		disp_state_stack._disp_state[disp_state_stack._disp_index] = FILAMENT_UI;
 	}
-	disp_state = EXTRUSION_UI;
+	disp_state = FILAMENT_UI;
 		
 	GUI_SetBkColor(gCfgItems.background_color);
 	GUI_SetColor(gCfgItems.title_color);
@@ -500,6 +504,8 @@ void disp_extru_amount()
 
 void Clear_extrusion()
 {
+	filament_ui.hide();
+	return;
 	GUI_SetBkColor(gCfgItems.background_color);
 	if(WM_IsWindow(hExtrusionWnd))
 	{

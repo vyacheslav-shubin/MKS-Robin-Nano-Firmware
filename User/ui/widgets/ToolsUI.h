@@ -11,22 +11,21 @@
 #include "StdWidget.h"
 
 typedef struct {
-	BUTTON_Handle	preheat;
-	BUTTON_Handle 	extrude;
-	BUTTON_Handle 	move;
-	BUTTON_Handle 	home;
-	BUTTON_Handle 	leveling;
-	BUTTON_Handle 	filament;
-	BUTTON_Handle 	more;
-	BUTTON_Handle 	ret;
+	UI_BUTTON	preheat;
+	UI_BUTTON 	move;
+	UI_BUTTON 	home;
+	UI_BUTTON 	leveling;
+	UI_BUTTON 	filament;
+	UI_BUTTON 	more;
+	UI_BUTTON 	ret;
 }TOOLS_UI_CONTROLS;
 
 class ToolsUI : public StdWidget{
 private:
-	TOOLS_UI_CONTROLS buttons;
+	TOOLS_UI_CONTROLS ui;
 protected:
 	virtual void createControls();
-	virtual void on_button(WM_HWIN hBtn);
+	virtual void on_button(UI_BUTTON hBtn);
 public:
 	ToolsUI() : StdWidget(TOOL_UI){};
 };

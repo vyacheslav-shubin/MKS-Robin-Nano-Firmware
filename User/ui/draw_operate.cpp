@@ -8,12 +8,9 @@
 #include "TEXT.h"
 #include "UI.h"
 #include "draw_pause_ui.h"
-#include "draw_pre_heat.h"
 #include "draw_change_speed.h"
 #include "draw_printing_moremenu.h"
 #include "mks_cfg.h"
-#include "draw_extrusion.h"
-#include "draw_filamentchange.h"
 
 #include "Marlin.h"
 #include "mks_reprint.h"
@@ -79,7 +76,7 @@ switch (pMsg->MsgId)
 				}			
 				last_disp_state = OPERATE_UI;
 				Clear_operate();
-				draw_preHeat();
+				preheat_ui.show();
 			}
 	            #if defined(TFT35)
 				else if(pMsg->hWinSrc == buttonFan.btnHandle)
@@ -107,14 +104,14 @@ switch (pMsg->MsgId)
 					mksReprint.mks_printer_state = MKS_PAUSING;				
 					Clear_operate();
 					gCfgItems.desireSprayerTempBak = thermalManager.target_temperature[active_extruder];
-					draw_FilamentChange();
+					filament_ui.show();
 				}
 				else
 				{
 					last_disp_state = OPERATE_UI;
 					Clear_operate();
                     gCfgItems.desireSprayerTempBak = thermalManager.target_temperature[active_extruder];
-					draw_FilamentChange();					
+					filament_ui.show();
 				}
 
 			}			
@@ -146,7 +143,7 @@ switch (pMsg->MsgId)
 					gCfgItems.moveSpeed_bak = feedrate_mm_s;
 				}
 				gCfgItems.extruSpeed_bak = feedrate_mm_s;
-				draw_extrusion();
+				filament_ui.show();
 			}	
 			else if(pMsg->hWinSrc == buttonMove.btnHandle)
 			{

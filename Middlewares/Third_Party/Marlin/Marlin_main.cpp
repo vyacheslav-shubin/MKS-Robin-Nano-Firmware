@@ -13037,7 +13037,7 @@ void process_parsed_command() {
             if(mksReprint.mks_printer_state == MKS_PAUSING)
             {
             	stop_print_time();							
-            	clear_cur_ui();
+            	ui_app.closeCurrentWidget();
             
             	card.pauseSDPrint();
             	print_job_timer.pause();
@@ -15602,7 +15602,7 @@ void lcd_reInit()
     GUI_UC_SetEncodeUTF8();
   }
   
-   clear_cur_ui();
+	ui_app.closeCurrentWidget();
    disp_state_stack._disp_index += 1;
    if(mksReprint.mks_printer_state == MKS_REPRINTED)
    {

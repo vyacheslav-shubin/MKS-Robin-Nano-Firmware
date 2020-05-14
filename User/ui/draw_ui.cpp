@@ -5,8 +5,6 @@
 #include "string_deal.h"
 #include "draw_ui.h"
 
-#include "../../trash/draw_fan.h"
-#include "../../trash/draw_main.h"
 #include "ui_tools.h"
 #include "Marlin.h"
 #include "draw_machine.h"
@@ -17,11 +15,8 @@
 #include "draw_print_file.h"
 #include "draw_operate.h"
 #include "draw_pause_ui.h"
-#include "draw_extrusion.h"
-#include "draw_pre_heat.h"
 #include "draw_change_speed.h"
 #include "draw_set.h"
-#include "draw_zero.h"
 #include "draw_Sprayer.h"
 #include "draw_machine.h"
 #include "draw_language.h"
@@ -32,7 +27,6 @@
 #include "pic_manager.h"
 #include "ili9320.h"
 #include "draw_printing_moremenu.h"
-#include "draw_filamentchange.h"
 /******add********/
 #include "tim.h"
 #include "Configuration.h"
@@ -45,8 +39,6 @@
 
 #include "at24cxx.h"
 #include "draw_bind.h"
-#include "draw_disk.h"
-#include "draw_zoffset.h"
 #include "fatfs.h"
 
 #include "Marlin.h"
@@ -208,7 +200,7 @@ inline char * get_display_title_ref(int index) {
 				} else {
 					return pause_menu.title;
 				}
-		case EXTRUSION_UI: 		return extrude_menu.title;
+		case FILAMENT_UI: 		return extrude_menu.title;
 		case CHANGE_SPEED_UI: 	return speed_menu.title;
 		case FAN_UI:			return fan_menu.title;
 		case PRE_HEAT_UI:
@@ -235,7 +227,6 @@ inline char * get_display_title_ref(int index) {
 		case MORE_UI:
 		case PRINT_MORE_UI:
 								return more_menu.title;
-		case FILAMENTCHANGE_UI: return filament_menu.title;
 		case LEVELING_UI:
         case MESHLEVELING_UI:	return leveling_menu.title;
 		case BIND_UI:			return cloud_menu.title;
@@ -337,18 +328,11 @@ void disp_sel_lang()
 void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
-		case PRINT_READY_UI:	main_ui.hide(); 		break;
 		case PRINT_FILE_UI:		clear_print_file(); 	break;
-		case PRINTING_UI:		printing_ui.hide();		break;
-		case MOVE_MOTOR_UI:		motor_move_ui.hide(); 	break;
 		case OPERATE_UI:		Clear_operate();		break;
 		case PAUSE_UI:			Clear_pause();			break;
-		case EXTRUSION_UI:		Clear_extrusion();		break;
-		case PRE_HEAT_UI:		clear_preHeat();		break;
 		case CHANGE_SPEED_UI:	Clear_changeSpeed();	break;
-		case FAN_UI:			fan_ui.hide();			break;
 		case SET_UI:			Clear_Set();			break;
-		case ZERO_UI:			clear_zero();			break;
 		case SPRAYER_UI:								break;
 		case MACHINE_UI:								break;
 		case LANGUAGE_UI:		Clear_Language();		break;
@@ -364,7 +348,6 @@ void clear_cur_ui() {
 		case LEVELING_UI:		manual_leveling_ui.hide();		break;
 		case BIND_UI:			Clear_Bind();			break;
 		case ZOFFSET_UI:								break;
-		case TOOL_UI:			tools_ui.hide();		break;
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
         case HARDWARE_TEST_UI:	Clear_Hardwaretest();	break;
         case WIFI_LIST_UI:		Clear_Wifi_list();		break;
@@ -395,7 +378,6 @@ void clear_cur_ui() {
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
 		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
 		case NUMBER_KEY_UI:		Clear_NumberKey();		break;
-		case BABY_STEP_UI:		babystep_ui.hide();		break;
 		default:	break;
 	}
 	GUI_Clear();
@@ -406,20 +388,21 @@ void draw_return_ui() {
 		disp_state_stack._disp_index--;
 		switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 			case PRINT_READY_UI: 	main_ui.show();			break;
-			case PRINT_FILE_UI: 	draw_print_file();		break;
 			case PRINTING_UI: printing_ui.show(); 			break;
 			case MOVE_MOTOR_UI: 	motor_move_ui.show();	break;
+			case PRE_HEAT_UI:		preheat_ui.show();		break;
+			case FAN_UI:			fan_ui.show(); 			break;
+			case ZERO_UI:			home_ui.show();			break;
+			case FILAMENT_UI:		filament_ui.show();		break;
+			case LEVELING_UI:		manual_leveling_ui.show();		break;
+			case TOOL_UI:			tools_ui.show();		break;
+            case BABY_STEP_UI:		babystep_ui.show();		break;
+
+			case PRINT_FILE_UI: 	draw_print_file();		break;
 			case OPERATE_UI:		draw_operate();			break;
 			case PAUSE_UI:			draw_pause();			break;
-			case EXTRUSION_UI:		draw_extrusion();		break;
-			case PRE_HEAT_UI:		draw_preHeat();			break;
 			case CHANGE_SPEED_UI:	draw_changeSpeed();		break;
-			case FAN_UI:			fan_ui.show(); 			break;
 			case SET_UI:			draw_Set();				break;
-			case ZERO_UI:
-				if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
-					draw_zero();
-				break;
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
 			case LANGUAGE_UI:		draw_Language();		break;
@@ -429,10 +412,7 @@ void draw_return_ui() {
 			case WIFI_UI:			draw_Wifi();			break;
 			case MORE_UI:			draw_More();			break;
 			case PRINT_MORE_UI:		draw_printmore();		break;
-			case FILAMENTCHANGE_UI:	draw_FilamentChange();	break;
-			case LEVELING_UI:		manual_leveling_ui.show();		break;
 			case BIND_UI:			draw_bind();			break;
-			case TOOL_UI:			tools_ui.show();		break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;
             case WIFI_LIST_UI:		draw_Wifi_list();		break;
@@ -464,7 +444,6 @@ void draw_return_ui() {
             case ENABLE_INVERT_UI:	draw_EnableInvert();	break;
             case NUMBER_KEY_UI:		draw_NumberKey();		break;
             case DIALOG_UI:			draw_dialog(DialogType);	break;
-            case BABY_STEP_UI:		babystep_ui.show();		break;
 			default:
 				break;
 		}
@@ -543,19 +522,6 @@ extern volatile WIFI_STATE wifi_link_state;
 void GUI_RefreshPage() {
   	__IO uint32_t i =0;
 	switch(disp_state) {
-		//case MAIN_UI:	main_ui.show(); 	break;
-		case ZERO_UI:
-			if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5s
-		    	  refresh_zero();
-		    break;
-		//case LEVELING_UI: manual_leveling_ui.refresh(); break;
-		case EXTRUSION_UI:
-			if(temperature_change_frequency == 1) {
-				temperature_change_frequency = 0;
-				disp_sprayer_temp();
-			}
-			break;
-		case PRE_HEAT_UI: refresh_preHeat(); break;
 		case PRINT_READY_UI: break;
 		case PRINT_FILE_UI: break;
 		//case PRINTING_UI: printing_ui.refresh(); break;
@@ -583,12 +549,6 @@ void GUI_RefreshPage() {
 			}
 			break;
         case BIND_UI:		refresh_bind_ui();	break;
-		case FILAMENTCHANGE_UI:
-			if(temperature_change_frequency) {
-				temperature_change_frequency = 0;
-				disp_filament_sprayer_temp();
-			}
-			break;
 		case DIALOG_UI:
 			refresh_dialog();
 			break;		

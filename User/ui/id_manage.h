@@ -11,9 +11,12 @@ typedef struct
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-extern void init_win_id(void);
-extern uint32_t alloc_win_id(void);
-extern void del_win_id(int32_t id);
+#define alloc_win_id() (0)
+#define init_win_id()
+
+//extern void init_win_id(void);
+//extern uint32_t alloc_win_id(void);
+//extern void del_win_id(int32_t id);
 
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */

@@ -11,12 +11,12 @@
 #include "StdWidget.h"
 
 typedef struct {
-	BUTTON_Handle plus;
-	BUTTON_Handle minus;
-	BUTTON_Handle run100;
-	BUTTON_Handle run50;
-	BUTTON_Handle run0;
-	BUTTON_Handle back;
+	UI_BUTTON plus;
+	UI_BUTTON minus;
+	UI_BUTTON run100;
+	UI_BUTTON run50;
+	UI_BUTTON run0;
+	UI_BUTTON back;
 	STATE_BUTTON fan;
 } FUN_UI_CONTROLS;
 
@@ -26,7 +26,7 @@ private:
 	void commitFanState();
 protected:
 	virtual void createControls();
-	virtual void on_button(WM_HWIN hBtn);
+	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_05();
 public:
 	FanUI() : StdWidget(FAN_UI) {};

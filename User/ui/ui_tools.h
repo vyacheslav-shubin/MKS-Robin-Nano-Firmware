@@ -38,6 +38,8 @@ extern "C" {
 #define img_percent_step10 	"bmp_step10_percent.bin"
 
 
+#define img_temperature_off		"bmp_speed0.bin"
+
 #define img_preset_pla  	"bmp_pla.bin"
 #define img_preset_sbs  	"bmp_sbs.bin"
 #define img_preset_petg  	"bmp_petg.bin"
@@ -66,13 +68,12 @@ extern "C" {
 #define img_z_minus				"bmp_zDec.bin"
 
 
-#define img_extrusion			"bmp_extruct.bin"
 #define img_move				"bmp_mov.bin"
 #define img_home				"bmp_zero.bin"
 #define img_home_z				"bmp_zeroZ.bin"
 #define img_leveling_manual		"bmp_leveling.bin"
 #define img_leveling_auto		"bmp_autoleveling.bin"
-#define img_filament			"bmp_filamentchange.bin"
+#define img_filament			"bmp_extruct.bin"
 #define img_more				"bmp_more.bin"
 #define img_print				"bmp_printing.bin"
 #define img_settings			"bmp_set.bin"
@@ -83,6 +84,29 @@ extern "C" {
 #define img_leveling_point3		"bmp_leveling3.bin"
 #define img_leveling_point4		"bmp_leveling4.bin"
 #define img_leveling_point5		"bmp_leveling5.bin"
+
+#define img_heating_selector_bed		"bmp_bed.bin"
+#define img_heating_selector_ext1		"bmp_extru1.bin"
+#define img_heating_selector_ext2		"bmp_extru2.bin"
+
+#define img_filament_step1		"bmp_step1_mm.bin"
+#define img_filament_step2		"bmp_step5_mm.bin"
+#define img_filament_step3		"bmp_step10_mm.bin"
+
+#define img_speed1			"bmp_speed_slow.bin"
+#define img_speed2			"bmp_speed_normal.bin"
+#define img_speed3			"bmp_speed_high.bin"
+
+#define img_filament_change "bmp_filamentchange.bin"
+
+#define img_home_all		"bmp_zero.bin"
+#define img_home_x			"bmp_zeroX.bin"
+#define img_home_y			"bmp_zeroY.bin"
+#define img_home_z			"bmp_zeroZ.bin"
+#define img_stop_motor		"bmp_function1.bin"
+
+#define img_filament_load		"bmp_in.bin"
+#define img_filament_unload		"bmp_out.bin"
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
@@ -131,6 +155,10 @@ typedef struct {
 	int				preview_offset;
 	unsigned char	preview_state_flags;
 } UI_PRINT_PROCESS;
+
+typedef struct {
+
+} UI_CURENT_FILE_INFO;
 
 typedef struct {
 	BUTTON_Handle button_next;

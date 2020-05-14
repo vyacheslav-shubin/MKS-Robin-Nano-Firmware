@@ -140,10 +140,11 @@ BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char 
 
 void ui_update_std_button(BUTTON_Handle btn, const char* file, char* title) {
 	ui_buttonpreset(btn);
-	BUTTON_SetBmpFileName(btn, file, 1);
-	BUTTON_SetBitmapEx(btn, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
-	if(gCfgItems.multiple_language != 0)
-		BUTTON_SetText(btn, title);
+	if (file!=0) {
+		BUTTON_SetBmpFileName(btn, file, 1);
+		BUTTON_SetBitmapEx(btn, 0, &bmp_struct, BMP_PIC_X, BMP_PIC_Y);
+	}
+	BUTTON_SetText(btn, title);
 }
 
 
@@ -154,8 +155,7 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const ch
 	BUTTON_SetBmpFileName(btn, pFile,1);
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_150, 0, 0);
 	BUTTON_SetTextAlign(btn, GUI_TA_VCENTER | GUI_CUSTOM_POS);
-	if(gCfgItems.multiple_language != 0)
-		BUTTON_SetText(btn, text);
+	BUTTON_SetText(btn, text);
 	return btn;
 }
 

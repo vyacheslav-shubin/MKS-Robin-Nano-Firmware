@@ -8,9 +8,9 @@
 #include "BabystepUI.h"
 #include "XyzUI.h"
 #include "ui_tools.h"
-#include "mks_reprint.h"
-#include "Marlin.h"
-#include "math.h"
+#include "integration.h"
+
+#define _do_babystep(axe, direction) shUI::babystep((axe), (direction) * this->getStepInfo()->size)
 
 BabystepUI babystep_ui;
 
@@ -24,12 +24,6 @@ UI_STEP_INFO * BabystepUI::getStepInfo() {
 	return &baby_step_info[step];
 }
 
-void BabystepUI::doBabystep(int direction, char* axe) {
-	UI_STEP_INFO * info = this->getStepInfo();
-	sprintf(ui_buf1_80, "M290 %s%.3f", axe,  direction * info->size);
-	excute_m290(ui_buf1_80);
-}
-
 void BabystepUI::createControls() {
 	XyzUI::createControls();
 	this->_has_adjust_z = 0;
@@ -38,38 +32,35 @@ void BabystepUI::createControls() {
 }
 
 char * BabystepUI::getStateString() {
-	float ofs = abs(zprobe_zoffset);
-	if (ofs<0.001)
-		ofs = 0;
-	sprintf(ui_buf1_80,"X:%3.2f Y:%3.2f Z:%3.2f", this->bs_x, this->bs_y, ofs);
+	sprintf(ui_buf1_80,"X:%3.2f Y:%3.2f Z:%3.2f", this->bs_x, this->bs_y, shUI::babystepGetZ());
 	return ui_buf1_80;
 }
 
 
 
-void BabystepUI::on_button(WM_HWIN hBtn) {
+void BabystepUI::on_button(UI_BUTTON hBtn) {
 	UI_STEP_INFO *si = this->getStepInfo();
 	if (hBtn==this->ui.xp) {
-		this->doBabystep(1, "X");
+		_do_babystep("X", 1);
 		this->bs_x+=si->size;
 	} else if(hBtn==this->ui.xm) {
-		this->doBabystep(-1, "X");
+		_do_babystep("X", -1);
 		this->bs_x-=si->size;
 	} else if(hBtn == this->ui.yp) {
-		this->doBabystep(1, "Y");
+		_do_babystep("Y", 1);
 		this->bs_y+=si->size;
 	} else if(hBtn == this->ui.ym) {
-		this->doBabystep(-1, "Y");
+		_do_babystep("Y", -1);
 		this->bs_y-=si->size;
 	} else if(hBtn == this->ui.zp) {
 		this->_has_adjust_z = 1;
-		doBabystep(1, "Z");
+		_do_babystep("Z", 1);
 	} else if(hBtn == this->ui.zm) {
 		this->_has_adjust_z = 1;
-		this->doBabystep(-1, "Z");
+		_do_babystep("Z", -1);
 	} else if (hBtn == this->ui.back) {
 		if(this->_has_adjust_z == 1)
-			excute_m500();
+			shUI::saveConfig();
 		this->_has_adjust_z = 0;
 		XyzUI::on_button(hBtn);
 	} else

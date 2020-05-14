@@ -8,6 +8,9 @@
 #include "MainUI.h"
 #include "ToolsUI.h"
 #include "MotorMoveUI.h"
+#include "HomeUI.h"
+#include "FilamentUI.h"
+#include "PreheatUI.h"
 #include "ui_tools.h"
 
 #include "draw_print_file.h"
@@ -17,12 +20,8 @@ MainUI main_ui;
 
 
 #include "draw_more.h"
-#include "draw_filamentchange.h"
-#include "draw_pre_heat.h"
-#include "draw_extrusion.h"
-#include "draw_zero.h"
 
-void MainUI::on_button(WM_HWIN hBtn) {
+void MainUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->buttons.tools) {
 		this->hide();
 		tools_ui.show(this);
@@ -34,7 +33,7 @@ void MainUI::on_button(WM_HWIN hBtn) {
 		draw_print_file();
 	} else  if (hBtn==this->buttons.preheat) {
 		this->hide();
-		draw_preHeat();
+		preheat_ui.show(this);
 	} else  if (hBtn==this->buttons.more) {
 		this->hide();
 		draw_More();
@@ -43,12 +42,12 @@ void MainUI::on_button(WM_HWIN hBtn) {
 		motor_move_ui.show(this);
 	} else  if (hBtn==this->buttons.home) {
 		this->hide();
-		draw_zero();
+		home_ui.show();
 	} else  if (hBtn==this->buttons.leveling) {
 		this->action_leveling();
-	} else  if (hBtn==this->buttons.extrude) {
+	} else  if (hBtn==this->buttons.filament) {
 		this->hide();
-		draw_extrusion();
+		filament_ui.show(this);
 	}
 }
 
@@ -59,7 +58,7 @@ void MainUI::createControls() {
 		this->buttons.move = this->createButtonAt(1, 0, img_move, lang_str.move);
 		this->buttons.home = this->createButtonAt(2, 0, img_home, lang_str.home);
 		this->buttons.print = this->createButtonAt(3, 0, img_print, lang_str.print);
-		this->buttons.extrude = this->createButtonAt(0, 1, img_extrusion, lang_str.extrusion);
+		this->buttons.filament = this->createButtonAt(0, 1, img_filament, lang_str.filament);
 
 		char next_button_offset = 1;
 		switch(gCfgItems.leveling_mode) {

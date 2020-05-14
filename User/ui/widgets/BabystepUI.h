@@ -13,13 +13,12 @@
 class BabystepUI: public XyzUI {
 private:
 	char _has_adjust_z=0;
-	void doBabystep(int direction, char* axe);
 	float bs_x = 0;
 	float bs_y = 0;
 protected:
 	virtual void createControls();
 	virtual UI_STEP_INFO * getStepInfo();
-	virtual void on_button(WM_HWIN hBtn);
+	virtual void on_button(UI_BUTTON hBtn);
 	virtual char * getStateString();
 public:
 	BabystepUI() : XyzUI(BABY_STEP_UI) {this->step_count = 3;} ;

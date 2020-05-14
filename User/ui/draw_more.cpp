@@ -9,7 +9,6 @@
 #include "pic_manager.h"
 #include "spi_flash.h"
 //#include "mks_tft_fifo.h"
-#include "draw_zoffset.h"
 #ifndef GUI_FLASH
 #define GUI_FLASH
 #endif
@@ -147,15 +146,6 @@ static void cbMoreWin(WM_MESSAGE * pMsg) {
 				codebufpoint = cmd_code;
 
 			}			
-#if tan_mask
-			else if(pMsg->hWinSrc == buttonzoffset.btnHandle)
-			{
-				last_disp_state = MORE_UI;
-				Clear_more();
-				draw_Zoffset();
-
-			}	
-#endif
 			else if(pMsg->hWinSrc == buttonRet.btnHandle)
 			{
 				last_disp_state = MORE_UI;

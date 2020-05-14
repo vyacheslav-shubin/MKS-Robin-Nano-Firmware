@@ -1,8 +1,10 @@
+#include "../../trash/draw_pre_heat.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
+#include "UI.h"
 #include "draw_ui.h"
 #include "ui_tools.h"
-#include "draw_pre_heat.h"
 #include "fontLib.h"
 #include "TEXT.h"
 #include "mks_cfg.h"
@@ -176,7 +178,8 @@ static void cbPreHeatWin(WM_MESSAGE * pMsg) {
 #define BUTTON_L(phy, file) ui_create_state_button(COL(COL_INDEX)+10, ROW(phy), hPreHeatWnd, file);
 
 void draw_preHeat() {
-	
+	preheat_ui.show();
+	return;
 	int i;
 	hPreHeatWnd = ui_std_init_window(PRE_HEAT_UI, cbPreHeatWin);
 

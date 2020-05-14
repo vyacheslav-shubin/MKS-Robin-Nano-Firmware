@@ -39,7 +39,7 @@ void MotorMoveUI::createControls() {
 }
 
 
-void MotorMoveUI::on_button(WM_HWIN hBtn) {
+void MotorMoveUI::on_button(UI_BUTTON hBtn) {
 	UI_STEP_INFO *si = this->getStepInfo();
 	if (hBtn==this->ui.xp) {
 		this->doMoveMotor(1, "X");

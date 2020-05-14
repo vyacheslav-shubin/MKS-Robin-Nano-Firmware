@@ -37,7 +37,7 @@ void XyzUI::updateButtons() {
 	ui_update_std_button(this->ui.step, step_info->picture, step_info->title);
 }
 
-void XyzUI::on_button(WM_HWIN hBtn) {
+void XyzUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn == this->ui.back) {
 		this->hide();
 		ui_app.back_ui();

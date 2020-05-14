@@ -16,7 +16,7 @@ private:
 protected:
 	virtual void createControls();
 	virtual UI_STEP_INFO * getStepInfo();
-	virtual void on_button(WM_HWIN hBtn);
+	virtual void on_button(UI_BUTTON hBtn);
 	virtual char * getStateString();
 public:
 	MotorMoveUI() : XyzUI(MOVE_MOTOR_UI) {this->step_count = 4;};

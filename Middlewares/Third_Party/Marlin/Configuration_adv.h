@@ -34,6 +34,8 @@
 #define CONFIGURATION_ADV_H
 #define CONFIGURATION_ADV_H_VERSION 010107
 
+#include "Configuration.h"
+
 // @section temperature
 
 //===========================================================================

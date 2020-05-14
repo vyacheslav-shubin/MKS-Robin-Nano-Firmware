@@ -8,7 +8,7 @@
 static int32_t nextId = GUI_ID_USER;
 
 static ID_STACK gId_stack[100];
-
+/*
 void init_win_id()
 {
 	uint32_t i; 
@@ -35,7 +35,8 @@ uint32_t alloc_win_id()
 	}
 	return 0;
 }
-
+*/
+/*
 void del_win_id(int32_t id)
 {
 	uint32_t i; 
@@ -48,5 +49,5 @@ void del_win_id(int32_t id)
 		}
 	}
 }
-
+*/
 

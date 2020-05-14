@@ -1,9 +1,9 @@
+#include "../../trash/draw_filamentchange.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
-#include "draw_filamentchange.h"
 #include "draw_ui.h"
 #include "TEXT.h"
-#include "draw_pre_heat.h"
 #include "Marlin.h"
 #include "temperature.h"
 #include "mks_reprint.h"

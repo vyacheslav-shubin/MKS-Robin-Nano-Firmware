@@ -657,13 +657,13 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 						} else if(mksReprint.mks_printer_state == MKS_PAUSED) {
 							pause_resum = 1;
 							mksReprint.mks_printer_state = MKS_RESUMING;
-							clear_cur_ui();
+							ui_app.closeCurrentWidget();
 							start_print_time();
 							printing_ui.show();
 						} else if(mksReprint.mks_printer_state == MKS_REPRINTING) {
 							pause_resum = 1;
 							mksReprint.mks_printer_state = MKS_REPRINTED;
-							clear_cur_ui();
+							ui_app.closeCurrentWidget();
 							start_print_time();
 							printing_ui.show();
 						}		
@@ -674,7 +674,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 					/*pause print file*/						
 					if(mksReprint.mks_printer_state == MKS_WORKING) {
 						stop_print_time();							
-						clear_cur_ui();
+						ui_app.closeCurrentWidget();
 						card.pauseSDPrint();
       					print_job_timer.pause();
 						mksReprint.mks_printer_state = MKS_PAUSING;
@@ -687,7 +687,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 					/*stop print file*/						
 					if((mksReprint.mks_printer_state == MKS_WORKING) || (mksReprint.mks_printer_state == MKS_PAUSED) || (mksReprint.mks_printer_state == MKS_REPRINTING)) {
 						stop_print_time();							
-						clear_cur_ui();
+						ui_app.closeCurrentWidget();
 					    card.stopSDPrint();
                         wait_for_heatup = false;
 						mksReprint.mks_printer_state = MKS_STOP;
@@ -743,7 +743,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 								wifi_link_state = WIFI_WAIT_TRANS_START;
 							} else {
 								wifi_link_state = WIFI_CONNECTED;
-								clear_cur_ui();
+								ui_app.closeCurrentWidget();
 								draw_dialog_filetransfer(2);
 							}
 						}
@@ -1141,7 +1141,7 @@ static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	res = f_open(&save_File, (const TCHAR *)saveFilePath, FA_CREATE_ALWAYS | FA_WRITE);
 
 	if(res != FR_OK) {
-		clear_cur_ui();
+		ui_app.closeCurrentWidget();
 		upload_result = 2;
 		wifiTransError.flag = 1;
 		wifiTransError.start_tick = getWifiTick();	
@@ -1150,7 +1150,7 @@ static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	}
 	wifi_link_state = WIFI_TRANS_FILE;
 	upload_result = 1;
-	clear_cur_ui();
+	ui_app.closeCurrentWidget();
 	draw_dialog(DIALOG_TYPE_UPLOAD_FILE);
 	GUI_Exec();
 	file_writer.tick_begin = getWifiTick();
@@ -1392,7 +1392,7 @@ void wifi_rcv_handle() {
 			if(len > 0) {
 				esp_data_parser((char *)ucStr, len);
 				if(wifi_link_state == WIFI_CONNECTED) {
-					clear_cur_ui();
+					ui_app.closeCurrentWidget();
 					draw_dialog(DIALOG_TYPE_UPLOAD_FILE);
 					stopEspTransfer();
 				}
@@ -1435,7 +1435,7 @@ void wifi_rcv_handle() {
 				if((tick_net_time1 != 0) && (getWifiTickDiff(tick_net_time1, tick_net_time2) > 4500)) {// transfer timeout
 					wifi_link_state = WIFI_CONNECTED;
 					upload_result = 2;
-					clear_cur_ui();
+					ui_app.closeCurrentWidget();
 					stopEspTransfer();
 					draw_dialog(DIALOG_TYPE_UPLOAD_FILE);
 				}
@@ -1554,7 +1554,7 @@ void wifi_init() {
 			wifi_delay(2000);
 			if(usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
 				return;
-			clear_cur_ui();
+			ui_app.closeCurrentWidget();
 
 			draw_dialog(DIALOG_TYPE_UPDATE_ESP_FIRMARE);
 			
@@ -1572,7 +1572,7 @@ void wifi_init() {
 				wifi_delay(2000);
 				if(usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
 					return;
-				clear_cur_ui();
+				ui_app.closeCurrentWidget();
 				draw_dialog(DIALOG_TYPE_UPDATE_ESP_FIRMARE);
 				if(wifi_upload(1) >= 0) {
 					f_unlink("1:/MKS_WIFI_CUR");
@@ -1589,7 +1589,7 @@ void wifi_init() {
 				wifi_delay(2000);
 				if(usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
 					return;
-				clear_cur_ui();
+				ui_app.closeCurrentWidget();
 				draw_dialog(DIALOG_TYPE_UPDATE_ESP_DATA);
 				if(wifi_upload(2) >= 0) {
 					f_unlink("1:/MKS_WEB_CONTROL_CUR");

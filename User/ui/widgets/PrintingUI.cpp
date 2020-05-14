@@ -16,6 +16,7 @@
 #include "pic_manager.h"
 #include "FanUI.h"
 #include "BabystepUI.h"
+#include "PreheatUI.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -241,15 +242,14 @@ void PrintingUI::refresh_1s() {
 	if((mksReprint.mks_printer_state == MKS_IDLE) && (ui_print_process.rate == 100)) {
 		this->doFinishPrint();
 	} else {
-		this->draw_xyz();
+		this->drawXYZ();
 		this->updateStateButtons();
 		this->updateProgress();
 	}
 }
-#include "draw_pre_heat.h"
 #include "draw_operate.h"
 
-void PrintingUI::on_button(WM_HWIN hBtn) {
+void PrintingUI::on_button(UI_BUTTON hBtn) {
 	if(hBtn == ui.tools) {
 		this->hide();
 		draw_operate();
@@ -289,7 +289,7 @@ void PrintingUI::on_button(WM_HWIN hBtn) {
 		fan_ui.show(this);
 	} else if ((hBtn == ui.ext1.button) || (hBtn == ui.ext2.button) || (hBtn == ui.bed.button)){
 		this->hide();
-		draw_preHeat();
+		preheat_ui.show(this);
 	} else if (hBtn == ui.z.button) {
 		if(mksReprint.mks_printer_state == MKS_WORKING) {
 			this->hide();

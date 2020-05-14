@@ -1,7 +1,8 @@
+#include "../../trash/draw_disk.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
-#include "draw_disk.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"

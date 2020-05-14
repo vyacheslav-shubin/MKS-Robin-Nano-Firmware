@@ -3,9 +3,10 @@
 #include "PROGBAR.h"
 #include "draw_ui.h"
 #include "draw_set.h"
+
+#include "../../trash/draw_disk.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "draw_disk.h"
 #include "UI.h"
 
 #include "draw_machine.h"
@@ -17,7 +18,6 @@
 #include "pic_manager.h"
 #include "spi_flash.h"
 #include "draw_print_file.h"
-#include "draw_filamentchange.h"
 #include "draw_wifi_list.h"
 #include "wifi_module.h"
 
@@ -147,7 +147,7 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 					//Get_Temperature_Flg = 1;
 					//get_temp_flag = 1;
 					Clear_Set();
-					draw_FilamentChange();
+					filament_ui.show();
 				}				
 
 				else if(pMsg->hWinSrc == buttonFan.btnHandle)

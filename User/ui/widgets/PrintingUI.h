@@ -17,11 +17,11 @@ typedef struct{
 	STATE_BUTTON z;
 	STATE_BUTTON bed;
 	STATE_BUTTON time;
-	BUTTON_Handle pause;
-	BUTTON_Handle stop;
-	BUTTON_Handle tools;
-	BUTTON_Handle power_control;
-	PROGBAR_Handle progress;
+	UI_BUTTON pause;
+	UI_BUTTON stop;
+	UI_BUTTON tools;
+	UI_BUTTON power_control;
+	UI_PROGRESS_BAR progress;
 	char preview_done;
 } PRINTING_UI_CONTROLS;
 
@@ -38,7 +38,7 @@ protected:
 	virtual void refresh_05();
 	virtual void refresh_1s();
 	virtual void createControls();
-	virtual void on_button(WM_HWIN hBtn);
+	virtual void on_button(UI_BUTTON hBtn);
 public:
 	virtual void refresh();
 	PrintingUI() : StdWidget(PRINTING_UI) {};

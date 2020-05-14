@@ -15,12 +15,16 @@ class Application;
 
 #include "Application.h"
 
+typedef BUTTON_Handle 		UI_BUTTON;
+typedef TEXT_Handle 		UI_TEXT;
+typedef PROGBAR_Handle 		UI_PROGRESS_BAR;
+
 class Widget {
 protected:
 	DISP_STATE id;
 	GUI_HWIN hWnd = 0;
 	virtual void createControls() {};
-	virtual void on_button(WM_HWIN hBtn) {};
+	virtual void on_button(UI_BUTTON hBtn) {};
 	virtual void refresh_05() {};
 	virtual void refresh_1s() {};
 public:

@@ -22,7 +22,7 @@ void Widget::on_message(WM_MESSAGE * pMsg) {
 	switch (pMsg->MsgId) {
     	case WM_NOTIFY_PARENT:
     		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED)
-    			this->on_button(pMsg->hWinSrc);
+    			this->on_button((UI_BUTTON)pMsg->hWinSrc);
     		break;
 	}
 }

@@ -11,11 +11,10 @@ void lang_ru(void) {
 	lang_str.jerk_settings = "Настройки рывков";
 
 	lang_str.preheat = "Нагрев";
-	lang_str.extrusion = "Экструзия";
 	lang_str.move = "Управление";
 	lang_str.home = "Парковка";
 	lang_str.leveling = "Уровень";
-	lang_str.filament = "Змена";
+	lang_str.filament = "Филамент";
 	lang_str.back = "Назад";
 	lang_str.more = "Больше";
 	lang_str.print = "Печать";
@@ -24,5 +23,16 @@ void lang_ru(void) {
 
 	lang_str.plus = "Добавить";
 	lang_str.minus = "Уменьшить";
+
+	lang_str.off = "Выключить";
+	lang_str.bed = "Стол";
+	lang_str.extruder1 = "Экструдер 1";
+	lang_str.extruder2 =  "Экструдер 2";
+
+	lang_str.stop = "Стоп";
+
+	lang_str.load = "Загрузить";
+	lang_str.unload = "Вытянуть";
+	lang_str.change = "Замена";
 
 }

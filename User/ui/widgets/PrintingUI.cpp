@@ -7,6 +7,7 @@
 
 #include "PrintingUI.h"
 #include "ui_tools.h"
+#include "integration.h"
 #include "temperature.h"
 #include "mks_reprint.h"
 #include "sh_tools.h"
@@ -86,6 +87,7 @@ void PrintingUI::createControls() {
 	this->createStateButtonAt(0, 2, &ui.bed, img_state_bed, 0);
 	this->createStateButtonAt(1, 2, &ui.fan, FAN_STATES[0], 0);
 	this->createStateButtonAt(1, 0, &ui.z, img_state_z, 0);
+	this->createStateButtonAt(0, 3, &ui.speed, img_state_speed, 0);
 
 	this->createStateButtonAt(0, 1, &ui.ext1, img_state_extruder1, 0);
 	if (is_dual_extruders())
@@ -103,13 +105,18 @@ void PrintingUI::createControls() {
 };
 
 void PrintingUI::updateStateButtons() {
-	sprintf(ui_buf1_20, "%d/%d°", (int)thermalManager.current_temperature[0], (int)thermalManager.target_temperature[0]);
+	shUI::SPRAYER_TEMP st;
+	shUI::getSprayerTemperature(0, &st);
+	sprintf(ui_buf1_20, "%d/%d°", (int)st.current, (int)st.target);
 	this->updateStateButton(&ui.ext1, 0, ui_buf1_20);
 	if(is_dual_extruders()){
-		sprintf(ui_buf1_20, "%d/%d°", (int)thermalManager.current_temperature[1], (int)thermalManager.target_temperature[1]);
+		shUI::getSprayerTemperature(1, &st);
+		sprintf(ui_buf1_20, "%d/%d°", (int)st.current, (int)st.target);
 		this->updateStateButton(&ui.ext2, 0, ui_buf1_20);
 	}
-	sprintf(ui_buf1_20, "%d/%d°", (int)thermalManager.current_temperature_bed,  (int)thermalManager.target_temperature_bed);
+	shUI::BED_TEMP bt;
+	shUI::getBedTemperature(&bt);
+	sprintf(ui_buf1_20, "%d/%d°", bt.current,  bt.target);
 	this->updateStateButton(&ui.bed, 0, ui_buf1_20);
 	print_time_to_str(&print_time, ui_buf1_20);
 	this->updateStateButton(&ui.time, 0, ui_buf1_20);
@@ -120,6 +127,14 @@ void PrintingUI::updateStateButtons() {
 		sprintf(ui_buf1_20,"%.2f/%.2f",current_position[Z_AXIS], zprobe_zoffset);
 	}
 	this->updateStateButton(&ui.z, 0, ui_buf1_20);
+
+	short p = shUI::getFeedratePercentage();
+	if (p==100)
+		sprintf(ui_buf1_20,"%.0f",feedrate_mm_s);
+	else
+		sprintf(ui_buf1_20,"%.0f/%d%%",feedrate_mm_s, p);
+	this->updateStateButton(&ui.speed, 0, ui_buf1_20);
+
 }
 
 void PrintingUI::updatePowerControlButton() {

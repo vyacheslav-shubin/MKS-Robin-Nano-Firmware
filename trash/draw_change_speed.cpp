@@ -1,7 +1,9 @@
-#include "draw_change_speed.h"
+#include "../../trash/draw_change_speed.h"
+
 #include "draw_ui.h"
 #include "id_manage.h"
 #include "Marlin.h"
+#include "UI.h"
 #include "planner.h"
 #include "ui_tools.h"
 
@@ -99,6 +101,8 @@ static void cbChangeSpeedWin(WM_MESSAGE * pMsg) {
 
 
 void draw_changeSpeed() {
+	speed_ui.show();
+	return;
 	hChangeSpeedWnd = ui_std_init_window(CHANGE_SPEED_UI, cbChangeSpeedWin);
 	
 	buttonInc.btnHandle = ui_std_button(0, 0, hChangeSpeedWnd, img_plus, speed_menu.add);
@@ -124,11 +128,14 @@ void draw_changeSpeed() {
 }
 
 void Clear_changeSpeed() {
+	speed_ui.hide();
+	return;
 	ui_drop_window(hChangeSpeedWnd);
 }
 
 void disp_print_speed()
 {
+
 	char buf[30] = {0};
 	char buf1[30] = {0};
 

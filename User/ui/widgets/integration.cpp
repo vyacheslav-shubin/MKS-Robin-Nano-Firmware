@@ -6,6 +6,7 @@
  */
 
 #include "ui_tools.h"
+#include "planner.h"
 #include "mks_reprint.h"
 #include "temperature.h"
 #include "integration.h"
@@ -75,6 +76,48 @@ namespace shUI {
 		temp->current = thermalManager.current_temperature_bed;
 		temp->target = thermalManager.target_temperature_bed;
 	}
+
+	short _fix_feedrate_percentage(short value) {
+		if (value > MAX_EXT_SPEED_PERCENT)
+			value = MAX_EXT_SPEED_PERCENT;
+		else if (value < MIN_EXT_SPEED_PERCENT)
+			value = MIN_EXT_SPEED_PERCENT;
+		return value;
+	}
+
+	short getFeedratePercentage() {
+		return feedrate_percentage;
+	}
+
+	void setFeedratePercentage(short value) {
+		feedrate_percentage = _fix_feedrate_percentage(value);
+	}
+
+	void addFeedratePercentage(short value) {
+		setFeedratePercentage(getFeedratePercentage() + value);
+	}
+
+	short _fix_flow(short value) {
+		if (value > MAX_EXT_SPEED_PERCENT)
+			value = MAX_EXT_SPEED_PERCENT;
+		else if (value < MIN_EXT_SPEED_PERCENT)
+			value = MIN_EXT_SPEED_PERCENT;
+		return value;
+	}
+
+	short getFlowPercentage(char index) {
+		return planner.flow_percentage[index];
+	}
+
+	void addFlowPercentage(char index, short value) {
+		setFlowPercentage(index, getFlowPercentage(index) + value);
+	}
+
+	void setFlowPercentage(char index, short value) {
+		planner.flow_percentage[index] = _fix_flow(value);
+		planner.e_factor[0]= planner.flow_percentage[0] * 0.01;
+	}
+
 
 	void pushGcode(const char * gcode) {
 		enqueue_and_echo_commands_P(gcode);

@@ -17,6 +17,7 @@ typedef struct{
 	STATE_BUTTON z;
 	STATE_BUTTON bed;
 	STATE_BUTTON time;
+	STATE_BUTTON speed;
 	UI_BUTTON pause;
 	UI_BUTTON stop;
 	UI_BUTTON tools;

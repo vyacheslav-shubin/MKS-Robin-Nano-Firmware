@@ -25,8 +25,6 @@ void PrintingToolsUI::createControls() {
 	}
 }
 
-#include "draw_change_speed.h"
-
 void PrintingToolsUI::on_button(UI_BUTTON hBtn) {
 	this->hide();
 	if (hBtn==this->ui.ret) {
@@ -36,11 +34,13 @@ void PrintingToolsUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn==this->ui.fan) {
 		fan_ui.show(this);
 	} else if (hBtn==this->ui.speed) {
-		draw_changeSpeed();
+		speed_ui.show();
 	} else if (hBtn==this->ui.move) {
 		motor_move_ui.show(this);
 	} else if (hBtn==this->ui.babystep) {
 		babystep_ui.show(this);
+	} else if (hBtn==this->ui.filament) {
+		filament_ui.show();
 	}
 }
 

@@ -11,7 +11,7 @@ void lang_ru(void) {
 	lang_str.jerk_settings = "Настройки рывков";
 
 	lang_str.preheat = "Нагрев";
-	lang_str.move = "Управление";
+	lang_str.move = "Перемещение";
 	lang_str.home = "Парковка";
 	lang_str.leveling = "Уровень";
 	lang_str.filament = "Филамент";

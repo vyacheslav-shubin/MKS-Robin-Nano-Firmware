@@ -13,7 +13,6 @@
 #include "draw_about.h"
 #include "draw_wifi.h"
 #include "draw_print_file.h"
-#include "draw_change_speed.h"
 #include "draw_set.h"
 #include "draw_Sprayer.h"
 #include "draw_machine.h"
@@ -24,7 +23,6 @@
 #include "ff.h"
 #include "pic_manager.h"
 #include "ili9320.h"
-#include "draw_printing_moremenu.h"
 /******add********/
 #include "tim.h"
 #include "Configuration.h"
@@ -214,8 +212,6 @@ inline char * get_display_title_ref(int index) {
 		case DIALOG_UI:			return common_menu.dialog_confirm_title;
 		case WIFI_UI:			return TitleText, wifi_menu.title;
 		case MORE_UI:
-		case PRINT_MORE_UI:
-								return more_menu.title;
 		case LEVELING_UI:
         case MESHLEVELING_UI:	return leveling_menu.title;
 		case BIND_UI:			return cloud_menu.title;
@@ -318,7 +314,6 @@ void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 		case PRINT_FILE_UI:		clear_print_file(); 	break;
-		case CHANGE_SPEED_UI:	Clear_changeSpeed();	break;
 		case SET_UI:			Clear_Set();			break;
 		case SPRAYER_UI:								break;
 		case MACHINE_UI:								break;
@@ -331,8 +326,6 @@ void clear_cur_ui() {
 		case FILETRANSFER_UI:							break;
 		case DIALOG_UI:			Clear_dialog();			break;
 		case FILETRANSFERSTATE_UI:						break;
-		case PRINT_MORE_UI:		Clear_Printmore();		break;
-		case LEVELING_UI:		manual_leveling_ui.hide();		break;
 		case BIND_UI:			Clear_Bind();			break;
 		case ZOFFSET_UI:								break;
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
@@ -385,9 +378,9 @@ void draw_return_ui() {
 			case TOOL_UI:			tools_ui.show();		break;
             case BABY_STEP_UI:		babystep_ui.show();		break;
 			case OPERATE_UI:		printing_tools_ui.show();			break;
+			case CHANGE_SPEED_UI:	speed_ui.show();		break;
 
 			case PRINT_FILE_UI: 	draw_print_file();		break;
-			case CHANGE_SPEED_UI:	draw_changeSpeed();		break;
 			case SET_UI:			draw_Set();				break;
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
@@ -397,7 +390,6 @@ void draw_return_ui() {
 			case DISK_UI:		break;
 			case WIFI_UI:			draw_Wifi();			break;
 			case MORE_UI:			draw_More();			break;
-			case PRINT_MORE_UI:		draw_printmore();		break;
 			case BIND_UI:			draw_bind();			break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;

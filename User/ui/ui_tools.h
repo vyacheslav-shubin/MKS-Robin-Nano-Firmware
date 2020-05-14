@@ -90,6 +90,10 @@ extern "C" {
 #define img_heating_selector_ext1		"bmp_extru1.bin"
 #define img_heating_selector_ext2		"bmp_extru2.bin"
 
+#define img_speed_selector_ext1		img_heating_selector_ext1
+#define img_speed_selector_ext2		img_heating_selector_ext2
+#define img_speed_selector_move		img_move
+
 #define img_filament_step1		"bmp_step1_mm.bin"
 #define img_filament_step2		"bmp_step5_mm.bin"
 #define img_filament_step3		"bmp_step10_mm.bin"

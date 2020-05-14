@@ -46,6 +46,14 @@ typedef struct{
 	extern void setBedTemperature(short value);
 	extern void addBedTemperature(short value);
 
+	extern short getFeedratePercentage();
+	extern void setFeedratePercentage(short value);
+	extern void addFeedratePercentage(short value);
+
+	extern short getFlowPercentage(char index);
+	extern void setFlowPercentage(char index, short value);
+	extern void addFlowPercentage(char index, short value);
+
 	extern void saveConfig();
 
 	extern void pushGcode(const char * gcode);

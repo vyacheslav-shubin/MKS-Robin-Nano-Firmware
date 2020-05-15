@@ -1,9 +1,13 @@
 #ifndef _DRAW_MORE_H_
+
 #define _DRAW_MORE_H_
+
+#error unused
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
+
 
 extern void draw_More();
 extern void Clear_more();

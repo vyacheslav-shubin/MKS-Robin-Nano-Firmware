@@ -38,5 +38,6 @@ void lang_ru(void) {
 	lang_str.fan = "Вентилятор";
 	lang_str.speed = "Скорость";
 	lang_str.babysteps = "Микрошаги";
+	lang_str.continue_print = "Продолжить";
 
 }

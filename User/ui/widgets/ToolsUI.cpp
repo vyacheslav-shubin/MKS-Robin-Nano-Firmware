@@ -9,6 +9,7 @@
 #include "MotorMoveUI.h"
 #include "PreheatUI.h"
 #include "HomeUI.h"
+#include "MoreUI.h"
 #include "FilamentUI.h"
 #include "integration.h"
 #include "ui_tools.h"
@@ -31,11 +32,14 @@ void ToolsUI::createControls() {
 		default:
 			break;
 	}
-	this->ui.more = this->createButtonAt(2, 1, img_more, lang_str.more);
+	this->ui.continuePrint = this->createButtonAt(1, 1, img_continue_print, lang_str.continue_print);
+
+	if (gCfgItems.MoreItem_pic_cnt)
+		this->ui.more = this->createButtonAt(2, 1, img_more, lang_str.more);
 	this->ui.ret = this->createButtonRet();
 }
 
-#include "draw_more.h"
+#include "draw_print_file.h"
 
 void ToolsUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.preheat) {
@@ -54,8 +58,13 @@ void ToolsUI::on_button(UI_BUTTON hBtn) {
 		filament_ui.show(this);
 	} else  if (hBtn==this->ui.more) {
 		this->hide();
-		draw_More();
+		more_ui.show(this);
 	} else  if (hBtn==this->ui.ret) {
 		this->action_back();
+	} else if (hBtn==this->ui.continuePrint) {
+		this->hide();
+		gCfgItems.breakpoint_reprint_flg = 1;
+        gCfgItems.breakpoint_flg=1;
+		draw_print_file();
 	}
 }

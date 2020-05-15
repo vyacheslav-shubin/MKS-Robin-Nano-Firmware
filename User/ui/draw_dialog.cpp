@@ -34,8 +34,6 @@
 
 extern FATFS fs;
 
-extern unsigned char codebuff[100];
-
 extern FIL fp_reprint_rw;
 
 extern unsigned char path_bak[15];
@@ -79,9 +77,6 @@ uint8_t DialogType;
 extern uint8_t print_start_flg;
 
 extern uint8_t pause_flag;
-
-
-extern uint8_t disp_in_file_dir;
 
 extern int upload_result ;
 
@@ -172,9 +167,6 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 			} else if(pMsg->hWinSrc == buttonCancle) {
 				unsigned int tmpFlag;
 				Chk_close_machine_flg = 0;
-				if(DialogType == DIALOG_TYPE_PRINT_FILE) {
-					disp_in_file_dir = 1;
-				}
 				Clear_dialog();
 				draw_return_ui();
 				
@@ -311,10 +303,6 @@ void draw_dialog(uint8_t type)
 				} else {
 					printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-120, LCD_WIDTH, 40, hStopDlgWnd, print_file_dialog_menu.print_file);
 					printfilename = ui_create_std_text_f(0,(imgHeight-40)/2-60, LCD_WIDTH, 30, hStopDlgWnd, GUI_TA_TOP | GUI_TA_HCENTER, 0);
-					/*
-					memset(codebuff,0,sizeof(codebuff));
-					strcpy((char*)codebuff,&ui_print_process.file_name[3]);
-					*/
 					ui_set_text_value(printfilename, &ui_print_process.file_name[3]);
 				}
 			} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {

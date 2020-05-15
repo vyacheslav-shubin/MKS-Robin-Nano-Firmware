@@ -41,8 +41,7 @@ static BUTTON_Handle buttonPu, buttonPd, buttonR;
 
 static FILE_BUTTON buttonF[FILE_BTN_CNT];
 
-uint8_t back_flg = 0;	
-uint8_t disp_in_file_dir;
+uint8_t back_flg = 0;
 
 void search_files();
 void disp_udisk_files(int seq);
@@ -127,7 +126,6 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 							card.Sd_file_cnt = 0;
 							ui_app.showMainWidget();
 						}
-						disp_in_file_dir = 0;
 					} else {
 						int8_t *ch = 0;
 						ch =  (int8_t *)strrchr((char *)card.gCurDir, '/');
@@ -160,7 +158,6 @@ static void cbPrintFileWin(WM_MESSAGE * pMsg) {
 									#else
 									strcpy(ui_print_process.file_name, (const char *)card.gcodeFileList.fileName[j]);
 									#endif
-									disp_in_file_dir = 0;
 
 									if (is_filament_fail()) {
 										clear_print_file();
@@ -249,7 +246,6 @@ void search_files() {
 			tick1 = getTick();
 			if(getTickDiff(tick1, tick2) >= 3000) {
 				if(curDirLever == 0) {
-					disp_in_file_dir = 0;
 					if(gCfgItems.breakpoint_reprint_flg == 1) {
 					    gCfgItems.breakpoint_reprint_flg = 0;
 						last_disp_state = SET_UI;

@@ -21,6 +21,7 @@
 #include "FilamentUI.h"
 #include "PrintingToolsUI.h"
 #include "SpeedUI.h"
+#include "MoreUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

@@ -39,6 +39,9 @@ DEFINE_OPT	:= $(addprefix -D,$(DEFINES))
 FIRMWARE 	:= $(BUILD_BASE)/firmware
 
 MKS_BIN_FILE	:=robin_nano35.bin
+SNAPSHOT_FILE	:=robin_nano35.zip
+SNAPSHOT_PIC_FILE	:=mks_pic.zip
+SNAPSHOT_DIR 	:=../mks-robin-nano35-binary/snapshot
 MKS_FIRMWARE 	:= $(BUILD_BASE)/$(MKS_BIN_FILE)
 
 LD_SCRIPT=MKS_ROBIN.ld
@@ -143,7 +146,16 @@ $(SD_CARD)/$(MKS_BIN_FILE): $(MKS_FIRMWARE)
 	#mountpoint -q /media/shubin/sd || udisksctl mount -b /dev/sdc1
 	cp $(MKS_FIRMWARE) $(SD_CARD)/$(MKS_BIN_FILE)
 
-make_sd_bin: $(SD_CARD)/$(MKS_BIN_FILE)
+$(SNAPSHOT_DIR)/$(SNAPSHOT_FILE): $(MKS_FIRMWARE)
+	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(MKS_FIRMWARE)
+
+$(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) : pics
+	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) $(PIC_OUTPUT)/*
+ 	 
+
+sd_bin: $(SD_CARD)/$(MKS_BIN_FILE)
+
+snapshot: $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE)
 
 make_sd: make_sd_bin mks
 	if [ -d "$(SD_CARD)/bak_font" ]; then mv $(SD_CARD)/bak_font  $(SD_CARD)/mks_font; fi

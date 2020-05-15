@@ -19,7 +19,6 @@
 #include "draw_language.h"
 #include "draw_log_ui.h"
 #include "draw_wifi.h"
-#include "draw_more.h"
 #include "ff.h"
 #include "pic_manager.h"
 #include "ili9320.h"
@@ -322,7 +321,6 @@ void clear_cur_ui() {
 		case LOG_UI:									break;
 		case DISK_UI:									break;
 		case WIFI_UI:			Clear_Wifi();			break;
-		case MORE_UI:			Clear_more();			break;
 		case FILETRANSFER_UI:							break;
 		case DIALOG_UI:			Clear_dialog();			break;
 		case FILETRANSFERSTATE_UI:						break;
@@ -379,6 +377,7 @@ void draw_return_ui() {
             case BABY_STEP_UI:		babystep_ui.show();		break;
 			case OPERATE_UI:		printing_tools_ui.show();			break;
 			case CHANGE_SPEED_UI:	speed_ui.show();		break;
+			case MORE_UI:			more_ui.show();			break;
 
 			case PRINT_FILE_UI: 	draw_print_file();		break;
 			case SET_UI:			draw_Set();				break;
@@ -389,7 +388,6 @@ void draw_return_ui() {
 			case CALIBRATE_UI:	break;
 			case DISK_UI:		break;
 			case WIFI_UI:			draw_Wifi();			break;
-			case MORE_UI:			draw_More();			break;
 			case BIND_UI:			draw_bind();			break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;

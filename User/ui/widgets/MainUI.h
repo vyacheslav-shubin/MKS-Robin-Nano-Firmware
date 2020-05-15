@@ -25,7 +25,7 @@ typedef struct {
 
 class MainUI: public StdWidget{
 private:
-	MAIN_UI_CONTROLS buttons;
+	MAIN_UI_CONTROLS ui;
 protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);

@@ -79,6 +79,7 @@ extern "C" {
 #define img_print				"bmp_printing.bin"
 #define img_settings			"bmp_set.bin"
 #define img_tools				"bmp_tool.bin"
+#define img_continue_print		"bmp_breakpoint.bin"
 
 #define img_leveling_point1		"bmp_leveling1.bin"
 #define img_leveling_point2		"bmp_leveling2.bin"

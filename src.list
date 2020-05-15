@@ -121,7 +121,6 @@ User/ui/draw_machine_settings.cpp
 User/ui/draw_machine_type.cpp
 User/ui/draw_MaxFeedRate.cpp
 User/ui/draw_mesh_leveling.cpp
-User/ui/draw_more.cpp
 User/ui/draw_motor_dir.cpp
 User/ui/draw_motor_settings.cpp
 User/ui/draw_nozzle_config.cpp
@@ -171,3 +170,4 @@ User/ui/widgets/HomeUI.cpp
 User/ui/widgets/FilamentUI.cpp
 User/ui/widgets/PrintingToolsUI.cpp
 User/ui/widgets/SpeedUI.cpp
+User/ui/widgets/MoreUI.cpp

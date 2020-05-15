@@ -1,6 +1,9 @@
-#include "draw_more.h"
+#include "../../trash/draw_more.h"
+
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
+#include "serial.h"
 #include "draw_ui.h"
 //#include "printer.h"
 #include "fontLib.h"
@@ -17,79 +20,19 @@ static BUTTON_STRUCT buttonzoffset,buttonCustom1, buttonCustom2, buttonCustom3, 
 GUI_HWIN hMoreWnd;
 
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-//extern TFT_FIFO gcodeCmdTxFIFO;		//gcode ָ��Ͷ���
-//extern TFT_FIFO gcodeCmdRxFIFO;		//gcode	ָ����ն���
-
-/*
-extern char cmd1_code[200];
-extern char cmd2_code[200];
-extern char cmd3_code[200];
-extern char cmd4_code[200];
-extern char cmd5_code[200];
-extern char cmd6_code[200];
-extern char cmd7_code[200];
-*/
 extern char cmd_code[201];
-
-/*
-unsigned char codebuff[100];
-unsigned char x[1]={0};
-volatile unsigned char *codebufpoint = x;
-*/
-unsigned char codebuff[100];              //**
 char x[1]={0};
 volatile char *codebufpoint = x;
 extern int X_ADD,X_INTERVAL;   //**ͼƬ���
 
-#if tan_mask
-//void pushButtonCodeToFifo(uint8_t *buttoncode)
-void pushButtonCodeToFifo(void)
-{
-	uint8_t i = 0,j;
-#if 1	
-	while(*(codebufpoint) != '\0')
-	{
-		memset(codebuff,0,sizeof(codebuff));
-		
-		while(*(codebufpoint) != 0x3b)//�������Էֺ�Ϊ��������
-		{
-			codebuff[i] = *codebufpoint;
-			i++;
-			codebufpoint++;
-		}
-		
-		codebuff[i] = '\n';
-		
-		codebufpoint += 1;		
-		if(checkFIFO(&gcodeCmdTxFIFO) != fifo_full)
-		{
-			pushFIFO(&gcodeCmdTxFIFO, codebuff);
-		}
-		else
-		{
-			codebufpoint = codebufpoint - i - 1;
-			break;
-		}
-		i = 0;
-	}
-#endif
-	
-}
-#endif
 static void cbMoreWin(WM_MESSAGE * pMsg) {
 
-	//unsigned char codebuff[100];
 	uint8_t *codebuffpointer;
 	unsigned char i = 0,j = 0;
 	
 	struct PressEvt *press_event;
-	//char buf[30] = {0};
-
 	switch (pMsg->MsgId) {
 	case WM_PAINT:
-	//GUI_SetBkColor(GUI_BLACK);
-	//	GUI_Clear();
-	//GUI_DispString("window");
 		break;
 	case WM_TOUCH:
 	 	press_event = (struct PressEvt *)pMsg->Data.p;
@@ -101,58 +44,40 @@ static void cbMoreWin(WM_MESSAGE * pMsg) {
 	  break;
 
 	case WM_NOTIFY_PARENT:
-		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED)
-		{	
+		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
 			press_event = (struct PressEvt *)pMsg->Data.p;
-
-		
-			if(pMsg->hWinSrc == buttonCustom1.btnHandle)
-			{
-				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD1_ADDR,201);
-				codebufpoint = cmd_code;
-			}
-			else if(pMsg->hWinSrc == buttonCustom2.btnHandle)
-			{
-				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD2_ADDR,201);
-				codebufpoint = cmd_code;
-
-			}
-			else if(pMsg->hWinSrc == buttonCustom3.btnHandle)
-			{
-				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD3_ADDR,201);
-				codebufpoint = cmd_code;				
-			}
-			else if(pMsg->hWinSrc == buttonCustom4.btnHandle)
-			{
+			if(pMsg->hWinSrc == buttonCustom1.btnHandle) {
+				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD1_ADDR,200);
+				SERIAL_ECHOLN("CONFIG CODE");
+				SERIAL_ECHOLN(cmd_code);
+				SERIAL_ECHOLN(cmd_code);
+				MYSERIAL.inject(cmd_code);
+			} else if(pMsg->hWinSrc == buttonCustom2.btnHandle) {
+				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD2_ADDR,200);
+				strcpy(cmd_code,"G28");
+				MYSERIAL.inject(cmd_code);
+			} else if(pMsg->hWinSrc == buttonCustom3.btnHandle) {
+				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD3_ADDR,200);
+				strcpy(cmd_code,"G28;");
+				MYSERIAL.inject(cmd_code);
+				MYSERIAL.inject(cmd_code);
+			} else if(pMsg->hWinSrc == buttonCustom4.btnHandle) {
 				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD4_ADDR,201);
-				codebufpoint = cmd_code;
-
-			}
-			else if(pMsg->hWinSrc == buttonCustom5.btnHandle)
-			{
+				MYSERIAL.inject(cmd_code);
+			} else if(pMsg->hWinSrc == buttonCustom5.btnHandle) {
 				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD5_ADDR,201);
-				codebufpoint = cmd_code;
-
-			}
-			else if(pMsg->hWinSrc == buttonCustom6.btnHandle)
-			{
+				MYSERIAL.inject(cmd_code);
+			} else if(pMsg->hWinSrc == buttonCustom6.btnHandle) {
 				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD6_ADDR,201);
-				codebufpoint = cmd_code;
-
-			}
-			else if(pMsg->hWinSrc == buttonCustom7.btnHandle)
-			{
+				MYSERIAL.inject(cmd_code);
+			} else if(pMsg->hWinSrc == buttonCustom7.btnHandle) {
 				SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_CMD7_ADDR,201);
-				codebufpoint = cmd_code;
-
-			}			
-			else if(pMsg->hWinSrc == buttonRet.btnHandle)
-			{
+				MYSERIAL.inject(cmd_code);
+			} else if(pMsg->hWinSrc == buttonRet.btnHandle) {
 				last_disp_state = MORE_UI;
 				Clear_more();
 				draw_return_ui();		
 			}
-
 		}
 		break;
 	default:
@@ -161,8 +86,10 @@ static void cbMoreWin(WM_MESSAGE * pMsg) {
 }
 
 
-void draw_More()
-{
+void draw_More(){
+	more_ui.show();
+	return;
+
 if(disp_state_stack._disp_state[disp_state_stack._disp_index] != MORE_UI)
 	{
 		disp_state_stack._disp_index++;
@@ -174,21 +101,6 @@ if(disp_state_stack._disp_state[disp_state_stack._disp_index] != MORE_UI)
 	GUI_SetBkColor(gCfgItems.background_color);
 	GUI_SetColor(gCfgItems.title_color);
 	GUI_Clear();
-	#if 0
-	//GUI_SetFont(&FONT_TITLE);
-	if(gCfgItems.language == LANG_COMPLEX_CHINESE)
-	{
-		GUI_SetFont(&GUI_FontHZ16);
-	}
-	else if(gCfgItems.language == LANG_SIMPLE_CHINESE)
-	{
-		GUI_SetFont(&FONT_TITLE);
-	}
-	else
-	{
-		GUI_SetFont(&GUI_FontHZ_fontHz18);
-	}
-#endif
 
 	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
 	
@@ -299,6 +211,8 @@ if(disp_state_stack._disp_state[disp_state_stack._disp_index] != MORE_UI)
 
 void Clear_more()
 {
+	more_ui.hide();
+	return;
 	GUI_SetBkColor(gCfgItems.background_color);
 	if(WM_IsWindow(hMoreWnd))
 	{

@@ -4,6 +4,7 @@
 #include "draw_ui.h"
 #include "draw_set.h"
 
+#include "serial.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
 #include "UI.h"
@@ -32,11 +33,9 @@ extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
 
 extern uint8_t command_send_flag;
 
-extern volatile char *codebufpoint;
 extern char cmd_code[201];
 extern int X_ADD,X_INTERVAL;   //**ͼƬ���
 extern uint32_t choose_ret;
-extern uint8_t disp_in_file_dir;
 	
 static BUTTON_STRUCT buttonDisk, buttonVarify, buttonMachine, buttonConnect, buttonWifi, buttonLanguage, buttonAbout, buttonFunction_1,buttonFunction_2,buttonFunction_3,buttonRet,buttonFilamentChange,buttonFan,buttonBreakpoint;
 static BUTTON_STRUCT buttonMoto_off,buttonMachinePara;
@@ -157,21 +156,8 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 				}
 				else if(pMsg->hWinSrc == buttonFunction_1.btnHandle)
 				{	
-					/*if((gCfgItems.leveling_mode == 1)||CfgPrinterItems.cfg_drive_system == 3)
-					{
-						memset(cmd_code,0,sizeof(cmd_code));
-						SPI_FLASH_BufferRead((u8*)cmd_code,BUTTON_FUNCTION2_ADDR,201);
-						codebufpoint = cmd_code;
-					}
-					else
-					{
-						last_disp_state = SET_UI;
-						Clear_Set();
-						draw_leveling();						
-					}*/
-					
 					SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_FUNCTION1_ADDR,201);
-					codebufpoint = cmd_code;
+					MYSERIAL.inject(cmd_code);
 				}
 				else if(pMsg->hWinSrc == buttonBreakpoint.btnHandle)
 				{
@@ -179,7 +165,6 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 					Clear_Set();
 					gCfgItems.breakpoint_reprint_flg = 1;
                     gCfgItems.breakpoint_flg=1;
-					disp_in_file_dir = 1;
 					draw_print_file();
 				}
 				else if(pMsg->hWinSrc == buttonMachinePara.btnHandle)

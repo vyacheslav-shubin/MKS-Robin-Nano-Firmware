@@ -12784,8 +12784,7 @@ inline void gcode_T(const uint8_t tmp_extruder) {
 void process_parsed_command() {
   KEEPALIVE_STATE(IN_HANDLER);
 
-  //SERIAL_ECHOPAIR("L: ", parser.command_letter);
-  //SERIAL_ECHOPAIR("N: ", parser.codenum);
+  //SERIAL_ECHOPAIR("CMD: ", parser.command_ptr);
   //SERIAL_EOL();
 
   // Handle a known G, M, or T
@@ -16085,7 +16084,7 @@ void loop() {
 	
 	filament_check();
 	
-	MYSERIAL.MoremenuCmd();
+	MYSERIAL.loopInjection();
 
 #endif
   if (commands_in_queue < BUFSIZE) get_available_commands();

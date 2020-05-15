@@ -56,5 +56,6 @@ void lang_std(void) {
 	lang_str.fan = "Fan";
 	lang_str.speed = "Speed";
 	lang_str.babysteps = "Babysteps";
+	lang_str.continue_print = "Continue";
 
 }

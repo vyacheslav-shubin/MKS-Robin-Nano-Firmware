@@ -22,6 +22,7 @@ typedef struct {
 	const char * filament;
 	const char * back;
 	const char * more;
+	const char * continue_print;
 	const char * print;
 	const char * settings;
 	const char * tools;

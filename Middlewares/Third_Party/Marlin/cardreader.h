@@ -180,7 +180,6 @@ public:
     void automount();
 	void get_file_list(char *path);
 	uint8_t Explore_Disk (char* path , uint8_t recu_level);
-	void ShowSDFiles(void);
 	int ascii2dec(char *ascii, char width);
 	void get_sd_cfg(void);
 	#ifdef GLENN_DEBUG

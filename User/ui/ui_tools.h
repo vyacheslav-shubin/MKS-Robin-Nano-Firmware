@@ -85,13 +85,13 @@ extern "C" {
 #define img_tools				"bmp_tool.bin"
 #define img_continue_print		"bmp_breakpoint.bin"
 
-#define img_lang_rus			"bmp_russian_sel.bin"
-#define img_lang_eng			"bmp_english_sel.bin"
-#define img_lang_spa			"bmp_spanish_sel.bin"
-#define img_lang_ita			"bmp_italy_sel.bin"
-#define img_lang_fra			"bmp_french_sel.bin"
-#define img_lang_cn_simp		"bmp_simplified_cn_sel.bin"
-#define img_lang_cn_comp		"bmp_traditional_cn_sel.bin"
+#define img_lang_rus			"bmp_ru.bin"
+#define img_lang_eng			"bmp_en.bin"
+#define img_lang_spa			"bmp_sp.bin"
+#define img_lang_ita			"bmp_it.bin"
+#define img_lang_fra			"bmp_fr.bin"
+#define img_lang_cn_simp		"bmp_cns.bin"
+#define img_lang_cn_comp		"bmp_cnc.bin"
 
 #define img_dir 				"bmp_dir.bin"
 #define img_file 				"bmp_file.bin"
@@ -224,8 +224,6 @@ extern void ui_pop_disp_stack(void);
 
 extern void ui_clear_screen(void);
 extern void ui_set_encoding(void);
-extern void ui_make_title(void);
-extern void ui_init_page(void);
 extern WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb);
 extern void ui_drop_window(WM_HWIN wnd);
 

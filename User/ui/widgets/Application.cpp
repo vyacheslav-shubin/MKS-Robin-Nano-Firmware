@@ -17,6 +17,11 @@
 
 Application ui_app;
 
+
+void Application::drawTitle() {
+	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
+}
+
 void Application::start() {
 	GUI_Init();
 	this->drawLogo();

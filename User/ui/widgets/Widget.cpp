@@ -43,8 +43,8 @@ char * Widget::getTitle() {
 }
 
 void Widget::recreate() {
-	ui_drop_window(this->hWnd);
-	ui_init_page();
+	this->dropWindow();
+	this->initPage();
 	this->hWnd = ui_std_window(widget_callback);
     this->createControls();
 }
@@ -53,15 +53,27 @@ void Widget::recreate() {
 void Widget::show(Widget * caller) {
 	ui_app.current_ui = this;
 	ui_app.push(this);
-	ui_init_page();
+	this->initPage();
 	this->hWnd = ui_std_window(widget_callback);
     this->createControls();
 }
 
 void Widget::hide() {
-	ui_drop_window(this->hWnd);
-	this->hWnd = 0;
+	this->dropWindow();
 	last_disp_state = this->id;
 	ui_app.current_ui = 0;
 }
 
+void Widget::dropWindow(){
+	GUI_SetBkColor(gCfgItems.background_color);
+	if(WM_IsWindow(this->hWnd)) {
+		WM_DeleteWindow(this->hWnd);
+		this->hWnd = 0;
+	}
+}
+
+void Widget::initPage() {
+	ui_clear_screen();
+	ui_set_encoding();
+	ui_app.drawTitle();
+}

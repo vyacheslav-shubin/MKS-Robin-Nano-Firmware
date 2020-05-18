@@ -49,6 +49,19 @@ typedef struct {
 	const char * fan;
 	const char * speed;
 	const char * babysteps;
+
+	const char * ui_title_main;
+	const char * ui_title_tool;
+	const char * ui_title_file_browser;
+	const char * ui_title_file_babysteps;
+	const char * ui_title_file_settings;
+	const char * ui_title_file_language;
+	const char * ui_title_file_preheat;
+	const char * ui_title_file_fan;
+	const char * ui_title_file_filament;
+	const char * ui_title_file_move;
+	const char * ui_title_file_home;
+	const char * ui_title_file_leveling;
 } CONFIG_LANG;
 
 #if defined(__cplusplus)

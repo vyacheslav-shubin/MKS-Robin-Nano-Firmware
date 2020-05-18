@@ -1,5 +1,6 @@
 #include "ui_tools.h"
 #include "GUI.h"
+#include "Application.h"
 #include "draw_ui.h"
 #include "Marlin.h"
 #include "planner.h"
@@ -104,17 +105,11 @@ void ui_set_encoding(void) {
 	}
 }
 
-void ui_make_title(void) {
-//	GUI_UC_SetEncodeNone();
-//	GUI_SetFont(&GUI_FontHZ16);
-	SERIAL_ECHOLNPAIR("TITLE: ", creat_title_text());
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
-}
 
 void ui_init_page(void) {
 	ui_clear_screen();
 	ui_set_encoding();
-	ui_make_title();
+	ui_app.drawTitle();
 }
 
 
@@ -123,7 +118,6 @@ WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb) {
 	ui_init_page();
 	return ui_std_window(cb);
 }
-
 
 void ui_buttonpreset(BUTTON_Handle btn) {
 	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);

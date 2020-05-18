@@ -27,6 +27,13 @@ private:
 	char is_wanted(FILINFO * fi) {
 		if ((fi->lfname[0] == '.') || (fi->fname[0] == '.') || (fi->fattrib & (AM_SYS|AM_HID)))
 			return 0;
+		if (
+				(strstr(fi->fname, "mks_pic")!=0)
+				|| (strstr(fi->fname, "bak_pic")!=0)
+				|| (strstr(fi->fname, "mks_font")!=0)
+				|| (strstr(fi->fname, "bak_font")!=0)
+		)
+			return 0;
 		return (strstr(fi->fname, ".GCO") || (fi->fattrib & AM_DIR));
 	}
 protected:

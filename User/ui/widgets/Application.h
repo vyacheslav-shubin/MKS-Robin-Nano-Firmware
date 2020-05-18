@@ -17,6 +17,7 @@ class Application {
 public:
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
+	void drawTitle();
 	void start();
 	void loop();
 	void startPrintFile();

@@ -27,6 +27,8 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn) {};
 	virtual void refresh_05() {};
 	virtual void refresh_1s() {};
+	void dropWindow();
+	void initPage();
 public:
 	Widget(DISP_STATE id) {this->id=id;};
 	bool is_active();

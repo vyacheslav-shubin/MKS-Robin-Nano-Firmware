@@ -40,4 +40,18 @@ void lang_ru(void) {
 	lang_str.babysteps = "Микрошаги";
 	lang_str.continue_print = "Продолжить";
 
+
+	lang_str.ui_title_main = "Готов";
+	lang_str.ui_title_tool = "Выбор инструмента";
+	lang_str.ui_title_file_browser = "Выбор файла";
+	lang_str.ui_title_file_babysteps = "Настройка сдвига";
+	lang_str.ui_title_file_settings = "Выбор настроек";
+	lang_str.ui_title_file_language = "Выбор языка";
+	lang_str.ui_title_file_preheat = "Управление нагревателями";
+	lang_str.ui_title_file_fan = "Управление вентилятором";
+	lang_str.ui_title_file_filament = "Управление филаментом";
+	lang_str.ui_title_file_move = "Управление моторами";
+	lang_str.ui_title_file_home = "Установка нолей осей";
+	lang_str.ui_title_file_leveling = "Настройка уровня стола";
+
 }

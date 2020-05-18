@@ -12,9 +12,9 @@
 #include "MoreUI.h"
 #include "FilamentUI.h"
 #include "PreheatUI.h"
+#include "FileBrowserUI.h"
 #include "ui_tools.h"
 
-#include "draw_print_file.h"
 #include "draw_set.h"
 
 MainUI main_ui;
@@ -28,7 +28,7 @@ void MainUI::on_button(UI_BUTTON hBtn) {
 		draw_Set();
 	} else if (hBtn==this->ui.print) {
 		this->hide();
-		draw_print_file();
+		file_browser_ui.show(this);
 	} else  if (hBtn==this->ui.preheat) {
 		this->hide();
 		preheat_ui.show(this);

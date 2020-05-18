@@ -9,9 +9,9 @@
 #include "ili9320.h"
 
 extern CardReader card;
+FATFS fs;
 
-char ui_buf1_20[20];
-char ui_buf1_80[80];
+char ui_buf1_100[100];
 
 UPLOAD_INFO upload_file_info = {0, 0};
 

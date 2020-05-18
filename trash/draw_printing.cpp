@@ -7,6 +7,7 @@
 #include "CHECKBOX.h"
 #include "draw_fan.h"
 #include "draw_operate.h"
+#include "draw_print_file.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
@@ -15,7 +16,6 @@
 #include "sh_tools.h"
 #include "pic_manager.h"
 
-#include "draw_print_file.h"
 #include "pic.h"
 #include "Marlin.h"
 #include "mks_reprint.h"

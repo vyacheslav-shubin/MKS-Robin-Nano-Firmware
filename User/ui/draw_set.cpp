@@ -17,7 +17,6 @@
 //#include "touch_calibrate.h"
 #include "pic_manager.h"
 #include "spi_flash.h"
-#include "draw_print_file.h"
 #include "draw_wifi_list.h"
 #include "wifi_module.h"
 
@@ -165,7 +164,7 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 					Clear_Set();
 					gCfgItems.breakpoint_reprint_flg = 1;
                     gCfgItems.breakpoint_flg=1;
-					draw_print_file();
+                    file_browser_ui.show();
 				}
 				else if(pMsg->hWinSrc == buttonMachinePara.btnHandle)
                 {

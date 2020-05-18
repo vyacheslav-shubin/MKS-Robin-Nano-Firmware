@@ -42,6 +42,14 @@ char * Widget::getTitle() {
 
 }
 
+void Widget::recreate() {
+	ui_drop_window(this->hWnd);
+	ui_init_page();
+	this->hWnd = ui_std_window(widget_callback);
+    this->createControls();
+}
+
+
 void Widget::show(Widget * caller) {
 	ui_app.current_ui = this;
 	ui_app.push(this);

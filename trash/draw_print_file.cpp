@@ -1,8 +1,9 @@
 //TODO: убрать диалог подтверждения перед печатью
+#include "../../trash/draw_print_file.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
-#include "draw_print_file.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "TEXT.h"

@@ -12,7 +12,6 @@
 #include "draw_language.h"
 #include "draw_about.h"
 #include "draw_wifi.h"
-#include "draw_print_file.h"
 #include "draw_set.h"
 #include "draw_Sprayer.h"
 #include "draw_machine.h"
@@ -172,7 +171,6 @@ inline char * get_display_title_ref(int index) {
 	switch(disp_state_stack._disp_state[index]) {
 		case MOTORDIR_UI:	return lang_str.axis_inversion;
 		case PRINT_READY_UI:	return main_menu.title;
-		case PRINT_FILE_UI:		return file_menu.title;
 		case PRINTING_UI:
 				if(disp_state_stack._disp_state[disp_state_stack._disp_index] == PRINTING_UI) {
 					return common_menu.print_special_title;
@@ -312,7 +310,6 @@ void disp_sel_lang()
 void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
-		case PRINT_FILE_UI:		clear_print_file(); 	break;
 		case SET_UI:			Clear_Set();			break;
 		case SPRAYER_UI:								break;
 		case MACHINE_UI:								break;
@@ -378,8 +375,8 @@ void draw_return_ui() {
 			case OPERATE_UI:		printing_tools_ui.show();			break;
 			case CHANGE_SPEED_UI:	speed_ui.show();		break;
 			case MORE_UI:			more_ui.show();			break;
+			case FILE_BROWSER_UI: 	file_browser_ui.show();		break;
 
-			case PRINT_FILE_UI: 	draw_print_file();		break;
 			case SET_UI:			draw_Set();				break;
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
@@ -499,7 +496,6 @@ void GUI_RefreshPage() {
   	__IO uint32_t i =0;
 	switch(disp_state) {
 		case PRINT_READY_UI: break;
-		case PRINT_FILE_UI: break;
 		case OPERATE_UI: break;
 
 		case WIFI_UI:

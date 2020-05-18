@@ -18,6 +18,7 @@ typedef struct {
 	UI_BUTTON 	filament;
 	UI_BUTTON 	continuePrint;
 	UI_BUTTON 	more;
+	UI_BUTTON 	files;
 	UI_BUTTON 	ret;
 }TOOLS_UI_CONTROLS;
 

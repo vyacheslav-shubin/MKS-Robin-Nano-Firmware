@@ -125,7 +125,6 @@ User/ui/draw_motor_dir.cpp
 User/ui/draw_motor_settings.cpp
 User/ui/draw_nozzle_config.cpp
 User/ui/draw_number_key.cpp
-User/ui/draw_print_file.cpp
 User/ui/draw_set.cpp
 User/ui/draw_steps.cpp
 User/ui/draw_stroke.cpp
@@ -171,3 +170,4 @@ User/ui/widgets/FilamentUI.cpp
 User/ui/widgets/PrintingToolsUI.cpp
 User/ui/widgets/SpeedUI.cpp
 User/ui/widgets/MoreUI.cpp
+User/ui/widgets/FileBrowserUI.cpp

@@ -11,6 +11,7 @@
 #include "HomeUI.h"
 #include "MoreUI.h"
 #include "FilamentUI.h"
+#include "FileBrowserUI.h"
 #include "integration.h"
 #include "ui_tools.h"
 
@@ -36,10 +37,10 @@ void ToolsUI::createControls() {
 
 	if (gCfgItems.MoreItem_pic_cnt)
 		this->ui.more = this->createButtonAt(2, 1, img_more, lang_str.more);
+	else
+		this->ui.files = this->createButtonAt(2, 1, img_print, lang_str.print);
 	this->ui.ret = this->createButtonRet();
 }
-
-#include "draw_print_file.h"
 
 void ToolsUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.preheat) {
@@ -65,6 +66,9 @@ void ToolsUI::on_button(UI_BUTTON hBtn) {
 		this->hide();
 		gCfgItems.breakpoint_reprint_flg = 1;
         gCfgItems.breakpoint_flg=1;
-		draw_print_file();
+		file_browser_ui.show(this);
+	} else if (hBtn==this->ui.files) {
+		this->hide();
+		file_browser_ui.show();
 	}
 }

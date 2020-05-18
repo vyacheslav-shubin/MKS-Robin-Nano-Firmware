@@ -24,6 +24,7 @@
 #define __SERIAL_H__
 
 #include "MarlinConfig.h"
+#include "Marlin.h"
 /*
 #ifdef USBCON
   #include <HardwareSerial.h>

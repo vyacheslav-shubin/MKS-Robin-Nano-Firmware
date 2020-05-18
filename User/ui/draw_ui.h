@@ -263,7 +263,6 @@ extern PRINT_TIME  print_time;
 typedef enum {
 	MAIN_UI,
 	PRINT_READY_UI,
-	PRINT_FILE_UI,
 	PRINTING_UI,
 	MOVE_MOTOR_UI,
 	OPERATE_UI,
@@ -320,7 +319,9 @@ typedef enum {
 	DOUBLE_Z_UI,
 	ENABLE_INVERT_UI,
 	NUMBER_KEY_UI,
-	BABY_STEP_UI
+	BABY_STEP_UI,
+	FILE_BROWSER_UI,
+
 } DISP_STATE;
 
 typedef struct {

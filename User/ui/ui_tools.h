@@ -11,6 +11,10 @@
 extern "C" {
 #endif
 
+#define img_page_up				"bmp_page_up.bin"
+#define img_page_down			"bmp_page_down.bin"
+#define img_page_back			"bmp_page_back.bin"
+
 #define img_fan_state0		"bmp_fan_state0.bin"
 #define img_fan_state1		"bmp_fan_state1.bin"
 #define img_fan_state2		"bmp_fan_state2.bin"
@@ -81,6 +85,10 @@ extern "C" {
 #define img_tools				"bmp_tool.bin"
 #define img_continue_print		"bmp_breakpoint.bin"
 
+#define img_dir 				"bmp_dir.bin"
+#define img_file 				"bmp_file.bin"
+#define img_file_wpv			"bmp_file_WPV.bin"
+
 #define img_leveling_point1		"bmp_leveling1.bin"
 #define img_leveling_point2		"bmp_leveling2.bin"
 #define img_leveling_point3		"bmp_leveling3.bin"
@@ -120,9 +128,12 @@ extern "C" {
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
+extern	FATFS fs;
+
 extern const char* FAN_STATES[3];
-extern char ui_buf1_20[20];
-extern char ui_buf1_80[80];
+extern char ui_buf1_100[100];
+#define ui_buf1_20	ui_buf1_100
+#define ui_buf1_80	ui_buf1_100
 
 typedef struct{
 	const char* pic;

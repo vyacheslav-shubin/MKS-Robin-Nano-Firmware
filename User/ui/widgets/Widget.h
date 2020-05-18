@@ -35,6 +35,7 @@ public:
 	virtual char * getTitle();
 	virtual void show(Widget * caller);
 	virtual void show() {this->show(0);};
+	virtual void recreate();
 	virtual void refresh();
 	virtual void hide();
 

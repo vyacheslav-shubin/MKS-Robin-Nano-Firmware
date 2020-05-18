@@ -15,6 +15,7 @@
 #include "PrintingUI.h"
 #include "FanUI.h"
 #include "BabystepUI.h"
+#include "ConfigurationRootUI.h"
 #include "MotorMoveUI.h"
 #include "PreheatUI.h"
 #include "HomeUI.h"

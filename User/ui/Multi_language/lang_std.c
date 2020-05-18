@@ -58,18 +58,27 @@ void lang_std(void) {
 	lang_str.babysteps = "Babysteps";
 	lang_str.continue_print = "Continue";
 
+	lang_str.machine = "Machine";
+	lang_str.temperature = "Temperture";
+	lang_str.motors = "Motors";
+	lang_str.advanced = "Advanced";
 
 	lang_str.ui_title_main = "Ready";
-	lang_str.ui_title_tool = "Select tool";
+	lang_str.ui_title_tools = "Select tool";
 	lang_str.ui_title_file_browser = "File browser";
-	lang_str.ui_title_file_babysteps = "Babysteps settings";
-	lang_str.ui_title_file_settings = "Select settings";
-	lang_str.ui_title_file_language = "Select language";
-	lang_str.ui_title_file_preheat = "Preheating tools";
-	lang_str.ui_title_file_fan = "Fun tools";
-	lang_str.ui_title_file_filament = "Filament tools";
-	lang_str.ui_title_file_move = "Motors control";
-	lang_str.ui_title_file_home = "Head parking";
-	lang_str.ui_title_file_leveling = "Leveling tools";
+	lang_str.ui_title_babysteps = "Babysteps settings";
+	lang_str.ui_title_settings = "Select settings";
+	lang_str.ui_title_language = "Select language";
+	lang_str.ui_title_preheat = "Preheating tools";
+	lang_str.ui_title_fan = "Fun tools";
+	lang_str.ui_title_filament = "Filament tools";
+	lang_str.ui_title_move = "Motors control";
+	lang_str.ui_title_home = "Head parking";
+	lang_str.ui_title_leveling = "Leveling tools";
+	lang_str.ui_title_config = "Configuration";
+	lang_str.ui_title_more = "More...";
+	lang_str.ui_title_printing_tools = "Printing tools";
+	lang_str.ui_title_printing = "Printing";
+	lang_str.ui_title_speed = "Speed";
 
 }

@@ -50,18 +50,29 @@ typedef struct {
 	const char * speed;
 	const char * babysteps;
 
+	const char * machine;
+	const char * temperature;
+	const char * motors;
+	const char * advanced;
+
+
 	const char * ui_title_main;
-	const char * ui_title_tool;
+	const char * ui_title_tools;
 	const char * ui_title_file_browser;
-	const char * ui_title_file_babysteps;
-	const char * ui_title_file_settings;
-	const char * ui_title_file_language;
-	const char * ui_title_file_preheat;
-	const char * ui_title_file_fan;
-	const char * ui_title_file_filament;
-	const char * ui_title_file_move;
-	const char * ui_title_file_home;
-	const char * ui_title_file_leveling;
+	const char * ui_title_babysteps;
+	const char * ui_title_settings;
+	const char * ui_title_language;
+	const char * ui_title_preheat;
+	const char * ui_title_fan;
+	const char * ui_title_filament;
+	const char * ui_title_move;
+	const char * ui_title_home;
+	const char * ui_title_leveling;
+	const char * ui_title_config;
+	const char * ui_title_more;
+	const char * ui_title_printing_tools;
+	const char * ui_title_printing;
+	const char * ui_title_speed;
 } CONFIG_LANG;
 
 #if defined(__cplusplus)

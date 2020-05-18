@@ -21,6 +21,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual char * getStateString();
 public:
+	virtual char * getTitle() {return lang_str.ui_title_babysteps;};
 	BabystepUI() : XyzUI(BABY_STEP_UI) {this->step_count = 3;} ;
 };
 

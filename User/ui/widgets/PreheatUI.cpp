@@ -14,7 +14,7 @@ PreheatUI preheat_ui;
 
 
 typedef struct {
-	char * picture;
+	const char * picture;
 	float tsprayer;
 	short tbed;
 } PREHEAT_PRESET;
@@ -125,7 +125,7 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 			case 2:shUI::setSprayerTemperature(1, 0); break;
 		}
 	} else if(hBtn == this->ui.preset) {
-		PREHEAT_PRESET * cp = &preset[this->current_preset];
+		const PREHEAT_PRESET * cp = &preset[this->current_preset];
 		shUI::setBedTemperature(cp->tbed);
 		switch (selector) {
 			case 0:

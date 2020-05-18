@@ -40,6 +40,7 @@ protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:
+	virtual char * getTitle() {return lang_str.ui_title_file_browser;};
 	FileBrowserUI(): StdWidget(FILE_BROWSER_UI) {};
 	friend	UIFileBrouser;
 };

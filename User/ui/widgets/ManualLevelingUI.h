@@ -29,6 +29,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_05();
 public:
+	virtual char * getTitle() {return lang_str.ui_title_leveling;};
 	ManualLevelingUI() : StdWidget(LEVELING_UI) {};
 };
 

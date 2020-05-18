@@ -40,18 +40,28 @@ void lang_ru(void) {
 	lang_str.babysteps = "Микрошаги";
 	lang_str.continue_print = "Продолжить";
 
+	lang_str.machine = "Принтер";
+	lang_str.temperature = "Нагрев";
+	lang_str.motors = "Моторы";
+	lang_str.advanced = "Дополнительно";
+
 
 	lang_str.ui_title_main = "Готов";
-	lang_str.ui_title_tool = "Выбор инструмента";
+	lang_str.ui_title_tools = "Выбор инструмента";
 	lang_str.ui_title_file_browser = "Выбор файла";
-	lang_str.ui_title_file_babysteps = "Настройка сдвига";
-	lang_str.ui_title_file_settings = "Выбор настроек";
-	lang_str.ui_title_file_language = "Выбор языка";
-	lang_str.ui_title_file_preheat = "Управление нагревателями";
-	lang_str.ui_title_file_fan = "Управление вентилятором";
-	lang_str.ui_title_file_filament = "Управление филаментом";
-	lang_str.ui_title_file_move = "Управление моторами";
-	lang_str.ui_title_file_home = "Установка нолей осей";
-	lang_str.ui_title_file_leveling = "Настройка уровня стола";
+	lang_str.ui_title_babysteps = "Настройка сдвига";
+	lang_str.ui_title_settings = "Выбор настроек";
+	lang_str.ui_title_language = "Выбор языка";
+	lang_str.ui_title_preheat = "Управление нагревателями";
+	lang_str.ui_title_fan = "Управление вентилятором";
+	lang_str.ui_title_filament = "Управление филаментом";
+	lang_str.ui_title_move = "Управление моторами";
+	lang_str.ui_title_home = "Установка нолей осей";
+	lang_str.ui_title_leveling = "Настройка уровня стола";
+	lang_str.ui_title_config = "Конфигурирование";
+	lang_str.ui_title_more = "Дополнительно...";
+	lang_str.ui_title_printing_tools = "Подстройка печати";
+	lang_str.ui_title_printing= "Печать";
+	lang_str.ui_title_speed = "Подстройка скорости";
 
 }

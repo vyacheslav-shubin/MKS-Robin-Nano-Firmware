@@ -27,6 +27,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_1s();
 public:
+	virtual char * getTitle() {return lang_str.ui_title_home;};
 	HomeUI() : StdWidget(ZERO_UI) {};
 };
 

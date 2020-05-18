@@ -19,7 +19,12 @@ Application ui_app;
 
 
 void Application::drawTitle() {
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS);
+	const char * title = 0;
+	if (this->current_ui!=0)
+		title = this->current_ui->getTitle();
+	if (title==0)
+		title = creat_title_text();
+	GUI_DispStringAt(title,  TITLE_XPOS, TITLE_YPOS);
 }
 
 void Application::start() {

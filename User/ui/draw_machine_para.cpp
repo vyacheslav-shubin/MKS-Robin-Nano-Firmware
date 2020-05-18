@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
 #include "draw_ui.h"
 
@@ -80,7 +81,9 @@ static void cbMachineParaWin(WM_MESSAGE * pMsg) {
 
 void draw_MachinePara()
 {   
-    int i;
+    configuration_root_ui.show();
+    return;
+	int i;
 
     if(disp_state_stack._disp_state[disp_state_stack._disp_index] != MACHINE_PARA_UI)
     {
@@ -137,6 +140,8 @@ void draw_MachinePara()
 
 void Clear_MachinePara()
 {
+    configuration_root_ui.hide();
+    return;
 	GUI_SetBkColor(gCfgItems.background_color);
 	if(WM_IsWindow(hMachineParaWnd))
 	{

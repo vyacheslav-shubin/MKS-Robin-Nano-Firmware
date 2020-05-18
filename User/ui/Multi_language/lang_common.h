@@ -4,6 +4,11 @@
 
 #define LANG_RU		1
 #define LANG_EN		1
+#define LANG_ES		0
+#define LANG_IT		0
+#define LANG_FR		0
+#define LANG_CN_S	0
+#define LANG_CN_C	0
 
 typedef struct {
 	const char * power_off_after_print;

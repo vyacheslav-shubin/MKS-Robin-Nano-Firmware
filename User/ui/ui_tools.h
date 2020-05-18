@@ -85,6 +85,14 @@ extern "C" {
 #define img_tools				"bmp_tool.bin"
 #define img_continue_print		"bmp_breakpoint.bin"
 
+#define img_lang_rus			"bmp_russian_sel.bin"
+#define img_lang_eng			"bmp_english_sel.bin"
+#define img_lang_spa			"bmp_spanish_sel.bin"
+#define img_lang_ita			"bmp_italy_sel.bin"
+#define img_lang_fra			"bmp_french_sel.bin"
+#define img_lang_cn_simp		"bmp_simplified_cn_sel.bin"
+#define img_lang_cn_comp		"bmp_traditional_cn_sel.bin"
+
 #define img_dir 				"bmp_dir.bin"
 #define img_file 				"bmp_file.bin"
 #define img_file_wpv			"bmp_file_WPV.bin"

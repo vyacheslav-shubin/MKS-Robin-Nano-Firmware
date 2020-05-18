@@ -1,7 +1,9 @@
+#include "../../trash/draw_language.h"
+
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
-#include "draw_language.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
@@ -210,7 +212,8 @@ static void cbLanguageWin(WM_MESSAGE * pMsg) {
 
 void draw_Language()
 {
-		
+	language_ui.show();
+	return;
 //	int titleHeight = 30;
 
 //	int imgHeight = LCD_HEIGHT - titleHeight;	
@@ -469,6 +472,8 @@ void disp_sel_item()
 
 void Clear_Language()
 {
+	language_ui.hide();
+	return;
 	GUI_SetBkColor(gCfgItems.background_color);
 	if(WM_IsWindow(hLanguageWnd))
 	{

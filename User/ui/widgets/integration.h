@@ -72,6 +72,7 @@ typedef struct{
 	extern char isPaused();
 	extern char isIdle();
 
+	extern void setLanguage(unsigned char index);
 
 }
 

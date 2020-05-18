@@ -113,7 +113,6 @@ User/ui/draw_home_speed.cpp
 User/ui/draw_hotbed_config.cpp
 User/ui/draw_jerk.cpp
 User/ui/draw_keyboard.cpp
-User/ui/draw_language.cpp
 User/ui/draw_levelingPara_config.cpp
 User/ui/draw_leveling_settings.cpp
 User/ui/draw_machine_para.cpp
@@ -171,3 +170,4 @@ User/ui/widgets/PrintingToolsUI.cpp
 User/ui/widgets/SpeedUI.cpp
 User/ui/widgets/MoreUI.cpp
 User/ui/widgets/FileBrowserUI.cpp
+User/ui/widgets/LanguageUI.cpp

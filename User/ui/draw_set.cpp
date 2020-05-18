@@ -11,7 +11,6 @@
 
 #include "draw_machine.h"
 #include "draw_log_ui.h"
-#include "draw_language.h"
 #include "draw_about.h"
 #include "draw_wifi.h"
 //#include "touch_calibrate.h"
@@ -83,7 +82,7 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
                     TEXT_SetDefaultFont(&FONT_TITLE);                    
                     GUI_UC_SetEncodeUTF8();
                     
-					draw_Language();
+					language_ui.show();
 				}
                 
 				else if(pMsg->hWinSrc == buttonAbout.btnHandle)

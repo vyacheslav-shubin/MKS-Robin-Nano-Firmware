@@ -180,6 +180,12 @@ namespace shUI {
 				||(mksReprint.mks_printer_state ==MKS_REPRINTED);
 	}
 
+	void setLanguage(unsigned char index) {
+		gCfgItems.language = index;
+		AT24CXX_Write(EPR_LANGUAGE,&index,1);
+		disp_language_init();
+	}
+
 }
 
 

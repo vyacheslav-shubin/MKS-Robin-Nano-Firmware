@@ -9,13 +9,11 @@
 #include "Marlin.h"
 #include "draw_machine.h"
 #include "draw_log_ui.h"
-#include "draw_language.h"
 #include "draw_about.h"
 #include "draw_wifi.h"
 #include "draw_set.h"
 #include "draw_Sprayer.h"
 #include "draw_machine.h"
-#include "draw_language.h"
 #include "draw_log_ui.h"
 #include "draw_wifi.h"
 #include "ff.h"
@@ -313,7 +311,6 @@ void clear_cur_ui() {
 		case SET_UI:			Clear_Set();			break;
 		case SPRAYER_UI:								break;
 		case MACHINE_UI:								break;
-		case LANGUAGE_UI:		Clear_Language();		break;
 		case ABOUT_UI:			Clear_About();			break;
 		case LOG_UI:									break;
 		case DISK_UI:									break;
@@ -376,11 +373,11 @@ void draw_return_ui() {
 			case CHANGE_SPEED_UI:	speed_ui.show();		break;
 			case MORE_UI:			more_ui.show();			break;
 			case FILE_BROWSER_UI: 	file_browser_ui.show();		break;
+			case LANGUAGE_UI:		language_ui.show();		break;
 
 			case SET_UI:			draw_Set();				break;
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
-			case LANGUAGE_UI:		draw_Language();		break;
 			case ABOUT_UI:			draw_About();			break;
 			case CALIBRATE_UI:	break;
 			case DISK_UI:		break;

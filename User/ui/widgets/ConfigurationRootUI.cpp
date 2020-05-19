@@ -6,6 +6,7 @@
  */
 
 #include "ConfigurationRootUI.h"
+#include "MotorConfigUI.h"
 
 ConfigurationRootUI configuration_root_ui;
 
@@ -18,7 +19,6 @@ void ConfigurationRootUI::createControls() {
 	this->ui.advanced = this->createButtonAt(3, 0, img_advanced_settings, lang_str.advanced);
 }
 
-#include "draw_motor_settings.h"
 #include "draw_machine_settings.h"
 #include "draw_temperature_settings.h"
 #include "draw_advanced.h"
@@ -32,7 +32,7 @@ void ConfigurationRootUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn==this->ui.temperature) {
         draw_TemperatureSettings();
 	} else if (hBtn==this->ui.motors) {
-        draw_MotorSettings();
+        motor_config_ui.show(this);
 	} else if (hBtn==this->ui.advanced) {
         draw_Advanced();
 	}

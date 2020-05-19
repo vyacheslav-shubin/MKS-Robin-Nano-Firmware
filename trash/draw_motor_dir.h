@@ -1,20 +1,21 @@
-#ifndef _DRAW_MOTORSETTINGS_H_
-#define _DRAW_MOTORSETTINGS_H_
+#error unused
+
+#ifndef _DRAW_MOTORDIR_H_
+#define _DRAW_MOTORDIR_H_
+
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-void draw_MotorSettings();
+void draw_MotorDir();
 
-void Clear_MotorSettings();
+void Clear_MotorDir();
+
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */
 #endif
 
 
 #endif
-
-
-
 

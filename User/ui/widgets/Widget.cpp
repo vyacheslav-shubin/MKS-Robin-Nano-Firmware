@@ -9,6 +9,14 @@
 #include "GUI.h"
 #include "ui_tools.h"
 #include "WM.h"
+#include "BUTTON.h"
+
+void Widget::buttonPreset(UI_BUTTON btn) {
+	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);
+	BUTTON_SetBkColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_color);
+	BUTTON_SetTextColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_textcolor);
+	BUTTON_SetTextColor(btn, BUTTON_CI_UNPRESSED, gCfgItems.btn_textcolor);
+}
 
 static void widget_callback(WM_MESSAGE * pMsg) {
 	ui_app.current_ui->on_message(pMsg);

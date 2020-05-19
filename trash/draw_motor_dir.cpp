@@ -3,6 +3,8 @@
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "stepper.h"
+#include "mks_cfg.h"
+#include "UI.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -62,7 +64,7 @@ static void cbMotorDirWin(WM_MESSAGE * pMsg) {
 					}
 					ui_update_check_button(ui.y.button_check, mksCfg.invert_y_dir==1);
 					if((stepper.last_direction_bits & (1<<Y_AXIS)) == 0)
-						stepper.last_direction_bits = stepper.last_direction_bits |(1<<Y_AXIS);
+						stepper.last_direction_bits = stepper.last_direction_bits | (1<<Y_AXIS);
 					else
 						stepper.last_direction_bits = stepper.last_direction_bits & (~(1<<Y_AXIS));
     				epr_write_data(EPR_INVERT_Y_DIR, &mksCfg.invert_y_dir,1);
@@ -115,6 +117,8 @@ static void cbMotorDirWin(WM_MESSAGE * pMsg) {
 
 
 void draw_MotorDir() {
+	motor_dir_config_ui.show();
+	return;
     hMotorDirWnd = ui_std_init_window(MOTORDIR_UI, cbMotorDirWin);
     navigator.page = 0;
     navigator.page_count = 1;
@@ -129,6 +133,8 @@ void draw_MotorDir() {
 
 
 void Clear_MotorDir() {
+	motor_dir_config_ui.hide();
+	return;
 	ui_drop_window(hMotorDirWnd);
 }
 

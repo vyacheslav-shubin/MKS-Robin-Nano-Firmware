@@ -13,12 +13,16 @@
 typedef struct {
 	const char * power_off_after_print;
 	const char * simple_main_ui;
-	const char * axis_inversion;
+	const char * axes_inversion;
 	const char * motor_steps_settings;
 	const char * home_speed_settings;
 	const char * acceleration_settings;
 	const char * maximum_speed_settings;
 	const char * jerk_settings;
+} CONFIG_LANG_STR;
+
+
+typedef struct {
 
 	const char * preheat;
 	const char * move;
@@ -55,6 +59,8 @@ typedef struct {
 	const char * motors;
 	const char * advanced;
 
+	const char *yes;
+	const char *no;
 
 	const char * ui_title_main;
 	const char * ui_title_tools;
@@ -73,13 +79,17 @@ typedef struct {
 	const char * ui_title_printing_tools;
 	const char * ui_title_printing;
 	const char * ui_title_speed;
-} CONFIG_LANG;
+
+	CONFIG_LANG_STR config_ui;
+} LANG_STR;
+
+
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-extern CONFIG_LANG lang_str;
+extern LANG_STR lang_str;
 extern void make_lang_str(void);
 extern void lang_std(void);
 extern void lang_ru(void);

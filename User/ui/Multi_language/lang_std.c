@@ -1,7 +1,7 @@
 #include "lang_common.h"
 #include "mks_cfg.h"
 
-CONFIG_LANG lang_str;
+LANG_STR lang_str;
 
 void make_lang_str(void) {
 	lang_std();
@@ -20,14 +20,14 @@ void make_lang_str(void) {
 }
 
 void lang_std(void) {
-	lang_str.power_off_after_print = "Auto Shutdown after print";
-	lang_str.simple_main_ui = "Simple main UI";
-	lang_str.axis_inversion = "Axis inversion";
-	lang_str.motor_steps_settings = "Steps settings";
-	lang_str.home_speed_settings = "Home speed setting";
-	lang_str.acceleration_settings = "Acceleration settings";
-	lang_str.maximum_speed_settings = "Maximum speed settings";
-	lang_str.jerk_settings = "Jerk settings";
+	lang_str.config_ui.power_off_after_print = "Auto Shutdown after print";
+	lang_str.config_ui.simple_main_ui = "Simple main UI";
+	lang_str.config_ui.axes_inversion = "Axes inversion";
+	lang_str.config_ui.motor_steps_settings = "Steps settings";
+	lang_str.config_ui.home_speed_settings = "Home speed setting";
+	lang_str.config_ui.acceleration_settings = "Acceleration settings";
+	lang_str.config_ui.maximum_speed_settings = "Maximum speed settings";
+	lang_str.config_ui.jerk_settings = "Jerk settings";
 
 	lang_str.preheat = "Preheat";
 	lang_str.move = "Move";
@@ -57,6 +57,9 @@ void lang_std(void) {
 	lang_str.speed = "Speed";
 	lang_str.babysteps = "Babysteps";
 	lang_str.continue_print = "Continue";
+
+	lang_str.yes = "Yes";
+	lang_str.no = "No";
 
 	lang_str.machine = "Machine";
 	lang_str.temperature = "Temperture";

@@ -138,6 +138,9 @@ extern "C" {
 #define img_motor_settings				"bmp_MotorSetting.bin"
 #define img_advanced_settings			"bmp_AdvanceSetting.bin"
 
+#define img_check_on 		 "bmp_enable.bin"
+#define img_check_off 		 "bmp_disable.bin"
+
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 

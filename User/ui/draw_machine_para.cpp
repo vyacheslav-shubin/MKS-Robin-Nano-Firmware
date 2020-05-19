@@ -59,7 +59,7 @@ static void cbMachineParaWin(WM_MESSAGE * pMsg) {
     			{
     				last_disp_state = MACHINE_PARA_UI;
     				Clear_MachinePara();
-                    draw_MotorSettings();
+                    motor_config_ui.show();
     		
     			}       
     			else if(pMsg->hWinSrc == buttonAdvanceSetting.btnHandle)

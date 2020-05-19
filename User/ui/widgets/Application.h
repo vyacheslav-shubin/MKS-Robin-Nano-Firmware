@@ -18,6 +18,7 @@ public:
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
 	void drawTitle();
+	char * getTitle();
 	void start();
 	void loop();
 	void startPrintFile();

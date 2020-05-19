@@ -155,154 +155,8 @@ void GUI_callback()
 }
 
 
-void titleText_cat(char *str, int strSize, char *addPart) {
-	if(str == 0 || addPart == 0)
-		return;
-	if(strlen(str) + strlen(addPart) >= strSize)
-		return;
-	strcat(str, addPart);
-}
-
-static char TitleText[30];
-
-inline char * get_display_title_ref(int index) {
-	switch(disp_state_stack._disp_state[index]) {
-		case MOTORDIR_UI:	return lang_str.axis_inversion;
-		case PRINT_READY_UI:	return main_menu.title;
-		case PRINTING_UI:
-				if(disp_state_stack._disp_state[disp_state_stack._disp_index] == PRINTING_UI) {
-					return common_menu.print_special_title;
-				} else {
-					return printing_menu.title;
-				}
-		case MOVE_MOTOR_UI:		return move_menu.title;
-		case OPERATE_UI:
-				if(disp_state_stack._disp_state[disp_state_stack._disp_index] == PRINTING_UI) {
-					return common_menu.operate_special_title;
-				} else {
-					return operation_menu.title;
-				}
-		case FILAMENT_UI: 		return extrude_menu.title;
-		case CHANGE_SPEED_UI: 	return speed_menu.title;
-		case FAN_UI:			return fan_menu.title;
-		case PRE_HEAT_UI:
-
-				if(
-						(disp_state_stack._disp_state[disp_state_stack._disp_index - 1] == OPERATE_UI)) {
-					return preheat_menu.adjust_title;
-				} else {
-					return preheat_menu.title;
-				}
-		case SET_UI:			return set_menu.title;
-		case ZERO_UI:			return home_menu.title;
-
-		case SPRAYER_UI:		return 0;
-		case MACHINE_UI:		return 0;
-
-
-		case LANGUAGE_UI:		return language_menu.title;
-		case ABOUT_UI:			return about_menu.title;
-		case LOG_UI:			return 0;
-		case DISK_UI:			return filesys_menu.title;
-		case DIALOG_UI:			return common_menu.dialog_confirm_title;
-		case WIFI_UI:			return TitleText, wifi_menu.title;
-		case MORE_UI:
-		case LEVELING_UI:
-        case MESHLEVELING_UI:	return leveling_menu.title;
-		case BIND_UI:			return cloud_menu.title;
-		case ZOFFSET_UI:		return zoffset_menu.title;
-		case TOOL_UI:			return tool_menu.title;
-		case WIFI_LIST_UI:		return list_menu.title;
-        case MACHINE_PARA_UI:	return MachinePara_menu.title;
-        case BABY_STEP_UI:		return operation_menu.babystep;
-	}
-	return 0;
-}
-
-char *getDispText(int index) {
-	memset(TitleText, 0, sizeof(TitleText));
-	char * ref = get_display_title_ref(index);
-	if (ref)
-		strcpy(TitleText, ref);
-	return TitleText;
-}
-
-static char titleText[100] = {0};
 
 uint8_t	ui_timing_flags = 0;
-
-
-char *creat_title_text() {
-	int index = 0;
-	char *tmpText = 0;
-	TCHAR tmpCurFileStr[20];
-	memset(tmpCurFileStr, 0, sizeof(tmpCurFileStr));
-
-	#if _LFN_UNICODE
-	cutFileName((TCHAR *)ui_print_process.file_name, 16, 16, (TCHAR *)tmpCurFileStr);
-	#else
-	cutFileName(ui_print_process.file_name, 16, 16, tmpCurFileStr);
-	#endif
-	
-	memset(titleText, 0, sizeof(titleText));
-	//SERIAL_ECHOLNPAIR("DISP_INDEX: ", disp_state_stack._disp_index);
-
-	while(index <= disp_state_stack._disp_index) {
-		//SERIAL_ECHOLNPAIR("INDEX: ", index);
-		tmpText = getDispText(index);
-		//SERIAL_ECHOLNPAIR("TITLE: ", tmpText);
-		if((*tmpText == 0) || (tmpText == 0)) {
-			index++;
-			continue;
-		}
-		titleText_cat(titleText, sizeof(titleText), tmpText);
-		if(index < disp_state_stack._disp_index)
-			titleText_cat(titleText, sizeof(titleText), ">");
-		index++;
-	}
-	
-	if(disp_state_stack._disp_state[disp_state_stack._disp_index] == PRINTING_UI) {
-		titleText_cat(titleText, sizeof(titleText), ":");
-		titleText_cat(titleText, sizeof(titleText), (char *)tmpCurFileStr);	
-	}
-
-	if(strlen(titleText) > MAX_TITLE_LEN) {
-		memset(titleText, 0, sizeof(titleText));
-		tmpText = getDispText(0);
-		if(*tmpText != 0) {
-			titleText_cat(titleText, sizeof(titleText), tmpText);
-			titleText_cat(titleText, sizeof(titleText), ">...>");
-			tmpText = getDispText(disp_state_stack._disp_index);
-			if(*tmpText != 0)
-				titleText_cat(titleText, sizeof(titleText), tmpText);
-		}
-	}
-	return titleText;
-}
-
-void disp_sel_lang()
-{
-	if(gCfgItems.language == LANG_ENGLISH)
-	{
-		BUTTON_SetBkColor(button4.btnHandle, BUTTON_CI_UNPRESSED, GUI_FOCUS_CLOLOR);	
-		//BUTTON_SetBkColor(button1, BUTTON_CI_UNPRESSED, GUI_BLUE);	
-		//BUTTON_SetBkColor(button3, BUTTON_CI_UNPRESSED, GUI_BLUE);	
-	}
-	/*else if(gCfgItems.language == 3)
-	{
-		BUTTON_SetBkColor(button3, BUTTON_CI_UNPRESSED, GUI_FOCUS_CLOLOR);	
-		BUTTON_SetBkColor(button1, BUTTON_CI_UNPRESSED, GUI_BLUE);	
-		BUTTON_SetBkColor(button2, BUTTON_CI_UNPRESSED, GUI_BLUE);	
-	}*/
-	else
-	{
-		//BUTTON_SetBkColor(button1, BUTTON_CI_UNPRESSED, GUI_FOCUS_CLOLOR);	
-		BUTTON_SetBkColor(button4.btnHandle, BUTTON_CI_UNPRESSED, GUI_BUTTON_COLOR);	
-		//BUTTON_SetBkColor(button3, BUTTON_CI_UNPRESSED, GUI_BLUE);	
-	}
-		
-}
-
 
 
 void clear_cur_ui() {
@@ -328,7 +182,6 @@ void clear_cur_ui() {
         case MACHINE_PARA_UI:	Clear_MachinePara();	break;
         case MACHINE_SETTINGS_UI:		Clear_MachineSettings();	break;
         case TEMPERATURE_SETTINGS_UI:	Clear_TemperatureSettings();break;
-        case MOTOR_SETTINGS_UI:	Clear_MotorSettings();	break;
         case MACHINETYPE_UI:	Clear_MachineType();	break;
         case STROKE_UI:			Clear_Stroke();			break;
         case HOME_DIR_UI:		Clear_HomeDir();		break;
@@ -342,7 +195,6 @@ void clear_cur_ui() {
 		case STEPS_UI:			Clear_Steps();			break;
 		case ACCELERATION_UI:	Clear_Acceleration();	break;
 		case JERK_UI:			Clear_Jerk();			break;
-		case MOTORDIR_UI:		Clear_MotorDir();		break;
 		case HOMESPEED_UI:		Clear_HomeSpeed();		break;
 		case NOZZLE_CONFIG_UI:	Clear_NozzleConfig();	break;
 		case HOTBED_CONFIG_UI:	Clear_HotbedConfig();	break;
@@ -374,6 +226,8 @@ void draw_return_ui() {
 			case MORE_UI:			more_ui.show();			break;
 			case FILE_BROWSER_UI: 	file_browser_ui.show();		break;
 			case LANGUAGE_UI:		language_ui.show();		break;
+            case MOTORDIR_UI:		motor_dir_config_ui.show();		break;
+			case MOTOR_SETTINGS_UI:	motor_config_ui.show();	break;
 
 			case SET_UI:			draw_Set();				break;
 			case SPRAYER_UI: 	break;
@@ -391,7 +245,6 @@ void draw_return_ui() {
             case MACHINE_PARA_UI:	draw_MachinePara();		break;
             case MACHINE_SETTINGS_UI:		draw_MachineSettings();			break;
             case TEMPERATURE_SETTINGS_UI:	draw_TemperatureSettings();		break;
-            case MOTOR_SETTINGS_UI:	draw_MotorSettings();	break;
             case MACHINETYPE_UI:	draw_MachineType();		break;
             case STROKE_UI:			draw_Stroke();			break;
             case HOME_DIR_UI:		draw_HomeDir();			break;
@@ -405,7 +258,6 @@ void draw_return_ui() {
             case STEPS_UI:			draw_Steps();			break;
             case ACCELERATION_UI:	draw_Acceleration();	break;
             case JERK_UI:			draw_Jerk();			break;
-            case MOTORDIR_UI:		draw_MotorDir();		break;
             case HOMESPEED_UI:		draw_HomeSpeed();		break;
             case NOZZLE_CONFIG_UI:	draw_NozzleConfig();	break;
             case HOTBED_CONFIG_UI:	draw_HotbedConfig();	break;
@@ -605,5 +457,10 @@ void _draw_logo() {
 		}
 	}
 }
+
+char * creat_title_text() {
+	return ui_app.getTitle();
+}
+
 
 

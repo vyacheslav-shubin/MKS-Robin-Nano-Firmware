@@ -50,9 +50,6 @@ case WM_NOTIFY_PARENT:
 				gCfgItems.language = LANG_SIMPLE_CHINESE;
 			else if(gCfgItems.language == LANG_SIMPLE_CHINESE)
 				gCfgItems.language = LANG_ENGLISH;
-			
-		//////	bakup_cfg_inf(BAK_LANG_ID,  gCfgItems.language);	
-			disp_sel_lang();
 		}
 		
 

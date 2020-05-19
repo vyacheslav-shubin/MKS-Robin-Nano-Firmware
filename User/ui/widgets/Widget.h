@@ -9,6 +9,8 @@
 #define USER_UI_WIDGETS_WIDGET_H_
 
 #include "GUI.h"
+#include "BUTTON.h"
+#include "TEXT.h"
 #include "draw_ui.h"
 
 class Application;
@@ -28,6 +30,7 @@ protected:
 	virtual void refresh_05() {};
 	virtual void refresh_1s() {};
 	void dropWindow();
+	void buttonPreset(UI_BUTTON btn);
 	void initPage();
 public:
 	Widget(DISP_STATE id) {this->id=id;};
@@ -35,8 +38,7 @@ public:
 	virtual void on_message(WM_MESSAGE * pMsg);
 	virtual ~Widget() {};
 	virtual char * getTitle();
-	virtual void show(Widget * caller);
-	virtual void show() {this->show(0);};
+	virtual void show(Widget * caller = 0);
 	virtual void recreate();
 	virtual void refresh();
 	virtual void hide();

@@ -17,14 +17,16 @@
 
 Application ui_app;
 
+char * Application::getTitle() {
+	if (this->current_ui!=0)
+		return this->current_ui->getTitle();
+	return 0;
+}
 
 void Application::drawTitle() {
-	const char * title = 0;
-	if (this->current_ui!=0)
-		title = this->current_ui->getTitle();
-	if (title==0)
-		title = creat_title_text();
-	GUI_DispStringAt(title,  TITLE_XPOS, TITLE_YPOS);
+	const char * title = this->getTitle();
+	if (title!=0)
+		GUI_DispStringAt(title,  TITLE_XPOS, TITLE_YPOS);
 }
 
 void Application::start() {

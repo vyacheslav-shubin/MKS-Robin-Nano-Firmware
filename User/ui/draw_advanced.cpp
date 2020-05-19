@@ -85,8 +85,8 @@ static void cbAdvancedWin(WM_MESSAGE * pMsg) {
 
 void _inner_draw_Advanced() {
     hAdvancedWnd = ui_std_init_window(ADVANCED_UI, cbAdvancedWin);
-    ui_make_check_pair(0, hAdvancedWnd, &power_off, lang_str.power_off_after_print, gCfgItems.print_finish_close_machine_flg==1);
-    ui_make_check_pair(1, hAdvancedWnd, &main_ui_type, lang_str.simple_main_ui, gCfgItems.display_style==1);
+    ui_make_check_pair(0, hAdvancedWnd, &power_off, lang_str.config_ui.power_off_after_print, gCfgItems.print_finish_close_machine_flg==1);
+    ui_make_check_pair(1, hAdvancedWnd, &main_ui_type, lang_str.config_ui.simple_main_ui, gCfgItems.display_style==1);
 
     ui_make_page_navigator(hAdvancedWnd, &navigator);
 }

@@ -1,14 +1,14 @@
 #include "lang_common.h"
 
 void lang_ru(void) {
-	lang_str.power_off_after_print = "Выключить по окончании печати";
-	lang_str.simple_main_ui = "Простое меню";
-	lang_str.axis_inversion = "Инверсия осей";
-	lang_str.motor_steps_settings = "Настройка шагов";
-	lang_str.home_speed_settings = "Скорость парковки";
-	lang_str.acceleration_settings = "Настройки ускорений";
-	lang_str.maximum_speed_settings = "Максимальные скорости";
-	lang_str.jerk_settings = "Настройки рывков";
+	lang_str.config_ui.power_off_after_print = "Выключить по окончании печати";
+	lang_str.config_ui.simple_main_ui = "Простое меню";
+	lang_str.config_ui.axes_inversion = "Инверсия осей";
+	lang_str.config_ui.motor_steps_settings = "Настройка шагов";
+	lang_str.config_ui.home_speed_settings = "Скорость парковки";
+	lang_str.config_ui.acceleration_settings = "Настройки ускорений";
+	lang_str.config_ui.maximum_speed_settings = "Максимальные скорости";
+	lang_str.config_ui.jerk_settings = "Настройки рывков";
 
 	lang_str.preheat = "Нагрев";
 	lang_str.move = "Перемещение";
@@ -44,6 +44,9 @@ void lang_ru(void) {
 	lang_str.temperature = "Нагрев";
 	lang_str.motors = "Моторы";
 	lang_str.advanced = "Дополнительно";
+
+	lang_str.yes = "Да";
+	lang_str.no = "Нет";
 
 
 	lang_str.ui_title_main = "Готов";

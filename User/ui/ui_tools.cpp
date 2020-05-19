@@ -44,18 +44,6 @@ void ui_start_print_process(void) {
 	}
 }
 
-void ui_start_print_file() {
-	reset_print_time();
-	start_print_time();
-	ui_print_process.rate = 0;
-	ui_print_process.preview_state_flags = 0;
-	if(gCfgItems.breakpoint_reprint_flg == 1)
-		gCfgItems.breakpoint_z_pos = current_position[Z_AXIS];
-	char has_preview = 0;
-	epr_write_data(EPR_PREVIEW_FROM_FLASH, &has_preview,1);
-	ui_start_print_process();
-}
-
 void ui_push_disp_stack(DISP_STATE ui_id) {
     if(disp_state_stack._disp_state[disp_state_stack._disp_index] != ui_id)
     {

@@ -169,6 +169,8 @@ User/ui/widgets/SpeedUI.cpp
 User/ui/widgets/MoreUI.cpp
 User/ui/widgets/FileBrowserUI.cpp
 User/ui/widgets/LanguageUI.cpp
+User/ui/widgets/FileInfoBaseUI.cpp
+User/ui/widgets/FileInfoUI.cpp
 User/ui/widgets/ConfigurationRootUI.cpp
 User/ui/widgets/config/ConfigurationWidget.cpp
 User/ui/widgets/config/MotorDirConfigUI.cpp

@@ -21,6 +21,16 @@ typedef struct {
 	const char * jerk_settings;
 } CONFIG_LANG_STR;
 
+typedef struct {
+	const char * size;
+	const char * time;
+	const char * layers;
+	const char * filament;
+	const char * min_max_x;
+	const char * min_max_y;
+	const char * min_max_z;
+} FILE_INFO_LANG_STR;
+
 
 typedef struct {
 
@@ -81,6 +91,7 @@ typedef struct {
 	const char * ui_title_speed;
 
 	CONFIG_LANG_STR config_ui;
+	FILE_INFO_LANG_STR	file_info_ui;
 } LANG_STR;
 
 

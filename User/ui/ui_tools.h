@@ -26,9 +26,11 @@ extern "C" {
 #define img_state_time  		"bmp_time_state.bin"
 #define img_state_speed  		"bmp_speed_state.bin"
 
+#define img_file_delete  		"bmp_del.bin"
 #define img_print_pause  		"bmp_pause100.bin"
 #define img_print_resume  		"bmp_resume100.bin"
 #define img_print_stop  		"bmp_stop100.bin"
+#define img_print_back  		"bmp_back100.bin"
 #define img_print_tools  		"bmp_operate100.bin"
 #define img_print_auto_power_off	"bmp_autoOffEnabled100.bin"
 #define img_print_manual_power_off	"bmp_autoOffDisabled100.bin"
@@ -176,16 +178,30 @@ typedef struct {
 } SUICIDE_CFG;
 
 
-#define PREVIEW_CHECKED_BIT		0
-#define PREVIEW_EXISTS_BIT		1
-#define PREVIEW_CACHED_BIT		2
+#define PREVIEW_CHECKED_BIT			0
+#define PREVIEW_EXISTS_BIT			1
+#define PREVIEW_CACHED_BIT			2
 #define PREVIEW_CACHED 			((1<<PREVIEW_CHECKED_BIT) | (1<<PREVIEW_CACHED_BIT) | (1 << PREVIEW_EXISTS_BIT))
+
+typedef struct {
+	float minv;
+	float maxv;
+} UI_MIN_MAX;
 
 typedef struct {
 	unsigned char	once; //printing
 	SUICIDE_CFG		suicide;
 	unsigned char 	rate;
 	char			file_name[100];
+
+	UI_MIN_MAX		mmx;
+	UI_MIN_MAX		mmy;
+	UI_MIN_MAX		mmz;
+	float			filament_used;
+	int				time;
+	float			layer_height;
+	int				layer_count;
+	unsigned long	size;
 
 	unsigned char	preview_row;
 	int				preview_offset;
@@ -288,9 +304,6 @@ extern uint8_t ui_timing_flags;
 extern void ui_timings(void);
 
 extern void ui_start_print_process(void);
-
-
-extern void ui_start_print_file();
 
 extern char ascii2dec(char ascii);
 extern uint8_t ui_file_with_preview(char *path, int * withoffset);

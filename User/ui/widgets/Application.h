@@ -21,7 +21,8 @@ public:
 	char * getTitle();
 	void start();
 	void loop();
-	void startPrintFile();
+	void dropPreview();
+	void startPrintFile(unsigned char savedPreview=0);
 	void drawLogo();
 	void back_ui();
 	void closeCurrentWidget();

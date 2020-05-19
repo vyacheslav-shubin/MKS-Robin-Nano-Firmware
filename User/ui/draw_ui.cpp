@@ -228,7 +228,7 @@ void draw_return_ui() {
 			case LANGUAGE_UI:		language_ui.show();		break;
             case MOTORDIR_UI:		motor_dir_config_ui.show();		break;
 			case MOTOR_SETTINGS_UI:	motor_config_ui.show();	break;
-
+			case FILE_INFO_UI:		file_info_ui.show();	break;
 			case SET_UI:			draw_Set();				break;
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;

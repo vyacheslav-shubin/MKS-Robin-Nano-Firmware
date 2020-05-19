@@ -6,6 +6,7 @@
  */
 
 #include "FileBrowserUI.h"
+#include "FileInfoUI.h"
 #include "ui_tools.h"
 #include "fatfs.h"
 #include "serial.h"
@@ -229,8 +230,12 @@ void FileBrowserUI::doButton(char index) {
 			this->hide();
 			draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
 		} else {
+			memset(&ui_print_process, 0, sizeof(ui_print_process));
 			sprintf(ui_print_process.file_name, "%s/%s", browser.curent_dir, this->ui.files[index].fileName);
-			ui_app.startPrintFile();
+			this->hide();
+			ui_app.dropPreview();
+			file_info_ui.show(this);
+			//ui_app.startPrintFile();
 		}
 	}
 }

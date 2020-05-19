@@ -34,6 +34,14 @@ UI_BUTTON StdWidget::createButton(int x, int y, const char * picture, const char
 	return ui_create_std_button(x, y, this->hWnd, picture, title);
 }
 
+UI_TEXT StdWidget::createText(int x, int y, int w, int h, const char * value) {
+	return ui_create_std_text(x, y, w, h, this->hWnd, value);
+}
+
+void StdWidget::setText(UI_TEXT hText, char * text) {
+	ui_set_text_value(hText, text);
+}
+
 void StdWidget::updateButton(UI_BUTTON button, const char * picture, const char * title) {
 	ui_update_std_button(button, picture, title);
 }

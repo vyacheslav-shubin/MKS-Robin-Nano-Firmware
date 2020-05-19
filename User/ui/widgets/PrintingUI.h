@@ -9,6 +9,7 @@
 #define USER_UI_WIDGETS_PRINTINGUI_H_
 
 #include "StdWidget.h"
+#include "FileInfoBaseUI.h"
 
 typedef struct{
 	STATE_BUTTON ext1;
@@ -26,7 +27,7 @@ typedef struct{
 	char preview_done;
 } PRINTING_UI_CONTROLS;
 
-class PrintingUI : public StdWidget{
+class PrintingUI : public FileInfoBaseUI {
 private:
 	PRINTING_UI_CONTROLS ui;
 	void createStateButtonAt(char col, char row, STATE_BUTTON * btn, const char * img, const char * title);
@@ -42,8 +43,8 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 public:
 	virtual char * getTitle() {return lang_str.ui_title_printing;};
-	virtual void refresh();
-	PrintingUI() : StdWidget(PRINTING_UI) {};
+	//virtual void refresh();
+	PrintingUI() : FileInfoBaseUI(PRINTING_UI) {};
 };
 
 extern PrintingUI printing_ui;

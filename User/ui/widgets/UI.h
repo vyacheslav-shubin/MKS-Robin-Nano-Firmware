@@ -27,6 +27,7 @@
 #include "LanguageUI.h"
 #include "MotorDirConfigUI.h"
 #include "MotorConfigUI.h"
+#include "FileInfoUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

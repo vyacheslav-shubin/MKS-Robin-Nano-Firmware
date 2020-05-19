@@ -9,6 +9,7 @@
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "MainUI.h"
+#include "Marlin.h"
 #include "PrintingUI.h"
 #include "ff.h"
 #include "ili9320.h"
@@ -53,9 +54,29 @@ void Application::loop() {
 	GUI_Exec();
 }
 
-void Application::startPrintFile() {
+void Application::dropPreview() {
+	ui_print_process.preview_state_flags = 0;
+	char has_preview = 0;
+	epr_write_data(EPR_PREVIEW_FROM_FLASH, &has_preview,1);
+}
+
+
+void Application::startPrintFile(unsigned char savedPreview) {
 	this->closeCurrentWidget();
-	ui_start_print_file();
+
+	reset_print_time();
+	start_print_time();
+	ui_print_process.rate = 0;
+	if(gCfgItems.breakpoint_reprint_flg == 1)
+		gCfgItems.breakpoint_z_pos = current_position[Z_AXIS];
+
+	memset(&ui_print_process.suicide, 0, sizeof(ui_print_process.suicide));
+	ui_print_process.suicide.enabled = gCfgItems.print_finish_close_machine_flg;
+	if (savedPreview==0)
+		this->dropPreview();
+
+	ui_start_print_process();
+
 	printing_ui.show();
 }
 

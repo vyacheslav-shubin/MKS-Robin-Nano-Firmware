@@ -67,4 +67,9 @@ void lang_ru(void) {
 	lang_str.ui_title_printing= "Печать";
 	lang_str.ui_title_speed = "Подстройка скорости";
 
+	lang_str.file_info_ui.filament = "Филамент: %1.3f m";
+	lang_str.file_info_ui.size = "Размер файла: %d";
+	lang_str.file_info_ui.time = "Время печати: ";
+	lang_str.file_info_ui.layers = "Слои: %1.2f * %d";
+
 }

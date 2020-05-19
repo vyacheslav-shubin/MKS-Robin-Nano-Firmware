@@ -319,6 +319,7 @@ typedef enum {
 	NUMBER_KEY_UI,
 	BABY_STEP_UI,
 	FILE_BROWSER_UI,
+	FILE_INFO_UI,
 
 } DISP_STATE;
 

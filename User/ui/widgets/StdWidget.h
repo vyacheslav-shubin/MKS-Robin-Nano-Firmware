@@ -45,8 +45,10 @@ protected:
 	void createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title);
 	void updateStateButton(STATE_BUTTON * btn, const char * img, const char * title);
 	UI_BUTTON createButton(int x, int y, const char * picture, const char * title);
+	UI_TEXT createText(int x, int y, int w, int h, const char * value);
 	void updateButton(UI_BUTTON button, const char * picture, const char * title);
 	void setButtonText(UI_BUTTON btn, char * text);
+	void setText(UI_TEXT hText, char * text);
 	UI_BUTTON createButtonAt(int phx, int phy, const char * picture, const char * title);
 	UI_BUTTON createButtonRet();
 	UI_BUTTON create100x80Button(int x, int y, const char * picture);

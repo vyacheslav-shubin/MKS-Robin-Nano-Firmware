@@ -94,4 +94,6 @@ void lang_std(void) {
 
 	lang_str.dialog.confirm_delete_file = "Delete file:\n%s";
 	lang_str.dialog.confirm_terminate_print = "Terminate printing?";
+	lang_str.dialog.confirm_print_again = "Print again?";
+	lang_str.dialog.confirm_print_with_suicide = "Auto power off.\nBreak and print again?";
 }

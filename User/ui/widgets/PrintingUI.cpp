@@ -71,10 +71,28 @@ void PrintingUI::updateProgress() {
 	}
 }
 
+static void on_print_finish_confirm(u8 button) {
+	confirm_dialog_ui.hide();
+	if (button==UI_BUTTON_OK) {
+		ui_app.startPrintFile();
+	} else if (button==UI_BUTTON_CANCEL) {
+		ui_app.showMainWidget();
+	} else if (button==UI_BUTTON_TIMEOUT) {
+		GUI_Clear();
+		enqueue_and_echo_commands_P(PSTR("M81"));
+	}
+}
+
 void PrintingUI::doFinishPrint() {
 	stop_print_time();
 	this->hide();
-	draw_dialog(DIALOG_TYPE_FINISH_PRINT);
+	confirm_dialog_ui.show(
+			ui_print_process.suicide_enabled ?
+					lang_str.dialog.confirm_print_with_suicide:
+					lang_str.dialog.confirm_print_again,
+					on_print_finish_confirm,
+					ui_print_process.suicide_enabled ? SUICIDE_WAIT : 0);
+	//draw_dialog(DIALOG_TYPE_FINISH_PRINT);
 }
 
 
@@ -137,7 +155,7 @@ void PrintingUI::updateStateButtons() {
 }
 
 void PrintingUI::updatePowerControlButton() {
-    BUTTON_SetBmpFileName(ui.power_control, ui_print_process.suicide.enabled?img_print_auto_power_off:img_print_manual_power_off, 0);
+    BUTTON_SetBmpFileName(ui.power_control, ui_print_process.suicide_enabled?img_print_auto_power_off:img_print_manual_power_off, 0);
     BUTTON_SetBitmapEx(ui.power_control, 0, &bmp_struct_100x80,0,0);
 }
 
@@ -218,7 +236,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 	} else if(hBtn == ui.stop) {
 		if(mksReprint.mks_printer_state != MKS_IDLE) {
 			this->hide();
-			confirm_dialog_ui.show(lang_str.dialog.confirm_terminate_print, on_stop_print_confirm, this);
+			confirm_dialog_ui.show(lang_str.dialog.confirm_terminate_print, on_stop_print_confirm, 0, this);
 		}
 	} else if (hBtn == ui.fan.button) {
 		this->hide();
@@ -232,7 +250,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 			babystep_ui.show();
 		}
 	} else if (hBtn == ui.power_control) {
-		ui_print_process.suicide.enabled = ui_print_process.suicide.enabled?0:1;
+		ui_print_process.suicide_enabled = ui_print_process.suicide_enabled?0:1;
 		this->updatePowerControlButton();
 	}
 

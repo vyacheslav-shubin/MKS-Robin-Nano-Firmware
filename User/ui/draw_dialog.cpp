@@ -96,24 +96,13 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 		 	break;
 		case WM_TOUCH:
 		case WM_TOUCH_CHILD:
-			ui_print_process.suicide.count_down = SUICIDE_WAIT;
 	 	break;
 
 		case WM_NOTIFY_PARENT:
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
 				if(pMsg->hWinSrc == buttonOk) {
 					Clear_dialog();
-					if(DialogType == DIALOG_TYPE_STOP) {
-						stop_print_time();
-						card.stopSDPrint();
-						wait_for_heatup = false;
-						mksReprint.mks_printer_state = MKS_STOP;
-						gCfgItems.breakpoint_reprint_flg = 0;
-						gCfgItems.breakpoint_z_pos = 0;
-						gCfgItems.breakpoint_flg=0;
-						reset_file_info();
-						ui_app.showMainWidget();
-					} else if(DialogType == DIALOG_TYPE_PRINT_FILE) {
+					if(DialogType == DIALOG_TYPE_PRINT_FILE) {
 						if(strlen(ui_print_process.file_name)>(100-1)) {
 							draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
 						} else {
@@ -267,7 +256,7 @@ void draw_dialog(uint8_t type)
 			strcat(tmpCurFileStr,print_file_dialog_menu.print_time);
 			print_time_to_str(&print_time, &tmpCurFileStr[strlen(print_file_dialog_menu.print_time)]);
 			ui_set_text_value(fileNameText, &ui_print_process.file_name[3]);
-			if (ui_print_process.suicide.enabled) {
+			if (ui_print_process.suicide_enabled) {
 				progressBar = ui_create_std_progbar((LCD_WIDTH-400)/2, (imgHeight-60)/2 + 80, 400, 25, hStopDlgWnd);
 				PROGBAR_SetValue(progressBar, 0);
 			}
@@ -294,9 +283,7 @@ void draw_dialog(uint8_t type)
 			}
 
 
-			if(DialogType == DIALOG_TYPE_STOP) {
-				ui_set_text_value(printStopDlgText, print_file_dialog_menu.cancle_print);
-			} else if(DialogType == DIALOG_TYPE_PRINT_FILE) {
+			if(DialogType == DIALOG_TYPE_PRINT_FILE) {
 				print_start_flg = 1;
 				if(gCfgItems.breakpoint_reprint_flg == 1) {
 					ui_set_text_value(printStopDlgText,  print_file_dialog_menu.print_from_breakpoint);
@@ -350,6 +337,7 @@ void refresh_dialog() {
 			wifi_scan_handle();
 			break;
 		case DIALOG_TYPE_FINISH_PRINT:
+#if 0
 			if (ui_print_process.suicide.enabled) {
 				if (is_ui_timing(F_UI_TIMING_SEC)) {
 					ui_timing_clear(F_UI_TIMING_SEC);
@@ -362,6 +350,7 @@ void refresh_dialog() {
 					}
 				}
 			}
+#endif
 			break;
 
 	}

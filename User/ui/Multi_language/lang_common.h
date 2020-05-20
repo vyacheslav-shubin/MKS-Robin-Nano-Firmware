@@ -34,6 +34,8 @@ typedef struct {
 typedef struct {
 	const char * confirm_delete_file;
 	const char * confirm_terminate_print;
+	const char * confirm_print_again;
+	const char * confirm_print_with_suicide;
 } DIALOG_LANG_STR;
 
 typedef struct {

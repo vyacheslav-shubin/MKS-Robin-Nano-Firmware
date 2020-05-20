@@ -17,6 +17,7 @@
 
 #define UI_BUTTON_OK		0
 #define UI_BUTTON_CANCEL	1
+#define UI_BUTTON_TIMEOUT	2
 
 typedef void (*ui_dialog_callback)(unsigned char);
 

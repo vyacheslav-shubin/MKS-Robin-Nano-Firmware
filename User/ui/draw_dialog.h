@@ -1,7 +1,6 @@
 #ifndef _DRAW_DIALOG_H_
 #define _DRAW_DIALOG_H_
 
-#define DIALOG_TYPE_STOP						0
 #define DIALOG_TYPE_PRINT_FILE					1
 #define DIALOG_TYPE_REPRINT_NO_FILE				2
 

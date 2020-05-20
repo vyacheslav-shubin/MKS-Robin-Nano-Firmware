@@ -16,7 +16,7 @@ char ui_buf1_100[100];
 
 UPLOAD_INFO upload_file_info = {0, 0};
 
-UI_PRINT_PROCESS ui_print_process = {0, {0, 0, SUICIDE_WAIT}, 0, {0}};
+UI_PRINT_PROCESS ui_print_process = {0, 0, 0, {0}};
 
 const char* FAN_STATES[3] {img_fan_state0, img_fan_state1, img_fan_state2};
 

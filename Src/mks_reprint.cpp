@@ -77,7 +77,7 @@ void mkstft_ui_load()
 		epr_read_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_points[4].y,sizeof(gCfgItems.leveling_points[0].y));
 
 		epr_read_data(EPR_AUTO_CLOSE_MACHINE,(uint8_t *)&gCfgItems.print_finish_close_machine_flg,sizeof(gCfgItems.print_finish_close_machine_flg));
-		ui_print_process.suicide.enabled = gCfgItems.print_finish_close_machine_flg;
+		ui_print_process.suicide_enabled = gCfgItems.print_finish_close_machine_flg;
 		epr_read_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
 
 		//sean 19.8.16
@@ -242,7 +242,7 @@ void mkstft_ui_init() {
 	gCfgItems.mask_det_Function = 0;
 
 	gCfgItems.print_finish_close_machine_flg = 0;
-	ui_print_process.suicide.enabled = gCfgItems.print_finish_close_machine_flg;
+	ui_print_process.suicide_enabled = gCfgItems.print_finish_close_machine_flg;
 
 	strcpy((char *)gCfgItems.z_display_pos,(char *)"0.000");
 	gCfgItems.custom_bed_flag = 1;

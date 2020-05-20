@@ -102,8 +102,7 @@ void Application::startPrintFile(unsigned char savedPreview) {
 	if(gCfgItems.breakpoint_reprint_flg == 1)
 		gCfgItems.breakpoint_z_pos = current_position[Z_AXIS];
 
-	memset(&ui_print_process.suicide, 0, sizeof(ui_print_process.suicide));
-	ui_print_process.suicide.enabled = gCfgItems.print_finish_close_machine_flg;
+	ui_print_process.suicide_enabled = gCfgItems.print_finish_close_machine_flg;
 	if (savedPreview==0)
 		this->dropPreview();
 

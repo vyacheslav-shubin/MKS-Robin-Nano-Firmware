@@ -176,13 +176,6 @@ UPLOAD_INFO;
 
 #define 	SUICIDE_WAIT 	60
 
-typedef struct {
-	volatile uint8_t enabled;
-	volatile uint8_t do_execute;
-	volatile uint8_t count_down;
-} SUICIDE_CFG;
-
-
 #define PREVIEW_CHECKED_BIT			0
 #define PREVIEW_EXISTS_BIT			1
 #define PREVIEW_CACHED_BIT			2
@@ -195,7 +188,7 @@ typedef struct {
 
 typedef struct {
 	unsigned char	once; //printing
-	SUICIDE_CFG		suicide;
+	unsigned char	suicide_enabled;
 	unsigned char 	rate;
 	char			file_name[100];
 

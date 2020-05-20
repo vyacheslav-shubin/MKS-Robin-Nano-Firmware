@@ -21,12 +21,15 @@ public:
 	char * getTitle();
 	void start();
 	void loop();
+	void defaultUI();
 	void dropPreview();
 	void startPrintFile(unsigned char savedPreview=0);
+	void terminatePrintFile();
 	void drawLogo();
 	void back_ui();
 	void closeCurrentWidget();
 	void push(Widget * widget);
+	void pop();
 	void showMainWidget();
 	void reset_stack(Widget * widget);
 	Application() {};

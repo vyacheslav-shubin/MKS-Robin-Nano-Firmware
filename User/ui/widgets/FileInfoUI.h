@@ -23,6 +23,7 @@ typedef struct{
 	UI_TEXT mmy;
 	UI_TEXT mmz;
 	char preview_done;
+	unsigned char info_updated;
 } FILE_INFO_UI_CONTROLS;
 
 class FileInfoUI  : public FileInfoBaseUI{

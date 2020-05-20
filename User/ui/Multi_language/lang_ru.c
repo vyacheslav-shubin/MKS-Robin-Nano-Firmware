@@ -72,4 +72,7 @@ void lang_ru(void) {
 	lang_str.file_info_ui.time = "Время печати: ";
 	lang_str.file_info_ui.layers = "Слои: %1.2f * %d";
 
+	lang_str.dialog.confirm_delete_file = "Удалить файл:\n%s";
+	lang_str.dialog.confirm_terminate_print = "Прервать печать?";
+
 }

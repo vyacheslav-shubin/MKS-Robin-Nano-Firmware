@@ -16,6 +16,7 @@
 #include "BabystepUI.h"
 #include "PreheatUI.h"
 #include "PrintingToolsUI.h"
+#include "ConfirmDialogUI.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -174,6 +175,16 @@ void PrintingUI::refresh_1s() {
 	}
 }
 
+
+static void on_stop_print_confirm(unsigned char button) {
+	confirm_dialog_ui.hide();
+	if (button==UI_BUTTON_OK) {
+		ui_app.terminatePrintFile();
+	} else if (button==UI_BUTTON_CANCEL) {
+		printing_ui.show();
+	}
+}
+
 void PrintingUI::on_button(UI_BUTTON hBtn) {
 	if(hBtn == ui.tools) {
 		this->hide();
@@ -207,7 +218,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 	} else if(hBtn == ui.stop) {
 		if(mksReprint.mks_printer_state != MKS_IDLE) {
 			this->hide();
-			draw_dialog(DIALOG_TYPE_STOP);
+			confirm_dialog_ui.show(lang_str.dialog.confirm_terminate_print, on_stop_print_confirm, this);
 		}
 	} else if (hBtn == ui.fan.button) {
 		this->hide();

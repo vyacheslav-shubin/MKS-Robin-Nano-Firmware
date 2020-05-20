@@ -21,92 +21,98 @@ FileBrowserUI file_browser_ui;
 
 #define MAX_FILE_NAME_SIZE	100
 
-class Browser{
-private:
-	FATFS fs;
+static TCHAR lfn[_MAX_LFN + 1];
 
-	char is_wanted(FILINFO * fi) {
-		if ((fi->lfname[0] == '.') || (fi->fname[0] == '.') || (fi->fattrib & (AM_SYS|AM_HID)))
-			return 0;
-		if (
-				(strstr(fi->fname, "mks_pic")!=0)
-				|| (strstr(fi->fname, "bak_pic")!=0)
-				|| (strstr(fi->fname, "mks_font")!=0)
-				|| (strstr(fi->fname, "bak_font")!=0)
-		)
-			return 0;
-		return (strstr(fi->fname, ".GCO") || (fi->fattrib & AM_DIR));
-	}
-protected:
-
-	virtual char onFile(FILINFO * fi) {
-		return 0;
-	}
-public:
-	char curent_dir[MAX_FILE_NAME_SIZE];
-	int dir_level = 0;
-
-	virtual void lookup() {
-		FILINFO fi;
-		static TCHAR lfn[_MAX_LFN + 1];
-		fi.lfname = lfn;
-		fi.lfsize = _MAX_LFN + 1;
-
-		if (f_mount(&fs, (TCHAR const*)SD_Path, 0) == FR_OK) {
-			DIR dir;
-			memset(&dir, 0, sizeof(dir));
-			SERIAL_ECHO("Open dir:");
-			SERIAL_ECHOLN(curent_dir);
-			if (f_opendir(&dir, curent_dir) == FR_OK) {
-				while (f_readdir(&dir, &fi) == FR_OK) {
-					if (fi.fname[0] == 0)
-						break;
-					if (is_wanted(&fi)) {
-						if (!onFile(&fi))
-							break;
-					}
-				}
-				f_closedir(&dir);
-			} else
-				this->close();
-			f_mount(&fs, SD_Path, 1);
-		} else
-			this->close();
-	}
-
-	virtual void close() {
-		strcpy(this->curent_dir, "1:");
-		this->dir_level = 0;
-	}
-
-	virtual void pushDirectory(char * name) {
-		strcat(curent_dir, "/");
-		strcat(curent_dir, name);
-		this->dir_level++;
-	}
-
-	virtual void popDirectory() {
-		if (this->dir_level!=0) {
-			unsigned char i=0;
-			unsigned char p=0;
-			while (curent_dir[i]!=0) {
-				if (curent_dir[i]=='/')
-					p = i;
-				i++;
-			}
-			if (p != 0) {
-				curent_dir[p] = 0;
-				this->dir_level--;
+char * get_long_file_name(char * fileName) {
+	int i = strlen(fileName);
+	while ((fileName[i] != '/') && (i>=0))
+		i--;
+	char * fn = &fileName[i+1];
+	memset(ui_buf1_100, 0, sizeof(ui_buf1_100));
+	strncpy(ui_buf1_100, fileName, i);
+	FILINFO fi;
+	fi.lfname = lfn;
+	fi.lfsize = _MAX_LFN + 1;
+	DIR dir;
+	memset(&dir, 0, sizeof(dir));
+	if (f_opendir(&dir, ui_buf1_100) == FR_OK) {
+		while (f_readdir(&dir, &fi) == FR_OK) {
+			SERIAL_ECHOLN(fi.fname);
+			if (fi.fname[0] == 0)
+				break;
+			if (strncmp(fi.fname, fn, 12)==0) {
+				if ((lfn!=0) && (lfn[0]!=0))
+					fn = lfn;
+				break;
 			}
 		}
+		f_closedir(&dir);
 	}
+	return fn;
+}
 
-	Browser() {
+
+char Browser::is_wanted(FILINFO * fi) {
+	if ((fi->lfname[0] == '.') || (fi->fname[0] == '.') || (fi->fattrib & (AM_SYS|AM_HID)))
+		return 0;
+	if (
+			(strstr(fi->fname, "mks_pic")!=0)
+			|| (strstr(fi->fname, "bak_pic")!=0)
+			|| (strstr(fi->fname, "mks_font")!=0)
+			|| (strstr(fi->fname, "bak_font")!=0)
+	)
+		return 0;
+	return (strstr(fi->fname, ".GCO") || (fi->fattrib & AM_DIR));
+}
+void Browser::lookup() {
+	FILINFO fi;
+	fi.lfname = lfn;
+	fi.lfsize = _MAX_LFN + 1;
+
+	DIR dir;
+	memset(&dir, 0, sizeof(dir));
+	if (f_opendir(&dir, curent_dir) == FR_OK) {
+		while (f_readdir(&dir, &fi) == FR_OK) {
+			SERIAL_ECHOLN(fi.fname);
+			if (fi.fname[0] == 0)
+				break;
+			if (is_wanted(&fi)) {
+				if (!onFile(&fi))
+					break;
+			}
+		}
+		f_closedir(&dir);
+	} else
 		this->close();
-	}
+}
 
-	virtual ~Browser() {}
-};
+void Browser::close() {
+	strcpy(this->curent_dir, "1:");
+	this->dir_level = 0;
+}
+
+void Browser::pushDirectory(char * name) {
+	strcat(curent_dir, "/");
+	strcat(curent_dir, name);
+	this->dir_level++;
+}
+
+void Browser::popDirectory() {
+	if (this->dir_level!=0) {
+		unsigned char i=0;
+		unsigned char p=0;
+		while (curent_dir[i]!=0) {
+			if (curent_dir[i]=='/')
+				p = i;
+			i++;
+		}
+		if (p != 0) {
+			curent_dir[p] = 0;
+			this->dir_level--;
+		}
+	}
+}
+
 
 typedef struct {
 	char more;
@@ -130,6 +136,7 @@ protected:
 			return 0;
 		}
 		char * fn =  ((fi->lfname!=0) && (fi->lfname[0]!=0))? fi->lfname:fi->fname;
+		SERIAL_ECHOLN(fn);
 		char * pic;
 		UI_FILE_BUTTON * ufb = &file_browser_ui.ui.files[this->index];
 		ufb->isDirectory = fi->fattrib & AM_DIR;
@@ -141,7 +148,6 @@ protected:
 			ufb->withPreview = ui_file_with_preview(ui_buf1_100, &ufb->previewOffset);
 			pic = ufb->withPreview ? img_file_wpv : img_file;
 		}
-		SERIAL_ECHOLN(fn);
 		ufb->button = file_browser_ui.createButtonAt(this->index % 3, this->index/3, pic, fn);
 
 		this->index++;
@@ -190,6 +196,7 @@ void FileBrowserUI::createControls() {
 	this->ui.next = this->create100x80Button(COL,ROW(1), img_page_down);
 	this->ui.back = this->create100x80Button(COL,ROW(2), img_page_back);
 	GUI_Exec();
+	f_mount(&fs, (TCHAR const*)SD_Path, 0);
 	browser.lookup();
 	GUI_Exec();
 	this->drawPreview();

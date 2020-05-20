@@ -12,6 +12,7 @@
 #include "MoreUI.h"
 #include "FilamentUI.h"
 #include "FileBrowserUI.h"
+#include "ConfirmDialogUI.h"
 #include "integration.h"
 #include "ui_tools.h"
 
@@ -69,6 +70,7 @@ void ToolsUI::on_button(UI_BUTTON hBtn) {
 		file_browser_ui.show(this);
 	} else if (hBtn==this->ui.files) {
 		this->hide();
+		//confirm_dialog_ui.show();
 		file_browser_ui.show();
 	}
 }

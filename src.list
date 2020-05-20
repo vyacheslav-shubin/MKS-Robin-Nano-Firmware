@@ -175,3 +175,5 @@ User/ui/widgets/ConfigurationRootUI.cpp
 User/ui/widgets/config/ConfigurationWidget.cpp
 User/ui/widgets/config/MotorDirConfigUI.cpp
 User/ui/widgets/config/MotorConfigUI.cpp
+User/ui/widgets/dialog/DialogWidget.cpp
+User/ui/widgets/dialog/ConfirmDialogUI.cpp

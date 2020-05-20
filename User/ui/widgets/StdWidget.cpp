@@ -21,10 +21,6 @@ void StdWidget::updateStateButton(STATE_BUTTON * btn, const char * img, const ch
 	ui_set_text_value(btn->label, title);
 }
 
-void StdWidget::setButtonText(UI_BUTTON btn, char * text) {
-	BUTTON_SetText(btn, text);
-}
-
 
 UI_BUTTON StdWidget::createButtonAt(int phx, int phy, const char * picture, const char * title) {
 	return this->createButton(ui_std_col(phx),  ui_std_row(phy), picture, title);
@@ -34,26 +30,11 @@ UI_BUTTON StdWidget::createButton(int x, int y, const char * picture, const char
 	return ui_create_std_button(x, y, this->hWnd, picture, title);
 }
 
-UI_TEXT StdWidget::createText(int x, int y, int w, int h, const char * value) {
-	return ui_create_std_text(x, y, w, h, this->hWnd, value);
-}
-
-void StdWidget::setText(UI_TEXT hText, char * text) {
-	ui_set_text_value(hText, text);
-}
-
-void StdWidget::updateButton(UI_BUTTON button, const char * picture, const char * title) {
-	ui_update_std_button(button, picture, title);
-}
-
 
 UI_BUTTON StdWidget::createButtonRet() {
 	return createButtonAt(3, 1, img_back, lang_str.back);
 }
 
-UI_BUTTON StdWidget::create100x80Button(int x, int y, const char * picture) {
-	return ui_create_100_80_button(x, y, this->hWnd, picture);
-}
 
 
 void StdWidget::action_leveling() {

@@ -6,77 +6,19 @@
  */
 
 #include "FileInfoUI.h"
+#include "FileBrowserUI.h"
 #include "PrintingToolsUI.h"
 #include "ff.h"
 #include "serial.h"
+#include "ConfirmDialogUI.h"
 
 FileInfoUI file_info_ui;
 
-void find_float(char * msg, float * value) {
-	memset(ui_buf1_100, 0, 11);
-	char * p = (char *)strstr(bmp_public_buf, msg);
-	if (p!=0) {
-		p+=strlen(msg);
-		while (*p==' ')
-			p++;
-		int i=0;
-		while ((((p[i]>='0') && (p[i]<='9')) || (p[i]=='-') || (p[i]=='.')) && (i<10)) {
-			ui_buf1_100[i] = p[i];
-			i++;
-		}
-		if (i!=0)
-			*value = atof(ui_buf1_100);
-	}
-}
-
-static void _explore_file() {
-#define PREPERD_SIZE 512
-	FIL file;
-	if(f_open(&file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
-		ui_print_process.size = file.fsize;
-		int offset;
-		if (ui_file_with_preview(ui_print_process.file_name, &offset)) {
-			f_lseek(&file, (PREVIEW_LITTLE_PIC_SIZE+offset) + 809 * 200 + 8); //809 - длина строки в preview
-		} else {
-			f_lseek(&file, 0);
-		}
-		memset(bmp_public_buf, 0, PREPERD_SIZE+1);
-		unsigned int readed;
-		if (f_read(&file, bmp_public_buf, PREPERD_SIZE, &readed) == FR_OK) {
-			find_float("MINX:", &ui_print_process.mmx.minv);
-			find_float("MAXX:", &ui_print_process.mmx.maxv);
-			find_float("MINY:", &ui_print_process.mmy.minv);
-			find_float("MAXY:", &ui_print_process.mmy.maxv);
-			find_float("MINZ:", &ui_print_process.mmz.minv);
-			find_float("MAXZ:", &ui_print_process.mmz.maxv);
-			find_float("Layer height:", &ui_print_process.layer_height);
-			find_float("Filament used:", &ui_print_process.filament_used);
-			float t;
-			find_float("TIME:", &t);
-			ui_print_process.time = (int)t;
-			find_float("LAYER_COUNT:", &t);
-			ui_print_process.layer_count = (int)t;
-
-			SERIAL_ECHOLNPAIR("SIZE:", ui_print_process.size);
-			SERIAL_ECHOLNPAIR("TIME:", ui_print_process.time);
-			SERIAL_ECHOLNPAIR("LAYER COUNT:", ui_print_process.layer_count);
-			SERIAL_ECHOLNPAIR("LAYER HEIGHT:", ui_print_process.layer_height);
-			SERIAL_ECHOLNPAIR("FILAMENT USED:", ui_print_process.filament_used);
-			SERIAL_ECHOPAIR("MIN_X:", ui_print_process.mmx.minv);
-			SERIAL_ECHOLNPAIR(" MAX_X:", ui_print_process.mmx.maxv);
-			SERIAL_ECHOPAIR("MIN_Y:", ui_print_process.mmy.minv);
-			SERIAL_ECHOLNPAIR(" MAX_Y:", ui_print_process.mmy.maxv);
-			SERIAL_ECHOPAIR("MIN_Z:", ui_print_process.mmz.minv);
-			SERIAL_ECHOLNPAIR(" MAX_Z:", ui_print_process.mmz.maxv);
-		}
-		f_close(&file);
-	}
-}
 
 void FileInfoUI::refresh() {
-	if (ui_print_process.size == 0) {
-		_explore_file();
+	if ((this->ui.info_updated==0) && (ui_print_process.size != 0)) {
 		this->update();
+		this->ui.info_updated = 1;
 	} else {
 		FileInfoBaseUI::refresh();
 	}
@@ -114,8 +56,8 @@ void FileInfoUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
 	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
 	#define _y 204
-	this->ui.run = this->create100x80Button(_col(3) + 70, _y, img_print_resume);
-	this->ui.cancel = this->create100x80Button(_col(2) + 70,_y, img_print_back);
+	this->ui.run = this->create100x80Button(_col(3) + 70, _y, img_ok);
+	this->ui.cancel = this->create100x80Button(_col(2) + 70,_y, img_cancel);
 	this->ui.tools = this->create100x80Button(_col(1) + 70,_y, img_print_tools);
 	this->ui.del = this->create100x80Button(_col(0),_y, img_file_delete);
 
@@ -135,13 +77,27 @@ char * FileInfoUI::getTitle() {
 	return ui_print_process.file_name;
 }
 
+static void on_confirm(unsigned char button) {
+	confirm_dialog_ui.hide();
+	if (button==UI_BUTTON_OK) {
+		f_unlink(ui_print_process.file_name);
+		ui_app.back_ui();
+	} else {
+		file_info_ui.show();
+	}
+}
+
 void FileInfoUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.run) {
 		ui_app.startPrintFile(1);
 	} if (hBtn==this->ui.del) {
-		f_unlink(ui_print_process.file_name);
 		this->hide();
-		ui_app.back_ui();
+		sprintf(
+					ui_buf1_100,
+					lang_str.dialog.confirm_delete_file,
+					get_long_file_name(ui_print_process.file_name)
+		);
+		confirm_dialog_ui.show(ui_buf1_100, on_confirm, this);
 	} if (hBtn==this->ui.cancel) {
 		this->hide();
 		ui_app.back_ui();

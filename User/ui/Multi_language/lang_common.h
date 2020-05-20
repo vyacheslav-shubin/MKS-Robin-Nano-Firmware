@@ -31,6 +31,10 @@ typedef struct {
 	const char * min_max_z;
 } FILE_INFO_LANG_STR;
 
+typedef struct {
+	const char * confirm_delete_file;
+	const char * confirm_terminate_print;
+} DIALOG_LANG_STR;
 
 typedef struct {
 
@@ -90,8 +94,9 @@ typedef struct {
 	const char * ui_title_printing;
 	const char * ui_title_speed;
 
-	CONFIG_LANG_STR config_ui;
+	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;
+	DIALOG_LANG_STR		dialog;
 } LANG_STR;
 
 
@@ -123,6 +128,9 @@ extern void lang_ru(void);
 #define LANG_GREEK					11
 #define LANG_ITALY					12
 #define LANG_PORTUGUESE				13
+
+
+#define is_chinese() ((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
 
 #define TEXT_VALUE                    "%d/%d"
 #define TEXT_VALUE_T                  ": %d℃"

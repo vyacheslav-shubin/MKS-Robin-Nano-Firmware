@@ -421,43 +421,6 @@ void GUI_RefreshPage() {
 const char* logo_file = "1:/bmp_logo.bin";
 
 
-void _draw_logo() {
-	FIL file;
-	int size = 320*480;
-	LCD_setWindowArea(0, 0, 480, 320);
-	LCD_WriteRAM_Prepare();
-
-	int res = f_open(&file, logo_file, FA_OPEN_EXISTING | FA_READ);
-	if(res == FR_OK) {
-		while (size>0) {
-			UINT readed;
-			res = f_read(&file, bmp_public_buf, sizeof(bmp_public_buf), &readed);
-			if((res == FR_OK) && (readed!=0)) {
-				for(UINT i=0;i<readed;i+=2) {
-					uint16_t *color=(uint16_t *)&bmp_public_buf[i];
-					LCD_WriteRAM(*color);
-					if (--size==0)
-						break;
-				}
-			} else
-				break;
-		}
-		f_close(&file);
-	} else {
-		int offset = 0;
-		while (size != 0) {
-			SPI_FLASH_BufferRead(bmp_public_buf,PIC_LOGO_ADDR+offset,sizeof(bmp_public_buf));
-			for (int i=0;i<sizeof(bmp_public_buf);i+=2) {
-				uint16_t *color=(uint16_t *)&bmp_public_buf[i];
-				LCD_WriteRAM(*color);
-				if (--size==0)
-					break;
-			}
-			offset+=sizeof(bmp_public_buf);
-		}
-	}
-}
-
 char * creat_title_text() {
 	return ui_app.getTitle();
 }

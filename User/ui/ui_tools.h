@@ -34,6 +34,9 @@ extern "C" {
 #define img_print_tools  		"bmp_operate100.bin"
 #define img_print_auto_power_off	"bmp_autoOffEnabled100.bin"
 #define img_print_manual_power_off	"bmp_autoOffDisabled100.bin"
+#define img_ok					"bmp_ok100.bin"
+#define img_cancel				"bmp_cancel100.bin"
+
 
 #define img_degree_step1	"bmp_step1_degree.bin"
 #define img_degree_step5  	"bmp_step5_degree.bin"
@@ -143,6 +146,8 @@ extern "C" {
 #define img_check_on 		 "bmp_enable.bin"
 #define img_check_off 		 "bmp_disable.bin"
 
+#define img_dialog_confirm 		 "bmp_confirm.bin"
+
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
@@ -233,6 +238,8 @@ typedef struct {
 
 
 extern GUI_BITMAP bmp_struct_100x80;
+extern GUI_BITMAP bmp_struct_100x100;
+extern GUI_BITMAP bmp_struct_50x50;
 
 extern UI_PRINT_PROCESS ui_print_process;
 
@@ -256,7 +263,8 @@ extern void ui_drop_window(WM_HWIN wnd);
 #define ui_std_row(ph_y) (INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * (ph_y))
 #define ui_std_button(ph_x, ph_y, hwnd, img, title) ui_create_std_button(ui_std_col(ph_x),  ui_std_row(ph_y), hwnd, img, title)
 #define ui_std_button_return(hwnd) ui_std_button(3, 1, hwnd, "bmp_return.bin", common_menu.text_back)
-#define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cb, 0)
+#define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, LCD_HEIGHT - titleHeight, WM_CF_SHOW, cb, 0)
+#define ui_std_dialog(cb) WM_CreateWindow(20, titleHeight + 10, LCD_WIDTH - 40, LCD_HEIGHT - titleHeight - 20, WM_CF_SHOW, cb, 0)
 
 
 extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
@@ -306,11 +314,10 @@ extern void ui_timings(void);
 extern void ui_start_print_process(void);
 
 extern char ascii2dec(char ascii);
-extern uint8_t ui_file_with_preview(char *path, int * withoffset);
+extern unsigned char ui_file_with_preview(char *path, int *withoffset);
 extern void ui_gcode_small_preview(char * file_name, int offset, int xpos_pixel,int ypos_pixel);
 
 extern void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text);
-
 #if defined(__cplusplus)
 }
 #endif

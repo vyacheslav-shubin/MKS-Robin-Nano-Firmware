@@ -5,8 +5,8 @@
 #include "Marlin.h"
 #include "planner.h"
 #include "cardreader.h"
-#include "tim.h"
 #include "ff.h"
+#include "fatfs.h"
 #include "ili9320.h"
 
 extern CardReader card;
@@ -142,6 +142,8 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const ch
 }
 
 GUI_BITMAP bmp_struct_100x80 = { 100, 80, 160, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+GUI_BITMAP bmp_struct_100x100 = { 100, 100, 200, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+GUI_BITMAP bmp_struct_50x50 = { 50, 50, 100, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 
 
 BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {
@@ -198,6 +200,7 @@ TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent,
 	TEXT_Handle res = TEXT_CreateEx(x, y, w, h, hWinParent, WM_CF_SHOW, flags,  GUI_ID_TEXT0, 0);
 	TEXT_SetBkColor(res,  gCfgItems.background_color);
 	TEXT_SetTextColor(res, gCfgItems.title_color);
+	TEXT_SetText(res, text);
 	return res;
 }
 
@@ -333,45 +336,43 @@ extern void ui_draw_config_half_lines() {
 }
 
 
-uint8_t ui_file_with_preview(char *path, int *withoffset) {
+unsigned char ui_file_with_preview(char *path, int *withoffset) {
 	#define PREPERD_SIZE 512
 	FIL file;
-	if (f_open(&file, path, FA_OPEN_EXISTING | FA_READ) != FR_OK)
-		return 0;
-	memset(bmp_public_buf, 0, PREPERD_SIZE+1);
-	UINT readed;
-	f_read(&file,bmp_public_buf,PREPERD_SIZE,&readed);
-	if (readed != PREPERD_SIZE)
-		return 0;
-	f_close(&file);
-	char * pos = strstr(bmp_public_buf,";simage:");
-	if (pos==0)
-		return 0;
-	else {
-		*withoffset = (int)pos-(int)bmp_public_buf;
-		return 1;
+	if (f_open(&file, path, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
+		memset(bmp_public_buf, 0, PREPERD_SIZE+1);
+		UINT readed;
+		f_read(&file, bmp_public_buf, PREPERD_SIZE, &readed);
+		f_close(&file);
+		if (readed == PREPERD_SIZE) {
+			char * pos = strstr(bmp_public_buf,";simage:");
+			if (pos!=0) {
+				*withoffset = (int)pos-(int)bmp_public_buf;
+				return 1;
+			}
+		}
 	}
+	return 0;
 }
 
 void ui_gcode_small_preview(char *file_name, int offset, int xpos_pixel,int ypos_pixel) {
 	FIL file;
-	int res = f_open(&file, file_name, FA_OPEN_EXISTING | FA_READ);
-	if(res != FR_OK)
-		return;
-	f_lseek(&file, offset);
-	LCD_setWindowArea(xpos_pixel, ypos_pixel, 50, 50);
-	LCD_WriteRAM_Prepare();
-	for (uint8_t i=0;i<50;i++) {
-		UINT read;
-		f_read(&file, bmp_public_buf, 209, &read);
-		if (read!=209)
-			break;
-		for(uint8_t j=8; j<208; j+=4) {
-			uint16_t color = (ascii2dec(bmp_public_buf[j+2])<<12) | (ascii2dec(bmp_public_buf[j+3])<<8) | (ascii2dec(bmp_public_buf[j])<<4) | (ascii2dec(bmp_public_buf[j+1]));
-			LCD_WriteRAM(color);
+	if (f_open(&file, file_name, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
+		f_lseek(&file, offset);
+		LCD_setWindowArea(xpos_pixel, ypos_pixel, 50, 50);
+		LCD_WriteRAM_Prepare();
+		for (u8 i=0; i< 50; i++) {
+			UINT read;
+			f_read(&file, bmp_public_buf, 209, &read);
+			if (read!=209)
+				break;
+			for(u8 j=8; j<208; j+=4) {
+				u16 color = (ascii2dec(bmp_public_buf[j+2])<<12) | (ascii2dec(bmp_public_buf[j+3])<<8) | (ascii2dec(bmp_public_buf[j])<<4) | (ascii2dec(bmp_public_buf[j+1]));
+				LCD_WriteRAM(color);
+			}
 		}
+		f_close(&file);
 	}
-	f_close(&file);
 }
 
 void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text) {
@@ -388,7 +389,6 @@ void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text) {
 		pr = 1;
 	sprintf(ui_buf1_20, "%d/%d%%", fanSpeeds[0], pr);
 	ui_set_text_value(text, ui_buf1_20);
-
 }
 
 

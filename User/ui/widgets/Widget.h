@@ -20,24 +20,33 @@ class Application;
 typedef BUTTON_Handle 		UI_BUTTON;
 typedef TEXT_Handle 		UI_TEXT;
 typedef PROGBAR_Handle 		UI_PROGRESS_BAR;
+typedef GUI_HWIN 			UI_WND;
+
+void widget_callback(WM_MESSAGE * pMsg);
 
 class Widget {
 protected:
 	DISP_STATE id;
-	GUI_HWIN hWnd = 0;
+	UI_WND hWnd = 0;
 	virtual void createControls() {};
 	virtual void on_button(UI_BUTTON hBtn) {};
 	virtual void refresh_05() {};
 	virtual void refresh_1s() {};
 	void dropWindow();
 	void buttonPreset(UI_BUTTON btn);
-	void initPage();
+	virtual void createWindow();
+	UI_BUTTON create100x80Button(int x, int y, const char * picture);
+	void updateButton(UI_BUTTON button, const char * picture, const char * title);
+	void setButtonText(UI_BUTTON btn, char * text);
+	UI_TEXT createText(int x, int y, int w, int h, const char * value);
+	UI_TEXT createTextF(int x, int y, int w, int h, int flags, char *text);
+	void setText(UI_TEXT hText, char * text);
 public:
 	Widget(DISP_STATE id) {this->id=id;};
 	bool is_active();
 	virtual void on_message(WM_MESSAGE * pMsg);
 	virtual ~Widget() {};
-	virtual char * getTitle();
+	virtual char * getTitle() {return 0; };
 	virtual void show(Widget * caller = 0);
 	virtual void recreate();
 	virtual void refresh();

@@ -213,15 +213,6 @@ GUI_BITMAP bmp_struct_117x25 = {
   NULL  /* Pointer to palette */
  ,GUI_DRAW_BMPM565
 };
-GUI_BITMAP bmp_struct_50x50 = {
-  50,
-  50,
-  160, /* BytesPerLine */
-  16, /* BitsPerPixel */
-  (unsigned char *)bmp_public_buf,  /* Pointer to picture data */
-  NULL  /* Pointer to palette */
- ,GUI_DRAW_BMPM565
-};
 GUI_BITMAP bmp_struct_141x60 = {
   140,
   15,

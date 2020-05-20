@@ -10,6 +10,28 @@
 
 #include "StdWidget.h"
 
+#define MAX_FILE_NAME_SIZE	100
+
+extern char * get_long_file_name(char * fileName);
+extern void delete_file(char * fileName);
+
+class Browser{
+private:
+	FATFS fs;
+	char is_wanted(FILINFO * fi);
+protected:
+	virtual char onFile(FILINFO * fi) {return 0;};
+public:
+	char curent_dir[MAX_FILE_NAME_SIZE];
+	int dir_level = 0;
+	virtual void lookup();
+	virtual void close();
+	virtual void pushDirectory(char * name);
+	virtual void popDirectory();
+	Browser() {this->close();};
+	virtual ~Browser() {}
+};
+
 class UIFileBrouser;
 
 typedef struct{

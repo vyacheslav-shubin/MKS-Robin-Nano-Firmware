@@ -12,11 +12,31 @@
 #include "Marlin.h"
 #include "PrintingUI.h"
 #include "ff.h"
+#include "fatfs.h"
 #include "ili9320.h"
 #include "pic_manager.h"
 #include "spi_flash.h"
+#include "mks_reprint.h"
 
 Application ui_app;
+static FATFS fat;
+
+void Application::defaultUI() {
+	GUI_SetBkColor(gCfgItems.background_color);
+	GUI_SetColor(gCfgItems.title_color);
+    if (is_chinese()) {
+    	GUI_SetFont(&GUI_FontHZ16);
+    	BUTTON_SetDefaultFont(&GUI_FontHZ16);
+    	TEXT_SetDefaultFont(&GUI_FontHZ16);
+    	GUI_UC_SetEncodeNone();
+    } else {
+    	GUI_SetFont(&FONT_TITLE);
+    	BUTTON_SetDefaultFont(&FONT_TITLE);
+    	TEXT_SetDefaultFont(&FONT_TITLE);
+    	GUI_UC_SetEncodeUTF8();
+	}
+}
+
 
 char * Application::getTitle() {
 	if (this->current_ui!=0)
@@ -60,6 +80,18 @@ void Application::dropPreview() {
 	epr_write_data(EPR_PREVIEW_FROM_FLASH, &has_preview,1);
 }
 
+void Application::terminatePrintFile() {
+	stop_print_time();
+	card.stopSDPrint();
+	wait_for_heatup = false;
+	mksReprint.mks_printer_state = MKS_STOP;
+	gCfgItems.breakpoint_reprint_flg = 0;
+	gCfgItems.breakpoint_z_pos = 0;
+	gCfgItems.breakpoint_flg=0;
+	reset_file_info();
+	ui_app.showMainWidget();
+}
+
 
 void Application::startPrintFile(unsigned char savedPreview) {
 	this->closeCurrentWidget();
@@ -84,7 +116,14 @@ void Application::showMainWidget() {
 	main_ui.show();
 }
 
+void Application::pop() {
+	if (disp_state_stack._disp_index>0)
+		disp_state_stack._disp_index--;
+	disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
+}
+
 void Application::push(Widget * widget) {
+	this->current_ui = widget;
 	if (widget==&main_ui)
 		reset_stack(widget);
 	else {
@@ -107,13 +146,10 @@ void Application::drawLogo() {
 	int size = 320*480;
 	LCD_setWindowArea(0, 0, 480, 320);
 	LCD_WriteRAM_Prepare();
-
-	int res = f_open(&file, logo_file, FA_OPEN_EXISTING | FA_READ);
-	if(res == FR_OK) {
+	if (f_open(&file, logo_file, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
 		while (size>0) {
 			UINT readed;
-			res = f_read(&file, bmp_public_buf, sizeof(bmp_public_buf), &readed);
-			if((res == FR_OK) && (readed!=0)) {
+			if((f_read(&file, bmp_public_buf, sizeof(bmp_public_buf), &readed) == FR_OK) && (readed != 0)) {
 				for(UINT i=0;i<readed;i+=2) {
 					uint16_t *color=(uint16_t *)&bmp_public_buf[i];
 					LCD_WriteRAM(*color);

@@ -11,6 +11,59 @@
 #include "ili9320.h"
 #include "pic_manager.h"
 #include "ui_tools.h"
+#include "serial.h"
+#include "fatfs.h"
+
+static void find_float(char * msg, float * value) {
+	memset(ui_buf1_100, 0, 11);
+	char * p = (char *)strstr(bmp_public_buf, msg);
+	if (p!=0) {
+		p+=strlen(msg);
+		while (*p==' ')
+			p++;
+		int i=0;
+		while ((((p[i]>='0') && (p[i]<='9')) || (p[i]=='-') || (p[i]=='.')) && (i<10)) {
+			ui_buf1_100[i] = p[i];
+			i++;
+		}
+		if (i!=0)
+			*value = atof(ui_buf1_100);
+	}
+}
+
+static void _explore_file() {
+	#define READ_SIZE 512
+	FIL file;
+	if(f_open(&file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
+		ui_print_process.size = file.fsize;
+		int offset;
+		if (ui_file_with_preview(ui_print_process.file_name, &offset)) {
+			f_lseek(&file, (PREVIEW_LITTLE_PIC_SIZE+offset) + 809 * 200 + 8); //809 - длина строки в preview
+		} else {
+			f_lseek(&file, 0);
+		}
+		memset(bmp_public_buf, 0, READ_SIZE+1);
+		unsigned int readed;
+		if (f_read(&file, bmp_public_buf, READ_SIZE, &readed) == FR_OK) {
+			find_float("MINX:", &ui_print_process.mmx.minv);
+			find_float("MAXX:", &ui_print_process.mmx.maxv);
+			find_float("MINY:", &ui_print_process.mmy.minv);
+			find_float("MAXY:", &ui_print_process.mmy.maxv);
+			find_float("MINZ:", &ui_print_process.mmz.minv);
+			find_float("MAXZ:", &ui_print_process.mmz.maxv);
+			find_float("Layer height:", &ui_print_process.layer_height);
+			find_float("Filament used:", &ui_print_process.filament_used);
+			float t;
+			find_float("TIME:", &t);
+			ui_print_process.time = (int)t;
+			find_float("LAYER_COUNT:", &t);
+			ui_print_process.layer_count = (int)t;
+
+		}
+		f_close(&file);
+	}
+}
+
 
 static void _preview(int x,int y, int src) {
 	for (int sector=0;sector<10;sector++) {
@@ -60,35 +113,40 @@ static void _preview_cache() {
 
 
 void FileInfoBaseUI::refresh() {
-	StdWidget::refresh();
-	if (!this->preview_done) {
-		if (ui_print_process.preview_state_flags & (1<<PREVIEW_CHECKED_BIT)) {
-			if (ui_print_process.preview_state_flags & (1<<PREVIEW_EXISTS_BIT)) {
-				if (ui_print_process.preview_state_flags & (1<<PREVIEW_CACHED_BIT)) {
-					_preview(2, 36, BAK_VIEW_ADDR);
-					this->preview_done = 1;
+	if (ui_print_process.size == 0) {
+		_explore_file();
+	} else {
+		if (!this->preview_done) {
+			if (ui_print_process.preview_state_flags & (1<<PREVIEW_CHECKED_BIT)) {
+				if (ui_print_process.preview_state_flags & (1<<PREVIEW_EXISTS_BIT)) {
+					if (ui_print_process.preview_state_flags & (1<<PREVIEW_CACHED_BIT)) {
+						_preview(2, 36, BAK_VIEW_ADDR);
+						this->preview_done = 1;
+					} else {
+						_preview_cache();
+					}
 				} else {
-					_preview_cache();
+					_preview(2, 36, DEFAULT_VIEW_ADDR);
+					this->preview_done = 1;
 				}
 			} else {
-				_preview(2, 36, DEFAULT_VIEW_ADDR);
-				this->preview_done = 1;
-			}
-		} else {
-			if (ui_print_process.file_name[0]!=0) {
-				ui_print_process.preview_state_flags = 1<<PREVIEW_CHECKED_BIT;
-				unsigned char has_preview;
-				epr_read_data(EPR_PREVIEW_FROM_FLASH, &has_preview, 1);
-				if (has_preview) {
-					ui_print_process.preview_state_flags = PREVIEW_CACHED;
-				} else {
-					if (ui_file_with_preview(ui_print_process.file_name, &ui_print_process.preview_offset)) {
-						ui_print_process.preview_state_flags |= 1<<PREVIEW_EXISTS_BIT;
-						ui_print_process.preview_row = 0;
-						_preview(2, 36, DEFAULT_VIEW_ADDR);
+				if (ui_print_process.file_name[0]!=0) {
+					ui_print_process.preview_state_flags = 1<<PREVIEW_CHECKED_BIT;
+					unsigned char has_preview;
+					epr_read_data(EPR_PREVIEW_FROM_FLASH, &has_preview, 1);
+					if (has_preview) {
+						ui_print_process.preview_state_flags = PREVIEW_CACHED;
+					} else {
+						if (ui_file_with_preview(ui_print_process.file_name, &ui_print_process.preview_offset)) {
+							ui_print_process.preview_state_flags |= 1<<PREVIEW_EXISTS_BIT;
+							ui_print_process.preview_row = 0;
+							_preview(2, 36, DEFAULT_VIEW_ADDR);
+						}
 					}
 				}
 			}
 		}
 	}
+
+	StdWidget::refresh();
 }

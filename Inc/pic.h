@@ -26,7 +26,6 @@ extern GUI_BITMAP bmp_struct144X40;
 extern GUI_BITMAP bmp_struct70X28;
 
 extern GUI_BITMAP bmp_struct10x17;
-extern GUI_BITMAP bmp_struct_50x50;
 extern GUI_BITMAP bmp_struct_141x60;
 extern uint8_t drawicon_preview(char *path,int xsize_small,int ysize_small,uint8_t part);
 

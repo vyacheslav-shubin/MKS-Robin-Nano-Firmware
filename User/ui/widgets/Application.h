@@ -13,6 +13,14 @@ class Widget;
 #include "Widget.h"
 #include "wifi_module.h"
 
+extern u8 ui_timing_flags;
+#define F_UI_TIMING_HALF_SEC		1<<0
+#define F_UI_TIMING_SEC				1<<1
+
+#define is_ui_timing(FLAG) (ui_timing_flags & FLAG)
+#define ui_timing_set(FLAG) (ui_timing_flags |= FLAG)
+#define ui_timing_clear(FLAG) (ui_timing_flags &= (~FLAG))
+
 class Application {
 public:
 	Widget * current_ui = 0;
@@ -21,6 +29,7 @@ public:
 	char * getTitle();
 	void start();
 	void loop();
+	void systick();
 	void defaultUI();
 	void dropPreview();
 	void startPrintFile(unsigned char savedPreview=0);

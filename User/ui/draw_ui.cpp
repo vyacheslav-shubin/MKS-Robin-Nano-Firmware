@@ -71,10 +71,6 @@ extern uint8_t temp_update_flag;
 extern uint8_t print_start_flg;
 /******end********/
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz14;
-
-uint8_t temperature_change_frequency = 1;
-uint16_t temperature_change_frequency_cnt;
-
 extern uint8_t wifi_refresh_flg;
 extern void disp_wifi_state();
 
@@ -153,10 +149,6 @@ void GUI_callback()
 		//uid.executeAction(action_id);
 	}
 }
-
-
-
-uint8_t	ui_timing_flags = 0;
 
 
 void clear_cur_ui() {

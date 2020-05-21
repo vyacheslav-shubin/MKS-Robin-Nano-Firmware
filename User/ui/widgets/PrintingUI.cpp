@@ -150,18 +150,13 @@ void PrintingUI::updatePowerControlButton() {
 
 void PrintingUI::updatePauseButton() {
 	const char * fn;
-	//Это условие избыточное
-	if(gCfgItems.standby_mode==1 && mksReprint.mks_printer_state == MKS_REPRINTED && button_disp_pause_state==1) {
-		fn = img_print_pause;
+	if(
+			(mksReprint.mks_printer_state == MKS_REPRINTING)
+			|| (mksReprint.mks_printer_state == MKS_PAUSING)
+			|| (mksReprint.mks_printer_state == MKS_PAUSED)) {
+		fn= img_print_resume;
 	} else {
-		if(
-				(mksReprint.mks_printer_state == MKS_REPRINTING)
-				|| (mksReprint.mks_printer_state == MKS_PAUSING)
-				|| (mksReprint.mks_printer_state == MKS_PAUSED)) {
-			fn= img_print_resume;
-		} else {
-			fn = img_print_pause;
-		}
+		fn = img_print_pause;
 	}
 	BUTTON_SetBmpFileName(this->ui.pause, fn, 1);
 	BUTTON_SetBitmapEx(this->ui.pause, 0, &bmp_struct_100x80, 0, 0);

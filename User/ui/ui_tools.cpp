@@ -229,35 +229,6 @@ void ui_set_text_value(TEXT_Handle handle, char* val) {
 	TEXT_SetText(handle, val);
 }
 
-void ui_timings(void) {
-	//TODO: добавить разрешение таймингов, тогда можно будет все завязать на этот механизм
-
-	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
-		ui_timing_set(F_UI_TIMING_HALF_SEC);
-
-	if(!(TimeIncrease * TICK_CYCLE % 1000)) { //1 sec
-		ui_timing_set(F_UI_TIMING_SEC);
-		if(print_time.start == 1) {
-			print_time.seconds++;
-			if(print_time.seconds >= 60) {
-				print_time.seconds = 0;
-				print_time.minutes++;
-				if(print_time.minutes >= 60) {
-					print_time.minutes = 0;
-					print_time.hours++;
-				}
-			}
-		}
-	}
-
-	//TODO: К херам (!!) достаточно секундных обновлений
-	temperature_change_frequency_cnt++;
-	if((temperature_change_frequency_cnt>=2000) && (temperature_change_frequency!=1)) {
-		temperature_change_frequency_cnt = 0;
-		temperature_change_frequency = 1;
-	}
-
-}
 
 void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator) {
 	navigator->button_back = BUTTON_CreateEx(400, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());

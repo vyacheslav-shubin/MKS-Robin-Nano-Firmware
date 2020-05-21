@@ -297,18 +297,6 @@ extern uint8_t temperature_change_frequency;
 
 static uint32_t After_finish_print_time = 0;
 
-uint8_t filament_loading_time_flg;
-uint32_t filament_loading_time_cnt;
-uint8_t filament_loading_completed;
-uint8_t filament_unloading_time_flg;
-uint32_t filament_unloading_time_cnt;
-uint8_t filament_unloading_completed;
-
-uint8_t filament_heat_completed_load;
-uint8_t filament_heat_completed_unload;
-
-extern uint32_t filament_rate;
-
 
 volatile uint32_t TimeIncrease;
 uint8_t preview_no_display;
@@ -16181,47 +16169,17 @@ uint32_t btn_beep_cnt = 0;
 #endif
 extern void mksBeeperAlarm(void);
 
-void Beeper(uint32_t cnt)
-{
+void Beeper(uint32_t cnt) {
     beep_flg = 1;
     beep_cnt = cnt;
     BEEPER_OP = 1;
 }
 
-void SysTick_Handler_User()
-{
-		TimeIncrease++;
-
-
-		if(filament_loading_time_flg == 1)
-		{
-			filament_loading_time_cnt++;
-			filament_rate = (uint32_t)(((filament_loading_time_cnt/(gCfgItems.filament_loading_time*1000.0))*100.0)+0.5);
-			if(filament_loading_time_cnt >= (gCfgItems.filament_loading_time*1000))
-			{
-				filament_loading_time_cnt = 0;
-				filament_loading_time_flg = 0;
-				filament_loading_completed = 1;
-			}
-		}
-		if(filament_unloading_time_flg == 1)
-		{
-			filament_unloading_time_cnt++;
-			filament_rate = (uint32_t)(((filament_unloading_time_cnt/(gCfgItems.filament_unloading_time*1000.0))*100.0)+0.5);
-			if(filament_unloading_time_cnt >= (gCfgItems.filament_unloading_time*1000))
-			{
-				filament_unloading_time_cnt = 0;
-				filament_unloading_time_flg = 0;
-				filament_unloading_completed = 1;
-				filament_rate = 100;
-			}
-		}	
-	
-		ui_timings();
-
-
-		if((TimeIncrease * TICK_CYCLE % 1000) == 0) 
-			display_hold_cnt++;
+void SysTick_Handler_User() {
+	TimeIncrease++;
+	ui_app.systick();
+	if((TimeIncrease * TICK_CYCLE % 1000) == 0)
+		display_hold_cnt++;
 
 		if((TimeIncrease * TICK_CYCLE % 1000) == 0)
 		{

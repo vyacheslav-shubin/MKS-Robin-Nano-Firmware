@@ -20,6 +20,7 @@
 
 Application ui_app;
 static FATFS fat;
+u8 ui_timing_flags;
 
 void Application::defaultUI() {
 	GUI_SetBkColor(gCfgItems.background_color);
@@ -73,6 +74,27 @@ void Application::loop() {
 	GUI_TOUCH_Exec();
 	GUI_Exec();
 }
+
+void Application::systick() {
+	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
+		ui_timing_set(F_UI_TIMING_HALF_SEC);
+
+	if(!(TimeIncrease * TICK_CYCLE % 1000)) { //1 sec
+		ui_timing_set(F_UI_TIMING_SEC);
+		if(print_time.start == 1) {
+			print_time.seconds++;
+			if(print_time.seconds >= 60) {
+				print_time.seconds = 0;
+				print_time.minutes++;
+				if(print_time.minutes >= 60) {
+					print_time.minutes = 0;
+					print_time.hours++;
+				}
+			}
+		}
+	}
+}
+
 
 void Application::dropPreview() {
 	ui_print_process.preview_state_flags = 0;

@@ -293,17 +293,6 @@ extern void ui_make_half_row_check_pair(int col, int row, WM_HWIN hWin, UI_CHECK
 extern void ui_make_arrow_pair(int row, WM_HWIN hWin, UI_ARROW_PAIR * pair, char* title);
 
 
-
-extern uint8_t ui_timing_flags;
-#define F_UI_TIMING_HALF_SEC		1<<0
-#define F_UI_TIMING_SEC				1<<1
-
-#define is_ui_timing(FLAG) (ui_timing_flags & FLAG)
-#define ui_timing_set(FLAG) (ui_timing_flags |= FLAG)
-#define ui_timing_clear(FLAG) (ui_timing_flags &= (~FLAG))
-
-extern void ui_timings(void);
-
 extern void ui_start_print_process(void);
 
 extern char ascii2dec(char ascii);

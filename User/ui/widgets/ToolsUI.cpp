@@ -70,7 +70,6 @@ void ToolsUI::on_button(UI_BUTTON hBtn) {
 		file_browser_ui.show(this);
 	} else if (hBtn==this->ui.files) {
 		this->hide();
-		//confirm_dialog_ui.show();
 		file_browser_ui.show();
 	}
 }

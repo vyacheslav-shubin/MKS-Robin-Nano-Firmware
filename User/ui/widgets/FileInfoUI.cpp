@@ -77,13 +77,13 @@ char * FileInfoUI::getTitle() {
 	return ui_print_process.file_name;
 }
 
-static void on_confirm(unsigned char button) {
+void FileInfoUI::on_confirm_dialog(u8 action, u8 dialog_id) {
 	confirm_dialog_ui.hide();
-	if (button==UI_BUTTON_OK) {
+	if (action==UI_BUTTON_OK) {
 		f_unlink(ui_print_process.file_name);
 		ui_app.back_ui();
 	} else {
-		file_info_ui.show();
+		this->show();
 	}
 }
 
@@ -97,7 +97,7 @@ void FileInfoUI::on_button(UI_BUTTON hBtn) {
 					lang_str.dialog.confirm_delete_file,
 					get_long_file_name(ui_print_process.file_name)
 		);
-		confirm_dialog_ui.show(ui_buf1_100, on_confirm, this);
+		confirm_dialog_ui.show(ui_buf1_100, this, 0, this);
 	} if (hBtn==this->ui.cancel) {
 		this->hide();
 		ui_app.back_ui();

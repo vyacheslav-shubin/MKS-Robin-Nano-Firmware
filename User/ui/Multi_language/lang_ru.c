@@ -76,5 +76,6 @@ void lang_ru(void) {
 	lang_str.dialog.confirm_terminate_print = "Прервать печать?";
 	lang_str.dialog.confirm_print_again = "Повторить печать?";
 	lang_str.dialog.confirm_print_with_suicide = "Автоматическое выключение.\nПрервать и повторить печать?";
+	lang_str.dialog.error_filament_end_detected = "Обнаружен обрыв филамента";
 
 }

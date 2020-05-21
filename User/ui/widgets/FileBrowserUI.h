@@ -9,6 +9,7 @@
 #define USER_UI_WIDGETS_FILEBROWSERUI_H_
 
 #include "StdWidget.h"
+#include "ConfirmDialogUI.h"
 
 #define MAX_FILE_NAME_SIZE	100
 
@@ -47,9 +48,10 @@ typedef struct{
 	UI_BUTTON next;
 	UI_BUTTON back;
 	UI_FILE_BUTTON files[6];
+	u8 selectedButton;
 } FILE_BROWSER_UI_CONTROLS;
 
-class FileBrowserUI: public StdWidget {
+class FileBrowserUI: public StdWidget, public ConfirmDialogCallback {
 private:
 	FILE_BROWSER_UI_CONTROLS ui;
 	void doBack();
@@ -58,9 +60,11 @@ private:
 	void doButton(char index);
 	void clearButtons();
 	void drawPreview();
+	void activatePrint(u8 index);
 protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
+	virtual void on_confirm_dialog(u8 action, u8 dialog_id);
 public:
 	virtual char * getTitle() {return lang_str.ui_title_file_browser;};
 	FileBrowserUI(): StdWidget(FILE_BROWSER_UI) {};

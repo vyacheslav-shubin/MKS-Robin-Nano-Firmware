@@ -36,6 +36,7 @@ void Widget::on_message(WM_MESSAGE * pMsg) {
 }
 
 void Widget::createWindow() {
+	ui_app.current_ui = this;
     ui_app.defaultUI();
 	GUI_Clear();
     ui_app.drawTitle();
@@ -73,7 +74,7 @@ void Widget::hide() {
 
 void Widget::dropWindow(){
 	//GUI_SetBkColor(gCfgItems.background_color);
-	if(WM_IsWindow(this->hWnd)) {
+	if ((this->hWnd!=0) && WM_IsWindow(this->hWnd)) {
 		WM_DeleteWindow(this->hWnd);
 		this->hWnd = 0;
 	}

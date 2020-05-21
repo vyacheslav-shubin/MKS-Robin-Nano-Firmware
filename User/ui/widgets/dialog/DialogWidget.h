@@ -15,11 +15,9 @@
 #define DIALOG_WIDTH	(LCD_WIDTH - DIALOG_X * 2)
 #define DIALOG_HEIGHT	(LCD_HEIGHT - DIALOG_Y * 2)
 
-#define UI_BUTTON_OK		0
-#define UI_BUTTON_CANCEL	1
-#define UI_BUTTON_TIMEOUT	2
-
-typedef void (*ui_dialog_callback)(unsigned char);
+#define UI_BUTTON_OK		((u8)0)
+#define UI_BUTTON_CANCEL	((u8)1)
+#define UI_BUTTON_TIMEOUT	((u8)2)
 
 class DialogWidget : public Widget {
 protected:

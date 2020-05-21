@@ -10,6 +10,7 @@
 
 #include "StdWidget.h"
 #include "FileInfoBaseUI.h"
+#include "ConfirmDialogUI.h"
 
 typedef struct{
 	STATE_BUTTON ext1;
@@ -27,7 +28,7 @@ typedef struct{
 	char preview_done;
 } PRINTING_UI_CONTROLS;
 
-class PrintingUI : public FileInfoBaseUI {
+class PrintingUI : public FileInfoBaseUI, public ConfirmDialogCallback {
 private:
 	PRINTING_UI_CONTROLS ui;
 	void createStateButtonAt(char col, char row, STATE_BUTTON * btn, const char * img, const char * title);
@@ -41,6 +42,7 @@ protected:
 	virtual void refresh_1s();
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
+	virtual void on_confirm_dialog(u8 action, u8 dialog_id);
 public:
 	virtual char * getTitle() {return lang_str.ui_title_printing;};
 	//virtual void refresh();

@@ -17,9 +17,21 @@ typedef struct {
 	UI_PROGRESS_BAR progress;
 } CONFIRM_DIALOG_UI_CONTROLS;
 
+class ConfirmDialogUI;
+
+class ConfirmDialogCallback {
+protected:
+	virtual void on_confirm_dialog(u8 action, u8 dialog_id) = 0;
+public:
+	virtual ~ConfirmDialogCallback() {};
+	friend ConfirmDialogUI;
+};
+
 class ConfirmDialogUI: public DialogWidget {
 private:
 	CONFIRM_DIALOG_UI_CONTROLS ui;
+	ConfirmDialogCallback * callback = 0;
+	u8 	id;
 	u16 timeout;
 	u16 max_timeout;
 protected:
@@ -27,8 +39,8 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_1s();
 public:
-	void show(char * message, ui_dialog_callback cb, Widget * caller = 0);
-	void show(char * message, ui_dialog_callback cb, u16 timeout, Widget * caller = 0);
+	void show(char * message, ConfirmDialogCallback * callback, u8 id = 0, Widget * caller = 0);
+	void show(char * message, ConfirmDialogCallback * callback, u16 timeout, u8 id, Widget * caller = 0);
 	ConfirmDialogUI() : DialogWidget() {};
 };
 

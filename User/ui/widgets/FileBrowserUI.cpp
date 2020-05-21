@@ -6,6 +6,7 @@
  */
 
 #include "FileBrowserUI.h"
+#include "ConfirmDialogUI.h"
 #include "FileInfoUI.h"
 #include "ui_tools.h"
 #include "fatfs.h"
@@ -13,6 +14,7 @@
 #include "ff.h"
 #include "ui_tools.h"
 #include "sh_tools.h"
+#include "integration.h"
 
 FileBrowserUI file_browser_ui;
 
@@ -228,21 +230,39 @@ void FileBrowserUI::doPrev(){
 
 #include "draw_dialog.h"
 
+void FileBrowserUI::activatePrint(u8 index) {
+	memset(&ui_print_process, 0, sizeof(ui_print_process));
+	sprintf(ui_print_process.file_name, "%s/%s", browser.curent_dir, this->ui.files[index].fileName);
+	ui_app.dropPreview();
+	file_info_ui.show(this);
+}
+
+void FileBrowserUI::on_confirm_dialog(u8 action, u8 dialog_id) {
+	if (action == UI_BUTTON_OK) {
+		if (is_filament_fail()) {
+			shUI::pushGcode("M300 P300");
+		} else {
+			confirm_dialog_ui.hide();
+			this->activatePrint(this->ui.selectedButton);
+		}
+	} else if (action == UI_BUTTON_CANCEL){
+		confirm_dialog_ui.hide();
+		this->recreate();
+	}
+}
+
+
 void FileBrowserUI::doButton(char index) {
 	if (this->ui.files[index].isDirectory) {
 		browser.pushDirectory(this->ui.files[index].fileName);
 		this->recreate();
 	} else {
+		this->hide();
 		if (is_filament_fail()) {
-			this->hide();
-			draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
+			this->ui.selectedButton = index;
+			confirm_dialog_ui.show(lang_str.dialog.error_filament_end_detected, this, 0, this);
 		} else {
-			memset(&ui_print_process, 0, sizeof(ui_print_process));
-			sprintf(ui_print_process.file_name, "%s/%s", browser.curent_dir, this->ui.files[index].fileName);
-			this->hide();
-			ui_app.dropPreview();
-			file_info_ui.show(this);
-			//ui_app.startPrintFile();
+			this->activatePrint(index);
 		}
 	}
 }

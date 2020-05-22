@@ -26,9 +26,6 @@ static uint8_t lastTouchState = PEN_UP;
 #define  times  4
 
 extern u16 DeviceCode;
-extern uint8_t display_hold;
-extern uint32_t display_hold_cnt;
-extern uint8_t display_hold_release;
 #define	CHX 	0x90//0x90 	//ͨ��Y+��ѡ�������	//0x94
 #define	CHY 	0xD0//0xd0	//ͨ��X+��ѡ�������	//0xD4
 
@@ -196,15 +193,8 @@ void getTouchEvent(TOUCH_EVENT *pTouchEvent) {
 		y = y_touch;
 		ADS7843_Rd_Addata(&x_touch, &y_touch);
 		if(TOUCH_PressValid(x_touch, y_touch)) {
-
-				display_hold_cnt=0;
-				if(display_hold==1) {
-					display_hold_release=1;
-					return;
-				}
-				if(abs(x - x_touch) > 50 || abs(y-y_touch) > 50)
-					return;
-
+			if(abs(x - x_touch) > 50 || abs(y-y_touch) > 50)
+				return;
 			if (ui_app_touch(PEN_DOWN)) {
 				pTouchEvent->x  = (x + x_touch) >> 1;
 				pTouchEvent->y = (y + y_touch) >> 1;
@@ -216,6 +206,5 @@ void getTouchEvent(TOUCH_EVENT *pTouchEvent) {
 				pTouchEvent->state = PEN_UP;
 		}
 	}
-
 }
 /*=====================================================================*/

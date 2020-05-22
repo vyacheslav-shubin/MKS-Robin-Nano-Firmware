@@ -15553,14 +15553,6 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) {
   planner.check_axes_activity();
 }
 
-/**
- * Standard idle routine keeps the machine alive
- */
-
-uint8_t display_hold=0;
-uint32_t display_hold_cnt=0;
-uint8_t display_hold_release=0;
-
 uint8_t button_disp_pause_state=0;
 
 void lcd_reInit()
@@ -15604,21 +15596,6 @@ void idle(
     Max7219_idle_tasks();
   #endif  // MAX7219_DEBUG
 
-   if(gCfgItems.standby_mode==1)
-    {
-        if(display_hold_cnt>=gCfgItems.standby_time)
-        {
-            display_hold_cnt -= gCfgItems.standby_time;
-            display_hold=1;
-            Lcd_Light_OFF;
-        }
-        if(display_hold_release==1)
-        {
-            display_hold=0;
-            display_hold_release=0;
-            lcd_reInit();
-        }
-    }
 
   lcd_update();
 
@@ -16048,8 +16025,6 @@ void setup() {
     delay(1000);
     WRITE(LCD_PINS_RS, HIGH);
   #endif
-    display_hold=0;
-    display_hold_cnt=0;
 }
 
 /**
@@ -16177,94 +16152,58 @@ void SysTick_Handler_User() {
 	TimeIncrease++;
 	ui_app.systick();
 	if((TimeIncrease * TICK_CYCLE % 1000) == 0)
-		display_hold_cnt++;
-
-		if((TimeIncrease * TICK_CYCLE % 1000) == 0)
-		{
-			z_high_count=1;
-		}
+		z_high_count=1;
 
 	if (filament_fail_flag)
 		filament_fail_cnt++;
 
 	if(poweroff_det_flg==1)
-	{
 		poweroff_det_cnt++;
-	}
 		
-
 	if(poweroff_det_low_flg==1)
-	{
 		poweroff_det_low_cnt++;
-	}
 	
 	if(poweroff_det_high_flg==1)
-	{
 		poweroff_det_high_cnt++;
-	}		
 
-	if(!(TimeIncrease * TICK_CYCLE % 5000))	//5s
-	{
+	if(!(TimeIncrease * TICK_CYCLE % 5000)) {
 		wifi_check_time = 1;
 		waiting_wifi_time ++;
-		if((waiting_wifi_time == 8) || (gCfgItems.wifi_type == ESP_WIFI))//40s
-		{
+		if((waiting_wifi_time == 8) || (gCfgItems.wifi_type == ESP_WIFI)) { //40s
 			if(wifi_init_flg == 0)
-			{
 				wifi_init_flg = 1;
-			}
-			
 		}
 		if(wifi_refresh_flg == 0)
 			wifi_refresh_flg = 1;
 		
 		if(cloud_refresh_flg == 0)
 			cloud_refresh_flg = 1;
-
 	}
 	
 
 	mksBeeperAlarm();
 
-    if(beep_flg == 1)
-    {
+    if(beep_flg == 1) {
         beep_cnt--;
-        if(beep_cnt<=0)
-        {
+        if(beep_cnt<=0) {
            beep_flg = 0;
            BEEPER_OP = 0; 
         }
     }  
 	if(key_value_calc.timer == TIMER_START)
-	{
 		key_value_calc.timer_count++;
-	}
-	if(((TimeIncrease * TICK_CYCLE % 1000) == 0) )
-	{		
+
+	if(((TimeIncrease * TICK_CYCLE % 1000) == 0))
 		if(tips_disp.timer == TIPS_TIMER_START)
-		{
 			tips_disp.timer_count++;
-		}
-	}
-	#if 0
-    if(btn_flg == 1)
-    {
-    	btn_beep_cnt--;
-        if(btn_beep_cnt<=0)
-        {
-           btn_flg = 0;
-           BEEPER_OP = 0; 
-        }
-    }
-    #endif
+
 	if (has_adjust_speed==1)
 		resume_printed_time++;
 
-	if(print_finish_start_timer==TIMER_START)
-	{
+	//TODO: Убрать
+	if(print_finish_start_timer==TIMER_START) {
 		print_finish_timer_count++;
-		if(print_finish_timer_count>=(gCfgItems.print_finish_count*1000))
-		{
+		if(print_finish_timer_count>=(gCfgItems.print_finish_count*1000)) {
 			print_finish_start_timer=TIMER_STOP;
 			print_finish_timer_count=0;
 			print_finish_close_machine=true;

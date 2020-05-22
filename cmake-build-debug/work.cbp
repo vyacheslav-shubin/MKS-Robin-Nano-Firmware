@@ -1,0 +1,2360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="work"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="work">
+				<Option output="/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/work" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F103xE"/>
+					<Add option="-DSTM32F10X_HD"/>
+					<Add option="-DUSE_HAL_LIB"/>
+					<Add option="-DMKS_ROBIN_NANO"/>
+					<Add option="-DTFT35"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/at24cxx"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/w25qxx"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Inc"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/avr"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/drivers"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Src"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 work"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="work/fast">
+				<Option output="/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/work" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F103xE"/>
+					<Add option="-DSTM32F10X_HD"/>
+					<Add option="-DUSE_HAL_LIB"/>
+					<Add option="-DMKS_ROBIN_NANO"/>
+					<Add option="-DTFT35"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/at24cxx"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/w25qxx"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Inc"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/avr"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/drivers"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/Src"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config"/>
+					<Add directory="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 work/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/at24cxx/at24cxx.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/at24cxx/at24cxx.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/w25qxx/spi_flash.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/w25qxx/spi_flash.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/w25qxx/w25qxx.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/Components/w25qxx/w25qxx.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/fastio_Lite.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/fastio_Robin.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/fastio_Robin2.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/fastio_RobinNano.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/fastio_RobinPro.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/mks_fastio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/mks_variant.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/mks_variant.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/BSP/variant/sys.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/arm_common_tables.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/arm_const_structs.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/arm_math.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/cmsis_armcc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/cmsis_armcc_V6.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/cmsis_gcc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cm0.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cm0plus.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cm3.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cm4.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cm7.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cmFunc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cmInstr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_cmSimd.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_sc000.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/CMSIS/Include/core_sc300.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/misc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_adc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_bkp.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_can.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_cec.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_crc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dac.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dbgmcu.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dma.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_exti.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_flash.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_fsmc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_i2c.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_iwdg.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_pwr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rtc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_sdio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_spi.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_tim.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_usart.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/inc/stm32f10x_wwdg.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/misc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sd.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_usart.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_fsmc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_sdmmc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_iwdg.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_usart.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_sdmmc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/adc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/bsp_driver_sd.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/dma.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/fatfs.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/ffconf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/fontLib.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/fsmc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/gpio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/gpio_Robin.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/gpio_Robin2.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/gpio_RobinMini.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/gpio_RobinPro.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/gpio_Robin_nano.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/gpio_lite.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/i2c.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/ili9320.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/ili9320_font.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/main.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/main_Robin.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/main_Robin2.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/main_RobinMini.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/main_RobinNano.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/main_RobinPro.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/mks_cfg.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/mks_reprint.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/mks_test.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/mks_touch_screen.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/pic.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/pic_manager.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/rtc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/sdio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/sh_tools.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/spi.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/stm32f1xx_hal_conf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/stm32f1xx_it.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/string_deal.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/tim.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/type_define.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/usart.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/usb_host.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/usbh_conf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/wifi_module.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Inc/wifi_upload.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/BUTTON.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/BUTTON_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/CHECKBOX.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/CHECKBOX_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/DIALOG.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/DIALOG_Intern.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/DROPDOWN.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/DROPDOWN_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/EDIT.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/EDIT_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/FRAMEWIN.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/FRAMEWIN_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUIConf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUIDEMO.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUIDebug.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUITouchConf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUIType.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUIVersion.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_ARRAY.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_ConfDefaults.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_FontIntern.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_HOOK.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_Protected.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_VNC.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/GUI_X.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/HEADER.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/HEADER_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/HzLib_65k.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LCD.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LCDConf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LCDSIM.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LCD_ConfDefaults.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LCD_IncludeDriver.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LCD_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LCD_Protected.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LISTBOX.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LISTBOX_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LISTVIEW.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/LISTVIEW_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/MENU.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/MENU_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/MESSAGEBOX.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/MULTIEDIT.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/MULTIPAGE.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/MULTIPAGE_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/Map.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/PROGBAR.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/RADIO.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/RADIO_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/SCROLLBAR.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/SCROLLBAR_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/SLIDER.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/TEXT.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/TEXT_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/WIDGET.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/WINDOW_Private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/WM.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/WM_GUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/WM_Intern.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/GUI/WM_Intern_ConfDep.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/diskio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/diskio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/ff.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/ff.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/ff_gen_drv.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/ffconf_template.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/integer.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/option/cc936.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/option/mycc936.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/FatFs/src/option/syscall.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Conditionals.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Conditionals_LCD.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Conditionals_post.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Configuration.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Configuration_adv.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/G26_Mesh_Validation_Tool.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/I2CPositionEncoder.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/I2CPositionEncoder.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/M100_Free_Mem_Chk.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Marlin.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Marlin.ino">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/MarlinConfig.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/MarlinSPI_nouse.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/MarlinSerial.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/MarlinSerial.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Marlin_export.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Marlin_main.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Max7219_Debug_LEDs.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Max7219_Debug_LEDs.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SanityCheck.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Sd2Card.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Sd2Card.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdBaseFile.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdBaseFile.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFat.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFat.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFatConfig.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFatStructs.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFatUtil.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFatUtil.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFile.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdFile.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdInfo.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdVolume.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/SdVolume.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/Version.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/bitmap_flags.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/blinkm.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/blinkm.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/boards.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/buzzer.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/cardreader.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/cardreader.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/circularqueue.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/configuration_store.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/configuration_store.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dac_mcp4728.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dac_mcp4728.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/digipot_mcp4018.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/digipot_mcp4451.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_bitmaps.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_6x9_marlin.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_HD44780_C.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_HD44780_J.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_HD44780_W.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_1.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_1_PL.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_1_tr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_5_Cyrillic.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_CN.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_CZ.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_Greek.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_Kana.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_ISO10646_SK.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/dogm_font_data_Marlin_symbols.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/duration_t.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/endstop_interrupts.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/endstops.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/endstops.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/enum.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/fastio.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/fastio_1280.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/fastio_1281.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/fastio_168.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/fastio_644.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/fastio_AT90USB.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/gcode.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/gcode.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/hex_print_routines.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/hex_print_routines.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_an.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_bg.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_ca.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_cn.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_cz.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_cz_utf8.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_da.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_de.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_el-gr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_el.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_en.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_es.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_eu.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_fi.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_fr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_fr_utf8.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_gl.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_hr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_it.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_kana.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_kana_utf8.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_nl.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_pl-DOGM.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_pl-HD44780.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_pl.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_pt-br.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_pt-br_utf8.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_pt.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_pt_utf8.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_ru.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_sk_utf8.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_test.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_tr.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_uk.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_zh_CN.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/language_zh_TW.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/least_squares_fit.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/least_squares_fit.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/leds.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/leds.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/macros.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/mesh_bed_leveling.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/mesh_bed_leveling.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/neopixel.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/neopixel.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/nozzle.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/nozzle.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pca9632.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pca9632.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pins.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pinsDebug.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pinsDebug_Teensyduino.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pinsDebug_list.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pinsDebug_plus_70.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pins_Lite.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pins_Robin.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pins_Robin2.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pins_RobinNano.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/pins_RobinPro.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/planner.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/planner.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/planner_bezier.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/planner_bezier.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/point_t.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/printcounter.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/printcounter.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/serial.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/serial.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/servo.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/servo.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/softspi.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/speed_lookuptable.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stepper.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stepper.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stepper_dac.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stepper_dac.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stepper_indirection.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stepper_indirection.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stopwatch.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/stopwatch.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/temperature.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/temperature.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistornames.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_1.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_10.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_1010.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_1047.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_11.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_110.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_12.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_13.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_147.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_2.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_20.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_3.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_4.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_5.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_51.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_52.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_55.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_6.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_60.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_66.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_7.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_70.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_71.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_75.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_8.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_9.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_998.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortable_999.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/thermistortables.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/tmc_macros.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/twibus.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/twibus.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/types.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ubl.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ubl.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ubl_G29.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ubl_motion.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ultralcd.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ultralcd.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ultralcd_impl_DOGM.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ultralcd_impl_HD44780.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ultralcd_st7565_u8glib_VIKI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/ultralcd_st7920_u8glib_rrd.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/utf_mapper.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/utility.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/utility.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/vector_3.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/vector_3.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/watchdog.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/Third_Party/Marlin/watchdog.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Arduino.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Client.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/HardwareSerial.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/HardwareTimer.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/HardwareTimer.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/HardwareTimer_static.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/IPAddress.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/IPAddress.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Print.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Print.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Printable.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Reset.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Reset.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/RingBuffer.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/RingBuffer.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Server.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Stream.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Stream.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Tone.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/UARTClass.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/UARTClass.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USARTClass.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USARTClass.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB/CDC.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB/HID.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB/USBAPI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB/USBCore.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB/USBCore.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/USB/USBDesc.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/Udp.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/WCharacter.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/WInterrupts.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/WInterrupts.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/WMath.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/WMath.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/WString.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/WString.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/avr/dtostrf.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/avr/dtostrf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/avr/interrupt.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/avr/pgmspace.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/binary.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/cortex_handlers.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/cxxabi-compat.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/hooks.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/iar_calls_sam3.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/itoa.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/itoa.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/pins_arduino.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/syscalls.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/syscalls_stm32.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/variant.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/variant.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_analog.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_analog.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_constants.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_digital.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_digital.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_private.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_pulse.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_pulse.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_shift.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Middlewares/arduino/stm32/cores/arduino/wiring_shift.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/adc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/bsp_driver_sd.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/dma.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/fatfs.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/fsmc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/gpio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/gpio_Robin.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/gpio_Robin2.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/gpio_RobinNano.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/gpio_RobinPro.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/gpio_lite.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/i2c.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/ili9320.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/main.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/mks_cfg.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/mks_fontHz14.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/mks_reprint.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/mks_test.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/mks_touch_screen.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/pic.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/pic_manager.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/rtc.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/sdio.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/sdio_sdcard.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/sdio_sdcard.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/sh_tools.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/spi.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/stm32f10x_conf.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/stm32f1xx_hal_msp.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/stm32f1xx_it.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/string_deal.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/tim.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/usart.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/usb_host.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/usbh_conf.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/wifi_module.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/Src/wifi_upload.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/Font24_MS.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/Font47_MS.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/Helvetica26.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/Helvetica36.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/Language_en.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/Language_ru.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/Multi_language.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/fontHz14.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/fontHz14_tft35.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/lang_common.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/lang_ru.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/lang_std.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/mks_fontHz14.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/Multi_language/multi_language.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/QR_Encode.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/QR_Encode.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/bitstream.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/bitstream.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/mask.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/mask.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/mmask.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/mmask.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/mqrspec.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/mqrspec.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/qrencode.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/qrencode.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/qrinput.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/qrinput.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/qrspec.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/qrspec.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/rscode.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/rscode.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/split.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/QRENCODE/split.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_EnablePin_Invert.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_EnablePin_Invert.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_FileTransfer_ui.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_FileTransfer_ui.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_MaxFeedRate.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_MaxFeedRate.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_Sprayer.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_Sprayer.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_Tips.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_Tips.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_XYZLevelPara.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_XYZLevelPara.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_acceleration.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_acceleration.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_bind.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_bind.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_deltaLevelPare.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_deltaLevelPare.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_dialog.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_dialog.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_doubleZ.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_doubleZ.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_endstop_type.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_endstop_type.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_filament_settings.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_filament_settings.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_home_dir.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_home_dir.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_home_speed.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_home_speed.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_hotbed_config.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_hotbed_config.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_jerk.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_jerk.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_keyboard.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_keyboard.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_levelingPara_config.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_levelingPara_config.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_log_ui.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_log_ui.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_machine.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_machine.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_machine_type.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_machine_type.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_mesh_leveling.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_meshleveling.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_nozzle_config.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_nozzle_config.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_number_key.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_number_key.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_steps.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_steps.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_stroke.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_stroke.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_ui.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_ui.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_wifi.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_wifi.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_wifi_list.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/draw_wifi_list.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/font.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/id_manage.c">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/id_manage.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/ui_tools.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/ui_tools.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/Application.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/Application.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/BabystepUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/BabystepUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FanUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FanUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FilamentUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FilamentUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FileBrowserUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FileBrowserUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FileInfoBaseUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FileInfoBaseUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FileInfoUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/FileInfoUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/HomeUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/HomeUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/LanguageUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/LanguageUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/MainUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/MainUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/ManualLevelingUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/ManualLevelingUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/MoreUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/MoreUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/MotorMoveUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/MotorMoveUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/PreheatUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/PreheatUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/PrintingToolsUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/PrintingToolsUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/PrintingUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/PrintingUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/SettingsUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/SettingsUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/SpeedUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/SpeedUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/StdWidget.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/StdWidget.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/ToolsUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/ToolsUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/UI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/Widget.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/Widget.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/XyzUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/XyzUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/backui.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/backui.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/AdvancedConfigUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/AdvancedConfigUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/ConfigurationWidget.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/ConfigurationWidget.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/MachineConfigurationUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/MachineConfigurationUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/MotorConfigUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/MotorConfigUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/MotorDirConfigUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/config/MotorDirConfigUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog/AboutDialogUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog/AboutDialogUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog/ConfirmDialogUI.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog/ConfirmDialogUI.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog/DialogWidget.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/dialog/DialogWidget.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/integration.cpp">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/widgets/integration.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/User/ui/wifi_list.h">
+			<Option target="work"/>
+		</Unit>
+		<Unit filename="/home/shubin/electronic/firmware/mks-robin/my/work/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

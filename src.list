@@ -113,7 +113,6 @@ User/ui/draw_jerk.cpp
 User/ui/draw_keyboard.cpp
 User/ui/draw_levelingPara_config.cpp
 User/ui/draw_leveling_settings.cpp
-User/ui/draw_machine_para.cpp
 User/ui/draw_machine_settings.cpp
 User/ui/draw_machine_type.cpp
 User/ui/draw_MaxFeedRate.cpp

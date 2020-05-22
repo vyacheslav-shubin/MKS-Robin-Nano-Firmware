@@ -157,7 +157,6 @@ void clear_cur_ui() {
         case WIFI_LIST_UI:		Clear_Wifi_list();		break;
         case KEY_BOARD_UI:		Clear_Keyboard();		break;
         case TIPS_UI:			Clear_Tips();			break;
-        case MACHINE_PARA_UI:	Clear_MachinePara();	break;
         case MACHINE_SETTINGS_UI:		Clear_MachineSettings();	break;
         case TEMPERATURE_SETTINGS_UI:	Clear_TemperatureSettings();break;
         case MACHINETYPE_UI:	Clear_MachineType();	break;
@@ -208,6 +207,7 @@ void draw_return_ui() {
 			case FILE_INFO_UI:		file_info_ui.show();	break;
             case ADVANCED_UI:		advanced_config_ui.show();		break;
 			case SET_UI:			settings_ui.show();		break;
+            case MACHINE_PARA_UI:	configuration_root_ui.show();		break;
 
 
 			case SPRAYER_UI: 	break;
@@ -221,7 +221,6 @@ void draw_return_ui() {
             case WIFI_LIST_UI:		draw_Wifi_list();		break;
             case KEY_BOARD_UI:		draw_Keyboard();		break;
             case TIPS_UI:			draw_Tips();			break;
-            case MACHINE_PARA_UI:	draw_MachinePara();		break;
             case MACHINE_SETTINGS_UI:		draw_MachineSettings();			break;
             case TEMPERATURE_SETTINGS_UI:	draw_TemperatureSettings();		break;
             case MACHINETYPE_UI:	draw_MachineType();		break;

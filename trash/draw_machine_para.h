@@ -1,6 +1,8 @@
 #ifndef _DRAW_MACHINEPARA_H_
 #define _DRAW_MACHINEPARA_H_
 
+#error
+
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif

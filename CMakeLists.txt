@@ -734,8 +734,6 @@ add_executable(work
         User/ui/draw_log_ui.h
         User/ui/draw_machine.cpp
         User/ui/draw_machine.h
-        User/ui/draw_machine_para.cpp
-        User/ui/draw_machine_para.h
         User/ui/draw_machine_settings.cpp
         User/ui/draw_machine_settings.h
         User/ui/draw_machine_type.cpp

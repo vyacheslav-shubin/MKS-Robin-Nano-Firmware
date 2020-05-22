@@ -16136,10 +16136,6 @@ extern uint8_t print_finish_start_timer;
 extern uint32_t print_finish_timer_count;
 extern uint8_t print_finish_close_machine;
 
-#if 0
-uint8_t btn_flg = 0;
-uint32_t btn_beep_cnt = 0;
-#endif
 extern void mksBeeperAlarm(void);
 
 void Beeper(uint32_t cnt) {

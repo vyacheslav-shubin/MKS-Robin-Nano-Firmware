@@ -30,7 +30,7 @@ void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
 
 void AdvancedConfigUI::createControls() {
 	ConfigurationWidget::createControls();
-
+    this->dual_columns = 0;
 	this->createCheckPair(0, 0, &this->ui.autoPowerOff, lang_str.config_ui.power_off_after_print, gCfgItems.print_finish_close_machine_flg==1);
 	this->createCheckPair(0, 1, &this->ui.simpleMainUI, lang_str.config_ui.simple_main_ui, gCfgItems.display_style==1);
 	this->createCheckPair(0, 2, &this->ui.diplayBackLight, lang_str.config_ui.display_backlight_off, gCfgItems.standby_mode==1);

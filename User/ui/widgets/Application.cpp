@@ -42,7 +42,7 @@ void Application::defaultUI() {
 }
 
 
-char * Application::getTitle() {
+const char * Application::getTitle() {
 	if (this->current_ui!=0)
 		return this->current_ui->getTitle();
 	return 0;

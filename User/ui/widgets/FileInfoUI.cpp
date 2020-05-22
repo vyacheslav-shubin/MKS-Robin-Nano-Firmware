@@ -73,7 +73,7 @@ void FileInfoUI::createControls() {
 	this->update();
 }
 
-char * FileInfoUI::getTitle() {
+const char * FileInfoUI::getTitle() {
 	return ui_print_process.file_name;
 }
 

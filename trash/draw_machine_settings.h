@@ -1,23 +1,20 @@
-#ifndef _DRAW_LEVELINGSETTINGS_H_
-#define _DRAW_LEVELINGSETTINGS_H_
+#error
+#ifndef _DRAW_MACHINESETTINGS_H_
+#define _DRAW_MACHINESETTINGS_H_
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-void draw_LevelingSettings();
+void draw_MachineSettings();
 
-void Clear_LevelingSettings();
-
+void Clear_MachineSettings();
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */
 #endif
 
 
 #endif
-
-
-
 
 
 

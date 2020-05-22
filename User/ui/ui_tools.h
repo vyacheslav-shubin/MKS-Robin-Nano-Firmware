@@ -153,6 +153,11 @@ extern "C" {
 
 #define img_dialog_confirm 		 "bmp_confirm.bin"
 #define img_dialog_info 		 "bmp_info.bin"
+#define img_arrow		        "bmp_arrow.bin"
+
+#define img_navigator_back		        "bmp_back70x40.bin"
+#define img_navigator_next		        "bmp_next70x40.bin"
+#define img_navigator_prev		        "bmp_prev70x40.bin"
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)

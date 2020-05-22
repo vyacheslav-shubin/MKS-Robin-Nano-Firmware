@@ -11,6 +11,16 @@ void lang_ru(void) {
 	lang_str.config_ui.maximum_speed_settings = "Максимальные скорости";
 	lang_str.config_ui.jerk_settings = "Настройки рывков";
 
+    lang_str.config_ui.machine_size = "Размеры";
+    lang_str.config_ui.machine_type = "Тип механики";
+    lang_str.config_ui.home_direction = "Парковка";
+    lang_str.config_ui.endtop_type = "Датчики";
+    lang_str.config_ui.filament_settings = "Филамент";
+    lang_str.config_ui.manual_leveling_settings = "Уровни";
+    lang_str.config_ui.auto_leveling_settings = "Автоуровени";
+    lang_str.config_ui.nozzle_settings = "Сопло";
+    lang_str.config_ui.hotbed_settings = "Стол";
+
     lang_str.dialog.refactored_by = "Доработка ПО:\nВячеслав Шубин\nshubin-vv@krista.ru";
 
 	lang_str.preheat = "Нагрев";

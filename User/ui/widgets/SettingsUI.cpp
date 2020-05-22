@@ -7,9 +7,9 @@
 
 #include "SettingsUI.h"
 #include "LanguageUI.h"
-#include "ConfigurationRootUI.h"
 #include "dialog/ConfirmDialogUI.h"
 #include "dialog/AboutDialogUI.h"
+#include "MachineConfigurationUI.h"
 
 SettingsUI settings_ui;
 
@@ -61,7 +61,7 @@ void SettingsUI::on_button(UI_BUTTON hBtn) {
 		language_ui.show(this);
 	}  else if (hBtn==this->ui.configuration) {
 		this->hide();
-		configuration_root_ui.show(this);
+		machine_configuration_ui.show(this);
 	}  else if (hBtn==this->ui.wifi) {
 		this->action_wifi();
 	}  else if (hBtn==this->ui.about) {

@@ -28,6 +28,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void on_action_dialog(u8 action, u8 dialog_id);
 public:
+    virtual const char * getTitle() {return lang_str.ui_title_settings;};
 	SettingsUI() : StdWidget(SET_UI) {};
 };
 

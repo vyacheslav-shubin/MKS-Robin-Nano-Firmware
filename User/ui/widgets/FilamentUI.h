@@ -39,7 +39,7 @@ protected:
 	virtual void refresh_1s();
 	virtual void refresh_05();
 public:
-	virtual char * getTitle() {return lang_str.ui_title_filament;};
+	virtual const char * getTitle() {return lang_str.ui_title_filament;};
 	FilamentUI() : StdWidget(FILAMENT_UI) {};
 };
 

@@ -43,15 +43,15 @@ void ConfigurationWidget::on_button(UI_BUTTON hBtn) {
 		this->hide();
 		ui_app.back_ui();
 	} else if(hBtn == this->navigator.next) {
-		this->navigator.page++;
-		if (this->navigator.page>=this->navigator.count)
-			this->navigator.page = 0;
+		this->page++;
+		if (this->page>=this->count)
+			this->page = 0;
 		this->recreate();
 	} else if(hBtn == this->navigator.previous) {
-		if (this->navigator.page!=0)
-			this->navigator.page--;
+		if (this->page!=0)
+			this->page--;
 		else
-			this->navigator.page = this->navigator.count - 1;
+			this->page = this->count - 1;
 		this->recreate();
 	}
 }
@@ -80,7 +80,7 @@ UI_BUTTON ConfigurationWidget::createCheckButton(int x, int y, unsigned char sta
 #define ROW(idx) (10+50*idx)
 #define TEXT_X_OFFSET 20
 
-void ConfigurationWidget::createCheckPair(int col, int row, UI_CHECK * pair, char* title, unsigned char state) {
+void ConfigurationWidget::createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state) {
 	int x = (this->dual_columns ? 240 * (col+1) : 240 * 2) - X_RADIO_SZ;
     pair->button = this->createCheckButton(x, ROW(row), state);
     x = (this->dual_columns ? 240 * col : 0) + TEXT_X_OFFSET;
@@ -92,34 +92,34 @@ void ConfigurationWidget::createCheckPair(int col, int row, UI_CHECK * pair, cha
 
 void ConfigurationWidget::createControls() {
 	this->navigator.back = BUTTON_CreateEx(400, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-    BUTTON_SetBmpFileName(this->navigator.back, "bmp_back70x40.bin",1);
+    BUTTON_SetBmpFileName(this->navigator.back, img_navigator_back,1);
     BUTTON_SetBitmapEx(this->navigator.back, 0, &bmp_struct70X40,0, 0);
     this->navigator.next = 0;
     this->navigator.previous = 0;
 
-    if (this->navigator.count>1) {
-    	if (this->navigator.page < this->navigator.count-1)
+    if (this->count>1) {
+    	if (this->page < this->count-1)
     		this->navigator.next = BUTTON_CreateEx(320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-    	if (this->navigator.page > 0) {
+    	if (this->page > 0) {
     		this->navigator.previous = BUTTON_CreateEx(this->navigator.next ? 240 : 320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
     	}
     }
 
 	if (this->navigator.next!=0) {
-		BUTTON_SetBmpFileName(this->navigator.next, "bmp_next70x40.bin",1);
+		BUTTON_SetBmpFileName(this->navigator.next, img_navigator_next,1);
 		BUTTON_SetBitmapEx(this->navigator.next, 0, &bmp_struct70X40,0, 0);
 	}
 
 	if (this->navigator.previous!=0) {
-		BUTTON_SetBmpFileName(this->navigator.previous, "bmp_prev70x40.bin",1);
+		BUTTON_SetBmpFileName(this->navigator.previous, img_navigator_prev,1);
 		BUTTON_SetBitmapEx(this->navigator.previous, 0, &bmp_struct70X40,0, 0);
 	}
 }
 
-void ConfigurationWidget::createArrowPair(int col, int row, UI_ARROW * pair, char* title) {
+void ConfigurationWidget::createArrowPair(int col, int row, UI_ARROW * pair, const char* title) {
     int x = (this->dual_columns ? 240 * (col+1) : 240 * 2) - X_ARROW_SZ;
     pair->button = BUTTON_CreateEx(x, ROW(row), 20, 40, this->hWnd, BUTTON_CF_SHOW, 5, 12);
-    BUTTON_SetBmpFileName(pair->button, "bmp_arrow.bin",1);
+    BUTTON_SetBmpFileName(pair->button, img_arrow, 1);
     BUTTON_SetBitmapEx(pair->button, 0, &bmp_struct10x17, 0, 0);
 
     x = (this->dual_columns ? 240 * col : 0) + TEXT_X_OFFSET;

@@ -36,6 +36,7 @@ void MotorConfigUI::on_button(UI_BUTTON hBtn) {
 void MotorConfigUI::createControls() {
 	ConfigurationWidget::createControls();
 	memset(&this->ui, 0, sizeof(this->ui));
+	this->dual_columns = 1;
 	this->createArrowPair(0, 0, &this->ui.axes, lang_str.config_ui.axes_inversion);
 	this->createArrowPair(0, 1, &this->ui.steps, lang_str.config_ui.motor_steps_settings);
 	this->createArrowPair(0, 2, &this->ui.home_speed, lang_str.config_ui.home_speed_settings);

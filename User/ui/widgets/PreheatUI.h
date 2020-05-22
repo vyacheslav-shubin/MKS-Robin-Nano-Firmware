@@ -40,7 +40,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_1s();
 public:
-	virtual char * getTitle() {return lang_str.ui_title_preheat;};
+	virtual const char * getTitle() {return lang_str.ui_title_preheat;};
 	PreheatUI(): StdWidget(PRE_HEAT_UI) {};
 };
 

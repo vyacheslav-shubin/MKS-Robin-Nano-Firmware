@@ -29,7 +29,7 @@ protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:
-	virtual char * getTitle() {return lang_str.ui_title_tools;};
+	virtual const char * getTitle() {return lang_str.ui_title_tools;};
 	ToolsUI() : StdWidget(TOOL_UI){};
 };
 

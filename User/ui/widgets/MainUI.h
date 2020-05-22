@@ -30,7 +30,7 @@ protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:
-	virtual char * getTitle() {return lang_str.ui_title_main;};
+	virtual const char * getTitle() {return lang_str.ui_title_main;};
 	MainUI() : StdWidget(PRINT_READY_UI){};
 };
 

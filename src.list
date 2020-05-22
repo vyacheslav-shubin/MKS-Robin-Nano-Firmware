@@ -112,8 +112,6 @@ User/ui/draw_hotbed_config.cpp
 User/ui/draw_jerk.cpp
 User/ui/draw_keyboard.cpp
 User/ui/draw_levelingPara_config.cpp
-User/ui/draw_leveling_settings.cpp
-User/ui/draw_machine_settings.cpp
 User/ui/draw_machine_type.cpp
 User/ui/draw_MaxFeedRate.cpp
 User/ui/draw_mesh_leveling.cpp
@@ -121,7 +119,6 @@ User/ui/draw_nozzle_config.cpp
 User/ui/draw_number_key.cpp
 User/ui/draw_steps.cpp
 User/ui/draw_stroke.cpp
-User/ui/draw_temperature_settings.cpp
 User/ui/draw_Tips.cpp
 User/ui/draw_ui.cpp
 User/ui/draw_wifi.cpp
@@ -168,10 +165,10 @@ User/ui/widgets/LanguageUI.cpp
 User/ui/widgets/FileInfoBaseUI.cpp
 User/ui/widgets/FileInfoUI.cpp
 User/ui/widgets/SettingsUI.cpp
-User/ui/widgets/ConfigurationRootUI.cpp
 User/ui/widgets/config/ConfigurationWidget.cpp
 User/ui/widgets/config/MotorDirConfigUI.cpp
 User/ui/widgets/config/MotorConfigUI.cpp
+User/ui/widgets/config/MachineConfigurationUI.cpp
 User/ui/widgets/config/AdvancedConfigUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp

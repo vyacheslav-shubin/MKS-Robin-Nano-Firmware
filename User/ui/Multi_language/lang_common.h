@@ -20,6 +20,16 @@ typedef struct {
 	const char * acceleration_settings;
 	const char * maximum_speed_settings;
 	const char * jerk_settings;
+
+    const char * machine_size;
+    const char * machine_type;
+    const char * home_direction;
+    const char * endtop_type;
+    const char * filament_settings;
+    const char * manual_leveling_settings;
+    const char * auto_leveling_settings;
+    const char * nozzle_settings;
+    const char * hotbed_settings;
 } CONFIG_LANG_STR;
 
 typedef struct {

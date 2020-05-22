@@ -19,7 +19,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual char * getStateString();
 public:
-	virtual char * getTitle() {return lang_str.ui_title_move;};
+	virtual const char * getTitle() {return lang_str.ui_title_move;};
 	MotorMoveUI() : XyzUI(MOVE_MOTOR_UI) {this->step_count = 4;};
 };
 

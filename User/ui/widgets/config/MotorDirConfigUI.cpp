@@ -48,6 +48,7 @@ void MotorDirConfigUI::on_button(UI_BUTTON hBtn) {
 void MotorDirConfigUI::createControls() {
 	ConfigurationWidget::createControls();
 	memset(&this->ui, 0, sizeof(this->ui));
+    this->dual_columns = 1;
 	this->createCheckPair(0, 0, &this->ui.x, "X:", mksCfg.invert_x_dir);
 	this->createCheckPair(0, 1, &this->ui.y, "Y:", mksCfg.invert_y_dir);
 	this->createCheckPair(0, 2, &this->ui.z, "Z:", mksCfg.invert_z_dir);

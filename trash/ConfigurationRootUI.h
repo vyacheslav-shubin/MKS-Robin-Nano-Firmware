@@ -4,7 +4,7 @@
  *  Created on: May 18, 2020
  *      Author: shubin
  */
-
+#error
 #ifndef USER_UI_WIDGETS_CONFIGURATIONROOTUI_H_
 #define USER_UI_WIDGETS_CONFIGURATIONROOTUI_H_
 
@@ -12,7 +12,6 @@
 
 typedef struct {
 	UI_BUTTON machine;
-	UI_BUTTON temperature;
 	UI_BUTTON motors;
 	UI_BUTTON advanced;
 	UI_BUTTON back;
@@ -25,7 +24,6 @@ protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:
-	virtual char * getTitle() {return lang_str.ui_title_config;};
 	ConfigurationRootUI() : StdWidget(MACHINE_PARA_UI) {};
 };
 

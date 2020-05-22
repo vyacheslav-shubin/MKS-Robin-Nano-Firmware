@@ -46,7 +46,7 @@ public:
 	bool is_active();
 	virtual void on_message(WM_MESSAGE * pMsg);
 	virtual ~Widget() {};
-	virtual char * getTitle() {return 0; };
+	virtual const char * getTitle() {return 0; };
 	virtual void show(Widget * caller = 0);
 	virtual void recreate();
 	virtual void refresh();

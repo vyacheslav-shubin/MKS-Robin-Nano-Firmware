@@ -37,7 +37,7 @@ protected:
 	virtual void on_action_dialog(u8 action, u8 dialog_id);
 	void update();
 public:
-	virtual char * getTitle();
+	virtual const char * getTitle();
 	FileInfoUI() : FileInfoBaseUI(FILE_INFO_UI) {};
 };
 

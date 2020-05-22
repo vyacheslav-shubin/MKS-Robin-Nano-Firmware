@@ -1,6 +1,9 @@
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
 #include "draw_ui.h"
+
+
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -138,7 +141,9 @@ static void cbMachineSettingsWin(WM_MESSAGE * pMsg) {
 
 
 void draw_MachineSettings()
-{   
+{
+    machine_configuration_ui.show();
+    return;
     int i;
 
     buttonMachine.btnHandle = 0;
@@ -298,7 +303,9 @@ void draw_MachineSettings()
 
 void Clear_MachineSettings()
 {
-	GUI_SetBkColor(gCfgItems.background_color);
+	machine_configuration_ui.hide();
+	return;
+    GUI_SetBkColor(gCfgItems.background_color);
 	if(WM_IsWindow(hMachineSettingsWnd))
 	{
 		WM_DeleteWindow(hMachineSettingsWnd);

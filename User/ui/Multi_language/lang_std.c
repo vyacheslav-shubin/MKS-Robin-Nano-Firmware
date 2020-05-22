@@ -30,7 +30,18 @@ void lang_std(void) {
 	lang_str.config_ui.maximum_speed_settings = "Maximum speed settings";
 	lang_str.config_ui.jerk_settings = "Jerk settings";
 
-	lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
+    lang_str.config_ui.machine_size = "Machine size";
+    lang_str.config_ui.machine_type = "Machine type";
+    lang_str.config_ui.home_direction = "Home direction";
+    lang_str.config_ui.endtop_type = "Endstop";
+    lang_str.config_ui.filament_settings = "Filament";
+    lang_str.config_ui.manual_leveling_settings = "Leveling";
+    lang_str.config_ui.auto_leveling_settings = "Auto leveling";
+    lang_str.config_ui.nozzle_settings = "Nozzle";
+    lang_str.config_ui.hotbed_settings = "Hotbed";
+
+
+    lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
 
 	lang_str.preheat = "Preheat";
 	lang_str.move = "Move";

@@ -641,6 +641,8 @@ add_executable(work
         User/ui/widgets/config/MotorConfigUI.h
         User/ui/widgets/config/MotorDirConfigUI.cpp
         User/ui/widgets/config/MotorDirConfigUI.h
+        User/ui/widgets/config/MachineConfigurationUI.cpp
+        User/ui/widgets/config/MachineConfigurationUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
         User/ui/widgets/dialog/ConfirmDialogUI.cpp
@@ -653,8 +655,6 @@ add_executable(work
         User/ui/widgets/BabystepUI.h
         User/ui/widgets/backui.cpp
         User/ui/widgets/backui.h
-        User/ui/widgets/ConfigurationRootUI.cpp
-        User/ui/widgets/ConfigurationRootUI.h
         User/ui/widgets/FanUI.cpp
         User/ui/widgets/FanUI.h
         User/ui/widgets/FilamentUI.cpp
@@ -726,16 +726,12 @@ add_executable(work
         User/ui/draw_jerk.h
         User/ui/draw_keyboard.cpp
         User/ui/draw_keyboard.h
-        User/ui/draw_leveling_settings.cpp
         User/ui/draw_levelingPara_config.cpp
         User/ui/draw_levelingPara_config.h
-        User/ui/draw_LevelingSettings.h
         User/ui/draw_log_ui.cpp
         User/ui/draw_log_ui.h
         User/ui/draw_machine.cpp
         User/ui/draw_machine.h
-        User/ui/draw_machine_settings.cpp
-        User/ui/draw_machine_settings.h
         User/ui/draw_machine_type.cpp
         User/ui/draw_machine_type.h
         User/ui/draw_MaxFeedRate.cpp
@@ -752,8 +748,6 @@ add_executable(work
         User/ui/draw_steps.h
         User/ui/draw_stroke.cpp
         User/ui/draw_stroke.h
-        User/ui/draw_temperature_settings.cpp
-        User/ui/draw_temperature_settings.h
         User/ui/draw_Tips.cpp
         User/ui/draw_Tips.h
         User/ui/draw_ui.cpp

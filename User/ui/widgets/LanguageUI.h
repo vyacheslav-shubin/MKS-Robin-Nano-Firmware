@@ -27,7 +27,7 @@ protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:
-	virtual char * getTitle() {return lang_str.ui_title_language;};
+	virtual const char * getTitle() {return lang_str.ui_title_language;};
 	LanguageUI(): StdWidget(LANGUAGE_UI){}
 };
 

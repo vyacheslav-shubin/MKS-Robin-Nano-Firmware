@@ -22,11 +22,11 @@ class MotorDirConfigUI: public ConfigurationWidget {
 private:
 	MOTOR_DIR_CONFIG_UI_CONTROLS ui;
 protected:
-	virtual char * getTitle() {return lang_str.config_ui.axes_inversion;};
+	virtual const char * getTitle() {return lang_str.config_ui.axes_inversion;};
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void createControls();
 public:
-	MotorDirConfigUI() : ConfigurationWidget(MOTORDIR_UI, 1, 1) {};
+	MotorDirConfigUI() : ConfigurationWidget(MOTORDIR_UI, 1) {};
 };
 
 extern MotorDirConfigUI motor_dir_config_ui;

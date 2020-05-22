@@ -15,7 +15,6 @@
 #include "PrintingUI.h"
 #include "FanUI.h"
 #include "BabystepUI.h"
-#include "ConfigurationRootUI.h"
 #include "MotorMoveUI.h"
 #include "PreheatUI.h"
 #include "HomeUI.h"
@@ -32,6 +31,7 @@
 #include "AdvancedConfigUI.h"
 #include "SettingsUI.h"
 #include "dialog/AboutDialogUI.h"
+#include "config/MachineConfigurationUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

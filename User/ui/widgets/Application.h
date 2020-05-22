@@ -29,7 +29,7 @@ public:
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
 	void drawTitle();
-	char * getTitle();
+	const char * getTitle();
 	void start();
 	void setup();
 	void loop();

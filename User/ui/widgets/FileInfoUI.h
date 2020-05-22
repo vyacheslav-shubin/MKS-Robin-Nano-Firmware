@@ -27,14 +27,14 @@ typedef struct{
 	unsigned char info_updated;
 } FILE_INFO_UI_CONTROLS;
 
-class FileInfoUI  : public FileInfoBaseUI, public ConfirmDialogCallback{
+class FileInfoUI  : public FileInfoBaseUI, public ActionDialogCallback{
 private:
 	FILE_INFO_UI_CONTROLS ui;
 protected:
 	virtual void refresh();
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void createControls();
-	virtual void on_confirm_dialog(u8 action, u8 dialog_id);
+	virtual void on_action_dialog(u8 action, u8 dialog_id);
 	void update();
 public:
 	virtual char * getTitle();

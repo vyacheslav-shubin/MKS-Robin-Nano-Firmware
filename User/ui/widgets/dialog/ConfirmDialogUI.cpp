@@ -15,20 +15,20 @@ static char * dialog_message = 0;
 void ConfirmDialogUI::on_button(UI_BUTTON hBtn) {
 	if (this->callback != 0) {
 		if (hBtn==this->ui.ok) {
-			this->callback->on_confirm_dialog(UI_BUTTON_OK, this->id);
+			this->callback->on_action_dialog(UI_BUTTON_OK, this->id);
 			//dialog_cb(UI_BUTTON_OK);
 		} else if (hBtn==this->ui.cancel) {
-			this->callback->on_confirm_dialog(UI_BUTTON_CANCEL, this->id);
+			this->callback->on_action_dialog(UI_BUTTON_CANCEL, this->id);
 			//dialog_cb(UI_BUTTON_CANCEL);
 		}
 	}
 }
 
-void ConfirmDialogUI::show(char * message, ConfirmDialogCallback * callback, u8 id = 0, Widget * caller=0) {
+void ConfirmDialogUI::show(char * message, ActionDialogCallback * callback, u8 id = 0, Widget * caller=0) {
 	this->show(message, callback, 0, id,  caller);
 }
 
-void ConfirmDialogUI::show(char * message, ConfirmDialogCallback * callback, u16 timeout, u8 id = 0, Widget * caller=0) {
+void ConfirmDialogUI::show(char * message, ActionDialogCallback * callback, u16 timeout, u8 id = 0, Widget * caller=0) {
 	dialog_message = message;
 	this->callback = callback;
 	this->max_timeout = timeout;
@@ -53,7 +53,7 @@ void ConfirmDialogUI::refresh_1s() {
 	if ((this->callback!=0) && (this->timeout != 0)) {
 		PROGBAR_SetValue(this->ui.progress, (this->max_timeout - this->timeout) * 100 / this->max_timeout);
 		if (--this->timeout==0)
-			this->callback->on_confirm_dialog(UI_BUTTON_TIMEOUT, this->id);
+			this->callback->on_action_dialog(UI_BUTTON_TIMEOUT, this->id);
 	}
 }
 

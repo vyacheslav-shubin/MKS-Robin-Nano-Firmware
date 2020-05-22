@@ -77,7 +77,7 @@ char * FileInfoUI::getTitle() {
 	return ui_print_process.file_name;
 }
 
-void FileInfoUI::on_confirm_dialog(u8 action, u8 dialog_id) {
+void FileInfoUI::on_action_dialog(u8 action, u8 dialog_id) {
 	confirm_dialog_ui.hide();
 	if (action==UI_BUTTON_OK) {
 		f_unlink(ui_print_process.file_name);

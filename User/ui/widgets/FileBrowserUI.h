@@ -51,7 +51,7 @@ typedef struct{
 	u8 selectedButton;
 } FILE_BROWSER_UI_CONTROLS;
 
-class FileBrowserUI: public StdWidget, public ConfirmDialogCallback {
+class FileBrowserUI: public StdWidget, public ActionDialogCallback {
 private:
 	FILE_BROWSER_UI_CONTROLS ui;
 	void doBack();
@@ -64,7 +64,7 @@ private:
 protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
-	virtual void on_confirm_dialog(u8 action, u8 dialog_id);
+	virtual void on_action_dialog(u8 action, u8 dialog_id);
 public:
 	virtual char * getTitle() {return lang_str.ui_title_file_browser;};
 	FileBrowserUI(): StdWidget(FILE_BROWSER_UI) {};

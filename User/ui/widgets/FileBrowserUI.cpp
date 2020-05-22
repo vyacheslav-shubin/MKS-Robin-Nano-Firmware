@@ -237,7 +237,7 @@ void FileBrowserUI::activatePrint(u8 index) {
 	file_info_ui.show(this);
 }
 
-void FileBrowserUI::on_confirm_dialog(u8 action, u8 dialog_id) {
+void FileBrowserUI::on_action_dialog(u8 action, u8 dialog_id) {
 	if (action == UI_BUTTON_OK) {
 		if (is_filament_fail()) {
 			shUI::pushGcode("M300 P300");

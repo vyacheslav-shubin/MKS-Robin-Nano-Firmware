@@ -177,7 +177,7 @@ void PrintingUI::refresh_1s() {
 	}
 }
 
-void PrintingUI::on_confirm_dialog(u8 action, u8 dialog_id) {
+void PrintingUI::on_action_dialog(u8 action, u8 dialog_id) {
 	confirm_dialog_ui.hide();
 	SERIAL_ECHOLNPAIR("DIALOG ID:", dialog_id);
 	if (dialog_id==0) {

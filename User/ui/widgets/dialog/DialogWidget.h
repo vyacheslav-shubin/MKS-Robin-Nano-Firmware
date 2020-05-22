@@ -19,6 +19,13 @@
 #define UI_BUTTON_CANCEL	((u8)1)
 #define UI_BUTTON_TIMEOUT	((u8)2)
 
+class ActionDialogCallback {
+protected:
+public:
+	virtual void on_action_dialog(u8 action, u8 dialog_id) = 0;
+	virtual ~ActionDialogCallback() {};
+};
+
 class DialogWidget : public Widget {
 protected:
 	void createDialogDecoration(const char * img, const char * title);

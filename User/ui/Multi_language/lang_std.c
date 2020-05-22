@@ -30,6 +30,8 @@ void lang_std(void) {
 	lang_str.config_ui.maximum_speed_settings = "Maximum speed settings";
 	lang_str.config_ui.jerk_settings = "Jerk settings";
 
+	lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
+
 	lang_str.preheat = "Preheat";
 	lang_str.move = "Move";
 	lang_str.home = "Home";
@@ -61,6 +63,10 @@ void lang_std(void) {
 
 	lang_str.yes = "Yes";
 	lang_str.no = "No";
+	lang_str.wifi = "WiFi";
+	lang_str.machine_settings = "Configuration";
+	lang_str.language = "Language";
+	lang_str.about = "Version";
 
 	lang_str.machine = "Machine";
 	lang_str.temperature = "Temperture";

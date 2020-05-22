@@ -191,18 +191,15 @@ int main(void)
 
   SPI_FLASH_BufferRead((u8*)&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR,1);
   
-  //Lcd_Light_ON;
   ui_app.start();
-  Lcd_Light_ON; 
   logo_tick1 = getTick();
   gui_view_init();
-  init_win_id();
-
   setTouchBound(gCfgItems.touch_adj_xMin, gCfgItems.touch_adj_xMax, gCfgItems.touch_adj_yMax, gCfgItems.touch_adj_yMin);
-
   SPI_FLASH_BufferRead((u8*)&gCfgItems.total_pic,PIC_COUNTER_ADDR,1);
 
 
+  //TODO: Нахрен!
+#if 1
   switch(gCfgItems.language_bak) {
   	case 1:
 		gCfgItems.language_bak= LANG_SIMPLE_CHINESE;
@@ -233,8 +230,13 @@ int main(void)
 		AT24CXX_Write(EPR_LANGUAGE,(uint8_t *)&gCfgItems.language,1);	
 	}
   }
+#endif
+
+
+
 
   setup();
+  ui_app.setup();
 
     TEXT_SetDefaultTextColor(gCfgItems.title_color);
     GUI_SetBkColor(gCfgItems.background_color);

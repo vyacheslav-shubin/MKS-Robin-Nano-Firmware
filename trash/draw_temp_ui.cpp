@@ -2,11 +2,11 @@
 
 #include "GUI.h"
 #include "BUTTON.h"
+#include "draw_set.h"
 #include "PROGBAR.h"
 #include "draw_ui.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
-#include "draw_set.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH

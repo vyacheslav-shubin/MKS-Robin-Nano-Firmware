@@ -30,8 +30,8 @@ LIBS		:= Middlewares/GUI/GUI.a
 
 INCLUDE		:= $(shell cat include.list)
 #PATCH_DIR	:= $(BUILD_BASE)/patch
-#INCLUDE		:= $(INCLUDE) 
-DEFINES		:= USE_HAL_DRIVER STM32F103xE STM32F10X_HD USE_HAL_LIB MKS_ROBIN_NANO TFT35
+#INCLUDE		:= $(INCLUDE)
+DEFINES		:= USE_HAL_DRIVER STM32F103xE STM32F10X_HD USE_HAL_LIB MKS_ROBIN_NANO TFT35 BUILD_DATE='"$(shell date +'%Y.%m.%d')"'
  
 INCLIDE_OPT	:= $(addprefix -I,$(INCLUDE))
 DEFINE_OPT	:= $(addprefix -D,$(DEFINES))
@@ -58,6 +58,8 @@ OBJCOPY = $(TOOLS)$(TOOL_PREFIX)-objcopy
 COMMON_ARGS = -Os -mcpu=cortex-m3 -mthumb -fsigned-char -fno-move-loop-invariants -fno-strict-aliasing --specs=nano.specs --specs=nosys.specs -MMD -MP -DTARGET_STM32F1
 CXX_ARGS = -fabi-version=0 -fno-use-cxa-atexit -fno-threadsafe-statics
 
+print_date:
+	echo $(BUILD_DATE)
 
 print_pic_src:
 	echo $(PICS)

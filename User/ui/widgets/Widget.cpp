@@ -80,7 +80,7 @@ void Widget::setButtonText(UI_BUTTON btn, char * text) {
 	BUTTON_SetText(btn, text);
 }
 
-TEXT_Handle Widget::createTextF(int x, int y, int w, int h, int flags, char *text) {
+TEXT_Handle Widget::createTextF(int x, int y, int w, int h, int flags, const char *text) {
 	TEXT_Handle res = TEXT_CreateEx(x, y, w, h, this->hWnd, WM_CF_SHOW, flags,  GUI_ID_TEXT0, 0);
 	TEXT_SetBkColor(res,  gCfgItems.background_color);
 	TEXT_SetTextColor(res, gCfgItems.title_color);

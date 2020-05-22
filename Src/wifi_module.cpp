@@ -48,6 +48,8 @@ volatile SZ_USART_FIFO  WifiRxFifo;
 
 #define WAIT_ESP_TRANS_TIMEOUT_TICK	10500
 
+uint8_t command_send_flag;
+
 int cfg_wifi_flag = 0;
 int cfg_cloud_flag = 0;
 
@@ -95,7 +97,6 @@ extern WIFI_PARA wifiPara;
 extern IP_PARA ipPara;
 extern CLOUD_PARA cloud_para;
 
-extern uint8_t command_send_flag;
 extern volatile uint32_t TimeIncrease;
 
 extern "C" void MX_SDIO_SD_Init(void);

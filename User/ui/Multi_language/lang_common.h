@@ -38,6 +38,7 @@ typedef struct {
 	const char * confirm_print_again;
 	const char * confirm_print_with_suicide;
 	const char * error_filament_end_detected;
+	const char * refactored_by;
 } DIALOG_LANG_STR;
 
 typedef struct {
@@ -79,6 +80,13 @@ typedef struct {
 
 	const char *yes;
 	const char *no;
+
+	const char *wifi;
+	const char *language;
+	const char *about;
+	const char *machine_settings;
+
+
 
 	const char * ui_title_main;
 	const char * ui_title_tools;

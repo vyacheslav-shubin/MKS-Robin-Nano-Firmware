@@ -13,13 +13,13 @@
 #include "ff.h"
 #include "fatfs.h"
 #include <string.h>
-#include <draw_set.h>
 #include "sdio.h"
 #include "sh_tools.h"
 
 #include "Marlin.h"
 #include "Configuration_adv.h"
 #include "cardreader.h"
+#include "draw_set.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH

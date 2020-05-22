@@ -1,20 +1,8 @@
 #include "GUI.h"
 #include "BUTTON.h"
-#include "PROGBAR.h"
 #include "UI.h"
-#include "string_deal.h"
 #include "draw_ui.h"
-
-#include "ui_tools.h"
 #include "Marlin.h"
-#include "draw_machine.h"
-#include "draw_log_ui.h"
-#include "draw_about.h"
-#include "draw_wifi.h"
-#include "draw_set.h"
-#include "draw_Sprayer.h"
-#include "draw_machine.h"
-#include "draw_log_ui.h"
 #include "draw_wifi.h"
 #include "ff.h"
 #include "pic_manager.h"
@@ -154,10 +142,8 @@ void GUI_callback()
 void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
-		case SET_UI:			Clear_Set();			break;
 		case SPRAYER_UI:								break;
 		case MACHINE_UI:								break;
-		case ABOUT_UI:			Clear_About();			break;
 		case LOG_UI:									break;
 		case DISK_UI:									break;
 		case WIFI_UI:			Clear_Wifi();			break;
@@ -221,14 +207,11 @@ void draw_return_ui() {
 			case MOTOR_SETTINGS_UI:	motor_config_ui.show();	break;
 			case FILE_INFO_UI:		file_info_ui.show();	break;
             case ADVANCED_UI:		advanced_config_ui.show();		break;
-
-
-			case SET_UI:			draw_Set();				break;
+			case SET_UI:			settings_ui.show();		break;
 
 
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
-			case ABOUT_UI:			draw_About();			break;
 			case CALIBRATE_UI:	break;
 			case DISK_UI:		break;
 			case WIFI_UI:			draw_Wifi();			break;

@@ -16,7 +16,7 @@ extern char wifi_firm_ver[20];
 
 //extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
 extern GUI_CONST_STORAGE GUI_BITMAP bmp_logo;
-extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬¼ä¸ô
+extern int X_ADD,X_INTERVAL;   //**Í¼Æ¬ï¿½ï¿½ï¿½
 
 static BUTTON_STRUCT buttonRet;
 static TEXT_Handle TFT_Version_text,TFT_Type_text,Wifi_Ver_text,Shengma_text;
@@ -114,7 +114,7 @@ void draw_About()
 
 	
        //HAL_Delay(10);
-       memset(cmd_code,0,sizeof(cmd_code));
+    memset(cmd_code,0,sizeof(cmd_code));
 	strcpy((char*)cmd_code,(const char *)about_menu.type);
 	SPI_FLASH_BufferRead((u8 *)buf,ABOUT_TYPE_ADDR,100);
 	//strcat((char*)cmd_code,(const char *)about_menu.type_name);

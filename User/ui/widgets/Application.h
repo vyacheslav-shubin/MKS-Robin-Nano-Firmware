@@ -31,6 +31,7 @@ public:
 	void drawTitle();
 	char * getTitle();
 	void start();
+	void setup();
 	void loop();
 	void refresh();
 	void refresh_05();

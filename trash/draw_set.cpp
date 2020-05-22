@@ -1,9 +1,9 @@
+#include "../../trash/draw_set.h"
+
 #include "GUI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_ui.h"
-#include "draw_set.h"
-
 #include "serial.h"
 #include "fontLib.h"
 #include "LISTBOX.h"
@@ -18,6 +18,7 @@
 #include "spi_flash.h"
 #include "draw_wifi_list.h"
 #include "wifi_module.h"
+#include "UI.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -28,8 +29,6 @@ static GUI_HWIN hSetWnd;
 extern uint8_t Get_Temperature_Flg;
 extern volatile uint8_t get_temp_flag;
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-
-extern uint8_t command_send_flag;
 
 extern char cmd_code[201];
 extern int X_ADD,X_INTERVAL;   //**ͼƬ���
@@ -181,8 +180,11 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 	}
 
 
-void draw_Set()
-{
+void draw_Set(){
+	settings_ui.show();
+	return;
+
+
 #if 1		
 //	int titleHeight = 30;
 
@@ -402,8 +404,11 @@ void draw_Set()
 #endif	
 }
 
-void Clear_Set()
-{
+void Clear_Set(){
+	settings_ui.hide();
+	return;
+
+
 	GUI_SetBkColor(gCfgItems.background_color);
 	if(WM_IsWindow(hSetWnd))
 	{

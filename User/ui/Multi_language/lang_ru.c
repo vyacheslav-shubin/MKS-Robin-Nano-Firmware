@@ -11,6 +11,8 @@ void lang_ru(void) {
 	lang_str.config_ui.maximum_speed_settings = "Максимальные скорости";
 	lang_str.config_ui.jerk_settings = "Настройки рывков";
 
+    lang_str.dialog.refactored_by = "Доработка ПО:\nВячеслав Шубин\nshubin-vv@krista.ru";
+
 	lang_str.preheat = "Нагрев";
 	lang_str.move = "Перемещение";
 	lang_str.home = "Парковка";
@@ -48,7 +50,9 @@ void lang_ru(void) {
 
 	lang_str.yes = "Да";
 	lang_str.no = "Нет";
-
+	lang_str.machine_settings = "Конфигурация";
+	lang_str.language = "Язык";
+	lang_str.about = "Версия";
 
 	lang_str.ui_title_main = "Готов";
 	lang_str.ui_title_tools = "Выбор инструмента";

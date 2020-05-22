@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include "UI.h"
 #include "BUTTON.h"
 #include "PROGBAR.h"
 #include "draw_wifi.h"
@@ -8,7 +9,6 @@
 #include "draw_bind.h"
 #include "wifi_module.h"
 #include  <string.h>
-#include  "draw_set.h"
 #include "draw_wifi_list.h"
 
 #ifndef GUI_FLASH
@@ -56,7 +56,7 @@ static void cbWifiWin(WM_MESSAGE * pMsg) {
 					last_disp_state = WIFI_UI;
 					Clear_Wifi();
 					//draw_return_ui();
-					draw_Set();
+					settings_ui.show();
 				}	
 				else if(pMsg->hWinSrc == buttonReconnect.btnHandle)
 				{

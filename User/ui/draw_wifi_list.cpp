@@ -7,12 +7,12 @@
 #include "draw_bind.h"
 #include "wifi_module.h"
 #include "draw_keyboard.h"
-#include "draw_set.h"
 #include "draw_wifi.h"
 #include "wifi_list.h"
 #include "draw_wifi_list.h"
 #include "string.h"
 #include "stdio.h"
+#include "UI.h"
 
 //#include "draw_wifi_connected.h"
 
@@ -91,12 +91,9 @@ static void cbWifiWin(WM_MESSAGE * pMsg) {
 				
 				if(pMsg->hWinSrc == buttonRet.btnHandle)
 				{
-					//GUI_Exec();
-					//GUI_UC_SetEncodeUTF8();
-					
 					last_disp_state = WIFI_LIST_UI;
 					Clear_Wifi_list();
-					draw_Set();
+					settings_ui.show();
 				}	
 				else if(pMsg->hWinSrc == buttonWifiPd.btnHandle)
 				{

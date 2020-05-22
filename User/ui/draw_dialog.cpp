@@ -82,7 +82,6 @@ extern int upload_result ;
 
 extern volatile WIFI_STATE wifi_link_state;
 extern WIFI_PARA wifiPara;
-extern uint8_t command_send_flag;
 
 static void cbDlgWin(WM_MESSAGE * pMsg) {
 	int8_t sel_item;
@@ -145,8 +144,6 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 				} else if(DialogType == DIALOG_TYPE_M80_FAIL) {
 					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_MESSEGE_ERR1) {
-					ui_app.showMainWidget();
-				} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
 					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
 					draw_return_ui();
@@ -243,24 +240,6 @@ void draw_dialog(uint8_t type)
 				sprintf(&buf[_index], " %d KBytes/s\n", upload_file_info.size / upload_file_info.time / 1024);
 				TEXT_SetText(printStopDlgText, buf);
 			}
-		} else if(DialogType == DIALOG_TYPE_FINISH_PRINT) {
-			ui_set_text_value(printStopDlgText, print_file_dialog_menu.print_finish);
-
-			buttonRePrint = ui_create_dialog_button((LCD_WIDTH-320)/2,(imgHeight-60)/2, hStopDlgWnd, print_file_dialog_menu.reprint);
-			buttonOk = ui_create_dialog_button((LCD_WIDTH-320)/2+40+140,(imgHeight-60)/2,hStopDlgWnd, 0);
-
-			printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-90, LCD_WIDTH, 30, hStopDlgWnd, 0);
-			fileNameText = ui_create_dialog_text(0,(imgHeight-40)/2-90+30, LCD_WIDTH, 30, hStopDlgWnd, 0);
-
-			memset(tmpCurFileStr,0,sizeof(tmpCurFileStr));
-			strcat(tmpCurFileStr,print_file_dialog_menu.print_time);
-			print_time_to_str(&print_time, &tmpCurFileStr[strlen(print_file_dialog_menu.print_time)]);
-			ui_set_text_value(fileNameText, &ui_print_process.file_name[3]);
-			if (ui_print_process.suicide_enabled) {
-				progressBar = ui_create_std_progbar((LCD_WIDTH-400)/2, (imgHeight-60)/2 + 80, 400, 25, hStopDlgWnd);
-				PROGBAR_SetValue(progressBar, 0);
-			}
-
 		} else if(DialogType == WIFI_ENABLE_TIPS) {
 			buttonCancle= BUTTON_CreateEx((LCD_WIDTH-120)/2,(imgHeight-60)/2,120,60,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
 			printStopDlgText = TEXT_CreateEx(0,(imgHeight-40)/2-90, LCD_WIDTH, 60, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), " ");
@@ -310,7 +289,6 @@ void draw_dialog(uint8_t type)
 }
 
 
-uint8_t command_send_flag;
 void wifi_scan_handle() {
 	char buf[6]={0};
 	if(command_send_flag == 1) {
@@ -336,22 +314,5 @@ void refresh_dialog() {
 		case WIFI_ENABLE_TIPS:
 			wifi_scan_handle();
 			break;
-		case DIALOG_TYPE_FINISH_PRINT:
-#if 0
-			if (ui_print_process.suicide.enabled) {
-				if (is_ui_timing(F_UI_TIMING_SEC)) {
-					ui_timing_clear(F_UI_TIMING_SEC);
-					PROGBAR_SetValue(progressBar, 100 - ui_print_process.suicide.count_down*100/SUICIDE_WAIT);
-					if (ui_print_process.suicide.count_down--==0) {
-						ui_print_process.suicide.enabled=0;
-						Clear_dialog();
-						ui_clear_screen();
-						enqueue_and_echo_commands_P(PSTR("M81"));
-					}
-				}
-			}
-#endif
-			break;
-
 	}
 }

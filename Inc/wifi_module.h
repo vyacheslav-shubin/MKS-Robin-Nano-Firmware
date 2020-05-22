@@ -16,13 +16,13 @@
 
 #define WIFI_AP_NAME		"TP-LINK_MKS"
 #define WIFI_KEY_CODE		"makerbase"
-//ClientÄ£Ê½ÏÂµÄIPÅäÖÃ
+//ClientÄ£Ê½ï¿½Âµï¿½IPï¿½ï¿½ï¿½ï¿½
 #define IP_ADDR 	 	"192.168.3.100"
 #define IP_MASK 	 	"255.255.255.0"
 #define IP_GATE 	 	"192.168.3.1"
 #define IP_DNS 	 	 	"192.168.3.1"
 
-//APÄ£Ê½ÏÂµÄIPÅäÖÃ
+//APÄ£Ê½ï¿½Âµï¿½IPï¿½ï¿½ï¿½ï¿½
 #define AP_IP_DHCP_FLAG	1
 #define AP_IP_ADDR		"192.168.3.100"
 #define AP_IP_MASK		"255.255.255.0"
@@ -72,11 +72,11 @@ typedef enum
 
 typedef struct			
 {
-	unsigned char *bufferAddr[TRANS_RCV_FIFO_BLOCK_NUM];		//ÓÃÓÚÖ¸Ïò´æ´¢¿éµÄÆäÊµµØÖ·£¬Ä¿Ç°¹²ÓÃ16KµÄÍ¼Æ¬»º´æbuf
+	unsigned char *bufferAddr[TRANS_RCV_FIFO_BLOCK_NUM];		//ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ö·ï¿½ï¿½Ä¿Ç°ï¿½ï¿½ï¿½ï¿½16Kï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½buf
 	unsigned char *p;	
 	UDISK_DATA_BUFFER_STATE state[TRANS_RCV_FIFO_BLOCK_NUM];		
-	unsigned char read_cur; //µ±Ç°¶Á¿éË÷Òý
-	unsigned char write_cur;	//µ±Ç°Ð´¿éË÷Òý
+	unsigned char read_cur; //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	unsigned char write_cur;	//ï¿½ï¿½Ç°Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }WIFI_DMA_RCV_FIFO;			//
 
 
@@ -84,7 +84,7 @@ typedef struct
 typedef struct
 {
 	uint8_t flag; // 0x0: no error;  0x01: error
-	uint32_t start_tick; //´íÎó¿ªÊ¼Ê±¿Ì
+	uint32_t start_tick; //ï¿½ï¿½ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
 	uint32_t now_tick;
 	
 } WIFI_TRANS_ERROR;
@@ -94,37 +94,37 @@ typedef struct
 
 typedef  struct
 {
-	char ap_name[32];	//wifiÍøÂçÃû³Æ×Ö·û´®
-	char keyCode[64]; //wifiÃÜÂë×Ö·û´®
-	int   decodeType; //¼ÓÃÜÀàÐÍ£¨1£ºauto£¬2£ºaes£©
+	char ap_name[32];	//wifiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+	char keyCode[64]; //wifiï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+	int   decodeType; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½1ï¿½ï¿½autoï¿½ï¿½2ï¿½ï¿½aesï¿½ï¿½
 	int baud;
 	int mode;
 } WIFI_PARA;
 
 typedef  struct
 {
-	char state;	//ÔÆÁ¬½Ó×´Ì¬£º0x12:ÔÆÁ¬½ÓÊ¹ÄÜ£¬²¢Á¬½ÓÉÏ£¬ÒÑ°ó¶¨;0x11:ÔÆÁ¬½ÓÊ¹ÄÜ£¬²¢Á¬½ÓÉÏ,Î´°ó¶¨;0x10£ºÔÆÁ¬½ÓÊ¹ÄÜ£¬µ«Î´Á¬½Ó;0x00:ÔÆÁ¬½Ó½ûÓÃ
-	char hostUrlLen; //ÔÆÁ¬½ÓµØÖ·³¤¶È£¨×î´óÖµÎª96£©
-	char hostUrl[96];	//ÔÆÁ¬½ÓµØÖ·
-	int port;		//ÔÆÁ¬½Ó¶Ë¿Ú
+	char state;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½0x12:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½Ñ°ï¿½;0x11:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Î´ï¿½ï¿½;0x10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ü£ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½;0x00:ï¿½ï¿½ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½
+	char hostUrlLen; //ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ö·ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ÖµÎª96ï¿½ï¿½
+	char hostUrl[96];	//ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ö·
+	int port;		//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶Ë¿ï¿½
 	char id[21];
 } CLOUD_PARA;
 
 typedef struct
 {
-	char  dhcp_flag;	//¶¯Ì¬»ñÈ¡IP±êÖ¾Î»£¬ÈôÎª1Ôò²»ÐèÒª¾²Ì¬ÉèÖÃ£¬//Îª0£¬Ôò²ÉÓÃ¾²Ì¬ÉèÖÃ
-	char  ip_addr[16];	//¾²Ì¬ipµØÖ·Êý×é£¬Èç192,168,0,23
-	char  mask[16];	//¾²Ì¬×ÓÍøÑÚÂë£¬Èç255,255,255,0
-	char  gate[16];	//¾²Ì¬Íø¹Ø£¬Èç192,168,0,1
+	char  dhcp_flag;	//ï¿½ï¿½Ì¬ï¿½ï¿½È¡IPï¿½ï¿½Ö¾Î»ï¿½ï¿½ï¿½ï¿½Îª1ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ì¬ï¿½ï¿½ï¿½Ã£ï¿½//Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¾ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
+	char  ip_addr[16];	//ï¿½ï¿½Ì¬ipï¿½ï¿½Ö·ï¿½ï¿½ï¿½é£¬ï¿½ï¿½192,168,0,23
+	char  mask[16];	//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½255,255,255,0
+	char  gate[16];	//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½192,168,0,1
 	char  dns[16];		//dns
 	
-	char  dhcpd_flag; //apÄ£Ê½ÏÂ£¬DHCP·þÎñÆ÷ÅäÖÃ
-	char  dhcpd_ip[16];//DHCP·þÎñÆ÷IPµØÖ·
-	char  dhcpd_mask[16];//DHCP·þÎñÆ÷ÑÚÂë
-	char  dhcpd_gate[16];//DHCP·þÎñÆ÷Íø¹Ø
-	char  dhcpd_dns[16];//DHCP·þÎñÆ÷DNSµØÖ·	
-	char  start_ip_addr[16];//ÆðÊ¼µØÖ·
-	char  end_ip_addr[16];//½áÊøµØÖ·
+	char  dhcpd_flag; //apÄ£Ê½ï¿½Â£ï¿½DHCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	char  dhcpd_ip[16];//DHCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IPï¿½ï¿½Ö·
+	char  dhcpd_mask[16];//DHCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	char  dhcpd_gate[16];//DHCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	char  dhcpd_dns[16];//DHCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DNSï¿½ï¿½Ö·	
+	char  start_ip_addr[16];//ï¿½ï¿½Ê¼ï¿½ï¿½Ö·
+	char  end_ip_addr[16];//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
 } IP_PARA;
 
 
@@ -169,12 +169,12 @@ typedef struct
 
 typedef enum
 {
-	WIFI_PARA_SET, 	//0x0:ÉèÖÃÍøÂç²ÎÊý
-	WIFI_PRINT_INF, 	//0x1:´òÓ¡»úÐÅÏ¢
-	WIFI_TRANS_INF, 	//0x2:Í¸´«ÐÅÏ¢
-	WIFI_EXCEP_INF,	 //0x3:Òì³£ÐÅÏ¢
-	WIFI_CLOUD_CFG,	//0x4:ÔÆ¶ËÅäÖÃ
-	WIFI_CLOUD_UNBIND, //0x5£º½â°óID
+	WIFI_PARA_SET, 	//0x0:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	WIFI_PRINT_INF, 	//0x1:ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Ï¢
+	WIFI_TRANS_INF, 	//0x2:Í¸ï¿½ï¿½ï¿½ï¿½Ï¢
+	WIFI_EXCEP_INF,	 //0x3:ï¿½ì³£ï¿½ï¿½Ï¢
+	WIFI_CLOUD_CFG,	//0x4:ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
+	WIFI_CLOUD_UNBIND, //0x5ï¿½ï¿½ï¿½ï¿½ï¿½ID
 } WIFI_RET_TYPE;
 
 
@@ -198,6 +198,7 @@ extern volatile WIFI_STATE wifi_link_state;
 extern WIFI_PARA wifiPara;
 extern IP_PARA ipPara;
 extern CLOUD_PARA cloud_para;
+extern uint8_t command_send_flag;
 
 extern WIFI_GCODE_BUFFER espGcodeFifo; 
 

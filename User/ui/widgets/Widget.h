@@ -39,7 +39,7 @@ protected:
 	void updateButton(UI_BUTTON button, const char * picture, const char * title);
 	void setButtonText(UI_BUTTON btn, char * text);
 	UI_TEXT createText(int x, int y, int w, int h, const char * value);
-	UI_TEXT createTextF(int x, int y, int w, int h, int flags, char *text);
+	UI_TEXT createTextF(int x, int y, int w, int h, int flags, const char *text);
 	void setText(UI_TEXT hText, char * text);
 public:
 	Widget(DISP_STATE id) {this->id=id;};

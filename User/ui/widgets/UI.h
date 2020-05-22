@@ -30,6 +30,8 @@
 #include "FileInfoUI.h"
 #include "DialogWidget.h"
 #include "AdvancedConfigUI.h"
+#include "SettingsUI.h"
+#include "dialog/AboutDialogUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

@@ -57,10 +57,15 @@ void Application::drawTitle() {
 void Application::start() {
 	GUI_Init();
 	this->drawLogo();
+	Lcd_Light_ON;
+}
+
+void Application::setup() {
 	this->screenOffCountDown = STANDBY_TIME;
 	if (this->screenOffCountDown < 60)
 		this->screenOffCountDown = 60;
 }
+
 
 void Application::closeCurrentWidget() {
 	if (this->current_ui)

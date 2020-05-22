@@ -1,3 +1,4 @@
+#error
 #ifndef _DRAW_ABOUT_H_
 #define _DRAW_ABOUT_H_
 

@@ -7,6 +7,7 @@
 
 #include "MainUI.h"
 #include "ToolsUI.h"
+#include "SettingsUI.h"
 #include "MotorMoveUI.h"
 #include "HomeUI.h"
 #include "MoreUI.h"
@@ -14,8 +15,6 @@
 #include "PreheatUI.h"
 #include "FileBrowserUI.h"
 #include "ui_tools.h"
-
-#include "draw_set.h"
 
 MainUI main_ui;
 
@@ -25,7 +24,7 @@ void MainUI::on_button(UI_BUTTON hBtn) {
 		tools_ui.show(this);
 	} else if (hBtn==this->ui.settings) {
 		this->hide();
-		draw_Set();
+		settings_ui.show(this);
 	} else if (hBtn==this->ui.print) {
 		this->hide();
 		file_browser_ui.show(this);
@@ -76,9 +75,9 @@ void MainUI::createControls() {
 	} else {
 		#define middle  ((LCD_HEIGHT-BTN_Y_PIXEL)/2-titleHeight)
 		#define col(idx) SIMPLE_FIRST_PAGE_GRAP + 1 + (BTN_X_PIXEL+SIMPLE_FIRST_PAGE_GRAP) * idx
-		this->ui.tools = this->createButton(col(0), middle, img_tools, lang_str.tools);
-		this->ui.settings = this->createButton(col(1), middle, img_settings, lang_str.settings);
-		this->ui.print = this->createButton(col(2), middle, img_print, lang_str.print);
+        this->ui.print = this->createButton(col(0), middle, img_print, lang_str.print);
+		this->ui.tools = this->createButton(col(1), middle, img_tools, lang_str.tools);
+        this->ui.settings = this->createButton(col(2), middle, img_settings, lang_str.settings);
 	}
 }
 

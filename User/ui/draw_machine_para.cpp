@@ -67,7 +67,7 @@ static void cbMachineParaWin(WM_MESSAGE * pMsg) {
     			{
     				last_disp_state = MACHINE_PARA_UI;
     				Clear_MachinePara();
-                    draw_Advanced();
+                    advanced_config_ui.show();
 
     			}				
     		}

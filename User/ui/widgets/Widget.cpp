@@ -45,14 +45,10 @@ void Widget::createWindow() {
 }
 
 void Widget::refresh() {
-	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
-		ui_timing_clear(F_UI_TIMING_HALF_SEC);
+	if (is_ui_timing(F_UI_TIMING_HALF_SEC))
 		this->refresh_05();
-	}
-	if (is_ui_timing(F_UI_TIMING_SEC)) {
-		ui_timing_clear(F_UI_TIMING_SEC);
+	if (is_ui_timing(F_UI_TIMING_SEC))
 		this->refresh_1s();
-	}
 }
 
 void Widget::recreate() {

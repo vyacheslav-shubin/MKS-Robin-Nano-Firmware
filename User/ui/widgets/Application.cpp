@@ -17,10 +17,13 @@
 #include "pic_manager.h"
 #include "spi_flash.h"
 #include "mks_reprint.h"
+#include "mks_touch_screen.h"
 
 Application ui_app;
 static FATFS fat;
-u8 ui_timing_flags;
+volatile u8 ui_timing_flags;
+
+#define STANDBY_TIME 	(gCfgItems.standby_time)
 
 void Application::defaultUI() {
 	GUI_SetBkColor(gCfgItems.background_color);
@@ -54,6 +57,9 @@ void Application::drawTitle() {
 void Application::start() {
 	GUI_Init();
 	this->drawLogo();
+	this->screenOffCountDown = STANDBY_TIME;
+	if (this->screenOffCountDown < 60)
+		this->screenOffCountDown = 60;
 }
 
 void Application::closeCurrentWidget() {
@@ -63,19 +69,71 @@ void Application::closeCurrentWidget() {
 		clear_cur_ui();
 }
 
+void Application::refresh() {
+
+}
+
+void Application::refresh_05() {
+	if (this->waitPenUp > 1) {
+		if (--this->waitPenUp==1) {
+			this->waitPenUp = 0;
+			this->screenOffCountDown = STANDBY_TIME;
+		}
+	}
+
+}
+
+void Application::refresh_1s() {
+	if ((gCfgItems.standby_mode) && (this->screenOffCountDown>0)) {
+		SERIAL_ECHOLNPAIR("Stendby: ", this->screenOffCountDown);
+		if (--this->screenOffCountDown==0)
+			Lcd_Light_OFF;
+	}
+}
+
+char Application::touch(u8 action) {
+	if (gCfgItems.standby_mode) {
+		if (this->screenOffCountDown==0) {
+			if ((action==PEN_DOWN) && (this->waitPenUp==0)) {
+				Lcd_Light_ON;
+				this->waitPenUp = 1;
+			} else if ((action==PEN_UP) && (this->waitPenUp==1)) {
+				SERIAL_ECHOLN("PENUP");
+				this->waitPenUp = 3;
+			}
+			return 0;
+		} else if (action==PEN_DOWN)
+			this->screenOffCountDown = STANDBY_TIME;
+	}
+	return 1;
+}
+
 
 void Application::loop() {
+
 	if(wifi_link_state != WIFI_TRANS_FILE) {
-		if (this->current_ui)
+		this->refresh();
+		if (this->current_ui) {
 			this->current_ui->refresh();
-		else
+		} else
 			GUI_RefreshPage();
 	}
+
+	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
+		ui_timing_clear(F_UI_TIMING_HALF_SEC);
+		this->refresh_05();
+	}
+	if (is_ui_timing(F_UI_TIMING_SEC)) {
+		ui_timing_clear(F_UI_TIMING_SEC);
+		this->refresh_1s();
+	}
+
 	GUI_TOUCH_Exec();
 	GUI_Exec();
 }
 
 void Application::systick() {
+
 	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
 		ui_timing_set(F_UI_TIMING_HALF_SEC);
 

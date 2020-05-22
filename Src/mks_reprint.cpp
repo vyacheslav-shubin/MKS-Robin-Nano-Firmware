@@ -90,6 +90,8 @@ void mkstft_ui_load()
 		epr_read_data(EPR_SINGLE_NOZZLE,(uint8_t *)&gCfgItems.singleNozzle,sizeof(gCfgItems.singleNozzle));
 		epr_read_data(EPR_STANDBY_MODE,(uint8_t *)&gCfgItems.standby_mode,sizeof(gCfgItems.standby_mode));
 		epr_read_data(EPR_STANDBY_TIME,(uint8_t *)&gCfgItems.standby_time,sizeof(gCfgItems.standby_time));
+		if (gCfgItems.standby_time < 30)
+			gCfgItems.standby_time = 30;
 		epr_read_data(EPR_PULSE_DELAY_TIME,(uint8_t *)&gCfgItems.pulseDelay,sizeof(gCfgItems.pulseDelay));
    		epr_read_data(EPR_PRINT_FINESH_COUNT,(uint8_t *)&gCfgItems.print_finish_count,sizeof(gCfgItems.print_finish_count));
 	}
@@ -304,7 +306,7 @@ void mkstft_ui_init() {
 	gCfgItems.singleNozzle=0;
 	gCfgItems.overturn_180 = 0;
 	gCfgItems.standby_mode=0;
-	gCfgItems.standby_time=0;
+	gCfgItems.standby_time=60;
 	gCfgItems.pulseDelay=5;
 	gCfgItems.print_finish_count=180;
 	mkstft_ui_set_epr();

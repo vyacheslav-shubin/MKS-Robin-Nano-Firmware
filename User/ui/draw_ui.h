@@ -42,7 +42,6 @@
 #include "draw_home_speed.h"
 #include "draw_nozzle_config.h"
 #include "draw_hotbed_config.h"
-#include "draw_advanced.h"
 #include "draw_doubleZ.h"
 #include "draw_EnablePin_Invert.h"
 #include "draw_number_key.h"

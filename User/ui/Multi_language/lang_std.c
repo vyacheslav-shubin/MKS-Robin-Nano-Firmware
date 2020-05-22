@@ -22,6 +22,7 @@ void make_lang_str(void) {
 void lang_std(void) {
 	lang_str.config_ui.power_off_after_print = "Auto Shutdown after print";
 	lang_str.config_ui.simple_main_ui = "Simple main UI";
+	lang_str.config_ui.display_backlight_off = "Standby display";
 	lang_str.config_ui.axes_inversion = "Axes inversion";
 	lang_str.config_ui.motor_steps_settings = "Steps settings";
 	lang_str.config_ui.home_speed_settings = "Home speed setting";

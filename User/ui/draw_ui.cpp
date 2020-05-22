@@ -190,7 +190,6 @@ void clear_cur_ui() {
 		case HOMESPEED_UI:		Clear_HomeSpeed();		break;
 		case NOZZLE_CONFIG_UI:	Clear_NozzleConfig();	break;
 		case HOTBED_CONFIG_UI:	Clear_HotbedConfig();	break;
-		case ADVANCED_UI:		Clear_Advanced();		break;
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
 		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
 		case NUMBER_KEY_UI:		Clear_NumberKey();		break;
@@ -221,7 +220,12 @@ void draw_return_ui() {
             case MOTORDIR_UI:		motor_dir_config_ui.show();		break;
 			case MOTOR_SETTINGS_UI:	motor_config_ui.show();	break;
 			case FILE_INFO_UI:		file_info_ui.show();	break;
+            case ADVANCED_UI:		advanced_config_ui.show();		break;
+
+
 			case SET_UI:			draw_Set();				break;
+
+
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
 			case ABOUT_UI:			draw_About();			break;
@@ -253,7 +257,6 @@ void draw_return_ui() {
             case HOMESPEED_UI:		draw_HomeSpeed();		break;
             case NOZZLE_CONFIG_UI:	draw_NozzleConfig();	break;
             case HOTBED_CONFIG_UI:	draw_HotbedConfig();	break;
-            case ADVANCED_UI:		draw_Advanced();		break;
             case DOUBLE_Z_UI:		draw_DoubleZ();			break;
             case ENABLE_INVERT_UI:	draw_EnableInvert();	break;
             case NUMBER_KEY_UI:		draw_NumberKey();		break;

@@ -3,6 +3,7 @@
 #include "draw_ui.h"
 #include "ui_tools.h"
 #include "lang_common.h"
+#include "UI.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -92,6 +93,8 @@ void _inner_draw_Advanced() {
 }
 
 void draw_Advanced() {
+	advanced_config_ui.show();
+	return;
 	navigator.page_count = 1;
 	navigator.page = 0;
 	_inner_draw_Advanced();
@@ -99,6 +102,8 @@ void draw_Advanced() {
 
 
 void Clear_Advanced() {
+	advanced_config_ui.hide();
+	return;
 	ui_drop_window(hAdvancedWnd);
 }
 

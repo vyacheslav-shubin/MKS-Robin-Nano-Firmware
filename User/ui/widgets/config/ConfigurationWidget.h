@@ -12,6 +12,8 @@
 #include "ui_tools.h"
 #include "mks_cfg.h"
 
+#define ui_invert_u8_flag(S) S=S==0 ? 1 : 0
+
 typedef struct {
 	UI_BUTTON text;
 	UI_BUTTON button;
@@ -45,7 +47,7 @@ protected:
 public:
 	virtual void on_message(WM_MESSAGE * pMsg);
 	virtual void show(Widget * caller = 0)  {this->navigator.page = 0; Widget::show(caller); };
-	ConfigurationWidget(DISP_STATE id,  unsigned char pages,  unsigned char dual_columns = 0) : Widget(id) {
+	ConfigurationWidget(DISP_STATE id,  unsigned char pages = 1,  unsigned char dual_columns = 0) : Widget(id) {
 		this->navigator.count = pages;
 		this->navigator.page = 0;
 		this->dual_columns = dual_columns;

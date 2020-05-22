@@ -3,6 +3,7 @@
 void lang_ru(void) {
 	lang_str.config_ui.power_off_after_print = "Выключить по окончании печати";
 	lang_str.config_ui.simple_main_ui = "Простое меню";
+	lang_str.config_ui.display_backlight_off = "Выключать подсветку дисплея";
 	lang_str.config_ui.axes_inversion = "Инверсия осей";
 	lang_str.config_ui.motor_steps_settings = "Настройка шагов";
 	lang_str.config_ui.home_speed_settings = "Скорость парковки";

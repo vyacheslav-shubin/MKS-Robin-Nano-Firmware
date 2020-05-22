@@ -8,12 +8,10 @@
 #ifndef USER_UI_WIDGETS_APPLICATION_H_
 #define USER_UI_WIDGETS_APPLICATION_H_
 
-class Widget;
-
 #include "Widget.h"
 #include "wifi_module.h"
 
-extern u8 ui_timing_flags;
+extern volatile u8 ui_timing_flags;
 #define F_UI_TIMING_HALF_SEC		1<<0
 #define F_UI_TIMING_SEC				1<<1
 
@@ -21,7 +19,12 @@ extern u8 ui_timing_flags;
 #define ui_timing_set(FLAG) (ui_timing_flags |= FLAG)
 #define ui_timing_clear(FLAG) (ui_timing_flags &= (~FLAG))
 
+class Widget;
+
 class Application {
+private:
+	volatile u32 screenOffCountDown = 255;
+	volatile u8 waitPenUp = 0;
 public:
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
@@ -29,7 +32,11 @@ public:
 	char * getTitle();
 	void start();
 	void loop();
+	void refresh();
+	void refresh_05();
+	void refresh_1s();
 	void systick();
+	char touch(u8 action);
 	void defaultUI();
 	void dropPreview();
 	void startPrintFile(unsigned char savedPreview=0);

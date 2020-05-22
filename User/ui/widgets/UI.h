@@ -29,6 +29,7 @@
 #include "MotorConfigUI.h"
 #include "FileInfoUI.h"
 #include "DialogWidget.h"
+#include "AdvancedConfigUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

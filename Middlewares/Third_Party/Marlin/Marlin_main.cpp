@@ -15556,13 +15556,11 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) {
 /**
  * Standard idle routine keeps the machine alive
  */
-//extern uint8_t display_hold;
-//extern uint32_t display_hold_cnt;
-//extern uint8_t display_hold_release;
 
 uint8_t display_hold=0;
 uint32_t display_hold_cnt=0;
 uint8_t display_hold_release=0;
+
 uint8_t button_disp_pause_state=0;
 
 void lcd_reInit()
@@ -16248,10 +16246,10 @@ void SysTick_Handler_User() {
 			tips_disp.timer_count++;
 		}
 	}
-#if 0
+	#if 0
     if(btn_flg == 1)
     {
-        btn_beep_cnt--;
+    	btn_beep_cnt--;
         if(btn_beep_cnt<=0)
         {
            btn_flg = 0;
@@ -16259,7 +16257,8 @@ void SysTick_Handler_User() {
         }
     }
     #endif
-	if(has_adjust_speed==1)resume_printed_time++;
+	if (has_adjust_speed==1)
+		resume_printed_time++;
 
 	if(print_finish_start_timer==TIMER_START)
 	{

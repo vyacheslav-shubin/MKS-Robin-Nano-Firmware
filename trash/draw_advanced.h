@@ -1,5 +1,8 @@
+#error unused
+
 #ifndef _DRAW_ADVANCE_H_
 #define _DRAW_ADVANCE_H_
+
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */

@@ -52,11 +52,11 @@ static void cbSetWin(WM_MESSAGE * pMsg) {
 			//GUI_DispString("window");
 			break;
 		case WM_TOUCH:
-		 	press_event = (struct PressEvt *)pMsg->Data.p;
+		 	//press_event = (struct PressEvt *)pMsg->Data.p;
 			
 			break;
 		case WM_TOUCH_CHILD:
-			press_event = (struct PressEvt *)pMsg->Data.p;
+			//press_event = (struct PressEvt *)pMsg->Data.p;
 
 			break;
 			

@@ -99,7 +99,6 @@ Src/wifi_module.cpp
 Src/wifi_upload.cpp
 User/ui/draw_about.cpp
 User/ui/draw_acceleration.cpp
-User/ui/draw_advanced.cpp
 User/ui/draw_bind.cpp
 User/ui/draw_deltaLevelPare.cpp
 User/ui/draw_dialog.cpp
@@ -175,5 +174,9 @@ User/ui/widgets/ConfigurationRootUI.cpp
 User/ui/widgets/config/ConfigurationWidget.cpp
 User/ui/widgets/config/MotorDirConfigUI.cpp
 User/ui/widgets/config/MotorConfigUI.cpp
+User/ui/widgets/config/AdvancedConfigUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp
+User/ui/widgets/backui.cpp
+
+

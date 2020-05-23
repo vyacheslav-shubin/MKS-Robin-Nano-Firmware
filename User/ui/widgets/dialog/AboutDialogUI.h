@@ -9,6 +9,7 @@
 #define USER_UI_WIDGETS_DIALOG_ABOUTDIALOGUI_H_
 
 #include "DialogWidget.h"
+#include "ActionDialog.h"
 
 typedef struct {
 	UI_BUTTON ok;
@@ -16,16 +17,14 @@ typedef struct {
     UI_TEXT	powered_by;
 } ABOUT_DIALOG_UI_CONTROLS;
 
-class AboutDialogUI : public DialogWidget{
+class AboutDialogUI : public ActionDialog{
 private:
 	ABOUT_DIALOG_UI_CONTROLS ui;
-	ActionDialogCallback * callback = 0;
 protected:
 	virtual void createControls();
 public:
 	virtual void on_message(WM_MESSAGE * pMsg);
-	void show(ActionDialogCallback * callback, Widget * caller = 0);
-	AboutDialogUI() : DialogWidget() {};
+	AboutDialogUI() : ActionDialog() {};
 };
 
 extern AboutDialogUI about_dialog_ui;

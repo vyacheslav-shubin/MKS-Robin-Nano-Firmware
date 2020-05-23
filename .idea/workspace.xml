@@ -36,11 +36,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ActionDialog.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ActionDialog.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/PrintingInfoDialogUI.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/PrintingInfoDialogUI.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/auto_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/cancel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/info96.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/manual_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/ok.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/pause.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/stop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/tools96.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MainUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MainUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileInfoBaseUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileInfoBaseUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileInfoUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileInfoUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/AboutDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/AboutDialogUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/AboutDialogUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/AboutDialogUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/autoOffDisabled100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/autoOffEnabled100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/back100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/buttons1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/buttons1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/cancel100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/del.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/ok100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/operate100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/page_back.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/page_back.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/page_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/page_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/page_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/page_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/pause100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/resume100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/stop100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590232576457</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="heating preset on main widget">
+      <created>1590235702605</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1590235702605</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,7 +250,8 @@
     <MESSAGE value="machine root config ui as widget" />
     <MESSAGE value="configuration menu refactored" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="heating preset on main widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="heating preset on main widget" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
@@ -233,10 +282,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590165780112" />
-    <state x="1" y="21" width="585" height="502" key="find.popup" timestamp="1590161462548">
+    <state x="1" y="21" width="585" height="502" key="find.popup" timestamp="1590236869884">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1" y="21" width="585" height="502" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590161462548" />
+    <state x="1" y="21" width="585" height="502" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590236869884" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

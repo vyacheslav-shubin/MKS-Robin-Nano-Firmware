@@ -9,6 +9,7 @@
 #define USER_UI_WIDGETS_DIALOG_CONFIRMDIALOGUI_H_
 
 #include "DialogWidget.h"
+#include "ActionDialog.h"
 
 typedef struct {
 	UI_BUTTON ok;
@@ -19,11 +20,9 @@ typedef struct {
 
 class ConfirmDialogUI;
 
-class ConfirmDialogUI: public DialogWidget {
+class ConfirmDialogUI: public ActionDialog {
 private:
 	CONFIRM_DIALOG_UI_CONTROLS ui;
-	ActionDialogCallback * callback = 0;
-	u8 	id;
 	u16 timeout;
 	u16 max_timeout;
 protected:
@@ -33,7 +32,7 @@ protected:
 public:
 	void show(char * message, ActionDialogCallback * callback, u8 id = 0, Widget * caller = 0);
 	void show(char * message, ActionDialogCallback * callback, u16 timeout, u8 id, Widget * caller = 0);
-	ConfirmDialogUI() : DialogWidget() {};
+	ConfirmDialogUI() : ActionDialog() {};
 };
 
 extern ConfirmDialogUI confirm_dialog_ui;

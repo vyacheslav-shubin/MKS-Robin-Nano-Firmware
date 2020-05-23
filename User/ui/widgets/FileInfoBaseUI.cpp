@@ -28,7 +28,8 @@ static void find_float(char * msg, float * value) {
 		}
 		if (i!=0)
 			*value = atof(ui_buf1_100);
-	}
+	} else
+        *value = 0;
 }
 
 static void _explore_file() {

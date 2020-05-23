@@ -49,7 +49,6 @@ protected:
 	UI_BUTTON createButtonRet();
 	void action_back();
 	void action_leveling();
-	void drawXYZ();
 	void updateFanState(STATE_BUTTON * stateButton);
 public:
 	StdWidget(DISP_STATE id) : Widget(id) {};

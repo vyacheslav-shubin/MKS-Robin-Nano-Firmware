@@ -194,9 +194,9 @@ UIFileBrouser browser;
 
 void FileBrowserUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
-	this->ui.prev = this->create100x80Button(COL,ROW(0), img_page_up);
-	this->ui.next = this->create100x80Button(COL,ROW(1), img_page_down);
-	this->ui.back = this->create100x80Button(COL,ROW(2), img_page_back);
+	this->ui.prev = this->create96x80Button(COL, ROW(0), img_page_up);
+	this->ui.next = this->create96x80Button(COL, ROW(1), img_page_down);
+	this->ui.back = this->create96x80Button(COL, ROW(2), img_page_back);
 	GUI_Exec();
 	f_mount(&fs, (TCHAR const*)SD_Path, 0);
 	browser.lookup();

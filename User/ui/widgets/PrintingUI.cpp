@@ -17,6 +17,7 @@
 #include "PreheatUI.h"
 #include "PrintingToolsUI.h"
 #include "ConfirmDialogUI.h"
+#include "PrintingInfoDialogUI.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -99,31 +100,25 @@ void PrintingUI::createControls() {
 	if (is_dual_extruders())
 		this->createStateButtonAt(1, 1, &ui.ext2, img_state_extruder2, 0);
 
-	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
+	#define _col(ph_x) (96*ph_x)
 	#define _y 204
-	ui.pause = this->create100x80Button(_col(0), _y, 0);
-	ui.stop = this->create100x80Button(_col(1),_y, img_print_stop);
-	ui.tools = this->create100x80Button(_col(2),_y, img_print_tools);
-	ui.power_control = this->create100x80Button(_col(3) + 70,_y, 0);
+	ui.pause = this->create96x80Button(_col(0), _y, 0);
+	ui.stop = this->create96x80Button(_col(1), _y, img_print_stop);
+	ui.tools = this->create96x80Button(_col(2), _y, img_print_tools);
+    ui.info = this->create96x80Button(_col(3), _y, img_info);
+	ui.power_control = this->create96x80Button(_col(4), _y, 0);
 	this->updatePowerControlButton();
 	this->updatePauseButton();
 	this->updateFanState(&this->ui.fan);
 };
 
 void PrintingUI::updateStateButtons() {
-	shUI::SPRAYER_TEMP st;
-	shUI::getSprayerTemperature(0, &st);
-	sprintf(ui_buf1_20, "%d/%d°", (int)st.current, (int)st.target);
-	this->updateStateButton(&ui.ext1, 0, ui_buf1_20);
-	if(is_dual_extruders()){
-		shUI::getSprayerTemperature(1, &st);
-		sprintf(ui_buf1_20, "%d/%d°", (int)st.current, (int)st.target);
-		this->updateStateButton(&ui.ext2, 0, ui_buf1_20);
-	}
-	shUI::BED_TEMP bt;
-	shUI::getBedTemperature(&bt);
-	sprintf(ui_buf1_20, "%d/%d°", bt.current,  bt.target);
-	this->updateStateButton(&ui.bed, 0, ui_buf1_20);
+    ui_update_bed_state_button(&ui.bed);
+
+    ui_update_ext_state_button(&ui.ext1, 0);
+	if(is_dual_extruders())
+        ui_update_ext_state_button(&ui.ext2, 1);
+
 	print_time_to_str(&print_time, ui_buf1_20);
 	this->updateStateButton(&ui.time, 0, ui_buf1_20);
 
@@ -144,8 +139,8 @@ void PrintingUI::updateStateButtons() {
 }
 
 void PrintingUI::updatePowerControlButton() {
-    BUTTON_SetBmpFileName(ui.power_control, ui_print_process.suicide_enabled?img_print_auto_power_off:img_print_manual_power_off, 0);
-    BUTTON_SetBitmapEx(ui.power_control, 0, &bmp_struct_100x80,0,0);
+    BUTTON_SetBmpFileName(ui.power_control, ui_print_process.suicide_enabled ? img_print_auto_power_off : img_print_manual_power_off, 0);
+    BUTTON_SetBitmapEx(ui.power_control, 0, &bmp_struct_96x80,0,0);
 }
 
 void PrintingUI::updatePauseButton() {
@@ -159,7 +154,7 @@ void PrintingUI::updatePauseButton() {
 		fn = img_print_pause;
 	}
 	BUTTON_SetBmpFileName(this->ui.pause, fn, 1);
-	BUTTON_SetBitmapEx(this->ui.pause, 0, &bmp_struct_100x80, 0, 0);
+	BUTTON_SetBitmapEx(this->ui.pause, 0, &bmp_struct_96x80, 0, 0);
 }
 
 void PrintingUI::refresh_05() {
@@ -178,15 +173,16 @@ void PrintingUI::refresh_1s() {
 }
 
 void PrintingUI::on_action_dialog(u8 action, u8 dialog_id) {
-	confirm_dialog_ui.hide();
 	SERIAL_ECHOLNPAIR("DIALOG ID:", dialog_id);
 	if (dialog_id==0) {
+        confirm_dialog_ui.hide();
 		if (action==UI_BUTTON_OK) {
 			ui_app.terminatePrintFile();
 		} else if (action==UI_BUTTON_CANCEL) {
 			this->show();
 		}
 	} else if (dialog_id==1) {
+        confirm_dialog_ui.hide();
 		if (action==UI_BUTTON_OK) {
 			ui_app.startPrintFile();
 		} else if (action==UI_BUTTON_CANCEL) {
@@ -195,6 +191,9 @@ void PrintingUI::on_action_dialog(u8 action, u8 dialog_id) {
 			GUI_Clear();
 			enqueue_and_echo_commands_P(PSTR("M81"));
 		}
+	} else if (dialog_id==2) {
+	    printing_info_dialog_ui.hide();
+	    this->show();
 	}
 }
 
@@ -245,9 +244,12 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 			this->hide();
 			babystep_ui.show();
 		}
-	} else if (hBtn == ui.power_control) {
+	} else if (hBtn == this->ui.power_control) {
 		ui_print_process.suicide_enabled = ui_print_process.suicide_enabled?0:1;
 		this->updatePowerControlButton();
+	} else if (hBtn == this->ui.info) {
+        this->hide();
+	    printing_info_dialog_ui.show(this, 2, this);
 	}
 
 };

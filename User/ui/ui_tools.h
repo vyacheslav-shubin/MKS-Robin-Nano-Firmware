@@ -11,9 +11,9 @@
 extern "C" {
 #endif
 
-#define img_page_up				"bmp_page_up.bin"
-#define img_page_down			"bmp_page_down.bin"
-#define img_page_back			"bmp_page_back.bin"
+extern GUI_BITMAP bmp_struct_96x80;
+extern GUI_BITMAP bmp_struct_50x50;
+
 
 #define img_fan_state0		"bmp_fan_state0.bin"
 #define img_fan_state1		"bmp_fan_state1.bin"
@@ -26,16 +26,20 @@ extern "C" {
 #define img_state_time  		"bmp_time_state.bin"
 #define img_state_speed  		"bmp_speed_state.bin"
 
-#define img_file_delete  		"bmp_del.bin"
-#define img_print_pause  		"bmp_pause100.bin"
-#define img_print_resume  		"bmp_resume100.bin"
-#define img_print_stop  		"bmp_stop100.bin"
-#define img_print_back  		"bmp_back100.bin"
-#define img_print_tools  		"bmp_operate100.bin"
-#define img_print_auto_power_off	"bmp_autoOffEnabled100.bin"
-#define img_print_manual_power_off	"bmp_autoOffDisabled100.bin"
-#define img_ok					"bmp_ok100.bin"
-#define img_cancel				"bmp_cancel100.bin"
+//96x80 images
+#define img_print_pause  		"bmp_pause.bin"
+#define img_print_resume  		"bmp_play.bin"
+#define img_print_stop  		"bmp_stop.bin"
+#define img_print_tools  		"bmp_tools96.bin"
+#define img_print_auto_power_off	"bmp_auto_off.bin"
+#define img_print_manual_power_off	"bmp_manual_off.bin"
+#define img_ok					"bmp_ok.bin"
+#define img_cancel				"bmp_cancel.bin"
+#define img_page_up				"bmp_page_up.bin"
+#define img_page_down			"bmp_page_down.bin"
+#define img_page_back			"bmp_page_back.bin"
+#define img_file_delete  		"bmp_delete.bin"
+#define img_info  		        "bmp_info96.bin"
 
 
 #define img_degree_step1	"bmp_step1_degree.bin"
@@ -273,7 +277,7 @@ extern void ui_drop_window(WM_HWIN wnd);
 
 extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
 extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
-extern BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
+extern BUTTON_Handle ui_create_96_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
 extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
 extern void ui_update_state_button(BUTTON_Handle btn, const char *pFile);
 

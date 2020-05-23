@@ -23,7 +23,8 @@ typedef struct{
 	UI_BUTTON pause;
 	UI_BUTTON stop;
 	UI_BUTTON tools;
-	UI_BUTTON power_control;
+    UI_BUTTON power_control;
+    UI_BUTTON info;
 	UI_PROGRESS_BAR progress;
 	char preview_done;
 } PRINTING_UI_CONTROLS;

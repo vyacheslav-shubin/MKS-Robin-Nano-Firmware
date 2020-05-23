@@ -57,16 +57,6 @@ void StdWidget::action_back() {
 }
 
 
-void StdWidget::drawXYZ() {
-	GUI_SetColor(gCfgItems.background_color);
-	GUI_FillRect(200, TITLE_YPOS, LCD_WIDTH, titleHeight);
-	GUI_SetColor(gCfgItems.title_color);
-	shUI::CURRENT_POSITION cp;
-	shUI::getCurrentPosition(&cp);
-	sprintf(ui_buf1_80,"X:%03.1f Y:%03.1f Z:%03.2f E:%04.1f", cp.x, cp.y, cp.z, cp.e);
-	GUI_DispStringAt(ui_buf1_80, 200, TITLE_YPOS);
-}
-
 void StdWidget::updateFanState(STATE_BUTTON * stateButton) {
 	ui_update_fan_button(stateButton->button, stateButton->label);
 }

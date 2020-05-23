@@ -66,7 +66,7 @@ void SettingsUI::on_button(UI_BUTTON hBtn) {
 		this->action_wifi();
 	}  else if (hBtn==this->ui.about) {
 		this->hide();
-		about_dialog_ui.show(this, this);
+		about_dialog_ui.show(this, 0, this);
 	}
 }
 

@@ -10,6 +10,7 @@
 #include "ui_tools.h"
 #include "WM.h"
 #include "BUTTON.h"
+#include "integration.h"
 
 void Widget::buttonPreset(UI_BUTTON btn) {
 	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);
@@ -103,7 +104,17 @@ void Widget::updateButton(UI_BUTTON button, const char * picture, const char * t
 
 
 
-UI_BUTTON Widget::create100x80Button(int x, int y, const char * picture) {
-	return ui_create_100_80_button(x, y, this->hWnd, picture);
+UI_BUTTON Widget::create96x80Button(int x, int y, const char * picture) {
+	return ui_create_96_80_button(x, y, this->hWnd, picture);
+}
+
+void Widget::drawXYZ() {
+    GUI_SetColor(gCfgItems.background_color);
+    GUI_FillRect(200, TITLE_YPOS, LCD_WIDTH, titleHeight);
+    GUI_SetColor(gCfgItems.title_color);
+    shUI::CURRENT_POSITION cp;
+    shUI::getCurrentPosition(&cp);
+    sprintf(ui_buf1_80,"X:%03.1f Y:%03.1f Z:%03.2f E:%04.1f", cp.x, cp.y, cp.z, cp.e);
+    GUI_DispStringAt(ui_buf1_80, 200, TITLE_YPOS);
 }
 

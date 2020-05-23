@@ -141,16 +141,15 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const ch
 	return btn;
 }
 
-GUI_BITMAP bmp_struct_100x80 = { 100, 80, 160, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
-GUI_BITMAP bmp_struct_100x100 = { 100, 100, 200, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+GUI_BITMAP bmp_struct_96x80 = { 96, 80, 96*2, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_50x50 = { 50, 50, 100, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 
 
-BUTTON_Handle ui_create_100_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 100, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
+BUTTON_Handle ui_create_96_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 96, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
 	ui_buttonpreset(btn);
 	BUTTON_SetBmpFileName(btn, pFile,1);
-	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_100x80, 0, 0);
+	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_96x80, 0, 0);
 	return btn;
 }
 

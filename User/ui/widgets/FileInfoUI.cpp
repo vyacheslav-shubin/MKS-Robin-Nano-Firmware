@@ -56,10 +56,10 @@ void FileInfoUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
 	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
 	#define _y 204
-	this->ui.run = this->create100x80Button(_col(3) + 70, _y, img_ok);
-	this->ui.cancel = this->create100x80Button(_col(2) + 70,_y, img_cancel);
-	this->ui.tools = this->create100x80Button(_col(1) + 70,_y, img_print_tools);
-	this->ui.del = this->create100x80Button(_col(0),_y, img_file_delete);
+	this->ui.run = this->create96x80Button(_col(3) + 70, _y, img_ok);
+	this->ui.cancel = this->create96x80Button(_col(2) + 70, _y, img_cancel);
+	this->ui.tools = this->create96x80Button(_col(1) + 70, _y, img_print_tools);
+	this->ui.del = this->create96x80Button(_col(0), _y, img_file_delete);
 
 #define _row_size 25
 #define _row(idx) _row_size * idx
@@ -72,6 +72,7 @@ void FileInfoUI::createControls() {
 	this->ui.mmz = this->createText(240, _row(6), 240, _row_size, 0);
 	this->update();
 }
+
 
 const char * FileInfoUI::getTitle() {
 	return ui_print_process.file_name;

@@ -35,7 +35,8 @@ protected:
 	void dropWindow();
 	void buttonPreset(UI_BUTTON btn);
 	virtual void createWindow();
-	UI_BUTTON create100x80Button(int x, int y, const char * picture);
+    void drawXYZ();
+	UI_BUTTON create96x80Button(int x, int y, const char * picture);
 	void updateButton(UI_BUTTON button, const char * picture, const char * title);
 	void setButtonText(UI_BUTTON btn, char * text);
 	UI_TEXT createText(int x, int y, int w, int h, const char * value);

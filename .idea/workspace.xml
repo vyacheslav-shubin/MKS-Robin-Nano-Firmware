@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="f836223df2f5fae66f7c5dc55739bc2c8828ac9b" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="WARN_ABOUT_DETACHED_HEAD" value="false" />
+  </component>
+  <component name="ProjectId" id="1cGCoHwrAXSy7izQOEt95Ihk0FG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/trash" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Other File Types" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/trash" />
+    </key>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="" />
+      <created>1590145716447</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590145716447</updated>
+      <workItem from="1590145721387" duration="1779000" />
+      <workItem from="1590147567092" duration="250000" />
+      <workItem from="1590147819121" duration="17438000" />
+      <workItem from="1590166417821" duration="46000" />
+    </task>
+    <task id="LOCAL-00001" summary="about dialog as widget">
+      <created>1590157605792</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590157605792</updated>
+    </task>
+    <task id="LOCAL-00002" summary="about dialog as widget">
+      <created>1590157639877</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1590157639877</updated>
+    </task>
+    <task id="LOCAL-00003" summary="about dialog as widget">
+      <created>1590157818920</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1590157818921</updated>
+    </task>
+    <task id="LOCAL-00004" summary="machine root config ui as widget">
+      <created>1590158185454</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1590158185454</updated>
+    </task>
+    <task id="LOCAL-00005" summary="configuration menu refactored">
+      <created>1590165773650</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1590165773650</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="about dialog as widget" />
+    <MESSAGE value="machine root config ui as widget" />
+    <MESSAGE value="configuration menu refactored" />
+    <option name="LAST_COMMIT_MESSAGE" value="configuration menu refactored" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590145878217" />
+    <state x="3" y="63" width="428" height="498" key="FileChooserDialogImpl" timestamp="1590164511859">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3" y="63" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590164511859" />
+    <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1590147811417">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590147811417" />
+    <state width="640" height="476" key="ImportCMakeProjectWizard.topPanel" timestamp="1590147811417">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="640" height="476" key="ImportCMakeProjectWizard.topPanel/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590147811417" />
+    <state x="1" y="21" width="984" height="744" key="SettingsEditor" timestamp="1590165519462">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1" y="21" width="984" height="744" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590165519462" />
+    <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2" timestamp="1590165780112">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590165780112" />
+    <state x="1" y="21" width="585" height="502" key="find.popup" timestamp="1590161462548">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1" y="21" width="585" height="502" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590161462548" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/trash/draw_about.h</url>
+          <line>15</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

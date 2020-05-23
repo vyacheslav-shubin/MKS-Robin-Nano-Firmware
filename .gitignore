@@ -5,6 +5,7 @@ EWARM/mksRobinNano/Obj/*
 
 /r1.gcode
 /r2.gcode
-/cmake-build-debug/
-.idea/
+/cmake-build-debug/*
+.idea/*
+
 

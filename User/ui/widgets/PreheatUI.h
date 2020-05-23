@@ -10,6 +10,16 @@
 
 #include "StdWidget.h"
 
+typedef struct {
+    const char * picture;
+    short tsprayer;
+    short tbed;
+} PREHEAT_PRESET;
+
+#define PREHEAT_PRESET_COUNT 3
+
+extern const PREHEAT_PRESET preset_preset[PREHEAT_PRESET_COUNT];
+
 typedef struct{
 	UI_BUTTON plus;
 	UI_BUTTON minus;
@@ -24,6 +34,11 @@ typedef struct{
 	STATE_BUTTON bed;
 
 } PREHEAT_UI_CONTROLS;
+
+extern void ui_update_heatpreset_button(UI_BUTTON button, char index);
+extern void ui_update_bed_state_button(STATE_BUTTON * button);
+extern void ui_update_ext_state_button(STATE_BUTTON * button, char index);
+
 
 class PreheatUI: public StdWidget {
 private:

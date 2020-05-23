@@ -13,15 +13,7 @@
 PreheatUI preheat_ui;
 
 
-typedef struct {
-	const char * picture;
-	float tsprayer;
-	short tbed;
-} PREHEAT_PRESET;
-
-#define PRESET_COUNT 3
-
-static const PREHEAT_PRESET preset[PRESET_COUNT] = {
+const PREHEAT_PRESET preset_preset[PREHEAT_PRESET_COUNT] = {
 		{img_preset_pla, 200, 60},
 		{img_preset_sbs, 230, 90},
 		{img_preset_petg, 240, 75},
@@ -80,9 +72,15 @@ void PreheatUI::updateSelector() {
 	this->updateButton(this->ui.selector, selector_info[this->selector].picture, *selector_info[this->selector].title);
 }
 
+void ui_update_heatpreset_button(UI_BUTTON button, char index) {
+    const PREHEAT_PRESET  * pp = &preset_preset[index];
+    sprintf(ui_buf1_80, "%d/%d°C", pp->tsprayer, pp->tbed);
+    ui_update_std_button(button, pp->picture, ui_buf1_80);
+}
+
+
 void PreheatUI::updatePreset() {
-	sprintf(ui_buf1_80, "%d/%d°C", (int)preset[this->current_preset].tsprayer, preset[this->current_preset].tbed);
-	this->updateButton(this->ui.preset, preset[this->current_preset].picture, ui_buf1_80);
+    ui_update_heatpreset_button(this->ui.preset, this->current_preset);
 }
 
 void PreheatUI::updateTempStep() {
@@ -125,7 +123,7 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 			case 2:shUI::setSprayerTemperature(1, 0); break;
 		}
 	} else if(hBtn == this->ui.preset) {
-		const PREHEAT_PRESET * cp = &preset[this->current_preset];
+		const PREHEAT_PRESET * cp = &preset_preset[this->current_preset];
 		shUI::setBedTemperature(cp->tbed);
 		switch (selector) {
 			case 0:
@@ -138,7 +136,7 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 		}
 
 		this->current_preset++;
-		if (this->current_preset>=PRESET_COUNT)
+		if (this->current_preset>=PREHEAT_PRESET_COUNT)
 			this->current_preset = 0;
 		this->updatePreset();
 	} else if(hBtn == this->ui.back) {
@@ -148,22 +146,26 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 
 }
 
+void ui_update_bed_state_button(STATE_BUTTON * button) {
+    shUI::BED_TEMP bt;
+    shUI::getBedTemperature(&bt);
+    sprintf(ui_buf1_80, "%d/%d°", bt.current,  bt.target);
+    ui_set_text_value(button->label, ui_buf1_80);
+}
+
+void ui_update_ext_state_button(STATE_BUTTON * button, char index) {
+    shUI::SPRAYER_TEMP st;
+    shUI::getSprayerTemperature(index, &st);
+    sprintf(ui_buf1_80, "%d/%d°", (int)st.current,  (int)st.target);
+    ui_set_text_value(button->label, ui_buf1_80);
+}
+
+
 void PreheatUI::refresh_1s() {
-	shUI::BED_TEMP bt;
-	shUI::getBedTemperature(&bt);
-	sprintf(ui_buf1_80, "%d/%d°", bt.current,  bt.target);
-	this->updateStateButton(&this->ui.bed, 0, ui_buf1_80);
-
-	shUI::SPRAYER_TEMP st;
-	shUI::getSprayerTemperature(0, &st);
-	sprintf(ui_buf1_80, "%d/%d°", (int)st.current,  (int)st.target);
-	this->updateStateButton(&this->ui.ext1, 0, ui_buf1_80);
-
-	if (shUI::isDualExtruders()) {
-		shUI::getSprayerTemperature(1, &st);
-		sprintf(ui_buf1_80, "%d/%d°", (int)st.current,  (int)st.target);
-		this->updateStateButton(&this->ui.ext2, 0, ui_buf1_80);
-	}
+    ui_update_bed_state_button(&this->ui.bed);
+    ui_update_ext_state_button(&this->ui.ext1, 0);
+	if (shUI::isDualExtruders())
+        ui_update_ext_state_button(&this->ui.ext2, 1);
 }
 
 

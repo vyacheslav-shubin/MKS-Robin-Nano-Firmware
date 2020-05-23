@@ -15,6 +15,7 @@
 #include "PreheatUI.h"
 #include "FileBrowserUI.h"
 #include "ui_tools.h"
+#include "integration.h"
 
 MainUI main_ui;
 
@@ -45,6 +46,13 @@ void MainUI::on_button(UI_BUTTON hBtn) {
 	} else  if (hBtn==this->ui.filament) {
 		this->hide();
 		filament_ui.show(this);
+	} else  if (hBtn==this->ui.heat_preset) {
+        const PREHEAT_PRESET * cp = &preset_preset[this->current_preheat_preset];
+        shUI::setBedTemperature(cp->tbed);
+        shUI::setSprayerTemperature(0, cp->tsprayer);
+        if (++this->current_preheat_preset >= PREHEAT_PRESET_COUNT)
+            this->current_preheat_preset = 0;
+        ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
 	}
 }
 
@@ -75,9 +83,24 @@ void MainUI::createControls() {
 	} else {
 		#define middle  ((LCD_HEIGHT-BTN_Y_PIXEL)/2-titleHeight)
 		#define col(idx) SIMPLE_FIRST_PAGE_GRAP + 1 + (BTN_X_PIXEL+SIMPLE_FIRST_PAGE_GRAP) * idx
-        this->ui.print = this->createButton(col(0), middle, img_print, lang_str.print);
-		this->ui.tools = this->createButton(col(1), middle, img_tools, lang_str.tools);
-        this->ui.settings = this->createButton(col(2), middle, img_settings, lang_str.settings);
+        this->ui.print = this->createButton(col(0), ui_std_row(0), img_print, lang_str.print);
+		this->ui.tools = this->createButton(col(1), ui_std_row(0), img_tools, lang_str.tools);
+        this->ui.settings = this->createButton(col(2), ui_std_row(0), img_settings, lang_str.settings);
+        this->ui.heat_preset = this->createButton(col(1), ui_std_row(1), 0, 0);
+
+        ui_std_ext1_state_button(col(2), ui_std_row(1) + 20, &this->ui.ext1);
+        ui_std_bed_state_button(col(2), ui_std_row(1) + 65, &this->ui.bed);
+        ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
+        ui_update_bed_state_button(&this->ui.bed);
+        ui_update_ext_state_button(&this->ui.ext1, 0);
 	}
 }
 
+void MainUI::refresh_1s() {
+    if(gCfgItems.display_style == 0) {
+
+    } else {
+        ui_update_bed_state_button(&this->ui.bed);
+        ui_update_ext_state_button(&this->ui.ext1, 0);
+    }
+}

@@ -66,6 +66,13 @@
       <recent name="$PROJECT_DIR$/trash" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="work" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="work" TARGET_NAME="work" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="work" RUN_TARGET_NAME="work">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="" />

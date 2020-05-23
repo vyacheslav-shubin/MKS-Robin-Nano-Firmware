@@ -1,3 +1,0 @@
-/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/shubin/electronic/firmware/mks-robin/my/work/cmake-build-debug/CMakeFiles/work.dir

@@ -82,10 +82,14 @@ void lang_ru(void) {
 	lang_str.ui_title_printing= "Печать";
 	lang_str.ui_title_speed = "Подстройка скорости";
 
-	lang_str.file_info_ui.filament = "Филамент: %1.3f m";
+	lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
+    lang_str.file_info_ui.filament_progress = "Филамент (m): %1.3f / %1.3f %d%%";
 	lang_str.file_info_ui.size = "Размер файла: %d";
-	lang_str.file_info_ui.time = "Время печати: ";
+    lang_str.file_info_ui.size_progress = "Чтение файла: %d / %d %d%%";
+	lang_str.file_info_ui.time = "Время печати: %s";
+    lang_str.file_info_ui.time_progress = "Время печати: %s / %s %d%%";
 	lang_str.file_info_ui.layers = "Слои: %1.2f * %d";
+    lang_str.file_info_ui.layers_progress = "Слои: %1.2f * %d / %d %d%%";
 
 	lang_str.dialog.confirm_delete_file = "Удалить файл:\n%s";
 	lang_str.dialog.confirm_terminate_print = "Прервать печать?";

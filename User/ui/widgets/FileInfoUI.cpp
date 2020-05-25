@@ -33,9 +33,9 @@ void FileInfoUI::update() {
 	pt.seconds = t % 60;
 	t/=60;
 	pt.minutes = t % 60;
-	pt.hours = t/=60;
-	strcpy(ui_buf1_100, lang_str.file_info_ui.time);
-	print_time_to_str(&pt, &ui_buf1_100[strlen(ui_buf1_100)]);
+	pt.hours = t/60;
+	print_time_to_str(&pt, &ui_buf1_100[80]);
+    sprintf(ui_buf1_100, lang_str.file_info_ui.time, (char *)&ui_buf1_100[80]);
 	this->setText(this->ui.time, ui_buf1_100);
 	sprintf(ui_buf1_100, lang_str.file_info_ui.filament, ui_print_process.filament_used);
 	this->setText(this->ui.filament, ui_buf1_100);

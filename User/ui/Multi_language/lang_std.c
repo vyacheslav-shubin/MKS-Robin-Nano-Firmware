@@ -102,10 +102,14 @@ void lang_std(void) {
 	lang_str.ui_title_printing = "Printing";
 	lang_str.ui_title_speed = "Speed";
 
-	lang_str.file_info_ui.filament = "Filament: %1.3f m";
-	lang_str.file_info_ui.size = "File size: %d";
-	lang_str.file_info_ui.time = "Print time: ";
-	lang_str.file_info_ui.layers = "Layers: %1.2f * %d";
+	lang_str.file_info_ui.filament = "Filament (m): %1.3f";
+    lang_str.file_info_ui.filament_progress = "Filament (m): %1.3f / %1.3f %d%%";
+    lang_str.file_info_ui.size = "File readed: %d / %d %d%%";
+    lang_str.file_info_ui.size_progress = "File size: %d / %d %d%%";
+    lang_str.file_info_ui.time = "Printing time: %s";
+    lang_str.file_info_ui.time_progress = "Printing time: %s / %s %d%%";
+    lang_str.file_info_ui.layers = "Layers: %1.2f * %d";
+    lang_str.file_info_ui.layers_progress = "Layers: %1.2f * %d / %d %d%%";
 	lang_str.file_info_ui.min_max_x = "X: %1.2f - %1.2f";
 	lang_str.file_info_ui.min_max_y = "Y: %1.2f - %1.2f";
 	lang_str.file_info_ui.min_max_z = "Z: %1.2f - %1.2f";

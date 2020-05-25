@@ -8,17 +8,19 @@
  extern "C" {
 #endif
 
-//¶¨ÒåÇý¶¯ICÊÇILI9320»¹ÊÇILI9325
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ICï¿½ï¿½ILI9320ï¿½ï¿½ï¿½ï¿½ILI9325
 #define  ILI9325 //ILI9325
 
-//ÆÁÄ»Ðý×ª¶¨Òå Êý×Ö°´ÕÕ ID[1:0]AM °´ÕÕPDFÖÐµÄÅäÖÃ¶¨Òå
+//ï¿½ï¿½Ä»ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½ï¿½ï¿½ ID[1:0]AM ï¿½ï¿½ï¿½ï¿½PDFï¿½Ðµï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½
 #define ID_AM  110
 
-//Ó²¼þÏà¹ØµÄ×Óº¯Êý
+//Ó²ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½Óºï¿½ï¿½ï¿½
 //#define Lcd_Light_ON   GPIO_SetBits(GPIOG, GPIO_Pin_11);
 //#define Lcd_Light_OFF  GPIO_ResetBits(GPIOG, GPIO_Pin_11);
 #define Lcd_Light_ON    PDout(13)=1
 #define Lcd_Light_OFF   PDout(13)=0
+#define lcd_light_on()      Lcd_Light_ON
+#define lcd_light_off()     Lcd_Light_OFF
 
 //#define Lcd_TE   PAin(15)
 
@@ -301,7 +303,7 @@ typedef struct
 #define Yellow         0xFFE0
 #endif
 
-#define HyalineBackColor 0x0001  // Lihao Í¸Ã÷±³¾°
+#define HyalineBackColor 0x0001  // Lihao Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #ifndef Line0
 #define Line0          0
@@ -319,7 +321,7 @@ typedef struct
 #define Horizontal     0x00
 #define Vertical       0x01
 #endif
-u16 Read_ID(void);      //**¶ÁÈ¡SSD1963ID 
+u16 Read_ID(void);      //**ï¿½ï¿½È¡SSD1963ID 
 u16 LCD_RD_DATA(void);  //**
 void LCD_WindowMax (unsigned int xsta,unsigned int ysta,unsigned int xend,unsigned int yend);  //**
 void LCD_Fill2(uint8_t xsta, uint16_t ysta, uint8_t xend, uint16_t yend, uint16_t colour);   //**
@@ -345,13 +347,13 @@ u16 ili9320_BGR2RGB(u16 c);
 
 u16 ili9320_GetPoint(u16 x,u16 y);;
 void ili9320_PutChar(u16 x,u16 y,u8 c,u16 charColor,u16 bkColor); 
-u16 GUI_Color565(u32 RGB);  // RGBÑÕÉ«×ªÎª16Î»(565)
+u16 GUI_Color565(u32 RGB);  // RGBï¿½ï¿½É«×ªÎª16Î»(565)
 
 void GUI_Text(u16 x, u16 y, u8 *str, u16 len,u16 Color, u16 bkColor);
-void GUI_Line(u16 x0, u16 y0, u16 x1, u16 y1,u16 color);  // »­Ïß
-void GUI_Circle(u16 cx,u16 cy,u16 r,u16 color,u8 fill);  // »­Ô°
-void GUI_Rectangle(u16 x0, u16 y0, u16 x1, u16 y1,u16 color,u8 fill); // »­¾ØÐÎ
-void GUI_Square(u16 x0, u16 y0, u16 with, u16 color,u8 fill);  // »­Õý·½ÐÎ
+void GUI_Line(u16 x0, u16 y0, u16 x1, u16 y1,u16 color);  // ï¿½ï¿½ï¿½ï¿½
+void GUI_Circle(u16 cx,u16 cy,u16 r,u16 color,u8 fill);  // ï¿½ï¿½Ô°
+void GUI_Rectangle(u16 x0, u16 y0, u16 x1, u16 y1,u16 color,u8 fill); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+void GUI_Square(u16 x0, u16 y0, u16 with, u16 color,u8 fill);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 void Touch_Initializtion(void);

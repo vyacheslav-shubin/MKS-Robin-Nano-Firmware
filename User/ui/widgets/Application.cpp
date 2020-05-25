@@ -85,14 +85,37 @@ void Application::refresh_05() {
 			this->screenOffCountDown = STANDBY_TIME;
 		}
 	}
-
 }
 
+void _calc_rate(void) {
+    if (card.filesize == 0) {
+        ui_print_process.rate = 0;
+    } else {
+        float rate;
+        if ((ui_print_process.preview_state_flags & (1<<PREVIEW_EXISTS_BIT)) != 0) {
+            int offset = PREVIEW_SIZE + ui_print_process.preview_offset;
+            if ((card.sdpos <= offset) || (card.filesize <= offset))
+                rate = 0;
+            else
+                rate = ((float)(card.sdpos - offset)) / (card.filesize - offset);
+        } else
+            rate = ((float)card.sdpos) / card.filesize;
+
+        SERIAL_ECHOLNPAIR("card.sdpos:", card.sdpos);
+        SERIAL_ECHOLNPAIR("card.filesize:", card.filesize);
+        SERIAL_ECHOLNPAIR("rate:", rate);
+        ui_print_process.rate = (u8)(rate * 100);
+        if ((ui_print_process.rate==100) && (card.filesize>card.sdpos))
+            ui_print_process.rate = 99;
+    }
+}
+
+
 void Application::refresh_1s() {
-	if ((gCfgItems.standby_mode) && (this->screenOffCountDown>0)) {
-		SERIAL_ECHOLNPAIR("Stendby: ", this->screenOffCountDown);
+	_calc_rate();
+    if ((gCfgItems.standby_mode) && (this->screenOffCountDown>0)) {
 		if (--this->screenOffCountDown==0)
-			Lcd_Light_OFF;
+            lcd_light_off();
 	}
 }
 
@@ -100,10 +123,9 @@ char Application::touch(u8 action) {
 	if (gCfgItems.standby_mode) {
 		if (this->screenOffCountDown==0) {
 			if ((action==PEN_DOWN) && (this->waitPenUp==0)) {
-				Lcd_Light_ON;
+                lcd_light_on();
 				this->waitPenUp = 1;
 			} else if ((action==PEN_UP) && (this->waitPenUp==1)) {
-				SERIAL_ECHOLN("PENUP");
 				this->waitPenUp = 3;
 			}
 			return 0;

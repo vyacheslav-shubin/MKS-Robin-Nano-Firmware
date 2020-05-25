@@ -34,9 +34,13 @@ typedef struct {
 
 typedef struct {
 	const char * size;
-	const char * time;
-	const char * layers;
-	const char * filament;
+    const char * size_progress;
+    const char * time;
+    const char * time_progress;
+    const char * layers;
+    const char * layers_progress;
+    const char * filament;
+    const char * filament_progress;
 	const char * min_max_x;
 	const char * min_max_y;
 	const char * min_max_z;

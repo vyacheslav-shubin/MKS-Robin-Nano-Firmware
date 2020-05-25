@@ -35,26 +35,6 @@ void PrintingUI::createStateButtonAt(char col, char row, STATE_BUTTON * btn, con
 	this->createStateButton(COL(col), ROW(row), btn, img, title);
 }
 
-void _calc_rate(void) {
-		int rate;
-		volatile long long rate_tmp_r =(long long) card.sdpos * 100;
-		rate = rate_tmp_r / card.filesize;
-
-	/*	volatile long long rate_tmp_r;
-		if(from_flash_pic != 1) {
-			rate_tmp_r =(long long) card.sdpos * 100;
-			rate = rate_tmp_r / card.filesize;
-		} else {
-			rate_tmp_r =(long long)card.sdpos;
-			rate = (rate_tmp_r-(PREVIEW_SIZE+To_pre_view))* 100 / (card.filesize-(PREVIEW_SIZE+To_pre_view));
-		}
-		ui_print_process.rate = rate;
-		if(rate <= 0)
-			rate = 0;
-			*/
-		ui_print_process.rate = rate;
-}
-
 void PrintingUI::updateProgress() {
 	PROGBAR_SetValue(ui.progress, ui_print_process.rate);
 	if (ui_print_process.rate != 0) {
@@ -162,7 +142,6 @@ void PrintingUI::refresh_05() {
 }
 
 void PrintingUI::refresh_1s() {
-	_calc_rate();
 	if((mksReprint.mks_printer_state == MKS_IDLE) && (ui_print_process.rate == 100)) {
 		this->doFinishPrint();
 	} else {
@@ -173,7 +152,6 @@ void PrintingUI::refresh_1s() {
 }
 
 void PrintingUI::on_action_dialog(u8 action, u8 dialog_id) {
-	SERIAL_ECHOLNPAIR("DIALOG ID:", dialog_id);
 	if (dialog_id==0) {
         confirm_dialog_ui.hide();
 		if (action==UI_BUTTON_OK) {

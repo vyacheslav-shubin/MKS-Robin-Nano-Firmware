@@ -649,6 +649,8 @@ add_executable(work
         User/ui/widgets/dialog/ConfirmDialogUI.h
         User/ui/widgets/dialog/DialogWidget.cpp
         User/ui/widgets/dialog/DialogWidget.h
+		User/ui/widgets/dialog/PrintingInfoDialogUI.cpp
+		User/ui/widgets/dialog/PrintingInfoDialogUI.h
         User/ui/widgets/Application.cpp
         User/ui/widgets/Application.h
         User/ui/widgets/BabystepUI.cpp

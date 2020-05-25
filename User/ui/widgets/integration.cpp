@@ -127,7 +127,7 @@ namespace shUI {
 		value->x = current_position[X_AXIS];
 		value->y = current_position[Y_AXIS];
 		value->z = current_position[Z_AXIS];
-		value->e = current_position[E_AXIS];
+		value->e = filament_counter;//current_position[E_AXIS];
 	}
 
 	unsigned char isManualLeveling() {

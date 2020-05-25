@@ -31,7 +31,8 @@ void print_time_to_str(PRINT_TIME * pt, char * buf) {
 
 void ui_start_print_process(void) {
 	if(card.openFile(ui_print_process.file_name, true)) {
-		feedrate_percentage = 100;
+        filament_counter = 0;
+	    feedrate_percentage = 100;
 		saved_feedrate_percentage = feedrate_percentage;
 		planner.flow_percentage[0] = 100;
 		planner.e_factor[0]= planner.flow_percentage[0]*0.01;

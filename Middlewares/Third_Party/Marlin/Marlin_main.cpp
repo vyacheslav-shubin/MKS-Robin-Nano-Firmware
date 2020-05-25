@@ -284,6 +284,8 @@
 #include "draw_Tips.h"
 #include "ili9320.h"
 
+float filament_counter;
+
 volatile uint8_t temper_error_flg = 0;
 volatile uint8_t temper_error_type = 0;
 
@@ -3859,6 +3861,8 @@ void gcode_get_destination() {
 
   if (parser.linearval('F') > 0.0)
     feedrate_mm_s = MMM_TO_MMS(parser.value_feedrate());
+
+  filament_counter += destination[E_AXIS] - current_position[E_AXIS];
 
   #if ENABLED(PRINTCOUNTER)
     if (!DEBUGGING(DRYRUN))

@@ -641,8 +641,10 @@ add_executable(work
         User/ui/widgets/config/MotorConfigUI.h
         User/ui/widgets/config/MotorDirConfigUI.cpp
         User/ui/widgets/config/MotorDirConfigUI.h
-        User/ui/widgets/config/MachineConfigurationUI.cpp
-        User/ui/widgets/config/MachineConfigurationUI.h
+		User/ui/widgets/config/MachineConfigurationUI.cpp
+		User/ui/widgets/config/MachineConfigurationUI.h
+		User/ui/widgets/config/MachineSizeUI.cpp
+		User/ui/widgets/config/MachineSizeUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
         User/ui/widgets/dialog/ConfirmDialogUI.cpp
@@ -651,6 +653,8 @@ add_executable(work
         User/ui/widgets/dialog/DialogWidget.h
 		User/ui/widgets/dialog/PrintingInfoDialogUI.cpp
 		User/ui/widgets/dialog/PrintingInfoDialogUI.h
+		User/ui/widgets/dialog/CalculatorDialogUI.cpp
+		User/ui/widgets/dialog/CalculatorDialogUI.h
         User/ui/widgets/Application.cpp
         User/ui/widgets/Application.h
         User/ui/widgets/BabystepUI.cpp

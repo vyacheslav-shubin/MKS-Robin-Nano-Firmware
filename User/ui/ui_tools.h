@@ -163,6 +163,8 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_navigator_next		        "bmp_next70x40.bin"
 #define img_navigator_prev		        "bmp_prev70x40.bin"
 
+#define img_calc_button		        "bmp_calc_b.bin"
+
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
 
@@ -248,6 +250,7 @@ typedef struct {
 extern GUI_BITMAP bmp_struct_100x80;
 extern GUI_BITMAP bmp_struct_100x100;
 extern GUI_BITMAP bmp_struct_50x50;
+extern GUI_BITMAP bmp_struct_70x50;
 
 extern UI_PRINT_PROCESS ui_print_process;
 

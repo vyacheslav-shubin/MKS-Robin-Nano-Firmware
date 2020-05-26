@@ -174,7 +174,9 @@ sync_pics:
 	cp -r -u -v $(PIC_OUTPUT) $(SD_CARD)
 
 
-#picocom --imap lfcrlf --echo --baud 115200 /dev/ttyUSB0
+#alias usbtty='tu=`ls /dev/ttyUSB*` && picocom --imap lfcrlf --echo --baud 115200 ${tu}'
+#tu=`ls /dev/ttyUSB*` && picocom --imap lfcrlf --echo --baud 115200 ${tu}
+
 
 
 

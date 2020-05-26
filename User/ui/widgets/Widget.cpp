@@ -108,6 +108,17 @@ UI_BUTTON Widget::create96x80Button(int x, int y, const char * picture) {
 	return ui_create_96_80_button(x, y, this->hWnd, picture);
 }
 
+UI_BUTTON Widget::create70x50Button(int x, int y, const char * picture, const char * text) {
+    BUTTON_Handle btn = BUTTON_CreateEx(x, y, 70, 60, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    BUTTON_SetTextAlign(btn, GUI_TA_HCENTER|GUI_TA_VCENTER );
+    BUTTON_SetBmpFileName(btn, picture, 1);
+    BUTTON_SetBitmapEx(btn, 0, &bmp_struct_70x50, 0, 0);
+    BUTTON_SetText(btn, text);
+    return btn;
+
+}
+
+
 void Widget::drawXYZ() {
     GUI_SetColor(gCfgItems.background_color);
     GUI_FillRect(200, TITLE_YPOS, LCD_WIDTH, titleHeight);

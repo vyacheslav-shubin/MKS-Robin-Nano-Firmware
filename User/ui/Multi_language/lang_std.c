@@ -83,6 +83,7 @@ void lang_std(void) {
 	lang_str.temperature = "Temperture";
 	lang_str.motors = "Motors";
 	lang_str.advanced = "Advanced";
+    lang_str.overflow = "OVERFLOW";
 
 	lang_str.ui_title_main = "Ready";
 	lang_str.ui_title_tools = "Select tool";

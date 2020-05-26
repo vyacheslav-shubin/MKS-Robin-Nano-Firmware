@@ -21,6 +21,8 @@ typedef struct {
     UI_ARROW motor_settings;
     UI_ARROW advanced_settings;
 
+    UI_ARROW test_calc;
+
 } MACHINE_CONFIG_UI_CONTROLS;
 
 class MachineConfigurationUI : public ConfigurationWidget{

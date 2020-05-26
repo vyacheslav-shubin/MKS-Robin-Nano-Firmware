@@ -170,11 +170,13 @@ User/ui/widgets/config/MotorDirConfigUI.cpp
 User/ui/widgets/config/MotorConfigUI.cpp
 User/ui/widgets/config/MachineConfigurationUI.cpp
 User/ui/widgets/config/AdvancedConfigUI.cpp
+User/ui/widgets/config/MachineSizeUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp
 User/ui/widgets/dialog/AboutDialogUI.cpp
 User/ui/widgets/dialog/ActionDialog.cpp
 User/ui/widgets/dialog/PrintingInfoDialogUI.cpp
+User/ui/widgets/dialog/CalculatorDialogUI.cpp
 User/ui/widgets/backui.cpp
 
 

@@ -100,7 +100,7 @@ typedef struct {
 	const char *about;
 	const char *machine_settings;
 
-
+    const char *overflow;
 
 	const char * ui_title_main;
 	const char * ui_title_tools;

@@ -64,7 +64,9 @@ void lang_ru(void) {
 	lang_str.language = "Язык";
 	lang_str.about = "Версия";
 
-	lang_str.ui_title_main = "Готов";
+	lang_str.overflow = "ПЕРЕПОЛНЕНИЕ";
+
+    lang_str.ui_title_main = "Готов";
 	lang_str.ui_title_tools = "Выбор инструмента";
 	lang_str.ui_title_file_browser = "Выбор файла";
 	lang_str.ui_title_babysteps = "Настройка сдвига";

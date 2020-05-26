@@ -144,6 +144,7 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const ch
 
 GUI_BITMAP bmp_struct_96x80 = { 96, 80, 96*2, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_50x50 = { 50, 50, 100, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+GUI_BITMAP bmp_struct_70x50 = { 70, 50, 140, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 
 
 BUTTON_Handle ui_create_96_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {

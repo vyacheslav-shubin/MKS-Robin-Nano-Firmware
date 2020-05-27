@@ -126,4 +126,5 @@ void lang_std(void) {
 	lang_str.dialog.confirm_print_again = "Print again?";
 	lang_str.dialog.confirm_print_with_suicide = "Auto power off.\nBreak and print again?";
 	lang_str.dialog.error_filament_end_detected = "Filament end detected";
+    lang_str.dialog.confirm_filament_load = "Load filament?";
 }

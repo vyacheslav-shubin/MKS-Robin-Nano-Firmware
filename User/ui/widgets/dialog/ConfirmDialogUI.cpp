@@ -10,7 +10,7 @@
 
 ConfirmDialogUI confirm_dialog_ui;
 
-static char * dialog_message = 0;
+static const char * dialog_message = 0;
 
 void ConfirmDialogUI::on_button(UI_BUTTON hBtn) {
 	if (this->callback != 0) {
@@ -22,11 +22,11 @@ void ConfirmDialogUI::on_button(UI_BUTTON hBtn) {
 	}
 }
 
-void ConfirmDialogUI::show(char * message, ActionDialogCallback * callback, u8 id, Widget * caller) {
+void ConfirmDialogUI::show(const char * message, ActionDialogCallback * callback, u8 id, Widget * caller) {
 	this->show(message, callback, 0, id,  caller);
 }
 
-void ConfirmDialogUI::show(char * message, ActionDialogCallback * callback, u16 timeout, u8 id = 0, Widget * caller) {
+void ConfirmDialogUI::show(const char * message, ActionDialogCallback * callback, u16 timeout, u8 id = 0, Widget * caller) {
 	dialog_message = message;
 	this->max_timeout = timeout;
 	this->timeout = timeout;

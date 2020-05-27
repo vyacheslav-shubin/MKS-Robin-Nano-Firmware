@@ -30,8 +30,8 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_1s();
 public:
-	void show(char * message, ActionDialogCallback * callback, u8 id = 0, Widget * caller = 0);
-	void show(char * message, ActionDialogCallback * callback, u16 timeout, u8 id, Widget * caller = 0);
+	void show(const char * message, ActionDialogCallback * callback, u8 id = 0, Widget * caller = 0);
+	void show(const char * message, ActionDialogCallback * callback, u16 timeout, u8 id, Widget * caller = 0);
 	ConfirmDialogUI() : ActionDialog() {};
 };
 

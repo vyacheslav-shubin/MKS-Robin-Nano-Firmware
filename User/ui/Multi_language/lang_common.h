@@ -56,7 +56,8 @@ typedef struct {
 	const char * confirm_print_again;
 	const char * confirm_print_with_suicide;
 	const char * error_filament_end_detected;
-	const char * refactored_by;
+    const char * refactored_by;
+    const char * confirm_filament_load;
 } DIALOG_LANG_STR;
 
 typedef struct {

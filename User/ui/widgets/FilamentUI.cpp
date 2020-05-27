@@ -106,20 +106,36 @@ short FilamentUI::getWantedTemperature(char direction) {
 		return shUI::getFilamentExtrudeMinTempereture();
 }
 
+void _execute_load_unload(unsigned char extruder, char direction) {
+    shUI::MOVE_DISTANCE dis;
+    shUI::getFilamentLoadUnloadDistance(direction, &dis);
+    shUI::doFilamentMove(
+            extruder,
+            (int) dis.distance,
+            (int) dis.speed
+    );
+}
 
-void FilamentUI::doFilament(char direction) {
+void FilamentUI::on_action_dialog(u8 action, u8 dialog_id) {
+    confirm_dialog_ui.hide();
+    this->show();
+    if (action==UI_BUTTON_OK)
+        this->doFilament(1, 0);
+}
+
+
+void FilamentUI::doFilament(char direction, unsigned char confirm) {
 	shUI::SPRAYER_TEMP st;
 	shUI::getSprayerTemperature(this->current_extruder, &st);
 	int wanted = this->getWantedTemperature(direction);
 	if (wanted < st.current + HYSTERESIS) {
 		if (this->current_step==3) {
-			shUI::MOVE_DISTANCE dis;
-			shUI::getFilamentLoadUnloadDistance(direction, &dis);
-			shUI::doFilamentMove(
-				this->current_extruder,
-				(int)dis.distance,
-				(int)dis.speed
-			);
+			if ((direction==1) && confirm){
+			    this->hide();
+                confirm_dialog_ui.show(lang_str.dialog.confirm_filament_load, this, 0, this);
+			} else {
+                _execute_load_unload(this->current_extruder, direction);
+            }
 		} else {
 			shUI::doFilamentMove(
 				this->current_extruder,
@@ -127,9 +143,8 @@ void FilamentUI::doFilament(char direction) {
 				(int)(filament_speed[this->current_speed].size)
 			);
 		}
-	}
-	if (wanted>st.target)
-		shUI::setSprayerTemperature(this->current_extruder, wanted);
+	} else if (wanted>st.target)
+        shUI::setSprayerTemperature(this->current_extruder, wanted);
 }
 
 void FilamentUI::updateExtruderSelector() {

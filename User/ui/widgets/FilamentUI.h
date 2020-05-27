@@ -9,6 +9,7 @@
 #define USER_UI_WIDGETS_FILAMENTUI_H_
 
 #include "StdWidget.h"
+#include "dialog/ConfirmDialogUI.h"
 
 typedef struct{
 	UI_BUTTON load;
@@ -22,13 +23,13 @@ typedef struct{
 	UI_BUTTON back;
 } FILAMENT_UI_CONTROLS;
 
-class FilamentUI: public StdWidget {
+class FilamentUI: public StdWidget, public ActionDialogCallback {
 private:
 	FILAMENT_UI_CONTROLS ui;
 	char current_extruder = 0;
 	char current_step = 0;
 	char current_speed = 0;
-	void doFilament(char direction);
+	void doFilament(char direction, unsigned char confirm = 1);
 	void updateExtruderSelector();
 	void updateStepSelector();
 	void updateSpeedSelector();
@@ -39,6 +40,7 @@ protected:
 	virtual void refresh_1s();
 	virtual void refresh_05();
 public:
+    virtual void on_action_dialog(u8 action, u8 dialog_id);
 	virtual const char * getTitle() {return lang_str.ui_title_filament;};
 	FilamentUI() : StdWidget(FILAMENT_UI) {};
 };

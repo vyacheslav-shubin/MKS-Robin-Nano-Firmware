@@ -36,40 +36,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/FilamentChangeConfigUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/FilamentChangeConfigUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inc/mks_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/mks_cfg.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/mks_cfg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_cfg.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/mks_reprint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_reprint.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_filament_settings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_filament_settings.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_filament_settings.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_filament_settings.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_number_key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_number_key.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_stroke.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_stroke.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_stroke.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_stroke.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineSizeUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineSizeUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineSizeUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineSizeUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/CalculatorDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/CalculatorDialogUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/CalculatorDialogUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/CalculatorDialogUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/buttons1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/buttons1.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/default.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/default.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/value_blank.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/value_blank.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590504430043</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Machine size config, filament change config as widget">
+      <created>1590588941484</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1590588941484</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,7 +259,8 @@
     <MESSAGE value="filament counter" />
     <MESSAGE value="printing info dialog" />
     <MESSAGE value="Calculator dialog widget" />
-    <option name="LAST_COMMIT_MESSAGE" value="Calculator dialog widget" />
+    <MESSAGE value="Machine size config, filament change config as widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="Machine size config, filament change config as widget" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">

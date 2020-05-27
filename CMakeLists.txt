@@ -644,6 +644,8 @@ add_executable(work
 		User/ui/widgets/config/MachineConfigurationUI.cpp
 		User/ui/widgets/config/MachineConfigurationUI.h
 		User/ui/widgets/config/MachineSizeUI.cpp
+		User/ui/widgets/config/FilamentChangeConfigUI.h
+		User/ui/widgets/config/FilamentChangeConfigUI.cpp
 		User/ui/widgets/config/MachineSizeUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
@@ -718,8 +720,6 @@ add_executable(work
         User/ui/draw_EnablePin_Invert.h
         User/ui/draw_endstop_type.cpp
         User/ui/draw_endstop_type.h
-        User/ui/draw_filament_settings.cpp
-        User/ui/draw_filament_settings.h
         User/ui/draw_FileTransfer_ui.cpp
         User/ui/draw_FileTransfer_ui.h
         User/ui/draw_home_dir.cpp
@@ -752,8 +752,6 @@ add_executable(work
         User/ui/draw_Sprayer.h
         User/ui/draw_steps.cpp
         User/ui/draw_steps.h
-        User/ui/draw_stroke.cpp
-        User/ui/draw_stroke.h
         User/ui/draw_Tips.cpp
         User/ui/draw_Tips.h
         User/ui/draw_ui.cpp

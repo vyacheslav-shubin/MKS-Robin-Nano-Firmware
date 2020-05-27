@@ -260,8 +260,8 @@ int main(void)
   }
   disp_language_init();	
 
-  gCfgItems.filament_loading_time = (uint32_t)((gCfgItems.filamentchange_load_length*60.0/gCfgItems.filamentchange_load_speed)+0.5);
-  gCfgItems.filament_unloading_time = (uint32_t)((gCfgItems.filamentchange_unload_length*60.0/gCfgItems.filamentchange_unload_speed)+0.5);
+  gCfgItems.filamentchange.load.time = (uint32_t)((gCfgItems.filamentchange.load.length*60.0/gCfgItems.filamentchange.load.speed)+0.5);
+  gCfgItems.filamentchange.unload.time = (uint32_t)((gCfgItems.filamentchange.unload.length*60.0/gCfgItems.filamentchange.unload.speed)+0.5);
 
   if(gCfgItems.pwroff_save_mode == 1)
   	FALA_CTRL = 1;

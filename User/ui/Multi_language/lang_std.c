@@ -40,6 +40,10 @@ void lang_std(void) {
     lang_str.config_ui.nozzle_settings = "Nozzle";
     lang_str.config_ui.hotbed_settings = "Hotbed";
 
+    lang_str.config_ui.filament_change_temperature = "T°C";
+    lang_str.config_ui.filament_change_speed = "Speed:";
+    lang_str.config_ui.filament_change_length= "Lenght:";;
+
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
 
@@ -102,6 +106,8 @@ void lang_std(void) {
 	lang_str.ui_title_printing_tools = "Printing tools";
 	lang_str.ui_title_printing = "Printing";
 	lang_str.ui_title_speed = "Speed";
+    lang_str.ui_title_config_machine_size = "Machine size";
+    lang_str.ui_title_config_filament_change = "Filament change settings";
 
 	lang_str.file_info_ui.filament = "Filament (m): %1.3f";
     lang_str.file_info_ui.filament_progress = "Filament (m): %1.3f / %1.3f %d%%";

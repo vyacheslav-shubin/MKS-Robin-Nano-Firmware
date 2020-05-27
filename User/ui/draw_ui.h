@@ -24,10 +24,8 @@
 #include "lang_common.h"
 #include "draw_meshleveling.h"
 #include "draw_machine_type.h"
-#include "draw_stroke.h"
 #include "draw_home_dir.h"
 #include "draw_endstop_type.h"
-#include "draw_filament_settings.h"
 #include "draw_levelingPara_config.h"
 #include "draw_deltaLevelPare.h"
 #include "draw_XYZLevelPara.h"
@@ -52,19 +50,6 @@ extern void gcode_M500();
 extern void gcode_M501();
 
 typedef enum {
-	X_stroke,
-	Y_stroke,
-	Z_stroke,
-	X_stroke_min,
-	Y_stroke_min,
-	Z_stroke_min,
-
-	Load_Temper_limit,
-	Load_Speed,
-	Load_Length,
-	Unload_Temper_limit,
-	Unload_Speed,
-	Unload_Length,	
 
 	xoffset,
 	yoffset,

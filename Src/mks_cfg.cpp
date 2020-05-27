@@ -835,12 +835,12 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue(">cfg_filament_det1_trigger_level", (uint8_t *)&gCfgItems.filament_det1_level_flg, EPR_FILAMENT_DET1_LEVEL);
 	eprBurnValue(">cfg_mask_det_function", (uint8_t *)&gCfgItems.mask_det_Function, EPR_MASK_DET_FUNCTION);
 
-	eprBurnValue(">cfg_filament_load_length", (int32_t *)&gCfgItems.filamentchange_load_length, EPR_FILAMENT_LOAD_LENGTH);
-	eprBurnValue(">cfg_filament_load_speed", (int32_t *)&gCfgItems.filamentchange_load_speed, EPR_FILAMENT_LOAD_SPEED);
-	eprBurnValue(">cfg_filament_load_limit_temperature", (int32_t *)&gCfgItems.filament_load_limit_temper, EPR_FILAMENT_LOAD_LIMIT_TEMPER);
-	eprBurnValue(">cfg_filament_unload_length", (int32_t *)&gCfgItems.filamentchange_unload_length, EPR_FILAMENT_UNLOAD_LENGTH);
-	eprBurnValue(">cfg_filament_unload_speed", (int32_t *)&gCfgItems.filamentchange_unload_speed, EPR_FILAMENT_UNLOAD_SPEED);
-	eprBurnValue(">cfg_filament_unload_limit_temperature", (int32_t *)&gCfgItems.filament_unload_limit_temper, EPR_FILAMENT_UNLOAD_LIMIT_TEMPER);
+	eprBurnValue(">cfg_filament_load_length", (int32_t *)&gCfgItems.filamentchange.load.length, EPR_FILAMENT_LOAD_LENGTH);
+	eprBurnValue(">cfg_filament_load_speed", (int32_t *)&gCfgItems.filamentchange.load.speed, EPR_FILAMENT_LOAD_SPEED);
+	eprBurnValue(">cfg_filament_load_limit_temperature", (int32_t *)&gCfgItems.filamentchange.load.temper, EPR_FILAMENT_LOAD_LIMIT_TEMPER);
+	eprBurnValue(">cfg_filament_unload_length", (int32_t *)&gCfgItems.filamentchange.unload.length, EPR_FILAMENT_UNLOAD_LENGTH);
+	eprBurnValue(">cfg_filament_unload_speed", (int32_t *)&gCfgItems.filamentchange.unload.speed, EPR_FILAMENT_UNLOAD_SPEED);
+	eprBurnValue(">cfg_filament_unload_limit_temperature", (int32_t *)&gCfgItems.filamentchange.unload.temper, EPR_FILAMENT_UNLOAD_LIMIT_TEMPER);
 	
 	eprBurnValue(">setmenu_func1_display", &gCfgItems.func_btn1_display_flag, EPR_SETMENU_FUNC1_DISPLAY_FLG);
 	flashBurnValue(">setmenu_func1:", BUTTON_FUNCTION1_ADDR);
@@ -927,8 +927,7 @@ void CardReader::mksEepromRefresh()
 }
 
 
-void epr_write_data(uint16_t pos, const uint8_t* value, uint16_t size)
-	{
+void epr_write_data(uint16_t pos, const uint8_t* value, uint16_t size) {
   while (size--) {
 	const uint8_t v = *value;
 	uint8_t eppr_r;

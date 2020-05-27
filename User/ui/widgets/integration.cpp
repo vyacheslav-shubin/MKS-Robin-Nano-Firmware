@@ -155,17 +155,17 @@ namespace shUI {
 	}
 
 	extern short getFilamentLoadUnloadMinTempereture(char direction) {
-		return direction==-1?gCfgItems.filament_unload_limit_temper:gCfgItems.filament_load_limit_temper;
+		return direction==-1?gCfgItems.filamentchange.unload.temper:gCfgItems.filamentchange.load.temper;
 	}
 
 
 	void getFilamentLoadUnloadDistance(char direction, MOVE_DISTANCE * distance) {
 		if (direction==-1) {
-			distance->distance = -(float)gCfgItems.filamentchange_unload_length;
-			distance->speed = gCfgItems.filamentchange_unload_speed;
+			distance->distance = -(float)gCfgItems.filamentchange.unload.length;
+			distance->speed = gCfgItems.filamentchange.unload.speed;
 		} else {
-			distance->distance = gCfgItems.filamentchange_load_length;
-			distance->speed = gCfgItems.filamentchange_load_speed;
+			distance->distance = gCfgItems.filamentchange.load.length;
+			distance->speed = gCfgItems.filamentchange.load.speed;
 		}
 	}
 

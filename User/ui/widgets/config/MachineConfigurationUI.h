@@ -6,6 +6,7 @@
 #define WORK_MACHINECONFIGURATIONUI_H
 
 #include "ConfigurationWidget.h"
+#include "config/MachineSizeUI.h"
 
 typedef struct {
     UI_ARROW machine_type;

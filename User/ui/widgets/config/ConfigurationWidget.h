@@ -28,6 +28,14 @@ typedef struct {
 	UI_BUTTON back;
 } UI_NAVIGATOR;
 
+typedef struct {
+    UI_BUTTON text;
+    UI_BUTTON button;
+    UI_BUTTON dflt;
+} UI_INPUT_WITH_DEFAULT;
+
+
+
 
 #define ui_is_double_button(tst, db) ((tst==db.button) || (tst==db.text))
 
@@ -40,9 +48,11 @@ protected:
 	unsigned char dual_columns = 0;
 	UI_NAVIGATOR navigator;
 	UI_BUTTON createCheckButton(int x, int y, unsigned char state);
+	UI_TEXT createLabel(int col, int row, const char* title);
 	void updateCheckButton(UI_BUTTON btn, unsigned char state);
 	void createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state);
 	void createArrowPair(int col, int row, UI_ARROW * pair, const char* title);
+	void createInputWithDefault(int col, int row, UI_INPUT_WITH_DEFAULT * input, const char* title, const char* value, const char* dflt = 0);
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:

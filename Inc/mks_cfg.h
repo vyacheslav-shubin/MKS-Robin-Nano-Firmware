@@ -484,6 +484,19 @@ typedef struct{
 #define set_xy_point(point, xv, yv) {point.x = xv; point.y = yv; }
 
 typedef struct {
+    uint32_t speed;
+    uint32_t length;
+    uint32_t temper;
+    uint32_t time;
+} FILAMENT_CHANGE_CONFIG_SET;
+
+typedef struct {
+    FILAMENT_CHANGE_CONFIG_SET     load;
+    FILAMENT_CHANGE_CONFIG_SET     unload;
+} FILAMENT_CHANGE_CONFIG;
+
+
+typedef struct {
 	volatile int8_t custom_pic_flag;
 
 		int32_t value_bk_color;
@@ -579,18 +592,9 @@ typedef struct {
 		//volatile uint32_t filament_limit_temper;
 		
 		uint8_t morefunc_cnt;//volatile 
-		
-		uint32_t filamentchange_load_speed;//�����ٶ�
-		uint32_t filamentchange_unload_speed;//�����ٶ�
-		uint32_t filamentchange_load_length;//���ϲ��� 
-		uint32_t filamentchange_unload_length;//���ϲ��� 
-		uint32_t filament_load_limit_temper;
-		uint32_t filament_unload_limit_temper;
-		uint32_t filament_loading_time;
-		uint32_t filament_unloading_time;
-		
 
-	
+        FILAMENT_CHANGE_CONFIG  filamentchange;
+
 		volatile uint8_t leveling_mode;//��ƽģʽ0:�ֶ���ƽ��1:�Զ���ƽ
 		volatile uint8_t leveling_point_number;//�ֶ���ƽ����������(����3/4/5����ֵ)
 
@@ -706,8 +710,8 @@ extern uint8_t total_probe_points;
 
 extern char cmd_code[CMD_CODE_LEN+1];
 
-void epr_write_data(uint16_t pos, const uint8_t* value, uint16_t size);
-void epr_read_data(int pos, uint8_t* value, uint16_t size);
+extern void epr_write_data(uint16_t pos, const uint8_t* value, uint16_t size);
+extern void epr_read_data(int pos, uint8_t* value, uint16_t size);
 
 
 //extern mesh_bed_leveling mbl;

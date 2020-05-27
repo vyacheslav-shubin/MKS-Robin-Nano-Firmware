@@ -121,7 +121,7 @@ BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char 
 	return btn;
 }
 
-void ui_update_std_button(BUTTON_Handle btn, const char* file, char* title) {
+void ui_update_std_button(BUTTON_Handle btn, const char* file, const char* title) {
 	ui_buttonpreset(btn);
 	if (file!=0) {
 		BUTTON_SetBmpFileName(btn, file, 1);
@@ -145,7 +145,7 @@ BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const ch
 GUI_BITMAP bmp_struct_96x80 = { 96, 80, 96*2, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_50x50 = { 50, 50, 100, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_70x50 = { 70, 50, 140, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
-
+GUI_BITMAP bmp_struct_70x28 = { 70, 28, 140, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 
 BUTTON_Handle ui_create_96_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 96, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());

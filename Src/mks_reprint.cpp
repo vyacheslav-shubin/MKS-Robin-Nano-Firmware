@@ -45,13 +45,15 @@ void mkstft_ui_load()
 		epr_read_data(EPR_LANGUAGE,(uint8_t *)&gCfgItems.language,sizeof(gCfgItems.language)); 
 		epr_read_data(EPR_MORE_ITEM_CNT,(uint8_t *)&gCfgItems.MoreItem_pic_cnt,sizeof(gCfgItems.MoreItem_pic_cnt)); 
 
-		epr_read_data(EPR_FILAMENT_LOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange_load_length,sizeof(gCfgItems.filamentchange_load_length)); 
-		epr_read_data(EPR_FILAMENT_LOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange_load_speed,sizeof(gCfgItems.filamentchange_load_speed)); 
-		epr_read_data(EPR_FILAMENT_LOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filament_load_limit_temper,sizeof(gCfgItems.filament_load_limit_temper)); 
-		epr_read_data(EPR_FILAMENT_UNLOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange_unload_length,sizeof(gCfgItems.filamentchange_unload_length)); 
-		epr_read_data(EPR_FILAMENT_UNLOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange_unload_speed,sizeof(gCfgItems.filamentchange_unload_speed)); 
-		epr_read_data(EPR_FILAMENT_UNLOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filament_unload_limit_temper,sizeof(gCfgItems.filament_unload_limit_temper)); 	
-		epr_read_data(EPR_SETMENU_FUNC1_DISPLAY_FLG,(uint8_t *)&gCfgItems.func_btn1_display_flag,sizeof(gCfgItems.func_btn1_display_flag));	
+		epr_read_data(EPR_FILAMENT_LOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange.load.length,sizeof(gCfgItems.filamentchange.load.length));
+		epr_read_data(EPR_FILAMENT_LOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange.load.speed,sizeof(gCfgItems.filamentchange.load.speed));
+		epr_read_data(EPR_FILAMENT_LOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filamentchange.load.temper,sizeof(gCfgItems.filamentchange.load.temper));
+
+		epr_read_data(EPR_FILAMENT_UNLOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange.unload.length,sizeof(gCfgItems.filamentchange.unload.length));
+		epr_read_data(EPR_FILAMENT_UNLOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange.unload.speed,sizeof(gCfgItems.filamentchange.unload.speed));
+		epr_read_data(EPR_FILAMENT_UNLOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filamentchange.unload.temper,sizeof(gCfgItems.filamentchange.unload.temper));
+
+		epr_read_data(EPR_SETMENU_FUNC1_DISPLAY_FLG,(uint8_t *)&gCfgItems.func_btn1_display_flag,sizeof(gCfgItems.func_btn1_display_flag));
 
 		epr_read_data(EPR_SCREEN_DISPLAY_STYLE,(uint8_t *)&gCfgItems.display_style,sizeof(gCfgItems.display_style));	
 		//epr_read_data(EPR_PWROFF_SAVE_MODE,(uint8_t *)&gCfgItems.pwroff_save_mode,sizeof(gCfgItems.pwroff_save_mode));	
@@ -130,12 +132,13 @@ void mkstft_ui_set_epr()
 		epr_write_data(EPR_LANGUAGE,(uint8_t *)&gCfgItems.language,sizeof(gCfgItems.language)); 
 		epr_write_data(EPR_MORE_ITEM_CNT,(uint8_t *)&gCfgItems.MoreItem_pic_cnt,sizeof(gCfgItems.MoreItem_pic_cnt)); 
 
-		epr_write_data(EPR_FILAMENT_LOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange_load_length,sizeof(gCfgItems.filamentchange_load_length)); 
-		epr_write_data(EPR_FILAMENT_LOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange_load_speed,sizeof(gCfgItems.filamentchange_load_speed)); 
-		epr_write_data(EPR_FILAMENT_LOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filament_load_limit_temper,sizeof(gCfgItems.filament_load_limit_temper)); 
-		epr_write_data(EPR_FILAMENT_UNLOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange_unload_length,sizeof(gCfgItems.filamentchange_unload_length)); 
-		epr_write_data(EPR_FILAMENT_UNLOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange_unload_speed,sizeof(gCfgItems.filamentchange_unload_speed)); 
-		epr_write_data(EPR_FILAMENT_UNLOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filament_unload_limit_temper,sizeof(gCfgItems.filament_unload_limit_temper)); 	
+		epr_write_data(EPR_FILAMENT_LOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange.load.length,sizeof(gCfgItems.filamentchange.load.length));
+		epr_write_data(EPR_FILAMENT_LOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange.load.speed,sizeof(gCfgItems.filamentchange.load.speed));
+		epr_write_data(EPR_FILAMENT_LOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filamentchange.load.temper,sizeof(gCfgItems.filamentchange.load.temper));
+		epr_write_data(EPR_FILAMENT_UNLOAD_LENGTH,(uint8_t *)&gCfgItems.filamentchange.unload.length,sizeof(gCfgItems.filamentchange.unload.length));
+		epr_write_data(EPR_FILAMENT_UNLOAD_SPEED,(uint8_t *)&gCfgItems.filamentchange.unload.speed,sizeof(gCfgItems.filamentchange.unload.speed));
+		epr_write_data(EPR_FILAMENT_UNLOAD_LIMIT_TEMPER,(uint8_t *)&gCfgItems.filamentchange.unload.temper,sizeof(gCfgItems.filamentchange.unload.temper));
+
 		epr_write_data(EPR_SETMENU_FUNC1_DISPLAY_FLG,(uint8_t *)&gCfgItems.func_btn1_display_flag,sizeof(gCfgItems.func_btn1_display_flag));	
 
 		epr_write_data(EPR_SCREEN_DISPLAY_STYLE,(uint8_t *)&gCfgItems.display_style,sizeof(gCfgItems.display_style));	
@@ -249,12 +252,12 @@ void mkstft_ui_init() {
 	strcpy((char *)gCfgItems.z_display_pos,(char *)"0.000");
 	gCfgItems.custom_bed_flag = 1;
 
-	gCfgItems.filament_load_limit_temper = 200;
-	gCfgItems.filamentchange_load_speed = 1000;
-	gCfgItems.filamentchange_load_length = 100;
-	gCfgItems.filament_unload_limit_temper = 200;
-	gCfgItems.filamentchange_unload_speed = 1000;
-	gCfgItems.filamentchange_unload_length = 100;
+	gCfgItems.filamentchange.load.temper = 200;
+	gCfgItems.filamentchange.load.speed = 1000;
+	gCfgItems.filamentchange.load.length = 100;
+	gCfgItems.filamentchange.unload.temper = 200;
+	gCfgItems.filamentchange.unload.speed = 1000;
+	gCfgItems.filamentchange.unload.length = 100;
 
 	gCfgItems.MoreItem_pic_cnt = 0;
 	gCfgItems.func_btn1_display_flag = 1;

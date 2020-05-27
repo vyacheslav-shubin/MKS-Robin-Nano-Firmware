@@ -164,6 +164,9 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_navigator_prev		        "bmp_prev70x40.bin"
 
 #define img_calc_button		        "bmp_calc_b.bin"
+#define img_value_blank		        "bmp_value_blank.bin"
+#define img_value_default		    "bmp_default.bin"
+
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
@@ -251,6 +254,7 @@ extern GUI_BITMAP bmp_struct_100x80;
 extern GUI_BITMAP bmp_struct_100x100;
 extern GUI_BITMAP bmp_struct_50x50;
 extern GUI_BITMAP bmp_struct_70x50;
+extern GUI_BITMAP bmp_struct_70x28;
 
 extern UI_PRINT_PROCESS ui_print_process;
 
@@ -295,7 +299,7 @@ extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinPa
 extern TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
 extern void ui_set_text_value(TEXT_Handle handle, char* val);
 
-extern void ui_update_std_button(BUTTON_Handle handle, const char* file, char* title);
+extern void ui_update_std_button(BUTTON_Handle handle, const char* file, const char* title);
 
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
 

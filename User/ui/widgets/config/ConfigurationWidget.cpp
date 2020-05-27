@@ -118,7 +118,7 @@ void ConfigurationWidget::createControls() {
 
 void ConfigurationWidget::createArrowPair(int col, int row, UI_ARROW * pair, const char* title) {
     int x = (this->dual_columns ? 240 * (col+1) : 240 * 2) - X_ARROW_SZ;
-    pair->button = BUTTON_CreateEx(x, ROW(row), 20, 40, this->hWnd, BUTTON_CF_SHOW, 5, 12);
+    pair->button = BUTTON_CreateEx(x, ROW(row), 20, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     BUTTON_SetBmpFileName(pair->button, img_arrow, 1);
     BUTTON_SetBitmapEx(pair->button, 0, &bmp_struct10x17, 0, 0);
 
@@ -129,3 +129,46 @@ void ConfigurationWidget::createArrowPair(int col, int row, UI_ARROW * pair, con
     BUTTON_SetText(pair->text, title);
 }
 
+UI_TEXT ConfigurationWidget::createLabel(int col, int row, const char* title) {
+	int text_w = (this->dual_columns ? 240 : 480) - TEXT_X_OFFSET - 10;
+	int x = (this->dual_columns ? 240 * col : 0) + TEXT_X_OFFSET;
+	return this->createText(x, ROW(row), text_w, 40, title);
+}
+
+
+void ConfigurationWidget::createInputWithDefault(int col, int row, UI_INPUT_WITH_DEFAULT * input, const char* title, const char* value,  const char* dflt) {
+	int x = (this->dual_columns ? 240 * col : 0);
+	int text_w = (this->dual_columns ? 240 : 480)- (70 * 2) - 8 - TEXT_X_OFFSET - 10;
+	input->text = BUTTON_CreateEx(TEXT_X_OFFSET + x , ROW(row),  text_w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+	input->button = BUTTON_CreateEx(TEXT_X_OFFSET + x +  text_w + 4, ROW(row) + 6, 70, 28, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+	input->dflt = BUTTON_CreateEx(TEXT_X_OFFSET + x + text_w + 4 + 70 + 4, ROW(row) + 6, 70, 28, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+
+
+    BUTTON_SetBmpFileName(input->button, img_value_blank, 1);
+    BUTTON_SetBitmapEx(input->button, 0, &bmp_struct_70x28, 0, 0);
+
+    BUTTON_SetBmpFileName(input->dflt, img_value_default, 1);
+    BUTTON_SetBitmapEx(input->dflt, 0, &bmp_struct_70x28, 0, 0);
+
+    BUTTON_SetText(input->text, title);
+
+	BUTTON_SetTextAlign(input->text,GUI_TA_LEFT | GUI_TA_VCENTER);
+	BUTTON_SetTextAlign(input->button,GUI_TA_CENTER | GUI_TA_VCENTER);
+	BUTTON_SetTextAlign(input->dflt,GUI_TA_CENTER | GUI_TA_VCENTER);
+
+	BUTTON_SetText(input->button, value);
+	BUTTON_SetTextColor(input->button, BUTTON_CI_PRESSED, 0x0);
+	BUTTON_SetTextColor(input->button, BUTTON_CI_UNPRESSED, 0x0);
+    BUTTON_SetBkColor(input->button, BUTTON_CI_PRESSED, 0xe3ebca & 0xF8FAF8);
+    BUTTON_SetBkColor(input->button, BUTTON_CI_UNPRESSED, 0xe3ebca & 0xF8FAF8); //caebe3
+
+    BUTTON_SetTextColor(input->dflt, BUTTON_CI_PRESSED, 0xFFFFFF);
+    BUTTON_SetTextColor(input->dflt, BUTTON_CI_UNPRESSED, 0xFFFFFF);
+    BUTTON_SetBkColor(input->dflt, BUTTON_CI_PRESSED, 0xf8845d & 0xF8FAF8);
+    BUTTON_SetBkColor(input->dflt, BUTTON_CI_UNPRESSED, 0xf8845d & 0xF8FAF8);
+
+
+
+	BUTTON_SetText(input->dflt, dflt);
+
+}

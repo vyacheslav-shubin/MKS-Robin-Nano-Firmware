@@ -21,6 +21,10 @@ typedef struct {
 	const char * maximum_speed_settings;
 	const char * jerk_settings;
 
+    const char * filament_change_temperature;
+    const char * filament_change_speed;
+    const char * filament_change_length;
+
     const char * machine_size;
     const char * machine_type;
     const char * home_direction;
@@ -118,7 +122,9 @@ typedef struct {
 	const char * ui_title_more;
 	const char * ui_title_printing_tools;
 	const char * ui_title_printing;
-	const char * ui_title_speed;
+    const char * ui_title_speed;
+    const char * ui_title_config_machine_size;
+    const char * ui_title_config_filament_change;
 
 	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;

@@ -6,6 +6,7 @@
 #include "AdvancedConfigUI.h"
 #include "MotorConfigUI.h"
 #include "dialog/CalculatorDialogUI.h"
+#include "FilamentChangeConfigUI.h"
 
 MachineConfigurationUI machine_configuration_ui;
 
@@ -43,7 +44,8 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         draw_MachineType();
     } else if (ui_is_double_button(hBtn, this->ui.machine_size)) {
         this->hide();
-        draw_Stroke();
+        machine_size_ui.show(this);
+        //draw_Stroke();
     } else if (ui_is_double_button(hBtn, this->ui.home_direction)) {
         this->hide();
         draw_HomeDir();
@@ -52,7 +54,7 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         draw_EndstopType();
     } else if (ui_is_double_button(hBtn, this->ui.filament_settings)) {
         this->hide();
-        draw_FilamentSettings();
+        filament_change_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.manual_leveling_settings)) {
         this->hide();
         draw_XYZLevelPara();
@@ -72,8 +74,8 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         this->hide();
         advanced_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.test_calc)) {
-        this->hide();
-        calculator_dialog_ui.show(this);
+        //this->hide();
+        //calculator_dialog_ui.show(this);
     } else {
         ConfigurationWidget::on_button(hBtn);
     }

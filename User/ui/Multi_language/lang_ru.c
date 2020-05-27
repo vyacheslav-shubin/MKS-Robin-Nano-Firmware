@@ -20,6 +20,8 @@ void lang_ru(void) {
     lang_str.config_ui.auto_leveling_settings = "Автоуровени";
     lang_str.config_ui.nozzle_settings = "Сопло";
     lang_str.config_ui.hotbed_settings = "Стол";
+    lang_str.config_ui.filament_change_speed = "Скорость:";
+    lang_str.config_ui.filament_change_length= "Длина:";;
 
     lang_str.dialog.refactored_by = "Доработка ПО:\nВячеслав Шубин\nshubin-vv@krista.ru";
 
@@ -83,6 +85,8 @@ void lang_ru(void) {
 	lang_str.ui_title_printing_tools = "Подстройка печати";
 	lang_str.ui_title_printing= "Печать";
 	lang_str.ui_title_speed = "Подстройка скорости";
+    lang_str.ui_title_config_machine_size = "Размеры области печати";
+    lang_str.ui_title_config_filament_change = "Настройки замены филамента";
 
 	lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
     lang_str.file_info_ui.filament_progress = "Филамент (m): %1.3f / %1.3f %d%%";

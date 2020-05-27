@@ -11,6 +11,7 @@
 
 typedef struct {
     UI_TEXT value;
+    UI_TEXT title;
     UI_BUTTON digs[10];
     UI_BUTTON point;
     UI_BUTTON sign;
@@ -58,6 +59,7 @@ private:
     CALC_OPERAND * currentOperand;
     unsigned char id = 0;
     double init_value = 0;
+    const char * title;
     UI_BUTTON createCalcButton(int x, int y,  const char * text);
     CalculatorDialogCallback * callback = 0;
     void updateDisplay();
@@ -66,10 +68,11 @@ protected:
     virtual void createControls();
     virtual void on_button(UI_BUTTON hBtn);
 public:
-    void show(double value, unsigned char  dialog_id, CalculatorDialogCallback * callback, Widget * caller) {
+    void show(const char * title, double value, unsigned char  dialog_id, CalculatorDialogCallback * callback, Widget * caller) {
         this->id = dialog_id;
         this->callback = callback;
         this->init_value = value;
+        this->title = title;
         DialogWidget::show(caller);
     }
     CalculatorDialogUI() : DialogWidget(){};

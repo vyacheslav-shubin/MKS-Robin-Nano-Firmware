@@ -1,13 +1,14 @@
-#ifndef _DRAW_FILAMENTSETTINGS_H_
-#define _DRAW_FILAMENTSETTINGS_H_
+#error unused
+#ifndef _DRAW_STROKE_H_
+#define _DRAW_STROKE_H_
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-void draw_FilamentSettings();
+void draw_Stroke();
 
-void Clear_FilamentSettings();
+void Clear_Stroke();
 
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */
@@ -15,8 +16,6 @@ void Clear_FilamentSettings();
 
 
 #endif
-
-
 
 
 

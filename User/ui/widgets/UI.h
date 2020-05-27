@@ -32,6 +32,8 @@
 #include "SettingsUI.h"
 #include "dialog/AboutDialogUI.h"
 #include "config/MachineConfigurationUI.h"
+#include "config/MachineSizeUI.h"
+#include "config/FilamentChangeConfigUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

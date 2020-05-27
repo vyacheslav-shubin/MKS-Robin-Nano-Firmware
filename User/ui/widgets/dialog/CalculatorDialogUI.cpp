@@ -97,7 +97,9 @@ void CalculatorDialogUI::createControls() {
         this->cm.operation = OVFL;
     this->currentOperand = &this->cm.op1;
     #define _x (DIALOG_WIDTH/2)
-    this->ui.value = TEXT_CreateEx(DIALOG_WIDTH/2, 6, DIALOG_WIDTH - 6 - _x, 28, this->hWnd, WM_CF_SHOW, TEXT_CF_RIGHT|TEXT_CF_VCENTER,  GUI_ID_TEXT0, 0);
+    if (this->title != 0)
+        this->ui.title = this->createText(6, 6, DIALOG_WIDTH / 2 - 12, 28, this->title);
+    this->ui.value = TEXT_CreateEx(DIALOG_WIDTH/2, 6, DIALOG_WIDTH - 6 - _x, 28, this->hWnd, WM_CF_SHOW, TEXT_CF_RIGHT|TEXT_CF_VCENTER,  0, 0);
     TEXT_SetBkColor(ui.value,  0xFFFFFF);
     TEXT_SetTextColor(ui.value, 0x00);
 

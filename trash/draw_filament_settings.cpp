@@ -151,57 +151,57 @@ static void cbFilamentSettingsWin(WM_MESSAGE * pMsg) {
     			} 
     			else if(pMsg->hWinSrc == InTemperature_default.btnHandle)
     			{
-                    gCfgItems.filament_load_limit_temper = 200;
+                    gCfgItems.filamentchange.load.temper = 200;
                     memset(cmd_code,0,sizeof(cmd_code));
-                    sprintf(cmd_code,"%d",gCfgItems.filament_load_limit_temper);
+                    sprintf(cmd_code,"%d",gCfgItems.filamentchange.load.temper);
                     BUTTON_SetText(InTemperature_value.btnHandle,cmd_code);
-                    epr_write_data(EPR_FILAMENT_LOAD_LIMIT_TEMPER, (uint8_t *)&gCfgItems.filament_load_limit_temper,sizeof(uint32_t));
+                    epr_write_data(EPR_FILAMENT_LOAD_LIMIT_TEMPER, (uint8_t *)&gCfgItems.filamentchange.load.temper,sizeof(uint32_t));
 
     			}  
     			else if(pMsg->hWinSrc == InSpeed_default.btnHandle)
     			{
-                    gCfgItems.filamentchange_load_speed = 1000;
+                    gCfgItems.filamentchange.load.speed = 1000;
                     memset(cmd_code,0,sizeof(cmd_code));
-                    sprintf(cmd_code,"%d",gCfgItems.filamentchange_load_speed);
+                    sprintf(cmd_code,"%d",gCfgItems.filamentchange.load.speed);
                     BUTTON_SetText(InSpeed_value.btnHandle,cmd_code);
-                    epr_write_data(EPR_FILAMENT_LOAD_SPEED, (uint8_t *)&gCfgItems.filamentchange_load_speed,sizeof(uint32_t));
-                    gCfgItems.filament_loading_time = (uint32_t)((gCfgItems.filamentchange_load_length*60.0/gCfgItems.filamentchange_load_speed)+0.5);
-    			} 
+                    epr_write_data(EPR_FILAMENT_LOAD_SPEED, (uint8_t *)&gCfgItems.filamentchange.load.speed,sizeof(uint32_t));
+                    gCfgItems.filamentchange.load.time = (uint32_t)((gCfgItems.filamentchange.load.length*60.0/gCfgItems.filamentchange.load.speed)+0.5);
+    			}
     			else if(pMsg->hWinSrc == InLength_default.btnHandle)
     			{
-                    gCfgItems.filamentchange_load_length = 100;
+                    gCfgItems.filamentchange.load.length = 100;
                     memset(cmd_code,0,sizeof(cmd_code));
-                    sprintf(cmd_code,"%d",gCfgItems.filamentchange_load_length);
+                    sprintf(cmd_code,"%d",gCfgItems.filamentchange.load.length);
                     BUTTON_SetText(InLength_value.btnHandle,cmd_code);
-                    epr_write_data(EPR_FILAMENT_LOAD_LENGTH, (uint8_t *)&gCfgItems.filamentchange_load_length,sizeof(uint32_t));
-                    gCfgItems.filament_loading_time = (uint32_t)((gCfgItems.filamentchange_load_length*60.0/gCfgItems.filamentchange_load_speed)+0.5);
-    			}   
+                    epr_write_data(EPR_FILAMENT_LOAD_LENGTH, (uint8_t *)&gCfgItems.filamentchange.load.length,sizeof(uint32_t));
+                    gCfgItems.filamentchange.load.time = (uint32_t)((gCfgItems.filamentchange.load.length*60.0/gCfgItems.filamentchange.load.speed)+0.5);
+    			}
     			else if(pMsg->hWinSrc == OutTemperature_default.btnHandle)
     			{
-                    gCfgItems.filament_unload_limit_temper = 200;
+                    gCfgItems.filamentchange.unload.temper = 200;
                     memset(cmd_code,0,sizeof(cmd_code));
-                    sprintf(cmd_code,"%d",gCfgItems.filament_unload_limit_temper);
+                    sprintf(cmd_code,"%d",gCfgItems.filamentchange.unload.temper);
                     BUTTON_SetText(OutTemperature_value.btnHandle,cmd_code);
-                    epr_write_data(EPR_FILAMENT_UNLOAD_LIMIT_TEMPER, (uint8_t *)&gCfgItems.filament_unload_limit_temper,sizeof(uint32_t));
+                    epr_write_data(EPR_FILAMENT_UNLOAD_LIMIT_TEMPER, (uint8_t *)&gCfgItems.filamentchange.unload.temper,sizeof(uint32_t));
 
     			}  
     			else if(pMsg->hWinSrc == OutSpeed_default.btnHandle)
     			{
-                    gCfgItems.filamentchange_unload_speed = 1000;
+                    gCfgItems.filamentchange.unload.speed = 1000;
                     memset(cmd_code,0,sizeof(cmd_code));
-                    sprintf(cmd_code,"%d",gCfgItems.filamentchange_unload_speed);
+                    sprintf(cmd_code,"%d",gCfgItems.filamentchange.unload.speed);
                     BUTTON_SetText(OutSpeed_default.btnHandle,cmd_code);
-                    epr_write_data(EPR_FILAMENT_UNLOAD_SPEED, (uint8_t *)&gCfgItems.filamentchange_unload_speed,sizeof(uint32_t));
-                    gCfgItems.filament_unloading_time = (uint32_t)((gCfgItems.filamentchange_unload_length*60.0/gCfgItems.filamentchange_unload_speed)+0.5);
+                    epr_write_data(EPR_FILAMENT_UNLOAD_SPEED, (uint8_t *)&gCfgItems.filamentchange.unload.speed,sizeof(uint32_t));
+                    gCfgItems.filamentchange.unload.time = (uint32_t)((gCfgItems.filamentchange.unload.length*60.0/gCfgItems.filamentchange.unload.speed)+0.5);
     			} 
     			else if(pMsg->hWinSrc == OutLength_default.btnHandle)
     			{
-                    gCfgItems.filamentchange_unload_length = 100;
+                    gCfgItems.filamentchange.unload.length = 100;
                     memset(cmd_code,0,sizeof(cmd_code));
-                    sprintf(cmd_code,"%d",gCfgItems.filamentchange_unload_length);
+                    sprintf(cmd_code,"%d",gCfgItems.filamentchange.unload.length);
                     BUTTON_SetText(OutLength_value.btnHandle,cmd_code);
-                    epr_write_data(EPR_FILAMENT_UNLOAD_LENGTH, (uint8_t *)&gCfgItems.filamentchange_unload_length,sizeof(uint32_t));
-             		gCfgItems.filament_unloading_time = (uint32_t)((gCfgItems.filamentchange_unload_length*60.0/gCfgItems.filamentchange_unload_speed)+0.5);
+                    epr_write_data(EPR_FILAMENT_UNLOAD_LENGTH, (uint8_t *)&gCfgItems.filamentchange.unload.length,sizeof(uint32_t));
+             		gCfgItems.filamentchange.unload.time = (uint32_t)((gCfgItems.filamentchange.unload.length*60.0/gCfgItems.filamentchange.unload.speed)+0.5);
     			}                   
     		}
     		break;
@@ -339,16 +339,16 @@ void draw_FilamentSettings()
        BUTTON_SetTextColor(OutTemperature_default.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.default_text_color);
 
         memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.filament_load_limit_temper);
+        sprintf(cmd_code,"%d",gCfgItems.filamentchange.load.temper);
         BUTTON_SetText(InTemperature_value.btnHandle,cmd_code);     
         memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.filamentchange_load_speed);
+        sprintf(cmd_code,"%d",gCfgItems.filamentchange.load.speed);
         BUTTON_SetText(InSpeed_value.btnHandle,cmd_code); 
         memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.filamentchange_load_length);
+        sprintf(cmd_code,"%d",gCfgItems.filamentchange.load.length);
         BUTTON_SetText(InLength_value.btnHandle,cmd_code);        
         memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.filament_unload_limit_temper);
+        sprintf(cmd_code,"%d",gCfgItems.filamentchange.unload.temper);
         BUTTON_SetText(OutTemperature_value.btnHandle,cmd_code);  
 
     }
@@ -410,10 +410,10 @@ void draw_FilamentSettings()
         BUTTON_SetTextColor(OutLength_default.btnHandle, BUTTON_CI_UNPRESSED, gCfgItems.default_text_color);
                 
         memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.filamentchange_unload_speed);
+        sprintf(cmd_code,"%d",gCfgItems.filamentchange.unload.speed);
         BUTTON_SetText(OutSpeed_value.btnHandle,cmd_code); 
         memset(cmd_code,0,sizeof(cmd_code));
-        sprintf(cmd_code,"%d",gCfgItems.filamentchange_unload_length);
+        sprintf(cmd_code,"%d",gCfgItems.filamentchange.unload.length);
         BUTTON_SetText(OutLength_value.btnHandle,cmd_code);              
     }
 

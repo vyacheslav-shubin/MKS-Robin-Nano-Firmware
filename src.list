@@ -104,7 +104,6 @@ User/ui/draw_dialog.cpp
 User/ui/draw_doubleZ.cpp
 User/ui/draw_EnablePin_Invert.cpp
 User/ui/draw_endstop_type.cpp
-User/ui/draw_filament_settings.cpp
 User/ui/draw_FileTransfer_ui.cpp
 User/ui/draw_home_dir.cpp
 User/ui/draw_home_speed.cpp
@@ -118,7 +117,6 @@ User/ui/draw_mesh_leveling.cpp
 User/ui/draw_nozzle_config.cpp
 User/ui/draw_number_key.cpp
 User/ui/draw_steps.cpp
-User/ui/draw_stroke.cpp
 User/ui/draw_Tips.cpp
 User/ui/draw_ui.cpp
 User/ui/draw_wifi.cpp
@@ -170,6 +168,7 @@ User/ui/widgets/config/MotorDirConfigUI.cpp
 User/ui/widgets/config/MotorConfigUI.cpp
 User/ui/widgets/config/MachineConfigurationUI.cpp
 User/ui/widgets/config/AdvancedConfigUI.cpp
+User/ui/widgets/config/FilamentChangeConfigUI.cpp
 User/ui/widgets/config/MachineSizeUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp

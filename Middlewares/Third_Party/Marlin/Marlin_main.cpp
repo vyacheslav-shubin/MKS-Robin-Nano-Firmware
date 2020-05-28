@@ -1371,7 +1371,7 @@ void display_sd_error()
 	  
 	  //wifi_looping();
 	  
-	 ui_app.loop();
+	 ui_app.idle();
 
 	#endif
 
@@ -15630,7 +15630,7 @@ void idle(
   
   wifi_looping();
   
-  ui_app.loop();
+  ui_app.idle();
 
 #endif
   #if ENABLED(I2C_POSITION_ENCODERS)
@@ -16123,8 +16123,6 @@ extern uint8_t print_finish_start_timer;
 extern uint32_t print_finish_timer_count;
 extern uint8_t print_finish_close_machine;
 
-extern void mksBeeperAlarm(void);
-
 void Beeper(uint32_t cnt) {
     beep_flg = 1;
     beep_cnt = cnt;
@@ -16163,10 +16161,7 @@ void SysTick_Handler_User() {
 			cloud_refresh_flg = 1;
 	}
 	
-
-	mksBeeperAlarm();
-
-    if(beep_flg == 1) {
+	if(beep_flg == 1) {
         beep_cnt--;
         if(beep_cnt<=0) {
            beep_flg = 0;

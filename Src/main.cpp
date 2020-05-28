@@ -297,65 +297,6 @@ uint32_t filament_fail_flag;
 uint32_t filament_fail_cnt = 0;
 
 
-volatile unsigned long BeeperFreq=0;
-volatile unsigned char BeeperCnt=0;
-volatile unsigned char mksBpAlrmEn=0;
-
-
-static uint8_t beeper_cnt;
-static uint8_t check_beeper_cnt;
-
-__IO uint32_t delaycnt = 0;
-__IO uint8_t beeper_flg = 0;
-
-uint8_t beep_pwdet=0;
-uint8_t beep_mtdet1=0;
-uint8_t beep_mtdet2=0;
-
-void mksBeeperAlarm(void){
-    if(beep_pwdet) {
-        if(MKS_PW_DET_OP==1) {
-            beep_pwdet=0;
-            BeeperCnt = 0;
-            delaycnt = 0;
-            mksBpAlrmEn = 0;
-            BEEPER_OP = 0;
-        }
-    }
-    if(beep_mtdet1) {
-        if(MKS_MT_DET1_OP==1) {
-            beep_mtdet1=0;
-            BeeperCnt = 0;
-            delaycnt = 0;
-            mksBpAlrmEn = 0;
-            BEEPER_OP = 0;
-        }
-    }
-    if(beep_mtdet2) {
-        if(MKS_MT_DET2_OP==1) {
-            beep_mtdet2=0;
-            BeeperCnt = 0;
-            delaycnt = 0;
-            mksBpAlrmEn = 0;
-            BEEPER_OP = 0;
-        }
-    }
-	if(mksBpAlrmEn) {
-        delaycnt++;
-        if(delaycnt >= 1000) {
-            BeeperCnt++;
-			delaycnt = 0;
-			BEEPER_OP = BeeperCnt%2;
-        }
-		if(BeeperCnt>=20) {
-            BeeperCnt = 0;
-            delaycnt = 0;
-            mksBpAlrmEn = 0;
-            BEEPER_OP = 0;
-        }
-    }
-}
-
 void Close_machine_display() {
 	ui_app.closeCurrentWidget();
 	disp_state = PRINT_READY_UI;
@@ -377,8 +318,7 @@ void filament_check() {
 			print_job_timer.pause();
 			mksReprint.mks_printer_state = MKS_PAUSING;
 			printing_ui.show();
-			mksBpAlrmEn = 1;
-			delaycnt = 0;
+            ui_app.beep(5);
 		}
 	} else {
 		filament_fail_flag = 0;

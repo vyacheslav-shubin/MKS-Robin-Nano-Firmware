@@ -21,18 +21,24 @@ extern volatile u8 ui_timing_flags;
 
 class Widget;
 
+typedef struct {
+    unsigned char count;
+} APP_BEEPER;
+
 class Application {
 private:
-	volatile u32 screenOffCountDown = 255;
+    APP_BEEPER beeper = {0};
+    volatile u32 screenOffCountDown = 255;
 	volatile u8 waitPenUp = 0;
 public:
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
 	void drawTitle();
 	const char * getTitle();
+	void beep(unsigned char seconds) {this->beeper.count = seconds;};
 	void start();
 	void setup();
-	void loop();
+	void idle();
 	void refresh();
 	void refresh_05();
 	void refresh_1s();

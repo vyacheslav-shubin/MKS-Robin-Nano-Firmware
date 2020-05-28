@@ -25,6 +25,8 @@ volatile u8 ui_timing_flags;
 
 #define STANDBY_TIME 	(gCfgItems.standby_time)
 
+static void _calc_rate(void);
+
 void Application::defaultUI() {
 	GUI_SetBkColor(gCfgItems.background_color);
 	GUI_SetColor(gCfgItems.title_color);
@@ -79,6 +81,8 @@ void Application::refresh() {
 }
 
 void Application::refresh_05() {
+    if (beeper.count>0)
+        BEEPER_OP = 1;
 	if (this->waitPenUp > 1) {
 		if (--this->waitPenUp==1) {
 			this->waitPenUp = 0;
@@ -87,7 +91,19 @@ void Application::refresh_05() {
 	}
 }
 
-void _calc_rate(void) {
+void Application::refresh_1s() {
+    if (beeper.count > 0) {
+        BEEPER_OP = 0;
+        beeper.count--;
+    };
+    _calc_rate();
+    if ((gCfgItems.standby_mode) && (this->screenOffCountDown>0)) {
+        if (--this->screenOffCountDown==0)
+            lcd_light_off();
+    }
+}
+
+static void _calc_rate(void) {
     if (card.filesize == 0) {
         ui_print_process.rate = 0;
     } else {
@@ -104,15 +120,6 @@ void _calc_rate(void) {
         if ((ui_print_process.rate==100) && (card.filesize>card.sdpos))
             ui_print_process.rate = 99;
     }
-}
-
-
-void Application::refresh_1s() {
-	_calc_rate();
-    if ((gCfgItems.standby_mode) && (this->screenOffCountDown>0)) {
-		if (--this->screenOffCountDown==0)
-            lcd_light_off();
-	}
 }
 
 char Application::touch(u8 action) {
@@ -132,7 +139,7 @@ char Application::touch(u8 action) {
 }
 
 
-void Application::loop() {
+void Application::idle() {
 
 	if(wifi_link_state != WIFI_TRANS_FILE) {
 		this->refresh();

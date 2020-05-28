@@ -58,8 +58,6 @@ extern int X_ADD,X_INTERVAL;   //**ͼƬ���
 
 extern uint8_t  Get_Temperature_Flg;
 //extern PR_STATUS printerStaus;
-extern volatile unsigned char BeeperCnt;
-extern volatile unsigned long BeeperFreq;
 extern volatile uint8_t get_temp_flag;
 extern unsigned char SendOneTime;
 //int8_t  gCurDir[100];

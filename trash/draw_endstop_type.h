@@ -1,3 +1,4 @@
+#error unused
 #ifndef _DRAW_ENDSTOPTYPE_H_
 #define _DRAW_ENDSTOPTYPE_H_
 

@@ -158,7 +158,6 @@ void clear_cur_ui() {
         case KEY_BOARD_UI:		Clear_Keyboard();		break;
         case TIPS_UI:			Clear_Tips();			break;
         case MACHINETYPE_UI:	Clear_MachineType();	break;
-        case ENDSTOP_TYPE_UI:	Clear_EndstopType();	break;
         case LEVELING_PARA_UI:	Clear_LevelingPara();	break;
 		case DELTA_LEVELING_PARA_UI:	Clear_DeltaLevelPara();		break;
 		case MAXFEEDRATE_UI:	Clear_MaxFeedRate();	break;
@@ -204,6 +203,7 @@ void draw_return_ui() {
             case FILAMENT_SETTINGS_UI:		filament_change_config_ui.show();	break;
             case XYZ_LEVELING_PARA_UI:		manual_leveling_ui.show();			break;
             case HOME_SETTINGS_UI:  home_config_ui.show();                      break;
+            case ENDSTOP_TYPE_UI:	sensor_level_config_ui.show();		        break;
 
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
@@ -217,7 +217,6 @@ void draw_return_ui() {
             case KEY_BOARD_UI:		draw_Keyboard();		break;
             case TIPS_UI:			draw_Tips();			break;
             case MACHINETYPE_UI:	draw_MachineType();		break;
-            case ENDSTOP_TYPE_UI:	draw_EndstopType();		break;
             case LEVELING_PARA_UI:			draw_LevelingPara();			break;
             case DELTA_LEVELING_PARA_UI:	draw_DeltaLevelPara();			break;
             case MAXFEEDRATE_UI:	draw_MaxFeedRate();		break;

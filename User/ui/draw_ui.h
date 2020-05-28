@@ -24,7 +24,6 @@
 #include "lang_common.h"
 #include "draw_meshleveling.h"
 #include "draw_machine_type.h"
-#include "draw_endstop_type.h"
 #include "draw_levelingPara_config.h"
 #include "draw_deltaLevelPare.h"
 #include "draw_MaxFeedRate.h"

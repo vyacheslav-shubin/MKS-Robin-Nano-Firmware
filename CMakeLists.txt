@@ -647,6 +647,10 @@ add_executable(work
 		User/ui/widgets/config/FilamentChangeConfigUI.h
 		User/ui/widgets/config/FilamentChangeConfigUI.cpp
 		User/ui/widgets/config/MachineSizeUI.h
+		User/ui/widgets/config/LevelingPointsUI.h
+		User/ui/widgets/config/LevelingPointsUI.cpp
+		User/ui/widgets/config/HomeConfigUI.cpp
+		User/ui/widgets/config/HomeConfigUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
         User/ui/widgets/dialog/ConfirmDialogUI.cpp
@@ -722,10 +726,6 @@ add_executable(work
         User/ui/draw_endstop_type.h
         User/ui/draw_FileTransfer_ui.cpp
         User/ui/draw_FileTransfer_ui.h
-        User/ui/draw_home_dir.cpp
-        User/ui/draw_home_dir.h
-        User/ui/draw_home_speed.cpp
-        User/ui/draw_home_speed.h
         User/ui/draw_hotbed_config.cpp
         User/ui/draw_hotbed_config.h
         User/ui/draw_jerk.cpp
@@ -760,8 +760,6 @@ add_executable(work
         User/ui/draw_wifi.h
         User/ui/draw_wifi_list.cpp
         User/ui/draw_wifi_list.h
-        User/ui/draw_XYZLevelPara.cpp
-        User/ui/draw_XYZLevelPara.h
         User/ui/font.h
         User/ui/id_manage.c
         User/ui/id_manage.h

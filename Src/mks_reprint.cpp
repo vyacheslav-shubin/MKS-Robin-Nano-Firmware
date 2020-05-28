@@ -67,16 +67,7 @@ void mkstft_ui_load()
 		epr_read_data(EPR_LEVELING_MODE,(uint8_t *)&gCfgItems.leveling_mode,sizeof(gCfgItems.leveling_mode));	
 		epr_read_data(EPR_LEVELING_POINT_CNT,(uint8_t *)&gCfgItems.leveling_point_number,sizeof(gCfgItems.leveling_point_number));	
 
-		epr_read_data(EPR_LEVELING_POINT1_X,(uint8_t *)&gCfgItems.leveling_points[0].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_read_data(EPR_LEVELING_POINT1_Y,(uint8_t *)&gCfgItems.leveling_points[0].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_read_data(EPR_LEVELING_POINT2_X,(uint8_t *)&gCfgItems.leveling_points[1].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_read_data(EPR_LEVELING_POINT2_Y,(uint8_t *)&gCfgItems.leveling_points[1].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_read_data(EPR_LEVELING_POINT3_X,(uint8_t *)&gCfgItems.leveling_points[2].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_read_data(EPR_LEVELING_POINT3_Y,(uint8_t *)&gCfgItems.leveling_points[2].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_read_data(EPR_LEVELING_POINT4_X,(uint8_t *)&gCfgItems.leveling_points[3].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_read_data(EPR_LEVELING_POINT4_Y,(uint8_t *)&gCfgItems.leveling_points[3].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_read_data(EPR_LEVELING_POINT5_X,(uint8_t *)&gCfgItems.leveling_points[4].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_read_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_points[4].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_read_data(EPR_LEVELING_POINTS,(uint8_t *)&gCfgItems.leveling_points,sizeof(gCfgItems.leveling_points));
 
 		epr_read_data(EPR_AUTO_CLOSE_MACHINE,(uint8_t *)&gCfgItems.print_finish_close_machine_flg,sizeof(gCfgItems.print_finish_close_machine_flg));
 		ui_print_process.suicide_enabled = gCfgItems.print_finish_close_machine_flg;
@@ -153,16 +144,7 @@ void mkstft_ui_set_epr()
 		epr_write_data(EPR_LEVELING_MODE,(uint8_t *)&gCfgItems.leveling_mode,sizeof(gCfgItems.leveling_mode));	
 		epr_write_data(EPR_LEVELING_POINT_CNT,(uint8_t *)&gCfgItems.leveling_point_number,sizeof(gCfgItems.leveling_point_number));	
 
-		epr_write_data(EPR_LEVELING_POINT1_X,(uint8_t *)&gCfgItems.leveling_points[0].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_write_data(EPR_LEVELING_POINT1_Y,(uint8_t *)&gCfgItems.leveling_points[0].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_write_data(EPR_LEVELING_POINT2_X,(uint8_t *)&gCfgItems.leveling_points[1].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_write_data(EPR_LEVELING_POINT2_Y,(uint8_t *)&gCfgItems.leveling_points[1].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_write_data(EPR_LEVELING_POINT3_X,(uint8_t *)&gCfgItems.leveling_points[2].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_write_data(EPR_LEVELING_POINT3_Y,(uint8_t *)&gCfgItems.leveling_points[2].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_write_data(EPR_LEVELING_POINT4_X,(uint8_t *)&gCfgItems.leveling_points[3].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_write_data(EPR_LEVELING_POINT4_Y,(uint8_t *)&gCfgItems.leveling_points[3].y,sizeof(gCfgItems.leveling_points[0].y));
-		epr_write_data(EPR_LEVELING_POINT5_X,(uint8_t *)&gCfgItems.leveling_points[4].x,sizeof(gCfgItems.leveling_points[0].x));
-		epr_write_data(EPR_LEVELING_POINT5_Y,(uint8_t *)&gCfgItems.leveling_points[4].y,sizeof(gCfgItems.leveling_points[0].y));
+		epr_write_data(EPR_LEVELING_POINTS,(uint8_t *)&gCfgItems.leveling_points,sizeof(gCfgItems.leveling_points));
 
 		epr_write_data(EPR_AUTO_CLOSE_MACHINE,(uint8_t *)&gCfgItems.print_finish_close_machine_flg,sizeof(gCfgItems.print_finish_close_machine_flg));
 		epr_write_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));

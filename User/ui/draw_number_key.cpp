@@ -274,18 +274,6 @@ void set_value_confirm()
         break; 
 
 
-       case Point1_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,0);break;
-       case Point1_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,0);break;
-       case Point2_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,1);break;
-       case Point2_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,1);break;
-       case Point3_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,2);break;
-       case Point3_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,2);break;
-       case Point4_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,3);break;
-       case Point4_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,3);break;
-       case Point5_x: set_value_confirm_point_x(key_value,EPR_LEVELING_POINT1_X,4);break;
-       case Point5_y: set_value_confirm_point_y(key_value,EPR_LEVELING_POINT1_Y,4);break;
-
-
         break; 
        case XMaxFeedRate:
         planner.max_feedrate_mm_s[X_AXIS]=atof(key_value);
@@ -520,17 +508,6 @@ void disp_value()
         memset(cmd_code,0,sizeof(cmd_code));
         sprintf(cmd_code,"%.1f",delta_calibration_radius);        
         break; 
-
-       case Point1_x : MEMSET_LEV_P(0, x); break;
-       case Point1_y:  MEMSET_LEV_P(0, y); break;
-       case Point2_x : MEMSET_LEV_P(1, x); break;
-       case Point2_y : MEMSET_LEV_P(1, y); break;
-       case Point3_x : MEMSET_LEV_P(2, x); break;
-       case Point3_y : MEMSET_LEV_P(2, y); break;
-       case Point4_x : MEMSET_LEV_P(3, x); break;
-       case Point4_y : MEMSET_LEV_P(3, y); break;
-       case Point5_x : MEMSET_LEV_P(4, x); break;
-       case Point5_y : MEMSET_LEV_P(4, y); break;
 
        case XMaxFeedRate:
         memset(cmd_code,0,sizeof(cmd_code));

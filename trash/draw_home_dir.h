@@ -1,3 +1,4 @@
+#error unused
 #ifndef _DRAW_HOMEDIR_H_
 #define _DRAW_HOMEDIR_H_
 

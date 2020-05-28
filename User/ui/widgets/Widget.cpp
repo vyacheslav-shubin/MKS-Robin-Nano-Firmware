@@ -71,10 +71,9 @@ void Widget::hide() {
 
 void Widget::dropWindow(){
 	//GUI_SetBkColor(gCfgItems.background_color);
-	if ((this->hWnd!=0) && WM_IsWindow(this->hWnd)) {
+	if ((this->hWnd!=0) && WM_IsWindow(this->hWnd))
 		WM_DeleteWindow(this->hWnd);
-		this->hWnd = 0;
-	}
+    this->hWnd = 0;
 }
 
 void Widget::setButtonText(UI_BUTTON btn, char * text) {

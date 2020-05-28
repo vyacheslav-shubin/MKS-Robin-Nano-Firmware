@@ -105,8 +105,6 @@ User/ui/draw_doubleZ.cpp
 User/ui/draw_EnablePin_Invert.cpp
 User/ui/draw_endstop_type.cpp
 User/ui/draw_FileTransfer_ui.cpp
-User/ui/draw_home_dir.cpp
-User/ui/draw_home_speed.cpp
 User/ui/draw_hotbed_config.cpp
 User/ui/draw_jerk.cpp
 User/ui/draw_keyboard.cpp
@@ -121,7 +119,6 @@ User/ui/draw_Tips.cpp
 User/ui/draw_ui.cpp
 User/ui/draw_wifi.cpp
 User/ui/draw_wifi_list.cpp
-User/ui/draw_XYZLevelPara.cpp
 User/ui/id_manage.c
 User/ui/Multi_language/fontHz14.c
 User/ui/Multi_language/Helvetica26.c
@@ -169,6 +166,8 @@ User/ui/widgets/config/MotorConfigUI.cpp
 User/ui/widgets/config/MachineConfigurationUI.cpp
 User/ui/widgets/config/AdvancedConfigUI.cpp
 User/ui/widgets/config/FilamentChangeConfigUI.cpp
+User/ui/widgets/config/LevelingPointsUI.cpp
+User/ui/widgets/config/HomeConfigUI.cpp
 User/ui/widgets/config/MachineSizeUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp

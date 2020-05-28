@@ -33,13 +33,13 @@ unsigned char FilamentChangeConfigUI::checkButtonSet(UI_BUTTON hBtn, unsigned ch
     FILAMENT_CHANGE_CONFIG_SET * config = index==0 ? &gCfgItems.filamentchange.load: &gCfgItems.filamentchange.unload;
     if (hBtn==set->speed.button) {
         this->hide();
-        calculator_dialog_ui.show(lang_str.config_ui.filament_change_speed, config->speed, FILAMENT_S + 3 * index, this, this);
+        calculator_dialog_ui.show(lang_str.config_ui.speed, config->speed, FILAMENT_S + 3 * index, this, this);
     } else if (hBtn==set->termerature.button) {
         this->hide();
         calculator_dialog_ui.show(lang_str.config_ui.filament_change_temperature, config->temper, FILAMENT_T + 3 * index, this, this);
     } else if (hBtn==set->length.button) {
         this->hide();
-        calculator_dialog_ui.show(lang_str.config_ui.filament_change_length, config->length, FILAMENT_L + 3 * index, this, this);
+        calculator_dialog_ui.show(lang_str.config_ui.length, config->length, FILAMENT_L + 3 * index, this, this);
     } else {
         if (hBtn==set->length.dflt) {
             _set_value(FILAMENT_L + 3 * index, 750);
@@ -61,8 +61,8 @@ void FilamentChangeConfigUI::on_button(UI_BUTTON hBtn) {
 
 void FilamentChangeConfigUI::createSet(FILAMET_CHANGE_UI_CONTROLS_SET * set, unsigned char col) {
     this->createInputWithDefault(col, 1, &set->termerature, lang_str.config_ui.filament_change_temperature, 0, 0);
-    this->createInputWithDefault(col, 2, &set->speed, lang_str.config_ui.filament_change_speed, 0, 0);
-    this->createInputWithDefault(col, 3, &set->length, lang_str.config_ui.filament_change_length, 0, 0);
+    this->createInputWithDefault(col, 2, &set->speed, lang_str.config_ui.speed, 0, 0);
+    this->createInputWithDefault(col, 3, &set->length, lang_str.config_ui.length, 0, 0);
 }
 
 void FilamentChangeConfigUI::createControls() {

@@ -32,7 +32,8 @@ void lang_std(void) {
 
     lang_str.config_ui.machine_size = "Machine size";
     lang_str.config_ui.machine_type = "Machine type";
-    lang_str.config_ui.home_direction = "Home direction";
+    lang_str.config_ui.parking = "Parking";
+    lang_str.config_ui.direction = "Direction";
     lang_str.config_ui.endtop_type = "Endstop";
     lang_str.config_ui.filament_settings = "Filament";
     lang_str.config_ui.manual_leveling_settings = "Leveling";
@@ -41,8 +42,9 @@ void lang_std(void) {
     lang_str.config_ui.hotbed_settings = "Hotbed";
 
     lang_str.config_ui.filament_change_temperature = "T°C";
-    lang_str.config_ui.filament_change_speed = "Speed:";
-    lang_str.config_ui.filament_change_length= "Lenght:";;
+    lang_str.config_ui.speed = "Speed:";
+    lang_str.config_ui.length= "Lenght:";;
+    lang_str.config_ui.point = "Point %d";
 
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
@@ -76,8 +78,14 @@ void lang_std(void) {
 	lang_str.babysteps = "Babysteps";
 	lang_str.continue_print = "Continue";
 
-	lang_str.yes = "Yes";
-	lang_str.no = "No";
+	lang_str.yes_no.tr = "Yes";
+	lang_str.yes_no.fl = "No";
+    lang_str.on_off.tr = "On";
+    lang_str.on_off.fl = "Off";
+    lang_str.min_max.tr = "Max";
+    lang_str.min_max.fl = "Min";
+    lang_str.gnd_vcc.fl = "GND";
+    lang_str.gnd_vcc.fl = "VCC";
 	lang_str.wifi = "WiFi";
 	lang_str.machine_settings = "Configuration";
 	lang_str.language = "Language";
@@ -108,6 +116,8 @@ void lang_std(void) {
 	lang_str.ui_title_speed = "Speed";
     lang_str.ui_title_config_machine_size = "Machine size";
     lang_str.ui_title_config_filament_change = "Filament change settings";
+    lang_str.ui_title_leveling_points = "Manual leveling points";
+    lang_str.ui_title_config_home = "Home parking config";
 
 	lang_str.file_info_ui.filament = "Filament (m): %1.3f";
     lang_str.file_info_ui.filament_progress = "Filament (m): %1.3f / %1.3f %d%%";

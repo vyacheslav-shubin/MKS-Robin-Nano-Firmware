@@ -158,16 +158,13 @@ void clear_cur_ui() {
         case KEY_BOARD_UI:		Clear_Keyboard();		break;
         case TIPS_UI:			Clear_Tips();			break;
         case MACHINETYPE_UI:	Clear_MachineType();	break;
-        case HOME_DIR_UI:		Clear_HomeDir();		break;
         case ENDSTOP_TYPE_UI:	Clear_EndstopType();	break;
         case LEVELING_PARA_UI:	Clear_LevelingPara();	break;
 		case DELTA_LEVELING_PARA_UI:	Clear_DeltaLevelPara();		break;
-		case XYZ_LEVELING_PARA_UI:		Clear_XYZLevelPara();		break;
 		case MAXFEEDRATE_UI:	Clear_MaxFeedRate();	break;
 		case STEPS_UI:			Clear_Steps();			break;
 		case ACCELERATION_UI:	Clear_Acceleration();	break;
 		case JERK_UI:			Clear_Jerk();			break;
-		case HOMESPEED_UI:		Clear_HomeSpeed();		break;
 		case NOZZLE_CONFIG_UI:	Clear_NozzleConfig();	break;
 		case HOTBED_CONFIG_UI:	Clear_HotbedConfig();	break;
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
@@ -205,7 +202,8 @@ void draw_return_ui() {
             case MACHINE_SETTINGS_UI:   machine_configuration_ui.show();		break;
             case STROKE_UI:			machine_size_ui.show();			            break;
             case FILAMENT_SETTINGS_UI:		filament_change_config_ui.show();	break;
-
+            case XYZ_LEVELING_PARA_UI:		manual_leveling_ui.show();			break;
+            case HOME_SETTINGS_UI:  home_config_ui.show();                      break;
 
 			case SPRAYER_UI: 	break;
 			case MACHINE_UI:	break;
@@ -219,16 +217,13 @@ void draw_return_ui() {
             case KEY_BOARD_UI:		draw_Keyboard();		break;
             case TIPS_UI:			draw_Tips();			break;
             case MACHINETYPE_UI:	draw_MachineType();		break;
-            case HOME_DIR_UI:		draw_HomeDir();			break;
             case ENDSTOP_TYPE_UI:	draw_EndstopType();		break;
             case LEVELING_PARA_UI:			draw_LevelingPara();			break;
             case DELTA_LEVELING_PARA_UI:	draw_DeltaLevelPara();			break;
-            case XYZ_LEVELING_PARA_UI:		draw_XYZLevelPara();			break;
             case MAXFEEDRATE_UI:	draw_MaxFeedRate();		break;
             case STEPS_UI:			draw_Steps();			break;
             case ACCELERATION_UI:	draw_Acceleration();	break;
             case JERK_UI:			draw_Jerk();			break;
-            case HOMESPEED_UI:		draw_HomeSpeed();		break;
             case NOZZLE_CONFIG_UI:	draw_NozzleConfig();	break;
             case HOTBED_CONFIG_UI:	draw_HotbedConfig();	break;
             case DOUBLE_Z_UI:		draw_DoubleZ();			break;

@@ -57,18 +57,20 @@ void ConfigurationWidget::on_button(UI_BUTTON hBtn) {
 }
 
 
-void ConfigurationWidget::updateCheckButton(UI_BUTTON btn, unsigned char state) {
+void ConfigurationWidget::updateCheckButton(UI_BUTTON btn, unsigned char state, BOOLEAN_LANG * lang) {
 	BUTTON_SetBmpFileName(btn, state ? img_check_on : img_check_off, 1);
     BUTTON_SetBitmapEx(btn,0,&bmp_struct90X30, 0, 5);
-	BUTTON_SetText(btn, state ? lang_str.yes : lang_str.no);
+    if (lang==0)
+        lang = &lang_str.yes_no;
+	BUTTON_SetText(btn, state ? lang->tr : lang->fl);
 }
 
 
-UI_BUTTON ConfigurationWidget::createCheckButton(int x, int y, unsigned char state) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 90, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+UI_BUTTON ConfigurationWidget::createCheckButton(int x, int y, unsigned char state, BOOLEAN_LANG * lang) {
+	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 90, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
 	this->buttonPreset(btn);
 	BUTTON_SetTextAlign(btn, GUI_TA_HCENTER | GUI_TA_VCENTER);
-	this->updateCheckButton(btn, state);
+	this->updateCheckButton(btn, state, lang);
 	return btn;
 }
 
@@ -80,18 +82,18 @@ UI_BUTTON ConfigurationWidget::createCheckButton(int x, int y, unsigned char sta
 #define ROW(idx) (10+50*idx)
 #define TEXT_X_OFFSET 20
 
-void ConfigurationWidget::createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state) {
+void ConfigurationWidget::createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state, BOOLEAN_LANG * lang) {
 	int x = (this->dual_columns ? 240 * (col+1) : 240 * 2) - X_RADIO_SZ;
-    pair->button = this->createCheckButton(x, ROW(row), state);
+    pair->button = this->createCheckButton(x, ROW(row), state, lang);
     x = (this->dual_columns ? 240 * col : 0) + TEXT_X_OFFSET;
     int w = (this->dual_columns? (240 - X_RADIO_SZ) : 240 * 2 - X_RADIO_SZ) - TEXT_X_OFFSET;
-    pair->text = BUTTON_CreateEx(x, ROW(row), w, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+    pair->text = BUTTON_CreateEx(x, ROW(row), w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     BUTTON_SetTextAlign(pair->text, GUI_TA_LEFT | GUI_TA_VCENTER);
     BUTTON_SetText(pair->text, title);
 }
 
 void ConfigurationWidget::createControls() {
-	this->navigator.back = BUTTON_CreateEx(400, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+	this->navigator.back = BUTTON_CreateEx(400, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     BUTTON_SetBmpFileName(this->navigator.back, img_navigator_back,1);
     BUTTON_SetBitmapEx(this->navigator.back, 0, &bmp_struct70X40,0, 0);
     this->navigator.next = 0;
@@ -99,9 +101,9 @@ void ConfigurationWidget::createControls() {
 
     if (this->count>1) {
     	if (this->page < this->count-1)
-    		this->navigator.next = BUTTON_CreateEx(320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+    		this->navigator.next = BUTTON_CreateEx(320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     	if (this->page > 0) {
-    		this->navigator.previous = BUTTON_CreateEx(this->navigator.next ? 240 : 320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
+    		this->navigator.previous = BUTTON_CreateEx(this->navigator.next ? 240 : 320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     	}
     }
 
@@ -136,39 +138,60 @@ UI_TEXT ConfigurationWidget::createLabel(int col, int row, const char* title) {
 }
 
 
+UI_BUTTON ConfigurationWidget::createInput(int x, int y, const char* value) {
+    UI_BUTTON button = BUTTON_CreateEx(x, y, 70, 28, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    BUTTON_SetBmpFileName(button, img_value_blank, 1);
+    BUTTON_SetBitmapEx(button, 0, &bmp_struct_70x28, 0, 0);
+    BUTTON_SetText(button, value);
+    BUTTON_SetTextAlign(button, GUI_TA_CENTER | GUI_TA_VCENTER);
+    BUTTON_SetTextColor(button, BUTTON_CI_PRESSED, 0x0);
+    BUTTON_SetTextColor(button, BUTTON_CI_UNPRESSED, 0x0);
+    BUTTON_SetBkColor(button, BUTTON_CI_PRESSED, 0xe3ebca & 0xF8FAF8);
+    BUTTON_SetBkColor(button, BUTTON_CI_UNPRESSED, 0xe3ebca & 0xF8FAF8); //caebe3
+    return button;
+}
+
+UI_BUTTON ConfigurationWidget::createDefaultSetButtonAt(int col, int row, int offset, const char* value) {
+    int x = (this->dual_columns ? 240 * col : 0);
+    return this->createDefaultSetButton(x + TEXT_X_OFFSET + offset, ROW(row) + 6, value);
+}
+
+
+UI_BUTTON ConfigurationWidget::createDefaultSetButton(int x, int y, const char* value) {
+    UI_BUTTON dflt = BUTTON_CreateEx(x, y, 70, 28, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    BUTTON_SetBmpFileName(dflt, img_value_default, 1);
+    BUTTON_SetBitmapEx(dflt, 0, &bmp_struct_70x28, 0, 0);
+    BUTTON_SetTextAlign(dflt,GUI_TA_CENTER | GUI_TA_VCENTER);
+    BUTTON_SetTextColor(dflt, BUTTON_CI_PRESSED, 0xFFFFFF);
+    BUTTON_SetTextColor(dflt, BUTTON_CI_UNPRESSED, 0xFFFFFF);
+    BUTTON_SetBkColor(dflt, BUTTON_CI_PRESSED, 0xf8845d & 0xF8FAF8);
+    BUTTON_SetBkColor(dflt, BUTTON_CI_UNPRESSED, 0xf8845d & 0xF8FAF8);
+    BUTTON_SetText(dflt, value);
+    return dflt;
+
+}
+
 void ConfigurationWidget::createInputWithDefault(int col, int row, UI_INPUT_WITH_DEFAULT * input, const char* title, const char* value,  const char* dflt) {
 	int x = (this->dual_columns ? 240 * col : 0);
 	int text_w = (this->dual_columns ? 240 : 480)- (70 * 2) - 8 - TEXT_X_OFFSET - 10;
+
+    input->button = this->createInput(TEXT_X_OFFSET + x +  text_w + 4, ROW(row) + 6, value);
+    input->dflt = this->createDefaultSetButton(TEXT_X_OFFSET + x + text_w + 4 + 70 + 4, ROW(row) + 6, dflt);
+
 	input->text = BUTTON_CreateEx(TEXT_X_OFFSET + x , ROW(row),  text_w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
-	input->button = BUTTON_CreateEx(TEXT_X_OFFSET + x +  text_w + 4, ROW(row) + 6, 70, 28, this->hWnd, BUTTON_CF_SHOW, 0, 0);
-	input->dflt = BUTTON_CreateEx(TEXT_X_OFFSET + x + text_w + 4 + 70 + 4, ROW(row) + 6, 70, 28, this->hWnd, BUTTON_CF_SHOW, 0, 0);
-
-
-    BUTTON_SetBmpFileName(input->button, img_value_blank, 1);
-    BUTTON_SetBitmapEx(input->button, 0, &bmp_struct_70x28, 0, 0);
-
-    BUTTON_SetBmpFileName(input->dflt, img_value_default, 1);
-    BUTTON_SetBitmapEx(input->dflt, 0, &bmp_struct_70x28, 0, 0);
-
+    BUTTON_SetTextAlign(input->text,GUI_TA_LEFT | GUI_TA_VCENTER);
     BUTTON_SetText(input->text, title);
-
-	BUTTON_SetTextAlign(input->text,GUI_TA_LEFT | GUI_TA_VCENTER);
-	BUTTON_SetTextAlign(input->button,GUI_TA_CENTER | GUI_TA_VCENTER);
-	BUTTON_SetTextAlign(input->dflt,GUI_TA_CENTER | GUI_TA_VCENTER);
-
-	BUTTON_SetText(input->button, value);
-	BUTTON_SetTextColor(input->button, BUTTON_CI_PRESSED, 0x0);
-	BUTTON_SetTextColor(input->button, BUTTON_CI_UNPRESSED, 0x0);
-    BUTTON_SetBkColor(input->button, BUTTON_CI_PRESSED, 0xe3ebca & 0xF8FAF8);
-    BUTTON_SetBkColor(input->button, BUTTON_CI_UNPRESSED, 0xe3ebca & 0xF8FAF8); //caebe3
-
-    BUTTON_SetTextColor(input->dflt, BUTTON_CI_PRESSED, 0xFFFFFF);
-    BUTTON_SetTextColor(input->dflt, BUTTON_CI_UNPRESSED, 0xFFFFFF);
-    BUTTON_SetBkColor(input->dflt, BUTTON_CI_PRESSED, 0xf8845d & 0xF8FAF8);
-    BUTTON_SetBkColor(input->dflt, BUTTON_CI_UNPRESSED, 0xf8845d & 0xF8FAF8);
-
-
-
-	BUTTON_SetText(input->dflt, dflt);
-
 }
+
+void ConfigurationWidget::createInputDial(int col, int row, UI_INPUT_DUAL * input, const char* title, const char* value1, const char* value2) {
+    int x = (this->dual_columns ? 240 * col : 0);
+    int text_w = (this->dual_columns ? 240 : 480)- (70 * 2) - 8 - TEXT_X_OFFSET - 10;
+
+    input->button1 = this->createInput(TEXT_X_OFFSET + x +  text_w + 4, ROW(row) + 6, value1);
+    input->button2 = this->createInput(TEXT_X_OFFSET + x + text_w + 4 + 70 + 4, ROW(row) + 6, value2);
+
+    input->text = BUTTON_CreateEx(TEXT_X_OFFSET + x , ROW(row),  text_w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    BUTTON_SetTextAlign(input->text,GUI_TA_LEFT | GUI_TA_VCENTER);
+    BUTTON_SetText(input->text, title);
+}
+

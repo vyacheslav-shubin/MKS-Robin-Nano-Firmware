@@ -24,16 +24,13 @@
 #include "lang_common.h"
 #include "draw_meshleveling.h"
 #include "draw_machine_type.h"
-#include "draw_home_dir.h"
 #include "draw_endstop_type.h"
 #include "draw_levelingPara_config.h"
 #include "draw_deltaLevelPare.h"
-#include "draw_XYZLevelPara.h"
 #include "draw_MaxFeedRate.h"
 #include "draw_steps.h"
 #include "draw_acceleration.h"
 #include "draw_jerk.h"
-#include "draw_home_speed.h"
 #include "draw_nozzle_config.h"
 #include "draw_hotbed_config.h"
 #include "draw_doubleZ.h"
@@ -64,18 +61,6 @@ typedef enum {
 	SmoothRodOffset,
 	EffectorOffset,
 	CalibrationRadius,
-
-	Point1_x,
-	Point2_x,
-	Point3_x,
-	Point4_x,
-	Point5_x,
-
-	Point1_y,
-	Point2_y,
-	Point3_y,
-	Point4_y,
-	Point5_y,
 
 	XMaxFeedRate,
 	YMaxFeedRate,
@@ -282,7 +267,8 @@ typedef enum {
 	STROKE_UI,
 	HOME_DIR_UI,
 	ENDSTOP_TYPE_UI,
-	FILAMENT_SETTINGS_UI,
+    FILAMENT_SETTINGS_UI,
+    HOME_SETTINGS_UI,
 	LEVELING_SETTIGNS_UI,
 	LEVELING_PARA_UI,
 	DELTA_LEVELING_PARA_UI,

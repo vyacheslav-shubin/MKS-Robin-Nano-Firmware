@@ -6,7 +6,9 @@
 #include "AdvancedConfigUI.h"
 #include "MotorConfigUI.h"
 #include "dialog/CalculatorDialogUI.h"
+#include "LevelingPointsUI.h"
 #include "FilamentChangeConfigUI.h"
+#include "HomeConfigUI.h"
 
 MachineConfigurationUI machine_configuration_ui;
 
@@ -18,7 +20,7 @@ void MachineConfigurationUI::createControls() {
             this->dual_columns = 1;
             this->createArrowPair(0, 0, &this->ui.machine_type, lang_str.config_ui.machine_type);
             this->createArrowPair(0, 1, &this->ui.machine_size, lang_str.config_ui.machine_size);
-            this->createArrowPair(0, 2, &this->ui.home_direction, lang_str.config_ui.home_direction);
+            this->createArrowPair(0, 2, &this->ui.home_direction, lang_str.config_ui.parking);
             this->createArrowPair(0, 3, &this->ui.endstop_type, lang_str.config_ui.endtop_type);
             this->createArrowPair(0, 4, &this->ui.filament_settings, lang_str.config_ui.filament_settings);
             this->createArrowPair(1, 0, &this->ui.manual_leveling_settings, lang_str.config_ui.manual_leveling_settings);
@@ -48,7 +50,7 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         //draw_Stroke();
     } else if (ui_is_double_button(hBtn, this->ui.home_direction)) {
         this->hide();
-        draw_HomeDir();
+        home_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.endstop_type)) {
         this->hide();
         draw_EndstopType();
@@ -57,7 +59,7 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         filament_change_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.manual_leveling_settings)) {
         this->hide();
-        draw_XYZLevelPara();
+        leveling_points_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.auto_leveling_settings)) {
         this->hide();
         draw_LevelingPara();

@@ -50,7 +50,7 @@ inline static void _fix_size_values() {
     }
 }
 
-void _set_value(unsigned char value_id, float value) {
+static void _set_value(unsigned char value_id, float value) {
     switch (value_id) {
         case X_MAX:
             mksCfg.x_max_pos = value;

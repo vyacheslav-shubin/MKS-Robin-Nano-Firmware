@@ -871,11 +871,11 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue(">cfg_leveling_mode", (uint8_t *)&gCfgItems.leveling_mode,EPR_LEVELING_MODE);
 	eprBurnValue(">cfg_point_number", (uint8_t *)&gCfgItems.leveling_point_number,EPR_LEVELING_POINT_CNT);
 
-	eprBurnValue_leveling(">cfg_point1:",(int32_t *)&gCfgItems.leveling_points[0].x,(int32_t *)&gCfgItems.leveling_points[0].y,EPR_LEVELING_POINT1_X,EPR_LEVELING_POINT1_Y);
-	eprBurnValue_leveling(">cfg_point2:",(int32_t *)&gCfgItems.leveling_points[1].x,(int32_t *)&gCfgItems.leveling_points[1].y,EPR_LEVELING_POINT2_X,EPR_LEVELING_POINT2_Y);
-	eprBurnValue_leveling(">cfg_point3:",(int32_t *)&gCfgItems.leveling_points[2].x,(int32_t *)&gCfgItems.leveling_points[2].y,EPR_LEVELING_POINT3_X,EPR_LEVELING_POINT3_Y);
-	eprBurnValue_leveling(">cfg_point4:",(int32_t *)&gCfgItems.leveling_points[3].x,(int32_t *)&gCfgItems.leveling_points[3].y,EPR_LEVELING_POINT4_X,EPR_LEVELING_POINT4_Y);
-	eprBurnValue_leveling(">cfg_point5:",(int32_t *)&gCfgItems.leveling_points[4].x,(int32_t *)&gCfgItems.leveling_points[4].y,EPR_LEVELING_POINT5_X,EPR_LEVELING_POINT5_Y);
+	eprBurnValue_leveling(">cfg_point1:", (int32_t *)&gCfgItems.leveling_points[0].x, (int32_t *)&gCfgItems.leveling_points[0].y, EPR_LEVELING_POINT1_X, EPR_LEVELING_POINT1_Y);
+	eprBurnValue_leveling(">cfg_point2:", (int32_t *)&gCfgItems.leveling_points[1].x, (int32_t *)&gCfgItems.leveling_points[1].y, EPR_LEVELING_POINT2_X, EPR_LEVELING_POINT2_Y);
+	eprBurnValue_leveling(">cfg_point3:", (int32_t *)&gCfgItems.leveling_points[2].x, (int32_t *)&gCfgItems.leveling_points[2].y, EPR_LEVELING_POINT3_X, EPR_LEVELING_POINT3_Y);
+	eprBurnValue_leveling(">cfg_point4:", (int32_t *)&gCfgItems.leveling_points[3].x, (int32_t *)&gCfgItems.leveling_points[3].y, EPR_LEVELING_POINT4_X, EPR_LEVELING_POINT4_Y);
+	eprBurnValue_leveling(">cfg_point5:", (int32_t *)&gCfgItems.leveling_points[4].x, (int32_t *)&gCfgItems.leveling_points[4].y, EPR_LEVELING_POINT5_X, EPR_LEVELING_POINT5_Y);
 
 	eprBurnValue(">cfg_print_over_auto_close", (uint8_t *)&gCfgItems.print_finish_close_machine_flg,EPR_AUTO_CLOSE_MACHINE);
 

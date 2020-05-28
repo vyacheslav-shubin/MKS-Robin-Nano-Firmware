@@ -13,7 +13,6 @@
 typedef struct {
 	UI_ARROW axes;
 	UI_ARROW steps;
-	UI_ARROW home_speed;
 	UI_ARROW acceleration;
 	UI_ARROW max_speed;
 	UI_ARROW jerk;

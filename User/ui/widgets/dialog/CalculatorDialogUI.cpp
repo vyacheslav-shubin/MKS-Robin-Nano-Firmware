@@ -93,12 +93,12 @@ unsigned char _init_calc(CALC_MATH * cm, double value) {
 
 void CalculatorDialogUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
+    if (this->title != 0)
+        this->ui.title = this->createText(6, 6, DIALOG_WIDTH / 2 - 12, 28, this->title);
     if (!_init_calc(&this->cm, this->init_value))
         this->cm.operation = OVFL;
     this->currentOperand = &this->cm.op1;
     #define _x (DIALOG_WIDTH/2)
-    if (this->title != 0)
-        this->ui.title = this->createText(6, 6, DIALOG_WIDTH / 2 - 12, 28, this->title);
     this->ui.value = TEXT_CreateEx(DIALOG_WIDTH/2, 6, DIALOG_WIDTH - 6 - _x, 28, this->hWnd, WM_CF_SHOW, TEXT_CF_RIGHT|TEXT_CF_VCENTER,  0, 0);
     TEXT_SetBkColor(ui.value,  0xFFFFFF);
     TEXT_SetTextColor(ui.value, 0x00);
@@ -266,5 +266,6 @@ void CalculatorDialogUI::on_button(UI_BUTTON hBtn) {
             }
         }
     }
-    this->updateDisplay();
+    if (this->hWnd!=0)
+        this->updateDisplay();
 }

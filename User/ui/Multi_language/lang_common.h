@@ -22,18 +22,22 @@ typedef struct {
 	const char * jerk_settings;
 
     const char * filament_change_temperature;
-    const char * filament_change_speed;
-    const char * filament_change_length;
+    const char * speed;
+    const char * length;
 
     const char * machine_size;
     const char * machine_type;
-    const char * home_direction;
+    const char * parking;
+    const char * direction;
     const char * endtop_type;
     const char * filament_settings;
     const char * manual_leveling_settings;
     const char * auto_leveling_settings;
     const char * nozzle_settings;
     const char * hotbed_settings;
+
+    const char * point;
+
 } CONFIG_LANG_STR;
 
 typedef struct {
@@ -59,6 +63,11 @@ typedef struct {
     const char * refactored_by;
     const char * confirm_filament_load;
 } DIALOG_LANG_STR;
+
+typedef struct{
+    const char* tr;
+    const char* fl;
+} BOOLEAN_LANG;
 
 typedef struct {
 
@@ -97,8 +106,10 @@ typedef struct {
 	const char * motors;
 	const char * advanced;
 
-	const char *yes;
-	const char *no;
+    BOOLEAN_LANG yes_no;
+    BOOLEAN_LANG on_off;
+    BOOLEAN_LANG min_max;
+    BOOLEAN_LANG gnd_vcc;
 
 	const char *wifi;
 	const char *language;
@@ -126,6 +137,8 @@ typedef struct {
     const char * ui_title_speed;
     const char * ui_title_config_machine_size;
     const char * ui_title_config_filament_change;
+    const char * ui_title_config_home;
+    const char * ui_title_leveling_points;
 
 	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;

@@ -312,109 +312,48 @@ uint8_t beep_pwdet=0;
 uint8_t beep_mtdet1=0;
 uint8_t beep_mtdet2=0;
 
-void mksBeeperAlarm(void)
-{
-#if 0
-		if((gCfgItems.filament_det1_level_flg==1)||(gCfgItems.filament_det2_level_flg==1))
-		{
-			//���ڸߵ�ƽ����ʱ��
-			//�Ƚ���ͨ���ܽŵ�ƽ���ж�
-			//�źŽŵĵ�ƽʹ������ֹͣ���죬
-			//����Ĭ��ÿ�ζ�������5�Ρ�
-			beeper_cnt = 10;
-		}
-		else
-		{
-			if((MKS_PWRDN == 1) && (MKS_MTRDN == 1))
-			{
-				check_beeper_cnt++;
-			}
-			if(check_beeper_cnt >=5)
-			{
-					mksBpAlrmEn = 0;
-					BeeperFreq = 0;
-					BeeperCnt = 0;	
-					SPEAKER = 0;
-					check_beeper_cnt = 0;
-			}
-			beeper_cnt = 20;
-		}
-
-		if(mksBpAlrmEn)
-		{
-			BeeperFreq++;
-			
-			
-			if(BeeperFreq%3000 == 0)
-			{
-				BeeperCnt++;
-				SPEAKER = BeeperCnt%2;
-				//HAL_Delay(3000);
-			}
-		
-			if(BeeperCnt > beeper_cnt)	
-			{	
-				SPEAKER = 0;
-				mksBpAlrmEn=0;
-				BeeperCnt=0;
-				BeeperFreq = 0;
-			}
-		}
-		#endif
-        
-        if(beep_pwdet)
-        {
-            if(MKS_PW_DET_OP== 1)
-            {
-                beep_pwdet=0;
-                BeeperCnt = 0;
-                delaycnt = 0;
-                mksBpAlrmEn = 0;    
-                BEEPER_OP = 0;
-            }
+void mksBeeperAlarm(void){
+    if(beep_pwdet) {
+        if(MKS_PW_DET_OP==1) {
+            beep_pwdet=0;
+            BeeperCnt = 0;
+            delaycnt = 0;
+            mksBpAlrmEn = 0;
+            BEEPER_OP = 0;
         }
-
-        if(beep_mtdet1)
-        {
-            if(MKS_MT_DET1_OP== 1)
-            {
-                beep_mtdet1=0;
-                BeeperCnt = 0;
-                delaycnt = 0;
-                mksBpAlrmEn = 0;    
-                BEEPER_OP = 0;
-            }
+    }
+    if(beep_mtdet1) {
+        if(MKS_MT_DET1_OP==1) {
+            beep_mtdet1=0;
+            BeeperCnt = 0;
+            delaycnt = 0;
+            mksBpAlrmEn = 0;
+            BEEPER_OP = 0;
         }
-        
-        if(beep_mtdet2)
-        {
-            if(MKS_MT_DET2_OP== 1)
-            {
-                beep_mtdet2=0;
-                BeeperCnt = 0;
-                delaycnt = 0;
-                mksBpAlrmEn = 0;    
-                BEEPER_OP = 0;
-            }
+    }
+    if(beep_mtdet2) {
+        if(MKS_MT_DET2_OP==1) {
+            beep_mtdet2=0;
+            BeeperCnt = 0;
+            delaycnt = 0;
+            mksBpAlrmEn = 0;
+            BEEPER_OP = 0;
         }
-        
-		if(mksBpAlrmEn)
-		{
-			delaycnt++;
-			if(delaycnt >= 1000)
-			{
-				BeeperCnt++;
-				delaycnt = 0;
-				BEEPER_OP = BeeperCnt%2;
-			}
-			if(BeeperCnt>=20)
-			{
-				BeeperCnt = 0;
-				delaycnt = 0;
-				mksBpAlrmEn = 0;	
-				BEEPER_OP = 0;
-			}
-		}
+    }
+	if(mksBpAlrmEn) {
+        delaycnt++;
+        if(delaycnt >= 1000) {
+            BeeperCnt++;
+			delaycnt = 0;
+			BEEPER_OP = BeeperCnt%2;
+        }
+		if(BeeperCnt>=20) {
+            BeeperCnt = 0;
+            delaycnt = 0;
+            mksBpAlrmEn = 0;
+            BEEPER_OP = 0;
+        }
+    }
 }
 
 void Close_machine_display() {

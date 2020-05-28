@@ -2,6 +2,7 @@
 // Created by shubin on 22.05.2020.
 //
 
+#include "SensorLevelConfigUI.h"
 #include "MachineConfigurationUI.h"
 #include "AdvancedConfigUI.h"
 #include "MotorConfigUI.h"
@@ -53,7 +54,8 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         home_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.endstop_type)) {
         this->hide();
-        draw_EndstopType();
+        sensor_level_config_ui.show(this);
+        //draw_EndstopType();
     } else if (ui_is_double_button(hBtn, this->ui.filament_settings)) {
         this->hide();
         filament_change_config_ui.show(this);

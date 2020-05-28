@@ -93,6 +93,7 @@ void lang_ru(void) {
     lang_str.ui_title_config_filament_change = "Настройки замены филамента";
     lang_str.ui_title_leveling_points = "Точки настройки уровня стола";
     lang_str.ui_title_config_home = "Настройка парковки";
+    lang_str.ui_title_sensor_levels = "Уровень активации датчиков";
 
 	lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
     lang_str.file_info_ui.filament_progress = "Филамент (m): %1.3f / %1.3f %d%%";

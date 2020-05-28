@@ -35,6 +35,7 @@
 #include "config/MachineSizeUI.h"
 #include "config/FilamentChangeConfigUI.h"
 #include "config/HomeConfigUI.h"
+#include "config/SensorLevelConfigUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

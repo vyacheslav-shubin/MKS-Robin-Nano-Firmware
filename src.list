@@ -103,7 +103,6 @@ User/ui/draw_deltaLevelPare.cpp
 User/ui/draw_dialog.cpp
 User/ui/draw_doubleZ.cpp
 User/ui/draw_EnablePin_Invert.cpp
-User/ui/draw_endstop_type.cpp
 User/ui/draw_FileTransfer_ui.cpp
 User/ui/draw_hotbed_config.cpp
 User/ui/draw_jerk.cpp
@@ -169,6 +168,7 @@ User/ui/widgets/config/FilamentChangeConfigUI.cpp
 User/ui/widgets/config/LevelingPointsUI.cpp
 User/ui/widgets/config/HomeConfigUI.cpp
 User/ui/widgets/config/MachineSizeUI.cpp
+User/ui/widgets/config/SensorLevelConfigUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp
 User/ui/widgets/dialog/AboutDialogUI.cpp

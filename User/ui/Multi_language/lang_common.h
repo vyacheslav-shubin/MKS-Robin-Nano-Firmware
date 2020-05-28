@@ -139,6 +139,7 @@ typedef struct {
     const char * ui_title_config_filament_change;
     const char * ui_title_config_home;
     const char * ui_title_leveling_points;
+    const char * ui_title_sensor_levels;
 
 	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;

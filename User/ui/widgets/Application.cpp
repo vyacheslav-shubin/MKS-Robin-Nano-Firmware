@@ -100,10 +100,6 @@ void _calc_rate(void) {
                 rate = ((float)(card.sdpos - offset)) / (card.filesize - offset);
         } else
             rate = ((float)card.sdpos) / card.filesize;
-
-        SERIAL_ECHOLNPAIR("card.sdpos:", card.sdpos);
-        SERIAL_ECHOLNPAIR("card.filesize:", card.filesize);
-        SERIAL_ECHOLNPAIR("rate:", rate);
         ui_print_process.rate = (u8)(rate * 100);
         if ((ui_print_process.rate==100) && (card.filesize>card.sdpos))
             ui_print_process.rate = 99;

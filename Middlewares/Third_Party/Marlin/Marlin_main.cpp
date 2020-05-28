@@ -16042,73 +16042,56 @@ void setup() {
  *  - Call LCD update
  */
 void loop() {
-#if 1
-    //display_sd_error();
-
-	display_temper_error();
-	
+    display_temper_error();
 	filament_check();
-	
 	MYSERIAL.loopInjection();
 
-#endif
-  if (commands_in_queue < BUFSIZE) get_available_commands();
-
-  #if 0//ENABLED(SDSUPPORT)
-    card.checkautostart(false);
-  #endif
-  card.checkFilesys(gCfgItems.fileSysType);
-
-  if (commands_in_queue) {
-
-    #if ENABLED(SDSUPPORT)
-
-      if (card.saving) {
-        char* command = command_queue[cmd_queue_index_r];
-        if (strstr_P(command, PSTR("M29"))) {
-          // M29 closes the file
-          card.closefile();
-          SERIAL_PROTOCOLLNPGM(MSG_FILE_SAVED);
-
-          #if ENABLED(SERIAL_STATS_DROPPED_RX)
-            SERIAL_ECHOLNPAIR("Dropped bytes: ", customizedSerial.dropped());
-          #endif
-
-          #if ENABLED(SERIAL_STATS_MAX_RX_QUEUED)
-            SERIAL_ECHOLNPAIR("Max RX Queue Size: ", customizedSerial.rxMaxEnqueued());
-          #endif
-
-          ok_to_send();
-        }
-        else {
-          // Write the string from the read buffer to SD
-          card.write_command(command);
-          if (card.logging)
-            process_next_command(); // The card is saving because it's logging
-          else
-            ok_to_send();
-        }
-      }
-      else
-        process_next_command();
-
-    #else
-
-      process_next_command();
-
-    #endif // SDSUPPORT
-
-    // The queue may be reset by a command handler or by code invoked by idle() within a handler
+    if (commands_in_queue < BUFSIZE)
+        get_available_commands();
+    card.checkFilesys(gCfgItems.fileSysType);
     if (commands_in_queue) {
-      --commands_in_queue;
-      if (++cmd_queue_index_r >= BUFSIZE) cmd_queue_index_r = 0;
+
+        #if ENABLED(SDSUPPORT)
+
+        if (card.saving) {
+            char* command = command_queue[cmd_queue_index_r];
+            if (strstr_P(command, PSTR("M29"))) {
+                // M29 closes the file
+                card.closefile();
+                SERIAL_PROTOCOLLNPGM(MSG_FILE_SAVED);
+                #if ENABLED(SERIAL_STATS_DROPPED_RX)
+                    SERIAL_ECHOLNPAIR("Dropped bytes: ", customizedSerial.dropped());
+                #endif
+
+                #if ENABLED(SERIAL_STATS_MAX_RX_QUEUED)
+                    SERIAL_ECHOLNPAIR("Max RX Queue Size: ", customizedSerial.rxMaxEnqueued());
+                #endif
+                ok_to_send();
+            } else {
+                // Write the string from the read buffer to SD
+                card.write_command(command);
+                if (card.logging)
+                    process_next_command(); // The card is saving because it's logging
+                else
+                    ok_to_send();
+            }
+        } else
+            process_next_command();
+        #else
+            process_next_command();
+        #endif // SDSUPPORT
+
+            // The queue may be reset by a command handler or by code invoked by idle() within a handler
+            if (commands_in_queue) {
+                --commands_in_queue;
+                if (++cmd_queue_index_r >= BUFSIZE)
+                    cmd_queue_index_r = 0;
+            }
     }
-  }
-  endstops.report_state();
-  idle();
-  loop_start=1;
-  
-  mks_PrintStatePolling();
+    endstops.report_state();
+    idle();
+    loop_start=1;
+    mks_PrintStatePolling();
 }
 #if 1
 uint16_t z_high_count;

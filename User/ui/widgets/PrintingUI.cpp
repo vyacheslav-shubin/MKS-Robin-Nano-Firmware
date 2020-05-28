@@ -31,6 +31,13 @@ uint8_t pause_resum=0;
 uint8_t print_start_flg = 0;
 extern uint8_t button_disp_pause_state;
 
+typedef enum {
+    DID_CONFIRM_STOP,
+    DID_PRINT_FINISHED,
+    DID_PRINT_INFO,
+    DID_NO_FILAMENT
+};
+
 void PrintingUI::createStateButtonAt(char col, char row, STATE_BUTTON * btn, const char * img, const char * title) {
 	this->createStateButton(COL(col), ROW(row), btn, img, title);
 }
@@ -151,28 +158,53 @@ void PrintingUI::refresh_1s() {
 	}
 }
 
+
 void PrintingUI::on_action_dialog(u8 action, u8 dialog_id) {
-	if (dialog_id==0) {
-        confirm_dialog_ui.hide();
-		if (action==UI_BUTTON_OK) {
-			ui_app.terminatePrintFile();
-		} else if (action==UI_BUTTON_CANCEL) {
-			this->show();
-		}
-	} else if (dialog_id==1) {
-        confirm_dialog_ui.hide();
-		if (action==UI_BUTTON_OK) {
-			ui_app.startPrintFile();
-		} else if (action==UI_BUTTON_CANCEL) {
-			ui_app.showMainWidget();
-		} else if (action==UI_BUTTON_TIMEOUT) {
-			GUI_Clear();
-			enqueue_and_echo_commands_P(PSTR("M81"));
-		}
-	} else if (dialog_id==2) {
-	    printing_info_dialog_ui.hide();
-	    this->show();
-	}
+    switch(dialog_id) {
+        case DID_NO_FILAMENT: {
+            if (action == UI_BUTTON_OK) {
+                if (is_filament_fail()) {
+                    shUI::pushGcode("M300 P300");
+                } else {
+                    confirm_dialog_ui.hide();
+                    start_print_time();
+                    pause_resum = 1;
+                    mksReprint.mks_printer_state = MKS_RESUMING;//MKS_WORKING;
+                    this->show();
+                }
+            } else {
+                confirm_dialog_ui.hide();
+                this->show();
+            }
+            break;
+        }
+        case DID_PRINT_INFO: {
+            printing_info_dialog_ui.hide();
+            this->show();
+            break;
+        }
+        case DID_PRINT_FINISHED: {
+            confirm_dialog_ui.hide();
+            if (action==UI_BUTTON_OK) {
+                ui_app.startPrintFile();
+            } else if (action==UI_BUTTON_CANCEL) {
+                ui_app.showMainWidget();
+            } else if (action==UI_BUTTON_TIMEOUT) {
+                GUI_Clear();
+                enqueue_and_echo_commands_P(PSTR("M81"));
+            }
+            break;
+        }
+        case DID_CONFIRM_STOP: {
+            confirm_dialog_ui.hide();
+            if (action == UI_BUTTON_OK) {
+                ui_app.terminatePrintFile();
+            } else if (action == UI_BUTTON_CANCEL) {
+                this->show();
+            }
+            break;
+        }
+    }
 }
 
 
@@ -193,8 +225,9 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 
 		} else if(mksReprint.mks_printer_state == MKS_PAUSED) {
 			if (is_filament_fail()) {
+                shUI::pushGcode("M300 P300");
 				this->hide();
-				draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
+                confirm_dialog_ui.show(lang_str.dialog.error_filament_end_detected, this, DID_NO_FILAMENT, this);
 				return;
 			} else {
 				start_print_time();
@@ -209,7 +242,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 	} else if(hBtn == ui.stop) {
 		if(mksReprint.mks_printer_state != MKS_IDLE) {
 			this->hide();
-			confirm_dialog_ui.show(lang_str.dialog.confirm_terminate_print, this, 0, this);
+			confirm_dialog_ui.show(lang_str.dialog.confirm_terminate_print, this, DID_CONFIRM_STOP, this);
 		}
 	} else if (hBtn == ui.fan.button) {
 		this->hide();
@@ -227,7 +260,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 		this->updatePowerControlButton();
 	} else if (hBtn == this->ui.info) {
         this->hide();
-	    printing_info_dialog_ui.show(this, 2, this);
+	    printing_info_dialog_ui.show(this, DID_PRINT_INFO, this);
 	}
 
 };

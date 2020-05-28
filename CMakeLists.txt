@@ -650,6 +650,8 @@ add_executable(work
 		User/ui/widgets/config/LevelingPointsUI.h
 		User/ui/widgets/config/LevelingPointsUI.cpp
 		User/ui/widgets/config/HomeConfigUI.cpp
+		User/ui/widgets/config/SensorLevelConfigUI.h
+		User/ui/widgets/config/SensorLevelConfigUI.cpp
 		User/ui/widgets/config/HomeConfigUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
@@ -722,8 +724,6 @@ add_executable(work
         User/ui/draw_doubleZ.h
         User/ui/draw_EnablePin_Invert.cpp
         User/ui/draw_EnablePin_Invert.h
-        User/ui/draw_endstop_type.cpp
-        User/ui/draw_endstop_type.h
         User/ui/draw_FileTransfer_ui.cpp
         User/ui/draw_FileTransfer_ui.h
         User/ui/draw_hotbed_config.cpp

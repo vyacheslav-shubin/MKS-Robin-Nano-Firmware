@@ -1,3 +1,4 @@
+#error unused
 #ifndef _DRAW_MACHINETYPE_H_
 #define _DRAW_MACHINETYPE_H_
 

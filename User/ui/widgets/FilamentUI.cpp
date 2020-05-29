@@ -13,6 +13,10 @@
 
 FilamentUI filament_ui;
 
+//gCfgItems.filamentchange.load.time = (uint32_t)((gCfgItems.filamentchange.load.length*60.0/gCfgItems.filamentchange.load.speed)+0.5);
+//gCfgItems.filamentchange.unload.time = (uint32_t)((gCfgItems.filamentchange.unload.length*60.0/gCfgItems.filamentchange.unload.speed)+0.5);
+
+
 static const UI_BUTTON_INFO extruder_selector_info[2] {
 	{img_heating_selector_ext1, &lang_str.extruder1},
 	{img_heating_selector_ext2, &lang_str.extruder2}

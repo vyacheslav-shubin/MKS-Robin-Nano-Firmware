@@ -25,8 +25,8 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void createControls();
 public:
-	virtual const char * getTitle() {return lang_str.config_ui.simple_main_ui;};
-	MotorConfigUI() : ConfigurationWidget(MOTOR_SETTINGS_UI, 1) {};;
+	virtual const char * getTitle() {return lang_str.ui_title_motor_settings;};
+	MotorConfigUI() : ConfigurationWidget(MOTOR_SETTINGS_UI, 1) {};
 };
 
 extern MotorConfigUI motor_config_ui;

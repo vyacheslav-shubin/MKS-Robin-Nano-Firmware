@@ -1,6 +1,7 @@
 #include "GUI.h"
 #include "BUTTON.h"
 #include "draw_ui.h"
+#include "ui_tools.h"
 
 #include "Marlin.h"
 #include "mks_reprint.h"
@@ -126,9 +127,9 @@ void draw_MachineType()
     BUTTON_SetBmpFileName(buttonDelta.btnHandle,NULL,1);
     BUTTON_SetBmpFileName(buttonCorexy.btnHandle,NULL,1);
 
-    BUTTON_SetBitmapEx(XYZ_Sel.btnHandle,0,&bmp_struct26X26,64,7);//ͼƬ��СΪ26x26
-    BUTTON_SetBitmapEx(Delta_Sel.btnHandle,0,&bmp_struct26X26,64,7);
-    BUTTON_SetBitmapEx(Corexy_Sel.btnHandle,0,&bmp_struct26X26,64,7);
+    BUTTON_SetBitmapEx(XYZ_Sel.btnHandle,0,&bmp_struct_30x30,63,6);//ͼƬ��СΪ26x26
+    BUTTON_SetBitmapEx(Delta_Sel.btnHandle,0,&bmp_struct_30x30,63,6);
+    BUTTON_SetBitmapEx(Corexy_Sel.btnHandle,0,&bmp_struct_30x30,63,6);
     
     BUTTON_SetTextAlign(buttonXYZ.btnHandle,GUI_TA_LEFT|GUI_TA_VCENTER );
     BUTTON_SetTextAlign(buttonDelta.btnHandle,GUI_TA_LEFT|GUI_TA_VCENTER );
@@ -163,27 +164,26 @@ void Machine_sel()
     switch(mksCfg.machinetype)
     {
         case 1:
-                 
-            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, "bmp_circle_sel.bin",1);        
-            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, "bmp_circle.bin",1);
-            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, "bmp_circle.bin",1);
+            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, img_radio_sel,1);
+            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, img_radio,1);
+            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, img_radio,1);
             break;
         case 2:
                  
-            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, "bmp_circle.bin",1);        
-            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, "bmp_circle_sel.bin",1);
-            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, "bmp_circle.bin",1);
+            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, img_radio,1);
+            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, img_radio_sel,1);
+            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, img_radio,1);
             break;
         case 4:
                  
-            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, "bmp_circle.bin",1);        
-            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, "bmp_circle.bin",1);
-            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, "bmp_circle_sel.bin",1);
+            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, img_radio,1);
+            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, img_radio,1);
+            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, img_radio_sel,1);
             break;
         default:
-            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, "bmp_circle_sel.bin",1);        
-            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, "bmp_circle.bin",1);
-            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, "bmp_circle.bin",1);            
+            BUTTON_SetBmpFileName(XYZ_Sel.btnHandle, img_radio_sel,1);
+            BUTTON_SetBmpFileName(Delta_Sel.btnHandle, img_radio,1);
+            BUTTON_SetBmpFileName(Corexy_Sel.btnHandle, img_radio,1);
             break;
     }
 }

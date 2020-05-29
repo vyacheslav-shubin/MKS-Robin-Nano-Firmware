@@ -167,6 +167,9 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_value_blank		        "bmp_value_blank.bin"
 #define img_value_default		    "bmp_default.bin"
 
+#define img_radio		            "bmp_radio.bin"
+#define img_radio_sel		        "bmp_radio_sel.bin"
+
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
@@ -255,6 +258,7 @@ extern GUI_BITMAP bmp_struct_100x100;
 extern GUI_BITMAP bmp_struct_50x50;
 extern GUI_BITMAP bmp_struct_70x50;
 extern GUI_BITMAP bmp_struct_70x28;
+extern GUI_BITMAP bmp_struct_30x30;
 
 extern UI_PRINT_PROCESS ui_print_process;
 
@@ -302,14 +306,6 @@ extern void ui_set_text_value(TEXT_Handle handle, char* val);
 extern void ui_update_std_button(BUTTON_Handle handle, const char* file, const char* title);
 
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
-
-
-extern void ui_draw_config_lines();
-extern void ui_draw_config_half_lines();
-
-extern void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator);
-extern void ui_make_check_pair(int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title, uint8_t state);
-extern void ui_make_half_row_check_pair(int col, int row, WM_HWIN hWin, UI_CHECK_PAIR * pair, char* title, uint8_t state);
 
 #define ui_compare_arrow_pair(handle, pair) (((handle)==pair.button_text) || ((handle)==pair.button_arrow))
 extern void ui_make_arrow_pair(int row, WM_HWIN hWin, UI_ARROW_PAIR * pair, char* title);

@@ -74,19 +74,36 @@ UI_BUTTON ConfigurationWidget::createCheckButton(int x, int y, unsigned char sta
 	return btn;
 }
 
-#define X_TEXT 		10
-#define X_RADIO 	370
-#define X_RADIO_SZ 	110
+#define X_RADIO_SZ 	30
+#define X_CHECK_BOX_SZ 	110
 #define X_ARROW_SZ 	10
 
 #define ROW(idx) (10+50*idx)
 #define TEXT_X_OFFSET 20
 
+void ConfigurationWidget::createRadio(int col, int row, UI_RADIO * radio, const char* title, unsigned char state) {
+    int x = (this->dual_columns ? 0 : 240) + TEXT_X_OFFSET;
+    int w = (this->dual_columns ? 240 - TEXT_X_OFFSET : (480 * (2 - TEXT_X_OFFSET))) - X_RADIO_SZ - 10;
+
+    radio->text = BUTTON_CreateEx(x, ROW(row), w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    BUTTON_SetTextAlign(radio->text, GUI_TA_LEFT | GUI_TA_VCENTER);
+    BUTTON_SetText(radio->text, title);
+
+    radio->button = BUTTON_CreateEx(x + w, ROW(row), 40, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    this->updateRadio(radio->button, state);
+}
+
+void ConfigurationWidget::updateRadio(UI_BUTTON radio, unsigned char state) {
+    BUTTON_SetBmpFileName(radio, state ? img_radio_sel : img_radio, 1);
+    BUTTON_SetBitmapEx(radio, 0, &bmp_struct_30x30,5, 5);
+}
+
+
 void ConfigurationWidget::createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state, BOOLEAN_LANG * lang) {
-	int x = (this->dual_columns ? 240 * (col+1) : 240 * 2) - X_RADIO_SZ;
+	int x = (this->dual_columns ? 240 * (col+1) : 240 * 2) - X_CHECK_BOX_SZ;
     pair->button = this->createCheckButton(x, ROW(row), state, lang);
     x = (this->dual_columns ? 240 * col : 0) + TEXT_X_OFFSET;
-    int w = (this->dual_columns? (240 - X_RADIO_SZ) : 240 * 2 - X_RADIO_SZ) - TEXT_X_OFFSET;
+    int w = (this->dual_columns ? (240 - X_CHECK_BOX_SZ) : 240 * 2 - X_CHECK_BOX_SZ) - TEXT_X_OFFSET;
     pair->text = BUTTON_CreateEx(x, ROW(row), w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     BUTTON_SetTextAlign(pair->text, GUI_TA_LEFT | GUI_TA_VCENTER);
     BUTTON_SetText(pair->text, title);

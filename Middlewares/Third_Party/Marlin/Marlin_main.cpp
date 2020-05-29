@@ -16043,7 +16043,8 @@ void setup() {
  */
 void loop() {
     display_temper_error();
-	filament_check();
+	ui_app.loop();
+    filament_check();
 	MYSERIAL.loopInjection();
 
     if (commands_in_queue < BUFSIZE)

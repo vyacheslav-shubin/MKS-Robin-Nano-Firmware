@@ -353,8 +353,8 @@ add_executable(work
         Middlewares/Third_Party/Marlin/blinkm.h
         Middlewares/Third_Party/Marlin/boards.h
         Middlewares/Third_Party/Marlin/buzzer.h
-        Middlewares/Third_Party/Marlin/cardreader.cpp
-        Middlewares/Third_Party/Marlin/cardreader.h
+		Middlewares/Third_Party/Marlin/cardreader.cpp
+		Middlewares/Third_Party/Marlin/cardreader.h
         Middlewares/Third_Party/Marlin/circularqueue.h
         Middlewares/Third_Party/Marlin/Conditionals.h
         Middlewares/Third_Party/Marlin/Conditionals_LCD.h
@@ -653,6 +653,9 @@ add_executable(work
 		User/ui/widgets/config/SensorLevelConfigUI.h
 		User/ui/widgets/config/SensorLevelConfigUI.cpp
 		User/ui/widgets/config/HomeConfigUI.h
+		User/ui/widgets/config/MachineTypeConfigUI.cpp
+		User/ui/widgets/config/MachineTypeConfigUI.h
+		User/ui/widgets/config/HomeConfigUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
         User/ui/widgets/dialog/ConfirmDialogUI.cpp
@@ -738,8 +741,6 @@ add_executable(work
         User/ui/draw_log_ui.h
         User/ui/draw_machine.cpp
         User/ui/draw_machine.h
-        User/ui/draw_machine_type.cpp
-        User/ui/draw_machine_type.h
         User/ui/draw_MaxFeedRate.cpp
         User/ui/draw_MaxFeedRate.h
         User/ui/draw_mesh_leveling.cpp
@@ -748,8 +749,6 @@ add_executable(work
         User/ui/draw_nozzle_config.h
         User/ui/draw_number_key.cpp
         User/ui/draw_number_key.h
-        User/ui/draw_Sprayer.cpp
-        User/ui/draw_Sprayer.h
         User/ui/draw_steps.cpp
         User/ui/draw_steps.h
         User/ui/draw_Tips.cpp

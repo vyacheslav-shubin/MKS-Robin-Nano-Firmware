@@ -39,6 +39,7 @@ public:
 	void start();
 	void setup();
 	void idle();
+	void loop();
 	void refresh();
 	void refresh_05();
 	void refresh_1s();

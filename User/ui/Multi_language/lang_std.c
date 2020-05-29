@@ -119,6 +119,8 @@ void lang_std(void) {
     lang_str.ui_title_leveling_points = "Manual leveling points";
     lang_str.ui_title_config_home = "Home parking config";
     lang_str.ui_title_sensor_levels = "Sensors activalting level";
+    lang_str.ui_title_motor_settings = "Motors settings";
+    lang_str.ui_title_machine_type_settings = "Machine type settings";
 
 	lang_str.file_info_ui.filament = "Filament (m): %1.3f";
     lang_str.file_info_ui.filament_progress = "Filament (m): %1.3f / %1.3f %d%%";

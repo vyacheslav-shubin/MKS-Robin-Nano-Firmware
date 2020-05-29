@@ -37,11 +37,37 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/cardreader.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/cardreader.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_Sprayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_Sprayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_Sprayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_Sprayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_machine_type.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_machine_type.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_machine_type.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_machine_type.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MotorConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MotorConfigUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/arrow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/buttons1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/buttons1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/circle_sel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/disable.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/disable.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/enable.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/enable.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +126,7 @@
       <workItem from="1590147567092" duration="250000" />
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
+      <workItem from="1590758996962" duration="1745000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -248,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590683782774</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="application.loop -&gt; application.idle + application.beep">
+      <created>1590685860084</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1590685860084</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -289,17 +323,18 @@
     <MESSAGE value="Confirm dialog on filament load" />
     <MESSAGE value="Home config as widget. Direction+Speed = One widget" />
     <MESSAGE value="sensor level config as widget" />
-    <option name="LAST_COMMIT_MESSAGE" value="sensor level config as widget" />
+    <MESSAGE value="application.loop -&gt; application.idle + application.beep" />
+    <option name="LAST_COMMIT_MESSAGE" value="application.loop -&gt; application.idle + application.beep" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590145878217" />
-    <state x="6" y="126" width="428" height="498" key="FileChooserDialogImpl" timestamp="1590683433264">
+    <state x="7" y="147" width="428" height="498" key="FileChooserDialogImpl" timestamp="1590760677993">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="6" y="126" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590683433264" />
+    <state x="7" y="147" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590760677993" />
     <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1590147811417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -328,6 +363,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590581244987" />
+    <state x="623" y="234" width="672" height="678" key="search.everywhere.popup" timestamp="1590686517574">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="234" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590686517574" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

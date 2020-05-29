@@ -23,6 +23,7 @@
 #ifndef _CARDREADER_H_
 #define _CARDREADER_H_
 
+#include "Configuration.h"
 
 #define SD_DETECT_INVERTED false
 /*-----------------------2017-11-01 add 1---------------------------*/
@@ -188,6 +189,7 @@ public:
 	private:
 		uint8_t lsRecursive(SdBaseFile *parent,uint8_t level,char *findFilename);
 };
+
 extern CardReader card;
 
 

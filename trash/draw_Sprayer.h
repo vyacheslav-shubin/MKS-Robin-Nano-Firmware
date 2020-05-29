@@ -1,3 +1,4 @@
+#error unused
 #ifndef _DRAW_SPRAYER_H_
 #define _DRAW_SPRAYER_H_
 

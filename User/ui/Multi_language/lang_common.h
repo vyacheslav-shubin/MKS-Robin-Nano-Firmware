@@ -140,6 +140,8 @@ typedef struct {
     const char * ui_title_config_home;
     const char * ui_title_leveling_points;
     const char * ui_title_sensor_levels;
+    const char * ui_title_motor_settings;
+    const char * ui_title_machine_type_settings;
 
 	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;

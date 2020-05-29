@@ -138,6 +138,9 @@ char Application::touch(u8 action) {
 	return 1;
 }
 
+void Application::loop() {
+
+}
 
 void Application::idle() {
 

@@ -12,7 +12,6 @@
 #include "fatfs.h"
 #include "serial.h"
 #include "ff.h"
-#include "ui_tools.h"
 #include "sh_tools.h"
 #include "integration.h"
 

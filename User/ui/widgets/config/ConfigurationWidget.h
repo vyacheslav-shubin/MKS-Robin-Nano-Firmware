@@ -40,6 +40,8 @@ typedef struct {
     UI_BUTTON button2;
 } UI_INPUT_DUAL;
 
+typedef UI_DOUBLE_BUTTON UI_RADIO;
+
 #define ui_is_double_button(tst, db) ((tst==db.button) || (tst==db.text))
 
 
@@ -53,7 +55,10 @@ protected:
 	UI_BUTTON createCheckButton(int x, int y, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
 	UI_TEXT createLabel(int col, int row, const char* title);
 	void updateCheckButton(UI_BUTTON btn, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
-	void createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
+    void createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
+    void createRadio(int col, int row, UI_RADIO * radio, const char* title, unsigned char state);
+    void updateRadio(UI_BUTTON radio, unsigned char state);
+
 	void createArrowPair(int col, int row, UI_ARROW * pair, const char* title);
     void createInputWithDefault(int col, int row, UI_INPUT_WITH_DEFAULT * input, const char* title, const char* value, const char* dflt = 0);
     void createInputDial(int col, int row, UI_INPUT_DUAL * input, const char* title, const char* value1, const char* value2);

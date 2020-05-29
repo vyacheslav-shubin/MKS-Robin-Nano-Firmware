@@ -108,7 +108,6 @@ User/ui/draw_hotbed_config.cpp
 User/ui/draw_jerk.cpp
 User/ui/draw_keyboard.cpp
 User/ui/draw_levelingPara_config.cpp
-User/ui/draw_machine_type.cpp
 User/ui/draw_MaxFeedRate.cpp
 User/ui/draw_mesh_leveling.cpp
 User/ui/draw_nozzle_config.cpp
@@ -168,6 +167,7 @@ User/ui/widgets/config/FilamentChangeConfigUI.cpp
 User/ui/widgets/config/LevelingPointsUI.cpp
 User/ui/widgets/config/HomeConfigUI.cpp
 User/ui/widgets/config/MachineSizeUI.cpp
+User/ui/widgets/config/MachineTypeConfigUI.cpp
 User/ui/widgets/config/SensorLevelConfigUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp

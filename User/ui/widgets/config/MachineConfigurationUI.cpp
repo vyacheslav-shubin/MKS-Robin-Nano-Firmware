@@ -4,6 +4,7 @@
 
 #include "SensorLevelConfigUI.h"
 #include "MachineConfigurationUI.h"
+#include "MachineTypeConfigUI.h"
 #include "AdvancedConfigUI.h"
 #include "MotorConfigUI.h"
 #include "dialog/CalculatorDialogUI.h"
@@ -34,7 +35,7 @@ void MachineConfigurationUI::createControls() {
             this->dual_columns = 1;
             this->createArrowPair(0, 0, &this->ui.motor_settings, lang_str.motors);
             this->createArrowPair(0, 1, &this->ui.advanced_settings, lang_str.advanced);
-            this->createArrowPair(0, 1, &this->ui.test_calc, "test calc");
+            //this->createArrowPair(0, 2, &this->ui.test_calc, "test calc");
 
             break;
         }
@@ -44,18 +45,17 @@ void MachineConfigurationUI::createControls() {
 void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     if (ui_is_double_button(hBtn, this->ui.machine_type)) {
         this->hide();
-        draw_MachineType();
+        machine_type_config_ui.show(this);
+        //draw_MachineType();
     } else if (ui_is_double_button(hBtn, this->ui.machine_size)) {
         this->hide();
         machine_size_ui.show(this);
-        //draw_Stroke();
     } else if (ui_is_double_button(hBtn, this->ui.home_direction)) {
         this->hide();
         home_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.endstop_type)) {
         this->hide();
         sensor_level_config_ui.show(this);
-        //draw_EndstopType();
     } else if (ui_is_double_button(hBtn, this->ui.filament_settings)) {
         this->hide();
         filament_change_config_ui.show(this);
@@ -77,7 +77,7 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     } else if (ui_is_double_button(hBtn, this->ui.advanced_settings)) {
         this->hide();
         advanced_config_ui.show(this);
-    } else if (ui_is_double_button(hBtn, this->ui.test_calc)) {
+    //} else if (ui_is_double_button(hBtn, this->ui.test_calc)) {
         //this->hide();
         //calculator_dialog_ui.show(this);
     } else {

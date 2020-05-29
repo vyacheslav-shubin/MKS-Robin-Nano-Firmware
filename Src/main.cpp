@@ -98,12 +98,8 @@ uint32_t logo_tick1,logo_tick2;
 
 extern void draw_Hardwaretest();
 
-volatile uint8_t pause_from_high_level=0;
-volatile uint8_t pause_from_low_level=0;
-
 uint16_t test_epr;
-int main(void)
-{
+int main(void) {
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -180,63 +176,62 @@ int main(void)
     HAL_NVIC_DisableIRQ(DMA1_Channel1_IRQn);//�ر�DMA1_Channel1_IRQn�ж�
  
     mkstft_ui_init();
-    
+    mksTmp.cfg_hardware_test_enable = 0;
 
- mksTmp.cfg_hardware_test_enable = 0;
+    if(SD_DET_IP == 0) {
+        card.initsd();
+        card.mksConfiguration();
+    }
 
-  if(SD_DET_IP == 0) {
-	card.initsd();
-	card.mksConfiguration();
-  }
-
-  SPI_FLASH_BufferRead((u8*)&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR,1);
+    SPI_FLASH_BufferRead((u8*)&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR,1);
   
-  ui_app.start();
-  logo_tick1 = getTick();
-  gui_view_init();
-  setTouchBound(gCfgItems.touch_adj_xMin, gCfgItems.touch_adj_xMax, gCfgItems.touch_adj_yMax, gCfgItems.touch_adj_yMin);
-  SPI_FLASH_BufferRead((u8*)&gCfgItems.total_pic,PIC_COUNTER_ADDR,1);
+    ui_app.start();
+    logo_tick1 = getTick();
+    gui_view_init();
+    setTouchBound(gCfgItems.touch_adj_xMin, gCfgItems.touch_adj_xMax, gCfgItems.touch_adj_yMax, gCfgItems.touch_adj_yMin);
+    SPI_FLASH_BufferRead((u8*)&gCfgItems.total_pic,PIC_COUNTER_ADDR,1);
 
 
   //TODO: Нахрен!
 #if 1
-  switch(gCfgItems.language_bak) {
-  	case 1:
-		gCfgItems.language_bak= LANG_SIMPLE_CHINESE;
-		break;
-	case 2:
-		gCfgItems.language_bak= LANG_COMPLEX_CHINESE;
-		break;
-	case 3:
-		gCfgItems.language_bak= LANG_ENGLISH;
-		break;
-	case 4:
-		gCfgItems.language_bak= LANG_RUSSIAN;
-		break;
-	case 5:
-		gCfgItems.language_bak= LANG_SPANISH;
-		break;
-	case 6:
-		gCfgItems.language_bak= LANG_FRENCH;
-		break;
-	case 7:
-		gCfgItems.language_bak= LANG_ITALY;
-		break;
-  }
+    switch(gCfgItems.language_bak) {
+        case 1:
+            gCfgItems.language_bak= LANG_SIMPLE_CHINESE;
+            break;
+        case 2:
+            gCfgItems.language_bak= LANG_COMPLEX_CHINESE;
+            break;
+        case 3:
+            gCfgItems.language_bak= LANG_ENGLISH;
+            break;
+        case 4:
+            gCfgItems.language_bak= LANG_RUSSIAN;
+            break;
+        case 5:
+            gCfgItems.language_bak= LANG_SPANISH;
+            break;
+        case 6:
+            gCfgItems.language_bak= LANG_FRENCH;
+            break;
+        case 7:
+            gCfgItems.language_bak= LANG_ITALY;
+            break;
+    }
   
-  if(gCfgItems.multiple_language == 0) {
-	if(gCfgItems.language_bak != 0) {
-		gCfgItems.language = gCfgItems.language_bak;
-		AT24CXX_Write(EPR_LANGUAGE,(uint8_t *)&gCfgItems.language,1);	
-	}
-  }
+    if(gCfgItems.multiple_language == 0) {
+	    if(gCfgItems.language_bak != 0) {
+		    gCfgItems.language = gCfgItems.language_bak;
+		    AT24CXX_Write(EPR_LANGUAGE,(uint8_t *)&gCfgItems.language,1);
+	    }
+    }
 #endif
 
 
 
 
-  setup();
-  ui_app.setup();
+    setup();
+
+    ui_app.setup();
 
     TEXT_SetDefaultTextColor(gCfgItems.title_color);
     GUI_SetBkColor(gCfgItems.background_color);
@@ -247,42 +242,41 @@ int main(void)
     BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_UNPRESSED);
     BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_PRESSED);
 
-  if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
-    GUI_SetFont(&GUI_FontHZ16);
-    BUTTON_SetDefaultFont(&GUI_FontHZ16);
-    TEXT_SetDefaultFont(&GUI_FontHZ16);  
-    GUI_UC_SetEncodeNone();
-  } else {
-    GUI_SetFont(&FONT_TITLE);
-    BUTTON_SetDefaultFont(&FONT_TITLE);
-    TEXT_SetDefaultFont(&FONT_TITLE);                    
-    GUI_UC_SetEncodeUTF8();
-  }
-  disp_language_init();	
+    if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
+        GUI_SetFont(&GUI_FontHZ16);
+        BUTTON_SetDefaultFont(&GUI_FontHZ16);
+        TEXT_SetDefaultFont(&GUI_FontHZ16);
+        GUI_UC_SetEncodeNone();
+    } else {
+        GUI_SetFont(&FONT_TITLE);
+        BUTTON_SetDefaultFont(&FONT_TITLE);
+        TEXT_SetDefaultFont(&FONT_TITLE);
+        GUI_UC_SetEncodeUTF8();
+    }
+    disp_language_init();
 
-  gCfgItems.filamentchange.load.time = (uint32_t)((gCfgItems.filamentchange.load.length*60.0/gCfgItems.filamentchange.load.speed)+0.5);
-  gCfgItems.filamentchange.unload.time = (uint32_t)((gCfgItems.filamentchange.unload.length*60.0/gCfgItems.filamentchange.unload.speed)+0.5);
 
-  if(gCfgItems.pwroff_save_mode == 1)
-  	FALA_CTRL = 1;
+    if(gCfgItems.pwroff_save_mode == 1)
+  	    FALA_CTRL = 1;
 
-  mks_initPrint();
-  memset(&wifi_list,0,sizeof(&wifi_list));
-  if(mksTmp.cfg_hardware_test_enable) {
-	mksCfg.extruders=2;
-	draw_Hardwaretest();
-  }
-  card.initsd();
-  mks_rePrintCheck();
+    mks_initPrint();
+    memset(&wifi_list,0,sizeof(&wifi_list));
+    if(mksTmp.cfg_hardware_test_enable) {
+	    mksCfg.extruders=2;
+	    draw_Hardwaretest();
+    }
+    card.initsd();
+    mks_rePrintCheck();
 
-  if(gCfgItems.wifi_type == ESP_WIFI)
-	wifi_init();
-  /* Infinite loop */
-  while (1) {
-      if(mksTmp.cfg_hardware_test_enable==1)
-        mksHardwareTest();
-      loop();
-  }
+    if(gCfgItems.wifi_type == ESP_WIFI)
+	    wifi_init();
+
+    /* Infinite loop */
+    while (1) {
+        if(mksTmp.cfg_hardware_test_enable==1)
+            mksHardwareTest();
+        loop();
+    }
 }
 
 uint8_t poweroff_det_flg;

@@ -12,7 +12,6 @@ typedef enum{
 
 FilamentChangeConfigUI filament_change_config_ui;
 
-static void _set_value(unsigned char value_id, u32 value);
 
 void _set_text_values(FILAMET_CHANGE_UI_CONTROLS_SET * set, FILAMENT_CHANGE_CONFIG_SET * config) {
     sprintf(ui_buf1_100,"%d",config->temper);
@@ -32,21 +31,18 @@ unsigned char FilamentChangeConfigUI::checkButtonSet(UI_BUTTON hBtn, unsigned ch
     FILAMET_CHANGE_UI_CONTROLS_SET * set = index==0 ? &this->ui.load: &this->ui.unload;
     FILAMENT_CHANGE_CONFIG_SET * config = index==0 ? &gCfgItems.filamentchange.load: &gCfgItems.filamentchange.unload;
     if (hBtn==set->speed.button) {
-        this->hide();
-        calculator_dialog_ui.show(lang_str.config_ui.speed, config->speed, FILAMENT_S + 3 * index, this, this);
+        this->calculator(lang_str.config_ui.speed, config->speed, FILAMENT_S + 3 * index);
     } else if (hBtn==set->termerature.button) {
-        this->hide();
-        calculator_dialog_ui.show(lang_str.config_ui.filament_change_temperature, config->temper, FILAMENT_T + 3 * index, this, this);
+        this->calculator(lang_str.config_ui.filament_change_temperature, config->temper, FILAMENT_T + 3 * index);
     } else if (hBtn==set->length.button) {
-        this->hide();
-        calculator_dialog_ui.show(lang_str.config_ui.length, config->length, FILAMENT_L + 3 * index, this, this);
+        this->calculator(lang_str.config_ui.length, config->length, FILAMENT_L + 3 * index);
     } else {
         if (hBtn==set->length.dflt) {
-            _set_value(FILAMENT_L + 3 * index, 750);
+            this->_setValue(FILAMENT_L + 3 * index, 750);
         } else if (hBtn==set->speed.dflt) {
-            _set_value(FILAMENT_S + 3 * index, 2000);
+            this->_setValue(FILAMENT_S + 3 * index, 2000);
         } else if (hBtn==set->termerature.dflt) {
-            _set_value(FILAMENT_T + 3 * index, 200);
+            this->_setValue(FILAMENT_T + 3 * index, 200);
         } else
             return 0;
         _set_text_values(set, config);
@@ -76,7 +72,7 @@ void FilamentChangeConfigUI::createControls() {
     this->updateValues();
 }
 
-static void _set_value(unsigned char value_id, u32 value) {
+void FilamentChangeConfigUI::_setValue(unsigned char value_id, u32 value) {
     switch (value_id) {
         case FILAMENT_L:
             gCfgItems.filamentchange.load.length = value;
@@ -105,10 +101,3 @@ static void _set_value(unsigned char value_id, u32 value) {
     }
 }
 
-
-void FilamentChangeConfigUI::on_calculator(unsigned char action, double result, unsigned char dialog_id) {
-    calculator_dialog_ui.hide();
-    if (action==UI_BUTTON_OK)
-        _set_value(dialog_id, result);
-    this->show();
-}

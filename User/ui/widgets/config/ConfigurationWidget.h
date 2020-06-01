@@ -11,6 +11,7 @@
 #include "Widget.h"
 #include "ui_tools.h"
 #include "mks_cfg.h"
+#include "../dialog/CalculatorDialogUI.h"
 
 #define ui_invert_u8_flag(S) S=S==0 ? 1 : 0
 
@@ -44,7 +45,6 @@ typedef UI_DOUBLE_BUTTON UI_RADIO;
 
 #define ui_is_double_button(tst, db) ((tst==db.button) || (tst==db.text))
 
-
 class ConfigurationWidget: public Widget {
 private:
     unsigned char count;
@@ -65,7 +65,7 @@ protected:
     UI_BUTTON createInput(int x, int y, const char* value);
     UI_BUTTON createDefaultSetButton(int x, int y, const char* value);
     UI_BUTTON createDefaultSetButtonAt(int col, int row, int offset, const char* value);
-	virtual void createControls();
+    virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:
 	virtual void on_message(WM_MESSAGE * pMsg);
@@ -74,6 +74,23 @@ public:
 		this->count = pages;
 		this->page = 0;
 	};
+};
+
+class ConfigurationWidgetWithCalc : public ConfigurationWidget, public CalculatorDialogCallback {
+protected:
+    virtual void setValue(unsigned char id, double value) = 0;
+    void calculator(const char * label, const char * sub_label, double value, unsigned char id);
+    void calculator(const char * label,  double value, unsigned char id) {
+        this->calculator(label, 0, value, id);
+    }
+public:
+    virtual void on_calculator(unsigned char action, double result, unsigned char dialog_id) {
+        calculator_dialog_ui.hide();
+        if (action==UI_BUTTON_OK)
+            this->setValue(dialog_id, result);
+        this->show();
+    }
+    ConfigurationWidgetWithCalc(DISP_STATE id,  unsigned char pages = 1) : ConfigurationWidget(id, pages) {};
 };
 
 #endif /* USER_UI_WIDGETS_CONFIGURATIONWIDGET_H_ */

@@ -28,17 +28,20 @@ typedef struct {
 } LEVELING_AUTO_CONFIG_UI_CONTROLS;
 
 
-class LevelingAutoConfigUI  : public ConfigurationWidget, public CalculatorDialogCallback{
+class LevelingAutoConfigUI  : public ConfigurationWidgetWithCalc{
 private:
     LEVELING_AUTO_CONFIG_UI_CONTROLS ui;
     void updateControls();
+    void _setValue(unsigned char index, float value);
 protected:
     virtual void on_button(UI_BUTTON hBtn);
     virtual void createControls();
+    virtual void setValue(unsigned char id, double value) {
+        this->_setValue(id, value);
+    }
 public:
     virtual const char * getTitle() {return lang_str.ui_title_leveling_points;};
-    void on_calculator(unsigned char action, double result, unsigned char dialog_id);
-    LevelingAutoConfigUI() : ConfigurationWidget(LEVELING_PARA_UI, 2) {};
+    LevelingAutoConfigUI() : ConfigurationWidgetWithCalc(LEVELING_PARA_UI, 2) {};
 };
 
 extern LevelingAutoConfigUI leveling_auto_config_ui;

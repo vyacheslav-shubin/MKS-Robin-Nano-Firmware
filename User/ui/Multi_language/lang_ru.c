@@ -14,6 +14,8 @@ void lang_ru(void) {
     lang_str.config_ui.probe_speed = "Скорость зонда";
     lang_str.config_ui.connectorZ = "Порт Z";
 
+    lang_str.config_ui.pause = "Пауза";
+
     lang_str.config_ui.machine_size = "Размеры";
     lang_str.config_ui.machine_type = "Тип механики";
     lang_str.config_ui.parking = "Парковка";

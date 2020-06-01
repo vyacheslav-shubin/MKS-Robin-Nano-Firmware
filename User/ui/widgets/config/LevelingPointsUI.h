@@ -16,18 +16,21 @@ typedef struct {
     UI_BUTTON deflt;
 } LEVELING_POINTS_CONFIG_UI_CONTROLS;
 
-class LevelingPointsUI : public ConfigurationWidget, public CalculatorDialogCallback{
+class LevelingPointsUI : public ConfigurationWidgetWithCalc {
 private:
     LEVELING_POINTS_CONFIG_UI_CONTROLS ui;
     void updateValues();
     unsigned char checkButtonSet(UI_BUTTON hBtn, unsigned char index);
+    virtual void _setValue(unsigned char id, u16 value);
 protected:
     virtual void on_button(UI_BUTTON hBtn);
     virtual void createControls();
+    virtual void setValue(unsigned char id, double value) {
+        this->_setValue(id, value);
+    }
 public:
     virtual const char * getTitle() {return lang_str.ui_title_leveling_points;};
-    void on_calculator(unsigned char action, double result, unsigned char dialog_id);
-    LevelingPointsUI() : ConfigurationWidget(XYZ_LEVELING_PARA_UI, 1) {};
+    LevelingPointsUI() : ConfigurationWidgetWithCalc(XYZ_LEVELING_PARA_UI, 1) {};
 };
 
 

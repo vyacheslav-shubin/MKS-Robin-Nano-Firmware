@@ -212,3 +212,16 @@ void ConfigurationWidget::createInputDial(int col, int row, UI_INPUT_DUAL * inpu
     BUTTON_SetText(input->text, title);
 }
 
+
+void ConfigurationWidgetWithCalc::calculator(const char * label, const char * sub_label, double value, unsigned char id) {
+    this->hide();
+    const char * title;
+    if (sub_label) {
+        if (ui_buf1_100!=label)
+            strcpy(ui_buf1_100, label);
+        strcat(ui_buf1_100, sub_label);
+        title = ui_buf1_100;
+    } else
+        title = label;
+    calculator_dialog_ui.show(title, value, id, this, this);
+}

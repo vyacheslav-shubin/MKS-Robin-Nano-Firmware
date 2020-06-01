@@ -16,19 +16,28 @@ typedef struct {
     UI_CHECK z_dir;
     UI_INPUT_WITH_DEFAULT xy_speed;
     UI_INPUT_WITH_DEFAULT z_speed;
+    UI_TEXT pause;
+    UI_INPUT_WITH_DEFAULT px;
+    UI_INPUT_WITH_DEFAULT py;
+    UI_INPUT_WITH_DEFAULT pz;
+    UI_INPUT_WITH_DEFAULT pe_unload;
+    UI_INPUT_WITH_DEFAULT pe_load;
 } HOME_CONFIG_UI_CONTROLS;
 
-class HomeConfigUI : public ConfigurationWidget, public CalculatorDialogCallback {
+class HomeConfigUI : public ConfigurationWidgetWithCalc {
 private:
     HOME_CONFIG_UI_CONTROLS ui;
     void updateValues();
+    void _setValue(unsigned char id, float value);
 protected:
     virtual void on_button(UI_BUTTON hBtn);
     virtual void createControls();
+    virtual void setValue(unsigned char id, double value) {
+        this->_setValue(id, value);
+    }
 public:
     virtual const char * getTitle() {return lang_str.ui_title_config_home;};
-    void on_calculator(unsigned char action, double result, unsigned char dialog_id);
-    HomeConfigUI() : ConfigurationWidget(HOME_SETTINGS_UI, 1) {};
+    HomeConfigUI() : ConfigurationWidgetWithCalc(HOME_SETTINGS_UI, 2) {};
 };
 
 

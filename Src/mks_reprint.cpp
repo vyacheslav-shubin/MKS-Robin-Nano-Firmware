@@ -450,38 +450,22 @@ void mks_ReadFromEpr()        //��ͣ���ϵ�ʱ��ȡ����
 }
 
 
-void mks_resumePrint()
-{
-	if(mksReprint.mks_printer_state == MKS_PAUSED)
-		{
+void mks_resumePrint() {
+	if(mksReprint.mks_printer_state == MKS_PAUSED) {
 		mksReprint.mks_printer_state = MKS_WORKING;
-		
-		//��������
 		mks_preExtrude(mksReprint.mks_pausePrint_e);
-
-		//�ƶ�X,Y
-
 		mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);
-		//Z���½�
 		mks_moveZ(0);
-		//lcd_setstatus("Resume print.");
-		//lcd_setstatus(MSG_RESUME_PRINT);
 		lcd_setstatus(mksReprint.filename);
-		
-		}
-	
+	}
 	if(mksReprint.mks_printer_state == MKS_REPRINTING)
-		{
 		mksReprint.mks_printer_state = MKS_REPRINTED;
-		}
 }
 
 
 
-void mks_pausePrint()
-{
+void mks_pausePrint() {
 	stepper.synchronize();
-
 	mksReprint.current_position[0] = current_position[X_AXIS];
 	mksReprint.current_position[1] = current_position[Y_AXIS];
 	mksReprint.current_position[2] = current_position[Z_AXIS];
@@ -492,23 +476,14 @@ void mks_pausePrint()
 	mksReprint.destination[2]=destination[Z_AXIS];
 	mksReprint.destination[3]=destination[E_AXIS];
 
-        mksReprint.fanSpeeds_0 = fanSpeeds[0];
-        mksReprint.feedrate_mm_s = feedrate_mm_s;
-
-	//E �س�
-	//mks_preExtrude(MKS_RETROVERSION); 
-	mks_preExtrude(gCfgItems.pause_unload_len); 
-	//Z������
+	mksReprint.fanSpeeds_0 = fanSpeeds[0];
+    mksReprint.feedrate_mm_s = feedrate_mm_s;
+	mks_preExtrude(gCfgItems.pause_unload_len);
 	mks_moveZ(mksReprint.mks_pausePrint_z);
-    //�ƶ�X,Y
-    if(mksReprint.mks_pausePrint_x != (float)-1  && mksReprint.mks_pausePrint_y != (float)-1)
-	mks_moveXY(mksReprint.mks_pausePrint_x,mksReprint.mks_pausePrint_y);
 
+    if(mksReprint.mks_pausePrint_x != (float)-1  && mksReprint.mks_pausePrint_y != (float)-1)
+	    mks_moveXY(mksReprint.mks_pausePrint_x,mksReprint.mks_pausePrint_y);
 	mks_WriteToEpr();
-	//lcd_setstatus("Pause print.");
-#if ENABLED(ULTRA_LCD)         
-	lcd_setstatus(MSG_PAUSE_PRINT);
-#endif
 }
 
 volatile uint8_t has_adjust_speed=0;
@@ -755,39 +730,17 @@ void mks_setFeedrate( )
 }
 
 
-void mks_preExtrude(float e)
-{
-	//��������
-
+void mks_preExtrude(float e){
 	char string[20];
 	relative_mode = true;
-
-	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
-	strcpy(mksReprint.command_queue,"G1 E");
-	memset(string,0,sizeof(string));
-	sprintf(string,"%f",e);
-	strcat(mksReprint.command_queue,string);
-	//current_command_args = 
-	//parser.command_ptr = &mksReprint.command_queue[3];
-    parser.parse(mksReprint.command_queue);
+	sprintf(mksReprint.command_queue, "G1 E%f", e);
+	parser.parse(mksReprint.command_queue);
 	gcode_G0_G1();
 	stepper.synchronize();
-
 	relative_mode = false;
-
-
-//����E��ǰλ��
-	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
-	strcpy(mksReprint.command_queue,"G92 E");
-	memset(string,0,sizeof(string));
-	//sprintf(string,"%f",mksReprint.current_position[3]);
-	sprintf(string,"%f",mksReprint.destination[3]);	
-	strcat(mksReprint.command_queue,string);
-	//current_command_args = 
-	//parser.string_arg = &mksReprint.command_queue[4];
+	sprintf(mksReprint.command_queue,"G92 E%f",mksReprint.destination[3]);
 	parser.parse(mksReprint.command_queue);
 	gcode_G92();
-
 }
 
 void mks_moveXY(float X,float Y)
@@ -812,21 +765,19 @@ void mks_moveXY(float X,float Y)
 	stepper.synchronize();
 
 }
-void mks_moveZ(float Z)
-{
-      char string[20];
-    //�ƶ���ӡͷZλ��
-	memset(mksReprint.command_queue,0,MAX_CMD_SIZE);
+
+void mks_moveZ(float Z) {
+    char string[20];
+	memset(mksReprint.command_queue,0, MAX_CMD_SIZE);
 	strcpy(mksReprint.command_queue,"G1 Z");
 	memset(string,0,sizeof(string));
 	sprintf(string,"%f",mksReprint.destination[2]+Z);
 	strcat(mksReprint.command_queue,string);
-	//current_command_args = 
-	//parser.command_ptr = &mksReprint.command_queue[0];
 	parser.parse(mksReprint.command_queue);
 	gcode_G0_G1();
 	stepper.synchronize();
 }
+
 void mks_moveZ_relative(float Z)
 {
       char string[20];
@@ -868,59 +819,29 @@ void mks_G28(char *g_command)
 }
 
 
-void mks_contiuePrintPause()
-{
-	 
+void mks_contiuePrintPause() {
 	char string[20];
-
 	card.sdprinting = true;
-
 	mks_setTemperature();
-
-	// X,Y����
 	mks_G28("G28 X0 Y0");
-    //����ֹͣ��֮�󣬺���Ķ�������Ҫִ�С�
-    if(mksReprint.mks_printer_state == MKS_STOP)
-     {
+    if(mksReprint.mks_printer_state == MKS_STOP) {
         card.sdprinting = false;
         return;
-     }
-
-	//��������
+    }
 	mks_preExtrude(mksReprint.mks_pausePrint_e);
-
-	
-	//�ƶ���ӡͷX,Yλ��
-	mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);	
-	//����Z��ǰλ��
+	mks_moveXY(mksReprint.destination[0],mksReprint.destination[1]);
 	mks_setPositionZ();
-
-	//�ƶ���ӡͷZλ��
 	mks_moveZ(0);
-
-
-	//����feedrate
 	mks_setFeedrate();
-
-	//sean
 	mks_adjust_extrude_speed();
-
-	//���÷����ٶ�
 	fanSpeeds[0] = mksReprint.fanSpeeds_0;
 	MKS_FAN_TIM = fanSpeeds[0]*10000/255;
-    //����ֹͣ��֮�󣬺���Ķ�������Ҫִ�С�
-    if(mksReprint.mks_printer_state == MKS_STOP)
-     {
+    if(mksReprint.mks_printer_state == MKS_STOP) {
         card.sdprinting = false;
         return;
-     }
-
-	//lcd_setstatus("Resume printing...");
-	//lcd_setstatus(mksReprint.filename);
+    }
 	mksReprint.mks_printer_state = MKS_WORKING;
 	gcode_M24(); 
-
-
 }
 
 void mks_contiuePrintPwdwn()

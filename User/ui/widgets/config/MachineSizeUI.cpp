@@ -50,7 +50,7 @@ inline static void _fix_size_values() {
     }
 }
 
-static void _set_value(unsigned char value_id, float value) {
+void MachineSizeUI::_setValue(unsigned char value_id, float value) {
     switch (value_id) {
         case X_MAX:
             mksCfg.x_max_pos = value;
@@ -80,46 +80,33 @@ static void _set_value(unsigned char value_id, float value) {
     _fix_size_values();
 }
 
-void MachineSizeUI::on_calculator(unsigned char action, double result, unsigned char dialog_id) {
-    calculator_dialog_ui.hide();
-    if (action == UI_BUTTON_OK)
-        _set_value(dialog_id, (float)result);
-    this->show();
-}
-
 
 void MachineSizeUI::on_button(UI_BUTTON hBtn) {
     if (hBtn==this->ui.xmax.button) {
-        this->hide();
-        calculator_dialog_ui.show(labels.x_max, mksCfg.x_max_pos, X_MAX, this, this);
+        this->calculator(labels.x_max, mksCfg.x_max_pos, X_MAX);
     } else if (hBtn==this->ui.ymax.button) {
-        this->hide();
-        calculator_dialog_ui.show(labels.y_max, mksCfg.x_max_pos, Y_MAX, this, this);
+        this->calculator(labels.y_max, mksCfg.y_max_pos, Y_MAX);
     } else if (hBtn==this->ui.zmax.button) {
-        this->hide();
-        calculator_dialog_ui.show(labels.z_max, mksCfg.z_max_pos, Z_MAX, this, this);
+        this->calculator(labels.z_max, mksCfg.z_max_pos, Z_MAX);
     } else if (hBtn==this->ui.xmin.button) {
-        this->hide();
-        calculator_dialog_ui.show(labels.x_min, mksCfg.x_min_pos, X_MIN, this, this);
+        this->calculator(labels.x_min, mksCfg.x_min_pos, X_MIN);
     } else if (hBtn==this->ui.ymin.button) {
-        this->hide();
-        calculator_dialog_ui.show(labels.y_min, mksCfg.y_min_pos, Y_MIN, this, this);
+        this->calculator(labels.y_min, mksCfg.y_min_pos, Y_MIN);
     } else if (hBtn==this->ui.zmin.button) {
-        this->hide();
-        calculator_dialog_ui.show(labels.z_min, mksCfg.z_min_pos, Z_MIN, this, this);
+        this->calculator(labels.z_min, mksCfg.z_min_pos, Z_MIN);
     } else {
         if (hBtn==this->ui.xmax.dflt) {
-            _set_value(X_MAX, 200);
+            this->setValue(X_MAX, 200);
         } else if (hBtn==this->ui.ymax.dflt) {
-            _set_value(Y_MAX, 200);
+            this->setValue(Y_MAX, 200);
         } else if (hBtn==this->ui.zmax.dflt) {
-            _set_value(Z_MAX, 200);
+            this->setValue(Z_MAX, 200);
         } else if (hBtn==this->ui.xmin.dflt) {
-            _set_value(X_MIN, 0);
+            this->setValue(X_MIN, 0);
         } else if (hBtn==this->ui.ymin.dflt) {
-            _set_value(Y_MIN, 0);
+            this->setValue(Y_MIN, 0);
         } else if (hBtn==this->ui.zmin.dflt) {
-            _set_value(Z_MIN, 0);
+            this->setValue(Z_MIN, 0);
         } else {
             ConfigurationWidget::on_button(hBtn);
             return;

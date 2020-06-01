@@ -23,15 +23,11 @@ void LevelingPointsUI::updateValues() {
 
 unsigned char LevelingPointsUI::checkButtonSet(UI_BUTTON hBtn, unsigned char index) {
     if (hBtn==this->ui.points[index].button1) {
-        this->hide();
         sprintf(ui_buf1_100, lang_str.config_ui.point, index + 1);
-        strcat(ui_buf1_100, ".X:");
-        calculator_dialog_ui.show(ui_buf1_100, gCfgItems.leveling_points[index].x, POINT_X + index * 2, this, this);
+        this->calculator(ui_buf1_100, ".X:", gCfgItems.leveling_points[index].x, POINT_X + index * 2);
     }if (hBtn==this->ui.points[index].button2) {
-        this->hide();
         sprintf(ui_buf1_100, lang_str.config_ui.point, index + 1);
-        strcat(ui_buf1_100, ".Y:");
-        calculator_dialog_ui.show(ui_buf1_100, gCfgItems.leveling_points[index].y, POINT_Y + index * 2, this, this);
+        this->calculator(ui_buf1_100, ".Y:", gCfgItems.leveling_points[index].y, POINT_Y + index * 2);
     } else
         return 0;
     return 1;
@@ -87,14 +83,9 @@ void LevelingPointsUI::createControls() {
     this->updateValues();
 }
 
-static void _set_value(unsigned char value_id, u16 value) {
+void LevelingPointsUI::_setValue(unsigned char value_id, u16 value) {
     ((u16 *)&gCfgItems.leveling_points)[value_id] = value;
     epr_write_data(EPR_LEVELING_POINTS + value_id * sizeof(u16), (unsigned char *)&value, sizeof(value));
 }
 
 
-void LevelingPointsUI::on_calculator(unsigned char action, double result, unsigned char dialog_id) {
-    calculator_dialog_ui.hide();
-    _set_value(dialog_id, (u16)result);
-    this->show();
-}

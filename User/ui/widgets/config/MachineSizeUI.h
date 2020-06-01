@@ -17,17 +17,20 @@ typedef struct {
     UI_INPUT_WITH_DEFAULT 	zmax;
 } MACHINE_SIZE_UI_CONTROLS;
 
-class MachineSizeUI : public ConfigurationWidget, public CalculatorDialogCallback{
+class MachineSizeUI : public ConfigurationWidgetWithCalc{
 private:
     MACHINE_SIZE_UI_CONTROLS ui;
     void updateValues();
+    void _setValue(unsigned char value_id, float value);
 protected:
+    virtual void setValue(unsigned char id, double value) {
+        this->_setValue(id, value);
+    }
     virtual void on_button(UI_BUTTON hBtn);
     virtual void createControls();
 public:
     virtual const char * getTitle() {return lang_str.ui_title_config_machine_size;};
-    void on_calculator(unsigned char action, double result, unsigned char dialog_id);
-    MachineSizeUI() : ConfigurationWidget(STROKE_UI, 1) {};
+    MachineSizeUI() : ConfigurationWidgetWithCalc(STROKE_UI, 1) {};
 };
 
 extern MachineSizeUI machine_size_ui;

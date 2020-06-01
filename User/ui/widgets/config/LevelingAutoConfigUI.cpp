@@ -19,16 +19,16 @@ typedef enum {
     SPEED_Z_SLOW,
 } VALUES;
 
-static void _set_value(unsigned char index, double value) {
+void LevelingAutoConfigUI::_setValue(unsigned char index, float value) {
     switch(index) {
         case OFFSET_X: {
             mksCfg.x_probe_offset_from_extruder = value;
-            epr_write_data(EPR_X_PROBE_OFFSET_FROM_EXTRUDER, (uint8_t *)&mksCfg.x_probe_offset_from_extruder, sizeof(float));
+            epr_write_data(EPR_X_PROBE_OFFSET_FROM_EXTRUDER, (uint8_t *)&value, sizeof(float));
             break;
         }
         case OFFSET_Y: {
             mksCfg.y_probe_offset_from_extruder = value;
-            epr_write_data(EPR_Y_PROBE_OFFSET_FROM_EXTRUDER, (uint8_t *)&mksCfg.y_probe_offset_from_extruder, sizeof(float));
+            epr_write_data(EPR_Y_PROBE_OFFSET_FROM_EXTRUDER, (uint8_t *)&value, sizeof(float));
             break;
         }
         case OFFSET_Z: {
@@ -38,17 +38,17 @@ static void _set_value(unsigned char index, double value) {
         }
         case SPEED_XY: {
             mksCfg.xy_probe_speed = value;
-            epr_write_data(EPR_XY_PROBE_SPEED, (uint8_t *)&mksCfg.xy_probe_speed,sizeof(float));
+            epr_write_data(EPR_XY_PROBE_SPEED, (uint8_t *)&value, sizeof(float));
             break;
         }
         case SPEED_Z_FAST: {
             mksCfg.z_probe_speed_fast = value;
-            epr_write_data(EPR_Z_PROBE_SPEED_FAST, (uint8_t *)&mksCfg.z_probe_speed_fast,sizeof(float));
+            epr_write_data(EPR_Z_PROBE_SPEED_FAST, (uint8_t *)&value, sizeof(float));
             break;
         }
         case SPEED_Z_SLOW: {
             mksCfg.z_probe_speed_slow = value;
-            epr_write_data(EPR_Z_PROBE_SPEED_SLOW, (uint8_t *)&mksCfg.z_probe_speed_slow,sizeof(float));
+            epr_write_data(EPR_Z_PROBE_SPEED_SLOW, (uint8_t *)&value, sizeof(float));
             break;
         }
     }
@@ -56,35 +56,17 @@ static void _set_value(unsigned char index, double value) {
 
 void LevelingAutoConfigUI::on_button(UI_BUTTON hBtn) {
     if (hBtn==this->ui.probe.x_offset.button) {
-        this->hide();
-        strcpy(ui_buf1_100, lang_str.config_ui.probe_offset);
-        strcat(ui_buf1_100, " X:");
-        calculator_dialog_ui.show(ui_buf1_100, mksCfg.x_probe_offset_from_extruder, OFFSET_X, this, this);
+        this->calculator(lang_str.config_ui.probe_offset, " X:", mksCfg.x_probe_offset_from_extruder, OFFSET_X);
     } else if (hBtn==this->ui.probe.y_offset.button) {
-        this->hide();
-        strcpy(ui_buf1_100, lang_str.config_ui.probe_offset);
-        strcat(ui_buf1_100, " Y:");
-        calculator_dialog_ui.show(ui_buf1_100, mksCfg.y_probe_offset_from_extruder, OFFSET_Y, this, this);
+        this->calculator(lang_str.config_ui.probe_offset, " Y:", mksCfg.y_probe_offset_from_extruder, OFFSET_Y);
     } else if (hBtn==this->ui.probe.z_offset.button) {
-        this->hide();
-        strcpy(ui_buf1_100, lang_str.config_ui.probe_offset);
-        strcat(ui_buf1_100, " Z:");
-        calculator_dialog_ui.show(ui_buf1_100, zprobe_zoffset, OFFSET_Z, this, this);
+        this->calculator(lang_str.config_ui.probe_offset, " Z:", zprobe_zoffset, OFFSET_Z);
     } else if (hBtn==this->ui.probe.xy_speed.button) {
-        this->hide();
-        strcpy(ui_buf1_100, lang_str.config_ui.probe_speed);
-        strcat(ui_buf1_100, " XY:");
-        calculator_dialog_ui.show(ui_buf1_100, mksCfg.xy_probe_speed, SPEED_XY, this, this);
+        this->calculator(lang_str.config_ui.probe_speed, " XY:", mksCfg.xy_probe_speed, SPEED_XY);
     } else if (hBtn==this->ui.probe.z_speed_fast.button) {
-        this->hide();
-        strcpy(ui_buf1_100, lang_str.config_ui.probe_speed);
-        strcat(ui_buf1_100, " Z/1:");
-        calculator_dialog_ui.show(ui_buf1_100, mksCfg.z_probe_speed_fast, SPEED_Z_FAST, this, this);
+        this->calculator(lang_str.config_ui.probe_speed, " Z/1:", mksCfg.z_probe_speed_fast, SPEED_Z_FAST);
     } else if (hBtn==this->ui.probe.z_speed_slow.button) {
-        this->hide();
-        strcpy(ui_buf1_100, lang_str.config_ui.probe_speed);
-        strcat(ui_buf1_100, " Z/2:");
-        calculator_dialog_ui.show(ui_buf1_100, mksCfg.z_probe_speed_slow, SPEED_Z_SLOW, this, this);
+        this->calculator(lang_str.config_ui.probe_speed, " Z/2:", mksCfg.z_probe_speed_slow, SPEED_Z_SLOW);
     } else if (hBtn==this->ui.autoleveling_enable.button) {
         mksCfg.bed_leveling_method = mksCfg.bed_leveling_method==8 ? 0 : 3;
         gCfgItems.leveling_mode = mksCfg.bed_leveling_method ? 1 : 0;
@@ -110,17 +92,17 @@ void LevelingAutoConfigUI::on_button(UI_BUTTON hBtn) {
         this->updateCheckButton(this->ui.probe.connector.button, mksCfg.z_min_probe_pin_mode!=1, &lang_str.min_max);
     } else {
         if (hBtn==this->ui.probe.x_offset.dflt) {
-            _set_value(OFFSET_X, 0);
+            this->_setValue(OFFSET_X, 0);
         } else if (hBtn==this->ui.probe.y_offset.dflt) {
-            _set_value(OFFSET_Y, 0);
+            this->_setValue(OFFSET_Y, 0);
         } else if (hBtn==this->ui.probe.z_offset.dflt) {
-            _set_value(OFFSET_Z, 0);
+            this->_setValue(OFFSET_Z, 0);
         } else if (hBtn==this->ui.probe.xy_speed.dflt) {
-            _set_value(SPEED_XY, 4000);
+            this->_setValue(SPEED_XY, 4000);
         } else if (hBtn==this->ui.probe.z_speed_fast.dflt) {
-            _set_value(SPEED_Z_FAST, 600);
+            this->_setValue(SPEED_Z_FAST, 600);
         } else if (hBtn==this->ui.probe.z_speed_slow.dflt) {
-            _set_value(SPEED_Z_SLOW, 300);
+            this->_setValue(SPEED_Z_SLOW, 300);
         } else {
             ConfigurationWidget::on_button(hBtn);
             return;
@@ -181,11 +163,3 @@ void LevelingAutoConfigUI::updateControls() {
         this->setButtonText(this->ui.probe.z_speed_slow.button, ui_buf1_100);
     }
 }
-
-void LevelingAutoConfigUI::on_calculator(unsigned char action, double result, unsigned char dialog_id) {
-    calculator_dialog_ui.hide();
-    if (action==UI_BUTTON_OK)
-        _set_value(dialog_id, result);
-    this->show();
-}
-

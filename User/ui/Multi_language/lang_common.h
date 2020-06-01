@@ -41,6 +41,8 @@ typedef struct {
     const char * probe_offset;
     const char * probe_speed;
 
+    const char * pause;
+
 } CONFIG_LANG_STR;
 
 typedef struct {

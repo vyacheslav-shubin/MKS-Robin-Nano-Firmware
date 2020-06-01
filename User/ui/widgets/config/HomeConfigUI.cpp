@@ -8,7 +8,7 @@
 HomeConfigUI home_config_ui;
 
 typedef enum {
-    SPEED_XY, SPEED_Z
+    SPEED_XY, SPEED_Z_FAST
 } VALUES;
 
 void HomeConfigUI::updateValues() {
@@ -24,7 +24,7 @@ static void _set_value(unsigned char id, float value) {
             mksCfg.homing_feedrate_xy = value;
             epr_write_data(EPR_HOMING_FEEDRATE_XY,(uint8_t *)&value, sizeof(value));
             break;
-        case SPEED_Z:
+        case SPEED_Z_FAST:
             mksCfg.homing_feedrate_z = value;
             epr_write_data(EPR_HOMING_FEEDRATE_Z,(uint8_t *)&value, sizeof(value));
             break;
@@ -53,10 +53,10 @@ void HomeConfigUI::on_button(UI_BUTTON hBtn) {
         this->hide();
         strcpy(ui_buf1_100, lang_str.config_ui.speed);
         strcat(ui_buf1_100, " Z:");
-        calculator_dialog_ui.show("Z:", mksCfg.homing_feedrate_z, SPEED_Z, this, this);
+        calculator_dialog_ui.show("Z:", mksCfg.homing_feedrate_z, SPEED_Z_FAST, this, this);
     } else {
         if (hBtn == this->ui.z_speed.dflt) {
-            _set_value(SPEED_Z, 1200);
+            _set_value(SPEED_Z_FAST, 1200);
         } else if (hBtn == this->ui.xy_speed.dflt) {
             _set_value(SPEED_XY, 2400);
         } else {

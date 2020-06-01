@@ -37,6 +37,8 @@
 #include "config/HomeConfigUI.h"
 #include "config/SensorLevelConfigUI.h"
 #include "config/MachineTypeConfigUI.h"
+#include "config/LevelingPointsUI.h"
+#include "config/LevelingAutoConfigUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

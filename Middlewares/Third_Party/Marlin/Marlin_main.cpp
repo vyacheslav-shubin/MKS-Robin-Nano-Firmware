@@ -15983,7 +15983,9 @@ void setup() {
   #endif
 
   //#if ENABLED(BLTOUCH)
+    //TODO: насильное включение ????
   mksCfg.mkstouch=1;
+
   if(MKSTOUCH == 1)
   {
     // Make sure any BLTouch error condition is cleared

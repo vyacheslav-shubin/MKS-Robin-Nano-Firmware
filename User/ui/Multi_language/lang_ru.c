@@ -10,6 +10,9 @@ void lang_ru(void) {
 	lang_str.config_ui.acceleration_settings = "Настройки ускорений";
 	lang_str.config_ui.maximum_speed_settings = "Максимальные скорости";
 	lang_str.config_ui.jerk_settings = "Настройки рывков";
+    lang_str.config_ui.probe_offset = "Смещение зонда";
+    lang_str.config_ui.probe_speed = "Скорость зонда";
+    lang_str.config_ui.connectorZ = "Порт Z";
 
     lang_str.config_ui.machine_size = "Размеры";
     lang_str.config_ui.machine_type = "Тип механики";

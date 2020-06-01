@@ -157,7 +157,6 @@ void clear_cur_ui() {
         case WIFI_LIST_UI:		Clear_Wifi_list();		break;
         case KEY_BOARD_UI:		Clear_Keyboard();		break;
         case TIPS_UI:			Clear_Tips();			break;
-        case LEVELING_PARA_UI:	Clear_LevelingPara();	break;
 		case DELTA_LEVELING_PARA_UI:	Clear_DeltaLevelPara();		break;
 		case MAXFEEDRATE_UI:	Clear_MaxFeedRate();	break;
 		case STEPS_UI:			Clear_Steps();			break;
@@ -203,12 +202,9 @@ void draw_return_ui() {
             case XYZ_LEVELING_PARA_UI:		manual_leveling_ui.show();			break;
             case HOME_SETTINGS_UI:  home_config_ui.show();                      break;
             case ENDSTOP_TYPE_UI:	sensor_level_config_ui.show();		        break;
-            case MACHINETYPE_UI:	machine_type_config_ui.show();		break;
+            case MACHINETYPE_UI:	machine_type_config_ui.show();              break;
+            case LEVELING_PARA_UI:	leveling_auto_config_ui.show();             break;
 
-			case SPRAYER_UI: 	break;
-			case MACHINE_UI:	break;
-			case CALIBRATE_UI:	break;
-			case DISK_UI:		break;
 			case WIFI_UI:			draw_Wifi();			break;
 			case BIND_UI:			draw_bind();			break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
@@ -216,7 +212,6 @@ void draw_return_ui() {
             case WIFI_LIST_UI:		draw_Wifi_list();		break;
             case KEY_BOARD_UI:		draw_Keyboard();		break;
             case TIPS_UI:			draw_Tips();			break;
-            case LEVELING_PARA_UI:			draw_LevelingPara();			break;
             case DELTA_LEVELING_PARA_UI:	draw_DeltaLevelPara();			break;
             case MAXFEEDRATE_UI:	draw_MaxFeedRate();		break;
             case STEPS_UI:			draw_Steps();			break;

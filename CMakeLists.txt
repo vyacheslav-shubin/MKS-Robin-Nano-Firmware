@@ -656,6 +656,8 @@ add_executable(work
 		User/ui/widgets/config/MachineTypeConfigUI.cpp
 		User/ui/widgets/config/MachineTypeConfigUI.h
 		User/ui/widgets/config/HomeConfigUI.h
+		User/ui/widgets/config/LevelingAutoConfigUI.cpp
+		User/ui/widgets/config/LevelingAutoConfigUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
         User/ui/widgets/dialog/ConfirmDialogUI.cpp
@@ -735,8 +737,6 @@ add_executable(work
         User/ui/draw_jerk.h
         User/ui/draw_keyboard.cpp
         User/ui/draw_keyboard.h
-        User/ui/draw_levelingPara_config.cpp
-        User/ui/draw_levelingPara_config.h
         User/ui/draw_log_ui.cpp
         User/ui/draw_log_ui.h
         User/ui/draw_machine.cpp

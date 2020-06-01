@@ -109,7 +109,7 @@ static void cbLevelingParaWin(WM_MESSAGE * pMsg) {
                     if(mksCfg.bed_leveling_method == 8)
                     {
                         mksCfg.bed_leveling_method=0;
-				gCfgItems.leveling_mode = 0;
+				        gCfgItems.leveling_mode = 0;
                         BUTTON_SetBmpFileName(AutoLevelEnable.btnHandle, "bmp_disable.bin",1);
                         if(gCfgItems.multiple_language != 0)
                             BUTTON_SetText(AutoLevelEnable.btnHandle,machine_menu.disable);
@@ -118,7 +118,7 @@ static void cbLevelingParaWin(WM_MESSAGE * pMsg) {
                     else
                     {
                         mksCfg.bed_leveling_method=3;
-			    gCfgItems.leveling_mode = 1;
+			            gCfgItems.leveling_mode = 1;
                         BUTTON_SetBmpFileName(AutoLevelEnable.btnHandle, "bmp_enable.bin",1);
                         if(gCfgItems.multiple_language != 0)
                             BUTTON_SetText(AutoLevelEnable.btnHandle,machine_menu.enable);                        
@@ -132,28 +132,24 @@ static void cbLevelingParaWin(WM_MESSAGE * pMsg) {
     			}
     			else if(pMsg->hWinSrc == BLtouchEnable.btnHandle)
     			{
-                    if(mksCfg.mkstouch==1)
-                    {
+                    if(mksCfg.mkstouch==1) {
                         mksCfg.mkstouch=0;
                         BUTTON_SetBmpFileName(BLtouchEnable.btnHandle, "bmp_disable.bin",1);
                         if(gCfgItems.multiple_language != 0)
                             BUTTON_SetText(BLtouchEnable.btnHandle,machine_menu.disable);
-                    }
-                    else
-                    {
+                    } else {
                         mksCfg.mkstouch=1;
                         BUTTON_SetBmpFileName(BLtouchEnable.btnHandle, "bmp_enable.bin",1);
                         if(gCfgItems.multiple_language != 0)
                             BUTTON_SetText(BLtouchEnable.btnHandle,machine_menu.enable);     
 
-			       if(mksCfg.mkstouch ==1 && mksCfg.bed_leveling_method != NULL_BED_LEVELING)
-				{
-					mksCfg.z_min_probe_endstop_inverting = 0;
-					if(mksCfg.z_min_probe_pin_mode == 1)	//ZMIN
-						mksCfg.z_min_endstop_inverting = 0;
-					else if(mksCfg.z_min_probe_pin_mode == 2)	//ZMAX	
-						mksCfg.z_max_endstop_inverting = 0;
-				}
+			            if(mksCfg.mkstouch == 1 && mksCfg.bed_leveling_method != NULL_BED_LEVELING) {
+					        mksCfg.z_min_probe_endstop_inverting = 0;
+					        if(mksCfg.z_min_probe_pin_mode == 1)	//ZMIN
+						        mksCfg.z_min_endstop_inverting = 0;
+					        else if(mksCfg.z_min_probe_pin_mode == 2)	//ZMAX
+						        mksCfg.z_max_endstop_inverting = 0;
+				        }
                     }
                     epr_write_data(EPR_MKSTOUCH,&mksCfg.mkstouch,1);
 
@@ -319,7 +315,7 @@ void draw_LevelingPara()
         else
            BUTTON_SetBmpFileName(AutoLevelEnable.btnHandle, "bmp_disable.bin",1);
 
-	 AT24CXX_Read((uint16_t)EPR_MKSTOUCH,&mksCfg.mkstouch,1);
+	    AT24CXX_Read((uint16_t)EPR_MKSTOUCH,&mksCfg.mkstouch,1);
         if(mksCfg.mkstouch==1)    
            BUTTON_SetBmpFileName(BLtouchEnable.btnHandle, "bmp_enable.bin",1);
         else

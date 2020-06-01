@@ -5,6 +5,7 @@
 #include "SensorLevelConfigUI.h"
 #include "MachineConfigurationUI.h"
 #include "MachineTypeConfigUI.h"
+#include "LevelingAutoConfigUI.h"
 #include "AdvancedConfigUI.h"
 #include "MotorConfigUI.h"
 #include "dialog/CalculatorDialogUI.h"
@@ -16,6 +17,7 @@ MachineConfigurationUI machine_configuration_ui;
 
 void MachineConfigurationUI::createControls() {
     ConfigurationWidget::createControls();
+    this->dual_columns = 1;
     memset(&this->ui, 0, sizeof(this->ui));
     switch (this->page) {
         case 0: {
@@ -46,7 +48,6 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     if (ui_is_double_button(hBtn, this->ui.machine_type)) {
         this->hide();
         machine_type_config_ui.show(this);
-        //draw_MachineType();
     } else if (ui_is_double_button(hBtn, this->ui.machine_size)) {
         this->hide();
         machine_size_ui.show(this);
@@ -64,7 +65,7 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         leveling_points_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.auto_leveling_settings)) {
         this->hide();
-        draw_LevelingPara();
+        leveling_auto_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.nozzle_settings)) {
         this->hide();
         draw_NozzleConfig();

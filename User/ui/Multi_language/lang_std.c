@@ -45,6 +45,9 @@ void lang_std(void) {
     lang_str.config_ui.speed = "Speed:";
     lang_str.config_ui.length= "Lenght:";;
     lang_str.config_ui.point = "Point %d";
+    lang_str.config_ui.probe_offset = "Probe offset";
+    lang_str.config_ui.probe_offset = "Probe speed";
+    lang_str.config_ui.connectorZ = "Connector Z";
 
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";

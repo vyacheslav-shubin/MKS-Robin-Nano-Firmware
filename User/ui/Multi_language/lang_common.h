@@ -35,8 +35,11 @@ typedef struct {
     const char * auto_leveling_settings;
     const char * nozzle_settings;
     const char * hotbed_settings;
+    const char * connectorZ;
 
     const char * point;
+    const char * probe_offset;
+    const char * probe_speed;
 
 } CONFIG_LANG_STR;
 

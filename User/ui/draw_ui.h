@@ -28,8 +28,6 @@
 #include "draw_steps.h"
 #include "draw_acceleration.h"
 #include "draw_jerk.h"
-#include "draw_nozzle_config.h"
-#include "draw_hotbed_config.h"
 #include "draw_doubleZ.h"
 #include "draw_EnablePin_Invert.h"
 #include "draw_number_key.h"

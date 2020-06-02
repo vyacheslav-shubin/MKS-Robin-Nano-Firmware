@@ -334,6 +334,7 @@ typedef struct
 	float	homing_feedrate_z;		//HOMING_FEEDRATE_Z
 	float   extrude_mintemp;		//EXTRUDE_MINTEMP
 	int16_t heater_0_maxtemp;		//HEATER_0_MAXTEMP
+
 	int16_t bed_maxtemp;			//BED_MAXTEMP
 	int16_t bed_mintemp;			//BED_MINTEMP
 	uint8_t pidtemp;				//PIDTEMP	

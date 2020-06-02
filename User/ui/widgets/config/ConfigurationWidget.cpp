@@ -200,6 +200,18 @@ void ConfigurationWidget::createInputWithDefault(int col, int row, UI_INPUT_WITH
     BUTTON_SetText(input->text, title);
 }
 
+void ConfigurationWidget::createInputSingle(int col, int row, UI_INPUT_SINGLE * input, const char* title, const char* value) {
+    int x = (this->dual_columns ? 240 * col : 0);
+    int text_w = (this->dual_columns ? 240 : 480)- 70  - 4 - TEXT_X_OFFSET - 10;
+
+    input->button = this->createInput(TEXT_X_OFFSET + x +  text_w + 4, ROW(row) + 6, value);
+
+    input->text = BUTTON_CreateEx(TEXT_X_OFFSET + x , ROW(row),  text_w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    BUTTON_SetTextAlign(input->text,GUI_TA_LEFT | GUI_TA_VCENTER);
+    BUTTON_SetText(input->text, title);
+}
+
+
 void ConfigurationWidget::createInputDial(int col, int row, UI_INPUT_DUAL * input, const char* title, const char* value1, const char* value2) {
     int x = (this->dual_columns ? 240 * col : 0);
     int text_w = (this->dual_columns ? 240 : 480)- (70 * 2) - 8 - TEXT_X_OFFSET - 10;

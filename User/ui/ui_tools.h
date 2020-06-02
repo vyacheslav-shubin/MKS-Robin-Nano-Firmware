@@ -243,11 +243,6 @@ typedef struct {
 
 typedef struct {
 	BUTTON_Handle button_text;
-	BUTTON_Handle button_check;
-} UI_CHECK_PAIR;
-
-typedef struct {
-	BUTTON_Handle button_text;
 	BUTTON_Handle button_arrow;
 } UI_ARROW_PAIR;
 

@@ -658,6 +658,10 @@ add_executable(work
 		User/ui/widgets/config/HomeConfigUI.h
 		User/ui/widgets/config/LevelingAutoConfigUI.cpp
 		User/ui/widgets/config/LevelingAutoConfigUI.h
+		User/ui/widgets/config/HotBedConfigUI.cpp
+		User/ui/widgets/config/HotBedConfigUI.h
+		User/ui/widgets/config/NozzleConfigUI.cpp
+		User/ui/widgets/config/NozzleConfigUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
         User/ui/widgets/dialog/ConfirmDialogUI.cpp
@@ -723,30 +727,24 @@ add_executable(work
         User/ui/draw_bind.h
         User/ui/draw_deltaLevelPare.cpp
         User/ui/draw_deltaLevelPare.h
-        User/ui/draw_dialog.cpp
-        User/ui/draw_dialog.h
+		User/ui/draw_dialog.cpp
+		User/ui/draw_dialog.h
         User/ui/draw_doubleZ.cpp
         User/ui/draw_doubleZ.h
         User/ui/draw_EnablePin_Invert.cpp
         User/ui/draw_EnablePin_Invert.h
         User/ui/draw_FileTransfer_ui.cpp
         User/ui/draw_FileTransfer_ui.h
-        User/ui/draw_hotbed_config.cpp
-        User/ui/draw_hotbed_config.h
         User/ui/draw_jerk.cpp
         User/ui/draw_jerk.h
         User/ui/draw_keyboard.cpp
         User/ui/draw_keyboard.h
         User/ui/draw_log_ui.cpp
         User/ui/draw_log_ui.h
-        User/ui/draw_machine.cpp
-        User/ui/draw_machine.h
         User/ui/draw_MaxFeedRate.cpp
         User/ui/draw_MaxFeedRate.h
         User/ui/draw_mesh_leveling.cpp
         User/ui/draw_meshleveling.h
-        User/ui/draw_nozzle_config.cpp
-        User/ui/draw_nozzle_config.h
         User/ui/draw_number_key.cpp
         User/ui/draw_number_key.h
         User/ui/draw_steps.cpp

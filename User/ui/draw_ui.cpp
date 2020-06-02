@@ -162,8 +162,6 @@ void clear_cur_ui() {
 		case STEPS_UI:			Clear_Steps();			break;
 		case ACCELERATION_UI:	Clear_Acceleration();	break;
 		case JERK_UI:			Clear_Jerk();			break;
-		case NOZZLE_CONFIG_UI:	Clear_NozzleConfig();	break;
-		case HOTBED_CONFIG_UI:	Clear_HotbedConfig();	break;
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
 		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
 		case NUMBER_KEY_UI:		Clear_NumberKey();		break;
@@ -204,6 +202,8 @@ void draw_return_ui() {
             case ENDSTOP_TYPE_UI:	sensor_level_config_ui.show();		        break;
             case MACHINETYPE_UI:	machine_type_config_ui.show();              break;
             case LEVELING_PARA_UI:	leveling_auto_config_ui.show();             break;
+            case HOTBED_CONFIG_UI:	hotbed_config_ui.show();	                break;
+            case NOZZLE_CONFIG_UI:	nozzle_config_ui.show();	                break;
 
 			case WIFI_UI:			draw_Wifi();			break;
 			case BIND_UI:			draw_bind();			break;
@@ -217,8 +217,6 @@ void draw_return_ui() {
             case STEPS_UI:			draw_Steps();			break;
             case ACCELERATION_UI:	draw_Acceleration();	break;
             case JERK_UI:			draw_Jerk();			break;
-            case NOZZLE_CONFIG_UI:	draw_NozzleConfig();	break;
-            case HOTBED_CONFIG_UI:	draw_HotbedConfig();	break;
             case DOUBLE_Z_UI:		draw_DoubleZ();			break;
             case ENABLE_INVERT_UI:	draw_EnableInvert();	break;
             case NUMBER_KEY_UI:		draw_NumberKey();		break;

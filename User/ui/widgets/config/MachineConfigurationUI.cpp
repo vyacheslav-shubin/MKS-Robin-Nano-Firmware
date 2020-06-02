@@ -12,6 +12,8 @@
 #include "LevelingPointsUI.h"
 #include "FilamentChangeConfigUI.h"
 #include "HomeConfigUI.h"
+#include "HotBedConfigUI.h"
+#include "NozzleConfigUI.h"
 
 MachineConfigurationUI machine_configuration_ui;
 
@@ -68,10 +70,11 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         leveling_auto_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.nozzle_settings)) {
         this->hide();
-        draw_NozzleConfig();
+        nozzle_config_ui.show();
     } else if (ui_is_double_button(hBtn, this->ui.hotbed_settings)) {
         this->hide();
-        draw_HotbedConfig();
+        hotbed_config_ui.show(this);
+        //draw_HotbedConfig();
     } else if (ui_is_double_button(hBtn, this->ui.motor_settings)) {
         this->hide();
         motor_config_ui.show(this);

@@ -341,7 +341,8 @@ void MarlinSettings::postprocess() {
   /**
    * M500 - Store Configuration
    */
-  bool MarlinSettings::save() {
+
+bool MarlinSettings::save() {
     float dummy = 0.0f;
     char ver[4] = "000";
 
@@ -593,14 +594,10 @@ void MarlinSettings::postprocess() {
     EEPROM_WRITE(lpq_len);
 
     //#if DISABLED(PIDTEMPBED)
-    if(!PIDTEMP)
-     {
+    if(!PIDTEMPBED) {
       dummy = DUMMY_PID_VALUE;
       for (uint8_t q = 3; q--;) EEPROM_WRITE(dummy);
-     }
-    //#else
-    else
-    {
+    } else {
       EEPROM_WRITE(thermalManager.bedKp);
       EEPROM_WRITE(thermalManager.bedKi);
       EEPROM_WRITE(thermalManager.bedKd);

@@ -104,12 +104,10 @@ User/ui/draw_dialog.cpp
 User/ui/draw_doubleZ.cpp
 User/ui/draw_EnablePin_Invert.cpp
 User/ui/draw_FileTransfer_ui.cpp
-User/ui/draw_hotbed_config.cpp
 User/ui/draw_jerk.cpp
 User/ui/draw_keyboard.cpp
 User/ui/draw_MaxFeedRate.cpp
 User/ui/draw_mesh_leveling.cpp
-User/ui/draw_nozzle_config.cpp
 User/ui/draw_number_key.cpp
 User/ui/draw_steps.cpp
 User/ui/draw_Tips.cpp
@@ -169,6 +167,8 @@ User/ui/widgets/config/MachineSizeUI.cpp
 User/ui/widgets/config/MachineTypeConfigUI.cpp
 User/ui/widgets/config/SensorLevelConfigUI.cpp
 User/ui/widgets/config/LevelingAutoConfigUI.cpp
+User/ui/widgets/config/HotBedConfigUI.cpp
+User/ui/widgets/config/NozzleConfigUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp
 User/ui/widgets/dialog/AboutDialogUI.cpp

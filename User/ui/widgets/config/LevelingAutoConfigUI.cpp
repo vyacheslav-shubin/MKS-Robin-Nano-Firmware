@@ -5,7 +5,8 @@
 #include "LevelingAutoConfigUI.h"
 #include "CalculatorDialogUI.h"
 #include "mks_cfg.h"
-#include "configuration_store.h"
+#include "integration.h"
+#include "Configuration.h"
 
 
 LevelingAutoConfigUI leveling_auto_config_ui;
@@ -33,7 +34,7 @@ void LevelingAutoConfigUI::_setValue(unsigned char index, float value) {
         }
         case OFFSET_Z: {
             zprobe_zoffset = value;
-            settings.save();
+            shUI::saveConfig();
             break;
         }
         case SPEED_XY: {

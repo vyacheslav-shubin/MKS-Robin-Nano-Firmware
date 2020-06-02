@@ -50,6 +50,13 @@ void lang_std(void) {
     lang_str.config_ui.connectorZ = "Connector Z";
     lang_str.config_ui.pause = "Pause";
 
+    lang_str.config_ui.heater = "Heater";
+    lang_str.config_ui.pid_termostat = "PID termostat";
+    lang_str.config_ui.minumumT = "Min T°C";
+    lang_str.config_ui.maximumT = "Max T°C";;
+    lang_str.config_ui.number_of_nozzles = "Number of nozzles";
+    lang_str.config_ui.nozzle = "Nozzle";
+
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
 
@@ -125,6 +132,8 @@ void lang_std(void) {
     lang_str.ui_title_sensor_levels = "Sensors activalting level";
     lang_str.ui_title_motor_settings = "Motors settings";
     lang_str.ui_title_machine_type_settings = "Machine type settings";
+    lang_str.ui_title_hotbed_config = "Hotbed configuration";
+    lang_str.ui_title_extruders_config = "Nozzles config";
 
 	lang_str.file_info_ui.filament = "Filament (m): %1.3f";
     lang_str.file_info_ui.filament_progress = "Filament (m): %1.3f / %1.3f %d%%";

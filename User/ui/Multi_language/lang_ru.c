@@ -29,6 +29,12 @@ void lang_ru(void) {
     lang_str.config_ui.speed = "Скорость";
     lang_str.config_ui.length= "Длина";;
     lang_str.config_ui.point = "Точка %d";
+    lang_str.config_ui.heater = "Нагреватель";
+    lang_str.config_ui.pid_termostat = "PID термостат";
+    lang_str.config_ui.minumumT = "Мин T°C";
+    lang_str.config_ui.maximumT = "Макс T°C";;
+    lang_str.config_ui.number_of_nozzles = "к-во сопел";
+    lang_str.config_ui.nozzle = "Сопло";
 
     lang_str.dialog.refactored_by = "Доработка ПО:\nВячеслав Шубин\nshubin-vv@krista.ru";
 
@@ -101,6 +107,8 @@ void lang_ru(void) {
     lang_str.ui_title_sensor_levels = "Уровень активации датчиков";
     lang_str.ui_title_motor_settings = "Настройки моторов";
     lang_str.ui_title_machine_type_settings = "Выбор типа механики";
+    lang_str.ui_title_hotbed_config = "Настройка нагревателя стола";
+    lang_str.ui_title_extruders_config = "Конфигурация сопел";
 
 	lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
     lang_str.file_info_ui.filament_progress = "Филамент (m): %1.3f / %1.3f %d%%";

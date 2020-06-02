@@ -76,7 +76,7 @@ void Widget::dropWindow(){
     this->hWnd = 0;
 }
 
-void Widget::setButtonText(UI_BUTTON btn, char * text) {
+void Widget::setButtonText(UI_BUTTON btn, const char * text) {
 	BUTTON_SetText(btn, text);
 }
 

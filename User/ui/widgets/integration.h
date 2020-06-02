@@ -55,7 +55,8 @@ typedef struct{
 	extern void setFlowPercentage(char index, short value);
 	extern void addFlowPercentage(char index, short value);
 
-	extern void saveConfig();
+    extern void saveConfig();
+    extern void loadConfig();
 
 	extern void pushGcode(const char * gcode);
 

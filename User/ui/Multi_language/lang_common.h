@@ -42,7 +42,12 @@ typedef struct {
     const char * probe_speed;
 
     const char * pause;
-
+    const char * heater;
+    const char * pid_termostat;
+    const char * minumumT;
+    const char * maximumT;
+    const char * number_of_nozzles;
+    const char * nozzle;
 } CONFIG_LANG_STR;
 
 typedef struct {
@@ -144,9 +149,11 @@ typedef struct {
     const char * ui_title_config_filament_change;
     const char * ui_title_config_home;
     const char * ui_title_leveling_points;
+    const char * ui_title_hotbed_config;
     const char * ui_title_sensor_levels;
     const char * ui_title_motor_settings;
     const char * ui_title_machine_type_settings;
+    const char * ui_title_extruders_config;
 
 	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;

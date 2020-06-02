@@ -11,6 +11,7 @@
 #include "temperature.h"
 #include "integration.h"
 #include "Configuration_adv.h"
+#include "configuration_store.h"
 
 namespace shUI {
 	void babystep(char * axe, float size) {
@@ -25,10 +26,14 @@ namespace shUI {
 	}
 
 	void saveConfig() {
-		excute_m500();
+        settings.save();
 	}
 
-	char isDualExtruders() {
+    extern void loadConfig() {
+        settings.load();
+	}
+
+    char isDualExtruders() {
 		return (mksCfg.extruders == 2) && (gCfgItems.singleNozzle == 0);
 	}
 

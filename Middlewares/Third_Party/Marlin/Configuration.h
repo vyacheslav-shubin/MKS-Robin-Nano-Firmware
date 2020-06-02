@@ -317,7 +317,7 @@
  */
 #define  sensors_MAX31855	-3
 #define  sensors_100k		 1
-#define TEMP_SENSOR_0 mksCfg.temp_sensor_0 
+#define TEMP_SENSOR_0       mksCfg.temp_sensor_0
 //#define TEMP_SENSOR_0 1
 #define TEMP_SENSOR_1 1
 #define TEMP_SENSOR_2 0
@@ -381,7 +381,7 @@
 
 // Comment the following line to disable PID and enable bang-bang.
 #if USE_MKS_CONFIGURATION
-#define PIDTEMP 	mksCfg.pidtemp	/*--mks cfg--*/
+#define PIDTEMP 	    mksCfg.pidtemp	/*--mks cfg--*/
 #else
 #define PIDTEMP
 #endif

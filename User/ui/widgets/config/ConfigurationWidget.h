@@ -41,7 +41,34 @@ typedef struct {
     UI_BUTTON button2;
 } UI_INPUT_DUAL;
 
+typedef struct {
+    UI_BUTTON text;
+    UI_BUTTON button;
+} UI_INPUT_SINGLE;
+
+
+
 typedef UI_DOUBLE_BUTTON UI_RADIO;
+
+
+typedef struct {
+    UI_CHECK enabled;
+    UI_INPUT_WITH_DEFAULT p;
+    UI_INPUT_WITH_DEFAULT i;
+    UI_INPUT_WITH_DEFAULT d;
+} PID_UI_CONTROPLS;
+
+typedef struct {
+    UI_INPUT_WITH_DEFAULT p;
+    UI_INPUT_WITH_DEFAULT i;
+    UI_INPUT_WITH_DEFAULT d;
+} PID_UI_CONTROPLS_1;
+
+typedef struct {
+    UI_INPUT_WITH_DEFAULT lo;
+    UI_INPUT_WITH_DEFAULT hi;
+} TEMP_INTERVAL_UI_CONTROLS;
+
 
 #define ui_is_double_button(tst, db) ((tst==db.button) || (tst==db.text))
 
@@ -62,6 +89,7 @@ protected:
 	void createArrowPair(int col, int row, UI_ARROW * pair, const char* title);
     void createInputWithDefault(int col, int row, UI_INPUT_WITH_DEFAULT * input, const char* title, const char* value, const char* dflt = 0);
     void createInputDial(int col, int row, UI_INPUT_DUAL * input, const char* title, const char* value1, const char* value2);
+    void createInputSingle(int col, int row, UI_INPUT_SINGLE * input, const char* title, const char* value);
     UI_BUTTON createInput(int x, int y, const char* value);
     UI_BUTTON createDefaultSetButton(int x, int y, const char* value);
     UI_BUTTON createDefaultSetButtonAt(int col, int row, int offset, const char* value);

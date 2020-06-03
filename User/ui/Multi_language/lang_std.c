@@ -56,6 +56,12 @@ void lang_std(void) {
     lang_str.config_ui.maximumT = "Max T°C";;
     lang_str.config_ui.number_of_nozzles = "Number of nozzles";
     lang_str.config_ui.nozzle = "Nozzle";
+    lang_str.config_ui.steps = "Steps";
+    lang_str.config_ui.acceleration = "Acceleration";
+    lang_str.config_ui.maximum_speed = "Maximum speed";
+    lang_str.config_ui.print = "Print";
+    lang_str.config_ui.travel = "Travel";
+    lang_str.config_ui.retract = "Retract";
 
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";

@@ -158,10 +158,6 @@ void clear_cur_ui() {
         case KEY_BOARD_UI:		Clear_Keyboard();		break;
         case TIPS_UI:			Clear_Tips();			break;
 		case DELTA_LEVELING_PARA_UI:	Clear_DeltaLevelPara();		break;
-		case MAXFEEDRATE_UI:	Clear_MaxFeedRate();	break;
-		case STEPS_UI:			Clear_Steps();			break;
-		case ACCELERATION_UI:	Clear_Acceleration();	break;
-		case JERK_UI:			Clear_Jerk();			break;
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
 		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
 		case NUMBER_KEY_UI:		Clear_NumberKey();		break;
@@ -190,7 +186,7 @@ void draw_return_ui() {
 			case FILE_BROWSER_UI: 	file_browser_ui.show();         break;
 			case LANGUAGE_UI:		language_ui.show();             break;
             case MOTORDIR_UI:		motor_dir_config_ui.show();     break;
-			case MOTOR_SETTINGS_UI:	motor_config_ui.show();	                    break;
+			case MOTOR_SETTINGS_UI:	motor_settings_ui.show();	                    break;
 			case FILE_INFO_UI:		file_info_ui.show();	                    break;
             case ADVANCED_UI:		advanced_config_ui.show();		            break;
 			case SET_UI:			settings_ui.show();		                    break;
@@ -213,10 +209,6 @@ void draw_return_ui() {
             case KEY_BOARD_UI:		draw_Keyboard();		break;
             case TIPS_UI:			draw_Tips();			break;
             case DELTA_LEVELING_PARA_UI:	draw_DeltaLevelPara();			break;
-            case MAXFEEDRATE_UI:	draw_MaxFeedRate();		break;
-            case STEPS_UI:			draw_Steps();			break;
-            case ACCELERATION_UI:	draw_Acceleration();	break;
-            case JERK_UI:			draw_Jerk();			break;
             case DOUBLE_Z_UI:		draw_DoubleZ();			break;
             case ENABLE_INVERT_UI:	draw_EnableInvert();	break;
             case NUMBER_KEY_UI:		draw_NumberKey();		break;
@@ -376,7 +368,7 @@ void GUI_RefreshPage() {
 const char* logo_file = "1:/bmp_logo.bin";
 
 
-char * creat_title_text() {
+const char * creat_title_text() {
 	return ui_app.getTitle();
 }
 

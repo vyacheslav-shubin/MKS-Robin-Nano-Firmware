@@ -637,8 +637,6 @@ add_executable(work
         User/ui/widgets/config/AdvancedConfigUI.h
         User/ui/widgets/config/ConfigurationWidget.cpp
         User/ui/widgets/config/ConfigurationWidget.h
-        User/ui/widgets/config/MotorConfigUI.cpp
-        User/ui/widgets/config/MotorConfigUI.h
         User/ui/widgets/config/MotorDirConfigUI.cpp
         User/ui/widgets/config/MotorDirConfigUI.h
 		User/ui/widgets/config/MachineConfigurationUI.cpp
@@ -662,6 +660,8 @@ add_executable(work
 		User/ui/widgets/config/HotBedConfigUI.h
 		User/ui/widgets/config/NozzleConfigUI.cpp
 		User/ui/widgets/config/NozzleConfigUI.h
+		User/ui/widgets/config/MotorSettingsUI.cpp
+		User/ui/widgets/config/MotorSettingsUI.h
         User/ui/widgets/dialog/AboutDialogUI.cpp
         User/ui/widgets/dialog/AboutDialogUI.h
         User/ui/widgets/dialog/ConfirmDialogUI.cpp
@@ -721,8 +721,6 @@ add_executable(work
         User/ui/widgets/Widget.h
         User/ui/widgets/XyzUI.cpp
         User/ui/widgets/XyzUI.h
-        User/ui/draw_acceleration.cpp
-        User/ui/draw_acceleration.h
         User/ui/draw_bind.cpp
         User/ui/draw_bind.h
         User/ui/draw_deltaLevelPare.cpp
@@ -735,14 +733,10 @@ add_executable(work
         User/ui/draw_EnablePin_Invert.h
         User/ui/draw_FileTransfer_ui.cpp
         User/ui/draw_FileTransfer_ui.h
-        User/ui/draw_jerk.cpp
-        User/ui/draw_jerk.h
         User/ui/draw_keyboard.cpp
         User/ui/draw_keyboard.h
         User/ui/draw_log_ui.cpp
         User/ui/draw_log_ui.h
-        User/ui/draw_MaxFeedRate.cpp
-        User/ui/draw_MaxFeedRate.h
         User/ui/draw_mesh_leveling.cpp
         User/ui/draw_meshleveling.h
         User/ui/draw_number_key.cpp

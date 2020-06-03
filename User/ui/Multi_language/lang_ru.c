@@ -35,6 +35,12 @@ void lang_ru(void) {
     lang_str.config_ui.maximumT = "Макс T°C";;
     lang_str.config_ui.number_of_nozzles = "к-во сопел";
     lang_str.config_ui.nozzle = "Сопло";
+    lang_str.config_ui.steps = "Шаги";
+    lang_str.config_ui.acceleration = "Ускорение";
+    lang_str.config_ui.maximum_speed = "Макс. скорость";
+    lang_str.config_ui.print = "Печать";
+    lang_str.config_ui.travel = "Перенос";
+    lang_str.config_ui.retract = "Откат";
 
     lang_str.dialog.refactored_by = "Доработка ПО:\nВячеслав Шубин\nshubin-vv@krista.ru";
 

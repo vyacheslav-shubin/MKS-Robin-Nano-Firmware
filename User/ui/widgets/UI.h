@@ -25,7 +25,7 @@
 #include "FileBrowserUI.h"
 #include "LanguageUI.h"
 #include "MotorDirConfigUI.h"
-#include "MotorConfigUI.h"
+#include "../../../trash/MotorConfigUI.h"
 #include "FileInfoUI.h"
 #include "DialogWidget.h"
 #include "AdvancedConfigUI.h"
@@ -41,6 +41,7 @@
 #include "config/LevelingAutoConfigUI.h"
 #include "config/HotBedConfigUI.h"
 #include "config/NozzleConfigUI.h"
+#include "config/MotorSettingsUI.h"
 
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

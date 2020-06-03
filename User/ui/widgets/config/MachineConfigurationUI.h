@@ -22,7 +22,7 @@ typedef struct {
     UI_ARROW motor_settings;
     UI_ARROW advanced_settings;
 
-    UI_ARROW test_calc;
+    UI_ARROW test;
 
 } MACHINE_CONFIG_UI_CONTROLS;
 

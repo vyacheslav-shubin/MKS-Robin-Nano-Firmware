@@ -7,13 +7,13 @@
 #include "MachineTypeConfigUI.h"
 #include "LevelingAutoConfigUI.h"
 #include "AdvancedConfigUI.h"
-#include "MotorConfigUI.h"
 #include "dialog/CalculatorDialogUI.h"
 #include "LevelingPointsUI.h"
 #include "FilamentChangeConfigUI.h"
 #include "HomeConfigUI.h"
 #include "HotBedConfigUI.h"
 #include "NozzleConfigUI.h"
+#include "MotorSettingsUI.h"
 
 MachineConfigurationUI machine_configuration_ui;
 
@@ -39,7 +39,7 @@ void MachineConfigurationUI::createControls() {
             this->dual_columns = 1;
             this->createArrowPair(0, 0, &this->ui.motor_settings, lang_str.motors);
             this->createArrowPair(0, 1, &this->ui.advanced_settings, lang_str.advanced);
-            //this->createArrowPair(0, 2, &this->ui.test_calc, "test calc");
+            this->createArrowPair(0, 2, &this->ui.test, "Test");
 
             break;
         }
@@ -77,13 +77,13 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         //draw_HotbedConfig();
     } else if (ui_is_double_button(hBtn, this->ui.motor_settings)) {
         this->hide();
-        motor_config_ui.show(this);
+        motor_settings_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.advanced_settings)) {
         this->hide();
         advanced_config_ui.show(this);
-    //} else if (ui_is_double_button(hBtn, this->ui.test_calc)) {
+    } else if (ui_is_double_button(hBtn, this->ui.test)) {
         //this->hide();
-        //calculator_dialog_ui.show(this);
+        //motor_settings_ui.show(this);
     } else {
         ConfigurationWidget::on_button(hBtn);
     }

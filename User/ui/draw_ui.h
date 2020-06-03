@@ -24,10 +24,6 @@
 #include "lang_common.h"
 #include "draw_meshleveling.h"
 #include "draw_deltaLevelPare.h"
-#include "draw_MaxFeedRate.h"
-#include "draw_steps.h"
-#include "draw_acceleration.h"
-#include "draw_jerk.h"
 #include "draw_doubleZ.h"
 #include "draw_EnablePin_Invert.h"
 #include "draw_number_key.h"
@@ -348,7 +344,7 @@ extern void GUI_callback(void);
 
 extern void GUI_RefreshPage(void);
 
-extern char * creat_title_text();
+extern const char * creat_title_text();
 
 #if defined(__cplusplus)
 }

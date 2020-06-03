@@ -36,37 +36,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/HotBedConfigUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/HotBedConfigUI.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/NozzleConfigUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/NozzleConfigUI.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/MotorSettingsUI.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/MotorSettingsUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inc/mks_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/mks_cfg.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Configuration.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Configuration.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/configuration_store.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/configuration_store.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_hotbed_config.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_hotbed_config.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_hotbed_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_hotbed_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_machine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_machine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_machine.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_machine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_nozzle_config.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_nozzle_config.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_nozzle_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_nozzle_config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_MaxFeedRate.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_MaxFeedRate.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_MaxFeedRate.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_MaxFeedRate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_acceleration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_acceleration.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_acceleration.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_acceleration.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_jerk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_jerk.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_jerk.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_jerk.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/HomeConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/HomeConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingAutoConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/LevelingAutoConfigUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MotorConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/MotorConfigUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MotorConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/MotorConfigUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +115,7 @@
       <workItem from="1590147567092" duration="250000" />
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
-      <workItem from="1590758996962" duration="53296000" />
+      <workItem from="1590758996962" duration="65524000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -310,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591023948087</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Nozzle config as widget">
+      <created>1591111136198</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1591111136198</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -355,17 +351,18 @@
     <MESSAGE value="machine type config ui as widget" />
     <MESSAGE value="auto leveling config as widget" />
     <MESSAGE value="Pause point/tools change point -&gt; home config" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pause point/tools change point -&gt; home config" />
+    <MESSAGE value="Nozzle config as widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nozzle config as widget" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590145878217" />
-    <state x="9" y="189" width="428" height="498" key="FileChooserDialogImpl" timestamp="1591109929116">
+    <state x="11" y="231" width="428" height="498" key="FileChooserDialogImpl" timestamp="1591177076171">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="9" y="189" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591109929116" />
+    <state x="11" y="231" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591177076171" />
     <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1590147811417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

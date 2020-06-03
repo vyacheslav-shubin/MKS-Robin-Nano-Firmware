@@ -48,6 +48,12 @@ typedef struct {
     const char * maximumT;
     const char * number_of_nozzles;
     const char * nozzle;
+    const char * steps;
+    const char * acceleration;
+    const char * maximum_speed;
+    const char * print;
+    const char * travel;
+    const char * retract;
 } CONFIG_LANG_STR;
 
 typedef struct {

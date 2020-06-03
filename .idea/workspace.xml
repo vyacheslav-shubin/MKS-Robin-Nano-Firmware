@@ -35,29 +35,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/MotorSettingsUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/MotorSettingsUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_MaxFeedRate.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_MaxFeedRate.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_MaxFeedRate.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_MaxFeedRate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_acceleration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_acceleration.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_acceleration.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_acceleration.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_jerk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_jerk.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_jerk.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_jerk.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MotorConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/MotorConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MotorConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/MotorConfigUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
-    </list>
+    <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +93,7 @@
       <workItem from="1590147567092" duration="250000" />
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
-      <workItem from="1590758996962" duration="65524000" />
+      <workItem from="1590758996962" duration="65842000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -306,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591111136198</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)">
+      <created>1591177519185</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1591177519185</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -352,7 +337,8 @@
     <MESSAGE value="auto leveling config as widget" />
     <MESSAGE value="Pause point/tools change point -&gt; home config" />
     <MESSAGE value="Nozzle config as widget" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nozzle config as widget" />
+    <MESSAGE value="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">

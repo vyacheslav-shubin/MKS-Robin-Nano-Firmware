@@ -36,40 +36,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/LanguageConfigUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/LanguageConfigUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/multi_language.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/multi_language.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/LanguageUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/LanguageUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/LanguageUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/LanguageUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineSizeUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineSizeUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineTypeConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineTypeConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineTypeConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineTypeConfigUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/MAX31855.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/NTC.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/det.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/det_sel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/en.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/language.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/pwc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/pwc_sel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/ru.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/value_blank_grey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/z2_endstop_zmax.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/z2_endstop_zmax_sel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/z2_endstop_zmin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/z2_endstop_zmin_sel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trash/MotorConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/MotorConfigUI.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +95,7 @@
       <workItem from="1590147567092" duration="250000" />
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
-      <workItem from="1590758996962" duration="70674000" />
+      <workItem from="1590758996962" duration="72166000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -333,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591177560177</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="language select-&gt;configuration">
+      <created>1591182398050</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1591182398050</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -380,7 +354,8 @@
     <MESSAGE value="Pause point/tools change point -&gt; home config" />
     <MESSAGE value="Nozzle config as widget" />
     <MESSAGE value="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)" />
+    <MESSAGE value="language select-&gt;configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="language select-&gt;configuration" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">

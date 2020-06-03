@@ -4,7 +4,6 @@
 
 #include "MachineSizeUI.h"
 #include "Configuration.h"
-#include "../dialog/CalculatorDialogUI.h"
 
 MachineSizeUI machine_size_ui;
 

@@ -638,13 +638,13 @@ add_executable(work
         User/ui/widgets/config/ConfigurationWidget.cpp
         User/ui/widgets/config/ConfigurationWidget.h
         User/ui/widgets/config/MotorDirConfigUI.cpp
-        User/ui/widgets/config/MotorDirConfigUI.h
+		User/ui/widgets/config/MotorDirConfigUI.h
+		User/ui/widgets/config/LanguageConfigUI.cpp
+		User/ui/widgets/config/LanguageConfigUI.h
 		User/ui/widgets/config/MachineConfigurationUI.cpp
 		User/ui/widgets/config/MachineConfigurationUI.h
-		User/ui/widgets/config/MachineSizeUI.cpp
 		User/ui/widgets/config/FilamentChangeConfigUI.h
 		User/ui/widgets/config/FilamentChangeConfigUI.cpp
-		User/ui/widgets/config/MachineSizeUI.h
 		User/ui/widgets/config/LevelingPointsUI.h
 		User/ui/widgets/config/LevelingPointsUI.cpp
 		User/ui/widgets/config/HomeConfigUI.cpp
@@ -692,8 +692,6 @@ add_executable(work
         User/ui/widgets/HomeUI.h
         User/ui/widgets/integration.cpp
         User/ui/widgets/integration.h
-        User/ui/widgets/LanguageUI.cpp
-        User/ui/widgets/LanguageUI.h
         User/ui/widgets/MainUI.cpp
         User/ui/widgets/MainUI.h
         User/ui/widgets/ManualLevelingUI.cpp

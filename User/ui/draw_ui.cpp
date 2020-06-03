@@ -184,14 +184,12 @@ void draw_return_ui() {
 			case CHANGE_SPEED_UI:	speed_ui.show();		        break;
 			case MORE_UI:			more_ui.show();			        break;
 			case FILE_BROWSER_UI: 	file_browser_ui.show();         break;
-			case LANGUAGE_UI:		language_ui.show();             break;
             case MOTORDIR_UI:		motor_dir_config_ui.show();     break;
 			case MOTOR_SETTINGS_UI:	motor_settings_ui.show();	                    break;
 			case FILE_INFO_UI:		file_info_ui.show();	                    break;
             case ADVANCED_UI:		advanced_config_ui.show();		            break;
 			case SET_UI:			settings_ui.show();		                    break;
             case MACHINE_SETTINGS_UI:   machine_configuration_ui.show();		break;
-            case STROKE_UI:			machine_size_ui.show();			            break;
             case FILAMENT_SETTINGS_UI:		filament_change_config_ui.show();	break;
             case XYZ_LEVELING_PARA_UI:		manual_leveling_ui.show();			break;
             case HOME_SETTINGS_UI:  home_config_ui.show();                      break;

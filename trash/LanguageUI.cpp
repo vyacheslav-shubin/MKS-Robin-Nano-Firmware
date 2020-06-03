@@ -13,7 +13,8 @@
 LanguageUI language_ui;
 
 void LanguageUI::createControls() {
-	memset(&this->ui, 0, sizeof(this->ui));
+    memset(&this->ui, 0, sizeof(this->ui));
+
 	this->ui.back = this->createButtonRet();
 	int i=0;
 

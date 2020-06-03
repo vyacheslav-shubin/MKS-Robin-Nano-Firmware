@@ -1,7 +1,21 @@
 #ifndef _LANG_COMMON
 #define _LANG_COMMON
 
+#define LANG_SIMPLE_CHINESE			1
+#define LANG_COMPLEX_CHINESE		2
+#define LANG_ENGLISH				3
+#define LANG_JAPAN					4
+#define LANG_GERMAN					5
+#define LANG_FRENCH					6
+#define LANG_RUSSIAN				7
+#define LANG_KOREAN					8
+#define LANG_TURKISH				9
+#define LANG_SPANISH				10
+#define LANG_GREEK					11
+#define LANG_ITALY					12
+#define LANG_PORTUGUESE				13
 
+//enabled langs
 #define LANG_RU		1
 #define LANG_EN		1
 #define LANG_ES		0
@@ -9,6 +23,15 @@
 #define LANG_FR		0
 #define LANG_CN_S	0
 #define LANG_CN_C	0
+
+#define LANG_COUNT (LANG_RU+LANG_EN+LANG_ES+LANG_IT+LANG_FR+LANG_CN_S+LANG_CN_C)
+
+typedef struct {
+    const char * name;
+    unsigned char id;
+} LANG_DEF;
+
+extern LANG_DEF lang_defs[LANG_COUNT];
 
 typedef struct {
 	const char * power_off_after_print;
@@ -182,19 +205,6 @@ extern void lang_ru(void);
 #endif
 
 
-#define LANG_SIMPLE_CHINESE			1
-#define LANG_COMPLEX_CHINESE		2
-#define LANG_ENGLISH				3
-#define LANG_JAPAN					4
-#define LANG_GERMAN					5
-#define LANG_FRENCH					6
-#define LANG_RUSSIAN				7
-#define LANG_KOREAN					8
-#define LANG_TURKISH				9
-#define LANG_SPANISH				10
-#define LANG_GREEK					11
-#define LANG_ITALY					12
-#define LANG_PORTUGUESE				13
 
 
 #define is_chinese() ((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))

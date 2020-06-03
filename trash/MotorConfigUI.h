@@ -5,6 +5,7 @@
  *      Author: shubin
  */
 
+#error moved to machine type ui
 #ifndef USER_UI_WIDGETS_CONFIG_MOTORCONFIGUI_H_
 #define USER_UI_WIDGETS_CONFIG_MOTORCONFIGUI_H_
 

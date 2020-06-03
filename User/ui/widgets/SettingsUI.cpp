@@ -6,8 +6,6 @@
  */
 
 #include "SettingsUI.h"
-#include "LanguageUI.h"
-#include "dialog/ConfirmDialogUI.h"
 #include "dialog/AboutDialogUI.h"
 #include "MachineConfigurationUI.h"
 
@@ -17,7 +15,6 @@ void SettingsUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
 	this->ui.configuration = this->createButtonAt(0, 0, img_machine_settings_root, lang_str.machine_settings);
 	this->ui.wifi = this->createButtonAt(1, 0, img_wifi, lang_str.wifi);
-	this->ui.lang = this->createButtonAt(2, 0, img_language, lang_str.language);
 	this->ui.about = this->createButtonAt(3, 0, img_about, lang_str.about);
 	this->ui.ret = this->createButtonRet();
 }
@@ -56,9 +53,6 @@ void SettingsUI::action_wifi() {
 void SettingsUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.ret) {
 		this->action_back();
-	} else if (hBtn==this->ui.lang) {
-		this->hide();
-		language_ui.show(this);
 	}  else if (hBtn==this->ui.configuration) {
 		this->hide();
 		machine_configuration_ui.show(this);

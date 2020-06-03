@@ -4,7 +4,7 @@
  *  Created on: May 18, 2020
  *      Author: shubin
  */
-
+#error moved to config
 #ifndef USER_UI_WIDGETS_LANGUAGEUI_H_
 #define USER_UI_WIDGETS_LANGUAGEUI_H_
 

@@ -3,6 +3,7 @@
 #include "lang_common.h"
 #include "wifi_list.h"
 
+LANG_DEF lang_defs[LANG_COUNT] = {{"EN", LANG_ENGLISH}, {"RU", LANG_RUSSIAN}};
 
 //********************************************//
 //������ʵ�ַ��������⣬�������������ֱ�����ANSI��׼��ʽ��ʾ

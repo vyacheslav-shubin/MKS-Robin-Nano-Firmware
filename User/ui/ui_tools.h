@@ -74,7 +74,6 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_back				"bmp_return.bin"
 
 #define img_wifi				"bmp_wifi.bin"
-#define img_language			"bmp_language.bin"
 #define img_about				"bmp_about.bin"
 #define img_machine_settings_root	"bmp_machinePara.bin"
 
@@ -99,13 +98,6 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_tools				"bmp_tool.bin"
 #define img_continue_print		"bmp_breakpoint.bin"
 
-#define img_lang_rus			"bmp_ru.bin"
-#define img_lang_eng			"bmp_en.bin"
-#define img_lang_spa			"bmp_sp.bin"
-#define img_lang_ita			"bmp_it.bin"
-#define img_lang_fra			"bmp_fr.bin"
-#define img_lang_cn_simp		"bmp_cns.bin"
-#define img_lang_cn_comp		"bmp_cnc.bin"
 
 #define img_dir 				"bmp_dir.bin"
 #define img_file 				"bmp_file.bin"

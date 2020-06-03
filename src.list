@@ -147,7 +147,6 @@ User/ui/widgets/PrintingToolsUI.cpp
 User/ui/widgets/SpeedUI.cpp
 User/ui/widgets/MoreUI.cpp
 User/ui/widgets/FileBrowserUI.cpp
-User/ui/widgets/LanguageUI.cpp
 User/ui/widgets/FileInfoBaseUI.cpp
 User/ui/widgets/FileInfoUI.cpp
 User/ui/widgets/SettingsUI.cpp
@@ -159,8 +158,8 @@ User/ui/widgets/config/AdvancedConfigUI.cpp
 User/ui/widgets/config/FilamentChangeConfigUI.cpp
 User/ui/widgets/config/LevelingPointsUI.cpp
 User/ui/widgets/config/HomeConfigUI.cpp
-User/ui/widgets/config/MachineSizeUI.cpp
 User/ui/widgets/config/MachineTypeConfigUI.cpp
+User/ui/widgets/config/LanguageConfigUI.cpp
 User/ui/widgets/config/SensorLevelConfigUI.cpp
 User/ui/widgets/config/LevelingAutoConfigUI.cpp
 User/ui/widgets/config/HotBedConfigUI.cpp

@@ -10,7 +10,6 @@
 
 typedef struct {
     UI_ARROW machine_type;
-    UI_ARROW machine_size;
     UI_ARROW home_direction;
     UI_ARROW endstop_type;
     UI_ARROW filament_settings;
@@ -18,11 +17,11 @@ typedef struct {
     UI_ARROW auto_leveling_settings;
     UI_ARROW nozzle_settings;
     UI_ARROW hotbed_settings;
-    //page 2
     UI_ARROW motor_settings;
+    //page 2
     UI_ARROW advanced_settings;
 
-    UI_ARROW test;
+    UI_ARROW language;
 
 } MACHINE_CONFIG_UI_CONTROLS;
 

@@ -8,14 +8,22 @@
 #include "SettingsUI.h"
 #include "dialog/AboutDialogUI.h"
 #include "MachineConfigurationUI.h"
+#include "dialog/WifiWaitInitDialogUI.h"
+#include "WifiListUI.h"
 
 SettingsUI settings_ui;
+
+typedef enum{
+    DIALOG_ID_ABOUT,
+    DIALOG_ID_INIT_WIFI
+} ;
 
 void SettingsUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
 	this->ui.configuration = this->createButtonAt(0, 0, img_machine_settings_root, lang_str.machine_settings);
 	this->ui.wifi = this->createButtonAt(1, 0, img_wifi, lang_str.wifi);
-	this->ui.about = this->createButtonAt(3, 0, img_about, lang_str.about);
+    this->ui.about = this->createButtonAt(3, 0, img_about, lang_str.about);
+    this->ui.reset = this->createButtonAt(0, 1, img_about, lang_str.about);
 	this->ui.ret = this->createButtonRet();
 }
 
@@ -28,27 +36,28 @@ void SettingsUI::action_wifi() {
 			this->hide();
 			draw_Wifi();
 		} else {
-			if(command_send_flag == 1) {
-				ui_buf1_100[0] = 0xA5;
-				ui_buf1_100[1] = 0x07;
-				ui_buf1_100[2] = 0x00;
-				ui_buf1_100[3] = 0x00;
-				ui_buf1_100[4] = 0xFC;
-				raw_send_to_wifi(ui_buf1_100, 5);
+            wifi_list_received_flag = 0;
+            get_wifi_list_command_send();
+            this->hide();
+            wifi_wait_init_dialog_ui.show(this, DIALOG_ID_INIT_WIFI, this);
+            /*
+			if(wifi_list_received_flag == 1) {
 				last_disp_state = SET_UI;
 				this->hide();
 				draw_Wifi_list();
 			} else {
-				this->hide();
 				//Диалог ожидания. Так же можно реализовать на обратном вызове
-				draw_dialog(WIFI_ENABLE_TIPS);
+				//draw_dialog(WIFI_ENABLE_TIPS);
 			}
+             */
 		}
 	} else {
 		this->hide();
 		draw_Wifi();
 	}
 }
+
+extern "C" void Reset_Handler(void);
 
 void SettingsUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.ret) {
@@ -60,11 +69,29 @@ void SettingsUI::on_button(UI_BUTTON hBtn) {
 		this->action_wifi();
 	}  else if (hBtn==this->ui.about) {
 		this->hide();
-		about_dialog_ui.show(this, 0, this);
+		about_dialog_ui.show(this, DIALOG_ID_ABOUT, this);
+	}  else if (hBtn==this->ui.reset) {
+        Reset_Handler();
 	}
 }
 
 void SettingsUI::on_action_dialog(u8 action, u8 dialog_id) {
-	about_dialog_ui.hide();
-	this->show();
+    if (dialog_id==DIALOG_ID_ABOUT) {
+        about_dialog_ui.hide();
+        this->show();
+    } else if (dialog_id==DIALOG_ID_INIT_WIFI) {
+        wifi_wait_init_dialog_ui.hide();
+        switch(action) {
+            case UI_BUTTON_CANCEL:
+                this->show();
+                break;
+            case UI_ACTION_WIFI_LIST_READY:
+                wifi_list_ui.show();
+                //draw_Wifi_list();
+                break;
+            case UI_ACTION_WIFI_CONNECTED:
+                draw_Wifi();
+                break;
+        };
+    }
 }

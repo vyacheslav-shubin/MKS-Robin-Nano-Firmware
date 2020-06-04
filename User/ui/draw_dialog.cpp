@@ -289,7 +289,7 @@ void draw_dialog(uint8_t type)
 
 void wifi_scan_handle() {
 	char buf[6]={0};
-	if(command_send_flag == 1) {
+	if(wifi_list_received_flag == 1) {
 		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
 			last_disp_state = PRINT_READY_UI;
 			main_ui.hide();

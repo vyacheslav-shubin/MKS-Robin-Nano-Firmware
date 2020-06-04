@@ -10,12 +10,11 @@
 
 DialogWidget dialog_widget;
 
-void DialogWidget::createWindow() {
-
-	#define ax1	DIALOG_X
-	#define ay1	DIALOG_Y
-	#define ax2	(DIALOG_X+DIALOG_WIDTH)
-	#define ay2	(DIALOG_Y+DIALOG_HEIGHT)
+void DialogWidget::createFrame() {
+#define ax1	DIALOG_X
+#define ay1	DIALOG_Y
+#define ax2	(DIALOG_X+DIALOG_WIDTH)
+#define ay2	(DIALOG_Y+DIALOG_HEIGHT)
 
 
 	GUI_SetColor(gCfgItems.background_color);
@@ -26,8 +25,7 @@ void DialogWidget::createWindow() {
 	GUI_FillRect(ax1, ay1, ax1+2, ay2);
 	GUI_FillRect(ax2-2, ay1, ax2, ay2);
 	ui_app.defaultUI();
-    this->hWnd = WM_CreateWindow(DIALOG_X, DIALOG_Y, DIALOG_WIDTH, DIALOG_HEIGHT, WM_CF_SHOW, widget_callback, 0);
-    this->createControls();
+	this->hWnd = WM_CreateWindow(DIALOG_X, DIALOG_Y, DIALOG_WIDTH, DIALOG_HEIGHT, WM_CF_SHOW, widget_callback, 0);
 }
 
 void DialogWidget::createDialogDecoration(const char * img, const char * title) {

@@ -8,7 +8,7 @@
 #ifndef GUI_FLASH
 #define GUI_FLASH
 #endif
-
+#include "wifi_module.h"
 static GUI_HWIN hTipsWnd;
 
 static TEXT_Handle TEXT_tisps,TEXT_wifi_name;
@@ -88,7 +88,7 @@ void draw_Tips()
 	TEXT_SetFont(TEXT_wifi_name,&GUI_FontHelvetica26);
 	TEXT_SetBkColor(TEXT_wifi_name,0x00dfe0);
 	TEXT_SetTextColor(TEXT_wifi_name,0x000000);
-	TEXT_SetText(TEXT_wifi_name,(const char *)wifi_list.wifiName[wifi_list.nameIndex]);
+	TEXT_SetText(TEXT_wifi_name,(const char *)wifi_list.wifi[wifi_list.selected].name);
 
 	tips_disp.timer = TIPS_TIMER_START;
 	tips_disp.timer_count = 0;

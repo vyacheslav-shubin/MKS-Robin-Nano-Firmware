@@ -13,6 +13,7 @@
 #include "stdio.h"
 #include "draw_wifi_list.h"
 #include "wifi_list.h"
+#include "Application.h"
 
 static GUI_HWIN hKeyboardWnd;
 static TEXT_Handle textKeyboardTitle;
@@ -90,7 +91,7 @@ static void cbKeyboardWin(WM_MESSAGE * pMsg) {
             
 			GUI_SetColor(0x979797);
 			GUI_FillRect(0,VALUE_DISP_HEIGHT,LCD_WIDTH-6,VALUE_DISP_HEIGHT+1);//����
-	            	GUI_FillRect(0,VALUE_DISP_HEIGHT+1+KEY_HEIGHT,LCD_WIDTH-6,VALUE_DISP_HEIGHT+1+KEY_HEIGHT+1);
+			GUI_FillRect(0,VALUE_DISP_HEIGHT+1+KEY_HEIGHT,LCD_WIDTH-6,VALUE_DISP_HEIGHT+1+KEY_HEIGHT+1);
 			GUI_FillRect(0,VALUE_DISP_HEIGHT+1+KEY_HEIGHT*2+1,LCD_WIDTH-6,VALUE_DISP_HEIGHT+1+KEY_HEIGHT*2+1*2);
 			GUI_FillRect(0,VALUE_DISP_HEIGHT+1+KEY_HEIGHT*3+1*2,LCD_WIDTH-6,VALUE_DISP_HEIGHT+1+KEY_HEIGHT*3+1*3);
 			GUI_FillRect(0,VALUE_DISP_HEIGHT+1+KEY_HEIGHT*4+1*3,LCD_WIDTH-6,VALUE_DISP_HEIGHT+1+KEY_HEIGHT*4+1*4);
@@ -133,13 +134,20 @@ static void cbKeyboardWin(WM_MESSAGE * pMsg) {
 				}
 				else if(pMsg->hWinSrc == buttonJoint.btnHandle)
 				{
-					//BUTTON_SetFont(buttonJoint.btnHandle,&GUI_FontHelvetica26);
+#if 1
+                    Clear_Keyboard();
+                    ui_app.back_ui();
+                    return;
+#endif
+
+
+				    //BUTTON_SetFont(buttonJoint.btnHandle,&GUI_FontHelvetica26);
 					if(key_value_calc.cnt > 0)
 					{
 						key_value_calc.timer = TIMER_STOP;
 
 						memset((void *)gCfgItems.wifi_ap, 0, sizeof(gCfgItems.wifi_ap));
-						memcpy((void *)gCfgItems.wifi_ap, wifi_list.wifiName[wifi_list.nameIndex], 32);
+						memcpy((void *)gCfgItems.wifi_ap, wifi_list.wifi[wifi_list.selected].name, 32);
 
 						memset((void *)gCfgItems.wifi_key, 0, sizeof(gCfgItems.wifi_key));
 						memcpy((void *)gCfgItems.wifi_key, key_value_calc.password_value, sizeof(key_value_calc.password_value));

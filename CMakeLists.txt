@@ -672,6 +672,12 @@ add_executable(work
 		User/ui/widgets/dialog/PrintingInfoDialogUI.h
 		User/ui/widgets/dialog/CalculatorDialogUI.cpp
 		User/ui/widgets/dialog/CalculatorDialogUI.h
+		User/ui/widgets/dialog/WifiWaitInitDialogUI.cpp
+		User/ui/widgets/dialog/WifiWaitInitDialogUI.h
+		User/ui/widgets/dialog/KeyboardUI.cpp
+		User/ui/widgets/dialog/KeyboardUI.h
+		User/ui/widgets/WifiListUI.cpp
+		User/ui/widgets/WifiListUI.h
         User/ui/widgets/Application.cpp
         User/ui/widgets/Application.h
         User/ui/widgets/BabystepUI.cpp
@@ -733,14 +739,10 @@ add_executable(work
         User/ui/draw_FileTransfer_ui.h
         User/ui/draw_keyboard.cpp
         User/ui/draw_keyboard.h
-        User/ui/draw_log_ui.cpp
-        User/ui/draw_log_ui.h
         User/ui/draw_mesh_leveling.cpp
         User/ui/draw_meshleveling.h
         User/ui/draw_number_key.cpp
         User/ui/draw_number_key.h
-        User/ui/draw_steps.cpp
-        User/ui/draw_steps.h
         User/ui/draw_Tips.cpp
         User/ui/draw_Tips.h
         User/ui/draw_ui.cpp

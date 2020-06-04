@@ -48,7 +48,7 @@ volatile SZ_USART_FIFO  WifiRxFifo;
 
 #define WAIT_ESP_TRANS_TIMEOUT_TICK	10500
 
-uint8_t command_send_flag;
+uint8_t wifi_list_received_flag;
 
 int cfg_wifi_flag = 0;
 int cfg_cloud_flag = 0;
@@ -804,7 +804,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 						wifi_ret_ack();
 						send_to_wifi("M997 PAUSE\r\n", strlen("M997 PAUSE\r\n"));
 					}		
-					if (command_send_flag==0)
+					if (wifi_list_received_flag == 0)
 						get_wifi_list_command_send();
 					break;
 				case 998:
@@ -964,71 +964,62 @@ static void net_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	}
 }
 
+WIFI_LIST wifi_list;
+
 static void wifi_list_msg_handle(uint8_t * msg, uint16_t msgLen) {
-	int wifiNameLen,wifiMsgIdex=1;
+	int wifiNameLen, wifiMsgIdex=1;
 	int8_t wifi_name_is_same=0,wifi_name_is_empty=0;
 	int8_t i,j;
 	int8_t wifi_name_num=0;
-	uint8_t *str=0;
+	unsigned char *str=0;
 	int8_t valid_name_num;
-	
-	if(msgLen <= 0)
-		return;
-	if(disp_state == KEY_BOARD_UI)
+
+    wifi_list_received_flag=1;
+    memset(&wifi_list.wifi, 0, sizeof(wifi_list.wifi));
+    wifi_list.count = 0;
+
+    if(msgLen <= 0)
 		return;
 
-	wifi_list.getNameNum = msg[0];
+	wifi_list.count = msg[0];
+	if(wifi_list.count < 20) {
+		wifi_name_num = wifi_list.count;
+		valid_name_num = 0;
+		str = wifi_list.wifi[valid_name_num].name;
 
-	if(wifi_list.getNameNum < 20) {
-		command_send_flag=1;
+		if (wifi_list.count > 0)
+		    wifi_list.currentWifipage = 1;
 		
-		memset(wifi_list.wifiName,0,sizeof(wifi_list.wifiName));
-		
-		wifi_name_num = wifi_list.getNameNum;
-		
-		valid_name_num=0;
-		str = wifi_list.wifiName[valid_name_num];
-		
-		if(wifi_list.getNameNum > 0)wifi_list.currentWifipage = 1;
-		
-		for(i=0;i<wifi_list.getNameNum;i++) {
+		for (i=0; i< wifi_list.count; i++) {
 			wifiNameLen = msg[wifiMsgIdex];
-			wifiMsgIdex  +=  1;
+			wifiMsgIdex += 1;
+            wifi_name_is_same = 0;
 			if(wifiNameLen < 32) {
-				memset(str, 0, WIFI_NAME_BUFFER_SIZE);
 				memcpy(str, &msg[wifiMsgIdex], wifiNameLen);
 				for(j=0;j<valid_name_num;j++) {
-					if(strcmp((const char *)str,(const char *)wifi_list.wifiName[j]) == 0) {
+					if(strcmp((const char *)str,(const char *)wifi_list.wifi[j].name) == 0) {
 						wifi_name_is_same = 1;
 						break;
 					}
 				}
-				if ((wifi_name_is_same != 1) && (str[0] > 0x80))
-						wifi_name_is_same = 1;
+				if ((!wifi_name_is_same) && (str[0] > 0x80))
+					wifi_name_is_same = 1;
 
-				if(wifi_name_is_same == 1) {
-					wifi_name_is_same = 0;
+				if (wifi_name_is_same) {
 					wifiMsgIdex  +=  wifiNameLen;
 					wifiMsgIdex  +=  1;
 					wifi_name_num--;
 					continue;
 				}
 				if(i < WIFI_TOTAL_NUMBER-1)
-					str = wifi_list.wifiName[++valid_name_num];
+					str = wifi_list.wifi[++valid_name_num].name;
 			}
 			wifiMsgIdex  +=  wifiNameLen;
-			wifi_list.RSSI[i] = msg[wifiMsgIdex];
+			//wifi_list.RSSI[i] = msg[wifiMsgIdex];
 			wifiMsgIdex  +=  1;
 		}
-		wifi_list.getNameNum = wifi_name_num;
-		if(wifi_list.getNameNum % NUMBER_OF_PAGE == 0) {
-			wifi_list.getPage = wifi_list.getNameNum/NUMBER_OF_PAGE;
-		} else {
-			wifi_list.getPage = wifi_list.getNameNum/NUMBER_OF_PAGE + 1;
-		}
-		wifi_list.nameIndex = 0;
-		if(disp_state == WIFI_LIST_UI)
-			disp_wifi_list();
+		wifi_list.count = wifi_name_num;
+		wifi_list.selected = 0;
 	}
 }
 

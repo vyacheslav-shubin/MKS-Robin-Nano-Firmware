@@ -14,6 +14,8 @@ typedef struct {
 	UI_CHECK	autoPowerOff;
 	UI_CHECK	simpleMainUI;
 	UI_CHECK	diplayBackLight;
+    //todo: доделать
+    UI_CHECK	wifiScan;
 } ADVANCED_CONFIG_UI_CONTROLS;
 
 class AdvancedConfigUI  : public ConfigurationWidget {

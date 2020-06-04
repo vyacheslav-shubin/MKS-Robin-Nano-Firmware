@@ -35,6 +35,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_print_manual_power_off	"bmp_manual_off.bin"
 #define img_ok					"bmp_ok.bin"
 #define img_cancel				"bmp_cancel.bin"
+#define img_Aa				    "bmp_Aa.bin"
 #define img_page_up				"bmp_page_up.bin"
 #define img_page_down			"bmp_page_down.bin"
 #define img_page_back			"bmp_page_back.bin"

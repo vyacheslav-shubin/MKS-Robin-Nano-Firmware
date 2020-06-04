@@ -44,14 +44,14 @@ void ConfigurationWidget::on_button(UI_BUTTON hBtn) {
 		ui_app.back_ui();
 	} else if(hBtn == this->navigator.next) {
 		this->page++;
-		if (this->page>=this->count)
+		if (this->page>=this->page_count)
 			this->page = 0;
 		this->recreate();
 	} else if(hBtn == this->navigator.previous) {
 		if (this->page!=0)
 			this->page--;
 		else
-			this->page = this->count - 1;
+			this->page = this->page_count - 1;
 		this->recreate();
 	}
 }
@@ -110,14 +110,16 @@ void ConfigurationWidget::createCheckPair(int col, int row, UI_CHECK * pair, con
 }
 
 void ConfigurationWidget::createControls() {
+    if (this->page>= this->page_count)
+        this->page = 0;
 	this->navigator.back = BUTTON_CreateEx(400, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     BUTTON_SetBmpFileName(this->navigator.back, img_navigator_back,1);
     BUTTON_SetBitmapEx(this->navigator.back, 0, &bmp_struct70X40,0, 0);
     this->navigator.next = 0;
     this->navigator.previous = 0;
 
-    if (this->count>1) {
-    	if (this->page < this->count-1)
+    if (this->page_count>1) {
+    	if (this->page < this->page_count-1)
     		this->navigator.next = BUTTON_CreateEx(320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
     	if (this->page > 0) {
     		this->navigator.previous = BUTTON_CreateEx(this->navigator.next ? 240 : 320, 230, 70, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);

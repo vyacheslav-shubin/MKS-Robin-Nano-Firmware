@@ -36,12 +36,16 @@ void Widget::on_message(WM_MESSAGE * pMsg) {
 	}
 }
 
+void Widget::createFrame() {
+    GUI_Clear();
+    ui_app.drawTitle();
+    this->hWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, LCD_HEIGHT - titleHeight, WM_CF_SHOW, widget_callback, 0);
+}
+
 void Widget::createWindow() {
 	ui_app.current_ui = this;
     ui_app.defaultUI();
-	GUI_Clear();
-    ui_app.drawTitle();
-    this->hWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, LCD_HEIGHT - titleHeight, WM_CF_SHOW, widget_callback, 0);
+    this->createFrame();
     this->createControls();
 }
 

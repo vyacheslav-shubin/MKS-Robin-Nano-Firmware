@@ -73,9 +73,8 @@ typedef struct {
 #define ui_is_double_button(tst, db) ((tst==db.button) || (tst==db.text))
 
 class ConfigurationWidget: public Widget {
-private:
-    unsigned char count;
 protected:
+	unsigned char page_count;
     unsigned char page;
 	unsigned char dual_columns = 0;
 	UI_NAVIGATOR navigator;
@@ -99,7 +98,7 @@ public:
 	virtual void on_message(WM_MESSAGE * pMsg);
 	virtual void show(Widget * caller = 0)  {Widget::show(caller); };
 	ConfigurationWidget(DISP_STATE id,  unsigned char pages = 1) : Widget(id) {
-		this->count = pages;
+		this->page_count = pages;
 		this->page = 0;
 	};
 };

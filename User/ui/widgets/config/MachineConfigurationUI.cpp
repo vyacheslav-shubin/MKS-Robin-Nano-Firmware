@@ -15,6 +15,8 @@
 #include "NozzleConfigUI.h"
 #include "MotorSettingsUI.h"
 #include "LanguageConfigUI.h"
+#include "draw_keyboard.h"
+#include "dialog/KeyboardUI.h"
 
 MachineConfigurationUI machine_configuration_ui;
 
@@ -40,10 +42,18 @@ void MachineConfigurationUI::createControls() {
             this->dual_columns = 1;
             this->createArrowPair(0, 0, &this->ui.advanced_settings, lang_str.advanced);
             this->createArrowPair(0, 1, &this->ui.language, lang_str.language);
+            this->createArrowPair(0, 2, &this->ui.test1, "Keyboard");
             break;
         }
     }
 }
+
+void MachineConfigurationUI::on_action_dialog(u8 action, u8 dialog_id) {
+    keyboard_ui.hide();
+    this->show();
+}
+
+char password_buf[33];
 
 void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     if (ui_is_double_button(hBtn, this->ui.machine_type)) {
@@ -79,6 +89,11 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     } else if (ui_is_double_button(hBtn, this->ui.language)) {
         this->hide();
         language_config_ui.show(this);
+    } else if (ui_is_double_button(hBtn, this->ui.test1)) {
+        this->hide();
+        memset(password_buf, 0, sizeof(password_buf));
+        keyboard_ui.show("Password:", password_buf, sizeof(password_buf) - 1, this, 0, this);
+    } else if (ui_is_double_button(hBtn, this->ui.test2)) {
     } else {
         ConfigurationWidget::on_button(hBtn);
     }

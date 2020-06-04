@@ -34,6 +34,7 @@ protected:
 	virtual void refresh_1s() {};
 	void dropWindow();
 	void buttonPreset(UI_BUTTON btn);
+    virtual void createFrame();
 	virtual void createWindow();
     void drawXYZ();
     UI_BUTTON create96x80Button(int x, int y, const char * picture);

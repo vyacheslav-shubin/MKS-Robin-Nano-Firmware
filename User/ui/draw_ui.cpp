@@ -320,7 +320,7 @@ void GUI_RefreshPage() {
 		case TIPS_UI:
 			switch(tips_type) {
 				case TIPS_TYPE_JOINING:
-					if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifiName[wifi_list.nameIndex]) == 0) {
+					if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifi[wifi_list.selected].name) == 0) {
 						tips_disp.timer = TIPS_TIMER_STOP;
 						tips_disp.timer_count = 0;
 						Clear_Tips();

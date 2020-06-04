@@ -194,11 +194,33 @@ typedef struct
 	uint32_t w;
 } WIFI_GCODE_BUFFER;
 
+#define WIFI_TOTAL_NUMBER 20
+#define WIFI_NAME_BUFFER_SIZE 33
+
+typedef struct {
+    char RSSI;
+    char name[WIFI_NAME_BUFFER_SIZE];
+} WIFI_NETWORK;
+
+typedef struct {
+    int8_t count;
+    int8_t selected;
+    int8_t currentWifipage;
+    int8_t getPage;
+    WIFI_NETWORK wifi[WIFI_TOTAL_NUMBER];
+    //int8_t RSSI[WIFI_TOTAL_NUMBER];
+    //uint8_t wifiName[WIFI_TOTAL_NUMBER][WIFI_NAME_BUFFER_SIZE];
+    char wifiConnectedName[WIFI_NAME_BUFFER_SIZE];
+} WIFI_LIST;
+
+extern WIFI_LIST wifi_list;
+
 extern volatile WIFI_STATE wifi_link_state;
 extern WIFI_PARA wifiPara;
 extern IP_PARA ipPara;
 extern CLOUD_PARA cloud_para;
-extern uint8_t command_send_flag;
+extern uint8_t wifi_list_received_flag;
+
 
 extern WIFI_GCODE_BUFFER espGcodeFifo; 
 

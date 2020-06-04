@@ -15,9 +15,12 @@
 #define DIALOG_WIDTH	(LCD_WIDTH - DIALOG_X * 2)
 #define DIALOG_HEIGHT	(LCD_HEIGHT - DIALOG_Y * 2)
 
-#define UI_BUTTON_OK		((u8)0)
-#define UI_BUTTON_CANCEL	((u8)1)
-#define UI_BUTTON_TIMEOUT	((u8)2)
+#define UI_BUTTON_OK		        ((u8)0)
+#define UI_BUTTON_CANCEL	        ((u8)1)
+#define UI_ACTION_TIMEOUT	        ((u8)2)
+#define UI_ACTION_WIFI_CONNECTED	((u8)3)
+#define UI_ACTION_WIFI_LIST_READY	((u8)4)
+
 
 class ActionDialogCallback {
 protected:
@@ -30,7 +33,7 @@ class DialogWidget : public Widget {
 protected:
 	void createDialogDecoration(const char * img, const char * title);
 	virtual void createControls() {};
-	virtual void createWindow();
+    virtual void createFrame();
 public:
 	void hide();
 	DialogWidget() : Widget(CUSTOM_DIALOG_UI) {};

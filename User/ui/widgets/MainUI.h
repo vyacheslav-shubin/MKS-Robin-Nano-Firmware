@@ -20,7 +20,7 @@ typedef struct {
 	UI_BUTTON preheat;
 	UI_BUTTON leveling;
 	UI_BUTTON filament;
-	UI_BUTTON more;
+    UI_BUTTON more;
     STATE_BUTTON ext1;
     STATE_BUTTON bed;
 } MAIN_UI_CONTROLS;

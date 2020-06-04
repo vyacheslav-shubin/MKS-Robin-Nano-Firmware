@@ -49,7 +49,7 @@ void ConfirmDialogUI::refresh_1s() {
 	if ((this->callback!=0) && (this->timeout != 0)) {
 		PROGBAR_SetValue(this->ui.progress, (this->max_timeout - this->timeout) * 100 / this->max_timeout);
 		if (--this->timeout==0)
-			this->doAction(UI_BUTTON_TIMEOUT);
+			this->doAction(UI_ACTION_TIMEOUT);
 	}
 }
 

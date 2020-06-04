@@ -189,7 +189,7 @@ void PrintingUI::on_action_dialog(u8 action, u8 dialog_id) {
                 ui_app.startPrintFile();
             } else if (action==UI_BUTTON_CANCEL) {
                 ui_app.showMainWidget();
-            } else if (action==UI_BUTTON_TIMEOUT) {
+            } else if (action==UI_ACTION_TIMEOUT) {
                 GUI_Clear();
                 enqueue_and_echo_commands_P(PSTR("M81"));
             }

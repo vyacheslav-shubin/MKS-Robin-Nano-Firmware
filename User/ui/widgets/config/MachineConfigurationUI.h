@@ -22,16 +22,19 @@ typedef struct {
     UI_ARROW advanced_settings;
 
     UI_ARROW language;
+    UI_ARROW test1;
+    UI_ARROW test2;
 
 } MACHINE_CONFIG_UI_CONTROLS;
 
-class MachineConfigurationUI : public ConfigurationWidget{
+class MachineConfigurationUI : public ConfigurationWidget, public ActionDialogCallback{
 private:
     MACHINE_CONFIG_UI_CONTROLS ui;
 protected:
     virtual void createControls();
     virtual void on_button(UI_BUTTON hBtn);
 public:
+    virtual void on_action_dialog(u8 action, u8 dialog_id);
     virtual const char * getTitle() {return lang_str.ui_title_config;};
     MachineConfigurationUI() : ConfigurationWidget(MACHINE_SETTINGS_UI, 2) {}
 };

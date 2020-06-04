@@ -13,12 +13,14 @@
 #include "string.h"
 #include "stdio.h"
 #include "UI.h"
-
+#include "wifi_module.h"
 //#include "draw_wifi_connected.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
 #endif
+
+#define NUMBER_OF_PAGE 5
 
 static GUI_HWIN hWifiWnd;
 
@@ -49,8 +51,7 @@ GUI_BITMAP bmp_struct_0x0 = {
 	
 static BUTTON_STRUCT  buttonWifiPd,buttonRet,buttonN[4];
 
-WIFI_LIST wifi_list;
-list_menu_def list_menu;	
+list_menu_def list_menu;
 extern GUI_CONST_STORAGE GUI_FONT GUI_FontHelvetica26;
 
 #define NAME_BTN_X 330
@@ -98,16 +99,16 @@ static void cbWifiWin(WM_MESSAGE * pMsg) {
 				else if(pMsg->hWinSrc == buttonWifiPd.btnHandle)
 				{
 					#if 1
-					if(wifi_list.getNameNum > 0)
+					if(wifi_list.count > 0)
 					{
-						if((wifi_list.nameIndex + NUMBER_OF_PAGE) >= wifi_list.getNameNum)
+						if((wifi_list.selected + NUMBER_OF_PAGE) >= wifi_list.count)
 						{
-							wifi_list.nameIndex = 0;
+							wifi_list.selected = 0;
 							wifi_list.currentWifipage = 1;
 						}
 						else 
 						{
-							wifi_list.nameIndex += NUMBER_OF_PAGE;
+							wifi_list.selected += NUMBER_OF_PAGE;
 							wifi_list.currentWifipage++;
 						}
 						disp_wifi_list();
@@ -124,17 +125,17 @@ static void cbWifiWin(WM_MESSAGE * pMsg) {
 					{
 						if(pMsg->hWinSrc == buttonN[i].btnHandle)
 						{
-							if(wifi_list.getNameNum !=0)
+							if(wifi_list.count != 0)
 							{
 								//GUI_Exec();
 								//GUI_UC_SetEncodeUTF8();
 								
-								if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifiName[wifi_list.nameIndex + i]) == 0)
+								if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifi[wifi_list.selected + i].name) == 0)
 								{
 									//BUTTON_SetBmpFileName(buttonN[i].btnHandle, "bmp_Check_Mark_Yellow.bin",1);
 									//BUTTON_SetBitmapEx(buttonN[i].btnHandle, 0, &bmp_struct_18x14,MARK_BTN_X, (NAME_BTN_Y-1-14)/2);
 
-									wifi_list.nameIndex = wifi_list.nameIndex + i;
+									wifi_list.selected = wifi_list.selected + i;
 									last_disp_state = WIFI_LIST_UI;
 									Clear_Wifi_list();
 									//draw_WifiConnected();
@@ -142,7 +143,7 @@ static void cbWifiWin(WM_MESSAGE * pMsg) {
 								}
 								else
 								{
-									wifi_list.nameIndex = wifi_list.nameIndex + i;
+									wifi_list.selected = wifi_list.selected + i;
 									last_disp_state = WIFI_LIST_UI;
 									Clear_Wifi_list();
 									draw_Keyboard();
@@ -166,7 +167,7 @@ static void cbWifiWin(WM_MESSAGE * pMsg) {
 					{
 						if(pMsg->hWinSrc == buttonN[i].btnHandle)
 						{
-							if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifiName[wifi_list.nameIndex + i]) == 0)
+							if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifi[wifi_list.selected + i].name) == 0)
 							{
 								//BUTTON_SetBmpFileName(buttonN[i].btnHandle, "bmp_Check_Mark_Black.bin",1);
 								//BUTTON_SetBitmapEx(buttonN[i].btnHandle, 0, &bmp_struct_18x14,MARK_BTN_X, (NAME_BTN_Y-1-14)/2);
@@ -276,7 +277,7 @@ void draw_Wifi_list()
 		}
 		else*/
 		//{
-			wifi_list.nameIndex = 0;
+			wifi_list.selected = 0;
 			wifi_list.currentWifipage = 1;
 		//}
 
@@ -330,8 +331,8 @@ void disp_wifi_list(void)
 			
 		memset(tmpStr, 0, sizeof(tmpStr));
 
-		j = wifi_list.nameIndex + i;
-		if(j >= wifi_list.getNameNum)
+		j = wifi_list.selected + i;
+		if(j >= wifi_list.count)
 		{
 			BUTTON_SetText(buttonN[i].btnHandle, (char const *)(tmpStr));
 		}
@@ -339,9 +340,9 @@ void disp_wifi_list(void)
 		{
 			//cutWifiName((char *)wifi_list.wifiName[j], 20,  (char *)tmpStr); 
 			//BUTTON_SetText(buttonN[i].btnHandle, (char const *)(tmpStr));
-			BUTTON_SetText(buttonN[i].btnHandle, (char const *)wifi_list.wifiName[j]);
+			BUTTON_SetText(buttonN[i].btnHandle, (char const *)wifi_list.wifi[j].name);
 			
-			if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifiName[j]) == 0)
+			if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifi[j].name) == 0)
 			{
 				//BUTTON_SetBmpFileName(buttonN[i].btnHandle, "bmp_Check_Mark_Yellow.bin",1);
 				//BUTTON_SetBitmapEx(buttonN[i].btnHandle, 0, &bmp_struct_18x14,MARK_BTN_X, (NAME_BTN_Y-1-14)/2);

@@ -23,8 +23,7 @@
 #include "Marlin.h"
 #include "cardreader.h"
 #include "mks_reprint.h"
-#include "draw_wifi_list.h"
-#include<cstring>
+#include <cstring>
 #include "ff.h"	
 
 extern CardReader card;
@@ -896,6 +895,10 @@ static void net_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	if(msgLen <= 0)
 		return;
 	sprintf(ipPara.ip_addr, "%d.%d.%d.%d", msg[0], msg[1], msg[2], msg[3]);
+    ipPara.ip[0] = msg[0];
+    ipPara.ip[1] = msg[1];
+    ipPara.ip[2] = msg[2];
+    ipPara.ip[3] = msg[3];
 	if(msg[6] == 0x0a) {
 		wifi_link_state = WIFI_CONNECTED;
 	} else if(msg[6] == 0x0e) {
@@ -1450,14 +1453,12 @@ void wifi_rcv_handle() {
 }
 
 void wifi_looping() {
-	IP_PARA *ip_para = &ipPara;
-	WIFI_PARA  *wifi_para = &wifiPara;
-	char cfg_buf[100];
-	if(gCfgItems.wifi_type == ESP_WIFI) {
-		do {
-		 	wifi_rcv_handle();
-		} while(wifi_link_state == WIFI_TRANS_FILE);
-	}
+//	IP_PARA *ip_para = &ipPara;
+//	WIFI_PARA  *wifi_para = &wifiPara;
+//	char cfg_buf[100];
+	if(gCfgItems.wifi_type == ESP_WIFI)  do
+	    wifi_rcv_handle();
+    while (wifi_link_state == WIFI_TRANS_FILE);
 }
 
 

@@ -17,8 +17,6 @@
 
 #define DIALOG_TYPE_FILAMENT_NO_PRESS			18
 
-#define WIFI_ENABLE_TIPS						20
-
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif

@@ -280,8 +280,6 @@
 #include "ui_tools.h"
 #include "wifi_module.h"
 #include "sdio_sdcard.h"
-#include "draw_keyboard.h"
-#include "draw_Tips.h"
 #include "ili9320.h"
 
 float filament_counter;
@@ -16171,13 +16169,6 @@ void SysTick_Handler_User() {
            BEEPER_OP = 0; 
         }
     }  
-	if(key_value_calc.timer == TIMER_START)
-		key_value_calc.timer_count++;
-
-	if(((TimeIncrease * TICK_CYCLE % 1000) == 0))
-		if(tips_disp.timer == TIPS_TIMER_START)
-			tips_disp.timer_count++;
-
 	if (has_adjust_speed==1)
 		resume_printed_time++;
 

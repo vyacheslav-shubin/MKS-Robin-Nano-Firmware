@@ -250,7 +250,7 @@ void mkstft_ui_init() {
 	memset(&ipPara, 0, sizeof(ipPara));
 	strcpy(wifiPara.ap_name,WIFI_AP_NAME);
 	strcpy(wifiPara.keyCode,WIFI_KEY_CODE);
-	//clientģʽ��ʼֵ
+
 	strcpy(ipPara.ip_addr,IP_ADDR);
 	strcpy(ipPara.mask,IP_MASK);
 	strcpy(ipPara.gate,IP_GATE);

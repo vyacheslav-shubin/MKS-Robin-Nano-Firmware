@@ -14,9 +14,10 @@ void PrintingInfoDialogUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
     this->createDialogDecoration(img_dialog_info, 0);
     this->ui.ok = this->create96x80Button(DIALOG_WIDTH - (96 + 4), DIALOG_HEIGHT - 84, img_ok);
+
 #define _row_size 20
 #define _x  40
-#define _w  210
+#define _w  220
 
 #define _wl (DIALOG_WIDTH - (_x*2))
 #define _row(idx) _row_size * idx + 60

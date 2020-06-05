@@ -75,6 +75,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_back				"bmp_return.bin"
 
 #define img_wifi				"bmp_wifi.bin"
+#define img_cloud				"bmp_cloud.bin"
 #define img_about				"bmp_about.bin"
 #define img_machine_settings_root	"bmp_machinePara.bin"
 

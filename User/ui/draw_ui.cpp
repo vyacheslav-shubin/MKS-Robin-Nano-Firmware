@@ -3,7 +3,6 @@
 #include "UI.h"
 #include "draw_ui.h"
 #include "Marlin.h"
-#include "draw_wifi.h"
 #include "ff.h"
 #include "pic_manager.h"
 #include "ili9320.h"
@@ -24,9 +23,6 @@
 #include "Marlin.h"
 #include "mks_test.h"
 #include "wifi_list.h"
-#include "draw_wifi_list.h"
-#include "draw_keyboard.h"
-#include "draw_Tips.h"
 #include "wifi_module.h"
 //Screen TFT_screen;
 
@@ -146,7 +142,6 @@ void clear_cur_ui() {
 		case MACHINE_UI:								break;
 		case LOG_UI:									break;
 		case DISK_UI:									break;
-		case WIFI_UI:			Clear_Wifi();			break;
 		case FILETRANSFER_UI:							break;
 		case DIALOG_UI:			Clear_dialog();			break;
 		case FILETRANSFERSTATE_UI:						break;
@@ -154,9 +149,6 @@ void clear_cur_ui() {
 		case ZOFFSET_UI:								break;
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
         case HARDWARE_TEST_UI:	Clear_Hardwaretest();	break;
-        case WIFI_LIST_UI:		Clear_Wifi_list();		break;
-        case KEY_BOARD_UI:		Clear_Keyboard();		break;
-        case TIPS_UI:			Clear_Tips();			break;
 		case DELTA_LEVELING_PARA_UI:	Clear_DeltaLevelPara();		break;
 		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
 		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
@@ -198,14 +190,12 @@ void draw_return_ui() {
             case LEVELING_PARA_UI:	leveling_auto_config_ui.show();             break;
             case HOTBED_CONFIG_UI:	hotbed_config_ui.show();	                break;
             case NOZZLE_CONFIG_UI:	nozzle_config_ui.show();	                break;
+            case WIFI_UI:			wifi_ui.show();			                    break;
+            case WIFI_LIST_UI:		wifi_list_ui.show();		                break;
 
-			case WIFI_UI:			draw_Wifi();			break;
 			case BIND_UI:			draw_bind();			break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;
-            case WIFI_LIST_UI:		draw_Wifi_list();		break;
-            case KEY_BOARD_UI:		draw_Keyboard();		break;
-            case TIPS_UI:			draw_Tips();			break;
             case DELTA_LEVELING_PARA_UI:	draw_DeltaLevelPara();			break;
             case DOUBLE_Z_UI:		draw_DoubleZ();			break;
             case ENABLE_INVERT_UI:	draw_EnableInvert();	break;
@@ -291,80 +281,17 @@ void GUI_RefreshPage() {
 	switch(disp_state) {
 		case PRINT_READY_UI: break;
 		case OPERATE_UI: break;
-
-		case WIFI_UI:
-			if(wifi_refresh_flg == 1) {
-				disp_wifi_state();
-				wifi_refresh_flg = 0;
-			}
-			break;
         case BIND_UI:		refresh_bind_ui();	break;
-		case DIALOG_UI:
-			refresh_dialog();
-			break;		
 		case MESHLEVELING_UI:
             disp_zpos();
             break;
 		case HARDWARE_TEST_UI:
 			break;      
-		case WIFI_LIST_UI:
-			if(wifi_refresh_flg == 1) {
-				disp_wifi_list();
-				wifi_refresh_flg = 0;
-			}
-			break;
-		case KEY_BOARD_UI:
-			update_password_disp();
-		    update_join_state_disp();
-		    break;
-		case TIPS_UI:
-			switch(tips_type) {
-				case TIPS_TYPE_JOINING:
-					if(wifi_link_state == WIFI_CONNECTED && strcmp((const char *)wifi_list.wifiConnectedName,(const char *)wifi_list.wifi[wifi_list.selected].name) == 0) {
-						tips_disp.timer = TIPS_TIMER_STOP;
-						tips_disp.timer_count = 0;
-						Clear_Tips();
-						tips_type = TIPS_TYPE_WIFI_CONECTED;
-						draw_Tips();
-					}
-					if (tips_disp.timer_count >= 30) {
-						tips_disp.timer = TIPS_TIMER_STOP;
-						tips_disp.timer_count = 0;
-						Clear_Tips();
-						tips_type = TIPS_TYPE_TAILED_JOIN;
-						draw_Tips();
-					}
-					break;
-				case TIPS_TYPE_TAILED_JOIN:
-					if (tips_disp.timer_count >= 3) {
-						tips_disp.timer = TIPS_TIMER_STOP;
-						tips_disp.timer_count = 0;
-						last_disp_state = TIPS_UI;
-						Clear_Tips();
-						draw_Wifi_list();
-					}
-					break;
-				case TIPS_TYPE_WIFI_CONECTED:
-					if(tips_disp.timer_count >= 3) {
-						tips_disp.timer = TIPS_TIMER_STOP;
-						tips_disp.timer_count = 0;
-						last_disp_state = TIPS_UI;
-						Clear_Tips();
-						draw_Wifi();
-					}
-					break;
-				default:
-					break;
-			}
-            break;
 	    default:
 	    	break;
 				
 	}
 }
-
-const char* logo_file = "1:/bmp_logo.bin";
-
 
 const char * creat_title_text() {
 	return ui_app.getTitle();

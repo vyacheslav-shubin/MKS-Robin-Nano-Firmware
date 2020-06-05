@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_TIPS_H_
 #define _DRAW_TIPS_H_
 
@@ -13,7 +15,7 @@ extern void Clear_Tips();
 typedef enum
 {
 	TIPS_TYPE_JOINING,
-	TIPS_TYPE_TAILED_JOIN,
+	TIPS_TYPE_FAILED_JOIN,
 	TIPS_TYPE_WIFI_CONECTED
 }TIPS_TYPE;
 extern TIPS_TYPE tips_type;

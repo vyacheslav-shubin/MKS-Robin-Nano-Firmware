@@ -11,7 +11,6 @@
 #include "draw_Tips.h"
 #include "string.h"
 #include "stdio.h"
-#include "draw_wifi_list.h"
 #include "wifi_list.h"
 #include "Application.h"
 

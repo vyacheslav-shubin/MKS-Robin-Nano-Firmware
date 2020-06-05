@@ -104,6 +104,8 @@ void lang_std(void) {
     lang_str.gnd_vcc.fl = "GND";
     lang_str.gnd_vcc.tr = "VCC";
 	lang_str.wifi = "WiFi";
+    lang_str.cloud = "Cloud";
+    lang_str.wifi_reconnect = "Select network";
 	lang_str.machine_settings = "Configuration";
 	lang_str.language = "Language";
 	lang_str.about = "Version";
@@ -140,8 +142,9 @@ void lang_std(void) {
     lang_str.ui_title_machine_type_settings = "Machine type settings";
     lang_str.ui_title_hotbed_config = "Hotbed configuration";
     lang_str.ui_title_extruders_config = "Nozzles config";
+    lang_str.ui_title_wifi_list = "WiFi networks";
 
-	lang_str.file_info_ui.filament = "Filament (m): %1.3f";
+    lang_str.file_info_ui.filament = "Filament (m): %1.3f";
     lang_str.file_info_ui.filament_progress = "Filament (m): %1.3f / %1.3f %d%%";
     lang_str.file_info_ui.size = "File readed: %d / %d %d%%";
     lang_str.file_info_ui.size_progress = "File size: %d / %d %d%%";

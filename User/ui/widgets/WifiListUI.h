@@ -19,7 +19,7 @@ protected:
     virtual void createControls();
 public:
     virtual void on_action_dialog(u8 action, u8 dialog_id);
-    virtual const char * getTitle() {return lang_str.ui_title_config_machine_size;};
+    virtual const char * getTitle() {return lang_str.ui_title_wifi_list;};
     WifiListUI() : ConfigurationWidget(WIFI_LIST_UI, 1) {};
 };
 

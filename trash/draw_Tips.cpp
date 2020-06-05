@@ -75,7 +75,7 @@ void draw_Tips()
 	{	
 		TEXT_SetText(TEXT_tisps,tips_menu.joining);
 	}
-	else if(tips_type == TIPS_TYPE_TAILED_JOIN)
+	else if(tips_type == TIPS_TYPE_FAILED_JOIN)
 	{
 		TEXT_SetText(TEXT_tisps,tips_menu.failedJoin);
 	}

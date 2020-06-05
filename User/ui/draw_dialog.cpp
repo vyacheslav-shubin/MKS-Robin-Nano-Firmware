@@ -24,8 +24,6 @@
 #include "fatfs.h"
 #include "draw_ui.h"
 #include "wifi_module.h"
-#include "draw_wifi_list.h"
-#include "draw_wifi.h"
 
 #ifndef GUI_FLASH
 #define GUI_FLASH
@@ -238,12 +236,6 @@ void draw_dialog(uint8_t type)
 				sprintf(&buf[_index], " %d KBytes/s\n", upload_file_info.size / upload_file_info.time / 1024);
 				TEXT_SetText(printStopDlgText, buf);
 			}
-		} else if(DialogType == WIFI_ENABLE_TIPS) {
-			buttonCancle= BUTTON_CreateEx((LCD_WIDTH-120)/2,(imgHeight-60)/2,120,60,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-			printStopDlgText = TEXT_CreateEx(0,(imgHeight-40)/2-90, LCD_WIDTH, 60, hStopDlgWnd, WM_CF_SHOW, GUI_TA_VCENTER | GUI_TA_HCENTER,	alloc_win_id(), " ");
-			TEXT_SetBkColor(printStopDlgText, gCfgItems.background_color);
-			TEXT_SetTextColor(printStopDlgText, gCfgItems.title_color);
-			TEXT_SetText(printStopDlgText, print_file_dialog_menu.wifi_enable_tips);
 		} else {
 
 			printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-90, LCD_WIDTH, 70, hStopDlgWnd, 0);
@@ -287,30 +279,9 @@ void draw_dialog(uint8_t type)
 }
 
 
-void wifi_scan_handle() {
-	char buf[6]={0};
-	if(wifi_list_received_flag == 1) {
-		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
-			last_disp_state = PRINT_READY_UI;
-			main_ui.hide();
-			draw_Wifi();
-		} else {
-			last_disp_state = DIALOG_UI;
-			Clear_dialog();
-			draw_Wifi_list();
-		}
-	}
-}
-
-
 void Clear_dialog() {
 	ui_drop_window(hStopDlgWnd);
 }
 
 void refresh_dialog() {
-	switch (DialogType) {
-		case WIFI_ENABLE_TIPS:
-			wifi_scan_handle();
-			break;
-	}
 }

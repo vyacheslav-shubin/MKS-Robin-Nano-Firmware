@@ -27,6 +27,8 @@
 #include "FileInfoUI.h"
 #include "DialogWidget.h"
 #include "AdvancedConfigUI.h"
+#include "WifiUI.h"
+#include "WifiListUI.h"
 #include "SettingsUI.h"
 #include "dialog/AboutDialogUI.h"
 #include "config/MachineConfigurationUI.h"

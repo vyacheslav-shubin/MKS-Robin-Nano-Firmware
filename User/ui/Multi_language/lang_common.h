@@ -150,7 +150,9 @@ typedef struct {
     BOOLEAN_LANG min_max;
     BOOLEAN_LANG gnd_vcc;
 
-	const char *wifi;
+    const char *wifi;
+    const char *cloud;
+    const char *wifi_reconnect;
 	const char *language;
 	const char *about;
 	const char *machine_settings;
@@ -175,6 +177,7 @@ typedef struct {
 	const char * ui_title_printing;
     const char * ui_title_speed;
     const char * ui_title_config_machine_size;
+    const char * ui_title_wifi_list;
     const char * ui_title_config_filament_change;
     const char * ui_title_config_home;
     const char * ui_title_leveling_points;

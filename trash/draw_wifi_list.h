@@ -1,3 +1,5 @@
+#error unused
+
 #ifndef _DRAW_WIFI_LIST_H_
 #define _DRAW_WIFI_LIST_H_
 

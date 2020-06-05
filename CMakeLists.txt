@@ -723,8 +723,10 @@ add_executable(work
         User/ui/widgets/UI.h
         User/ui/widgets/Widget.cpp
         User/ui/widgets/Widget.h
-        User/ui/widgets/XyzUI.cpp
-        User/ui/widgets/XyzUI.h
+		User/ui/widgets/XyzUI.cpp
+		User/ui/widgets/XyzUI.h
+		User/ui/widgets/WifiUI.cpp
+		User/ui/widgets/WifiUI.h
         User/ui/draw_bind.cpp
         User/ui/draw_bind.h
         User/ui/draw_deltaLevelPare.cpp
@@ -737,20 +739,12 @@ add_executable(work
         User/ui/draw_EnablePin_Invert.h
         User/ui/draw_FileTransfer_ui.cpp
         User/ui/draw_FileTransfer_ui.h
-        User/ui/draw_keyboard.cpp
-        User/ui/draw_keyboard.h
         User/ui/draw_mesh_leveling.cpp
         User/ui/draw_meshleveling.h
         User/ui/draw_number_key.cpp
         User/ui/draw_number_key.h
-        User/ui/draw_Tips.cpp
-        User/ui/draw_Tips.h
         User/ui/draw_ui.cpp
         User/ui/draw_ui.h
-        User/ui/draw_wifi.cpp
-        User/ui/draw_wifi.h
-        User/ui/draw_wifi_list.cpp
-        User/ui/draw_wifi_list.h
         User/ui/font.h
         User/ui/id_manage.c
         User/ui/id_manage.h

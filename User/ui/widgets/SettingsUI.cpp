@@ -10,6 +10,7 @@
 #include "MachineConfigurationUI.h"
 #include "dialog/WifiWaitInitDialogUI.h"
 #include "WifiListUI.h"
+#include "WifiUI.h"
 
 SettingsUI settings_ui;
 
@@ -27,33 +28,20 @@ void SettingsUI::createControls() {
 	this->ui.ret = this->createButtonRet();
 }
 
-#include "draw_wifi_list.h"
-#include "draw_wifi.h"
-
 void SettingsUI::action_wifi() {
 	if(gCfgItems.wifi_scan == 1) {
 		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
 			this->hide();
-			draw_Wifi();
+            wifi_ui.show(this);
 		} else {
             wifi_list_received_flag = 0;
             get_wifi_list_command_send();
             this->hide();
-            wifi_wait_init_dialog_ui.show(this, DIALOG_ID_INIT_WIFI, this);
-            /*
-			if(wifi_list_received_flag == 1) {
-				last_disp_state = SET_UI;
-				this->hide();
-				draw_Wifi_list();
-			} else {
-				//Диалог ожидания. Так же можно реализовать на обратном вызове
-				//draw_dialog(WIFI_ENABLE_TIPS);
-			}
-             */
+            wifi_wait_init_dialog_ui.show(WIFI_DIALOG_LOOKUP, this, DIALOG_ID_INIT_WIFI, this);
 		}
 	} else {
 		this->hide();
-		draw_Wifi();
+        wifi_ui.show(this);
 	}
 }
 
@@ -90,7 +78,7 @@ void SettingsUI::on_action_dialog(u8 action, u8 dialog_id) {
                 //draw_Wifi_list();
                 break;
             case UI_ACTION_WIFI_CONNECTED:
-                draw_Wifi();
+                wifi_ui.show(this);
                 break;
         };
     }

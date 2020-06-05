@@ -103,13 +103,9 @@ User/ui/draw_dialog.cpp
 User/ui/draw_doubleZ.cpp
 User/ui/draw_EnablePin_Invert.cpp
 User/ui/draw_FileTransfer_ui.cpp
-User/ui/draw_keyboard.cpp
 User/ui/draw_mesh_leveling.cpp
 User/ui/draw_number_key.cpp
-User/ui/draw_Tips.cpp
 User/ui/draw_ui.cpp
-User/ui/draw_wifi.cpp
-User/ui/draw_wifi_list.cpp
 User/ui/id_manage.c
 User/ui/Multi_language/fontHz14.c
 User/ui/Multi_language/Helvetica26.c
@@ -151,6 +147,7 @@ User/ui/widgets/FileInfoBaseUI.cpp
 User/ui/widgets/FileInfoUI.cpp
 User/ui/widgets/SettingsUI.cpp
 User/ui/widgets/WifiListUI.cpp
+User/ui/widgets/WifiUI.cpp
 User/ui/widgets/config/ConfigurationWidget.cpp
 User/ui/widgets/config/MotorSettingsUI.cpp
 User/ui/widgets/config/MotorDirConfigUI.cpp

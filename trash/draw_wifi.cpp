@@ -109,7 +109,7 @@ void draw_Wifi()
 	if(gCfgItems.wifi_type == ESP_WIFI)
 	{
 		
-		if((gCfgItems.wifi_type == 0x02)&&(gCfgItems.cloud_enable == 1))
+		if((gCfgItems.wifi_type == 0x02) && (gCfgItems.cloud_enable == 1))
 		{
 			buttonCloud.btnHandle = BUTTON_CreateEx(BTN_X_PIXEL*2+INTERVAL_V*3,  0, BTN_X_PIXEL, BTN_Y_PIXEL, hWifiWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
 

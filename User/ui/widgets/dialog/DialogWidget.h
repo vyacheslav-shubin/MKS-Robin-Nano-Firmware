@@ -20,6 +20,7 @@
 #define UI_ACTION_TIMEOUT	        ((u8)2)
 #define UI_ACTION_WIFI_CONNECTED	((u8)3)
 #define UI_ACTION_WIFI_LIST_READY	((u8)4)
+#define UI_ACTION_WIFI_FAIL	        ((u8)5)
 
 
 class ActionDialogCallback {

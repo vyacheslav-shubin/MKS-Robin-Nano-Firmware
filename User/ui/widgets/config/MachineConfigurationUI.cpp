@@ -15,7 +15,6 @@
 #include "NozzleConfigUI.h"
 #include "MotorSettingsUI.h"
 #include "LanguageConfigUI.h"
-#include "draw_keyboard.h"
 #include "dialog/KeyboardUI.h"
 
 MachineConfigurationUI machine_configuration_ui;

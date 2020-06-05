@@ -110,9 +110,10 @@ typedef  struct
 	char id[21];
 } CLOUD_PARA;
 
-typedef struct
-{
+typedef struct {
 	char  dhcp_flag;	//��̬��ȡIP��־λ����Ϊ1����Ҫ��̬���ã�//Ϊ0������þ�̬����
+	unsigned char  ip[4];
+	//todo: не нужно
 	char  ip_addr[16];	//��̬ip��ַ���飬��192,168,0,23
 	char  mask[16];	//��̬�������룬��255,255,255,0
 	char  gate[16];	//��̬���أ���192,168,0,1
@@ -220,8 +221,6 @@ extern WIFI_PARA wifiPara;
 extern IP_PARA ipPara;
 extern CLOUD_PARA cloud_para;
 extern uint8_t wifi_list_received_flag;
-
-
 extern WIFI_GCODE_BUFFER espGcodeFifo; 
 
 extern uint32_t  getWifiTick();

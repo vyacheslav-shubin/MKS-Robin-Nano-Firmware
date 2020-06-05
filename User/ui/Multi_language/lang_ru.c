@@ -58,6 +58,9 @@ void lang_ru(void) {
 	lang_str.plus = "Добавить";
 	lang_str.minus = "Уменьшить";
 
+    lang_str.wifi_reconnect = "Сменить сеть";
+    lang_str.cloud = "Облако";
+
 	lang_str.off = "Выключить";
 	lang_str.bed = "Стол";
 	lang_str.extruder1 = "Экструдер 1";
@@ -115,6 +118,7 @@ void lang_ru(void) {
     lang_str.ui_title_machine_type_settings = "Выбор типа механики";
     lang_str.ui_title_hotbed_config = "Настройка нагревателя стола";
     lang_str.ui_title_extruders_config = "Конфигурация сопел";
+    lang_str.ui_title_wifi_list = "Сети WiFi";
 
 	lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
     lang_str.file_info_ui.filament_progress = "Филамент (m): %1.3f / %1.3f %d%%";

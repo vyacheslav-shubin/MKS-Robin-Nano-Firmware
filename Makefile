@@ -41,7 +41,7 @@ FIRMWARE 	:= $(BUILD_BASE)/firmware
 MKS_BIN_FILE	:=robin_nano35.bin
 SNAPSHOT_FILE	:=robin_nano35.zip
 SNAPSHOT_PIC_FILE	:=mks_pic.zip
-SNAPSHOT_DIR 	:=../mks-robin-nano35-binary/snapshot
+SNAPSHOT_DIR 	:= snapshot
 MKS_FIRMWARE 	:= $(BUILD_BASE)/$(MKS_BIN_FILE)
 
 LD_SCRIPT=MKS_ROBIN.ld

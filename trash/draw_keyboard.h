@@ -1,3 +1,4 @@
+#error unused
 #ifndef _DRAW_KEYBOARD_H_
 #define _DRAW_KEYBOARD_H_
 

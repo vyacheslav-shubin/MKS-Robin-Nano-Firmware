@@ -27,13 +27,13 @@ void WifiWaitInitDialogUI::updateControls() {
         case WIFI_DIALOG_LOOKUP: {
             switch (this->state_machine) {
                 case WIFI_SM_START:
-                    this->setText(this->ui.text, "WiFi lookup");
+                    this->setText(this->ui.text, lang_str.wf.lookup);
                     break;
                 case WIFI_SM_CONNECTED:
-                    this->setText(this->ui.text, "WiFi conntected");
+                    this->setText(this->ui.text, lang_str.wf.connected);
                     break;
                 case WIFI_SM_LIST_READY:
-                    this->setText(this->ui.text, "WiFi scanned");
+                    this->setText(this->ui.text, lang_str.wf.lookup);
                     break;
             }
             break;
@@ -41,20 +41,17 @@ void WifiWaitInitDialogUI::updateControls() {
         case WIFI_DIALOG_JOIN: {
             switch (this->state_machine) {
                 case WIFI_SM_START: {
-                    strcpy(ui_buf1_100, "Joining to: ");
-                    strcat(ui_buf1_100, wifi_list.wifi[wifi_list.selected].name);
+                    sprintf(ui_buf1_100, "%s [%s]", lang_str.wf.joining, wifi_list.wifi[wifi_list.selected].name);
                     this->setText(this->ui.text, ui_buf1_100);
                     break;
                 }
                 case WIFI_SM_CONNECTED: {
-                    strcpy(ui_buf1_100, "Joined to: ");
-                    strcat(ui_buf1_100, wifi_list.wifi[wifi_list.selected].name);
+                    sprintf(ui_buf1_100, "%s [%s]", lang_str.wf.joined, wifi_list.wifi[wifi_list.selected].name);
                     this->setText(this->ui.text, ui_buf1_100);
                     break;
                 }
                 case WIFI_SM_FAIL: {
-                    strcpy(ui_buf1_100, "Failed join to: ");
-                    strcat(ui_buf1_100, wifi_list.wifi[wifi_list.selected].name);
+                    sprintf(ui_buf1_100, "%s [%s]", lang_str.wf.fail_join, wifi_list.wifi[wifi_list.selected].name);
                     this->setText(this->ui.text, ui_buf1_100);
                     break;
                 }

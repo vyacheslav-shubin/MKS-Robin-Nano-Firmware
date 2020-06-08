@@ -43,7 +43,7 @@ protected:
 	void setButtonText(UI_BUTTON btn, const char * text);
 	UI_TEXT createText(int x, int y, int w, int h, const char * value);
 	UI_TEXT createTextF(int x, int y, int w, int h, int flags, const char *text);
-	void setText(UI_TEXT hText, char * text);
+	void setText(UI_TEXT hText, const char * text);
 public:
 	Widget(DISP_STATE id) {this->id=id;};
 	bool is_active();

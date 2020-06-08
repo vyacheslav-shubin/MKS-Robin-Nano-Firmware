@@ -54,6 +54,7 @@ void lang_ru(void) {
 	lang_str.print = "Печать";
 	lang_str.settings = "Настройки";
 	lang_str.tools = "Инструменты";
+    lang_str.power_off = "Выключить";
 
 	lang_str.plus = "Добавить";
 	lang_str.minus = "Уменьшить";
@@ -135,5 +136,13 @@ void lang_ru(void) {
 	lang_str.dialog.confirm_print_with_suicide = "Автоматическое выключение.\nПрервать и повторить печать?";
 	lang_str.dialog.error_filament_end_detected = "Обнаружен обрыв филамента";
     lang_str.dialog.confirm_filament_load = "Загрузить филамент?";
+
+    lang_str.wf.state = "Состояние";
+    lang_str.wf.connected = "Подключено";
+    lang_str.wf.disconnected = "Нет соединения";
+    lang_str.wf.fail_join = "Ошибка подключения";
+    lang_str.wf.joining = "Идет подключение";
+    lang_str.wf.joined = "Подключено";
+    lang_str.wf.lookup = "Поиск сетей";
 
 }

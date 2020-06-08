@@ -103,6 +103,16 @@ typedef struct {
     const char * confirm_filament_load;
 } DIALOG_LANG_STR;
 
+typedef struct {
+    const char * lookup;
+    const char * connected;
+    const char * disconnected;
+    const char * state;
+    const char * joining;
+    const char * joined;
+    const char * fail_join;
+} WIFI_UI_LANG_STR;
+
 typedef struct{
     const char* tr;
     const char* fl;
@@ -121,6 +131,7 @@ typedef struct {
 	const char * print;
 	const char * settings;
 	const char * tools;
+    const char * power_off;
 
 	const char * plus;
 	const char * minus;
@@ -190,6 +201,7 @@ typedef struct {
 	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;
 	DIALOG_LANG_STR		dialog;
+    WIFI_UI_LANG_STR    wf;
 } LANG_STR;
 
 

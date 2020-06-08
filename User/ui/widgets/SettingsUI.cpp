@@ -24,7 +24,7 @@ void SettingsUI::createControls() {
 	this->ui.configuration = this->createButtonAt(0, 0, img_machine_settings_root, lang_str.machine_settings);
 	this->ui.wifi = this->createButtonAt(1, 0, img_wifi, lang_str.wifi);
     this->ui.about = this->createButtonAt(3, 0, img_about, lang_str.about);
-    this->ui.reset = this->createButtonAt(0, 1, img_about, lang_str.about);
+    //this->ui.reset = this->createButtonAt(0, 1, img_about, lang_str.about);
 	this->ui.ret = this->createButtonRet();
 }
 

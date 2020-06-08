@@ -151,16 +151,13 @@ $(SD_CARD)/$(MKS_BIN_FILE): $(MKS_FIRMWARE)
 $(SNAPSHOT_DIR):
 	mkdir $(SNAPSHOT_DIR)
 
-$(SNAPSHOT_DIR)/$(SNAPSHOT_FILE): $(MKS_FIRMWARE) $(SNAPSHOT_DIR)
-	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(MKS_FIRMWARE)
-
-$(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) : pics $(SNAPSHOT_DIR)
-	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) $(PIC_OUTPUT)/*
- 	 
-
 sd_bin: $(SD_CARD)/$(MKS_BIN_FILE)
 
-snapshot: $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE)
+snapshot: $(MKS_FIRMWARE) pics $(SNAPSHOT_DIR)
+	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE); fi
+	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE); fi
+	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(MKS_FIRMWARE)
+	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) $(PIC_OUTPUT)/*
 
 make_sd: make_sd_bin mks
 	if [ -d "$(SD_CARD)/bak_font" ]; then mv $(SD_CARD)/bak_font  $(SD_CARD)/mks_font; fi

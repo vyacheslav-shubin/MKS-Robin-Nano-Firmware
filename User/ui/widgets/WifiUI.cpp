@@ -47,12 +47,13 @@ void WifiUI::refresh_1s() {
     strcpy(ui_buf1_100, "WiFi: ");
     strcat(ui_buf1_100, wifiPara.ap_name);
     this->setText(this->ui.name, ui_buf1_100);
-    strcpy(ui_buf1_100, "State: ");
+    const char * msg;
     if(wifi_link_state == WIFI_CONNECTED)
-        strcat(ui_buf1_100, "Connected");
+        msg = lang_str.wf.connected;
     else if(wifi_link_state == WIFI_NOT_CONFIG)
-        strcat(ui_buf1_100, "Disconnected");
+        msg = lang_str.wf.disconnected;
     else
-        strcat(ui_buf1_100, "Fail");
+        msg = lang_str.wf.fail_join;
+    sprintf(ui_buf1_100, "%s: %s", lang_str.wf.state, msg);
     this->setText(this->ui.state, ui_buf1_100);
 }

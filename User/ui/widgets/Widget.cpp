@@ -97,8 +97,10 @@ UI_TEXT Widget::createText(int x, int y, int w, int h, const char * value) {
 	return this->createTextF(x, y, w, h, TEXT_CF_LEFT|TEXT_CF_VCENTER, value);
 }
 
-void Widget::setText(UI_TEXT hText, char * text) {
-	ui_set_text_value(hText, text);
+void Widget::setText(UI_TEXT hText, const char * text) {
+    TEXT_SetBkColor(hText, gCfgItems.background_color);
+    TEXT_SetTextColor(hText, gCfgItems.title_color);
+    TEXT_SetText(hText, text);
 }
 
 void Widget::updateButton(UI_BUTTON button, const char * picture, const char * title) {

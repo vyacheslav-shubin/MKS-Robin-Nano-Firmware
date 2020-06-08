@@ -36,45 +36,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/WifiUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/WifiUI.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/WifiConnectionStateUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/WifiConnectionStateUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inc/wifi_module.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/wifi_module.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/mks_reprint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_reprint.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/multi_language.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/multi_language.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_Tips.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_Tips.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_Tips.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_Tips.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_dialog.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_keyboard.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_keyboard.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_keyboard.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_keyboard.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_wifi.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_wifi.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_wifi.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_wifi.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_wifi_list.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_wifi_list.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_wifi_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_wifi_list.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MainUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MainUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/WifiListUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/WifiListUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/WifiListUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/WifiListUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/DialogWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/DialogWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/PrintingInfoDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/PrintingInfoDialogUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/WifiUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/WifiUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/WifiWaitInitDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/WifiWaitInitDialogUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/WifiWaitInitDialogUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/WifiWaitInitDialogUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trash/draw_babyStep.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_babyStep.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +111,7 @@
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
       <workItem from="1590758996962" duration="70674000" />
-      <workItem from="1591360292011" duration="14768000" />
+      <workItem from="1591360292011" duration="19166000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -353,7 +330,21 @@
       <option name="project" value="LOCAL" />
       <updated>1591288915083</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="wifi-ui as widget; snapshot">
+      <created>1591375193150</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1591375193150</updated>
+    </task>
+    <task id="LOCAL-00033" summary="wifi-ui as widget; snapshot">
+      <created>1591375200539</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1591375200539</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -401,7 +392,8 @@
     <MESSAGE value="Nozzle config as widget" />
     <MESSAGE value="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)" />
     <MESSAGE value="keyboard ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="keyboard ui" />
+    <MESSAGE value="wifi-ui as widget; snapshot" />
+    <option name="LAST_COMMIT_MESSAGE" value="wifi-ui as widget; snapshot" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
@@ -444,10 +436,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590581244987" />
-    <state x="623" y="234" width="672" height="678" key="search.everywhere.popup" timestamp="1590686517574">
+    <state x="623" y="234" width="672" height="678" key="search.everywhere.popup" timestamp="1591607946586">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="234" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590686517574" />
+    <state x="623" y="234" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591607946586" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

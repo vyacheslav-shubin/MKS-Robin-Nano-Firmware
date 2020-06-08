@@ -75,6 +75,7 @@ typedef struct{
 	extern char isIdle();
 
 	extern void setLanguage(unsigned char index);
+	extern void powerOff();
 
 }
 

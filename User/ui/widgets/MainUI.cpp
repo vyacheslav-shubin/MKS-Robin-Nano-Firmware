@@ -16,7 +16,19 @@
 #include "FileBrowserUI.h"
 #include "ui_tools.h"
 #include "integration.h"
+#include "dialog/ConfirmDialogUI.h"
+
 MainUI main_ui;
+
+void MainUI::on_action_dialog(u8 action, u8 dialog_id) {
+    confirm_dialog_ui.hide();
+    if ((action==UI_BUTTON_OK) || (action==UI_ACTION_TIMEOUT)) {
+        shUI::powerOff();
+    } else {
+        this->show();
+    }
+}
+
 
 void MainUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.tools) {
@@ -52,6 +64,11 @@ void MainUI::on_button(UI_BUTTON hBtn) {
         if (++this->current_preheat_preset >= PREHEAT_PRESET_COUNT)
             this->current_preheat_preset = 0;
         ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
+	} else if (hBtn == this->ui.power) {
+        this->hide();
+        strcpy(ui_buf1_100, lang_str.power_off);
+        strcat(ui_buf1_100, "?");
+        confirm_dialog_ui.show(ui_buf1_100, this, 30, 0, this);
 	}
 }
 
@@ -87,8 +104,9 @@ void MainUI::createControls() {
         this->ui.settings = this->createButton(col(2), ui_std_row(0), img_settings, lang_str.settings);
         this->ui.heat_preset = this->createButton(col(1), ui_std_row(1), 0, 0);
 
-        ui_std_ext1_state_button(col(2), ui_std_row(1) + 20, &this->ui.ext1);
-        ui_std_bed_state_button(col(2), ui_std_row(1) + 65, &this->ui.bed);
+        ui_std_ext1_state_button(col(0), ui_std_row(1) + 20, &this->ui.ext1);
+        ui_std_bed_state_button(col(0), ui_std_row(1) + 65, &this->ui.bed);
+        this->ui.power = this->createButton(col(2), ui_std_row(1), img_power, lang_str.power_off);
         ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
         ui_update_bed_state_button(&this->ui.bed);
         ui_update_ext_state_button(&this->ui.ext1, 0);

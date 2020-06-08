@@ -14,10 +14,16 @@
 #include "configuration_store.h"
 
 namespace shUI {
-	void babystep(char * axe, float size) {
+    extern void powerOff() {
+        GUI_Clear();
+        enqueue_and_echo_commands_P(PSTR("M81"));
+    }
+
+    void babystep(char * axe, float size) {
 		sprintf(ui_buf1_80, "M290 %s%.3f", axe,  size);
 		excute_m290(ui_buf1_80);
 	}
+
 	float babystepGetZ() {
 		float ofs = zprobe_zoffset;
 		if (abs(ofs)<0.001)

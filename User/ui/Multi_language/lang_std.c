@@ -76,6 +76,7 @@ void lang_std(void) {
 	lang_str.print = "Print";
 	lang_str.settings = "Settings";
 	lang_str.tools = "Tools";
+    lang_str.power_off = "Power off";
 
 	lang_str.plus = "More";
 	lang_str.minus = "Less";
@@ -162,4 +163,12 @@ void lang_std(void) {
 	lang_str.dialog.confirm_print_with_suicide = "Auto power off.\nBreak and print again?";
 	lang_str.dialog.error_filament_end_detected = "Filament end detected";
     lang_str.dialog.confirm_filament_load = "Load filament?";
+
+    lang_str.wf.state = "State";
+    lang_str.wf.connected = "Connected";
+    lang_str.wf.disconnected = "Disconnected";
+    lang_str.wf.fail_join = "Failed join";
+    lang_str.wf.joining = "Joining";
+    lang_str.wf.joined = "Joined";
+    lang_str.wf.lookup = "Lookup networks";
 }

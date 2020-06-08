@@ -97,6 +97,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_more				"bmp_more.bin"
 #define img_print				"bmp_printing.bin"
 #define img_settings			"bmp_set.bin"
+#define img_power			    "bmp_power.bin"
 #define img_tools				"bmp_tool.bin"
 #define img_continue_print		"bmp_breakpoint.bin"
 

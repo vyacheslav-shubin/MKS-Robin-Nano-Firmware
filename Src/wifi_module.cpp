@@ -1502,6 +1502,58 @@ void DMA1_Channel5_IRQHandler() {
 	}
 }
 
+
+char wifi_upload_firmware(const char * src, const char * back, int dest) {
+    char res = 0;
+    if(f_open(&esp_upload.uploadFile, src,  FA_OPEN_EXISTING | FA_READ) ==  FR_OK) {
+        f_close(&esp_upload.uploadFile);
+        char last_state = -1;
+        ProgressDialogUI * pdu = ui_app.showProgress(lang_str.wf.update_start, 0);
+        ui_app.idle();
+        esp_upload.retriesPerBaudRate = 9;
+        ResetWiFiForUpload(0);
+        SendUpdateFile(ESP_FIRMWARE_FILE, dest);
+        while(esp_upload.state != upload_idle) {
+            upload_spin();
+            if (last_state!=esp_upload.state) {
+                last_state = esp_upload.state;
+                switch (esp_upload.state) {
+                    case resetting:
+                        pdu->setMessage(lang_str.wf.update_reseting);
+                        break;
+                    case upload_idle:
+                        pdu->setMessage(lang_str.wf.update_idle);
+                        break;
+                    case connecting:
+                        break;
+                    case erasing:
+                        pdu->setMessage(lang_str.wf.update_eraising);
+                        break;
+                    case uploading:
+                        pdu->setMessage(lang_str.wf.update_uploading);
+                        break;
+                    case done:
+                        pdu->setMessage(lang_str.wf.update_done);
+                        break;
+                };
+            }
+            if (esp_upload.state==uploading)
+                pdu->setProgress(((float)esp_upload.uploadBlockNumber)/((float)esp_upload.fileSize/0x0400)*100);
+            ui_app.idle();
+        };
+        ResetWiFiForUpload(1);
+        if (esp_upload.uploadResult == success) {
+            f_unlink(back);
+            f_rename(src, back);
+            res = 1;
+        }
+        ui_app.doneProgress();
+    }
+    return res;
+}
+
+
+
 void wifi_init() {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	uint32_t flash_inf_valid_flag = 0;
@@ -1534,63 +1586,19 @@ void wifi_init() {
 		HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 		WIFI_IO1_SET();
 	}
-	{
-		FRESULT res;
-		int update_flag = 0;
-		esp_state = TRANSFER_IDLE;
-		esp_port_begin(1);		
-		wifi_reset();
-		res = f_open(&esp_upload.uploadFile, ESP_FIRMWARE_FILE,  FA_OPEN_EXISTING | FA_READ);
-		if(res ==  FR_OK) {
-			f_close(&esp_upload.uploadFile);
-			wifi_delay(2000);
-			if(usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
-				return;
-			ui_app.closeCurrentWidget();
+    esp_state = TRANSFER_IDLE;
+    esp_port_begin(1);
+    wifi_reset();
+    wifi_delay(2000);
+    if (usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
+        return;
 
-			draw_dialog(DIALOG_TYPE_UPDATE_ESP_FIRMARE);
-			
-			if(wifi_upload(0) >= 0) {
-				f_unlink("1:/MKS_WIFI_CUR");
-				f_rename(ESP_FIRMWARE_FILE,"/MKS_WIFI_CUR");
-			}
-			draw_return_ui();
-			update_flag = 1;
-		}
-		if(update_flag == 0) {
-			res = f_open(&esp_upload.uploadFile, ESP_WEB_FIRMWARE_FILE,  FA_OPEN_EXISTING | FA_READ);
-			if(res ==  FR_OK) {
-				f_close(&esp_upload.uploadFile);
-				wifi_delay(2000);
-				if(usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
-					return;
-				ui_app.closeCurrentWidget();
-				draw_dialog(DIALOG_TYPE_UPDATE_ESP_FIRMARE);
-				if(wifi_upload(1) >= 0) {
-					f_unlink("1:/MKS_WIFI_CUR");
-					f_rename(ESP_WEB_FIRMWARE_FILE,"/MKS_WIFI_CUR");
-				}
-				draw_return_ui();
-				update_flag = 1;
-			}
-		}
-		if(update_flag == 0) {
-			res = f_open(&esp_upload.uploadFile, ESP_WEB_FILE,  FA_OPEN_EXISTING | FA_READ);
-			if(res ==  FR_OK) {
-				f_close(&esp_upload.uploadFile);
-				wifi_delay(2000);
-				if(usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
-					return;
-				ui_app.closeCurrentWidget();
-				draw_dialog(DIALOG_TYPE_UPDATE_ESP_DATA);
-				if(wifi_upload(2) >= 0) {
-					f_unlink("1:/MKS_WEB_CONTROL_CUR");
-					f_rename(ESP_WEB_FILE,"/MKS_WEB_CONTROL_CUR");
-				}
-				draw_return_ui();
-			}
-		}
-	}
+    wifi_upload_firmware(ESP_FIRMWARE_FILE, ESP_FIRMWARE_FILE_BACK, ESP_FIRMWARE_ADDR)
+    ||
+    wifi_upload_firmware(ESP_WEB_FIRMWARE_FILE, ESP_WEB_FIRMWARE_FILE_BACK, ESP_WEB_FIRMWARE_ADDR)
+    ||
+    wifi_upload_firmware(ESP_WEB_FILE, ESP_WEB_FILE_BACK, ESP_WEB_ADDR);
+
 	wifiPara.decodeType = WIFI_DECODE_TYPE;
 	wifiPara.baud = 115200;
 	wifi_link_state = WIFI_NOT_CONFIG;

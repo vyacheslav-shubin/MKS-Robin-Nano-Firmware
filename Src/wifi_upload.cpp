@@ -694,7 +694,7 @@ void upload_spin()
 			if (esp_upload.connectAttemptNumber % esp_upload.retriesPerBaudRate == 0)
 			{
 			}
-		//	uploadPort.begin(baud);//´®¿Ú³õÊ¼»¯
+		//	uploadPort.begin(baud);//ï¿½ï¿½ï¿½Ú³ï¿½Ê¼ï¿½ï¿½
 		//	uploadPort_close();
 
 						
@@ -803,11 +803,11 @@ void upload_spin()
 
 	case done:
 		f_close(&esp_upload.uploadFile);
-		//uploadPort.end();				//ÖØÐÂÅäÖÃ´®¿Ú	// disable the port, it has a high interrupt priority
+		//uploadPort.end();				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½	// disable the port, it has a high interrupt priority
 		//uploadPort_close();
 
 		//WIFI_COM.begin(115200, true);
-		//wifi_init(); //»Ö¸´Õý³£WIFIÉèÖÃ
+		//wifi_init(); //ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½WIFIï¿½ï¿½ï¿½ï¿½
 		
 		if (esp_upload.uploadResult == success)
 		{
@@ -847,8 +847,8 @@ void SendUpdateFile(const char *file, uint32_t address)
 	esp_upload.state = resetting;
 }
 
-static const uint32_t FirmwareAddress = 0x00000000; //¹Ì¼þ
-static const uint32_t WebFilesAddress = 0x00100000; //ÎÄ¼þÏµÍ³
+static const uint32_t FirmwareAddress = 0x00000000; //ï¿½Ì¼ï¿½
+static const uint32_t WebFilesAddress = 0x00100000; //ï¿½Ä¼ï¿½ÏµÍ³
 
 
 void ResetWiFiForUpload(int begin_or_end)
@@ -859,12 +859,12 @@ void ResetWiFiForUpload(int begin_or_end)
 
 	#if V1_0_V1_1
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
-	GPIO_InitStructure.Pin = GPIO_Pin_8;//PC7ÏÈ×÷ÎªÊäÈë£¬Éý¼¶Ê±ºò×÷ÎªÊä³ö
+	GPIO_InitStructure.Pin = GPIO_Pin_8;//PC7ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½
 	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP; 
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
        #else
        GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
-	GPIO_InitStructure.Pin = GPIO_Pin_13;//PC7ÏÈ×÷ÎªÊäÈë£¬Éý¼¶Ê±ºò×÷ÎªÊä³ö
+	GPIO_InitStructure.Pin = GPIO_Pin_13;//PC7ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½
 	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP; 
 	HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);    
        #endif
@@ -886,14 +886,14 @@ void ResetWiFiForUpload(int begin_or_end)
         	#if V1_0_V1_1
 		HAL_GPIO_WritePin(GPIOA,GPIO_Pin_8,GPIO_PIN_SET); //boot mode	
 		GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
-		GPIO_InitStructure.Pin = GPIO_Pin_8;//PF2ÏÈ×÷ÎªÊäÈë£¬Éý¼¶Ê±ºò×÷ÎªÊä³ö
+		GPIO_InitStructure.Pin = GPIO_Pin_8;//PF2ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½
 		GPIO_InitStructure.Mode = GPIO_MODE_INPUT;  
 		HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
         	#endif
         	#else
  		HAL_GPIO_WritePin(GPIOC,GPIO_Pin_13,GPIO_PIN_SET); //boot mode	
 		GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
-		GPIO_InitStructure.Pin = GPIO_Pin_13;//PF2ÏÈ×÷ÎªÊäÈë£¬Éý¼¶Ê±ºò×÷ÎªÊä³ö
+		GPIO_InitStructure.Pin = GPIO_Pin_13;//PF2ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½
 		GPIO_InitStructure.Mode = GPIO_MODE_INPUT;  
 		HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);       
         	#endif
@@ -908,13 +908,21 @@ void ResetWiFiForUpload(int begin_or_end)
 }
 
 
-	
+char wifi_do_upload(char * file, unsigned int dest) {
+    esp_upload.retriesPerBaudRate = 9;
+    SendUpdateFile(ESP_FIRMWARE_FILE, dest);
+    while(esp_upload.state != upload_idle)
+        upload_spin();
+    ResetWiFiForUpload(1);
+    return esp_upload.uploadResult == success;
+}
+
 
 int32_t wifi_upload(int type)
 {
-	esp_upload.retriesPerBaudRate = 9; //9ÖÖ²¨ÌØÂÊ
+	esp_upload.retriesPerBaudRate = 9; //9ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	ResetWiFiForUpload(0); //¿ØÖÆesp¹Ü½ÅÐÅºÅ£¬Ê¹Æä½øÈëÉý¼¶Ä£Ê½
+	ResetWiFiForUpload(0); //ï¿½ï¿½ï¿½ï¿½espï¿½Ü½ï¿½ï¿½ÅºÅ£ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 	
 	if(type == 0) // wifi firmware
 	{

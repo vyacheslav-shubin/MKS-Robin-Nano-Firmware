@@ -1,11 +1,15 @@
 #ifndef _WIFI_UPLOAD_H_
 #define _WIFI_UPLOAD_H_
 
-#define ESP_FIRMWARE_FILE		"1:/MksWifi.bin"
-#define ESP_WEB_FIRMWARE_FILE		"1:/MksWifi_Web.bin"
-#define ESP_WEB_FILE		"1:/MksWifi_WebView.bin"
-
-
+#define ESP_FIRMWARE_FILE		        "1:/MksWifi.bin"
+#define ESP_FIRMWARE_FILE_BACK		    "1:/MksWifi.cur"
+#define ESP_FIRMWARE_ADDR		        0x00000000
+#define ESP_WEB_FIRMWARE_FILE		    "1:/MksWifi_Web.bin"
+#define ESP_WEB_FIRMWARE_FILE_BACK		"1:/MksWifi_Web.cur"
+#define ESP_WEB_FIRMWARE_ADDR		    0x00000000
+#define ESP_WEB_FILE		            "1:/MksWifi_WebView.bin"
+#define ESP_WEB_FILE_BACK		        "1:/MksWifi_WebView.cur"
+#define ESP_WEB_ADDR		            0x00100000
 
 typedef enum
 {
@@ -54,6 +58,9 @@ extern UPLOAD_STRUCT esp_upload;
 extern "C" {
 #endif
 	int32_t wifi_upload(int type);
+    void ResetWiFiForUpload(int begin_or_end);
+    void SendUpdateFile(const char *file, uint32_t address);
+    void upload_spin();
 #ifdef __cplusplus
 }
 #endif

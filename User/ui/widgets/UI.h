@@ -31,6 +31,7 @@
 #include "WifiListUI.h"
 #include "SettingsUI.h"
 #include "dialog/AboutDialogUI.h"
+#include "dialog/ProgressDialogUI.h"
 #include "config/MachineConfigurationUI.h"
 #include "config/MachineSizeUI.h"
 #include "config/FilamentChangeConfigUI.h"

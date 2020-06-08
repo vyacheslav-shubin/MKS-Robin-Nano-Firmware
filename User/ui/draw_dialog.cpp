@@ -97,17 +97,7 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
 				if(pMsg->hWinSrc == buttonOk) {
 					Clear_dialog();
-					if(DialogType == DIALOG_TYPE_PRINT_FILE) {
-						if(strlen(ui_print_process.file_name)>(100-1)) {
-							draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
-						} else {
-							if (is_filament_fail()) {
-								draw_dialog(DIALOG_TYPE_FILAMENT_NO_PRESS);
-							} else {
-								ui_app.startPrintFile();
-							}
-						}
-					} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
+					if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
 						//TODO: этот код из mks_contiuePrint_UI
 						ui_print_process.preview_state_flags = 0;
 						f_mount(&fs, (TCHAR const*)SD_Path, 0);
@@ -137,12 +127,8 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 				} else if(DialogType == DIALOG_TYPE_UNBIND) {
 					cloud_unbind();
 					draw_return_ui();
-				} else if(DialogType == DIALOG_TYPE_M80_FAIL) {
-					ui_app.showMainWidget();
 				} else if(DialogType == DIALOG_TYPE_MESSEGE_ERR1) {
 					ui_app.showMainWidget();
-				} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
-					draw_return_ui();
 				} else {
 					draw_return_ui();
 				}
@@ -191,11 +177,7 @@ void draw_dialog(uint8_t type)
 	if(disp_state_stack._disp_index > 1)
 		GUI_DispStringAt(creat_title_text(), TITLE_XPOS, TITLE_YPOS);
 
-	if(DialogType == DIALOG_TYPE_UPDATE_ESP_FIRMARE) {
-		GUI_DispStringAt(DIALOG_UPDATE_WIFI_FIRMWARE_EN, 40, 120);
-	} else if(DialogType == DIALOG_TYPE_UPDATE_ESP_DATA) {
-		GUI_DispStringAt(DIALOG_UPDATE_WIFI_WEB_EN, 40, 100);
-	} else {
+    {
 		hStopDlgWnd = ui_std_window(cbDlgWin);
 
 		if(DialogType == DIALOG_TYPE_UPLOAD_FILE) {
@@ -240,35 +222,16 @@ void draw_dialog(uint8_t type)
 
 			printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-90, LCD_WIDTH, 70, hStopDlgWnd, 0);
 
-			if(
-					(DialogType == DIALOG_TYPE_M80_FAIL)
-			) {
-				buttonOk= ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
-				buttonOk = ui_create_dialog_button((LCD_WIDTH-140)/2,(imgHeight-40)/2, hStopDlgWnd, 0);
-			} else {
-				buttonOk= ui_create_dialog_button((LCD_WIDTH-320)/2,(imgHeight-40)/2,hStopDlgWnd, 0);
-				buttonCancle= ui_create_dialog_button((LCD_WIDTH-320)/2+40+140,(imgHeight-40)/2,hStopDlgWnd, 0);
-			}
+
+			buttonOk= ui_create_dialog_button((LCD_WIDTH-320)/2,(imgHeight-40)/2,hStopDlgWnd, 0);
+			buttonCancle= ui_create_dialog_button((LCD_WIDTH-320)/2+40+140,(imgHeight-40)/2,hStopDlgWnd, 0);
 
 
-			if(DialogType == DIALOG_TYPE_PRINT_FILE) {
-				print_start_flg = 1;
-				if(gCfgItems.breakpoint_reprint_flg == 1) {
-					ui_set_text_value(printStopDlgText,  print_file_dialog_menu.print_from_breakpoint);
-				} else {
-					printStopDlgText = ui_create_dialog_text(0,(imgHeight-40)/2-120, LCD_WIDTH, 40, hStopDlgWnd, print_file_dialog_menu.print_file);
-					printfilename = ui_create_std_text_f(0,(imgHeight-40)/2-60, LCD_WIDTH, 30, hStopDlgWnd, GUI_TA_TOP | GUI_TA_HCENTER, 0);
-					ui_set_text_value(printfilename, &ui_print_process.file_name[3]);
-				}
-			} else if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
+
+			if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
 				TEXT_SetText(printStopDlgText, file_menu.no_file_and_check);
-			} else if(DialogType == DIALOG_TYPE_M80_FAIL) {
-				TEXT_SetText(printStopDlgText, print_file_dialog_menu.close_machine_error);
 			} else if(DialogType == DIALOG_TYPE_UNBIND) {
 				TEXT_SetText(printStopDlgText, common_menu.unbind_printer_tips);
-			} else if(DialogType == DIALOG_TYPE_FILAMENT_NO_PRESS) {
-				TEXT_SetText(printStopDlgText, print_file_dialog_menu.filament_no_press);
 			}
 		}
 	}

@@ -111,6 +111,13 @@ typedef struct {
     const char * joining;
     const char * joined;
     const char * fail_join;
+
+    const char * update_start;
+    const char * update_reseting;
+    const char * update_idle;
+    const char * update_eraising;
+    const char * update_uploading;
+    const char * update_done;
 } WIFI_UI_LANG_STR;
 
 typedef struct{

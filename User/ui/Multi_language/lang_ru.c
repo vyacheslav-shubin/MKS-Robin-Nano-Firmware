@@ -145,4 +145,11 @@ void lang_ru(void) {
     lang_str.wf.joined = "Подключено";
     lang_str.wf.lookup = "Поиск сетей";
 
+    lang_str.wf.update_start = "Обновление ПО модуля WiFi";
+    lang_str.wf.update_reseting = "Инициализация";
+    lang_str.wf.update_idle = "Ожидание ответа";
+    lang_str.wf.update_eraising = "Очитстка памяти";
+    lang_str.wf.update_uploading = lang_str.wf.update_start;
+    lang_str.wf.update_done = "Завершено";
+
 }

@@ -170,6 +170,7 @@ User/ui/widgets/dialog/PrintingInfoDialogUI.cpp
 User/ui/widgets/dialog/CalculatorDialogUI.cpp
 User/ui/widgets/dialog/KeyboardUI.cpp
 User/ui/widgets/dialog/WifiWaitInitDialogUI.cpp
+User/ui/widgets/dialog/ProgressDialogUI.cpp
 User/ui/widgets/backui.cpp
 
 

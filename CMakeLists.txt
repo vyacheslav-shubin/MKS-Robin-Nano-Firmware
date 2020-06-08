@@ -676,6 +676,8 @@ add_executable(work
 		User/ui/widgets/dialog/WifiWaitInitDialogUI.h
 		User/ui/widgets/dialog/KeyboardUI.cpp
 		User/ui/widgets/dialog/KeyboardUI.h
+		User/ui/widgets/dialog/ProgressDialogUI.cpp
+		User/ui/widgets/dialog/ProgressDialogUI.h
 		User/ui/widgets/WifiListUI.cpp
 		User/ui/widgets/WifiListUI.h
         User/ui/widgets/Application.cpp

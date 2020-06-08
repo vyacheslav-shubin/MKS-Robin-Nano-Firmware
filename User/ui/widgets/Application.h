@@ -20,6 +20,7 @@ extern volatile u8 ui_timing_flags;
 #define ui_timing_clear(FLAG) (ui_timing_flags &= (~FLAG))
 
 class Widget;
+class ProgressDialogUI;
 
 typedef struct {
     unsigned char count;
@@ -56,6 +57,10 @@ public:
 	void pop();
 	void showMainWidget();
 	void reset_stack(Widget * widget);
+
+    ProgressDialogUI * showProgress(const char * message, unsigned char progress);
+    void doneProgress();
+
 	Application() {};
 	virtual ~Application() {};
 };

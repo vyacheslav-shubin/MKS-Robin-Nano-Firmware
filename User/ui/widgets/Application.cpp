@@ -18,6 +18,7 @@
 #include "spi_flash.h"
 #include "mks_reprint.h"
 #include "mks_touch_screen.h"
+#include "dialog/ProgressDialogUI.h"
 
 Application ui_app;
 static FATFS fat;
@@ -287,3 +288,23 @@ void Application::drawLogo() {
 	}
 }
 
+static Widget * stored_last_ui;
+
+ProgressDialogUI * Application::showProgress(const char * message, unsigned char progress) {
+    stored_last_ui = this->current_ui;
+    if (this->current_ui) {
+        this->current_ui->hide();
+        this->current_ui = 0;
+    }
+    progress_dialog_ui.show(message, progress);
+    return &progress_dialog_ui;
+}
+
+void Application::doneProgress() {
+    progress_dialog_ui.hide();
+    if (stored_last_ui) {
+        this->current_ui = stored_last_ui;
+        this->current_ui->show();
+    } else
+        this->showMainWidget();
+}

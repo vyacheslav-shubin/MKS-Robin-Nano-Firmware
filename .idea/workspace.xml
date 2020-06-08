@@ -35,24 +35,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ProgressDialogUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ProgressDialogUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inc/wifi_upload.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/wifi_upload.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/wifi_upload.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_upload.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_dialog.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
-    </list>
+    <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +95,7 @@
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
       <workItem from="1590758996962" duration="70674000" />
-      <workItem from="1591360292011" duration="30422000" />
+      <workItem from="1591360292011" duration="30602000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -352,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591609164179</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="wifi upload firmware code refactoring + ProgressDialogUI">
+      <created>1591628763872</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1591628763872</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -402,7 +392,8 @@
     <MESSAGE value="keyboard ui" />
     <MESSAGE value="wifi-ui as widget; snapshot" />
     <MESSAGE value="wifi-ui multilanguage +power off button on main ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="wifi-ui multilanguage +power off button on main ui" />
+    <MESSAGE value="wifi upload firmware code refactoring + ProgressDialogUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="wifi upload firmware code refactoring + ProgressDialogUI" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">

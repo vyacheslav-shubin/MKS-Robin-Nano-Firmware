@@ -243,8 +243,6 @@ typedef struct {
 
 
 
-extern GUI_BITMAP bmp_struct_100x80;
-extern GUI_BITMAP bmp_struct_100x100;
 extern GUI_BITMAP bmp_struct_50x50;
 extern GUI_BITMAP bmp_struct_70x50;
 extern GUI_BITMAP bmp_struct_70x28;
@@ -260,32 +258,23 @@ extern void print_time_to_str(PRINT_TIME * pt, char * buf);
 
 extern void ui_push_disp_stack(DISP_STATE ui_id);
 extern void ui_reset_disp_stack(DISP_STATE ui_id);
-extern void ui_pop_disp_stack(void);
 
 extern void ui_clear_screen(void);
 extern void ui_set_encoding(void);
-extern WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb);
 extern void ui_drop_window(WM_HWIN wnd);
 
 //with placeholder
 #define ui_std_col(ph_x) (INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*(ph_x))
 #define ui_std_row(ph_y) (INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * (ph_y))
-#define ui_std_button(ph_x, ph_y, hwnd, img, title) ui_create_std_button(ui_std_col(ph_x),  ui_std_row(ph_y), hwnd, img, title)
-#define ui_std_button_return(hwnd) ui_std_button(3, 1, hwnd, "bmp_return.bin", common_menu.text_back)
 #define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, LCD_HEIGHT - titleHeight, WM_CF_SHOW, cb, 0)
-#define ui_std_dialog(cb) WM_CreateWindow(20, titleHeight + 10, LCD_WIDTH - 40, LCD_HEIGHT - titleHeight - 20, WM_CF_SHOW, cb, 0)
 
 
 extern BUTTON_Handle ui_create_std_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
-extern BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text);
 extern BUTTON_Handle ui_create_96_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
 extern BUTTON_Handle ui_create_state_button(int x, int y, WM_HWIN hWinParent, const char *pFile);
 extern void ui_update_state_button(BUTTON_Handle btn, const char *pFile);
 
 extern BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const char* text);
-
-extern BUTTON_Handle ui_create_check_button(int x, int y, WM_HWIN hWinParent, uint8_t state);
-extern void ui_update_check_button(BUTTON_Handle  btn, uint8_t state);
 
 
 extern TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, char *text);
@@ -296,12 +285,6 @@ extern void ui_set_text_value(TEXT_Handle handle, char* val);
 extern void ui_update_std_button(BUTTON_Handle handle, const char* file, const char* title);
 
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
-
-#define ui_compare_arrow_pair(handle, pair) (((handle)==pair.button_text) || ((handle)==pair.button_arrow))
-extern void ui_make_arrow_pair(int row, WM_HWIN hWin, UI_ARROW_PAIR * pair, char* title);
-
-
-extern void ui_start_print_process(void);
 
 extern char ascii2dec(char ascii);
 extern unsigned char ui_file_with_preview(char *path, int *withoffset);

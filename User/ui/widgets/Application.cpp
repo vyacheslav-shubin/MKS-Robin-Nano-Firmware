@@ -207,6 +207,54 @@ void Application::terminatePrintFile() {
 }
 
 
+extern uint32_t logo_tick1,logo_tick2;
+extern uint8_t continue_print_error_flg;
+
+
+void Application::confinuePrintFile() {
+    SERIAL_PROTOCOLLN("CONTINUE PRINT");
+    ui_print_process.preview_state_flags = 0;
+    card.openFile(mksReprint.filename, true);
+    strcpy(ui_print_process.file_name, mksReprint.filename);
+    if(!card.isFileOpen()) {
+        this->beep(1);
+        draw_dialog(DIALOG_TYPE_REPRINT_NO_FILE);
+    } else {
+        if((mksReprint.sdpos > MIN_FILE_PRINTED)||(mksReprint.sdpos_from_epr>MIN_FILE_PRINTED)) {
+            epr_write_data(EPR_SAV_FILENAME, (uint8_t *)&mksReprint.filename[0],sizeof(mksReprint.filename));
+            card.sdprinting = 0;
+
+            if(mksReprint.resume == MKS_RESUME_PWDWN)
+                mks_getPositionXYZE();
+
+            if(gCfgItems.pwroff_save_mode != 1)
+                card.setIndex(mksReprint.sdpos);
+            else
+                card.setIndex(mksReprint.sdpos_from_epr);
+            current_position[X_AXIS] = mksReprint.current_position[0];
+            current_position[Y_AXIS] = mksReprint.current_position[1];
+            current_position[Z_AXIS] = mksReprint.current_position[2];
+            if(gCfgItems.pwroff_save_mode != 1)
+                mks_clearDir();
+            while(1) {
+                logo_tick2 = getTick();
+                if((getTickDiff(logo_tick2, logo_tick1)>=3000) || (gCfgItems.fileSysType == FILE_SYS_USB))
+                    break;
+            }
+            printing_ui.show();
+        } else {
+            mksReprint.resume = MKS_RESUME_IDLE;
+            mksReprint.mks_printer_state = MKS_IDLE;
+            if(gCfgItems.pwroff_save_mode != 1)
+                epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
+            continue_print_error_flg = 1;
+            ui_app.showMainWidget();
+        }
+    }
+
+}
+
+
 void Application::startPrintFile(unsigned char savedPreview) {
 	this->closeCurrentWidget();
 
@@ -220,7 +268,19 @@ void Application::startPrintFile(unsigned char savedPreview) {
 	if (savedPreview==0)
 		this->dropPreview();
 
-	ui_start_print_process();
+	if(card.openFile(ui_print_process.file_name, true)) {
+		filament_counter = 0;
+		feedrate_percentage = 100;
+		saved_feedrate_percentage = feedrate_percentage;
+		planner.flow_percentage[0] = 100;
+		planner.e_factor[0]= planner.flow_percentage[0]*0.01;
+		if(mksCfg.extruders==2) {
+			planner.flow_percentage[1] = 100;
+			planner.e_factor[1]= planner.flow_percentage[1]*0.01;
+		}
+		card.startFileprint();
+		ui_print_process.once = 0;
+	}
 
 	printing_ui.show();
 }

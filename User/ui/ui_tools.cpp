@@ -29,6 +29,7 @@ void print_time_to_str(PRINT_TIME * pt, char * buf) {
 	sprintf(buf, "%d%d:%d%d:%d%d", pt->hours/10, pt->hours%10, pt->minutes/10, pt->minutes%10,  pt->seconds/10, pt->seconds%10);
 }
 
+/*
 void ui_start_print_process(void) {
 	if(card.openFile(ui_print_process.file_name, true)) {
         filament_counter = 0;
@@ -44,6 +45,7 @@ void ui_start_print_process(void) {
 		ui_print_process.once = 0;
 	}
 }
+*/
 
 void ui_push_disp_stack(DISP_STATE ui_id) {
     if(disp_state_stack._disp_state[disp_state_stack._disp_index] != ui_id)
@@ -61,11 +63,6 @@ void ui_reset_disp_stack(DISP_STATE ui_id) {
 	disp_state = ui_id;
 }
 
-
-void ui_pop_disp_stack(void) {
-	disp_state_stack._disp_index--;
-	disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
-}
 
 void ui_clear_screen(void) {
 	GUI_SetBkColor(gCfgItems.background_color);
@@ -102,11 +99,6 @@ void ui_init_page(void) {
 }
 
 
-WM_HWIN ui_std_init_window(DISP_STATE ui_id, WM_CALLBACK* cb) {
-	ui_push_disp_stack(ui_id);
-	ui_init_page();
-	return ui_std_window(cb);
-}
 
 void ui_buttonpreset(BUTTON_Handle btn) {
 	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);
@@ -131,17 +123,6 @@ void ui_update_std_button(BUTTON_Handle btn, const char* file, const char* title
 }
 
 
-
-BUTTON_Handle ui_create_150_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile, const char* text) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 150, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
-	ui_buttonpreset(btn);
-	BUTTON_SetBmpFileName(btn, pFile,1);
-	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_150, 0, 0);
-	BUTTON_SetTextAlign(btn, GUI_TA_VCENTER | GUI_CUSTOM_POS);
-	BUTTON_SetText(btn, text);
-	return btn;
-}
-
 GUI_BITMAP bmp_struct_96x80 = { 96, 80, 96*2, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_50x50 = { 50, 50, 100, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_70x50 = { 70, 50, 140, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
@@ -155,22 +136,6 @@ BUTTON_Handle ui_create_96_80_button(int x, int y, WM_HWIN hWinParent, const cha
 	BUTTON_SetBitmapEx(btn, 0, &bmp_struct_96x80, 0, 0);
 	return btn;
 }
-
-BUTTON_Handle ui_create_check_button(int x, int y, WM_HWIN hWinParent, uint8_t state) {
-	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 90, 40, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());
-	ui_buttonpreset(btn);
-	BUTTON_SetTextAlign(btn,GUI_TA_HCENTER|GUI_TA_VCENTER);
-	ui_update_check_button(btn, state);
-    return btn;
-}
-
-
-void ui_update_check_button(BUTTON_Handle  btn, uint8_t state) {
-	BUTTON_SetBmpFileName(btn, state?"bmp_enable.bin":"bmp_disable.bin", 1);
-    BUTTON_SetBitmapEx(btn,0,&bmp_struct90X30, 0, 5);
-	BUTTON_SetText(btn, state?machine_menu.enable:machine_menu.disable);
-}
-
 
 
 void ui_update_state_button(BUTTON_Handle btn, const char *pFile) {
@@ -231,32 +196,6 @@ void ui_set_text_value(TEXT_Handle handle, char* val) {
 	TEXT_SetText(handle, val);
 }
 
-
-void ui_make_page_navigator(WM_HWIN hWin, UI_PAGE_NAVIGATOR * navigator) {
-	navigator->button_back = BUTTON_CreateEx(400, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
-    BUTTON_SetBmpFileName(navigator->button_back, "bmp_back70x40.bin",1);
-    BUTTON_SetBitmapEx(navigator->button_back, 0, &bmp_struct70X40,0, 0);
-    navigator->button_next = 0;
-    navigator->button_previous = 0;
-
-    if (navigator->page_count>1) {
-    	if (navigator->page < navigator->page_count-1)
-    		navigator->button_next = BUTTON_CreateEx(320, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
-    	if (navigator->page > 0) {
-    		navigator->button_previous = BUTTON_CreateEx(navigator->button_next?240:320, 230, 70, 40, hWin, BUTTON_CF_SHOW, 0, alloc_win_id());
-    	}
-    }
-
-	if (navigator->button_next!=0) {
-		BUTTON_SetBmpFileName(navigator->button_next, "bmp_next70x40.bin",1);
-		BUTTON_SetBitmapEx(navigator->button_next, 0, &bmp_struct70X40,0, 0);
-	}
-
-	if (navigator->button_previous!=0) {
-		BUTTON_SetBmpFileName(navigator->button_previous, "bmp_prev70x40.bin",1);
-		BUTTON_SetBitmapEx(navigator->button_previous, 0, &bmp_struct70X40,0, 0);
-	}
-}
 
 #define ROW(idx) (10+50*idx)
 

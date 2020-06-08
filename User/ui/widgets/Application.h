@@ -48,7 +48,8 @@ public:
 	char touch(u8 action);
 	void defaultUI();
 	void dropPreview();
-	void startPrintFile(unsigned char savedPreview=0);
+    void startPrintFile(unsigned char savedPreview=0);
+    void confinuePrintFile();
 	void terminatePrintFile();
 	void drawLogo();
 	void back_ui();

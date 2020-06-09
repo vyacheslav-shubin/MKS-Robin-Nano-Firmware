@@ -14,6 +14,8 @@
 #include "ff.h"
 #include "sh_tools.h"
 #include "integration.h"
+#include "Application.h"
+
 
 FileBrowserUI file_browser_ui;
 

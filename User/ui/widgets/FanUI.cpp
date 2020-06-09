@@ -9,6 +9,8 @@
 #include "ui_tools.h"
 #include "Marlin.h"
 #include "tim.h"
+#include "Application.h"
+
 
 FanUI fan_ui;
 

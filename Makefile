@@ -148,23 +148,14 @@ $(SD_CARD)/$(MKS_BIN_FILE): $(MKS_FIRMWARE)
 	#mountpoint -q /media/shubin/sd || udisksctl mount -b /dev/sdc1
 	cp $(MKS_FIRMWARE) $(SD_CARD)/$(MKS_BIN_FILE)
 
-$(SNAPSHOT_DIR):
-	mkdir $(SNAPSHOT_DIR)
-
 sd_bin: $(SD_CARD)/$(MKS_BIN_FILE)
 
-snapshot: $(MKS_FIRMWARE) pics $(SNAPSHOT_DIR)
+
+snapshot: $(MKS_FIRMWARE) pics
 	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE); fi
 	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE); fi
 	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(MKS_FIRMWARE)
 	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) $(PIC_OUTPUT)/*
-
-make_sd: make_sd_bin mks
-	if [ -d "$(SD_CARD)/bak_font" ]; then mv $(SD_CARD)/bak_font  $(SD_CARD)/mks_font; fi
-	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi
-	if [ -d "$(SD_CARD)/robin_nano35_cfg.CUR" ]; then mv $(SD_CARD)/robin_nano35_cfg.CUR $(SD_CARD)/robin_nano35_cfg.txt; fi
-	rm -f $(SD_CARD)/ROBIN_NANO35.CUR
-
 
 sync_pics:
 	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi

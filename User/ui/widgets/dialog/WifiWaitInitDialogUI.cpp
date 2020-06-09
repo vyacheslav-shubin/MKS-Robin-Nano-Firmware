@@ -4,6 +4,7 @@
 
 #include "WifiWaitInitDialogUI.h"
 #include "ui_tools.h"
+#include "wifi_module.h"
 
 WifiWaitInitDialogUI wifi_wait_init_dialog_ui;
 

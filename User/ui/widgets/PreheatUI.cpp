@@ -9,6 +9,8 @@
 #include "StdWidget.h"
 #include "ui_tools.h"
 #include "integration.h"
+#include "Application.h"
+
 
 PreheatUI preheat_ui;
 

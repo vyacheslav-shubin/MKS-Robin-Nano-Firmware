@@ -9,6 +9,8 @@
 #include "integration.h"
 #include "ui_tools.h"
 #include "ManualLevelingUI.h"
+#include "Application.h"
+
 
 void StdWidget::createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title) {
 	btn->button = ui_create_state_button(x, y,this->hWnd, picture);

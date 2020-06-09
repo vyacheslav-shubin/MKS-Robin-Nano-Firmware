@@ -93,8 +93,6 @@ static void MX_NVIC_Init(void);
 /* USER CODE END 0 */
 extern "C" u16 DeviceCode;
 
-uint32_t logo_tick1,logo_tick2;
-
 extern void draw_Hardwaretest();
 
 uint16_t test_epr;
@@ -185,7 +183,6 @@ int main(void) {
     SPI_FLASH_BufferRead((u8*)&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR,1);
   
     ui_app.start();
-    logo_tick1 = getTick();
     gui_view_init();
     setTouchBound(gCfgItems.touch_adj_xMin, gCfgItems.touch_adj_xMax, gCfgItems.touch_adj_yMax, gCfgItems.touch_adj_yMin);
     SPI_FLASH_BufferRead((u8*)&gCfgItems.total_pic,PIC_COUNTER_ADDR,1);

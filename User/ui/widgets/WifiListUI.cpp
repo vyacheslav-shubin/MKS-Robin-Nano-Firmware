@@ -7,6 +7,8 @@
 #include "wifi_module.h"
 #include "WifiUI.h"
 #include "WifiWaitInitDialogUI.h"
+#include "Application.h"
+
 
 
 WifiListUI wifi_list_ui;

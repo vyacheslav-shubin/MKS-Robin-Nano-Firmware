@@ -7,6 +7,8 @@
 
 #include "DialogWidget.h"
 #include "ui_tools.h"
+#include "Application.h"
+
 
 DialogWidget dialog_widget;
 

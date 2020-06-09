@@ -26,6 +26,10 @@ volatile u8 ui_timing_flags;
 
 #define STANDBY_TIME 	(gCfgItems.standby_time)
 
+typedef enum {
+    DIALOG_ID_NOFILE = 0
+} DIALOG_ID;
+
 static void _calc_rate(void);
 
 void Application::defaultUI() {
@@ -144,26 +148,25 @@ void Application::loop() {
 }
 
 void Application::idle() {
+    if (wifi_link_state != WIFI_TRANS_FILE) {
+        this->refresh();
+        if (this->current_ui) {
+            this->current_ui->refresh();
+        } else
+            GUI_RefreshPage();
+    }
 
-	if(wifi_link_state != WIFI_TRANS_FILE) {
-		this->refresh();
-		if (this->current_ui) {
-			this->current_ui->refresh();
-		} else
-			GUI_RefreshPage();
-	}
+    if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
+        ui_timing_clear(F_UI_TIMING_HALF_SEC);
+        this->refresh_05();
+    }
+    if (is_ui_timing(F_UI_TIMING_SEC)) {
+        ui_timing_clear(F_UI_TIMING_SEC);
+        this->refresh_1s();
+    }
 
-	if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {
-		ui_timing_clear(F_UI_TIMING_HALF_SEC);
-		this->refresh_05();
-	}
-	if (is_ui_timing(F_UI_TIMING_SEC)) {
-		ui_timing_clear(F_UI_TIMING_SEC);
-		this->refresh_1s();
-	}
-
-	GUI_TOUCH_Exec();
-	GUI_Exec();
+    GUI_TOUCH_Exec();
+    GUI_Exec();
 }
 
 void Application::systick() {
@@ -172,7 +175,7 @@ void Application::systick() {
 		ui_timing_set(F_UI_TIMING_HALF_SEC);
 
 	if(!(TimeIncrease * TICK_CYCLE % 1000)) { //1 sec
-		ui_timing_set(F_UI_TIMING_SEC);
+	    ui_timing_set(F_UI_TIMING_SEC);
 		if(print_time.start == 1) {
 			print_time.seconds++;
 			if(print_time.seconds >= 60) {
@@ -206,52 +209,75 @@ void Application::terminatePrintFile() {
 	ui_app.showMainWidget();
 }
 
-
-extern uint32_t logo_tick1,logo_tick2;
-extern uint8_t continue_print_error_flg;
-
-
-void Application::confinuePrintFile() {
-    SERIAL_PROTOCOLLN("CONTINUE PRINT");
-    ui_print_process.preview_state_flags = 0;
-    card.openFile(mksReprint.filename, true);
-    strcpy(ui_print_process.file_name, mksReprint.filename);
-    if(!card.isFileOpen()) {
-        this->beep(1);
-        draw_dialog(DIALOG_TYPE_REPRINT_NO_FILE);
-    } else {
-        if((mksReprint.sdpos > MIN_FILE_PRINTED)||(mksReprint.sdpos_from_epr>MIN_FILE_PRINTED)) {
-            epr_write_data(EPR_SAV_FILENAME, (uint8_t *)&mksReprint.filename[0],sizeof(mksReprint.filename));
-            card.sdprinting = 0;
-
-            if(mksReprint.resume == MKS_RESUME_PWDWN)
-                mks_getPositionXYZE();
-
-            if(gCfgItems.pwroff_save_mode != 1)
-                card.setIndex(mksReprint.sdpos);
-            else
-                card.setIndex(mksReprint.sdpos_from_epr);
-            current_position[X_AXIS] = mksReprint.current_position[0];
-            current_position[Y_AXIS] = mksReprint.current_position[1];
-            current_position[Z_AXIS] = mksReprint.current_position[2];
-            if(gCfgItems.pwroff_save_mode != 1)
-                mks_clearDir();
-            while(1) {
-                logo_tick2 = getTick();
-                if((getTickDiff(logo_tick2, logo_tick1)>=3000) || (gCfgItems.fileSysType == FILE_SYS_USB))
-                    break;
-            }
-            printing_ui.show();
-        } else {
-            mksReprint.resume = MKS_RESUME_IDLE;
-            mksReprint.mks_printer_state = MKS_IDLE;
-            if(gCfgItems.pwroff_save_mode != 1)
-                epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
-            continue_print_error_flg = 1;
-            ui_app.showMainWidget();
-        }
+char f_exists(const char * name) {
+    FIL file;
+    if (f_open(&file, name, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
+        f_close(&file);
+        return 1;
     }
+    return 0;
+}
 
+
+static void _do_continue_print() {
+    card.openFile(mksReprint.filename, true);
+    ui_print_process.preview_state_flags = 0;
+    strcpy(ui_print_process.file_name, mksReprint.filename);
+    if((mksReprint.sdpos > MIN_FILE_PRINTED)||(mksReprint.sdpos_from_epr>MIN_FILE_PRINTED)) {
+        epr_write_data(EPR_SAV_FILENAME, (uint8_t *)&mksReprint.filename[0],sizeof(mksReprint.filename));
+        card.sdprinting = 0;
+
+        if(mksReprint.resume == MKS_RESUME_PWDWN)
+            mks_getPositionXYZE();
+
+        if(gCfgItems.pwroff_save_mode != 1)
+            card.setIndex(mksReprint.sdpos);
+        else
+            card.setIndex(mksReprint.sdpos_from_epr);
+        current_position[X_AXIS] = mksReprint.current_position[0];
+        current_position[Y_AXIS] = mksReprint.current_position[1];
+        current_position[Z_AXIS] = mksReprint.current_position[2];
+        printing_ui.show();
+    } else {
+        mksReprint.resume = MKS_RESUME_IDLE;
+        mksReprint.mks_printer_state = MKS_IDLE;
+        if(gCfgItems.pwroff_save_mode != 1)
+            epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
+        ui_app.showMainWidget();
+    }
+}
+
+
+static unsigned char _reread_state_from_file = 0;
+
+void Application::on_action_dialog(u8 action, u8 dialog_id) {
+    if (action==UI_BUTTON_OK) {
+        if(f_exists(mksReprint.filename)) {
+            confirm_dialog_ui.hide();
+            if (_reread_state_from_file)
+                mks_read_state_from_file();
+            _do_continue_print();
+        } else
+            this->beep(1);
+    } else if (action==UI_BUTTON_CANCEL) {
+        confirm_dialog_ui.hide();
+        this->showMainWidget();
+    }
+}
+
+
+void Application::continuePrintFile(unsigned char reread_state_from_file) {
+    _reread_state_from_file = reread_state_from_file;
+    SERIAL_PROTOCOLLN("CONTINUE PRINT");
+    if(!f_exists(mksReprint.filename)) {
+        if (this->current_ui)
+            this->current_ui->hide();
+        this->beep(1);
+        sprintf(ui_buf1_100, lang_str.dialog.confirm_file_not_found,mksReprint.filename);
+        confirm_dialog_ui.show(ui_buf1_100, this, DIALOG_ID_NOFILE);
+    } else {
+        _do_continue_print();
+    }
 }
 
 
@@ -346,12 +372,10 @@ void Application::drawLogo() {
 			offset+=sizeof(bmp_public_buf);
 		}
 	}
+    delay(2000);
 }
-
-static Widget * stored_last_ui;
-
 ProgressDialogUI * Application::showProgress(const char * message, unsigned char progress) {
-    stored_last_ui = this->current_ui;
+    this->stored_last_ui = this->current_ui;
     if (this->current_ui) {
         this->current_ui->hide();
         this->current_ui = 0;
@@ -362,9 +386,10 @@ ProgressDialogUI * Application::showProgress(const char * message, unsigned char
 
 void Application::doneProgress() {
     progress_dialog_ui.hide();
-    if (stored_last_ui) {
-        this->current_ui = stored_last_ui;
+    if (this->stored_last_ui) {
+        this->current_ui = this->stored_last_ui;
         this->current_ui->show();
     } else
         this->showMainWidget();
 }
+

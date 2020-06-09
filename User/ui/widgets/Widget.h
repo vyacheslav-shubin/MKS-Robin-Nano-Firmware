@@ -15,14 +15,19 @@
 
 class Application;
 
-#include "Application.h"
-
 typedef BUTTON_Handle 		UI_BUTTON;
 typedef TEXT_Handle 		UI_TEXT;
 typedef PROGBAR_Handle 		UI_PROGRESS_BAR;
 typedef GUI_HWIN 			UI_WND;
 
 void widget_callback(WM_MESSAGE * pMsg);
+
+class ActionDialogCallback {
+protected:
+public:
+    virtual void on_action_dialog(u8 action, u8 dialog_id) = 0;
+    virtual ~ActionDialogCallback() {};
+};
 
 class Widget {
 protected:

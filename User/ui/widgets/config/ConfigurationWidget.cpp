@@ -9,6 +9,8 @@
 #include "GUI.h"
 #include "BUTTON.h"
 #include "ui_tools.h"
+#include "Application.h"
+
 
 
 void ConfigurationWidget::on_message(WM_MESSAGE * pMsg) {

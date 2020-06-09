@@ -7,6 +7,8 @@
 
 #include "SpeedUI.h"
 #include "integration.h"
+#include "Application.h"
+
 
 SpeedUI speed_ui;
 

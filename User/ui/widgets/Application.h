@@ -26,11 +26,12 @@ typedef struct {
     unsigned char count;
 } APP_BEEPER;
 
-class Application {
+class Application : public ActionDialogCallback {
 private:
     APP_BEEPER beeper = {0};
     volatile u32 screenOffCountDown = 255;
 	volatile u8 waitPenUp = 0;
+    Widget * stored_last_ui;
 public:
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
@@ -49,7 +50,7 @@ public:
 	void defaultUI();
 	void dropPreview();
     void startPrintFile(unsigned char savedPreview=0);
-    void confinuePrintFile();
+    void continuePrintFile(unsigned char reread_state_from_file = false);
 	void terminatePrintFile();
 	void drawLogo();
 	void back_ui();
@@ -59,6 +60,7 @@ public:
 	void showMainWidget();
 	void reset_stack(Widget * widget);
 
+    void on_action_dialog(u8 action, u8 dialog_id);
     ProgressDialogUI * showProgress(const char * message, unsigned char progress);
     void doneProgress();
 

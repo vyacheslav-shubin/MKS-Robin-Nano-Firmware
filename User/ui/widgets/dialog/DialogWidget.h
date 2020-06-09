@@ -23,13 +23,6 @@
 #define UI_ACTION_WIFI_FAIL	        ((u8)5)
 
 
-class ActionDialogCallback {
-protected:
-public:
-	virtual void on_action_dialog(u8 action, u8 dialog_id) = 0;
-	virtual ~ActionDialogCallback() {};
-};
-
 class DialogWidget : public Widget {
 protected:
 	void createDialogDecoration(const char * img, const char * title);

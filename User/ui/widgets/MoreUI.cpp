@@ -10,6 +10,8 @@
 #include "mks_cfg.h"
 #include "spi_flash.h"
 #include "serial.h"
+#include "Application.h"
+
 
 static int _addresses[6] = {BUTTON_CMD1_ADDR, BUTTON_CMD2_ADDR, BUTTON_CMD3_ADDR, BUTTON_CMD4_ADDR, BUTTON_CMD5_ADDR, BUTTON_CMD6_ADDR};
 static char has_image = 0;

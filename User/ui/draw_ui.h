@@ -210,7 +210,6 @@ typedef struct {
 	uint16_t    	hours;
 	uint8_t    		minutes;
 	volatile int8_t    seconds;
-	int8_t			ms_10;
 	int8_t			start;
 } PRINT_TIME;
 

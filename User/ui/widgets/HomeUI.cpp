@@ -7,6 +7,8 @@
 
 #include "HomeUI.h"
 #include "integration.h"
+#include "Application.h"
+
 
 HomeUI home_ui;
 

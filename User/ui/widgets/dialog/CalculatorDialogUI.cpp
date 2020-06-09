@@ -5,6 +5,8 @@
 #include "CalculatorDialogUI.h"
 #include "ui_tools.h"
 #include "math.h"
+#include "Application.h"
+
 
 
 CalculatorDialogUI calculator_dialog_ui;

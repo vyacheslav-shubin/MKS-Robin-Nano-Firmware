@@ -11,6 +11,8 @@
 #include "WM.h"
 #include "BUTTON.h"
 #include "integration.h"
+#include "Application.h"
+
 
 void Widget::buttonPreset(UI_BUTTON btn) {
 	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);

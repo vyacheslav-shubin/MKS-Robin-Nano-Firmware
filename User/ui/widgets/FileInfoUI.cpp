@@ -11,6 +11,8 @@
 #include "ff.h"
 #include "serial.h"
 #include "ConfirmDialogUI.h"
+#include "Application.h"
+
 
 FileInfoUI file_info_ui;
 

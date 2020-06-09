@@ -41,7 +41,6 @@ void reset_print_time() {
 	print_time.hours = 0;
 	print_time.minutes = 0;
 	print_time.seconds = 0;
-	print_time.ms_10 = 0;
 }
 
 static float zpos_bak = -1;

@@ -18,6 +18,8 @@
 #include "PrintingToolsUI.h"
 #include "ConfirmDialogUI.h"
 #include "PrintingInfoDialogUI.h"
+#include "Application.h"
+
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -212,6 +214,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 		this->hide();
 		printing_tools_ui.show(this);
 	} else if(hBtn == ui.pause) {
+
 		if(mksReprint.mks_printer_state == MKS_WORKING) {
 			stop_print_time();
 			if(mksCfg.extruders==2) {

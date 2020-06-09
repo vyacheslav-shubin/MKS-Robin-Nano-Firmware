@@ -94,7 +94,8 @@ typedef struct {
 } FILE_INFO_LANG_STR;
 
 typedef struct {
-	const char * confirm_delete_file;
+    const char * confirm_delete_file;
+    const char * confirm_file_not_found;
 	const char * confirm_terminate_print;
 	const char * confirm_print_again;
 	const char * confirm_print_with_suicide;

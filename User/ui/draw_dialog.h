@@ -1,10 +1,6 @@
 #ifndef _DRAW_DIALOG_H_
 #define _DRAW_DIALOG_H_
 
-#define DIALOG_TYPE_REPRINT_NO_FILE				2
-
-#define DIALOG_TYPE_MESSEGE_ERR1				4
-
 #define DIALOG_TYPE_UPLOAD_FILE					7
 #define DIALOG_TYPE_UNBIND						8
 

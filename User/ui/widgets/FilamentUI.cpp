@@ -8,6 +8,8 @@
 #include "FilamentUI.h"
 #include "PreheatUI.h"
 #include "integration.h"
+#include "Application.h"
+
 
 #define HYSTERESIS 2
 

@@ -4,6 +4,8 @@
 
 #include "KeyboardUI.h"
 #include "ui_tools.h"
+#include "Application.h"
+
 
 KeyboardUI keyboard_ui;
 const char * digital_key_value="1234567890-|:;()$&@\"";

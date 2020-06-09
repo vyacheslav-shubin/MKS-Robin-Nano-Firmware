@@ -95,67 +95,13 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 
 		case WM_NOTIFY_PARENT:
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
-				if(pMsg->hWinSrc == buttonOk) {
-					Clear_dialog();
-					if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
-						//TODO: этот код из mks_contiuePrint_UI
-						ui_print_process.preview_state_flags = 0;
-						f_mount(&fs, (TCHAR const*)SD_Path, 0);
-						card.openFile(mksReprint.filename, true);
-						if(!card.isFileOpen()) {
-							disp_state_stack._disp_index = 0;
-							memset(disp_state_stack._disp_state, 0, sizeof(disp_state_stack._disp_state));
-							disp_state_stack._disp_state[disp_state_stack._disp_index] = PRINT_READY_UI;
-							draw_dialog(DIALOG_TYPE_REPRINT_NO_FILE);
-						} else {
-							if(gCfgItems.pwroff_save_mode != 1)
-                                mks_ReadFromFile();
-							epr_write_data(EPR_SAV_FILENAME, (uint8_t *)&mksReprint.filename[0],sizeof(mksReprint.filename)); 
-							card.sdprinting = 0;
-							if(mksReprint.resume == MKS_RESUME_PWDWN) 
-								mks_getPositionXYZE();
-							if(gCfgItems.pwrdn_mtrdn_level_flg != 1)
-								card.setIndex(mksReprint.sdpos);
-							else
-								card.setIndex(mksReprint.sdpos_from_epr);
-							current_position[X_AXIS] = mksReprint.current_position[0];
-							current_position[Y_AXIS] = mksReprint.current_position[1];
-							current_position[Z_AXIS] = mksReprint.current_position[2];
-							mks_clearDir();
-							printing_ui.show();
-						}
-				} else if(DialogType == DIALOG_TYPE_UNBIND) {
-					cloud_unbind();
-					draw_return_ui();
-				} else if(DialogType == DIALOG_TYPE_MESSEGE_ERR1) {
-					ui_app.showMainWidget();
-				} else {
-					draw_return_ui();
-				}
-			} else if(pMsg->hWinSrc == buttonCancle) {
-				unsigned int tmpFlag;
-				Chk_close_machine_flg = 0;
-				Clear_dialog();
-				draw_return_ui();
-				
-				if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
-					mksReprint.mks_printer_state = MKS_IDLE;
-                    if(gCfgItems.pwroff_save_mode != 1)
-					    epr_write_data(EPR_SAV_FLAG, (uint8_t *)&mksReprint.mks_printer_state,sizeof(mksReprint.mks_printer_state));  //
+                if (pMsg->hWinSrc == buttonOk) {
+                    if (DialogType == DIALOG_TYPE_UNBIND)
+                        cloud_unbind();
                     Clear_dialog();
-                    ui_app.showMainWidget();
+                    draw_return_ui();
                 }
-			} else if(pMsg->hWinSrc == buttonRePrint) {
-				//TODO: Сделать отдельной ф-ей совмещается с buttonOk
-
-				if(strlen(ui_print_process.file_name)>(100-1)) {
-					Clear_dialog();
-					draw_dialog(DIALOG_TYPE_MESSEGE_ERR1);
-				} else {
-					ui_app.startPrintFile();
-				}
-			}
-		}
+            }
 	}
 }
 
@@ -228,9 +174,7 @@ void draw_dialog(uint8_t type)
 
 
 
-			if(DialogType == DIALOG_TYPE_REPRINT_NO_FILE) {
-				TEXT_SetText(printStopDlgText, file_menu.no_file_and_check);
-			} else if(DialogType == DIALOG_TYPE_UNBIND) {
+            if(DialogType == DIALOG_TYPE_UNBIND) {
 				TEXT_SetText(printStopDlgText, common_menu.unbind_printer_tips);
 			}
 		}

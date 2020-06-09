@@ -11,6 +11,7 @@
 #include "dialog/WifiWaitInitDialogUI.h"
 #include "WifiListUI.h"
 #include "WifiUI.h"
+#include "wifi_module.h"
 
 SettingsUI settings_ui;
 

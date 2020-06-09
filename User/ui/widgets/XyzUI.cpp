@@ -7,6 +7,8 @@
 
 #include "XyzUI.h"
 #include "ui_tools.h"
+#include "Application.h"
+
 
 void XyzUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));

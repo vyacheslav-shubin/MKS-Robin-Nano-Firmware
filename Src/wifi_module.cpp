@@ -804,7 +804,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 						send_to_wifi("M997 PAUSE\r\n", strlen("M997 PAUSE\r\n"));
 					}		
 					if (wifi_list_received_flag == 0)
-						get_wifi_list_command_send();
+						get_wifi_list_comman1d_send();
 					break;
 				case 998:
 					if(mksReprint.mks_printer_state == MKS_IDLE) {

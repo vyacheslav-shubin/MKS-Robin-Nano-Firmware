@@ -161,6 +161,20 @@ sync_pics:
 	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi
 	cp -r -u -v $(PIC_OUTPUT) $(SD_CARD)
 
+clear_wifi:
+	esptool.py --port `ls /dev/ttyUSB*` erase_flash
+
+mks_wifi:
+	unzip -o snapshot/MksWifi.zip -d $(BUILD_BASE)/
+	esptool.py --port `ls /dev/ttyUSB*` write_flash 0 $(BUILD_BASE)/MksWifi.bin
+
+patch_wifi:
+	echo -n HJNLM0002CF432810411>$(BUILD_BASE)/wifi-patch.bin
+	#dd if=/home/shubin/esp-cn.dump bs=1 skip=$(DEC_OFFSET) count=$(COUNT)>/home/shubin/sector.bin
+	esptool.py --port `ls /dev/ttyUSB*` write_flash 0x3fb0c0 $(BUILD_BASE)/wifi-patch.bin
+
+wifi: clear_wifi patch_wifi mks_wifi
+
 
 #alias usbtty='tu=`ls /dev/ttyUSB*` && picocom --imap lfcrlf --echo --baud 115200 ${tu}'
 #tu=`ls /dev/ttyUSB*` && picocom --imap lfcrlf --echo --baud 115200 ${tu}

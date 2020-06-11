@@ -113,6 +113,18 @@ uint32_t getWifiTickDiff(int32_t lastTick, int32_t  curTick) {
 	return ((lastTick <= curTick)?(curTick - lastTick):(0xffffffff - lastTick + curTick))* TICK_CYCLE;
 }
 
+int raw_send_to_wifi(char *buf, int len);
+
+void get_wifi_list_command_send() {
+    char buf[6]={0};
+    buf[0] = 0xA5;
+    buf[1] = 0x07;
+    buf[2] = 0x00;
+    buf[3] = 0x00;
+    buf[4] = 0xFC;
+    raw_send_to_wifi(buf, 5);
+}
+
 void wifi_delay(int n) {
 	uint32_t begin = getWifiTick();
 	uint32_t end = begin;
@@ -804,7 +816,7 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 						send_to_wifi("M997 PAUSE\r\n", strlen("M997 PAUSE\r\n"));
 					}		
 					if (wifi_list_received_flag == 0)
-						get_wifi_list_comman1d_send();
+						get_wifi_list_command_send();
 					break;
 				case 998:
 					if(mksReprint.mks_printer_state == MKS_IDLE) {
@@ -877,16 +889,6 @@ static int32_t charAtArray(const uint8_t *_array, uint32_t _arrayLen, uint8_t _c
 		if(*(_array + i) == _char)
 			return i;
 	return -1;
-}
-
-void get_wifi_list_command_send() {
-	char buf[6]={0};
-	buf[0] = 0xA5;
-	buf[1] = 0x07;
-	buf[2] = 0x00;
-	buf[3] = 0x00;
-	buf[4] = 0xFC;
-	raw_send_to_wifi(buf, 5);
 }
 
 static void net_msg_handle(uint8_t * msg, uint16_t msgLen) {

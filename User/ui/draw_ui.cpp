@@ -17,7 +17,6 @@
 #include "stm32f1xx_hal_flash_ex.h"
 
 #include "at24cxx.h"
-#include "draw_bind.h"
 #include "fatfs.h"
 
 #include "Marlin.h"
@@ -144,7 +143,6 @@ void clear_cur_ui() {
 		case FILETRANSFER_UI:							break;
 		case DIALOG_UI:			Clear_dialog();			break;
 		case FILETRANSFERSTATE_UI:						break;
-		case BIND_UI:			Clear_Bind();			break;
 		case ZOFFSET_UI:								break;
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
         case HARDWARE_TEST_UI:	Clear_Hardwaretest();	break;
@@ -192,7 +190,6 @@ void draw_return_ui() {
             case WIFI_UI:			wifi_ui.show();			                    break;
             case WIFI_LIST_UI:		wifi_list_ui.show();		                break;
 
-			case BIND_UI:			draw_bind();			break;
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;
             case DELTA_LEVELING_PARA_UI:	draw_DeltaLevelPara();			break;
@@ -278,14 +275,9 @@ extern volatile WIFI_STATE wifi_link_state;
 void GUI_RefreshPage() {
   	__IO uint32_t i =0;
 	switch(disp_state) {
-		case PRINT_READY_UI: break;
-		case OPERATE_UI: break;
-        case BIND_UI:		refresh_bind_ui();	break;
 		case MESHLEVELING_UI:
             disp_zpos();
             break;
-		case HARDWARE_TEST_UI:
-			break;      
 	    default:
 	    	break;
 				

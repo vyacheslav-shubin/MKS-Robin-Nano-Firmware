@@ -729,8 +729,6 @@ add_executable(work
 		User/ui/widgets/XyzUI.h
 		User/ui/widgets/WifiUI.cpp
 		User/ui/widgets/WifiUI.h
-        User/ui/draw_bind.cpp
-        User/ui/draw_bind.h
         User/ui/draw_deltaLevelPare.cpp
         User/ui/draw_deltaLevelPare.h
 		User/ui/draw_dialog.cpp

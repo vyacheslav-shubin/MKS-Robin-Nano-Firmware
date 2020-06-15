@@ -33,8 +33,8 @@ void WifiUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
     this->ui.ret = this->createButtonRet();
     this->ui.reconnect = this->createButtonAt(2, 1, img_wifi, lang_str.wifi_reconnect);
-    if((gCfgItems.wifi_type == 0x02) && (gCfgItems.cloud_enable == 1))
-        this->ui.cloud = this->createButtonAt(3, 0, img_cloud, lang_str.cloud);
+//    if((gCfgItems.wifi_type == 0x02) && (gCfgItems.cloud_enable == 1))
+//        this->ui.cloud = this->createButtonAt(3, 0, img_cloud, lang_str.cloud);
     this->ui.name = this->createText(10, 30, LCD_WIDTH / 2, 20, 0);
     this->ui.ip = this->createText(10, 30 + 20, LCD_WIDTH / 2, 20, 0);;
     this->ui.state = this->createText(10, 30 + 40, LCD_WIDTH / 2, 20, 0);;

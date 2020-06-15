@@ -97,7 +97,6 @@ Src/tim.c
 Src/usart.c
 Src/wifi_module.cpp
 Src/wifi_upload.cpp
-User/ui/draw_bind.cpp
 User/ui/draw_deltaLevelPare.cpp
 User/ui/draw_dialog.cpp
 User/ui/draw_doubleZ.cpp

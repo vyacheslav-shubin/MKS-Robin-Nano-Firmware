@@ -37,7 +37,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_bind.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_bind.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_bind.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_bind.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/WifiUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/WifiUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +77,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/snapshot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/trash" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Other File Types" />
   </component>
   <component name="RecentsManager">
@@ -101,7 +107,7 @@
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
       <workItem from="1590758996962" duration="70674000" />
-      <workItem from="1591360292011" duration="75916000" />
+      <workItem from="1591360292011" duration="80543000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -376,7 +382,21 @@
       <option name="project" value="LOCAL" />
       <updated>1591890202247</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="wifi module fix">
+      <created>1591891310195</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1591891310195</updated>
+    </task>
+    <task id="LOCAL-00041" summary="snapshot">
+      <created>1591891410626</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1591891410626</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -404,7 +424,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="configuration menu refactored" />
     <MESSAGE value="fix" />
     <MESSAGE value="heating preset on main widget" />
     <MESSAGE value="printing widget: +file info" />
@@ -425,11 +444,12 @@
     <MESSAGE value="wifi-ui as widget; snapshot" />
     <MESSAGE value="wifi-ui multilanguage +power off button on main ui" />
     <MESSAGE value="wifi upload firmware code refactoring + ProgressDialogUI" />
-    <MESSAGE value="snapshot" />
     <MESSAGE value="no file dialog ui prepare" />
     <MESSAGE value="Reprint no file dialog as widget" />
     <MESSAGE value="wifi module" />
-    <option name="LAST_COMMIT_MESSAGE" value="wifi module" />
+    <MESSAGE value="wifi module fix" />
+    <MESSAGE value="snapshot" />
+    <option name="LAST_COMMIT_MESSAGE" value="snapshot" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
@@ -440,10 +460,14 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2606" y="360" width="549" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591794734176" />
-    <state x="2" y="42" width="428" height="498" key="FileChooserDialogImpl" timestamp="1591804823997">
+    <state x="1920" y="0" width="1920" height="1060" key="DiffContextDialog" timestamp="1592203944583">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1920" y="0" width="1920" height="1060" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592203944583" />
+    <state x="2" y="42" width="428" height="498" key="FileChooserDialogImpl" timestamp="1592227175234">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="2" y="42" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591804823997" />
+    <state x="2" y="42" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592227175234" />
     <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1591803636347">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

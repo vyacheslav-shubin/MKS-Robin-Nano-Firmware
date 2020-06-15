@@ -14,7 +14,6 @@
 #include "usb_host.h"
 #include "at24cxx.h"
 
-#include "draw_bind.h"
 #include "mks_cfg.h"
 #include "Marlin.h"
 #include "cardreader.h"
@@ -95,12 +94,8 @@ static void cbDlgWin(WM_MESSAGE * pMsg) {
 
 		case WM_NOTIFY_PARENT:
 			if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
-                if (pMsg->hWinSrc == buttonOk) {
-                    if (DialogType == DIALOG_TYPE_UNBIND)
-                        cloud_unbind();
-                    Clear_dialog();
-                    draw_return_ui();
-                }
+                Clear_dialog();
+                draw_return_ui();
             }
 	}
 }
@@ -174,9 +169,6 @@ void draw_dialog(uint8_t type)
 
 
 
-            if(DialogType == DIALOG_TYPE_UNBIND) {
-				TEXT_SetText(printStopDlgText, common_menu.unbind_printer_tips);
-			}
 		}
 	}
 	if (buttonOk)

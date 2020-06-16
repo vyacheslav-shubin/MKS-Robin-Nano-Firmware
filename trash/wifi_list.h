@@ -1,3 +1,4 @@
+#error unused
 #ifndef _BUILD_TEXT
 #define _BUILD_TEXT
 typedef struct list_menu_disp

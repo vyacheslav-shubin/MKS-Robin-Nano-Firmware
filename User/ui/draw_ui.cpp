@@ -2,25 +2,8 @@
 #include "BUTTON.h"
 #include "UI.h"
 #include "draw_ui.h"
-#include "Marlin.h"
-#include "ff.h"
-#include "pic_manager.h"
-#include "ili9320.h"
-/******add********/
-#include "tim.h"
 #include "Configuration.h"
-#include "Configuration_adv.h"
-#include "types.h"
-#include "mks_reprint.h"
-
 #include "stm32f1xx_hal.h"
-#include "stm32f1xx_hal_flash_ex.h"
-
-#include "at24cxx.h"
-#include "fatfs.h"
-
-#include "Marlin.h"
-#include "wifi_list.h"
 #include "wifi_module.h"
 //Screen TFT_screen;
 

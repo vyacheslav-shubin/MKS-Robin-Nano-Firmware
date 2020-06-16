@@ -38,7 +38,6 @@
 /* USER CODE BEGIN 0 */
 #include "tim.h"
 #include "serial.h"   
-#include "mks_test.h"
 
 extern void SysTick_Handler_User();
 /* USER CODE END 0 */
@@ -287,10 +286,7 @@ void TIM2_IRQHandler(void)
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
-  if(mksTmp.cfg_hardware_test_enable)
-    mksStepperTest();
-  else
-    IsrStepperHandler();
+  IsrStepperHandler();
 
   /* USER CODE END TIM2_IRQn 1 */
 }

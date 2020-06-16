@@ -67,12 +67,26 @@ void Application::start() {
 	GUI_Init();
 	this->drawLogo();
 	Lcd_Light_ON;
+    gui_view_init();
 }
 
 void Application::setup() {
 	this->screenOffCountDown = STANDBY_TIME;
 	if (this->screenOffCountDown < 60)
 		this->screenOffCountDown = 60;
+
+	TEXT_SetDefaultTextColor(gCfgItems.title_color);
+    GUI_SetBkColor(gCfgItems.background_color);
+    GUI_SetColor(gCfgItems.title_color);
+
+    BUTTON_SetDefaultBkColor(gCfgItems.btn_color, BUTTON_CI_UNPRESSED);
+    BUTTON_SetDefaultBkColor(gCfgItems.btn_color, BUTTON_CI_PRESSED);
+    BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_UNPRESSED);
+    BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_PRESSED);
+    GUI_SetFont(&FONT_TITLE);
+    BUTTON_SetDefaultFont(&FONT_TITLE);
+    TEXT_SetDefaultFont(&FONT_TITLE);
+    GUI_UC_SetEncodeUTF8();
 }
 
 void Application::closeCurrentWidget() {

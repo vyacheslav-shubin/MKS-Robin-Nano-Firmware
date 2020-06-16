@@ -282,24 +282,6 @@ typedef struct {
 	char       _disp_index;
 } DISP_STATE_STACK;
 
-#define  CB_EVENT_DEPTH	20
-
-typedef struct {
-	int16_t event[CB_EVENT_DEPTH];
-	int8_t  r_idx;
-	int8_t  w_idx;
-	
-} CB_EVENT_STACK;
-
-typedef enum {
-	SD_NOT_INIT = 1,
-	SD_INIT_OK,
-	SD_FILE_RET_BEGIN,
-	SD_FILE_RET_END,
-	SD_SEL_FILE
-	
-} SD_STATE;
-
 
 typedef struct {
 	BUTTON_Handle 	btnHandle;
@@ -312,33 +294,22 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 
 extern CFG_ITMES gCfgItems;
 
-extern uint8_t temperature_change_frequency;
-
 extern DISP_STATE disp_state;
-extern DISP_STATE last_disp_state;
 extern DISP_STATE_STACK disp_state_stack;
 
 extern volatile uint32_t TimeIncrease;
-extern uint16_t temperature_change_frequency_cnt;
-extern uint8_t temperature_change_frequency;
-extern uint8_t from_flash_pic;
 
 extern void start_print_time();
 extern void stop_print_time();
 extern void reset_print_time();
 
-extern void _draw_logo();
-extern int8_t get_printing_rate(FIL *fileHandle);
 extern void draw_return_ui();
 
 extern void clear_cur_ui(void);
 extern void gui_view_init(void);
-extern void push_cb_stack(int16_t event_id);
-extern void GUI_callback(void);
 
 extern void GUI_RefreshPage(void);
 
-extern const char * creat_title_text();
 
 #if defined(__cplusplus)
 }

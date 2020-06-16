@@ -71,7 +71,6 @@ void Widget::show(Widget * caller) {
 
 void Widget::hide() {
 	this->dropWindow();
-	last_disp_state = this->id;
 	ui_app.current_ui = 0;
 }
 

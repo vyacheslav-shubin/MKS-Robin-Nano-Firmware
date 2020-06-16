@@ -1178,11 +1178,6 @@ void CardReader::mksReset()
 	mksCfg.watch_bed_temp_period = 60;
 	mksCfg.watch_bed_temp_increase = 2;
 
-
-	mksTmp.cfg_hardware_test_enable = 0;
-
-	
-	
 	mksCfg.hotnd_offset_x = 20.0;
 	mksCfg.hotnd_offset_y = 5.0;
 

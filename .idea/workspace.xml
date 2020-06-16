@@ -36,36 +36,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Configuration.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Configuration.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_FileTransfer_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_FileTransfer_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_FileTransfer_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_FileTransfer_ui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_dialog.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_dialog.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_dialog.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inc/mks_test.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/mks_test.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/mks_cfg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_cfg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/mks_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/mks_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/stm32f1xx_it.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/stm32f1xx_it.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_mesh_leveling.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_mesh_leveling.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingAutoConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/LevelingAutoConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingAutoConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/LevelingAutoConfigUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingPointsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/LevelingPointsUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingPointsUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/LevelingPointsUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/ConfirmDialogUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +113,7 @@
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
       <workItem from="1590758996962" duration="70674000" />
-      <workItem from="1591360292011" duration="113183000" />
+      <workItem from="1591360292011" duration="114835000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -433,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592292825394</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="-draw_dialog - deleted. Leveling config as single widget">
+      <created>1592320643660</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1592320643660</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -461,7 +451,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="printing widget: +file info" />
     <MESSAGE value="filament counter" />
     <MESSAGE value="printing info dialog" />
     <MESSAGE value="Calculator dialog widget" />
@@ -486,7 +475,8 @@
     <MESSAGE value="snapshot" />
     <MESSAGE value="drop bind to cloud" />
     <MESSAGE value="-rudiments" />
-    <option name="LAST_COMMIT_MESSAGE" value="-rudiments" />
+    <MESSAGE value="-draw_dialog - deleted. Leveling config as single widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="-draw_dialog - deleted. Leveling config as single widget" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
@@ -501,10 +491,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="1920" y="0" width="1920" height="1060" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592203944583" />
-    <state x="6" y="126" width="428" height="498" key="FileChooserDialogImpl" timestamp="1592320330395">
+    <state x="6" y="126" width="428" height="498" key="FileChooserDialogImpl" timestamp="1592321021562">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="6" y="126" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592320330395" />
+    <state x="6" y="126" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592321021562" />
     <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1591803636347">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

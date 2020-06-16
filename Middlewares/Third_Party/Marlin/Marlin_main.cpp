@@ -293,11 +293,6 @@ extern void filament_check();
 extern void display_temper_error();
 extern void Close_machine_display();
 
-extern uint8_t temperature_change_frequency;
-
-static uint32_t After_finish_print_time = 0;
-
-
 volatile uint32_t TimeIncrease;
 uint8_t preview_no_display;
 
@@ -15557,37 +15552,6 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) {
 
 uint8_t button_disp_pause_state=0;
 
-void lcd_reInit()
-{
-   GUI_Init();
-   //GUI_UC_SetEncodeUTF8();
-   gui_view_init(); 
-   
-   if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-  {
-    GUI_SetFont(&GUI_FontHZ16);
-    BUTTON_SetDefaultFont(&GUI_FontHZ16);
-    TEXT_SetDefaultFont(&GUI_FontHZ16);  
-    GUI_UC_SetEncodeNone();
-  }
-  else
-  {
-    GUI_SetFont(&FONT_TITLE);
-    BUTTON_SetDefaultFont(&FONT_TITLE);
-    TEXT_SetDefaultFont(&FONT_TITLE);                    
-    GUI_UC_SetEncodeUTF8();
-  }
-  
-	ui_app.closeCurrentWidget();
-   disp_state_stack._disp_index += 1;
-   if(mksReprint.mks_printer_state == MKS_REPRINTED)
-   {
-   	button_disp_pause_state=1;
-   }
-   draw_return_ui();
-   button_disp_pause_state=0;
-   Lcd_Light_ON;
-}
 
 void idle(
   #if ENABLED(ADVANCED_PAUSE_FEATURE)

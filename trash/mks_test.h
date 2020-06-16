@@ -1,3 +1,4 @@
+#error unused
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MKS_TEST_H_
 #define __MKS_TEST_H_

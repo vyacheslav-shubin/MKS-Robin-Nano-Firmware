@@ -20,7 +20,6 @@
 #include "fatfs.h"
 
 #include "Marlin.h"
-#include "mks_test.h"
 #include "wifi_list.h"
 #include "wifi_module.h"
 //Screen TFT_screen;
@@ -45,97 +44,23 @@ void reset_print_time() {
 static float zpos_bak = -1;
 extern volatile uint8_t temper_error_flg;
 
-extern volatile int16_t logo_time;
-//extern PR_STATUS printerStaus;
-extern uint8_t temp_update_flag;
-
-
-extern uint8_t print_start_flg;
-/******end********/
 extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz14;
 extern uint8_t wifi_refresh_flg;
-extern void disp_wifi_state();
-
-extern void filament_dialog_handle(void);
-
-FIL TEST_FIL1;
 
 DISP_STATE_STACK disp_state_stack;
 DISP_STATE disp_state = MAIN_UI;
 
-//TODO: эта переменная не нужна...
-DISP_STATE last_disp_state;
-
 char BMP_PIC_X = 0 ;
 char BMP_PIC_Y = 0;
 
-uint32_t To_pre_view;
-
-static   GUI_HWIN hMainWnd;
-static  BUTTON_STRUCT button4;//button1, button2, button3, button4;
-
-extern GUI_FLASH const GUI_FONT GUI_FontHZ_fontHz18;
-
-extern GUI_CONST_STORAGE GUI_BITMAP bmlogo;
-extern GUI_CONST_STORAGE GUI_BITMAP bmpreheat;
-
 extern CFG_ITMES gCfgItems;
 
-extern int X_ADD,X_INTERVAL;
-static volatile uint8_t fan_move_flag;
-extern uint8_t fan_change_flag;
-
-extern uint8_t DialogType;
-
-
-//PR_STATUS printerStaus = pr_idle;
-
-#define MAX_TITLE_LEN	28
-
-static CB_EVENT_STACK gCbEventStack;
-//Tan21060406
-#define INC_RD_POINT(b)	((b.r_idx+1 == sizeof(b.event) / sizeof(b.event[0])) ? 0 : b.r_idx+1)
-#define INC_WR_POINT(b)	((b.w_idx+1 == sizeof(b.event) / sizeof(b.event[0])) ? 0 : b.w_idx+1)
-
-void init_cb_stack()
-{
-	memset(&gCbEventStack.event, 0, sizeof(gCbEventStack.event));
-	gCbEventStack.r_idx = 0;
-	gCbEventStack.w_idx = 0;
-}
-
-void push_cb_stack(int16_t event_id) {
-	if(INC_WR_POINT(gCbEventStack) == gCbEventStack.r_idx) //overflow
-		return;
-	gCbEventStack.event[gCbEventStack.w_idx] = event_id;
-	gCbEventStack.w_idx = INC_WR_POINT(gCbEventStack);
-}
-
-int16_t pop_cb_stack() {
-	int16_t ret;
-	if(gCbEventStack.r_idx != gCbEventStack.w_idx) {
-		ret = gCbEventStack.event[gCbEventStack.r_idx];
-		gCbEventStack.r_idx = INC_RD_POINT(gCbEventStack);
-		return ret;
-	}
-	return -1;
-}
-
-void GUI_callback()
-{
-	int16_t action_id = pop_cb_stack();
-	if(action_id != (int16_t)-1)
-	{
-		//uid.executeAction(action_id);
-	}
-}
 
 
 void clear_cur_ui() {
-	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
+	disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
-        case HARDWARE_TEST_UI:	Clear_Hardwaretest();	break;
 		default:	break;
 	}
 	GUI_Clear();
@@ -177,7 +102,6 @@ void draw_return_ui() {
             case WIFI_LIST_UI:		wifi_list_ui.show();		                break;
 
             case MESHLEVELING_UI:	draw_meshleveling();	break;
-            case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;
 			default:
 				break;
 		}
@@ -205,8 +129,6 @@ void gui_view_init()
 	BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_PRESSED);
 	if(gCfgItems.button_3d_effect_flag != 1)
 		WIDGET_SetDefaultEffect(&WIDGET_Effect_Simple);
-
-	init_cb_stack();
 
     gCfgItems.touch_adj_xMin = 3518;
     gCfgItems.touch_adj_xMax = 389;
@@ -252,7 +174,6 @@ void gui_view_init()
 }
 
 extern uint16_t z_high_count;
-extern uint8_t move_speed_flg;
 extern volatile WIFI_STATE wifi_link_state;
 
 void GUI_RefreshPage() {
@@ -266,10 +187,3 @@ void GUI_RefreshPage() {
 				
 	}
 }
-
-const char * creat_title_text() {
-	return ui_app.getTitle();
-}
-
-
-

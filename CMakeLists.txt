@@ -187,7 +187,6 @@ add_executable(work
         Inc/main_RobinPro.h
         Inc/mks_cfg.h
         Inc/mks_reprint.h
-        Inc/mks_test.h
         Inc/mks_touch_screen.h
         Inc/pic.h
         Inc/pic_manager.h
@@ -579,7 +578,6 @@ add_executable(work
         Src/mks_cfg.cpp
         Src/mks_fontHz14.c
         Src/mks_reprint.cpp
-        Src/mks_test.cpp
         Src/mks_touch_screen.c
         Src/pic.c
         Src/pic_manager.cpp
@@ -729,8 +727,6 @@ add_executable(work
 		User/ui/widgets/WifiUI.h
         User/ui/draw_mesh_leveling.cpp
         User/ui/draw_meshleveling.h
-		trash/draw_number_key.cpp
-		trash/draw_number_key.h
         User/ui/draw_ui.cpp
         User/ui/draw_ui.h
         User/ui/font.h

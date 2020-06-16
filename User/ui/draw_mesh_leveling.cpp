@@ -132,9 +132,6 @@ void draw_meshleveling()
 	GUI_SetColor(gCfgItems.title_color);
 	GUI_Clear();
 
-	GUI_DispStringAt(creat_title_text(),  TITLE_XPOS, TITLE_YPOS); 
-
-    
 	hMeshLevelingWnd = WM_CreateWindow(0, titleHeight, LCD_WIDTH, imgHeight, WM_CF_SHOW, cbMeshLevelingWin, 0);
 
 	buttonMesh.btnHandle = BUTTON_CreateEx((LCD_WIDTH/2-100)/2 , imgHeight/2+(imgHeight/2-50)/2, 100, 50, hMeshLevelingWnd, BUTTON_CF_SHOW, 0, alloc_win_id());

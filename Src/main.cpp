@@ -52,7 +52,6 @@
 /* USER CODE BEGIN Includes */
 #include "Marlin.h"
 #include "Marlin_export.h"
-#include "mks_test.h"
 #include "sh_tools.h"
 #include "mks_reprint.h"
     
@@ -183,84 +182,19 @@ int main(void) {
     SPI_FLASH_BufferRead((u8*)&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR,1);
   
     ui_app.start();
-    gui_view_init();
+
     setTouchBound(gCfgItems.touch_adj_xMin, gCfgItems.touch_adj_xMax, gCfgItems.touch_adj_yMax, gCfgItems.touch_adj_yMin);
     SPI_FLASH_BufferRead((u8*)&gCfgItems.total_pic,PIC_COUNTER_ADDR,1);
 
-
-  //TODO: Нахрен!
-#if 1
-    switch(gCfgItems.language_bak) {
-        case 1:
-            gCfgItems.language_bak= LANG_SIMPLE_CHINESE;
-            break;
-        case 2:
-            gCfgItems.language_bak= LANG_COMPLEX_CHINESE;
-            break;
-        case 3:
-            gCfgItems.language_bak= LANG_ENGLISH;
-            break;
-        case 4:
-            gCfgItems.language_bak= LANG_RUSSIAN;
-            break;
-        case 5:
-            gCfgItems.language_bak= LANG_SPANISH;
-            break;
-        case 6:
-            gCfgItems.language_bak= LANG_FRENCH;
-            break;
-        case 7:
-            gCfgItems.language_bak= LANG_ITALY;
-            break;
-    }
-  
-    if(gCfgItems.multiple_language == 0) {
-	    if(gCfgItems.language_bak != 0) {
-		    gCfgItems.language = gCfgItems.language_bak;
-		    AT24CXX_Write(EPR_LANGUAGE,(uint8_t *)&gCfgItems.language,1);
-	    }
-    }
-#endif
-
-
-
-
     setup();
-
     ui_app.setup();
-
-    TEXT_SetDefaultTextColor(gCfgItems.title_color);
-    GUI_SetBkColor(gCfgItems.background_color);
-    GUI_SetColor(gCfgItems.title_color);
-
-    BUTTON_SetDefaultBkColor(gCfgItems.btn_color, BUTTON_CI_UNPRESSED);
-    BUTTON_SetDefaultBkColor(gCfgItems.btn_color, BUTTON_CI_PRESSED);
-    BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_UNPRESSED);
-    BUTTON_SetDefaultTextColor(gCfgItems.btn_textcolor, BUTTON_CI_PRESSED);
-
-    if((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE)) {
-        GUI_SetFont(&GUI_FontHZ16);
-        BUTTON_SetDefaultFont(&GUI_FontHZ16);
-        TEXT_SetDefaultFont(&GUI_FontHZ16);
-        GUI_UC_SetEncodeNone();
-    } else {
-        GUI_SetFont(&FONT_TITLE);
-        BUTTON_SetDefaultFont(&FONT_TITLE);
-        TEXT_SetDefaultFont(&FONT_TITLE);
-        GUI_UC_SetEncodeUTF8();
-    }
     disp_language_init();
-
 
     if(gCfgItems.pwroff_save_mode == 1)
   	    FALA_CTRL = 1;
 
     mks_initPrint();
     memset(&wifi_list,0,sizeof(&wifi_list));
-    if(mksTmp.cfg_hardware_test_enable) {
-	    mksCfg.extruders=2;
-	    draw_Hardwaretest();
-    }
     card.initsd();
     mks_rePrintCheck();
 
@@ -268,11 +202,8 @@ int main(void) {
 	    wifi_init();
 
     /* Infinite loop */
-    while (1) {
-        if(mksTmp.cfg_hardware_test_enable==1)
-            mksHardwareTest();
+    while (1)
         loop();
-    }
 }
 
 uint8_t poweroff_det_flg;

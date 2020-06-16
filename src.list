@@ -82,7 +82,6 @@ Src/ili9320.c
 Src/main.cpp
 Src/mks_cfg.cpp
 Src/mks_fontHz14.c
-Src/mks_test.cpp
 Src/mks_touch_screen.c
 Src/pic.c
 Src/pic_manager.cpp

@@ -10,13 +10,8 @@
 
 AboutDialogUI about_dialog_ui;
 
-void AboutDialogUI::on_message(WM_MESSAGE * pMsg) {
-	switch (pMsg->MsgId) {
-    	case WM_TOUCH:
-    	case WM_TOUCH_CHILD:
-            this->doAction(UI_BUTTON_OK);
-    		break;
-	}
+void AboutDialogUI::on_button(UI_BUTTON hBtn) {
+    this->doAction(UI_BUTTON_OK);
 }
 
 void AboutDialogUI::createControls() {

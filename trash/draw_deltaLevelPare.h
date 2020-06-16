@@ -1,13 +1,14 @@
-#ifndef _DRAW_DRAW_NUMBER_KEY_H_
-#define _DRAW_DRAW_NUMBER_KEY_H_
+#error unused
+#ifndef _DRAW_DELTALEVELPARA_H_
+#define _DRAW_DELTALEVELPARA_H_
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-void draw_NumberKey();
+void draw_DeltaLevelPara();
 
-void Clear_NumberKey();
+void Clear_DeltaLevelPara();
 
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */

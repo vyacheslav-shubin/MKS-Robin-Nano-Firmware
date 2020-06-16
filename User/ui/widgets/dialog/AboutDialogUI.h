@@ -22,8 +22,8 @@ private:
 	ABOUT_DIALOG_UI_CONTROLS ui;
 protected:
 	virtual void createControls();
+    virtual void on_button(UI_BUTTON hBtn);
 public:
-	virtual void on_message(WM_MESSAGE * pMsg);
 	AboutDialogUI() : ActionDialog() {};
 };
 

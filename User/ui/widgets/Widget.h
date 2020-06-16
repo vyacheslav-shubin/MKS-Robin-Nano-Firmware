@@ -22,12 +22,18 @@ typedef GUI_HWIN 			UI_WND;
 
 void widget_callback(WM_MESSAGE * pMsg);
 
+typedef enum {
+    WIDGET_UI, WIDGET_ROOT_UI, WIDGET_DIALOG, WIDGET_CONFIG
+} WIDGET_TYPE;
+
 class ActionDialogCallback {
 protected:
 public:
     virtual void on_action_dialog(u8 action, u8 dialog_id) = 0;
     virtual ~ActionDialogCallback() {};
 };
+
+
 
 class Widget {
 protected:
@@ -52,6 +58,7 @@ protected:
 public:
 	Widget(DISP_STATE id) {this->id=id;};
 	bool is_active();
+    virtual WIDGET_TYPE getType() {return WIDGET_UI;};
 	virtual void on_message(WM_MESSAGE * pMsg);
 	virtual ~Widget() {};
 	virtual const char * getTitle() {return 0; };

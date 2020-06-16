@@ -29,7 +29,8 @@ protected:
 	virtual void createControls() {};
     virtual void createFrame();
 public:
-	void hide();
+    virtual WIDGET_TYPE getType() {return WIDGET_DIALOG;};
+    void hide();
 	DialogWidget() : Widget(CUSTOM_DIALOG_UI) {};
 };
 

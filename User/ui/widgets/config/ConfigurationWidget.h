@@ -95,7 +95,8 @@ protected:
     virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:
-	virtual void on_message(WM_MESSAGE * pMsg);
+    virtual WIDGET_TYPE getType() {return WIDGET_CONFIG;};
+    virtual void on_message(WM_MESSAGE * pMsg);
 	virtual void show(Widget * caller = 0)  {Widget::show(caller); };
 	ConfigurationWidget(DISP_STATE id,  unsigned char pages = 1) : Widget(id) {
 		this->page_count = pages;

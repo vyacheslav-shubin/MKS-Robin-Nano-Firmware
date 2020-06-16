@@ -14,19 +14,15 @@
 
 #include "mks_cfg.h"
 
-#include "id_manage.h"
 #include "draw_dialog.h"
-#include "id_manage.h"
 #include "ff.h"
 #include "string_deal.h"
 #include "pic.h"
 #include "Multi_language.h"
 #include "lang_common.h"
 #include "draw_meshleveling.h"
-#include "draw_deltaLevelPare.h"
-#include "draw_doubleZ.h"
-#include "draw_EnablePin_Invert.h"
-#include "draw_number_key.h"
+
+#define alloc_win_id() (0)
 
 extern float delta_height;
 extern float delta_radius;

@@ -37,7 +37,6 @@ extern unsigned char path_bak[15];
 extern unsigned char *path_reprint;
 
 
-extern FIL *srcfp;
 extern uint8_t print_start_flg;
 
 extern uint8_t  mksPrinterStatusFlag;
@@ -134,30 +133,8 @@ void draw_dialog(uint8_t type)
 				TEXT_SetText(printStopDlgText, DIALOG_UPLOAD_ERROR_EN);
 			} else if(upload_result == 3) {
 				//TODO: upload_size, upload_time - отдельной структурой
-				char buf[200];
-				int _index = 0;
-				memset(buf,0,sizeof(200));
 				buttonOk= BUTTON_CreateEx((LCD_WIDTH-140)/2,(imgHeight)/2, 140, 50,hStopDlgWnd, BUTTON_CF_SHOW, 0, alloc_win_id());
-				strcpy(buf, DIALOG_UPLOAD_FINISH_EN);
-				_index = strlen(buf);
-				buf[_index] = '\n';
-				_index++;
-				strcat(buf, DIALOG_UPLOAD_SIZE_EN);
-				_index = strlen(buf);
-				buf[_index] = ':';
-				_index++;
-				sprintf(&buf[_index], " %.1d KBytes\n", upload_file_info.size / 1024);
-				strcat(buf, DIALOG_UPLOAD_TIME_EN);
-				_index = strlen(buf);
-				buf[_index] = ':';
-				_index++;
-				sprintf(&buf[_index], " %d s\n", upload_file_info.time);
-				strcat(buf, DIALOG_UPLOAD_SPEED_EN);
-				_index = strlen(buf);
-				buf[_index] = ':';
-				_index++;
-				sprintf(&buf[_index], " %d KBytes/s\n", upload_file_info.size / upload_file_info.time / 1024);
-				TEXT_SetText(printStopDlgText, buf);
+				TEXT_SetText(printStopDlgText, DIALOG_UPLOAD_FINISH_EN);
 			}
 		} else {
 

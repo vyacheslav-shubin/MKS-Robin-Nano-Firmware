@@ -38,6 +38,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_1s();
 public:
+    virtual WIDGET_TYPE getType() {return WIDGET_ROOT_UI;};
     virtual void on_action_dialog(u8 action, u8 dialog_id);
 	virtual const char * getTitle() {return lang_str.ui_title_main;};
 	MainUI() : StdWidget(PRINT_READY_UI){};

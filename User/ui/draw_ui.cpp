@@ -97,8 +97,6 @@ static CB_EVENT_STACK gCbEventStack;
 #define INC_RD_POINT(b)	((b.r_idx+1 == sizeof(b.event) / sizeof(b.event[0])) ? 0 : b.r_idx+1)
 #define INC_WR_POINT(b)	((b.w_idx+1 == sizeof(b.event) / sizeof(b.event[0])) ? 0 : b.w_idx+1)
 
-FIL *srcfp;
-
 void init_cb_stack()
 {
 	memset(&gCbEventStack.event, 0, sizeof(gCbEventStack.event));
@@ -146,10 +144,6 @@ void clear_cur_ui() {
 		case ZOFFSET_UI:								break;
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
         case HARDWARE_TEST_UI:	Clear_Hardwaretest();	break;
-		case DELTA_LEVELING_PARA_UI:	Clear_DeltaLevelPara();		break;
-		case DOUBLE_Z_UI:		Clear_DoubleZ();		break;
-		case ENABLE_INVERT_UI:	Clear_EnableInvert();	break;
-		case NUMBER_KEY_UI:		Clear_NumberKey();		break;
 		default:	break;
 	}
 	GUI_Clear();
@@ -160,7 +154,7 @@ void draw_return_ui() {
 		disp_state_stack._disp_index--;
 		switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
 			case PRINT_READY_UI: 	main_ui.show();			break;
-			case PRINTING_UI: printing_ui.show(); 			break;
+			case PRINTING_UI:       printing_ui.show(); 			break;
 			case MOVE_MOTOR_UI: 	motor_move_ui.show();	break;
 			case PRE_HEAT_UI:		preheat_ui.show();		break;
 			case FAN_UI:			fan_ui.show(); 			break;
@@ -192,14 +186,12 @@ void draw_return_ui() {
 
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;
-            case DELTA_LEVELING_PARA_UI:	draw_DeltaLevelPara();			break;
-            case DOUBLE_Z_UI:		draw_DoubleZ();			break;
-            case ENABLE_INVERT_UI:	draw_EnableInvert();	break;
-            case NUMBER_KEY_UI:		draw_NumberKey();		break;
             case DIALOG_UI:			draw_dialog(DialogType);	break;
 			default:
 				break;
 		}
+	} else {
+        main_ui.show();
 	}
 }
 

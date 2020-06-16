@@ -61,11 +61,13 @@ public:
 	void reset_stack(Widget * widget);
 
     void on_action_dialog(u8 action, u8 dialog_id);
+
     ProgressDialogUI * showProgress(const char * message, unsigned char progress);
     void doneProgress();
 
 	Application() {};
 	virtual ~Application() {};
+
 };
 
 extern Application ui_app;

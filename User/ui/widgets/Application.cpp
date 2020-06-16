@@ -312,7 +312,7 @@ void Application::startPrintFile(unsigned char savedPreview) {
 }
 
 void Application::showMainWidget() {
-	main_ui.show();
+    main_ui.show();
 }
 
 void Application::pop() {
@@ -374,6 +374,7 @@ void Application::drawLogo() {
 	}
     delay(2000);
 }
+
 ProgressDialogUI * Application::showProgress(const char * message, unsigned char progress) {
     this->stored_last_ui = this->current_ui;
     if (this->current_ui) {
@@ -392,4 +393,3 @@ void Application::doneProgress() {
     } else
         this->showMainWidget();
 }
-

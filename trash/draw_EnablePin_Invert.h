@@ -1,13 +1,15 @@
-#ifndef _DRAW_DOUBLEZ_H_
-#define _DRAW_DOUBLEZ_H_
+#error unused
+
+#ifndef _DRAW_ENABLEINVERT_H_
+#define _DRAW_ENABLEINVERT_H_
 
 #if defined(__cplusplus)
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-void draw_DoubleZ();
+void draw_EnableInvert();
 
-void Clear_DoubleZ();
+void Clear_EnableInvert();
 
 #if defined(__cplusplus)
 }     /* Make sure we have C-declarations in C++ programs */
@@ -15,7 +17,6 @@ void Clear_DoubleZ();
 
 
 #endif
-
 
 
 

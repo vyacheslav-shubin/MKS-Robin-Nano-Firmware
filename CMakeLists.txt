@@ -645,8 +645,6 @@ add_executable(work
 		User/ui/widgets/config/MachineConfigurationUI.h
 		User/ui/widgets/config/FilamentChangeConfigUI.h
 		User/ui/widgets/config/FilamentChangeConfigUI.cpp
-		User/ui/widgets/config/LevelingPointsUI.h
-		User/ui/widgets/config/LevelingPointsUI.cpp
 		User/ui/widgets/config/HomeConfigUI.cpp
 		User/ui/widgets/config/SensorLevelConfigUI.h
 		User/ui/widgets/config/SensorLevelConfigUI.cpp
@@ -654,8 +652,8 @@ add_executable(work
 		User/ui/widgets/config/MachineTypeConfigUI.cpp
 		User/ui/widgets/config/MachineTypeConfigUI.h
 		User/ui/widgets/config/HomeConfigUI.h
-		User/ui/widgets/config/LevelingAutoConfigUI.cpp
-		User/ui/widgets/config/LevelingAutoConfigUI.h
+		User/ui/widgets/config/LevelingConfigUI.cpp
+		User/ui/widgets/config/LevelingConfigUI.h
 		User/ui/widgets/config/HotBedConfigUI.cpp
 		User/ui/widgets/config/HotBedConfigUI.h
 		User/ui/widgets/config/NozzleConfigUI.cpp
@@ -702,8 +700,8 @@ add_executable(work
         User/ui/widgets/integration.h
         User/ui/widgets/MainUI.cpp
         User/ui/widgets/MainUI.h
-        User/ui/widgets/ManualLevelingUI.cpp
-        User/ui/widgets/ManualLevelingUI.h
+		User/ui/widgets/ManualLevelingUI.cpp
+		User/ui/widgets/ManualLevelingUI.h
         User/ui/widgets/MoreUI.cpp
         User/ui/widgets/MoreUI.h
         User/ui/widgets/MotorMoveUI.cpp
@@ -729,10 +727,6 @@ add_executable(work
 		User/ui/widgets/XyzUI.h
 		User/ui/widgets/WifiUI.cpp
 		User/ui/widgets/WifiUI.h
-        User/ui/draw_dialog.cpp
-		User/ui/draw_dialog.h
-        User/ui/draw_FileTransfer_ui.cpp
-        User/ui/draw_FileTransfer_ui.h
         User/ui/draw_mesh_leveling.cpp
         User/ui/draw_meshleveling.h
 		trash/draw_number_key.cpp

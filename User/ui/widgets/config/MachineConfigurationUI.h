@@ -13,8 +13,7 @@ typedef struct {
     UI_ARROW home_direction;
     UI_ARROW endstop_type;
     UI_ARROW filament_settings;
-    UI_ARROW manual_leveling_settings;
-    UI_ARROW auto_leveling_settings;
+    UI_ARROW leveling_settings;
     UI_ARROW nozzle_settings;
     UI_ARROW hotbed_settings;
     UI_ARROW motor_settings;

@@ -112,7 +112,9 @@ void lang_ru(void) {
 	lang_str.ui_title_speed = "Подстройка скорости";
     lang_str.ui_title_config_machine_size = "Размеры области печати";
     lang_str.ui_title_config_filament_change = "Настройки замены филамента";
-    lang_str.ui_title_leveling_points = "Точки настройки уровня стола";
+    lang_str.ui_title_leveling_points = "Контрольные точки ручной настройки";
+    lang_str.ui_title_leveling_type = "Тип определения уровня стола";
+    lang_str.ui_title_probe_settins = "Настройки зонда";
     lang_str.ui_title_config_home = "Настройка парковки";
     lang_str.ui_title_sensor_levels = "Уровень активации датчиков";
     lang_str.ui_title_motor_settings = "Настройки моторов";

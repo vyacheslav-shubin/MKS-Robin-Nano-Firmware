@@ -1,3 +1,4 @@
+#error unused
 #ifndef _DRAW_DIALOG_H_
 #define _DRAW_DIALOG_H_
 

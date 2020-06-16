@@ -1,3 +1,4 @@
+#error unused
 #ifndef _DRAW_FILETRANSFER_H_
 #define _DRAW_FILETRANSFER_H_
 #include "stdint.h"

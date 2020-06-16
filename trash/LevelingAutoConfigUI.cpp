@@ -69,11 +69,12 @@ void LevelingAutoConfigUI::on_button(UI_BUTTON hBtn) {
     } else if (hBtn==this->ui.probe.z_speed_slow.button) {
         this->calculator(lang_str.config_ui.probe_speed, " Z/2:", mksCfg.z_probe_speed_slow, SPEED_Z_SLOW);
     } else if (hBtn==this->ui.autoleveling_enable.button) {
-        mksCfg.bed_leveling_method = mksCfg.bed_leveling_method==8 ? 0 : 3;
+        mksCfg.bed_leveling_method = mksCfg.bed_leveling_method==32 ? 0 : 5;
         gCfgItems.leveling_mode = mksCfg.bed_leveling_method ? 1 : 0;
-        epr_write_data(EPR_BED_LEVELING_METHOD,&mksCfg.bed_leveling_method,1);
+        epr_write_data(EPR_LEVELING_MODE, (uint8_t *)&gCfgItems.leveling_mode, 1);
+        epr_write_data(EPR_BED_LEVELING_METHOD, &mksCfg.bed_leveling_method,1);
         mksCfg.bed_leveling_method = 1<<mksCfg.bed_leveling_method;
-        this->updateCheckButton(ui.autoleveling_enable.button, mksCfg.bed_leveling_method==8);
+        this->updateCheckButton(ui.autoleveling_enable.button, mksCfg.bed_leveling_method==32);
     } else if (hBtn==this->ui.probe.enable.button) {
         mksCfg.mkstouch = mksCfg.mkstouch ? 0 : 1;
         if (mksCfg.mkstouch)  {
@@ -118,7 +119,7 @@ void LevelingAutoConfigUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
     if (page==0) {
         this->createCheckPair(0, 0, &this->ui.autoleveling_enable, lang_str.config_ui.auto_leveling_settings,
-                              (unsigned char) (mksCfg.bed_leveling_method == 8));
+                              (unsigned char) (mksCfg.bed_leveling_method == 32));
         this->createCheckPair(0, 2, &this->ui.probe.enable, "BLtouch", mksCfg.mkstouch);
         //todo: проверить значение
         this->createCheckPair(0, 3, &this->ui.probe.connector, lang_str.config_ui.connectorZ, mksCfg.z_min_probe_pin_mode != 1,

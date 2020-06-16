@@ -229,8 +229,6 @@ void FileBrowserUI::doPrev(){
 	}
 }
 
-#include "draw_dialog.h"
-
 void FileBrowserUI::activatePrint(u8 index) {
 	memset(&ui_print_process, 0, sizeof(ui_print_process));
 	sprintf(ui_print_process.file_name, "%s/%s", browser.curent_dir, this->ui.files[index].fileName);

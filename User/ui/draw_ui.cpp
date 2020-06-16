@@ -134,14 +134,6 @@ void GUI_callback()
 void clear_cur_ui() {
 	last_disp_state = disp_state_stack._disp_state[disp_state_stack._disp_index];
 	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
-		case SPRAYER_UI:								break;
-		case MACHINE_UI:								break;
-		case LOG_UI:									break;
-		case DISK_UI:									break;
-		case FILETRANSFER_UI:							break;
-		case DIALOG_UI:			Clear_dialog();			break;
-		case FILETRANSFERSTATE_UI:						break;
-		case ZOFFSET_UI:								break;
         case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
         case HARDWARE_TEST_UI:	Clear_Hardwaretest();	break;
 		default:	break;
@@ -178,7 +170,7 @@ void draw_return_ui() {
             case HOME_SETTINGS_UI:  home_config_ui.show();                      break;
             case ENDSTOP_TYPE_UI:	sensor_level_config_ui.show();		        break;
             case MACHINETYPE_UI:	machine_type_config_ui.show();              break;
-            case LEVELING_PARA_UI:	leveling_auto_config_ui.show();             break;
+            case LEVELING_PARA_UI:	leveling_config_ui.show();             break;
             case HOTBED_CONFIG_UI:	hotbed_config_ui.show();	                break;
             case NOZZLE_CONFIG_UI:	nozzle_config_ui.show();	                break;
             case WIFI_UI:			wifi_ui.show();			                    break;
@@ -186,7 +178,6 @@ void draw_return_ui() {
 
             case MESHLEVELING_UI:	draw_meshleveling();	break;
             case HARDWARE_TEST_UI:	draw_Hardwaretest();	break;
-            case DIALOG_UI:			draw_dialog(DialogType);	break;
 			default:
 				break;
 		}

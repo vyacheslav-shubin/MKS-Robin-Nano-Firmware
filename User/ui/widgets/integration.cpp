@@ -146,7 +146,7 @@ namespace shUI {
 	}
 
 	unsigned char isMeshLeveling() {
-		return BED_LEVELING_METHOD & MESH_BED_LEVELING;
+		return BED_LEVELING_METHOD == MESH_BED_LEVELING;
 	}
 
 	void doCustomLeveling() {

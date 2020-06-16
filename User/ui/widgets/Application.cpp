@@ -21,6 +21,8 @@
 #include "dialog/ProgressDialogUI.h"
 
 Application ui_app;
+ProgressUI progress_ui;
+
 static FATFS fat;
 volatile u8 ui_timing_flags;
 
@@ -72,7 +74,6 @@ void Application::setup() {
 	if (this->screenOffCountDown < 60)
 		this->screenOffCountDown = 60;
 }
-
 
 void Application::closeCurrentWidget() {
 	if (this->current_ui)
@@ -312,7 +313,10 @@ void Application::startPrintFile(unsigned char savedPreview) {
 }
 
 void Application::showMainWidget() {
-    main_ui.show();
+    if (this->current_ui!=&main_ui) {
+        this->closeCurrentWidget();
+        main_ui.show();
+    }
 }
 
 void Application::pop() {
@@ -324,13 +328,13 @@ void Application::pop() {
 void Application::push(Widget * widget) {
 	this->current_ui = widget;
 	if (widget==&main_ui)
-		reset_stack(widget);
+        resetStack(widget);
 	else {
 		ui_push_disp_stack(widget->id);
 	}
 }
 
-void Application::reset_stack(Widget * widget) {
+void Application::resetStack(Widget * widget) {
 	ui_reset_disp_stack(widget->id);
 }
 
@@ -375,21 +379,47 @@ void Application::drawLogo() {
     delay(2000);
 }
 
-ProgressDialogUI * Application::showProgress(const char * message, unsigned char progress) {
-    this->stored_last_ui = this->current_ui;
-    if (this->current_ui) {
-        this->current_ui->hide();
-        this->current_ui = 0;
-    }
-    progress_dialog_ui.show(message, progress);
-    return &progress_dialog_ui;
+void ProgressUI::on_action_dialog(u8 action, u8 dialog_id) {
+    ui_app.showMainWidget();
 }
 
-void Application::doneProgress() {
+void ProgressUI::progress(const char * message, char progress) {
+    if (ui_app.current_ui != &progress_dialog_ui) {
+        Widget * last = ui_app.current_ui;
+        if (last) {
+            last->hide();
+            if (last->getType() != WIDGET_DIALOG)
+                this->stored_last_ui = last;
+        }
+        progress_dialog_ui.show(message, progress);
+    } else {
+        if (message)
+            progress_dialog_ui.setMessage(message);
+        if (progress >= 0)
+            progress_dialog_ui.setProgress(progress);
+    }
+}
+
+void ProgressUI::fail(const char * message) {
+    if (ui_app.current_ui != &confirm_dialog_ui) {
+        Widget * last = ui_app.current_ui;
+        if (last) {
+            last->hide();
+            if (last->getType() != WIDGET_DIALOG)
+                this->stored_last_ui = last;
+        }
+        confirm_dialog_ui.showEx(message, this, 0, 0, CONFIRM_DIALOG_OK_BUTTON);
+    } else {
+        confirm_dialog_ui.setMessage(message);
+    }
+}
+
+void ProgressUI::done() {
     progress_dialog_ui.hide();
     if (this->stored_last_ui) {
-        this->current_ui = this->stored_last_ui;
-        this->current_ui->show();
+        ui_app.current_ui = this->stored_last_ui;
+        ui_app.current_ui->show();
     } else
-        this->showMainWidget();
+        ui_app.showMainWidget();
+    this->stored_last_ui = 0;
 }

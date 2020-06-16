@@ -26,12 +26,31 @@ typedef struct {
     unsigned char count;
 } APP_BEEPER;
 
+class ProgressUI : public ActionDialogCallback {
+private:
+    Widget * stored_last_ui = 0;
+public:
+    void on_action_dialog(u8 action, u8 dialog_id);
+    void progress(const char * message, char progress);
+    void progress(unsigned char progress) {
+        this->progress(0, progress);
+    }
+    void progress(const char * message) {
+        this->progress(message, -1);
+    }
+    void fail(const char * message);
+    void done();
+    ProgressUI() {};
+    virtual ~ProgressUI() {};
+};
+
 class Application : public ActionDialogCallback {
 private:
     APP_BEEPER beeper = {0};
     volatile u32 screenOffCountDown = 255;
 	volatile u8 waitPenUp = 0;
     Widget * stored_last_ui;
+    friend ProgressUI;
 public:
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
@@ -58,12 +77,9 @@ public:
 	void push(Widget * widget);
 	void pop();
 	void showMainWidget();
-	void reset_stack(Widget * widget);
+	void resetStack(Widget * widget);
 
     void on_action_dialog(u8 action, u8 dialog_id);
-
-    ProgressDialogUI * showProgress(const char * message, unsigned char progress);
-    void doneProgress();
 
 	Application() {};
 	virtual ~Application() {};
@@ -71,5 +87,6 @@ public:
 };
 
 extern Application ui_app;
+extern ProgressUI progress_ui;
 
 #endif /* USER_UI_WIDGETS_APPLICATION_H_ */

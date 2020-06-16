@@ -5,10 +5,9 @@
 #include "SensorLevelConfigUI.h"
 #include "MachineConfigurationUI.h"
 #include "MachineTypeConfigUI.h"
-#include "LevelingAutoConfigUI.h"
+#include "LevelingConfigUI.h"
 #include "AdvancedConfigUI.h"
 #include "dialog/CalculatorDialogUI.h"
-#include "LevelingPointsUI.h"
 #include "FilamentChangeConfigUI.h"
 #include "HomeConfigUI.h"
 #include "HotBedConfigUI.h"
@@ -31,17 +30,16 @@ void MachineConfigurationUI::createControls() {
             this->createArrowPair(0, 2, &this->ui.home_direction, lang_str.config_ui.parking);
             this->createArrowPair(0, 3, &this->ui.endstop_type, lang_str.config_ui.endtop_type);
             this->createArrowPair(0, 4, &this->ui.filament_settings, lang_str.config_ui.filament_settings);
-            this->createArrowPair(1, 0, &this->ui.manual_leveling_settings, lang_str.config_ui.manual_leveling_settings);
-            this->createArrowPair(1, 1, &this->ui.auto_leveling_settings, lang_str.config_ui.auto_leveling_settings);
-            this->createArrowPair(1, 2, &this->ui.nozzle_settings, lang_str.config_ui.nozzle_settings);
-            this->createArrowPair(1, 3, &this->ui.hotbed_settings, lang_str.config_ui.hotbed_settings);
+            this->createArrowPair(1, 0, &this->ui.leveling_settings, lang_str.config_ui.manual_leveling_settings);
+            this->createArrowPair(1, 1, &this->ui.nozzle_settings, lang_str.config_ui.nozzle_settings);
+            this->createArrowPair(1, 2, &this->ui.hotbed_settings, lang_str.config_ui.hotbed_settings);
+            this->createArrowPair(1, 3, &this->ui.advanced_settings, lang_str.advanced);
             break;
         }
         case 1: {
             this->dual_columns = 1;
-            this->createArrowPair(0, 0, &this->ui.advanced_settings, lang_str.advanced);
-            this->createArrowPair(0, 1, &this->ui.language, lang_str.language);
-            this->createArrowPair(0, 2, &this->ui.test1, "Keyboard");
+            this->createArrowPair(0, 0, &this->ui.language, lang_str.language);
+            //this->createArrowPair(0, 2, &this->ui.test1, "Leveling");
             break;
         }
     }
@@ -67,12 +65,9 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     } else if (ui_is_double_button(hBtn, this->ui.filament_settings)) {
         this->hide();
         filament_change_config_ui.show(this);
-    } else if (ui_is_double_button(hBtn, this->ui.manual_leveling_settings)) {
+    } else if (ui_is_double_button(hBtn, this->ui.leveling_settings)) {
         this->hide();
-        leveling_points_ui.show(this);
-    } else if (ui_is_double_button(hBtn, this->ui.auto_leveling_settings)) {
-        this->hide();
-        leveling_auto_config_ui.show(this);
+        leveling_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.nozzle_settings)) {
         this->hide();
         nozzle_config_ui.show();
@@ -89,9 +84,6 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         this->hide();
         language_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.test1)) {
-        this->hide();
-        memset(password_buf, 0, sizeof(password_buf));
-        keyboard_ui.show("Password:", password_buf, sizeof(password_buf) - 1, this, 0, this);
     } else if (ui_is_double_button(hBtn, this->ui.test2)) {
     } else {
         ConfigurationWidget::on_button(hBtn);

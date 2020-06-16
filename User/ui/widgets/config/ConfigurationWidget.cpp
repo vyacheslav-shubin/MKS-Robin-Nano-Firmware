@@ -84,7 +84,7 @@ UI_BUTTON ConfigurationWidget::createCheckButton(int x, int y, unsigned char sta
 #define TEXT_X_OFFSET 20
 
 void ConfigurationWidget::createRadio(int col, int row, UI_RADIO * radio, const char* title, unsigned char state) {
-    int x = (this->dual_columns ? 0 : 240) + TEXT_X_OFFSET;
+    int x = (this->dual_columns ? 240 : 0) * col + TEXT_X_OFFSET;
     int w = (this->dual_columns ? 240 - TEXT_X_OFFSET : (480 * (2 - TEXT_X_OFFSET))) - X_RADIO_SZ - 10;
 
     radio->text = BUTTON_CreateEx(x, ROW(row), w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);

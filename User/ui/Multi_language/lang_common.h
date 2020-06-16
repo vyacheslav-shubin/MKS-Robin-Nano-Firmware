@@ -199,7 +199,9 @@ typedef struct {
     const char * ui_title_wifi_list;
     const char * ui_title_config_filament_change;
     const char * ui_title_config_home;
+    const char * ui_title_leveling_type;
     const char * ui_title_leveling_points;
+    const char * ui_title_probe_settins;
     const char * ui_title_hotbed_config;
     const char * ui_title_sensor_levels;
     const char * ui_title_motor_settings;

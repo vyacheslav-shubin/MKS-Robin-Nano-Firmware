@@ -14,7 +14,6 @@
 
 #include "mks_cfg.h"
 
-#include "draw_dialog.h"
 #include "ff.h"
 #include "string_deal.h"
 #include "pic.h"

@@ -137,6 +137,8 @@ void lang_std(void) {
     lang_str.ui_title_config_machine_size = "Machine size";
     lang_str.ui_title_config_filament_change = "Filament change settings";
     lang_str.ui_title_leveling_points = "Manual leveling points";
+    lang_str.ui_title_leveling_type = "Leveling mode";
+    lang_str.ui_title_probe_settins = "Probe settings";
     lang_str.ui_title_config_home = "Home parking config";
     lang_str.ui_title_sensor_levels = "Sensors activalting level";
     lang_str.ui_title_motor_settings = "Motors settings";

@@ -1,3 +1,4 @@
+#error unused
 //
 // Created by shubin on 29.05.2020.
 //
@@ -6,7 +7,7 @@
 #define WORK_LEVELINGAUTOCONFIGUI_H
 
 #include "ConfigurationWidget.h"
-#include "../dialog/CalculatorDialogUI.h"
+#include "widgets/dialog/CalculatorDialogUI.h"
 
 typedef struct {
     UI_CHECK enable;

@@ -1124,12 +1124,12 @@
 //#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
-#define NULL_BED_LEVELING		1		//(1<<0)	1
+#define NULL_BED_LEVELING		    1		//(1<<0)	1
 #define AUTO_BED_LEVELING_3POINT	2		//(1<<1)	2
 #define AUTO_BED_LEVELING_LINEAR	4		//(1<<2)	4
 #define AUTO_BED_LEVELING_BILINEAR	8		//(1<<3)	8	
 #define AUTO_BED_LEVELING_UBL		16		//(1<<4)	16
-#define MESH_BED_LEVELING		32		//(1<<5)	32
+#define MESH_BED_LEVELING		    32		//(1<<5)	32
 
 #define BED_LEVELING_METHOD		mksCfg.bed_leveling_method	
 

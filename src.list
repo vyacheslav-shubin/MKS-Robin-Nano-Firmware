@@ -97,8 +97,6 @@ Src/tim.c
 Src/usart.c
 Src/wifi_module.cpp
 Src/wifi_upload.cpp
-User/ui/draw_dialog.cpp
-User/ui/draw_FileTransfer_ui.cpp
 User/ui/draw_mesh_leveling.cpp
 User/ui/draw_ui.cpp
 User/ui/Multi_language/fontHz14.c
@@ -148,12 +146,11 @@ User/ui/widgets/config/MotorDirConfigUI.cpp
 User/ui/widgets/config/MachineConfigurationUI.cpp
 User/ui/widgets/config/AdvancedConfigUI.cpp
 User/ui/widgets/config/FilamentChangeConfigUI.cpp
-User/ui/widgets/config/LevelingPointsUI.cpp
 User/ui/widgets/config/HomeConfigUI.cpp
 User/ui/widgets/config/MachineTypeConfigUI.cpp
 User/ui/widgets/config/LanguageConfigUI.cpp
 User/ui/widgets/config/SensorLevelConfigUI.cpp
-User/ui/widgets/config/LevelingAutoConfigUI.cpp
+User/ui/widgets/config/LevelingConfigUI.cpp
 User/ui/widgets/config/HotBedConfigUI.cpp
 User/ui/widgets/config/NozzleConfigUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp

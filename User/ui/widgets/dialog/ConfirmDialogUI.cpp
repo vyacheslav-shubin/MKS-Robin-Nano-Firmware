@@ -10,7 +10,6 @@
 
 ConfirmDialogUI confirm_dialog_ui;
 
-static const char * dialog_message = 0;
 
 void ConfirmDialogUI::on_button(UI_BUTTON hBtn) {
 	if (this->callback != 0) {
@@ -22,31 +21,27 @@ void ConfirmDialogUI::on_button(UI_BUTTON hBtn) {
 	}
 }
 
-void ConfirmDialogUI::show(const char * message, ActionDialogCallback * callback, u8 id, Widget * caller) {
-	this->show(message, callback, 0, id,  caller);
-}
-
-void ConfirmDialogUI::show(const char * message, ActionDialogCallback * callback, u16 timeout, u8 id = 0, Widget * caller) {
-	dialog_message = message;
-	this->max_timeout = timeout;
-	this->timeout = timeout;
-	ActionDialog::show(callback, id, caller);
+void ConfirmDialogUI::setMessage(const char * message) {
+    this->setText(this->ui.text, message);
 }
 
 void ConfirmDialogUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
 	this->createDialogDecoration(img_dialog_confirm, 0);
-    this->ui.ok = this->create96x80Button(DIALOG_WIDTH - (96 + 4), DIALOG_HEIGHT - 84, img_ok);
-	this->ui.cancel = this->create96x80Button(DIALOG_WIDTH - (96 + 4) * 2, DIALOG_HEIGHT - 84, img_cancel);
-	this->ui.text = this->createTextF(10, 60, DIALOG_WIDTH - 20, DIALOG_HEIGHT - 60 - 80 - 10, TEXT_CF_HCENTER | TEXT_CF_VCENTER, dialog_message);
-	if (this->timeout!=0) {
+	if (this->flags & CONFIRM_DIALOG_OK_BUTTON)
+        this->ui.ok = this->create96x80Button(DIALOG_WIDTH - (96 + 4), DIALOG_HEIGHT - 84, img_ok);
+    if (this->flags & CONFIRM_DIALOG_CANCEL_BUTTON)
+	    this->ui.cancel = this->create96x80Button(DIALOG_WIDTH - (96 + 4) * 2, DIALOG_HEIGHT - 84, img_cancel);
+	if ((this->flags & CONFIRM_DIALOG_PROGRESS) && this->timeout) {
 		this->ui.progress = ui_create_std_progbar(100, 20, DIALOG_WIDTH - 100 - 20, 20, this->hWnd);
 		PROGBAR_SetValue(this->ui.progress, 0);
 	}
+    this->ui.text = this->createTextF(10, 60, DIALOG_WIDTH - 20, DIALOG_HEIGHT - 60 - 80 - 10, TEXT_CF_HCENTER | TEXT_CF_VCENTER, this->dialog_message);
 };
 
 void ConfirmDialogUI::refresh_1s() {
-	if ((this->callback!=0) && (this->timeout != 0)) {
+
+	if (this->ui.progress && this->timeout) {
 		PROGBAR_SetValue(this->ui.progress, (this->max_timeout - this->timeout) * 100 / this->max_timeout);
 		if (--this->timeout==0)
 			this->doAction(UI_ACTION_TIMEOUT);

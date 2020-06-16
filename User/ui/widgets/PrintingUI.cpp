@@ -11,7 +11,6 @@
 #include "temperature.h"
 #include "mks_reprint.h"
 #include "sh_tools.h"
-#include "draw_dialog.h"
 #include "FanUI.h"
 #include "BabystepUI.h"
 #include "PreheatUI.h"

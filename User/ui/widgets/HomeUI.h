@@ -13,9 +13,11 @@
 typedef struct{
 	UI_BUTTON x;
 	UI_BUTTON y;
-	UI_BUTTON z;
+    UI_BUTTON z;
+    UI_BUTTON t;
 	UI_BUTTON all;
 	UI_BUTTON stop;
+    UI_TEXT change;
 	UI_BUTTON back;
 } HOME_UI_CONTROLS;
 

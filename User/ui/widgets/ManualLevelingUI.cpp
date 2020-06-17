@@ -38,7 +38,7 @@ void ManualLevelingUI::createControls() {
 	buttons.leveling3 = this->createButtonAt(1, 0, img_leveling_point3, _button_title(3));
 	buttons.leveling4 = this->createButtonAt(0, 0, img_leveling_point4, _button_title(2));
 	buttons.leveling5 = this->createButtonAt(2, 1, img_leveling_point5, _button_title(4));
-	buttons.home = this->createButtonAt(3, 0, img_home, lang_str.home);
+	buttons.home = this->createButtonAt(3, 0, img_home_all, lang_str.home);
 	buttons.homeZ = this->createButtonAt(2, 0, img_home_z, _home_z_button_title());
 	buttons.back = this->createButtonRet();
 }

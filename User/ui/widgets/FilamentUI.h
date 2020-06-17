@@ -17,7 +17,8 @@ typedef struct{
 	UI_BUTTON selector;
 	UI_BUTTON size;
 	UI_BUTTON speed;
-	UI_BUTTON preheat;
+    UI_BUTTON preheat;
+    UI_BUTTON home_t;
 	STATE_BUTTON ext1;
 	STATE_BUTTON ext2;
 	UI_BUTTON back;
@@ -29,6 +30,7 @@ private:
 	char current_extruder = 0;
 	char current_step = 0;
 	char current_speed = 0;
+    void fix_temperature(unsigned char extruder);
 	void doFilament(char direction, unsigned char confirm = 1);
 	void updateExtruderSelector();
 	void updateStepSelector();

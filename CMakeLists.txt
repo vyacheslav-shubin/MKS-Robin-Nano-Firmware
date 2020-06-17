@@ -606,11 +606,7 @@ add_executable(work
         User/ui/Multi_language/lang_common.h
         User/ui/Multi_language/lang_ru.c
         User/ui/Multi_language/lang_std.c
-        User/ui/Multi_language/Language_en.h
-        User/ui/Multi_language/Language_ru.h
         User/ui/Multi_language/mks_fontHz14.c
-        User/ui/Multi_language/multi_language.cpp
-        User/ui/Multi_language/Multi_language.h
         User/ui/QRENCODE/bitstream.c
         User/ui/QRENCODE/bitstream.h
         User/ui/QRENCODE/mask.c
@@ -725,8 +721,8 @@ add_executable(work
 		User/ui/widgets/XyzUI.h
 		User/ui/widgets/WifiUI.cpp
 		User/ui/widgets/WifiUI.h
-        User/ui/draw_mesh_leveling.cpp
-        User/ui/draw_meshleveling.h
+		User/ui/widgets/MeshLevelingUI.h
+		User/ui/widgets/MeshLevelingUI.cpp
         User/ui/draw_ui.cpp
         User/ui/draw_ui.h
         User/ui/font.h

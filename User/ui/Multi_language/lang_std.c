@@ -1,6 +1,7 @@
 #include "lang_common.h"
 #include "mks_cfg.h"
 
+LANG_DEF lang_defs[LANG_COUNT] = {{"EN", LANG_ENGLISH}, {"RU", LANG_RUSSIAN}};
 LANG_STR lang_str;
 
 void make_lang_str(void) {
@@ -138,6 +139,7 @@ void lang_std(void) {
     lang_str.ui_title_config_filament_change = "Filament change settings";
     lang_str.ui_title_leveling_points = "Manual leveling points";
     lang_str.ui_title_leveling_type = "Leveling mode";
+    lang_str.ui_title_mesh_leveling = "Mesh leveling execute";
     lang_str.ui_title_probe_settins = "Probe settings";
     lang_str.ui_title_config_home = "Home parking config";
     lang_str.ui_title_sensor_levels = "Sensors activalting level";

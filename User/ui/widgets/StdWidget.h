@@ -48,7 +48,8 @@ protected:
 	UI_BUTTON createButtonAt(int phx, int phy, const char * picture, const char * title);
 	UI_BUTTON createButtonRet();
 	void action_back();
-	void action_leveling();
+    void  actionFilamentChangeParking();
+    void action_leveling();
 	void updateFanState(STATE_BUTTON * stateButton);
 public:
 	StdWidget(DISP_STATE id) : Widget(id) {};

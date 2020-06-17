@@ -44,6 +44,15 @@ static const UI_STEP_INFO filament_speed[SPEED_COUNT] = {
 #define COL_T(x) COL(x) + STATE_PIC_X_PIXEL
 #define ROW(y) (row_offset + (row_size*y))
 
+#include "serial.h"
+
+void FilamentUI::fix_temperature(unsigned char extruder) {
+    shUI::SPRAYER_TEMP st;
+    shUI::getSprayerTemperature(extruder, &st);
+    float wanted = this->getWantedTemperature(0);
+    if (wanted > st.target)
+        shUI::setSprayerTemperature(extruder, wanted);
+}
 
 void FilamentUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
@@ -53,20 +62,21 @@ void FilamentUI::createControls() {
 		row_offset = 0;
 		row_size = 40;
 		ui_std_ext2_state_button(COL(1), ROW(1), &this->ui.ext2);
+        this->ui.selector = this->createButtonAt(0, 1, 0, 0);
 	} else {
 		this->current_extruder=0;
 		row_offset = 20;
 		row_size = 45;
+        this->ui.home_t = this->createButtonAt(0, 1, img_home_t, 0);
 	}
 	ui_std_ext1_state_button(COL(1), ROW(0), &this->ui.ext1);
 
 	this->ui.back = this->createButtonRet();
-	this->ui.selector = this->createButtonAt(0, 1, 0, 0);
 	this->ui.load = this->createButtonAt(0, 0, img_filament_load, lang_str.load);
 	this->ui.unload = this->createButtonAt(2, 0, img_filament_unload, lang_str.unload);
 	this->ui.size = this->createButtonAt(3, 0, 0, 0);
 	this->ui.speed = this->createButtonAt(1, 1, 0, 0);
-	this->ui.preheat = this->createButtonAt(2, 1, img_preheat, lang_str.preheat);
+    this->ui.preheat = this->createButtonAt(2, 1, img_preheat, lang_str.preheat);
 	this->updateExtruderSelector();
 	this->updateSpeedSelector();
 	this->updateStepSelector();
@@ -102,8 +112,16 @@ void FilamentUI::on_button(UI_BUTTON hBtn) {
 		doFilament(1);
 	} else if (hBtn==this->ui.unload) {
 		doFilament(-1);
+    } else if (hBtn==this->ui.home_t) {
+        this->actionFilamentChangeParking();
+	} else if (hBtn==this->ui.ext1.button) {
+        this->fix_temperature(0);
+    } else if (hBtn==this->ui.ext2.button) {
+        this->fix_temperature(1);
 	}
 }
+
+
 
 short FilamentUI::getWantedTemperature(char direction) {
 	if (this->current_step==3)
@@ -154,17 +172,19 @@ void FilamentUI::doFilament(char direction, unsigned char confirm) {
 }
 
 void FilamentUI::updateExtruderSelector() {
-	UI_BUTTON_INFO * info = &extruder_selector_info[this->current_extruder];
-	this->updateButton(this->ui.selector, info->picture, *info->title);
+    if (this->ui.selector) {
+        const UI_BUTTON_INFO *info = &extruder_selector_info[this->current_extruder];
+        this->updateButton(this->ui.selector, info->picture, *info->title);
+    }
 }
 
 void FilamentUI::updateStepSelector() {
-	UI_STEP_INFO * sp = &filament_steps[this->current_step];
+    const UI_STEP_INFO * sp = &filament_steps[this->current_step];
 	this->updateButton(this->ui.size, sp->picture, (sp->title==0)?lang_str.change:sp->title);
 }
 
 void FilamentUI::updateSpeedSelector() {
-	UI_STEP_INFO * sp = &filament_speed[this->current_speed];
+	const UI_STEP_INFO * sp = &filament_speed[this->current_speed];
 	this->updateButton(this->ui.speed, sp->picture, sp->title);
 }
 
@@ -172,7 +192,7 @@ void FilamentUI::refresh_05() {
 	shUI::SPRAYER_TEMP st;
 	shUI::getSprayerTemperature(this->current_extruder, &st);
 	int wanted = this->getWantedTemperature(1);
-	if (wanted > st.current - HYSTERESIS) {
+	if (wanted > st.current + HYSTERESIS) {
 		STATE_BUTTON * btn;
 		switch (this->current_extruder) {
 			case 0:

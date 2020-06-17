@@ -19,9 +19,11 @@ void HomeUI::createControls() {
 	this->ui.all = this->createButtonAt(0, 0, img_home_all, "XYZ");
 	this->ui.x= this->createButtonAt(1, 0, img_home_x, 0);
 	this->ui.y= this->createButtonAt(2, 0, img_home_y, 0);
-	this->ui.z= this->createButtonAt(3, 0, img_home_z, 0);
-	this->ui.stop= this->createButtonAt(0, 1, img_stop_motor, lang_str.stop);
+    this->ui.z= this->createButtonAt(3, 0, img_home_z, 0);
+    this->ui.t= this->createButtonAt(2, 1, img_home_t, lang_str.filament);
+	this->ui.stop = this->createButtonAt(0, 1, img_stop_motor, lang_str.stop);
 }
+
 void HomeUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.back) {
 		this->hide();
@@ -34,6 +36,8 @@ void HomeUI::on_button(UI_BUTTON hBtn) {
 		shUI::pushGcode("G28 Y0");
 	} else if (hBtn==this->ui.z) {
 		shUI::pushGcode("G28 Z0");
+    } else if (hBtn==this->ui.t) {
+	    this->actionFilamentChangeParking();
 	} else if (hBtn==this->ui.stop) {
 		shUI::pushGcode("M84");
 	}

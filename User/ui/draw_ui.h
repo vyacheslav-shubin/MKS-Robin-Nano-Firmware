@@ -17,9 +17,7 @@
 #include "ff.h"
 #include "string_deal.h"
 #include "pic.h"
-#include "Multi_language.h"
 #include "lang_common.h"
-#include "draw_meshleveling.h"
 
 #define alloc_win_id() (0)
 
@@ -305,11 +303,7 @@ extern void reset_print_time();
 
 extern void draw_return_ui();
 
-extern void clear_cur_ui(void);
 extern void gui_view_init(void);
-
-extern void GUI_RefreshPage(void);
-
 
 #if defined(__cplusplus)
 }

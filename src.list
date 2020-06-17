@@ -96,12 +96,10 @@ Src/tim.c
 Src/usart.c
 Src/wifi_module.cpp
 Src/wifi_upload.cpp
-User/ui/draw_mesh_leveling.cpp
 User/ui/draw_ui.cpp
 User/ui/Multi_language/fontHz14.c
 User/ui/Multi_language/Helvetica26.c
 User/ui/Multi_language/Helvetica36.c
-User/ui/Multi_language/multi_language.cpp
 User/ui/QRENCODE/bitstream.c
 User/ui/QRENCODE/mask.c
 User/ui/QRENCODE/mmask.c
@@ -161,6 +159,7 @@ User/ui/widgets/dialog/CalculatorDialogUI.cpp
 User/ui/widgets/dialog/KeyboardUI.cpp
 User/ui/widgets/dialog/WifiWaitInitDialogUI.cpp
 User/ui/widgets/dialog/ProgressDialogUI.cpp
+User/ui/widgets/MeshLevelingUI.cpp
 User/ui/widgets/backui.cpp
 
 

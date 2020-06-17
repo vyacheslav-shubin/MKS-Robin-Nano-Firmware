@@ -23,17 +23,8 @@ void ToolsUI::createControls() {
 	this->ui.preheat = this->createButtonAt(0, 0, img_preheat, lang_str.preheat);
 	this->ui.filament = this->createButtonAt(1, 0, img_filament, lang_str.filament);
 	this->ui.move = this->createButtonAt(2, 0, img_move, lang_str.move);
-	this->ui.home = this->createButtonAt(3, 0, img_home, lang_str.home);
-	switch (gCfgItems.leveling_mode) {
-		case 0:
-			this->ui.leveling = this->createButtonAt(0, 1, img_leveling_manual, lang_str.leveling);
-			break;
-		case 1:
-			this->ui.leveling = this->createButtonAt(0, 1, img_leveling_auto, lang_str.leveling);
-			break;
-		default:
-			break;
-	}
+	this->ui.home = this->createButtonAt(3, 0, img_home_all, lang_str.home);
+	this->ui.leveling = this->createButtonAt(0, 1, img_leveling, lang_str.leveling);
 	this->ui.continuePrint = this->createButtonAt(1, 1, img_continue_print, lang_str.continue_print);
 
 	if (gCfgItems.MoreItem_pic_cnt)

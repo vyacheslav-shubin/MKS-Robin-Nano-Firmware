@@ -1,3 +1,4 @@
+#error unused
 #ifndef _LANGUAGE_RU_H
 #define _LANGUAGE_RU_H
 //****************俄语***************************//

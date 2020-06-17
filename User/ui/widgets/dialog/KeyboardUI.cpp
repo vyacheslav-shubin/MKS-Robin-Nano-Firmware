@@ -78,7 +78,7 @@ void KeyboardUI::createControls() {
     this->ui.ok = this->create96x80Button(LCD_WIDTH-96, LCD_HEIGHT-80, img_ok);
     this->ui.cancel = this->create96x80Button(LCD_WIDTH-96-100, LCD_HEIGHT-80, img_cancel);
     this->ui.mode = this->create96x80Button(0, LCD_HEIGHT-80, img_Aa);
-    this->ui.input = this->createText(10, 10, LCD_WIDTH - 20, VALUE_DISP_HEIGHT - 20, "Hello world. This is password");
+    this->ui.input = this->createText(10, 10, LCD_WIDTH - 20, VALUE_DISP_HEIGHT - 20, title);
     TEXT_SetFont(this->ui.input, &GUI_FontHelvetica26);
     this->updateChars();
 }

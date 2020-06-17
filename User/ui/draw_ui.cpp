@@ -38,17 +38,6 @@ char BMP_PIC_Y = 0;
 
 extern CFG_ITMES gCfgItems;
 
-
-
-void clear_cur_ui() {
-	disp_state_stack._disp_state[disp_state_stack._disp_index];
-	switch(disp_state_stack._disp_state[disp_state_stack._disp_index]) {
-        case MESHLEVELING_UI:	Clear_MeshLeveling();	break;
-		default:	break;
-	}
-	GUI_Clear();
-}
-
 void draw_return_ui() {
 	if(disp_state_stack._disp_index > 0) {
 		disp_state_stack._disp_index--;
@@ -83,8 +72,7 @@ void draw_return_ui() {
             case NOZZLE_CONFIG_UI:	nozzle_config_ui.show();	                break;
             case WIFI_UI:			wifi_ui.show();			                    break;
             case WIFI_LIST_UI:		wifi_list_ui.show();		                break;
-
-            case MESHLEVELING_UI:	draw_meshleveling();	break;
+            case MESHLEVELING_UI:	mesh_leveling_ui.show();	break;
 			default:
 				break;
 		}
@@ -157,16 +145,3 @@ void gui_view_init()
 }
 
 extern uint16_t z_high_count;
-extern volatile WIFI_STATE wifi_link_state;
-
-void GUI_RefreshPage() {
-  	__IO uint32_t i =0;
-	switch(disp_state) {
-		case MESHLEVELING_UI:
-            disp_zpos();
-            break;
-	    default:
-	    	break;
-				
-	}
-}

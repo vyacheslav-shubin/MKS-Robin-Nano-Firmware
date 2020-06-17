@@ -30,6 +30,7 @@
 #include "WifiUI.h"
 #include "WifiListUI.h"
 #include "SettingsUI.h"
+#include "MeshLevelingUI.h"
 #include "dialog/AboutDialogUI.h"
 #include "dialog/ProgressDialogUI.h"
 #include "config/MachineConfigurationUI.h"

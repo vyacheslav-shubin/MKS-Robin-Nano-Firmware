@@ -87,13 +87,14 @@ void Application::setup() {
     BUTTON_SetDefaultFont(&FONT_TITLE);
     TEXT_SetDefaultFont(&FONT_TITLE);
     GUI_UC_SetEncodeUTF8();
+    make_lang_str();
 }
 
 void Application::closeCurrentWidget() {
 	if (this->current_ui)
 		this->current_ui->hide();
 	else
-		clear_cur_ui();
+        GUI_Clear();
 }
 
 void Application::refresh() {
@@ -165,10 +166,8 @@ void Application::loop() {
 void Application::idle() {
     if (wifi_link_state != WIFI_TRANS_FILE) {
         this->refresh();
-        if (this->current_ui) {
+        if (this->current_ui)
             this->current_ui->refresh();
-        } else
-            GUI_RefreshPage();
     }
 
     if (is_ui_timing(F_UI_TIMING_HALF_SEC)) {

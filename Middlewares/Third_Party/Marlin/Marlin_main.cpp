@@ -291,7 +291,6 @@ volatile uint8_t mks_heating_busy = 0;
 
 extern void filament_check();
 extern void display_temper_error();
-extern void Close_machine_display();
 
 volatile uint32_t TimeIncrease;
 uint8_t preview_no_display;

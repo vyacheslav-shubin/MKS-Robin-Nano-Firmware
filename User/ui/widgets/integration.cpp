@@ -8,7 +8,9 @@
 #include "ui_tools.h"
 #include "planner.h"
 #include "mks_reprint.h"
+#include "pic_manager.h"
 #include "temperature.h"
+#include "spi_flash.h"
 #include "integration.h"
 #include "Configuration_adv.h"
 #include "configuration_store.h"
@@ -150,8 +152,9 @@ namespace shUI {
 	}
 
 	void doCustomLeveling() {
-	    //SPI_FLASH_BufferRead((u8 *)cmd_code,BUTTON_AUTOLEVELING_ADDR,201);
-	    //codebufpoint = cmd_code;
+        memset(cmd_code, 0, sizeof(cmd_code));
+	    SPI_FLASH_BufferRead((u8 *)cmd_code, BUTTON_AUTOLEVELING_ADDR, 200);
+        MYSERIAL.inject(cmd_code);
 	}
 
 	void doFilamentMove(unsigned char extruder, int size, int speed) {
@@ -166,9 +169,16 @@ namespace shUI {
 	}
 
 	extern short getFilamentLoadUnloadMinTempereture(char direction) {
-		return direction==-1?gCfgItems.filamentchange.unload.temper:gCfgItems.filamentchange.load.temper;
+        switch(direction) {
+            case 1: return gCfgItems.filamentchange.load.temper;
+            case -1: return gCfgItems.filamentchange.unload.temper;
+            default:
+                return (gCfgItems.filamentchange.load.temper>gCfgItems.filamentchange.unload.temper)
+                ?
+                    gCfgItems.filamentchange.load.temper
+                    : gCfgItems.filamentchange.unload.temper;
+        }
 	}
-
 
 	void getFilamentLoadUnloadDistance(char direction, MOVE_DISTANCE * distance) {
 		if (direction==-1) {
@@ -187,14 +197,14 @@ namespace shUI {
 	char isPaused() {
 		return (mksReprint.mks_printer_state == MKS_PAUSING)
 				|| (mksReprint.mks_printer_state == MKS_PAUSED)
-				|| (mksReprint.mks_printer_state ==MKS_REPRINTING)
-				||(mksReprint.mks_printer_state ==MKS_REPRINTED);
+				|| (mksReprint.mks_printer_state == MKS_REPRINTING)
+				||(mksReprint.mks_printer_state == MKS_REPRINTED);
 	}
 
 	void setLanguage(unsigned char index) {
 		gCfgItems.language = index;
-		AT24CXX_Write(EPR_LANGUAGE,&index,1);
-		disp_language_init();
+		AT24CXX_Write(EPR_LANGUAGE, &index,1);
+        make_lang_str();
 	}
 
 }

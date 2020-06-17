@@ -27,8 +27,8 @@ class KeyboardUI : public ActionDialog {
 private:
     char * title;
     char * buf;
-    char maxSize;
-    char cursor;
+    unsigned char maxSize;
+    unsigned char cursor;
     KEYBOARD_UI_CONTROLS ui;
     unsigned char viewState = KB_LC;
     void updateCharsFrom(const char start);
@@ -44,7 +44,7 @@ protected:
 public:
     virtual void on_message(WM_MESSAGE * pMsg);
 
-    void show(char * title, char * buf, char maxSize, ActionDialogCallback * callback, u8 id, Widget * caller = 0) {
+    void show(char * title, char * buf, unsigned char maxSize, ActionDialogCallback * callback, u8 id, Widget * caller = 0) {
         this->title = title;
         this->buf = buf;
         this->maxSize = maxSize;

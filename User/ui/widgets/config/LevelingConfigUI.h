@@ -43,7 +43,7 @@ typedef struct {
     LEVELING_POINTS_CONFIG_UI_CONTROLS1 points;
 } LEVELING_CONFIG_UI_CONTROLS;
 
-class LevelingConfigUI : public ConfigurationWidgetWithCalc{
+class LevelingConfigUI : public ConfigurationWidgetWithCalc {
 private:
     LEVELING_CONFIG_UI_CONTROLS ui;
     void updateControls();

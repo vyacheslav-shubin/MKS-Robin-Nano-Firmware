@@ -188,7 +188,6 @@ int main(void) {
 
     setup();
     ui_app.setup();
-    disp_language_init();
 
     if(gCfgItems.pwroff_save_mode == 1)
   	    FALA_CTRL = 1;
@@ -216,17 +215,6 @@ uint32_t poweroff_det_high_cnt;
 
 uint32_t filament_fail_flag;
 uint32_t filament_fail_cnt = 0;
-
-
-void Close_machine_display() {
-	ui_app.closeCurrentWidget();
-	disp_state = PRINT_READY_UI;
-	GUI_SetBkColor(gCfgItems.background_color);
-	GUI_SetColor(gCfgItems.title_color);
-	GUI_Clear();
-	GUI_DispStringAt(common_menu.close_machine_tips, 190, 140);
-	MKS_PW_OFF_OP = 0;
-}
 
 
 void filament_check() {

@@ -1,3 +1,4 @@
+#error unused
 #ifndef _LANGUAGE_EN_H
 #define _LANGUAGE_EN_H
 //****************英文***************************//

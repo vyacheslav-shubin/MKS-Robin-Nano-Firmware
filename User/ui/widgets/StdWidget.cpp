@@ -9,7 +9,9 @@
 #include "integration.h"
 #include "ui_tools.h"
 #include "ManualLevelingUI.h"
+#include "MeshLevelingUI.h"
 #include "Application.h"
+#include "Configuration.h"
 
 
 void StdWidget::createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title) {
@@ -38,19 +40,31 @@ UI_BUTTON StdWidget::createButtonRet() {
 }
 
 
+void  StdWidget::actionFilamentChangeParking() {
+    sprintf(ui_buf1_100, "G91 G1 Z%.1f F%.1f", mksCfg.filament_change_z_add, mksCfg.homing_feedrate_z);
+    shUI::pushGcode(ui_buf1_100);
+    sprintf(ui_buf1_100, "G92 G1 X%.1f Y%.1f F%.1f", mksCfg.filament_change_x_pos, mksCfg.filament_change_y_pos, mksCfg.homing_feedrate_xy);
+    shUI::pushGcode(ui_buf1_100);
+}
 
 void StdWidget::action_leveling() {
-	if(shUI::isManualLeveling()) {
-    	this->hide();
-    	manual_leveling_ui.show(this);
-	} else {
-		if(shUI::isMeshLeveling()) {
-	    	this->hide();
-	    	draw_meshleveling();
-		} else {
-			shUI::doCustomLeveling();
-	    }
-	}
+    switch (BED_LEVELING_METHOD) {
+        case 0:
+        case NULL_BED_LEVELING: {
+            this->hide();
+            manual_leveling_ui.show(this);
+            break;
+        }
+        case MESH_BED_LEVELING: {
+            this->hide();
+            mesh_leveling_ui.show();
+            break;
+        }
+        default: {
+            shUI::doCustomLeveling();
+            break;
+        }
+    }
 }
 
 void StdWidget::action_back() {

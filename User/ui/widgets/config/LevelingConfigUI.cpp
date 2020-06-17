@@ -82,7 +82,6 @@ void LevelingConfigUI::updateControls() {
             this->updateRadio(this->ui.type.bilinear.button, mksCfg.bed_leveling_method==AUTO_BED_LEVELING_BILINEAR);
             this->updateRadio(this->ui.type.ubl.button, mksCfg.bed_leveling_method==AUTO_BED_LEVELING_UBL);
             this->updateRadio(this->ui.type.mesh.button,  mksCfg.bed_leveling_method==MESH_BED_LEVELING);
-
             break;
         }
         case 1: {
@@ -154,10 +153,12 @@ void LevelingConfigUI::on_button(UI_BUTTON hBtn) {
                 }
                 epr_write_data(EPR_MKSTOUCH,&mksCfg.mkstouch,1);
                 this->updateCheckButton(ui.probe.enable.button, mksCfg.mkstouch);
+                break;
             } else if (hBtn==this->ui.probe.connector.button) {
                 mksCfg.z_min_probe_pin_mode = mksCfg.z_min_probe_pin_mode==1 ? 2 : 1;
                 epr_write_data(EPR_Z_MIN_PROBE_PIN_MODE,&mksCfg.z_min_probe_pin_mode,1);
                 this->updateCheckButton(this->ui.probe.connector.button, mksCfg.z_min_probe_pin_mode!=1, &lang_str.min_max);
+                break;
             }
             this->updateControls();
             break;
@@ -250,11 +251,11 @@ void LevelingConfigUI::createControls() {
             break;
         }
         case 1: {
-            this->ui.probe.offset_label = this->createLabel(1, 0, lang_str.config_ui.probe_offset);
+            this->ui.probe.offset_label = this->createLabel(0, 0, lang_str.config_ui.probe_offset);
             this->createInputWithDefault(0, 1, &this->ui.probe.x_offset, "dX", 0, 0);
             this->createInputWithDefault(0, 2, &this->ui.probe.y_offset, "dY", 0, 0);
             this->createInputWithDefault(0, 3, &this->ui.probe.z_offset, "dZ", 0, 0);
-            this->ui.probe.offset_label = this->createLabel(0, 0, lang_str.config_ui.probe_speed);
+            this->ui.probe.offset_label = this->createLabel(1 , 0, lang_str.config_ui.probe_speed);
             this->createInputWithDefault(1, 1, &this->ui.probe.xy_speed, "XY", 0, 0);
             this->createInputWithDefault(1, 2, &this->ui.probe.z_speed_fast, "Z/1", 0, 0);
             this->createInputWithDefault(1, 3, &this->ui.probe.z_speed_slow, "Z/2", 0, 0);

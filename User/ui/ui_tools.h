@@ -24,6 +24,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_state_bed  			"bmp_bed_state.bin"
 #define img_state_z  			"bmp_zpos_state.bin"
 #define img_state_time  		"bmp_time_state.bin"
+#define img_state_mesh_point	"bmp_mesh_point.bin"
 #define img_state_speed  		"bmp_speed_state.bin"
 
 //96x80 images
@@ -89,10 +90,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 
 #define img_move				"bmp_mov.bin"
 #define img_babystep			img_move
-#define img_home				"bmp_zero.bin"
-#define img_home_z				"bmp_zeroZ.bin"
-#define img_leveling_manual		"bmp_leveling.bin"
-#define img_leveling_auto		"bmp_autoleveling.bin"
+#define img_leveling		    "bmp_leveling.bin"
 #define img_filament			"bmp_extruct.bin"
 #define img_more				"bmp_more.bin"
 #define img_print				"bmp_printing.bin"
@@ -130,10 +128,11 @@ extern GUI_BITMAP bmp_struct_50x50;
 
 #define img_filament_change "bmp_filamentchange.bin"
 
-#define img_home_all		"bmp_zero.bin"
-#define img_home_x			"bmp_zeroX.bin"
-#define img_home_y			"bmp_zeroY.bin"
-#define img_home_z			"bmp_zeroZ.bin"
+#define img_home_all		"bmp_homeAll.bin"
+#define img_home_x			"bmp_homeX.bin"
+#define img_home_y			"bmp_homeY.bin"
+#define img_home_z			"bmp_homeZ.bin"
+#define img_home_t			"bmp_homeT.bin"
 #define img_stop_motor		"bmp_function1.bin"
 
 #define img_filament_load		"bmp_in.bin"

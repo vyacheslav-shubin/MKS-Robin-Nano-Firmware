@@ -24,6 +24,8 @@
 #define LANG_CN_S	0
 #define LANG_CN_C	0
 
+#define FONT_TITLE		GUI_FontHZ_fontHz14
+
 #define LANG_COUNT (LANG_RU+LANG_EN+LANG_ES+LANG_IT+LANG_FR+LANG_CN_S+LANG_CN_C)
 
 typedef struct {
@@ -191,7 +193,8 @@ typedef struct {
 	const char * ui_title_home;
 	const char * ui_title_leveling;
 	const char * ui_title_config;
-	const char * ui_title_more;
+    const char * ui_title_more;
+    const char * ui_title_mesh_leveling;
 	const char * ui_title_printing_tools;
 	const char * ui_title_printing;
     const char * ui_title_speed;
@@ -233,55 +236,6 @@ extern void lang_ru(void);
 
 
 #define is_chinese() ((gCfgItems.language == LANG_SIMPLE_CHINESE)||(gCfgItems.language == LANG_COMPLEX_CHINESE))
-
-#define TEXT_VALUE                    "%d/%d"
-#define TEXT_VALUE_T                  ": %d℃"
-#define TEXT_VALUE_mm                 ": %dmm"
-#define TEXT_VALUE_cm                 ": %dcm"
-#define TEXT_VALUE_m                  ": %dm"
-
-#define TEMP_UNIT_SYBOL               "%d℃"
-#define FLOAT_TEMP_UNIT_SYBOL               "%.1f℃"
-
-#define TEXT_1C						"1℃"
-#define TEXT_5C						"5℃"
-#define TEXT_10C					"10℃"
-
-#define AXIS_X_ADD_TEXT			    "X+"
-#define AXIS_X_DEC_TEXT			    "X-"
-#define AXIS_Y_ADD_TEXT			    "Y+"
-#define AXIS_Y_DEC_TEXT			    "Y-"
-#define AXIS_Z_ADD_TEXT			    "Z+"
-#define AXIS_Z_DEC_TEXT			    "Z-"
-#define TEXT_001MM					"0.01mm"
-#define TEXT_005MM					"0.05mm"
-#define TEXT_01MM					"0.1mm"
-#define TEXT_1MM					"1mm"
-#define TEXT_10MM					"10mm"
-
-#define EXTRUDE_1MM_TEXT			"1mm"
-#define EXTRUDE_5MM_TEXT			"5mm"
-#define EXTRUDE_10MM_TEXT		    "10mm"
-
-#define LANGUAGE_S_CN				"简体"
-#define LANGUAGE_T_CN				"繁体"
-#define LANGUAGE_EN					"English"
-#define LANGUAGE_JP					"日本語"
-#define LANGUAGE_GE					"Deutsch"
-#define LANGUAGE_FR					"français"
-#define LANGUAGE_IT                 "Italia"
-#define LANGUAGE_PR                 "português"
-#define LANGUAGE_KR                 "Korean"
-#define LANGUAGE_BR                 "Brazil"
-#define LANGUAGE_RU                 "русский"
-#define LANGUAGE_SP                 "español"
-
-#define HOME_X_TEXT					"X"
-#define HOME_Y_TEXT					"Y"
-#define HOME_Z_TEXT					"Z"
-#define HOME_ALL_TEXT				"All"
-
-
 
 
 #endif

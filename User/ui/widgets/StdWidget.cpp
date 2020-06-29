@@ -43,7 +43,7 @@ UI_BUTTON StdWidget::createButtonRet() {
 void  StdWidget::actionFilamentChangeParking() {
     sprintf(ui_buf1_100, "G91 G1 Z%.1f F%.1f", mksCfg.filament_change_z_add, mksCfg.homing_feedrate_z);
     shUI::pushGcode(ui_buf1_100);
-    sprintf(ui_buf1_100, "G92 G1 X%.1f Y%.1f F%.1f", mksCfg.filament_change_x_pos, mksCfg.filament_change_y_pos, mksCfg.homing_feedrate_xy);
+    sprintf(ui_buf1_100, "G90 G1 X%.1f Y%.1f F%.1f", mksCfg.filament_change_x_pos, mksCfg.filament_change_y_pos, mksCfg.homing_feedrate_xy);
     shUI::pushGcode(ui_buf1_100);
 }
 

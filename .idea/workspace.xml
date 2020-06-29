@@ -36,50 +36,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/Multi_language.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/multi_language.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/Language_en.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/Language_en.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/Language_ru.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/Language_ru.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/Multi_language.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/multi_language.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_mesh_leveling.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_mesh_leveling.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_meshleveling.h" beforeDir="false" afterPath="$PROJECT_DIR$/trash/draw_meshleveling.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileInfoUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileInfoUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/HomeUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/HomeUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/HomeUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/HomeUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/ManualLevelingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/ManualLevelingUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inc/wifi_module.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/wifi_module.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/ToolsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/ToolsUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/autoleveling.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/buttons1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/buttons1.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/zero.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/zeroX.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/zeroY.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/zeroZ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,8 +75,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/trash" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Other File Types" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../esp/esp8266/wifi-module" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -131,6 +93,9 @@
       </method>
     </configuration>
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="" />
@@ -143,7 +108,14 @@
       <workItem from="1590147819121" duration="17438000" />
       <workItem from="1590166417821" duration="46000" />
       <workItem from="1590758996962" duration="70674000" />
-      <workItem from="1591360292011" duration="137431000" />
+      <workItem from="1591360292011" duration="138445000" />
+      <workItem from="1592464892118" duration="17443000" />
+      <workItem from="1592823918073" duration="635000" />
+      <workItem from="1592827405424" duration="191000" />
+      <workItem from="1592827652996" duration="31000" />
+      <workItem from="1592827788219" duration="80000" />
+      <workItem from="1592827884757" duration="628000" />
+      <workItem from="1592833769209" duration="48371000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -467,8 +439,25 @@
       <option name="project" value="LOCAL" />
       <updated>1592323565090</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="-mesh leveling as widget, NO MORE OLD UI CODE">
+      <created>1592398995341</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1592398995341</updated>
+    </task>
+    <task id="LOCAL-00048" summary="snapshot">
+      <created>1592399036223</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1592399036223</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -495,7 +484,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="printing info dialog" />
     <MESSAGE value="Calculator dialog widget" />
     <MESSAGE value="Machine size config, filament change config as widget" />
     <MESSAGE value="Confirm dialog on filament load" />
@@ -515,12 +503,13 @@
     <MESSAGE value="Reprint no file dialog as widget" />
     <MESSAGE value="wifi module" />
     <MESSAGE value="wifi module fix" />
-    <MESSAGE value="snapshot" />
     <MESSAGE value="drop bind to cloud" />
     <MESSAGE value="-draw_dialog - deleted. Leveling config as single widget" />
     <MESSAGE value="-rudiments" />
     <MESSAGE value="-old multilanguage" />
-    <option name="LAST_COMMIT_MESSAGE" value="-old multilanguage" />
+    <MESSAGE value="-mesh leveling as widget, NO MORE OLD UI CODE" />
+    <MESSAGE value="snapshot" />
+    <option name="LAST_COMMIT_MESSAGE" value="snapshot" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
@@ -531,14 +520,16 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2606" y="360" width="549" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591794734176" />
-    <state x="1920" y="0" width="1920" height="1060" key="DiffContextDialog" timestamp="1592203944583">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="1920" y="0" width="1920" height="1060" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592203944583" />
-    <state x="8" y="168" width="428" height="498" key="FileChooserDialogImpl" timestamp="1592397726720">
+    <state x="1" y="21" width="1918" height="1038" key="DiffContextDialog" timestamp="1592399662537">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="8" y="168" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592397726720" />
+    <state x="1" y="21" width="1918" height="1038" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592399662537" />
+    <state x="1920" y="0" width="1920" height="1060" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592203944583" />
+    <state x="2" y="42" width="428" height="498" key="FileChooserDialogImpl" timestamp="1592828511011">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2" y="42" width="428" height="498" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592828511011" />
+    <state x="1922" y="42" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592816041616" />
     <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1591803636347">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -551,18 +542,19 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="844" y="400" key="MultipleFileMergeDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590232149596" />
-    <state x="1" y="21" width="984" height="744" key="SettingsEditor" timestamp="1590165519462">
+    <state x="739" y="239" width="984" height="744" key="SettingsEditor" timestamp="1592828485565">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1" y="21" width="984" height="744" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590165519462" />
+    <state x="739" y="239" width="984" height="744" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592828485565" />
     <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2" timestamp="1590165780112">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590165780112" />
-    <state x="615" y="172" width="692" height="757" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1592325044537">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="2535" y="172" width="694" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593099881385">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="615" y="172" width="692" height="757" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592325044537" />
+    <state x="2535" y="172" width="694" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593099881385" />
     <state x="1" y="21" width="923" height="641" key="find.popup" timestamp="1592391235933">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -590,7 +582,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Src/wifi_module.cpp</url>
-          <line>1030</line>
+          <line>1039</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

@@ -175,6 +175,10 @@ patch_wifi:
 
 wifi: clear_wifi patch_wifi mks_wifi
 
+clone_wifi: clear_wifi
+	unzip -o res/wifi/esp-cn.zip -d $(BUILD_BASE)/
+	esptool.py --port `ls /dev/ttyUSB*` write_flash 0 $(BUILD_BASE)/esp-cn.dump
+
 
 #alias usbtty='tu=`ls /dev/ttyUSB*` && picocom --imap lfcrlf --echo --baud 115200 ${tu}'
 #tu=`ls /dev/ttyUSB*` && picocom --imap lfcrlf --echo --baud 115200 ${tu}

@@ -54,7 +54,7 @@
 #elif defined(MKS_ROBIN_MINI)||defined(MKS_ROBIN_NANO)
 #define WIFI_SET()        GPIO_SetBits(GPIOA, GPIO_Pin_5)
 #define WIFI_RESET()      GPIO_ResetBits(GPIOA, GPIO_Pin_5)
-#define WIFI_IO1_SET()    GPIO_SetBits(GPIOC, GPIO_Pin_7)      
+#define WIFI_IO1_SET()    GPIO_SetBits(GPIOC, GPIO_Pin_7)
 #define WIFI_IO1_RESET()  GPIO_ResetBits(GPIOC, GPIO_Pin_7)
 #endif	 
 
@@ -78,17 +78,6 @@ typedef struct
 	unsigned char read_cur; //��ǰ��������
 	unsigned char write_cur;	//��ǰд������
 }WIFI_DMA_RCV_FIFO;			//
-
-
-
-typedef struct
-{
-	uint8_t flag; // 0x0: no error;  0x01: error
-	uint32_t start_tick; //����ʼʱ��
-	uint32_t now_tick;
-	
-} WIFI_TRANS_ERROR;
-
 
 //-------tan 20171008 modify endif------
 
@@ -154,12 +143,6 @@ typedef enum
 	WIFI_EXCEPTION,
 } WIFI_STATE;
 
-typedef enum
-{
-	TRANSFER_IDLE,
-	TRANSFERING,
-	TRANSFER_STORE,
-} TRANSFER_STATE;
 typedef struct
 {
 	char buf[20][80];

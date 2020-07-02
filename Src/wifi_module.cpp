@@ -1,5 +1,6 @@
 #include "stdint.h"
 #include "string.h"
+#include "EspParser.h"
 #include "stm32f10x_gpio.h"
 
 #include "draw_ui.h"
@@ -369,7 +370,7 @@ typedef struct {
 	FIL  file;
 	char buf[513];
 	int buffer_index;
-	uint8_t fileName[30];
+	char fileName[30];
 	uint32_t fileSize;
     int32_t fragment;
     uint32_t totalWrot;
@@ -397,22 +398,6 @@ int write_to_file(char *buf, int len) {
 	}
 	return 0;
 }
-
-#define ESP_PROTOC_HEAD				(uint8_t)0xa5
-#define ESP_PROTOC_TAIL				(uint8_t)0xfc
-
-#define ESP_TYPE_NET				(uint8_t)0x0
-#define ESP_TYPE_GCODE				(uint8_t)0x1
-#define ESP_TYPE_FILE_FIRST			(uint8_t)0x2
-#define ESP_TYPE_FILE_FRAGMENT		(uint8_t)0x3
-#define ESP_TYPE_WIFI_LIST			(uint8_t)0x4
-
-#define ESP_TYPE_DEBUG			    (uint8_t)0x10
-#define ESP_TYPE_PING			    (uint8_t)0x11
-
-
-#define message_type_is_walid(TYPE) ((TYPE>=0) && (TYPE<=0x4) || (TYPE>=0x10) && (TYPE<=0x11))
-
 
 uint8_t esp_msg_buf[UART_RX_BUFFER_SIZE] = {0};
 uint16_t esp_msg_index = 0;
@@ -816,6 +801,27 @@ static int32_t charAtArray(const uint8_t *_array, uint32_t _arrayLen, uint8_t _c
 	return -1;
 }
 
+static void net_state_msg_handle(unsigned char * msg, uint16_t msgLen) {
+    ipPara.ip[0] = msg[0];
+    ipPara.ip[1] = msg[1];
+    ipPara.ip[2] = msg[2];
+    ipPara.ip[3] = msg[3];
+    switch(msg[4]) {
+        case 0x0a:
+            wifi_link_state = WIFI_CONNECTED;
+            break;
+        case 0x0e:
+            wifi_link_state = WIFI_EXCEPTION;
+            break;
+        default:
+            wifi_link_state = WIFI_NOT_CONFIG;
+    }
+    memset(wifiPara.ap_name, 0, sizeof(wifiPara.ap_name));
+    memcpy(wifiPara.keyCode, &msg[6], msg[5]);
+    memset(&wifi_list.wifiConnectedName,0,sizeof(wifi_list.wifiConnectedName));
+    memcpy(&wifi_list.wifiConnectedName, &msg[6], msg[5]);
+}
+
 static void net_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	int wifiNameLen, wifiKeyLen, hostLen, id_len, ver_len;
 	char ipStr[16];
@@ -834,11 +840,8 @@ static void net_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	} else {
 		wifi_link_state = WIFI_NOT_CONFIG;
 	}
-
 	//mode
 	wifiPara.mode = msg[7];
-	
-
 	//wifi name
 	wifiNameLen = msg[8];
 	wifiKeyLen = msg[9 + wifiNameLen];
@@ -1039,7 +1042,7 @@ static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	file_writer.fileSize = *((uint32_t *)(msg + 1));
 	memcpy(file_writer.fileName, msg + 5, fileNameLen);
     SERIAL_ECHOLNPAIR("FILE SIZE=", file_writer.fileSize);
-    SERIAL_ECHOLNPAIR("FILE NAME=", file_writer.fileName);
+    SERIAL_ECHOLNPAIR("FILE NAME=", (char *)file_writer.fileName);
 
 	utf8_2_gbk(file_writer.fileName, fileNameLen);
 	if(strlen((const char *)file_writer.fileName) > sizeof(saveFilePath))
@@ -1064,13 +1067,17 @@ static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
 		upload_result = 2;
         wifiTransferState.is_error = 1;
         wifiTransferState.start_tick = getWifiTick();
-		sprintf(ui_buf1_100, "File create error:\n%s", file_writer.fileName);
+        strcpy(ui_buf1_100, lang_str.wf.upload_fail);
+        strcat(ui_buf1_100, "\n");
+        strcat(ui_buf1_100, lang_str.wf.file_write_fail);
         progress_ui.fail(ui_buf1_100);
 		return;
 	}
 	wifi_link_state = WIFI_TRANS_FILE;
 	upload_result = 1;
-    sprintf(ui_buf1_100, "Uploading file:\n%s", file_writer.fileName);
+    strcpy(ui_buf1_100, lang_str.wf.uploading);
+    strcat(ui_buf1_100, "\n");
+    strcat(ui_buf1_100, file_writer.fileName);
     progress_ui.progress(ui_buf1_100, 0);
     ui_app.idle();
 }
@@ -1080,28 +1087,37 @@ static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
 static void file_fragment_msg_handle(uint8_t * msg, uint16_t msgLen) {
     u32 num_write;
 	u32 frag = *((uint32_t *)msg);
+	if (frag==0)
+        SERIAL_ECHOLN("FIRST FRAGEMENT");
 	if((frag & FRAG_MASK) != file_writer.fragment  + 1) {
 		memset(file_writer.buf, 0, sizeof(file_writer.buf));
 		file_writer.buffer_index = 0;
 		wifi_link_state = WIFI_CONNECTED;	
 		upload_result = 2;
-        progress_ui.fail("File upload\nprotocol fail");
+        strcpy(ui_buf1_100, lang_str.wf.upload_fail);
+        strcat(ui_buf1_100, "\n");
+        strcat(ui_buf1_100, lang_str.wf.protocol_error);
+        progress_ui.fail(ui_buf1_100);
 	} else {
 		if(write_to_file((char *)msg + 4, msgLen - 4) < 0) {
 			memset(file_writer.buf, 0, sizeof(file_writer.buf));
 			file_writer.buffer_index = 0;
 			wifi_link_state = WIFI_CONNECTED;	
 			upload_result = 2;
-            progress_ui.fail("File write fail");
+            strcpy(ui_buf1_100, lang_str.wf.upload_fail);
+            strcat(ui_buf1_100, "\n");
+            strcat(ui_buf1_100, lang_str.wf.file_write_fail);
+            progress_ui.fail(ui_buf1_100);
 			return;
 		} else {
             unsigned char p = file_writer.fileSize==0 ? 0 : (u8)((float)file_writer.totalWrot / (float)file_writer.fileSize * 100);
-		    progress_ui.progress(0,p);
+		    progress_ui.progress(0, p);
             ui_app.idle();
         }
         file_writer.fragment = frag;
 
-		if((frag & (~FRAG_MASK)) != 0) {
+		if(frag & (~FRAG_MASK)) {
+            SERIAL_ECHOLN("LAST FRAGEMENT");
 			FRESULT res =  f_write (&file_writer.file, file_writer.buf, file_writer.buffer_index, &num_write);
 			if((res != FR_OK) || (num_write != file_writer.buffer_index)) {
 				memset(file_writer.buf, 0, sizeof(file_writer.buf));
@@ -1114,8 +1130,10 @@ static void file_fragment_msg_handle(uint8_t * msg, uint16_t msgLen) {
 			file_writer.buffer_index = 0;
 			wifi_link_state = WIFI_CONNECTED;
 			upload_result = 3;
-            sprintf(ui_buf1_100, "File uploaded:\n%s", file_writer.fileName);
-            progress_ui.progress(ui_buf1_100);
+            strcpy(ui_buf1_100, lang_str.wf.uploaded);
+            strcat(ui_buf1_100, "\n");
+            strcat(ui_buf1_100, file_writer.fileName);
+            progress_ui.complete(ui_buf1_100);
             ui_app.idle();
 		}
 	}
@@ -1130,11 +1148,54 @@ static void ping_msg_handle(uint8_t * msg, uint16_t msgLen) {
 
 }
 
+static void ntp_msg_handle(unsigned char * msg, unsigned short msgLen) {
+    SERIAL_ECHOLNPAIR("NET TIME:",  *(unsigned int *)msg);
+}
+
+void execute_wifi_frame(unsigned char type, unsigned char * msg, unsigned short len) {
+    switch(type) {
+        case ESP_TYPE_NET:
+            net_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_NET_STATE:
+            net_state_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_GCODE:
+            gcode_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_FILE_FIRST:
+            file_first_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_FILE_FRAGMENT:
+            file_fragment_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_WIFI_LIST:
+            wifi_list_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_DEBUG:
+            debug_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_PING:
+            ping_msg_handle(msg, len);
+            break;
+        case ESP_TYPE_NTP:
+            ntp_msg_handle(msg, len);
+            break;
+        default:
+            break;
+
+    }
+}
+
+void esp_data_parser1(char *cmdRxBuf, int len) {
+    espParser.parse((unsigned char *)cmdRxBuf, len);
+}
+
 void esp_data_parser(char *cmdRxBuf, int len) {
 	int32_t head_pos;
 	int32_t tail_pos;
 	uint16_t cpyLen;
-	int16_t leftLen = len; //ʣ�೤��
+	int16_t leftLen = len;
 	uint8_t loop_again = 0;
 
 	ESP_PROTOC_FRAME esp_frame;
@@ -1195,7 +1256,7 @@ void esp_data_parser(char *cmdRxBuf, int len) {
 		}
 
 		if(esp_msg_buf[4 + esp_frame.dataLen] != ESP_PROTOC_TAIL) {
-			if(esp_msg_index >= sizeof(esp_msg_buf)) {
+		    if(esp_msg_index >= sizeof(esp_msg_buf)) {
 				memset(esp_msg_buf, 0, sizeof(esp_msg_buf));
 				esp_msg_index = 0;
 			}
@@ -1203,32 +1264,9 @@ void esp_data_parser(char *cmdRxBuf, int len) {
 		}
 		
 		esp_frame.data = &esp_msg_buf[4];
-		switch(esp_frame.type) {
-			case ESP_TYPE_NET:
-				net_msg_handle(esp_frame.data, esp_frame.dataLen);
-				break;
-			case ESP_TYPE_GCODE:
-				gcode_msg_handle(esp_frame.data, esp_frame.dataLen);
-				break;
-			case ESP_TYPE_FILE_FIRST:
-				file_first_msg_handle(esp_frame.data, esp_frame.dataLen);
-				break;
-			case ESP_TYPE_FILE_FRAGMENT:
-				file_fragment_msg_handle(esp_frame.data, esp_frame.dataLen);
-				break;
-			case ESP_TYPE_WIFI_LIST:
-				wifi_list_msg_handle(esp_frame.data, esp_frame.dataLen);
-				break;
-		    case ESP_TYPE_DEBUG:
-                debug_msg_handle(esp_frame.data, esp_frame.dataLen);
-                break;
-		    case ESP_TYPE_PING:
-                ping_msg_handle(esp_frame.data, esp_frame.dataLen);
-                break;
-			default:
-				break;
-				
-		}
+
+        execute_wifi_frame(esp_frame.type,  esp_frame.data, esp_frame.dataLen);
+
 		esp_msg_index = cut_msg_head(esp_msg_buf, esp_msg_index, esp_frame.dataLen  + 5);
 		if(esp_msg_index > 0) {
 			if(charAtArray(esp_msg_buf, esp_msg_index,  ESP_PROTOC_HEAD) == -1) {
@@ -1241,8 +1279,6 @@ void esp_data_parser(char *cmdRxBuf, int len) {
 		}
 	}
 }
-
-void hlk_data_parser(char *cmdRxBuf, int len) { }
 
 int32_t tick_net_time1, tick_net_time2;
 
@@ -1285,7 +1321,7 @@ int32_t readWifiFifo(uint8_t *retBuf, uint32_t bufLen) {
 
 void stopEspTransfer() {
 	char state;
-	if(wifi_link_state == WIFI_TRANS_FILE)
+	if (wifi_link_state == WIFI_TRANS_FILE)
 		wifi_link_state = WIFI_CONNECTED;
 	f_close(&file_writer.file);
 
@@ -1370,15 +1406,23 @@ void wifi_rcv_handle() {
 			tick_net_time2 = getWifiTick();
 			if(wifi_link_state == WIFI_TRANS_FILE) {
 				if((tick_net_time1 != 0) && (getWifiTickDiff(tick_net_time1, tick_net_time2) > 4500)) {// transfer timeout
+                    SERIAL_ECHOLNPAIR("TIMEOUT EXPIRED, FRAGMENTS:", file_writer.fragment);
 					wifi_link_state = WIFI_CONNECTED;
 					upload_result = 2;
 					stopEspTransfer();
-					progress_ui.progress("Upload error\nTimeout expired");
+                    strcpy(ui_buf1_100, lang_str.wf.upload_fail);
+                    strcat(ui_buf1_100, "\n");
+                    strcat(ui_buf1_100, lang_str.wf.upload_fail_deiail_time_expired);
+					progress_ui.fail(ui_buf1_100);
 				}
 			}
-			if((tick_net_time1 != 0) && (getWifiTickDiff(tick_net_time1, tick_net_time2) > 10000)) // heart beat timeout
-				wifi_link_state = WIFI_NOT_CONFIG;
+			if((tick_net_time1 != 0) && (getWifiTickDiff(tick_net_time1, tick_net_time2) > 10000)) {
+                if (wifi_link_state!=WIFI_NOT_CONFIG)
+                    SERIAL_ECHOLN("TIMEOUT EXPIRED, CONNECTION DONE");
+			    wifi_link_state = WIFI_NOT_CONFIG;
+            }
 			if((tick_net_time1 != 0) && (getWifiTickDiff(tick_net_time1, tick_net_time2) > 120000)) { // reset
+                SERIAL_ECHOLN("RESET MODULE");
 				wifi_link_state = WIFI_NOT_CONFIG;
 				wifi_reset();
 				tick_net_time1 = getWifiTick();
@@ -1428,7 +1472,6 @@ void DMA1_Channel5_IRQHandler() {
 		__HAL_DMA_CLEAR_FLAG((DMA_HandleTypeDef *)&hdma_usart1_rx, DMA_FLAG_TC5);
 		if(wifiTransferState.state == TRANSFER_IDLE)
             wifiTransferState.state = TRANSFERING;
-
 		if(storeRcvData((uint8_t *)WifiRxFifo.uartTxBuffer, UART_RX_BUFFER_SIZE)) {
 			esp_dma_pre();
             if(wifiTransferState.is_error != 0x1)
@@ -1457,26 +1500,26 @@ char wifi_upload_firmware(const char * src, const char * back, int dest) {
                 last_state = esp_upload.state;
                 switch (esp_upload.state) {
                     case resetting:
-                        progress_ui.progress(lang_str.wf.update_reseting);
+                        progress_ui.progress(lang_str.wf.update_reseting, -1);
                         break;
                     case upload_idle:
-                        progress_ui.progress(lang_str.wf.update_idle);
+                        progress_ui.progress(lang_str.wf.update_idle, -1);
                         break;
                     case connecting:
                         break;
                     case erasing:
-                        progress_ui.progress(lang_str.wf.update_eraising);
+                        progress_ui.progress(lang_str.wf.update_eraising, -1);
                         break;
                     case uploading:
-                        progress_ui.progress(lang_str.wf.update_uploading);
+                        progress_ui.progress(lang_str.wf.update_uploading, -1);
                         break;
                     case done:
-                        progress_ui.progress(lang_str.wf.update_done);
+                        progress_ui.progress(lang_str.wf.update_done, -1);
                         break;
                 };
             }
             if (esp_upload.state==uploading)
-                progress_ui.progress(((float)esp_upload.uploadBlockNumber)/((float)esp_upload.fileSize/0x0400)*100);
+                progress_ui.progress(0, (char)(((float)esp_upload.uploadBlockNumber)/((float)esp_upload.fileSize/0x0400)*100));
             ui_app.idle();
         };
         ResetWiFiForUpload(1);
@@ -1522,8 +1565,8 @@ void wifi_init() {
 		GPIO_InitStruct.Pin = GPIO_Pin_13;//
 		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
 		HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-		//WIFI_IO1_SET();
-        WIFI_IO1_RESET();
+		WIFI_IO1_SET();
+        //WIFI_IO1_RESET();
 	}
     wifiTransferState.state = TRANSFER_IDLE;
     esp_port_begin(1);

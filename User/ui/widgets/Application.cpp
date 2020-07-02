@@ -413,6 +413,10 @@ void ProgressUI::progress(const char * message, char progress) {
     }
 }
 
+void ProgressUI::complete(const char * message) {
+    fail(message);
+}
+
 void ProgressUI::fail(const char * message) {
     if (ui_app.current_ui != &confirm_dialog_ui) {
         Widget * last = ui_app.current_ui;

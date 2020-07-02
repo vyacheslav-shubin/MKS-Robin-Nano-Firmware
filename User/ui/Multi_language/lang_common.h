@@ -121,6 +121,12 @@ typedef struct {
     const char * update_eraising;
     const char * update_uploading;
     const char * update_done;
+    const char * uploading;
+    const char * uploaded;
+    const char * upload_fail;
+    const char * upload_fail_deiail_time_expired;
+    const char * protocol_error;
+    const char * file_write_fail;
 } WIFI_UI_LANG_STR;
 
 typedef struct{

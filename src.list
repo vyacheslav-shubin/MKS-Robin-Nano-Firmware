@@ -96,6 +96,7 @@ Src/tim.c
 Src/usart.c
 Src/wifi_module.cpp
 Src/wifi_upload.cpp
+Src/EspParser.cpp
 User/ui/draw_ui.cpp
 User/ui/Multi_language/fontHz14.c
 User/ui/Multi_language/Helvetica26.c

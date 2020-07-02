@@ -32,12 +32,7 @@ private:
 public:
     void on_action_dialog(u8 action, u8 dialog_id);
     void progress(const char * message, char progress);
-    void progress(unsigned char progress) {
-        this->progress(0, progress);
-    }
-    void progress(const char * message) {
-        this->progress(message, -1);
-    }
+	void complete(const char * message);
     void fail(const char * message);
     void done();
     ProgressUI() {};

@@ -176,12 +176,16 @@ void lang_std(void) {
     lang_str.wf.joining = "Joining";
     lang_str.wf.joined = "Joined";
     lang_str.wf.lookup = "Lookup networks";
-
+    lang_str.wf.uploading = "Uploading";
+    lang_str.wf.uploaded = "Uploaded";
     lang_str.wf.update_start = "Wifi module firmware update";
     lang_str.wf.update_reseting = "Reseting module";
     lang_str.wf.update_idle = "Waiting for responce";
     lang_str.wf.update_eraising = "Memory eraiging";
     lang_str.wf.update_uploading = "Uploading firmware";
     lang_str.wf.update_done = "Done";
-
+    lang_str.wf.upload_fail = "Upload fail";
+    lang_str.wf.upload_fail_deiail_time_expired = "Timeout expired";
+    lang_str.wf.protocol_error = "Protocol error";
+    lang_str.wf.file_write_fail = "File write error";
 }

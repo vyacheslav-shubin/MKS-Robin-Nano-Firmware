@@ -36,12 +36,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="configuration menu refactored">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Src/EspParser.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Src/EspParser.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Inc/wifi_module.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/wifi_module.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +121,9 @@
       <workItem from="1592827652996" duration="31000" />
       <workItem from="1592827788219" duration="80000" />
       <workItem from="1592827884757" duration="628000" />
-      <workItem from="1592833769209" duration="48371000" />
+      <workItem from="1592833769209" duration="50749000" />
+      <workItem from="1593516498212" duration="4917000" />
+      <workItem from="1593676223111" duration="18021000" />
     </task>
     <task id="LOCAL-00001" summary="about dialog as widget">
       <created>1590157605792</created>
@@ -453,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592399036223</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="wifi module code refactoring">
+      <created>1593447560867</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1593447560867</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,7 +499,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Calculator dialog widget" />
     <MESSAGE value="Machine size config, filament change config as widget" />
     <MESSAGE value="Confirm dialog on filament load" />
     <MESSAGE value="Home config as widget. Direction+Speed = One widget" />
@@ -509,7 +523,8 @@
     <MESSAGE value="-old multilanguage" />
     <MESSAGE value="-mesh leveling as widget, NO MORE OLD UI CODE" />
     <MESSAGE value="snapshot" />
-    <option name="LAST_COMMIT_MESSAGE" value="snapshot" />
+    <MESSAGE value="wifi module code refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="wifi module code refactoring" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
@@ -563,10 +578,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="718" y="282" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591185560132" />
-    <state x="623" y="244" key="run.anything.popup" timestamp="1592304006011">
+    <state x="623" y="244" key="run.anything.popup" timestamp="1593693079785">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592304006011" />
+    <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1593693079785" />
     <state x="623" y="234" width="672" height="678" key="search.everywhere.popup" timestamp="1591607946586">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -582,7 +597,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Src/wifi_module.cpp</url>
-          <line>1039</line>
+          <line>1042</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

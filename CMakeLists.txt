@@ -728,7 +728,7 @@ add_executable(work
         User/ui/font.h
         User/ui/ui_tools.cpp
         User/ui/ui_tools.h
-		)
+		Src/EspParser.cpp Src/EspParser.h)
 
 add_compile_definitions(USE_HAL_DRIVER)
 add_compile_definitions(STM32F103xE)

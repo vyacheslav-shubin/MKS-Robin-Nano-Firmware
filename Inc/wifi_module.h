@@ -1,6 +1,7 @@
 #ifndef _WIFI_MODULE_H_
 #define _WIFI_MODULE_H_
 
+#include "stdint.h"
 
 #undef ESP_MODEL
 
@@ -59,6 +60,27 @@
 #endif	 
 
 #define UDISKBUFLEN 1024
+
+
+#define ESP_PROTOC_HEAD				(uint8_t)0xa5
+#define ESP_PROTOC_TAIL				(uint8_t)0xfc
+
+#define ESP_TYPE_NET				(uint8_t)0x0
+#define ESP_TYPE_GCODE				(uint8_t)0x1
+#define ESP_TYPE_FILE_FIRST			(uint8_t)0x2
+#define ESP_TYPE_FILE_FRAGMENT		(uint8_t)0x3
+#define ESP_TYPE_WIFI_LIST			(uint8_t)0x4
+
+#define ESP_TYPE_DEBUG			    (uint8_t)0x10
+#define ESP_TYPE_PING			    (uint8_t)0x11
+#define ESP_TYPE_NTP			    (uint8_t)0x12
+#define ESP_TYPE_NET_STATE			(uint8_t)0x13
+
+
+
+#define message_type_is_walid(TYPE) ((TYPE>=0) && (TYPE<=0x4) || (TYPE>=0x10) && (TYPE<=0x13))
+
+extern void execute_wifi_frame(unsigned char type, unsigned char * msg, unsigned short  len);
 
 typedef enum
 {

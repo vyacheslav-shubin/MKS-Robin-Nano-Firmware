@@ -148,6 +148,8 @@ void lang_ru(void) {
     lang_str.wf.joining = "Идет подключение";
     lang_str.wf.joined = "Подключено";
     lang_str.wf.lookup = "Поиск сетей";
+    lang_str.wf.uploading = "Идет загрузка";
+    lang_str.wf.uploaded = "Файл загружен";
 
     lang_str.wf.update_start = "Обновление ПО модуля WiFi";
     lang_str.wf.update_reseting = "Инициализация";
@@ -155,5 +157,9 @@ void lang_ru(void) {
     lang_str.wf.update_eraising = "Очитстка памяти";
     lang_str.wf.update_uploading = lang_str.wf.update_start;
     lang_str.wf.update_done = "Завершено";
+    lang_str.wf.upload_fail = "Ошибка загрузки";
+    lang_str.wf.upload_fail_deiail_time_expired = "Превышено время ожидания";
+    lang_str.wf.protocol_error = "Нарушение протокола обмена";
+    lang_str.wf.file_write_fail = "Ошибка при запись файла";
 
 }

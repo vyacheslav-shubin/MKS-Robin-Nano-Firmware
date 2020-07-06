@@ -304,8 +304,8 @@ EEPROM 2K byte ����
 #define EPR_BED_MINTEMP			EPR_PRINT_FINESH_COUNT + 2
 #define EPR_Z_SAVE_HOMING               EPR_BED_MINTEMP + 2
 
-
-#define EPR_END_ADDR			EPR_Z_SAVE_HOMING + 1
+#define EPR_TIME_SHIFT          EPR_Z_SAVE_HOMING + 1
+#define EPR_END_ADDR			EPR_TIME_SHIFT + 2
 //#define EPR_END_ADDR EPR_PRINT_FINESH_COUNT + 2//EPR_END_ADDR=1852
 
 #if EPR_END_ADDR > 2048
@@ -683,7 +683,7 @@ typedef struct {
 		volatile uint16_t pulseDelay;
 		volatile uint16_t print_finish_count;
 		volatile uint16_t preview_bk_color;
-
+        volatile short time_offset;
 }CFG_ITMES;
 
 extern CFG_PRINTER_ITMES mksCfg;

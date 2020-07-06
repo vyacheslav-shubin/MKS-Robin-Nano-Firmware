@@ -203,6 +203,19 @@ typedef struct {
 	float maxv;
 } UI_MIN_MAX;
 
+
+typedef enum {
+    PREVIEW_NONE,
+    PREVIEW_50,
+    PREVIEW_100
+} PREVIEW_MODE;
+
+typedef struct{
+    PREVIEW_MODE mode;
+    unsigned int offset;
+} PREVIEW_META;
+
+
 typedef struct {
 	unsigned char	once; //printing
 	unsigned char	suicide_enabled;
@@ -217,7 +230,7 @@ typedef struct {
 	float			layer_height;
 	int				layer_count;
 	unsigned long	size;
-
+	PREVIEW_META    meta;
 	unsigned char	preview_row;
 	int				preview_offset;
 	unsigned char	preview_state_flags;
@@ -286,8 +299,12 @@ extern void ui_update_std_button(BUTTON_Handle handle, const char* file, const c
 extern PROGBAR_Handle ui_create_std_progbar(int x, int y, int w, int h, WM_HWIN hWinParent);
 
 extern char ascii2dec(char ascii);
+
 extern unsigned char ui_file_with_preview(char *path, int *withoffset);
-extern void ui_gcode_small_preview(char * file_name, int offset, int xpos_pixel,int ypos_pixel);
+
+extern void ui_file_check_preview(char *path, PREVIEW_META *meta);
+
+extern void ui_gcode_small_preview(char * file_name, PREVIEW_META * meta, int xpos_pixel,int ypos_pixel);
 
 extern void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text);
 #if defined(__cplusplus)

@@ -81,6 +81,8 @@ void mkstft_ui_load() {
     epr_read_data(EPR_PULSE_DELAY_TIME,(uint8_t *)&gCfgItems.pulseDelay,sizeof(gCfgItems.pulseDelay));
     epr_read_data(EPR_PRINT_FINESH_COUNT,(uint8_t *)&gCfgItems.print_finish_count,sizeof(gCfgItems.print_finish_count));
 	gCfgItems.preview_bk_color = rgb888_2_rgb565(gCfgItems.background_color);
+
+	epr_read_data(EPR_TIME_SHIFT, (uint8_t *)&gCfgItems.time_offset,sizeof(gCfgItems.time_offset));
 }
 
 void mkstft_ui_set_epr() {
@@ -278,6 +280,7 @@ void mkstft_ui_init() {
 	gCfgItems.standby_time=60;
 	gCfgItems.pulseDelay=5;
 	gCfgItems.print_finish_count=180;
+    gCfgItems.time_offset = 180;
 	mkstft_ui_set_epr();
 	BMP_PIC_X = BTN_PIC_X_OFFSET;
 	BMP_PIC_Y = BTN_PIC_Y_OFFSET;

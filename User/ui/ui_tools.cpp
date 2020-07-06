@@ -199,6 +199,37 @@ void ui_set_text_value(TEXT_Handle handle, char* val) {
 
 #define ROW(idx) (10+50*idx)
 
+extern void ui_file_check_preview(char *path, PREVIEW_META *meta) {
+    #define PREPERD_SIZE 1024
+    FIL file;
+    meta->mode = PREVIEW_NONE;
+    if (f_open(&file, path, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
+        memset(bmp_public_buf, 0, PREPERD_SIZE+1);
+        UINT readed;
+        f_read(&file, bmp_public_buf, PREPERD_SIZE, &readed);
+        f_close(&file);
+        if (readed == PREPERD_SIZE) {
+            char * pos = strstr(bmp_public_buf,";simage:");
+            if (pos != 0) {
+                meta->offset = (unsigned long)pos-(unsigned long)bmp_public_buf;
+                unsigned short i = meta->offset;
+                pos = strchr(&bmp_public_buf[meta->offset], '\r');
+                if (pos != 0) {
+                    unsigned int len = (unsigned long)pos - (unsigned long)(&bmp_public_buf) - meta->offset;
+                    if (len==208) {
+                        meta->mode = PREVIEW_50;
+                    } else if (len==408) {
+                        meta->mode = PREVIEW_100;
+                    } else
+                        meta->mode = PREVIEW_NONE;
+                } else {
+                    meta->mode = PREVIEW_NONE;
+                }
+            }
+        }
+    }
+}
+
 
 unsigned char ui_file_with_preview(char *path, int *withoffset) {
 	#define PREPERD_SIZE 512
@@ -211,7 +242,7 @@ unsigned char ui_file_with_preview(char *path, int *withoffset) {
 		if (readed == PREPERD_SIZE) {
 			char * pos = strstr(bmp_public_buf,";simage:");
 			if (pos!=0) {
-				*withoffset = (int)pos-(int)bmp_public_buf;
+				*withoffset = (unsigned long)pos-(unsigned long)bmp_public_buf;
 				return 1;
 			}
 		}
@@ -219,21 +250,40 @@ unsigned char ui_file_with_preview(char *path, int *withoffset) {
 	return 0;
 }
 
-void ui_gcode_small_preview(char *file_name, int offset, int xpos_pixel,int ypos_pixel) {
+void ui_gcode_small_preview(char *file_name, PREVIEW_META * meta, int xpos_pixel,int ypos_pixel) {
 	FIL file;
 	if (f_open(&file, file_name, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
-		f_lseek(&file, offset);
-		LCD_setWindowArea(xpos_pixel, ypos_pixel, 50, 50);
-		LCD_WriteRAM_Prepare();
-		for (u8 i=0; i< 50; i++) {
-			UINT read;
-			f_read(&file, bmp_public_buf, 209, &read);
-			if (read!=209)
-				break;
-			for(u8 j=8; j<208; j+=4) {
-				u16 color = (ascii2dec(bmp_public_buf[j+2])<<12) | (ascii2dec(bmp_public_buf[j+3])<<8) | (ascii2dec(bmp_public_buf[j])<<4) | (ascii2dec(bmp_public_buf[j+1]));
-				LCD_WriteRAM(color);
-			}
+		f_lseek(&file, meta->offset);
+		if (meta->mode==PREVIEW_50) {
+            LCD_setWindowArea(xpos_pixel, ypos_pixel, 50, 50);
+            LCD_WriteRAM_Prepare();
+            for (u8 i=0; i< 50; i++) {
+                UINT read;
+                f_read(&file, bmp_public_buf, 209, &read);
+                if (read!=209)
+                    break;
+                for(u8 j=8; j<208; j+=4) {
+                    u16 color = (ascii2dec(bmp_public_buf[j+2])<<12) | (ascii2dec(bmp_public_buf[j+3])<<8) | (ascii2dec(bmp_public_buf[j])<<4) | (ascii2dec(bmp_public_buf[j+1]));
+                    LCD_WriteRAM(color);
+                }
+            }
+		} else if (meta->mode==PREVIEW_100) {
+            LCD_setWindowArea(xpos_pixel, ypos_pixel, 100, 100);
+            LCD_WriteRAM_Prepare();
+            for (unsigned char i=0; i < 100; i++) {
+                UINT read;
+                f_read(&file, bmp_public_buf, 409, &read);
+                if (read!=409)
+                    break;
+                unsigned char k = 0;
+                for(unsigned short j=8; j<408; j+=4, k++) {
+                    //if (((i & 1)==0) && ((k & 1)==0)) {
+                        u16 color = (ascii2dec(bmp_public_buf[j + 2]) << 12) | (ascii2dec(bmp_public_buf[j + 3]) << 8) |
+                                    (ascii2dec(bmp_public_buf[j]) << 4) | (ascii2dec(bmp_public_buf[j + 1]));
+                        LCD_WriteRAM(color);
+                    //}
+                }
+            }
 		}
 		f_close(&file);
 	}

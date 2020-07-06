@@ -19,7 +19,7 @@
 #include "mks_reprint.h"
 #include "mks_touch_screen.h"
 #include "dialog/ProgressDialogUI.h"
-
+#include "integration.h"
 Application ui_app;
 ProgressUI progress_ui;
 
@@ -113,6 +113,9 @@ void Application::refresh_05() {
 }
 
 void Application::refresh_1s() {
+    if (shUI::hasTime())
+        shUI::time_plus(1);
+
     if (beeper.count > 0) {
         BEEPER_OP = 0;
         beeper.count--;
@@ -130,7 +133,7 @@ static void _calc_rate(void) {
     } else {
         float rate;
         if ((ui_print_process.preview_state_flags & (1<<PREVIEW_EXISTS_BIT)) != 0) {
-            int offset = PREVIEW_SIZE + ui_print_process.preview_offset;
+            int offset = PREVIEW_SIZE_50 + ui_print_process.preview_offset;
             if ((card.sdpos <= offset) || (card.filesize <= offset))
                 rate = 0;
             else

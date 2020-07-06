@@ -15,8 +15,70 @@
 #include "Configuration_adv.h"
 #include "configuration_store.h"
 
+static u8 DAYS_PER_MOUNTH[]={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 namespace shUI {
-    extern void powerOff() {
+
+    unsigned int now = 0;
+
+    void time_plus(unsigned short sec) {
+        now+=sec;
+    }
+
+    void set_unix_time(unsigned int time) {
+        now = time;
+    }
+
+    unsigned char isLeapYear(u16 year) {
+        return ((year%400==0) || ((year%100!=0) && (year%4==0)));
+    }
+
+    char hasTime() {
+        return now!=0;
+    }
+
+    void getTime(shUI::DateTime *time) {
+        u32 lt=now+(gCfgItems.time_offset*60);
+        memset(time, 0, sizeof(shUI::DateTime));
+        time->sec = lt%60;
+        lt/=60;
+        time->min = lt%60;
+        lt/=60;
+        time->hour = lt%24;
+        lt/=24;
+        time->year=1970;
+        time->wd=0;
+        u32 d=lt;
+        while (1) {
+            u16 dc;
+            dc=(isLeapYear(time->year))?366:365;
+            if (d<dc)
+                break;
+            d-=dc;
+            time->year++;
+        }
+        u8 i;
+        bool ly=isLeapYear(time->year);
+        time->month=1;
+        for (i=0;i<12;i++) {
+            u8 dc=DAYS_PER_MOUNTH[i];
+            if ((i==1) && ly)
+                dc++;
+            if (d<dc) break;
+            d-=dc;
+            time->month++;
+        }
+        time->day=1+d;
+    }
+
+    char getTimeStr(char * buffer) {
+        shUI::DateTime time;
+        getTime(&time);
+        sprintf(buffer, "%d%d:%d%d:%d%d", time.hour/10, time.hour%10, time.min/10, time.min%10,  time.sec/10, time.sec%10);
+    }
+
+
+    void powerOff() {
         GUI_Clear();
         enqueue_and_echo_commands_P(PSTR("M81"));
     }

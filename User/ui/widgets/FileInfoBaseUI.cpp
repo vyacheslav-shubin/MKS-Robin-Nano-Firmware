@@ -38,8 +38,22 @@ static void _explore_file() {
 	if(f_open(&file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
 		ui_print_process.size = file.fsize;
 		int offset;
+		ui_file_check_preview(ui_print_process.file_name, &ui_print_process.meta);
+		unsigned long seek = 0;
+        switch (ui_print_process.meta.mode) {
+            case PREVIEW_NONE:
+                seek = 0;
+                break;
+            case PREVIEW_50:
+                seek = PREVIEW_SIZE_50;
+                break;
+            case PREVIEW_100:
+                seek = PREVIEW_SIZE_100;
+                break;
+        }
+        seek+=ui_print_process.meta.offset;
 		if (ui_file_with_preview(ui_print_process.file_name, &offset)) {
-			f_lseek(&file, (PREVIEW_LITTLE_PIC_SIZE+offset) + 809 * 200 + 8); //809 - длина строки в preview
+			f_lseek(&file, seek); //809 - длина строки в preview
 		} else {
 			f_lseek(&file, 0);
 		}
@@ -85,7 +99,14 @@ static void _preview_cache() {
 	UINT readed;
 	volatile uint32_t i,j;
 	if(f_open(&file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
-		f_lseek(&file, (PREVIEW_LITTLE_PIC_SIZE+ui_print_process.preview_offset) + 809 * ui_print_process.preview_row + 8); //809 - длина строки в preview
+	    int seek = 0;
+	    if (ui_print_process.meta.mode==PREVIEW_50) {
+            seek = PREVIEW_LITTLE_PIC_SIZE_50;
+        } else {
+            seek = PREVIEW_LITTLE_PIC_SIZE_100;
+	    }
+        seek = seek + ui_print_process.preview_offset + 809 * ui_print_process.preview_row + 8;
+		f_lseek(&file, seek); //809 - длина строки в preview
 		f_read(&file, bmp_public_buf, 800, &readed);
 		i=0;j=0;
 		while (i<800) {
@@ -105,7 +126,7 @@ static void _preview_cache() {
 			ui_print_process.preview_row = 0;
 			ui_print_process.preview_state_flags |= 1<<PREVIEW_CACHED_BIT;
 			char done=1;
-			epr_write_data(EPR_PREVIEW_FROM_FLASH, &done,1);
+			epr_write_data(EPR_PREVIEW_FROM_FLASH, (const unsigned char *)&done,1);
 		}
 	} else {
 		ui_print_process.preview_state_flags = 0;

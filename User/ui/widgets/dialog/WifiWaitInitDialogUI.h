@@ -9,7 +9,8 @@
 
 typedef enum {
     WIFI_DIALOG_LOOKUP,
-    WIFI_DIALOG_JOIN
+    WIFI_DIALOG_JOIN,
+    WIFI_DIALOG_NET_LIST,
 } WIFI_DIALOG_TYPE;
 
 typedef struct {

@@ -140,7 +140,7 @@ protected:
 		}
 		char * fn =  ((fi->lfname!=0) && (fi->lfname[0]!=0))? fi->lfname:fi->fname;
 		SERIAL_ECHOLN(fn);
-		char * pic;
+		const char * pic;
 		UI_FILE_BUTTON * ufb = &file_browser_ui.ui.files[this->index];
 		ufb->isDirectory = fi->fattrib & AM_DIR;
 		strncpy(ufb->fileName, fi->fname, 12);
@@ -148,11 +148,25 @@ protected:
 			pic = img_dir;
 		} else {
 			sprintf(ui_buf1_100, "%s/%s", curent_dir, ufb->fileName);
-			ufb->withPreview = ui_file_with_preview(ui_buf1_100, &ufb->previewOffset);
-			pic = ufb->withPreview ? img_file_wpv : img_file;
+            ui_file_check_preview(ui_buf1_100, &ufb->previewMeta);
+            switch (ufb->previewMeta.mode) {
+                case PREVIEW_50:
+                    pic = img_file_wpv;
+                    break;
+                case PREVIEW_100:
+                    pic = 0;
+                    break;
+                case PREVIEW_NONE:
+                default:
+                    pic = img_file;
+                    break;
+            }
 		}
-		ufb->button = file_browser_ui.createButtonAt(this->index % 3, this->index/3, pic, fn);
-
+		strcpy(ui_buf1_100, fn);
+		unsigned char i = strlen(ui_buf1_100) - 1;
+		while ((ui_buf1_100[i] != '.') && (i > 0)) i--;
+        ui_buf1_100[i] = 0;
+		ufb->button = file_browser_ui.createButtonAt(this->index % 3, this->index/3, pic, ui_buf1_100);
 		this->index++;
 		return 1;
 	}
@@ -204,8 +218,6 @@ void FileBrowserUI::createControls() {
 	GUI_Exec();
 	this->drawPreview();
 }
-
-
 
 void FileBrowserUI::doBack(){
 	if (browser.dir_level>0) {
@@ -285,11 +297,21 @@ void FileBrowserUI::on_button(UI_BUTTON hBtn) {
 
 void FileBrowserUI::drawPreview() {
 	for(unsigned char i=0; i<6; i++) {
-		if (this->ui.files[i].withPreview) {
+		if (this->ui.files[i].previewMeta.mode != PREVIEW_NONE) {
 			sprintf(ui_buf1_100, "%s/%s", browser.curent_dir, ui.files[i].fileName);
-			int x = ui_std_col(i%3) + 33;
-			int y = ui_std_row(i/3) + 28 + titleHeight;
-			ui_gcode_small_preview(ui_buf1_100, ui.files[i].previewOffset, x, y);
+            int x = 0;
+            int y = 0;
+            switch (this->ui.files[i].previewMeta.mode) {
+                case PREVIEW_50:
+                    x = ui_std_col(i%3) + 33;
+                    y = ui_std_row(i/3) + 28 + titleHeight;
+                    break;
+                case PREVIEW_100:
+                    x = ui_std_col(i%3) + 6;
+                    y = ui_std_row(i/3) + 1 + titleHeight;
+                    break;
+            }
+			ui_gcode_small_preview(ui_buf1_100, &(this->ui.files[i].previewMeta), x, y);
 		}
 	}
 }

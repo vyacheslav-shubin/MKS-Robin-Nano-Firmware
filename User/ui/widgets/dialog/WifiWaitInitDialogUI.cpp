@@ -25,6 +25,7 @@ void WifiWaitInitDialogUI::createControls() {
 
 void WifiWaitInitDialogUI::updateControls() {
     switch (type) {
+        case WIFI_DIALOG_NET_LIST:
         case WIFI_DIALOG_LOOKUP: {
             switch (this->state_machine) {
                 case WIFI_SM_START:
@@ -87,6 +88,14 @@ void WifiWaitInitDialogUI::refresh_1s() {
         }
         default: {
             switch ((unsigned char)type) {
+                case WIFI_DIALOG_NET_LIST: {
+                    if (wifi_list_received_flag == 1) {
+                        this->state_machine = WIFI_SM_LIST_READY;
+                        this->count_down = 2;
+                        this->updateControls();
+                    }
+                    break;
+                }
                 case WIFI_DIALOG_LOOKUP: {
                     if (wifi_list_received_flag == 1) {
                         this->state_machine = (wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01)

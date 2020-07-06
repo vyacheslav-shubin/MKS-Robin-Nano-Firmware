@@ -40,7 +40,7 @@ protected:
 public:
     virtual WIDGET_TYPE getType() {return WIDGET_ROOT_UI;};
     virtual void on_action_dialog(u8 action, u8 dialog_id);
-	virtual const char * getTitle() {return lang_str.ui_title_main;};
+	virtual const char * getTitle();
 	MainUI() : StdWidget(PRINT_READY_UI){};
 };
 

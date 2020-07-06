@@ -17,7 +17,7 @@ void PrintingInfoDialogUI::createControls() {
 
 #define _row_size 20
 #define _x  40
-#define _w  220
+#define _w  230
 
 #define _wl (DIALOG_WIDTH - (_x*2))
 #define _row(idx) _row_size * idx + 60

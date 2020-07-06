@@ -1,4 +1,5 @@
 #include "stdint.h"
+#include "integration.h"
 #include "string.h"
 #include "EspParser.h"
 #include "stm32f10x_gpio.h"
@@ -1150,6 +1151,7 @@ static void ping_msg_handle(uint8_t * msg, uint16_t msgLen) {
 
 static void ntp_msg_handle(unsigned char * msg, unsigned short msgLen) {
     SERIAL_ECHOLNPAIR("NET TIME:",  *(unsigned int *)msg);
+    shUI::set_unix_time(*(unsigned int *)msg);
 }
 
 void execute_wifi_frame(unsigned char type, unsigned char * msg, unsigned short len) {
@@ -1317,7 +1319,6 @@ int32_t readWifiFifo(uint8_t *retBuf, uint32_t bufLen) {
 	} else
 		return 0;
 }
-
 
 void stopEspTransfer() {
 	char state;

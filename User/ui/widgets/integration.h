@@ -9,6 +9,15 @@
 #define USER_UI_WIDGETS_INTEGRATION_H_
 
 namespace shUI {
+    typedef struct {
+        unsigned char 		sec;
+        unsigned char 		min;
+        unsigned char 		hour;
+        unsigned char 		wd;
+        unsigned char 		day;
+        unsigned char 		month;
+        unsigned short		year;
+    } DateTime;
 
 typedef struct{
 	float current;
@@ -32,6 +41,11 @@ typedef struct{
 	float e;
 } CURRENT_POSITION;
 
+    extern void set_unix_time(unsigned int time);
+    extern void time_plus(unsigned short sec);
+    extern void getTime(shUI::DateTime *time);
+    extern char hasTime();
+    extern char getTimeStr(char * buffer);
 
 	extern void babystep(char * axe, float size);
 	extern float babystepGetZ();

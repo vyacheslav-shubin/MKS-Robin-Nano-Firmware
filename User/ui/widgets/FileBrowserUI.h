@@ -38,9 +38,8 @@ class UIFileBrouser;
 typedef struct{
 	UI_BUTTON button;
 	char fileName[13];
-	int previewOffset;
-	char withPreview;
 	char isDirectory;
+	PREVIEW_META previewMeta;
 } UI_FILE_BUTTON;
 
 typedef struct{

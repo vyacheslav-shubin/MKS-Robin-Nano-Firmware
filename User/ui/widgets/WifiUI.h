@@ -16,7 +16,7 @@ typedef struct {
     UI_BUTTON cloud;
 } WIFI_UI_CONTROLS;
 
-class WifiUI : public StdWidget {
+class WifiUI : public StdWidget, public ActionDialogCallback {
 private:
     WIFI_UI_CONTROLS ui;
 protected:
@@ -24,6 +24,7 @@ protected:
     virtual void createControls();
     virtual void refresh_1s();
 public:
+    virtual void on_action_dialog(u8 action, u8 dialog_id);
     virtual const char * getTitle() {return "WiFi";};
     WifiUI() : StdWidget(WIFI_UI) {};
 };

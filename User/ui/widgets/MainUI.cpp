@@ -17,6 +17,7 @@
 #include "ui_tools.h"
 #include "integration.h"
 #include "dialog/ConfirmDialogUI.h"
+#include "Application.h"
 
 MainUI main_ui;
 
@@ -28,6 +29,15 @@ void MainUI::on_action_dialog(u8 action, u8 dialog_id) {
         this->show();
     }
 }
+
+const char * MainUI::getTitle() {
+    if (shUI::hasTime()) {
+        shUI::getTimeStr(ui_buf1_100);
+        return ui_buf1_100;
+    } else {
+        return lang_str.ui_title_main;
+    }
+};
 
 
 void MainUI::on_button(UI_BUTTON hBtn) {
@@ -104,6 +114,8 @@ void MainUI::createControls() {
 
 void MainUI::refresh_1s() {
     this->drawXYZ();
+    if (shUI::hasTime())
+        ui_app.drawTitle();
     if(gCfgItems.display_style == 0) {
 
     } else {

@@ -2,6 +2,7 @@
 // Created by shubin on 05.06.2020.
 //
 
+#include "dialog/WifiWaitInitDialogUI.h"
 #include "WifiUI.h"
 #include "WifiListUI.h"
 #include "ui_tools.h"
@@ -11,19 +12,27 @@
 
 WifiUI wifi_ui;
 
+void WifiUI::on_action_dialog(u8 action, u8 dialog_id) {
+    wifi_wait_init_dialog_ui.hide();
+    switch(action) {
+        case UI_BUTTON_CANCEL:
+            this->show();
+            break;
+        case UI_ACTION_WIFI_LIST_READY:
+            wifi_list_ui.show();
+            break;
+    };
+}
+
 void WifiUI::on_button(UI_BUTTON hBtn) {
     if (hBtn==this->ui.ret) {
         this->action_back();
     } else if (hBtn==this->ui.reconnect) {
-        ui_buf1_100[0] = 0xA5;
-        ui_buf1_100[1] = 0x07;
-        ui_buf1_100[2] = 0x00;
-        ui_buf1_100[3] = 0x00;
-        ui_buf1_100[4] = 0xFC;
-        raw_send_to_wifi(ui_buf1_100, 5);
+        wifi_list_received_flag = 0;
+        get_wifi_list_command_send();
         this->hide();
         ui_app.pop();
-        wifi_list_ui.show();
+        wifi_wait_init_dialog_ui.show(WIFI_DIALOG_NET_LIST, this, 0, this);
     } else if (hBtn==this->ui.cloud) {
 
     }

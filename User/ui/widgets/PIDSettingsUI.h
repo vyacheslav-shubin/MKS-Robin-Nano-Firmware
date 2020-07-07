@@ -14,6 +14,7 @@ typedef struct {
 class PIDSettingsUI : public StdWidget {
 private:
     PID_SETTINGS_UI_CONTROLS ui;
+    unsigned short point;
 protected:
     virtual void createControls();
     virtual void on_button(UI_BUTTON hBtn);
@@ -23,6 +24,6 @@ public:
     PIDSettingsUI() : StdWidget(PID_SETTINGS_UI) {};
 };
 
-//PIDSettingsUI pid_settings_ui;
+extern PIDSettingsUI pid_settings_ui;
 
 #endif //WORK_PIDSETTINGSUI_H

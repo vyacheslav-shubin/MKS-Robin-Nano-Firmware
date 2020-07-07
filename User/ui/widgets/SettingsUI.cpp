@@ -12,6 +12,7 @@
 #include "WifiListUI.h"
 #include "WifiUI.h"
 #include "wifi_module.h"
+#include "PIDSettingsUI.h"
 
 SettingsUI settings_ui;
 
@@ -25,7 +26,7 @@ void SettingsUI::createControls() {
 	this->ui.configuration = this->createButtonAt(0, 0, img_machine_settings_root, lang_str.machine_settings);
 	this->ui.wifi = this->createButtonAt(1, 0, img_wifi, lang_str.wifi);
     this->ui.about = this->createButtonAt(3, 0, img_about, lang_str.about);
-    //this->ui.reset = this->createButtonAt(0, 1, img_about, lang_str.about);
+    this->ui.pid = this->createButtonAt(0, 1, img_preheat, "PID Set");
 	this->ui.ret = this->createButtonRet();
 }
 
@@ -61,7 +62,7 @@ void SettingsUI::on_button(UI_BUTTON hBtn) {
 		about_dialog_ui.show(this, DIALOG_ID_ABOUT, this);
 	}  else if (hBtn==this->ui.pid) {
 	    this->hide();
-
+        pid_settings_ui.show();
 	}
 }
 
@@ -77,7 +78,6 @@ void SettingsUI::on_action_dialog(u8 action, u8 dialog_id) {
                 break;
             case UI_ACTION_WIFI_LIST_READY:
                 wifi_list_ui.show();
-                //draw_Wifi_list();
                 break;
             case UI_ACTION_WIFI_CONNECTED:
                 wifi_ui.show(this);

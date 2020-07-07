@@ -141,11 +141,6 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_fan				"bmp_fan.bin"
 #define img_speed			"bmp_speed.bin"
 
-#define img_machine_settings			"bmp_MachineSetting.bin"
-#define img_temperature_settings		"bmp_TemperatureSetting.bin"
-#define img_motor_settings				"bmp_MotorSetting.bin"
-#define img_advanced_settings			"bmp_AdvanceSetting.bin"
-
 #define img_check_on 		 "bmp_enable.bin"
 #define img_check_off 		 "bmp_disable.bin"
 

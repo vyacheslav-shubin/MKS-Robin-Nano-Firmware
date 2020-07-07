@@ -1580,7 +1580,9 @@ void wifi_init() {
     ||
     wifi_upload_firmware(ESP_WEB_FIRMWARE_FILE, ESP_WEB_FIRMWARE_FILE_BACK, ESP_WEB_FIRMWARE_ADDR)
     ||
-    wifi_upload_firmware(ESP_WEB_FILE, ESP_WEB_FILE_BACK, ESP_WEB_ADDR);
+    wifi_upload_firmware(ESP_WEB_FILE, ESP_WEB_FILE_BACK, ESP_WEB_ADDR)
+    ||
+    wifi_upload_firmware(ESP_KEY_FILE, ESP_KEY_FILE_BACK, ESP_KEY_ADDR);
 
 	wifiPara.decodeType = WIFI_DECODE_TYPE;
 	wifiPara.baud = 115200;

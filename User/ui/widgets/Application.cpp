@@ -27,6 +27,7 @@ static FATFS fat;
 volatile u8 ui_timing_flags;
 
 PowerDetector powerDetector;
+TempStat tempStat;
 
 #define STANDBY_TIME 	(gCfgItems.standby_time)
 
@@ -109,12 +110,9 @@ void Application::refresh() {
 
 void PowerDetector::refresh_05() {
     if (this->active) {
-        SERIAL_ECHOLN("POWER DET ON");
         if (MKS_PW_DET_OP==0) {
-            SERIAL_ECHOLN("POWER OFF REQ");
             if (this->count_down==0) {
                 MKS_PW_OFF_OP = 0;
-                SERIAL_ECHOLN("DO POWER OFF");
                 this->count_down = POWER_DETECTOR_COUNT_DOWN;
             } else
                 this->count_down--;
@@ -131,7 +129,8 @@ void PowerDetector::init() {
     this->count_down = POWER_DETECTOR_COUNT_DOWN;
 }
 
-/*
+extern TempStat tempStat;
+
 void TempStat::stat() {
     shUI::BED_TEMP bt;
     shUI::getBedTemperature(&bt);
@@ -144,11 +143,10 @@ void TempStat::stat() {
     if (++this->data.cursor>=TEMP_STAT_COUNT)
         this->data.cursor = 0;
 }
-*/
 
 void Application::refresh_05() {
     powerDetector.refresh_05();
-    //this->tempStat.stat();
+    tempStat.stat();
     if (beeper.count>0)
         BEEPER_OP = 1;
 	if (this->waitPenUp > 1) {

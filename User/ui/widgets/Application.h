@@ -26,7 +26,7 @@ typedef struct {
     unsigned char count;
 } APP_BEEPER;
 
-/*
+
 #define TEMP_STAT_COUNT     120
 
 typedef struct {
@@ -43,7 +43,8 @@ public:
     void stat();
     TempStat() {memset(&this->data, 0, sizeof(this->data));};
 };
-*/
+
+extern TempStat tempStat;
 
 #define POWER_DETECTOR_COUNT_DOWN   1
 
@@ -80,7 +81,6 @@ private:
     Widget * stored_last_ui;
     friend ProgressUI;
 public:
-    //TempStat tempStat;
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
 	void drawTitle();

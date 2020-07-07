@@ -26,6 +26,39 @@ typedef struct {
     unsigned char count;
 } APP_BEEPER;
 
+/*
+#define TEMP_STAT_COUNT     120
+
+typedef struct {
+    unsigned char ext0[TEMP_STAT_COUNT];
+    unsigned char ext1[TEMP_STAT_COUNT];
+    unsigned char bed[TEMP_STAT_COUNT];
+    unsigned char cursor;
+} TEMPSTAT_DATA;
+
+
+class TempStat {
+public:
+    TEMPSTAT_DATA data;
+    void stat();
+    TempStat() {memset(&this->data, 0, sizeof(this->data));};
+};
+*/
+
+#define POWER_DETECTOR_COUNT_DOWN   1
+
+class PowerDetector{
+private:
+    unsigned char active = 0;
+    unsigned char count_down = POWER_DETECTOR_COUNT_DOWN;
+public:
+    void init();
+    void refresh_05();
+    PowerDetector() {};
+};
+
+extern PowerDetector powerDetector;
+
 class ProgressUI : public ActionDialogCallback {
 private:
     Widget * stored_last_ui = 0;
@@ -47,6 +80,7 @@ private:
     Widget * stored_last_ui;
     friend ProgressUI;
 public:
+    //TempStat tempStat;
 	Widget * current_ui = 0;
 	float storedFeedrate = 0;
 	void drawTitle();
@@ -55,6 +89,7 @@ public:
 	void start();
 	void setup();
 	void idle();
+	void before_loop();
 	void loop();
 	void refresh();
 	void refresh_05();

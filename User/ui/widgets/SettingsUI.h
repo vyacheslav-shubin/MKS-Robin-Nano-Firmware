@@ -15,7 +15,7 @@ typedef struct{
 	UI_BUTTON wifi;
 	UI_BUTTON configuration;
     UI_BUTTON about;
-    UI_BUTTON reset;
+    UI_BUTTON pid;
 	UI_BUTTON ret;
 } SETTINGS_UI_CONTROLS;
 

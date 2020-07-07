@@ -201,6 +201,7 @@ int main(void) {
 	    wifi_init();
 
     /* Infinite loop */
+    ui_app.before_loop();
     while (1)
         loop();
 }

@@ -26,6 +26,8 @@ ProgressUI progress_ui;
 static FATFS fat;
 volatile u8 ui_timing_flags;
 
+PowerDetector powerDetector;
+
 #define STANDBY_TIME 	(gCfgItems.standby_time)
 
 typedef enum {
@@ -90,6 +92,10 @@ void Application::setup() {
     make_lang_str();
 }
 
+void Application::before_loop() {
+    powerDetector.init();
+}
+
 void Application::closeCurrentWidget() {
 	if (this->current_ui)
 		this->current_ui->hide();
@@ -101,7 +107,48 @@ void Application::refresh() {
 
 }
 
+void PowerDetector::refresh_05() {
+    if (this->active) {
+        SERIAL_ECHOLN("POWER DET ON");
+        if (MKS_PW_DET_OP==0) {
+            SERIAL_ECHOLN("POWER OFF REQ");
+            if (this->count_down==0) {
+                MKS_PW_OFF_OP = 0;
+                SERIAL_ECHOLN("DO POWER OFF");
+                this->count_down = POWER_DETECTOR_COUNT_DOWN;
+            } else
+                this->count_down--;
+        }
+    } else
+        this->init();
+}
+void PowerDetector::init() {
+    if (gCfgItems.mask_det_Function & MASK_DETECTOR_POWER) {
+        this->active = 0;
+    } else {
+        this->active = (MKS_PW_DET_OP);
+    }
+    this->count_down = POWER_DETECTOR_COUNT_DOWN;
+}
+
+/*
+void TempStat::stat() {
+    shUI::BED_TEMP bt;
+    shUI::getBedTemperature(&bt);
+    this->data.bed[this->data.cursor] = bt.current;
+    shUI::SPRAYER_TEMP sp;
+    shUI::getSprayerTemperature(0, &sp);
+    this->data.ext1[this->data.cursor] = sp.current;
+    shUI::getSprayerTemperature(1, &sp);
+    this->data.ext1[this->data.cursor] = sp.current;
+    if (++this->data.cursor>=TEMP_STAT_COUNT)
+        this->data.cursor = 0;
+}
+*/
+
 void Application::refresh_05() {
+    powerDetector.refresh_05();
+    //this->tempStat.stat();
     if (beeper.count>0)
         BEEPER_OP = 1;
 	if (this->waitPenUp > 1) {

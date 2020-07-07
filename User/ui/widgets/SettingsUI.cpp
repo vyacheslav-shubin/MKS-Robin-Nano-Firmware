@@ -59,8 +59,9 @@ void SettingsUI::on_button(UI_BUTTON hBtn) {
 	}  else if (hBtn==this->ui.about) {
 		this->hide();
 		about_dialog_ui.show(this, DIALOG_ID_ABOUT, this);
-	}  else if (hBtn==this->ui.reset) {
-        Reset_Handler();
+	}  else if (hBtn==this->ui.pid) {
+	    this->hide();
+
 	}
 }
 

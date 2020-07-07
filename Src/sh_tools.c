@@ -2,8 +2,8 @@
 #include "mks_cfg.h"
 #include "fastio_RobinNano.h"
 
-uint8_t is_filament_fail(void) {
-	if (gCfgItems.mask_det_Function==1)
+unsigned char is_filament_fail(void) {
+	if (gCfgItems.mask_det_Function & MASK_DETECTOR_FILAMENT)
 	    return 0;
 	if (gCfgItems.filament_det0_level_flg == MKS_MT_DET1_OP)
 		return 1;

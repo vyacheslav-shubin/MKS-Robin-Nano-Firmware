@@ -63,6 +63,9 @@ void lang_std(void) {
     lang_str.config_ui.print = "Print";
     lang_str.config_ui.travel = "Travel";
     lang_str.config_ui.retract = "Retract";
+    lang_str.config_ui.time_shift = "Time shift (mins)";
+    lang_str.config_ui.power_detector = "Power detector";
+    lang_str.config_ui.filament_detector = "Filament detector";
 
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";

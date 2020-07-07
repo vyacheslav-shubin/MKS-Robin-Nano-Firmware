@@ -138,6 +138,7 @@ User/ui/widgets/FileInfoUI.cpp
 User/ui/widgets/SettingsUI.cpp
 User/ui/widgets/WifiListUI.cpp
 User/ui/widgets/WifiUI.cpp
+User/ui/widgets/PIDSettingsUI.cpp
 User/ui/widgets/config/ConfigurationWidget.cpp
 User/ui/widgets/config/MotorSettingsUI.cpp
 User/ui/widgets/config/MotorDirConfigUI.cpp

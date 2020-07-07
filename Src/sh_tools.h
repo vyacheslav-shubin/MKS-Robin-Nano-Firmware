@@ -9,7 +9,7 @@
 
 
 
-extern uint8_t is_filament_fail(void);
+extern unsigned char is_filament_fail(void);
 
 #ifdef __cplusplus
 }

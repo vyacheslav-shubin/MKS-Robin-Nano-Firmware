@@ -41,6 +41,9 @@ void lang_ru(void) {
     lang_str.config_ui.print = "Печать";
     lang_str.config_ui.travel = "Перенос";
     lang_str.config_ui.retract = "Откат";
+    lang_str.config_ui.time_shift = "Временная зона (мин)";
+    lang_str.config_ui.power_detector = "Контроль напряжения сети";
+    lang_str.config_ui.filament_detector = "Контроль филамента";
 
     lang_str.dialog.refactored_by = "Доработка ПО:\nВячеслав Шубин\nshubin-vv@krista.ru";
 
@@ -124,7 +127,7 @@ void lang_ru(void) {
     lang_str.ui_title_extruders_config = "Конфигурация сопел";
     lang_str.ui_title_wifi_list = "Сети WiFi";
 
-	lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
+    lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
     lang_str.file_info_ui.filament_progress = "Филамент (m): %1.3f / %1.3f %d%%";
 	lang_str.file_info_ui.size = "Размер файла: %d";
     lang_str.file_info_ui.size_progress = "Чтение файла: %d / %d %d%%";

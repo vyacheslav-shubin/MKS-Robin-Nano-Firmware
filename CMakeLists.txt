@@ -192,7 +192,7 @@ add_executable(work
         Inc/pic_manager.h
         Inc/rtc.h
         Inc/sdio.h
-        Inc/sh_tools.h
+		Src/sh_tools.h
         Inc/spi.h
         Inc/stm32f1xx_hal_conf.h
         Inc/stm32f1xx_it.h
@@ -728,7 +728,7 @@ add_executable(work
         User/ui/font.h
         User/ui/ui_tools.cpp
         User/ui/ui_tools.h
-		Src/EspParser.cpp Src/EspParser.h)
+		Src/EspParser.cpp Src/EspParser.h User/ui/widgets/PIDSettingsUI.cpp User/ui/widgets/PIDSettingsUI.h)
 
 add_compile_definitions(USE_HAL_DRIVER)
 add_compile_definitions(STM32F103xE)

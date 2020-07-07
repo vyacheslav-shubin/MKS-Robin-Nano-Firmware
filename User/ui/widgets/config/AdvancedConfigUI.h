@@ -15,6 +15,8 @@ typedef struct {
 	UI_CHECK	simpleMainUI;
 	UI_CHECK	diplayBackLight;
 	UI_INPUT_WITH_DEFAULT timeShift;
+    UI_CHECK	powerDet;
+    UI_CHECK	filamentDet;
     //todo: доделать
     UI_CHECK	wifiScan;
 } ADVANCED_CONFIG_UI_CONTROLS;
@@ -31,7 +33,7 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void createControls();
 public:
-	AdvancedConfigUI() : ConfigurationWidgetWithCalc(ADVANCED_UI) {};
+	AdvancedConfigUI() : ConfigurationWidgetWithCalc(ADVANCED_UI, 2) {};
 };
 
 extern AdvancedConfigUI advanced_config_ui;

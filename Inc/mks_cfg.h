@@ -498,6 +498,9 @@ typedef struct {
     FILAMENT_CHANGE_CONFIG_SET     unload;
 } FILAMENT_CHANGE_CONFIG;
 
+#define MASK_DETECTOR_FILAMENT  (1<<0)
+#define MASK_DETECTOR_POWER     (1<<1)
+
 
 typedef struct {
 	volatile int8_t custom_pic_flag;

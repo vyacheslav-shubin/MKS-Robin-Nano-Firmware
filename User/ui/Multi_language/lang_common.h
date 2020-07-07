@@ -79,6 +79,9 @@ typedef struct {
     const char * print;
     const char * travel;
     const char * retract;
+    const char * time_shift;
+    const char * power_detector;
+    const char * filament_detector;
 } CONFIG_LANG_STR;
 
 typedef struct {

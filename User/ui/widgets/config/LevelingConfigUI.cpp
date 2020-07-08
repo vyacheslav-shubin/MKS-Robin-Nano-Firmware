@@ -151,7 +151,7 @@ void LevelingConfigUI::on_button(UI_BUTTON hBtn) {
                             mksCfg.z_max_endstop_inverting = 0;
                     }
                 }
-                epr_write_data(EPR_MKSTOUCH,&mksCfg.mkstouch,1);
+                epr_write_data(EPR_MKSTOUCH, &mksCfg.mkstouch,1);
                 this->updateCheckButton(ui.probe.enable.button, mksCfg.mkstouch);
                 break;
             } else if (hBtn==this->ui.probe.connector.button) {

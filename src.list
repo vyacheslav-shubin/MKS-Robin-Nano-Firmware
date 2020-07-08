@@ -152,6 +152,7 @@ User/ui/widgets/config/SensorLevelConfigUI.cpp
 User/ui/widgets/config/LevelingConfigUI.cpp
 User/ui/widgets/config/HotBedConfigUI.cpp
 User/ui/widgets/config/NozzleConfigUI.cpp
+User/ui/widgets/config/PowerControlUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp
 User/ui/widgets/dialog/ConfirmDialogUI.cpp
 User/ui/widgets/dialog/AboutDialogUI.cpp
@@ -161,6 +162,7 @@ User/ui/widgets/dialog/CalculatorDialogUI.cpp
 User/ui/widgets/dialog/KeyboardUI.cpp
 User/ui/widgets/dialog/WifiWaitInitDialogUI.cpp
 User/ui/widgets/dialog/ProgressDialogUI.cpp
+User/ui/widgets/dialog/PowerOffDialogUI.cpp
 User/ui/widgets/MeshLevelingUI.cpp
 User/ui/widgets/backui.cpp
 

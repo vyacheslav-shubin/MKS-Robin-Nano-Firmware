@@ -5,6 +5,7 @@
  *      Author: shubin
  */
 
+#include "sh_tools.h"
 #include "Application.h"
 #include "draw_ui.h"
 #include "ui_tools.h"
@@ -20,6 +21,8 @@
 #include "mks_touch_screen.h"
 #include "dialog/ProgressDialogUI.h"
 #include "integration.h"
+#include "dialog/PowerOffDialogUI.h"
+
 Application ui_app;
 ProgressUI progress_ui;
 
@@ -112,7 +115,11 @@ void PowerDetector::refresh_05() {
     if (this->active) {
         if (MKS_PW_DET_OP==0) {
             if (this->count_down==0) {
-                MKS_PW_OFF_OP = 0;
+                if (gCfgItems.power_control_flags & POWER_CONTROL_HARDWARE_AS_SOFTWARE) {
+                    this->active = 0;
+                    ui_app.power_off_dialog(HW_SUICIDE_WAIT);
+                } else
+                    shUI::powerOffForce();
                 this->count_down = POWER_DETECTOR_COUNT_DOWN;
             } else
                 this->count_down--;
@@ -137,11 +144,13 @@ void TempStat::stat() {
     this->data.bed[this->data.cursor] = bt.current;
     shUI::SPRAYER_TEMP sp;
     shUI::getSprayerTemperature(0, &sp);
-    this->data.ext1[this->data.cursor] = sp.current;
+    this->data.ext0[this->data.cursor] = sp.current;
     shUI::getSprayerTemperature(1, &sp);
     this->data.ext1[this->data.cursor] = sp.current;
-    if (++this->data.cursor>=TEMP_STAT_COUNT)
+    if (++this->data.cursor>=TEMP_STAT_COUNT) {
         this->data.cursor = 0;
+        this->data.loop = 1;
+    }
 }
 
 void Application::refresh_05() {
@@ -190,6 +199,7 @@ static void _calc_rate(void) {
             ui_print_process.rate = 99;
     }
 }
+
 
 char Application::touch(u8 action) {
 	if (gCfgItems.standby_mode) {
@@ -352,7 +362,7 @@ void Application::startPrintFile(unsigned char savedPreview) {
 	if(gCfgItems.breakpoint_reprint_flg == 1)
 		gCfgItems.breakpoint_z_pos = current_position[Z_AXIS];
 
-	ui_print_process.suicide_enabled = gCfgItems.print_finish_close_machine_flg;
+	ui_print_process.suicide_enabled = gCfgItems.power_control_flags & POWER_CONTROL_SUNCIDE;
 	if (savedPreview==0)
 		this->dropPreview();
 
@@ -440,6 +450,15 @@ void Application::drawLogo() {
     delay(2000);
 }
 
+void Application::power_off_dialog(unsigned short duration) {
+    this->screenOffCountDown = STANDBY_TIME;
+    lcd_light_on();
+    if (this->current_ui)
+        this->current_ui->hide();
+    power_off_dialog_ui.show(duration);
+}
+
+
 void ProgressUI::on_action_dialog(u8 action, u8 dialog_id) {
     ui_app.showMainWidget();
 }
@@ -488,3 +507,4 @@ void ProgressUI::done() {
         ui_app.showMainWidget();
     this->stored_last_ui = 0;
 }
+

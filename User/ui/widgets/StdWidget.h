@@ -19,31 +19,8 @@
 #define ui_std_ext2_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_state_extruder2, 0)
 
 
-typedef struct {
-	UI_BUTTON button;
-	UI_TEXT	label;
-} STATE_BUTTON;
-
-typedef struct {
-	UI_BUTTON 		button;
-	unsigned char	index;
-} UI_SELECTOR;
-
-typedef struct {
-	float size;
-	const char * title;
-	const char * picture;
-} UI_STEP_INFO;
-
-typedef struct {
-	const char * picture;
-	const char ** title;
-} UI_BUTTON_INFO;
-
 class StdWidget : public Widget{
 protected:
-	void createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title);
-	void updateStateButton(STATE_BUTTON * btn, const char * img, const char * title);
 	UI_BUTTON createButton(int x, int y, const char * picture, const char * title);
 	UI_BUTTON createButtonAt(int phx, int phy, const char * picture, const char * title);
 	UI_BUTTON createButtonRet();

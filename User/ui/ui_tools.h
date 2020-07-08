@@ -186,7 +186,8 @@ typedef struct {
 }
 UPLOAD_INFO;
 
-#define 	SUICIDE_WAIT 	60
+#define 	SUICIDE_WAIT 	    60
+#define 	HW_SUICIDE_WAIT 	3
 
 #define PREVIEW_CHECKED_BIT			0
 #define PREVIEW_EXISTS_BIT			1
@@ -284,9 +285,9 @@ extern void ui_update_state_button(BUTTON_Handle btn, const char *pFile);
 extern BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const char* text);
 
 
-extern TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, char *text);
-extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
-extern TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text);
+extern TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, const char *text);
+extern TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, const char *text);
+extern TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, const char *text);
 extern void ui_set_text_value(TEXT_Handle handle, char* val);
 
 extern void ui_update_std_button(BUTTON_Handle handle, const char* file, const char* title);

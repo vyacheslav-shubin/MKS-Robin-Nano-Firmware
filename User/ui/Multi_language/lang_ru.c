@@ -1,7 +1,9 @@
 #include "lang_common.h"
 
 void lang_ru(void) {
-	lang_str.config_ui.power_off_after_print = "Выключить по окончании печати";
+	lang_str.config_ui.power_off_after_print = "Выключать по окончании печати";
+    lang_str.config_ui.power_off_temperature_wait = "Дожидаться охлаждения перед выключением";
+    lang_str.config_ui.power_off_hardware_button_as_sofware = "Обработка аппаратной кнопки как программной";
 	lang_str.config_ui.simple_main_ui = "Простое меню";
 	lang_str.config_ui.display_backlight_off = "Выключать подсветку дисплея";
 	lang_str.config_ui.axes_inversion = "Инверсия осей";
@@ -42,7 +44,8 @@ void lang_ru(void) {
     lang_str.config_ui.travel = "Перенос";
     lang_str.config_ui.retract = "Откат";
     lang_str.config_ui.time_shift = "Временная зона (мин)";
-    lang_str.config_ui.power_detector = "Контроль напряжения сети";
+    lang_str.config_ui.power_control = "Управление питанием";
+    lang_str.config_ui.power_detector = "Управление питанием. Обратная связь";
     lang_str.config_ui.filament_detector = "Контроль филамента";
 
     lang_str.dialog.refactored_by = "Доработка ПО:\nВячеслав Шубин\nshubin-vv@krista.ru";
@@ -126,6 +129,8 @@ void lang_ru(void) {
     lang_str.ui_title_hotbed_config = "Настройка нагревателя стола";
     lang_str.ui_title_extruders_config = "Конфигурация сопел";
     lang_str.ui_title_wifi_list = "Сети WiFi";
+    lang_str.ui_title_config_advanced = "Дополнительно";
+    lang_str.ui_title_power_contol = "Управление питанием";
 
     lang_str.file_info_ui.filament = "Филамент (m): %1.3f m";
     lang_str.file_info_ui.filament_progress = "Филамент (m): %1.3f / %1.3f %d%%";
@@ -143,6 +148,8 @@ void lang_ru(void) {
 	lang_str.dialog.confirm_print_with_suicide = "Автоматическое выключение.\nПрервать и повторить печать?";
 	lang_str.dialog.error_filament_end_detected = "Обнаружен обрыв филамента";
     lang_str.dialog.confirm_filament_load = "Загрузить филамент?";
+    lang_str.dialog.power_off = "Выключение питания";
+    lang_str.dialog.power_off_waiting_hotend = "Ожидание охлаждения";
 
     lang_str.wf.state = "Состояние";
     lang_str.wf.connected = "Подключено";

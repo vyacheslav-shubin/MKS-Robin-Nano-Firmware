@@ -9,12 +9,16 @@
 
 typedef struct {
     UI_BUTTON back;
+    UI_BUTTON run;
 } PID_SETTINGS_UI_CONTROLS;
 
 class PIDSettingsUI : public StdWidget {
 private:
     PID_SETTINGS_UI_CONTROLS ui;
     unsigned short point;
+    unsigned char history_done;
+    void draw(unsigned short bed, unsigned short ext0, unsigned short ext1);
+    void drawHistory();
 protected:
     virtual void createControls();
     virtual void on_button(UI_BUTTON hBtn);

@@ -26,14 +26,38 @@ typedef enum {
     WIDGET_UI, WIDGET_ROOT_UI, WIDGET_DIALOG, WIDGET_CONFIG
 } WIDGET_TYPE;
 
+typedef struct {
+    UI_BUTTON 		button;
+    unsigned char	index;
+} UI_SELECTOR;
+
+typedef struct {
+    float size;
+    const char * title;
+    const char * picture;
+} UI_STEP_INFO;
+
+typedef struct {
+    const char * picture;
+    const char ** title;
+} UI_BUTTON_INFO;
+
+typedef struct {
+    UI_BUTTON button;
+    UI_TEXT	label;
+} STATE_BUTTON;
+
+extern void ui_update_heatpreset_button(UI_BUTTON button, char index);
+extern void ui_update_bed_state_button(STATE_BUTTON * button);
+extern void ui_update_ext_state_button(STATE_BUTTON * button, char index);
+
+
 class ActionDialogCallback {
 protected:
 public:
     virtual void on_action_dialog(u8 action, u8 dialog_id) = 0;
     virtual ~ActionDialogCallback() {};
 };
-
-
 
 class Widget {
 protected:
@@ -55,6 +79,8 @@ protected:
 	UI_TEXT createText(int x, int y, int w, int h, const char * value);
 	UI_TEXT createTextF(int x, int y, int w, int h, int flags, const char *text);
 	void setText(UI_TEXT hText, const char * text);
+    void createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title);
+    void updateStateButton(STATE_BUTTON * btn, const char * img, const char * title);
 public:
 	Widget(DISP_STATE id) {this->id=id;};
 	bool is_active();

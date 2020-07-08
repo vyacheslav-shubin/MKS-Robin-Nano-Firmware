@@ -36,7 +36,9 @@ typedef struct {
 extern LANG_DEF lang_defs[LANG_COUNT];
 
 typedef struct {
-	const char * power_off_after_print;
+    const char * power_off_after_print;
+    const char * power_off_temperature_wait;
+    const char * power_off_hardware_button_as_sofware;
 	const char * simple_main_ui;
 	const char * display_backlight_off;
 	const char * axes_inversion;
@@ -80,6 +82,7 @@ typedef struct {
     const char * travel;
     const char * retract;
     const char * time_shift;
+    const char * power_control;
     const char * power_detector;
     const char * filament_detector;
 } CONFIG_LANG_STR;
@@ -107,6 +110,8 @@ typedef struct {
 	const char * error_filament_end_detected;
     const char * refactored_by;
     const char * confirm_filament_load;
+    const char * power_off;
+    const char * power_off_waiting_hotend;
 } DIALOG_LANG_STR;
 
 typedef struct {
@@ -219,6 +224,8 @@ typedef struct {
     const char * ui_title_motor_settings;
     const char * ui_title_machine_type_settings;
     const char * ui_title_extruders_config;
+    const char * ui_title_config_advanced;
+    const char * ui_title_power_contol;
 
 	CONFIG_LANG_STR 	config_ui;
 	FILE_INFO_LANG_STR	file_info_ui;

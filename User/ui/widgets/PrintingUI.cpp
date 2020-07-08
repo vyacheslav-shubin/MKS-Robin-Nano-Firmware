@@ -63,14 +63,10 @@ void PrintingUI::updateProgress() {
 void PrintingUI::doFinishPrint() {
 	stop_print_time();
 	this->hide();
-	confirm_dialog_ui.show(
-			ui_print_process.suicide_enabled ?
-					lang_str.dialog.confirm_print_with_suicide:
-					lang_str.dialog.confirm_print_again,
-					this,
-					ui_print_process.suicide_enabled ? SUICIDE_WAIT : 0,
-					1, this
-		);
+	if (ui_print_process.suicide_enabled)
+        ui_app.power_off_dialog(SUICIDE_WAIT);
+	else
+	    confirm_dialog_ui.show(lang_str.dialog.confirm_print_again, this, DID_PRINT_FINISHED);
 }
 
 

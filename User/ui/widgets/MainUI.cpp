@@ -18,6 +18,7 @@
 #include "integration.h"
 #include "dialog/ConfirmDialogUI.h"
 #include "Application.h"
+#include "dialog/PowerOffDialogUI.h"
 
 MainUI main_ui;
 
@@ -76,9 +77,12 @@ void MainUI::on_button(UI_BUTTON hBtn) {
         ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
 	} else if (hBtn == this->ui.power) {
         this->hide();
-        strcpy(ui_buf1_100, lang_str.power_off);
-        strcat(ui_buf1_100, "?");
-        confirm_dialog_ui.show(ui_buf1_100, this, 30, 0, this);
+        ui_app.power_off_dialog(SUICIDE_WAIT);
+	    //this->hide();
+        //strcpy(ui_buf1_100, lang_str.power_off);
+        //strcat(ui_buf1_100, "?");
+        //confirm_dialog_ui.show(ui_buf1_100, this, 30, 0, this);
+        //power_off_dialog_ui.show();
 	}
 }
 

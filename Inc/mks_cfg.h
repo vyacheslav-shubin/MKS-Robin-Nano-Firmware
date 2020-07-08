@@ -498,8 +498,8 @@ typedef struct {
     FILAMENT_CHANGE_CONFIG_SET     unload;
 } FILAMENT_CHANGE_CONFIG;
 
-#define MASK_DETECTOR_FILAMENT  (1<<0)
-#define MASK_DETECTOR_POWER     (1<<1)
+#define MASK_DETECTOR_FILAMENT      (1<<0)
+#define MASK_DETECTOR_POWER         (1<<1)
 
 
 typedef struct {
@@ -591,7 +591,7 @@ typedef struct {
 	
 		volatile uint8_t extern_chinese_flg;//�ⲿ�ֿ⡣
 	
-		volatile uint8_t print_finish_close_machine_flg;
+		volatile uint8_t power_control_flags;
 	
 		//volatile uint32_t filamentchange_speed;//�����ٶ�
 		//volatile uint8_t filamentchange_step;//���ϲ��� 

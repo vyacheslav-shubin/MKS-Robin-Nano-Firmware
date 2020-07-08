@@ -21,7 +21,9 @@ void make_lang_str(void) {
 }
 
 void lang_std(void) {
-	lang_str.config_ui.power_off_after_print = "Auto Shutdown after print";
+	lang_str.config_ui.power_off_after_print = "Auto shutdown after print";
+    lang_str.config_ui.power_off_temperature_wait = "Wait for cooling before power off";
+    lang_str.config_ui.power_off_hardware_button_as_sofware = "Hardware power button as software";
 	lang_str.config_ui.simple_main_ui = "Simple main UI";
 	lang_str.config_ui.display_backlight_off = "Standby display";
 	lang_str.config_ui.axes_inversion = "Axes inversion";
@@ -64,9 +66,9 @@ void lang_std(void) {
     lang_str.config_ui.travel = "Travel";
     lang_str.config_ui.retract = "Retract";
     lang_str.config_ui.time_shift = "Time shift (mins)";
-    lang_str.config_ui.power_detector = "Power detector";
+    lang_str.config_ui.power_detector = "Power control loopback";
     lang_str.config_ui.filament_detector = "Filament detector";
-
+    lang_str.config_ui.power_control = "Power control";
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
 
@@ -151,6 +153,8 @@ void lang_std(void) {
     lang_str.ui_title_hotbed_config = "Hotbed configuration";
     lang_str.ui_title_extruders_config = "Nozzles config";
     lang_str.ui_title_wifi_list = "WiFi networks";
+    lang_str.ui_title_config_advanced = "Advanced settings";
+    lang_str.ui_title_power_contol = "Power control";
 
     lang_str.file_info_ui.filament = "Filament (m): %1.3f";
     lang_str.file_info_ui.filament_progress = "Filament (m): %1.3f / %1.3f %d%%";
@@ -171,6 +175,8 @@ void lang_std(void) {
 	lang_str.dialog.confirm_print_with_suicide = "Auto power off.\nBreak and print again?";
 	lang_str.dialog.error_filament_end_detected = "Filament end detected";
     lang_str.dialog.confirm_filament_load = "Load filament?";
+    lang_str.dialog.power_off = "Power off";
+    lang_str.dialog.power_off_waiting_hotend = "Waiting for cooling hotend";
 
     lang_str.wf.state = "State";
     lang_str.wf.connected = "Connected";

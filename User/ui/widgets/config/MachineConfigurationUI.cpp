@@ -15,6 +15,7 @@
 #include "MotorSettingsUI.h"
 #include "LanguageConfigUI.h"
 #include "dialog/KeyboardUI.h"
+#include "PowerControlUI.h"
 
 MachineConfigurationUI machine_configuration_ui;
 
@@ -33,12 +34,13 @@ void MachineConfigurationUI::createControls() {
             this->createArrowPair(1, 0, &this->ui.leveling_settings, lang_str.config_ui.manual_leveling_settings);
             this->createArrowPair(1, 1, &this->ui.nozzle_settings, lang_str.config_ui.nozzle_settings);
             this->createArrowPair(1, 2, &this->ui.hotbed_settings, lang_str.config_ui.hotbed_settings);
-            this->createArrowPair(1, 3, &this->ui.advanced_settings, lang_str.advanced);
+            this->createArrowPair(1, 3, &this->ui.power_control, lang_str.config_ui.power_control);
             break;
         }
         case 1: {
             this->dual_columns = 1;
-            this->createArrowPair(0, 0, &this->ui.language, lang_str.language);
+            this->createArrowPair(0, 0, &this->ui.advanced_settings, lang_str.advanced);
+            this->createArrowPair(0, 1, &this->ui.language, lang_str.language);
             //this->createArrowPair(0, 2, &this->ui.test1, "Leveling");
             break;
         }
@@ -83,6 +85,9 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     } else if (ui_is_double_button(hBtn, this->ui.language)) {
         this->hide();
         language_config_ui.show(this);
+    } else if (ui_is_double_button(hBtn, this->ui.power_control)) {
+        this->hide();
+        power_control_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.test1)) {
     } else if (ui_is_double_button(hBtn, this->ui.test2)) {
     } else {

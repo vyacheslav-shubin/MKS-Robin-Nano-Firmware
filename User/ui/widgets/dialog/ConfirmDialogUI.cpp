@@ -40,7 +40,6 @@ void ConfirmDialogUI::createControls() {
 };
 
 void ConfirmDialogUI::refresh_1s() {
-
 	if (this->ui.progress && this->timeout) {
 		PROGBAR_SetValue(this->ui.progress, (this->max_timeout - this->timeout) * 100 / this->max_timeout);
 		if (--this->timeout==0)

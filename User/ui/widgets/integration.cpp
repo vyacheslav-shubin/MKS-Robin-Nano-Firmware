@@ -5,6 +5,7 @@
  *      Author: shubin
  */
 
+#include <ili9320.h>
 #include "ui_tools.h"
 #include "planner.h"
 #include "mks_reprint.h"
@@ -79,8 +80,15 @@ namespace shUI {
 
 
     void powerOff() {
+        SERIAL_ECHOLN("POWER OFF");
         GUI_Clear();
         enqueue_and_echo_commands_P(PSTR("M81"));
+    }
+
+    void powerOffForce() {
+        SERIAL_ECHOLN("FORCE POWER OFF");
+        lcd_light_off();
+        MKS_PW_OFF_OP = 0;
     }
 
     void babystep(char * axe, float size) {

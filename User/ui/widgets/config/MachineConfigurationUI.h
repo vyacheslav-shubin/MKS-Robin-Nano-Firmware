@@ -17,6 +17,7 @@ typedef struct {
     UI_ARROW nozzle_settings;
     UI_ARROW hotbed_settings;
     UI_ARROW motor_settings;
+    UI_ARROW power_control;
     //page 2
     UI_ARROW advanced_settings;
 

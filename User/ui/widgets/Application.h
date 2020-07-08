@@ -34,6 +34,7 @@ typedef struct {
     unsigned char ext1[TEMP_STAT_COUNT];
     unsigned char bed[TEMP_STAT_COUNT];
     unsigned char cursor;
+    unsigned char loop;
 } TEMPSTAT_DATA;
 
 
@@ -95,7 +96,7 @@ public:
 	void refresh_05();
 	void refresh_1s();
 	void systick();
-	char touch(u8 action);
+    char touch(u8 action);
 	void defaultUI();
 	void dropPreview();
     void startPrintFile(unsigned char savedPreview=0);
@@ -111,9 +112,10 @@ public:
 
     void on_action_dialog(u8 action, u8 dialog_id);
 
+    void power_off_dialog(unsigned short duration);
+
 	Application() {};
 	virtual ~Application() {};
-
 };
 
 extern Application ui_app;

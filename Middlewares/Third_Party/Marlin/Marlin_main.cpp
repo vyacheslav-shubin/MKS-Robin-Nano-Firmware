@@ -15943,18 +15943,9 @@ void setup() {
       mixing_factor[i] = mixing_virtual_tool_mix[0][i];
   #endif
 
-  //#if ENABLED(BLTOUCH)
-    //TODO: насильное включение ????
-  mksCfg.mkstouch=1;
-
-  if(MKSTOUCH == 1)
-  {
-    // Make sure any BLTouch error condition is cleared
     bltouch_command(BLTOUCH_RESET);
     set_bltouch_deployed(true);
     set_bltouch_deployed(false);
-  }
-  //#endif
 
   #if ENABLED(I2C_POSITION_ENCODERS)
     I2CPEM.init();

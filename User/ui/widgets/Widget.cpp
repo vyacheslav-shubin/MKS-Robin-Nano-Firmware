@@ -13,6 +13,32 @@
 #include "integration.h"
 #include "Application.h"
 
+void ui_update_bed_state_button(STATE_BUTTON * button) {
+    shUI::BED_TEMP bt;
+    shUI::getBedTemperature(&bt);
+    sprintf(ui_buf1_80, "%d/%d°", bt.current,  bt.target);
+    ui_set_text_value(button->label, ui_buf1_80);
+}
+
+void ui_update_ext_state_button(STATE_BUTTON * button, char index) {
+    shUI::SPRAYER_TEMP st;
+    shUI::getSprayerTemperature(index, &st);
+    sprintf(ui_buf1_80, "%d/%d°", (int)st.current,  (int)st.target);
+    ui_set_text_value(button->label, ui_buf1_80);
+}
+
+
+void Widget::createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title) {
+    btn->button = ui_create_state_button(x, y,this->hWnd, picture);
+    btn->label = ui_create_std_text(x + STATE_PIC_X_PIXEL, y, 80, STATE_PIC_Y_PIXEL, this->hWnd, title);
+}
+
+void Widget::updateStateButton(STATE_BUTTON * btn, const char * img, const char * title) {
+    if (img!=0)
+        ui_update_state_button(btn->button, img);
+    ui_set_text_value(btn->label, title);
+}
+
 
 void Widget::buttonPreset(UI_BUTTON btn) {
 	BUTTON_SetBkColor(btn, BUTTON_CI_PRESSED, gCfgItems.btn_color);

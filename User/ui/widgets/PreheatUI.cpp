@@ -148,21 +148,6 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 
 }
 
-void ui_update_bed_state_button(STATE_BUTTON * button) {
-    shUI::BED_TEMP bt;
-    shUI::getBedTemperature(&bt);
-    sprintf(ui_buf1_80, "%d/%d°", bt.current,  bt.target);
-    ui_set_text_value(button->label, ui_buf1_80);
-}
-
-void ui_update_ext_state_button(STATE_BUTTON * button, char index) {
-    shUI::SPRAYER_TEMP st;
-    shUI::getSprayerTemperature(index, &st);
-    sprintf(ui_buf1_80, "%d/%d°", (int)st.current,  (int)st.target);
-    ui_set_text_value(button->label, ui_buf1_80);
-}
-
-
 void PreheatUI::refresh_1s() {
     ui_update_bed_state_button(&this->ui.bed);
     ui_update_ext_state_button(&this->ui.ext1, 0);

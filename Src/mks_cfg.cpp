@@ -877,7 +877,7 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue_leveling(">cfg_point4:", (int32_t *)&gCfgItems.leveling_points[3].x, (int32_t *)&gCfgItems.leveling_points[3].y, EPR_LEVELING_POINT4_X, EPR_LEVELING_POINT4_Y);
 	eprBurnValue_leveling(">cfg_point5:", (int32_t *)&gCfgItems.leveling_points[4].x, (int32_t *)&gCfgItems.leveling_points[4].y, EPR_LEVELING_POINT5_X, EPR_LEVELING_POINT5_Y);
 
-	eprBurnValue(">cfg_print_over_auto_close", (uint8_t *)&gCfgItems.print_finish_close_machine_flg,EPR_AUTO_CLOSE_MACHINE);
+	eprBurnValue(">cfg_print_over_auto_close", (uint8_t *)&gCfgItems.power_control_flags, EPR_AUTO_CLOSE_MACHINE);
 
 
     eprBurnValue(">Z2_STEPPER_DRIVERS", &mksCfg.z2_enable, EPR_Z2_ENABLE);

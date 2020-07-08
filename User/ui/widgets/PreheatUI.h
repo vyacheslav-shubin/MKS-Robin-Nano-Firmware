@@ -35,10 +35,6 @@ typedef struct{
 
 } PREHEAT_UI_CONTROLS;
 
-extern void ui_update_heatpreset_button(UI_BUTTON button, char index);
-extern void ui_update_bed_state_button(STATE_BUTTON * button);
-extern void ui_update_ext_state_button(STATE_BUTTON * button, char index);
-
 
 class PreheatUI: public StdWidget {
 private:

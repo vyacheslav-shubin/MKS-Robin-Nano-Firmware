@@ -163,7 +163,7 @@ BUTTON_Handle ui_create_dialog_button(int x, int y, WM_HWIN hWinParent, const ch
 	return btn;
 }
 
-TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, char *text) {
+TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent, int flags, const char *text) {
 	TEXT_Handle res = TEXT_CreateEx(x, y, w, h, hWinParent, WM_CF_SHOW, flags,  GUI_ID_TEXT0, 0);
 	TEXT_SetBkColor(res,  gCfgItems.background_color);
 	TEXT_SetTextColor(res, gCfgItems.title_color);
@@ -171,11 +171,11 @@ TEXT_Handle ui_create_std_text_f(int x, int y, int w, int h, WM_HWIN hWinParent,
 	return res;
 }
 
-TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text) {
+TEXT_Handle ui_create_dialog_text(int x, int y, int w, int h, WM_HWIN hWinParent, const char *text) {
 	return ui_create_std_text_f(x, y, w, h, hWinParent, TEXT_CF_HCENTER|TEXT_CF_VCENTER, text);
 }
 
-TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, char *text) {
+TEXT_Handle ui_create_std_text(int x, int y, int w, int h, WM_HWIN hWinParent, const char *text) {
 	return ui_create_std_text_f(x, y, w, h, hWinParent, TEXT_CF_LEFT|TEXT_CF_VCENTER, text);
 }
 

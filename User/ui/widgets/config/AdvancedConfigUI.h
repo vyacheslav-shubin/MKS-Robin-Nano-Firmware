@@ -11,11 +11,9 @@
 #include "ConfigurationWidget.h"
 
 typedef struct {
-	UI_CHECK	autoPowerOff;
 	UI_CHECK	simpleMainUI;
 	UI_CHECK	diplayBackLight;
 	UI_INPUT_WITH_DEFAULT timeShift;
-    UI_CHECK	powerDet;
     UI_CHECK	filamentDet;
     //todo: доделать
     UI_CHECK	wifiScan;
@@ -33,7 +31,8 @@ protected:
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void createControls();
 public:
-	AdvancedConfigUI() : ConfigurationWidgetWithCalc(ADVANCED_UI, 2) {};
+    virtual const char * getTitle() {return lang_str.ui_title_config_advanced;};
+	AdvancedConfigUI() : ConfigurationWidgetWithCalc(ADVANCED_UI, 1) {};
 };
 
 extern AdvancedConfigUI advanced_config_ui;

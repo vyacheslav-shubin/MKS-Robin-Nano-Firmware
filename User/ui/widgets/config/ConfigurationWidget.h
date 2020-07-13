@@ -15,13 +15,6 @@
 
 #define ui_invert_u8_flag(S) S=S==0 ? 1 : 0
 
-typedef struct {
-	UI_BUTTON text;
-	UI_BUTTON button;
-} UI_DOUBLE_BUTTON;
-
-typedef UI_DOUBLE_BUTTON UI_CHECK;
-typedef UI_DOUBLE_BUTTON UI_ARROW;
 
 typedef struct {
 	UI_BUTTON next;
@@ -78,9 +71,7 @@ protected:
     unsigned char page;
 	unsigned char dual_columns = 0;
 	UI_NAVIGATOR navigator;
-	UI_BUTTON createCheckButton(int x, int y, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
 	UI_TEXT createLabel(int col, int row, const char* title);
-	void updateCheckButton(UI_BUTTON btn, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
     void createCheckPair(int col, int row, UI_CHECK * pair, const char* title, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
     void createRadio(int col, int row, UI_RADIO * radio, const char* title, unsigned char state);
     void updateRadio(UI_BUTTON radio, unsigned char state);

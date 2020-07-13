@@ -63,15 +63,22 @@ void FileInfoUI::createControls() {
 	this->ui.tools = this->create96x80Button(_col(1) + 70, _y, img_print_tools);
 	this->ui.del = this->create96x80Button(_col(0), _y, img_file_delete);
 
-#define _row_size 25
+#define _row_size 22
 #define _row(idx) _row_size * idx
-	this->ui.file_size = this->createText(240, _row(0), 240, _row_size, 0);
-	this->ui.time = this->createText(240, _row(1), 240, _row_size, 0);
-	this->ui.layers = this->createText(240, _row(2), 240, _row_size, 0);
-	this->ui.filament = this->createText(240, _row(3), 240, _row_size, 0);
-	this->ui.mmx = this->createText(240, _row(4), 240, _row_size, 0);
-	this->ui.mmy = this->createText(240, _row(5), 240, _row_size, 0);
-	this->ui.mmz = this->createText(240, _row(6), 240, _row_size, 0);
+#define _text_x 220
+
+	this->ui.file_size = this->createText(_text_x, _row(0), 240, _row_size, 0);
+	this->ui.time = this->createText(_text_x, _row(1), 240, _row_size, 0);
+	this->ui.layers = this->createText(_text_x, _row(2), 240, _row_size, 0);
+	this->ui.filament = this->createText(_text_x, _row(3), 240, _row_size, 0);
+	this->ui.mmx = this->createText(_text_x, _row(4), 240, _row_size, 0);
+	this->ui.mmy = this->createText(_text_x, _row(5), 240, _row_size, 0);
+	this->ui.mmz = this->createText(_text_x, _row(6), 240, _row_size, 0);
+
+    this->ui.continuePrint.text= this->createText(_text_x + 100, _row(7) + 16, 120, _row_size, lang_str.continue_print);
+    this->ui.continuePrint.button = this->createCheckButton(_text_x, _row(7) + 10, this->ui.contine_print);
+    UI_CHECK continuePrint;
+
 	this->update();
 }
 
@@ -92,7 +99,15 @@ void FileInfoUI::on_action_dialog(u8 action, u8 dialog_id) {
 
 void FileInfoUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.run) {
-		ui_app.startPrintFile(1);
+	    if (this->ui.contine_print) {
+            gCfgItems.breakpoint_reprint_flg = 1;
+            gCfgItems.breakpoint_flg = 1;
+	    } else {
+            gCfgItems.breakpoint_reprint_flg = 0;
+            gCfgItems.breakpoint_flg = 0;
+	    }
+
+        ui_app.startPrintFile(1);
 	} if (hBtn==this->ui.del) {
 		this->hide();
 		sprintf(
@@ -107,5 +122,8 @@ void FileInfoUI::on_button(UI_BUTTON hBtn) {
 	}  if (hBtn==this->ui.tools) {
 		this->hide();
 		printing_tools_ui.show(this);
+	} else if (hBtn==this->ui.continuePrint.button) {
+        this->ui.contine_print = !this->ui.contine_print;
+        this->updateCheckButton(ui.continuePrint.button, this->ui.contine_print);
 	}
 }

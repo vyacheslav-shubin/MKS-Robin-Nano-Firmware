@@ -16,7 +16,7 @@ typedef struct {
 	UI_BUTTON 	home;
 	UI_BUTTON 	leveling;
 	UI_BUTTON 	filament;
-	UI_BUTTON 	continuePrint;
+	UI_BUTTON 	fan;
 	UI_BUTTON 	more;
 	UI_BUTTON 	files;
 	UI_BUTTON 	ret;

@@ -25,6 +25,13 @@ void widget_callback(WM_MESSAGE * pMsg);
 typedef enum {
     WIDGET_UI, WIDGET_ROOT_UI, WIDGET_DIALOG, WIDGET_CONFIG
 } WIDGET_TYPE;
+typedef struct {
+    UI_BUTTON text;
+    UI_BUTTON button;
+} UI_DOUBLE_BUTTON;
+
+typedef UI_DOUBLE_BUTTON UI_CHECK;
+typedef UI_DOUBLE_BUTTON UI_ARROW;
 
 typedef struct {
     UI_BUTTON 		button;
@@ -81,6 +88,8 @@ protected:
 	void setText(UI_TEXT hText, const char * text);
     void createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title);
     void updateStateButton(STATE_BUTTON * btn, const char * img, const char * title);
+    UI_BUTTON createCheckButton(int x, int y, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
+    void updateCheckButton(UI_BUTTON btn, unsigned char state, BOOLEAN_LANG * lang = &lang_str.yes_no);
 public:
 	Widget(DISP_STATE id) {this->id=id;};
 	bool is_active();

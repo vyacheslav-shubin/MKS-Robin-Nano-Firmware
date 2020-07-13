@@ -27,6 +27,23 @@ void ui_update_ext_state_button(STATE_BUTTON * button, char index) {
     ui_set_text_value(button->label, ui_buf1_80);
 }
 
+UI_BUTTON Widget::createCheckButton(int x, int y, unsigned char state, BOOLEAN_LANG * lang) {
+    BUTTON_Handle btn = BUTTON_CreateEx(x, y, 90, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    this->buttonPreset(btn);
+    BUTTON_SetTextAlign(btn, GUI_TA_HCENTER | GUI_TA_VCENTER);
+    this->updateCheckButton(btn, state, lang);
+    return btn;
+}
+
+
+void Widget::updateCheckButton(UI_BUTTON btn, unsigned char state, BOOLEAN_LANG * lang) {
+    BUTTON_SetBmpFileName(btn, state ? img_check_on : img_check_off, 1);
+    BUTTON_SetBitmapEx(btn,0,&bmp_struct90X30, 0, 5);
+    if (lang==0)
+        lang = &lang_str.yes_no;
+    BUTTON_SetText(btn, state ? lang->tr : lang->fl);
+}
+
 
 void Widget::createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title) {
     btn->button = ui_create_state_button(x, y,this->hWnd, picture);

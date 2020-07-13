@@ -23,6 +23,8 @@ typedef struct{
 	UI_TEXT mmx;
 	UI_TEXT mmy;
     UI_TEXT mmz;
+    UI_CHECK continuePrint;
+    unsigned char contine_print;
 	char preview_done;
 	unsigned char info_updated;
 } FILE_INFO_UI_CONTROLS;

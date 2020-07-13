@@ -15,7 +15,7 @@
 #include "ConfirmDialogUI.h"
 #include "integration.h"
 #include "ui_tools.h"
-
+#include "FanUI.h"
 ToolsUI tools_ui;
 
 void ToolsUI::createControls() {
@@ -25,7 +25,7 @@ void ToolsUI::createControls() {
 	this->ui.move = this->createButtonAt(2, 0, img_move, lang_str.move);
 	this->ui.home = this->createButtonAt(3, 0, img_home_all, lang_str.home);
 	this->ui.leveling = this->createButtonAt(0, 1, img_leveling, lang_str.leveling);
-	this->ui.continuePrint = this->createButtonAt(1, 1, img_continue_print, lang_str.continue_print);
+	this->ui.fan = this->createButtonAt(1, 1, img_fan, lang_str.fan);
 
 	if (gCfgItems.MoreItem_pic_cnt)
 		this->ui.more = this->createButtonAt(2, 1, img_more, lang_str.more);
@@ -54,11 +54,9 @@ void ToolsUI::on_button(UI_BUTTON hBtn) {
 		more_ui.show(this);
 	} else  if (hBtn==this->ui.ret) {
 		this->action_back();
-	} else if (hBtn==this->ui.continuePrint) {
+	} else if (hBtn==this->ui.fan) {
 		this->hide();
-		gCfgItems.breakpoint_reprint_flg = 1;
-        gCfgItems.breakpoint_flg=1;
-		file_browser_ui.show(this);
+		fan_ui.show();
 	} else if (hBtn==this->ui.files) {
 		this->hide();
 		file_browser_ui.show();

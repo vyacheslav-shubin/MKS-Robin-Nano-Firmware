@@ -836,10 +836,13 @@ static void net_msg_handle(uint8_t * msg, uint16_t msgLen) {
     ipPara.ip[3] = msg[3];
 	if(msg[6] == 0x0a) {
 		wifi_link_state = WIFI_CONNECTED;
+        SERIAL_ECHOLN("LINK STATE OK");
 	} else if(msg[6] == 0x0e) {
 		wifi_link_state = WIFI_EXCEPTION;
+        SERIAL_ECHOLN("LINK STATE EXEPTION");
 	} else {
 		wifi_link_state = WIFI_NOT_CONFIG;
+        SERIAL_ECHOLN("LINK STATE NOT CONFIGURED");
 	}
 	//mode
 	wifiPara.mode = msg[7];
@@ -875,7 +878,9 @@ static void net_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	if(id_len == 20) {
 		memset(cloud_para.id, 0, sizeof(cloud_para.id));
 		memcpy(cloud_para.id, (const char *)&msg[15 + wifiNameLen + wifiKeyLen + hostLen], id_len);
-	}
+        SERIAL_ECHOLNPAIR("CLOUD ID: ", cloud_para.id);
+	} else
+        SERIAL_ECHOLN("CLOUD ID ERROR");
 	ver_len = msg[15 + wifiNameLen + wifiKeyLen + hostLen + id_len];
 	if(ver_len < 20) {
 		memset(wifi_firm_ver, 0, sizeof(wifi_firm_ver));
@@ -1494,7 +1499,8 @@ char wifi_upload_firmware(const char * src, const char * back, int dest) {
         ui_app.idle();
         esp_upload.retriesPerBaudRate = 9;
         ResetWiFiForUpload(0);
-        SendUpdateFile(ESP_FIRMWARE_FILE, dest);
+        SendUpdateFile(src, dest);
+        SERIAL_ECHOLNPAIR("START UPLOAD: ", src);
         while(esp_upload.state != upload_idle) {
             upload_spin();
             if (last_state!=esp_upload.state) {
@@ -1525,8 +1531,10 @@ char wifi_upload_firmware(const char * src, const char * back, int dest) {
         };
         ResetWiFiForUpload(1);
         if (esp_upload.uploadResult == success) {
-            f_unlink(back);
-            f_rename(src, back);
+            if (back) {
+                f_unlink(back);
+                f_rename(src, back);
+            }
             res = 1;
         }
         progress_ui.done();
@@ -1534,7 +1542,27 @@ char wifi_upload_firmware(const char * src, const char * back, int dest) {
     return res;
 }
 
+#define PATCH_FILE "1:/patch.bin"
 
+void upload_key() {
+    FIL file;
+    FIL patch;
+    if(f_open(&file, ESP_KEY_FILE,  FA_OPEN_EXISTING | FA_READ) ==  FR_OK) {
+        if(f_open(&patch, PATCH_FILE,  FA_CREATE_ALWAYS | FA_WRITE) ==  FR_OK) {
+            memset(ui_buf1_100, 0, sizeof(ui_buf1_100));
+            u32 w;
+            f_write(&patch, ui_buf1_100, 100, &w);
+            f_write(&patch, ui_buf1_100, 92, &w);
+            f_read(&file, ui_buf1_100, 20, &w);
+            f_write(&patch, ui_buf1_100, 20, &w);
+            f_close(&patch);
+        }
+        f_close(&file);
+        wifi_upload_firmware(PATCH_FILE, 0, ESP_KEY_ADDR);
+        f_unlink(PATCH_FILE);
+        f_rename(ESP_KEY_FILE, ESP_KEY_FILE_BACK);
+    }
+}
 
 void wifi_init() {
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -1576,13 +1604,10 @@ void wifi_init() {
     if (usartFifoAvailable((SZ_USART_FIFO *)&WifiRxFifo) < 20)
         return;
 
-    wifi_upload_firmware(ESP_FIRMWARE_FILE, ESP_FIRMWARE_FILE_BACK, ESP_FIRMWARE_ADDR)
-    ||
-    wifi_upload_firmware(ESP_WEB_FIRMWARE_FILE, ESP_WEB_FIRMWARE_FILE_BACK, ESP_WEB_FIRMWARE_ADDR)
-    ||
-    wifi_upload_firmware(ESP_WEB_FILE, ESP_WEB_FILE_BACK, ESP_WEB_ADDR)
-    ||
-    wifi_upload_firmware(ESP_KEY_FILE, ESP_KEY_FILE_BACK, ESP_KEY_ADDR);
+    wifi_upload_firmware(ESP_FIRMWARE_FILE, ESP_FIRMWARE_FILE_BACK, ESP_FIRMWARE_ADDR);
+    upload_key();
+    wifi_upload_firmware(ESP_SH_FIRMWARE_FILE1, ESP_SH_FIRMWARE_FILE1_BACK, ESP_SH_FIRMWARE_FILE1_ADDR);
+    wifi_upload_firmware(ESP_SH_FIRMWARE_FILE2, ESP_SH_FIRMWARE_FILE2_BACK, ESP_SH_FIRMWARE_FILE2_ADDR);
 
 	wifiPara.decodeType = WIFI_DECODE_TYPE;
 	wifiPara.baud = 115200;

@@ -53,6 +53,7 @@ void WifiListUI::on_action_dialog(u8 action, u8 dialog_id) {
             } else {
                 this->show();
             }
+            break;
         }
         case DIALOG_ID_WIFI_WAIT: {
             switch (action) {

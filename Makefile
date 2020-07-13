@@ -168,8 +168,10 @@ mks_wifi:
 	unzip -o snapshot/MksWifi.zip -d $(BUILD_BASE)/
 	esptool.py --port `ls /dev/ttyUSB*` write_flash 0 $(BUILD_BASE)/MksWifi.bin
 
-patch_wifi:
+create_patch_wifi:
 	echo -n HJNLM0002CF432810411>$(BUILD_BASE)/wifi-patch.bin
+
+patch_wifi: create_patch_wifi
 	#dd if=/home/shubin/esp-cn.dump bs=1 skip=$(DEC_OFFSET) count=$(COUNT)>/home/shubin/sector.bin
 	esptool.py --port `ls /dev/ttyUSB*` write_flash 0x3fb0c0 $(BUILD_BASE)/wifi-patch.bin
 

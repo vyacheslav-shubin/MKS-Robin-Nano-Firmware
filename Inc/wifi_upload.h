@@ -9,13 +9,26 @@
 #define ESP_WEB_FIRMWARE_FILE_BACK		"1:/MksWifi_Web.cur"
 #define ESP_WEB_FIRMWARE_ADDR		    0x00000000
 
+#define ESP_WEB_FIRMWARE_FILE		    "1:/MksWifi_Web.bin"
+#define ESP_WEB_FIRMWARE_FILE_BACK		"1:/MksWifi_Web.cur"
+#define ESP_WEB_FIRMWARE_ADDR		    0x00000000
+
 #define ESP_WEB_FILE		            "1:/MksWifi_WebView.bin"
 #define ESP_WEB_FILE_BACK		        "1:/MksWifi_WebView.cur"
 #define ESP_WEB_ADDR		            0x00100000
 
 #define ESP_KEY_FILE		            "1:/MksWifi_Key.bin"
 #define ESP_KEY_FILE_BACK		        "1:/MksWifi_Key.cur"
-#define ESP_KEY_ADDR		            0x3fb0c0
+//define ESP_KEY_ADDR		            0x3fb0c0
+#define ESP_KEY_ADDR		            0x3fb000
+
+#define ESP_SH_FIRMWARE_FILE1		    "1:/ShWifi_0x00000.bin"
+#define ESP_SH_FIRMWARE_FILE1_BACK		"1:/ShWifi_0x00000.cur"
+#define ESP_SH_FIRMWARE_FILE1_ADDR		0x00000000
+
+#define ESP_SH_FIRMWARE_FILE2		    "1:/ShWifi_0x10000.bin"
+#define ESP_SH_FIRMWARE_FILE2_BACK		"1:/ShWifi_0x10000.cur"
+#define ESP_SH_FIRMWARE_FILE2_ADDR		0x10000
 
 
 typedef enum

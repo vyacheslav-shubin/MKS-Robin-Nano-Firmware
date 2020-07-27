@@ -54,9 +54,11 @@ void MeshLevelingUI::do_move(char direction) {
 }
 
 void MeshLevelingUI::do_mesh_step() {
-    if (this->mesh_step==0)
+    if (this->mesh_step==0) {
+        if (!(axis_homed[X_AXIS] && axis_homed[Y_AXIS] && axis_homed[Z_AXIS]))
+            shUI::pushGcode("G28");
         shUI::pushGcode("G29 S1");
-    else
+    } else
         shUI::pushGcode("G29 S2");
     this->mesh_step++;
     if(this->mesh_step > GRID_MAX_POINTS) {

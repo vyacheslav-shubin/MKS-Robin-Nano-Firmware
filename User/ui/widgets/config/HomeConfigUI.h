@@ -14,6 +14,7 @@ typedef struct {
     UI_CHECK x_dir;
     UI_CHECK y_dir;
     UI_CHECK z_dir;
+    UI_CHECK z_safe;
     UI_INPUT_WITH_DEFAULT xy_speed;
     UI_INPUT_WITH_DEFAULT z_speed;
     UI_TEXT pause;

@@ -76,6 +76,10 @@ void HomeConfigUI::on_button(UI_BUTTON hBtn) {
         mksCfg.z_home_dir = (mksCfg.z_home_dir==1) ? -1 : 1;
         epr_write_data(EPR_Z_HOME_DIR, (uint8_t *)&mksCfg.z_home_dir,1);
         this->updateCheckButton(this->ui.z_dir.button, mksCfg.z_home_dir==1, &lang_str.min_max);
+    } if (ui_is_double_button(hBtn, this->ui.z_safe)) {
+        mksCfg.z_safe_homing = (mksCfg.z_safe_homing==1) ? 0 : 1;
+        epr_write_data(EPR_Z_SAFE_HOMING, (uint8_t *)&mksCfg.z_safe_homing, 1);
+        this->updateCheckButton(this->ui.z_safe.button, mksCfg.z_safe_homing==1, &lang_str.yes_no);
     } else if (hBtn==this->ui.xy_speed.button) {
         this->calculator(lang_str.config_ui.speed, " XY:", mksCfg.homing_feedrate_xy, SPEED_XY);
     } else if (hBtn==this->ui.z_speed.button) {
@@ -115,6 +119,8 @@ void HomeConfigUI::createControls() {
         this->createCheckPair(0, 1, &this->ui.x_dir, "X", mksCfg.x_home_dir == 1, &lang_str.min_max);
         this->createCheckPair(0, 2, &this->ui.y_dir, "Y", mksCfg.y_home_dir == 1, &lang_str.min_max);
         this->createCheckPair(0, 3, &this->ui.z_dir, "Z", mksCfg.z_home_dir == 1, &lang_str.min_max);
+        this->createCheckPair(0, 4, &this->ui.z_safe, lang_str.config_ui.z_safe_homing, mksCfg.z_safe_homing == 1, &lang_str.yes_no);
+
 
         this->createInputWithDefault(1, 1, &this->ui.xy_speed, "XY", 0);
         this->createInputWithDefault(1, 2, &this->ui.z_speed, "Z", 0);

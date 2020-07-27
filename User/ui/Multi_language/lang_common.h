@@ -44,6 +44,7 @@ typedef struct {
 	const char * axes_inversion;
 	const char * motor_steps_settings;
 	const char * home_speed_settings;
+	const char * z_safe_homing;
 	const char * acceleration_settings;
 	const char * maximum_speed_settings;
 	const char * jerk_settings;

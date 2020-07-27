@@ -8,6 +8,7 @@
 #include "ManualLevelingUI.h"
 #include "ui_tools.h"
 #include "Marlin.h"
+#include "integration.h"
 
 ManualLevelingUI manual_leveling_ui;
 
@@ -24,11 +25,13 @@ char * _home_z_button_title() {
 }
 
 void manual_leveling(char point) {
+    if (!(axis_homed[X_AXIS] && axis_homed[Y_AXIS] && axis_homed[Z_AXIS]))
+        shUI::pushGcode("G28");
 	sprintf(ui_buf1_80,"G91 G1 Z10 F%d\n",gCfgItems.leveling_z_speed);
-	enqueue_and_echo_commands_P(PSTR(ui_buf1_80));
+    shUI::pushGcode(ui_buf1_80);
 	sprintf(ui_buf1_80,"G90 G1 X%d Y%d F%d\n", gCfgItems.leveling_points[point].x, gCfgItems.leveling_points[point].y, gCfgItems.leveling_xy_speed);
-	enqueue_and_echo_commands_P(PSTR(ui_buf1_80));
-	enqueue_and_echo_commands_P(PSTR("G1 Z0"));
+    shUI::pushGcode(ui_buf1_80);
+    shUI::pushGcode("G1 Z0");
 }
 
 void ManualLevelingUI::createControls() {
@@ -57,9 +60,9 @@ void ManualLevelingUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn==buttons.leveling5) {
 		manual_leveling(4);
 	} else if (hBtn==buttons.home) {
-		enqueue_and_echo_commands_P(PSTR("G28"));
+        shUI::pushGcode("G28");
 	} else if (hBtn==buttons.homeZ) {
-		enqueue_and_echo_commands_P(PSTR("G28 Z0"));
+        shUI::pushGcode("G28 Z0");
 	}
 }
 

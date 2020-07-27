@@ -5,6 +5,7 @@
  *      Author: shubin
  */
 
+#include "Marlin.h"
 #include "StdWidget.h"
 #include "integration.h"
 #include "ui_tools.h"
@@ -29,6 +30,8 @@ UI_BUTTON StdWidget::createButtonRet() {
 
 
 void  StdWidget::actionFilamentChangeParking() {
+    if (!(axis_homed[X_AXIS] && axis_homed[Y_AXIS]))
+        enqueue_and_echo_commands_P("G28 X0 Y0");
     sprintf(ui_buf1_100, "G91 G1 Z%.1f F%.1f", mksCfg.filament_change_z_add, mksCfg.homing_feedrate_z);
     shUI::pushGcode(ui_buf1_100);
     sprintf(ui_buf1_100, "G90 G1 X%.1f Y%.1f F%.1f", mksCfg.filament_change_x_pos, mksCfg.filament_change_y_pos, mksCfg.homing_feedrate_xy);

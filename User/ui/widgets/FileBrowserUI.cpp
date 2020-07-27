@@ -163,9 +163,11 @@ protected:
             }
 		}
 		strcpy(ui_buf1_100, fn);
-		unsigned char i = strlen(ui_buf1_100) - 1;
-		while ((ui_buf1_100[i] != '.') && (i > 0)) i--;
-        ui_buf1_100[i] = 0;
+		if (!ufb->isDirectory) {
+            unsigned char i = strlen(ui_buf1_100) - 1;
+            while ((ui_buf1_100[i] != '.') && (i > 0)) i--;
+            ui_buf1_100[i] = 0;
+        }
 		ufb->button = file_browser_ui.createButtonAt(this->index % 3, this->index/3, pic, ui_buf1_100);
 		this->index++;
 		return 1;

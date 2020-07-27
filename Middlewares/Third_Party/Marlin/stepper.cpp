@@ -414,7 +414,7 @@ void Stepper::StepperHandler() {
   #if DISABLED(LIN_ADVANCE)
     // Disable Timer0 ISRs and enable global ISR again to capture UART events (incoming chars)
     //CBI(TIMSK0, OCIE0B); // Temperature ISR
-    HAL_TIM_Base_Stop_IT(&htim4);		//1?¡À?2a???D???
+    HAL_TIM_Base_Stop_IT(&htim4);		//1?ï¿½ï¿½?2a???D???
     DISABLE_STEPPER_DRIVER_INTERRUPT();
     sei();
   #endif

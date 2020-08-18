@@ -16,7 +16,8 @@ PreheatUI preheat_ui;
 
 
 const PREHEAT_PRESET preset_preset[PREHEAT_PRESET_COUNT] = {
-		{img_preset_pla, 200, 60},
+        {img_preset_off, 0, 0},
+        {img_preset_pla, 200, 60},
 		{img_preset_sbs, 230, 90},
 		{img_preset_petg, 240, 75},
 };
@@ -125,6 +126,9 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 			case 2:shUI::setSprayerTemperature(1, 0); break;
 		}
 	} else if(hBtn == this->ui.preset) {
+        this->current_preset++;
+        if (this->current_preset>=PREHEAT_PRESET_COUNT)
+            this->current_preset = 0;
 		const PREHEAT_PRESET * cp = &preset_preset[this->current_preset];
 		shUI::setBedTemperature(cp->tbed);
 		switch (selector) {
@@ -136,10 +140,6 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 				shUI::setSprayerTemperature(1, cp->tsprayer);
 				break;
 		}
-
-		this->current_preset++;
-		if (this->current_preset>=PREHEAT_PRESET_COUNT)
-			this->current_preset = 0;
 		this->updatePreset();
 	} else if(hBtn == this->ui.back) {
 		this->hide();

@@ -23,7 +23,7 @@ typedef struct{
 	UI_TEXT mmx;
 	UI_TEXT mmy;
     UI_TEXT mmz;
-    UI_CHECK continuePrint;
+    UI_BUTTON continuePrint;
     unsigned char contine_print;
 	char preview_done;
 	unsigned char info_updated;

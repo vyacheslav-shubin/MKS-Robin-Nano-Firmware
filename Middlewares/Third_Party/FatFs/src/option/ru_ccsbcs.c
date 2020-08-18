@@ -496,6 +496,7 @@ const WCHAR Tbl[] = {	/*  CP1258(0x80-0xFF) to Unicode conversion table */
 #error This file is not needed in current configuration. Remove from the project.
 #endif
 
+static const char * RUS_LOCAL = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзиклмнопрстуфхцчшщъыьэюя";
 
 WCHAR ff_convert (	/* Converted character, Returns zero on error */
 	WCHAR	chr,	/* Character code to be converted */
@@ -509,20 +510,21 @@ WCHAR ff_convert (	/* Converted character, Returns zero on error */
 		c = chr;
 
 	} else {
-		if (dir) {		/* OEMCP to Unicode */
-			c = (chr >= 0x100) ? 0 : Tbl[chr - 0x80];
-
+		if (dir) {
+		    for (unsigned char i=0; i<64;i++) {
+		        if (RUS_LOCAL[i]==c)
+		            return 0x0410+i;
+		    }
+		    return 0;
 		} else {		/* Unicode to OEMCP */
-		    for (c = 0; c < 0x80; c++) {
-				if (chr == Tbl[c]) break;
-			}
-			c = (c + 0x80) & 0xFF;
+		    if ((chr >=0x0410) && (chr < 0x0450))
+                return RUS_LOCAL[chr - 0x0410];
+            return 0;
 		}
 	}
 
 	return c;
 }
-
 
 WCHAR ff_wtoupper (	/* Upper converted character */
 	WCHAR chr		/* Input character */

@@ -170,6 +170,7 @@ void lang_std(void) {
 	lang_str.file_info_ui.min_max_z = "Z: %1.2f - %1.2f";
 
 	lang_str.dialog.confirm_delete_file = "Delete file:\n%s";
+    lang_str.dialog.confirm_continue_print = "Printing start with Z:%.3f.\nContinue?";
     lang_str.dialog.confirm_file_not_found = "File not found: \n%s";
 	lang_str.dialog.confirm_terminate_print = "Terminate printing?";
 	lang_str.dialog.confirm_print_again = "Print again?";

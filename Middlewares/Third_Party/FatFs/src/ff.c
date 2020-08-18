@@ -126,7 +126,6 @@
 #include "ff.h"			/* Declarations of FatFs API */
 #include "diskio.h"		/* Declarations of disk I/O functions */
 
-
 /*--------------------------------------------------------------------------
 
    Module Private Definitions
@@ -1763,6 +1762,36 @@ FRESULT dir_remove (	/* FR_OK: Successful, FR_DISK_ERR: A disk error */
 #endif /* !_FS_READONLY */
 
 
+static char make_long_name_russian(unsigned short * name, char * buf, unsigned short buflen) {
+    unsigned char i = 0;
+
+    while (*name) {
+        if (i==buflen - 2)
+            return 0;
+        unsigned short c = *name++;
+        if (c<0x80) {
+            buf[i++] = (char)c;
+        } else {
+            if (c==0x0401) {
+                c = 0xD081;
+            } else if (c==0x0451) {
+                c = 0xD191;
+            } else if ((c>=0x0410) && (c<=0x042F)) {
+                c = c + (0xD090 - 0x0410);
+            } else if ((c>=0x0430) && (c<=0x043F)) {
+                c = c + (0xD0B0 - 0x0430);
+            } else if ((c>=0x0440) && (c<=0x044F)) {
+                c = c + (0xD180 - 0x0440);
+            } else {
+                return 0;
+            }
+            buf[i++] = c >> 8;
+            buf[i++] = c & 0xFF;
+        }
+    }
+    buf[i] = 0;
+    return 1;
+}
 
 
 /*-----------------------------------------------------------------------*/
@@ -1812,21 +1841,30 @@ void get_fileinfo (		/* No return code */
 
 #if _USE_LFN
 	if (fno->lfname) {
-		i = 0; p = fno->lfname;
-		if (dp->sect && fno->lfsize && dp->lfn_idx != 0xFFFF) {	/* Get LFN if available */
-			lfn = dp->lfn;
-			while ((w = *lfn++) != 0) {		/* Get an LFN character */
-#if !_LFN_UNICODE
-				w = ff_convert(w, 0);		/* Unicode -> OEM */
-				if (!w) { i = 0; break; }	/* No LFN if it could not be converted */
-				if (_DF1S && w >= 0x100)	/* Put 1st byte if it is a DBC (always false on SBCS cfg) */
-					p[i++] = (TCHAR)(w >> 8);
+#if 0
+        i = 0; p = fno->lfname;
 #endif
-				if (i >= fno->lfsize - 1) { i = 0; break; }	/* No LFN if buffer overflow */
-				p[i++] = (TCHAR)w;
-			}
-		}
-		p[i] = 0;	/* Terminate LFN string by a \0 */
+        if (dp->sect && fno->lfsize && dp->lfn_idx != 0xFFFF) {    /* Get LFN if available */
+            if (!make_long_name_russian(dp->lfn, fno->lfname, fno->lfsize))
+                fno->lfname[0] = 0;
+#if 0
+
+            lfn = dp->lfn;
+            while ((w = *lfn++) != 0) {		/* Get an LFN character */
+#if !_LFN_UNICODE
+                w = ff_convert(w, 0);		/* Unicode -> OEM */
+                if (!w) { i = 0; break; }	/* No LFN if it could not be converted */
+                if (_DF1S && w >= 0x100)	/* Put 1st byte if it is a DBC (always false on SBCS cfg) */
+                    p[i++] = (TCHAR)(w >> 8);
+#endif
+                if (i >= fno->lfsize - 1) { i = 0; break; }	/* No LFN if buffer overflow */
+                p[i++] = (TCHAR)w;
+            }
+#endif
+        }
+#if 0
+        p[i] = 0;	/* Terminate LFN string by a \0 */
+#endif
 	}
 #endif
 }

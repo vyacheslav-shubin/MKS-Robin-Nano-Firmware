@@ -16,7 +16,7 @@ typedef struct {
     short tbed;
 } PREHEAT_PRESET;
 
-#define PREHEAT_PRESET_COUNT 3
+#define PREHEAT_PRESET_COUNT 4
 
 extern const PREHEAT_PRESET preset_preset[PREHEAT_PRESET_COUNT];
 

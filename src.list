@@ -38,7 +38,7 @@ Middlewares/arduino/stm32/cores/arduino/WMath.cpp
 Middlewares/arduino/stm32/cores/arduino/WString.cpp
 Middlewares/Third_Party/FatFs/src/diskio.c
 Middlewares/Third_Party/FatFs/src/ff.c
-Middlewares/Third_Party/FatFs/src/option/mycc936.c
+Middlewares/Third_Party/FatFs/src/option/ru_ccsbcs.c
 Middlewares/Third_Party/FatFs/src/option/syscall.c
 Middlewares/Third_Party/Marlin/blinkm.cpp
 Middlewares/Third_Party/Marlin/cardreader.cpp

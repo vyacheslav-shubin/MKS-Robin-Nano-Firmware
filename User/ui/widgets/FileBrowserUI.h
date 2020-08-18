@@ -21,7 +21,7 @@ private:
 	FATFS fs;
 	char is_wanted(FILINFO * fi);
 protected:
-	virtual char onFile(FILINFO * fi) {return 0;};
+	virtual char onFile(DIR * dir, FILINFO * fi) {return 0;};
 public:
 	char curent_dir[MAX_FILE_NAME_SIZE];
 	int dir_level = 0;

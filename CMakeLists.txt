@@ -336,7 +336,8 @@ add_executable(work
         Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c
         Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.h
         Middlewares/Third_Party/FatFs/src/option/cc936.c
-        Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
+		Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
+		Middlewares/Third_Party/FatFs/src/option/ru_ccsbcs.c
         Middlewares/Third_Party/FatFs/src/option/mycc936.c
         Middlewares/Third_Party/FatFs/src/option/syscall.c
         Middlewares/Third_Party/FatFs/src/diskio.c

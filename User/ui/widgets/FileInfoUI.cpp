@@ -12,10 +12,13 @@
 #include "serial.h"
 #include "ConfirmDialogUI.h"
 #include "Application.h"
-
+#include "integration.h"
 
 FileInfoUI file_info_ui;
 
+
+#define DIALOG_ID_DELETE        1
+#define DIALOG_ID_CONTINUE      2
 
 void FileInfoUI::refresh() {
 	if ((this->ui.info_updated==0) && (ui_print_process.size != 0)) {
@@ -59,6 +62,7 @@ void FileInfoUI::createControls() {
 	#define _col(ph_x) (INTERVAL_H + (100+INTERVAL_H)*ph_x)
 	#define _y 204
 	this->ui.run = this->create96x80Button(_col(3) + 70, _y, img_ok);
+    this->ui.continuePrint = this->create96x80Button(_col(3) + 70, _y - 80, img_ok_continue);
 	this->ui.cancel = this->create96x80Button(_col(2) + 70, _y, img_cancel);
 	this->ui.tools = this->create96x80Button(_col(1) + 70, _y, img_print_tools);
 	this->ui.del = this->create96x80Button(_col(0), _y, img_file_delete);
@@ -71,14 +75,9 @@ void FileInfoUI::createControls() {
 	this->ui.time = this->createText(_text_x, _row(1), 240, _row_size, 0);
 	this->ui.layers = this->createText(_text_x, _row(2), 240, _row_size, 0);
 	this->ui.filament = this->createText(_text_x, _row(3), 240, _row_size, 0);
-	this->ui.mmx = this->createText(_text_x, _row(4), 240, _row_size, 0);
-	this->ui.mmy = this->createText(_text_x, _row(5), 240, _row_size, 0);
-	this->ui.mmz = this->createText(_text_x, _row(6), 240, _row_size, 0);
-
-    this->ui.continuePrint.text= this->createText(_text_x + 100, _row(7) + 16, 120, _row_size, lang_str.continue_print);
-    this->ui.continuePrint.button = this->createCheckButton(_text_x, _row(7) + 10, this->ui.contine_print);
-    UI_CHECK continuePrint;
-
+	this->ui.mmx = this->createText(_text_x, _row(4), 160, _row_size, 0);
+	this->ui.mmy = this->createText(_text_x, _row(5), 160, _row_size, 0);
+	this->ui.mmz = this->createText(_text_x, _row(6), 160, _row_size, 0);
 	this->update();
 }
 
@@ -90,8 +89,19 @@ const char * FileInfoUI::getTitle() {
 void FileInfoUI::on_action_dialog(u8 action, u8 dialog_id) {
 	confirm_dialog_ui.hide();
 	if (action==UI_BUTTON_OK) {
-		f_unlink(ui_print_process.file_name);
-		ui_app.back_ui();
+	    switch (dialog_id) {
+	        case DIALOG_ID_DELETE: {
+                f_unlink(ui_print_process.file_name);
+                ui_app.back_ui();
+                break;
+	        }
+	        case DIALOG_ID_CONTINUE: {
+                gCfgItems.breakpoint_reprint_flg = 1;
+                gCfgItems.breakpoint_flg = 1;
+                ui_app.startPrintFile(1);
+	            break;
+	        }
+	    }
 	} else {
 		this->show();
 	}
@@ -99,14 +109,8 @@ void FileInfoUI::on_action_dialog(u8 action, u8 dialog_id) {
 
 void FileInfoUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.run) {
-	    if (this->ui.contine_print) {
-            gCfgItems.breakpoint_reprint_flg = 1;
-            gCfgItems.breakpoint_flg = 1;
-	    } else {
-            gCfgItems.breakpoint_reprint_flg = 0;
-            gCfgItems.breakpoint_flg = 0;
-	    }
-
+        gCfgItems.breakpoint_reprint_flg = 0;
+        gCfgItems.breakpoint_flg = 0;
         ui_app.startPrintFile(1);
 	} if (hBtn==this->ui.del) {
 		this->hide();
@@ -115,15 +119,25 @@ void FileInfoUI::on_button(UI_BUTTON hBtn) {
 					lang_str.dialog.confirm_delete_file,
 					get_long_file_name(ui_print_process.file_name)
 		);
-		confirm_dialog_ui.show(ui_buf1_100, this, 0, this);
+		confirm_dialog_ui.show(ui_buf1_100, this, DIALOG_ID_DELETE, this);
 	} if (hBtn==this->ui.cancel) {
 		this->hide();
 		ui_app.back_ui();
 	}  if (hBtn==this->ui.tools) {
 		this->hide();
 		printing_tools_ui.show(this);
-	} else if (hBtn==this->ui.continuePrint.button) {
-        this->ui.contine_print = !this->ui.contine_print;
-        this->updateCheckButton(ui.continuePrint.button, this->ui.contine_print);
+	} else if (hBtn==this->ui.continuePrint) {
+        this->hide();
+        shUI::CURRENT_POSITION cp;
+        shUI::getCurrentPosition(&cp);
+        sprintf(
+                ui_buf1_100,
+                lang_str.dialog.confirm_continue_print,
+                cp.z
+        );
+        confirm_dialog_ui.show(ui_buf1_100, this, DIALOG_ID_CONTINUE, this);
+        //gCfgItems.breakpoint_reprint_flg = 1;
+        //gCfgItems.breakpoint_flg = 1;
+        //ui_app.startPrintFile(1);
 	}
 }

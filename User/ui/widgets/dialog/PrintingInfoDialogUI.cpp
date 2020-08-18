@@ -17,9 +17,9 @@ void PrintingInfoDialogUI::createControls() {
 
 #define _row_size 20
 #define _x  40
-#define _w  230
+#define _w  220
 
-#define _wl (DIALOG_WIDTH - (_x*2))
+#define _wl (DIALOG_WIDTH - _x - 5)
 #define _row(idx) _row_size * idx + 60
     this->ui.file_size = this->createText(_x, _row(0), _wl, _row_size, 0);
     this->ui.time = this->createText(_x, _row(1), _wl, _row_size, 0);

@@ -69,11 +69,11 @@ void MainUI::on_button(UI_BUTTON hBtn) {
 		this->hide();
 		filament_ui.show(this);
 	} else  if (hBtn==this->ui.heat_preset) {
+        if (++this->current_preheat_preset >= PREHEAT_PRESET_COUNT)
+            this->current_preheat_preset = 0;
         const PREHEAT_PRESET * cp = &preset_preset[this->current_preheat_preset];
         shUI::setBedTemperature(cp->tbed);
         shUI::setSprayerTemperature(0, cp->tsprayer);
-        if (++this->current_preheat_preset >= PREHEAT_PRESET_COUNT)
-            this->current_preheat_preset = 0;
         ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
 	} else if (hBtn == this->ui.power) {
         this->hide();

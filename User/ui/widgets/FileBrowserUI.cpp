@@ -56,7 +56,7 @@ char * get_long_file_name(char * fileName) {
 
 
 char Browser::is_wanted(FILINFO * fi) {
-	if ((fi->lfname[0] == '.') || (fi->fname[0] == '.') || (fi->fattrib & (AM_SYS|AM_HID)))
+	if ((fi->fname[0] == '.') || (fi->fattrib & (AM_SYS|AM_HID)))
 		return 0;
 	if (
 			(strstr(fi->fname, "mks_pic")!=0)
@@ -76,11 +76,10 @@ void Browser::lookup() {
 	memset(&dir, 0, sizeof(dir));
 	if (f_opendir(&dir, curent_dir) == FR_OK) {
 		while (f_readdir(&dir, &fi) == FR_OK) {
-			SERIAL_ECHOLN(fi.fname);
 			if (fi.fname[0] == 0)
 				break;
 			if (is_wanted(&fi)) {
-				if (!onFile(&fi))
+				if (!onFile(&dir, &fi))
 					break;
 			}
 		}
@@ -122,14 +121,28 @@ typedef struct {
 	unsigned char skip = 0;
 } DIRECTORY_MARKER;
 
+/*
+Letter	CP1251	UTF16	UTF16->CP1251	                    UTF8	UTF8->CP1251
+Ё	    A8	    04 01	byte1==0x04 && byte2==0x01 ? 0xA8	D0 81	byte1==0xD0 && byte2==0x81 ? 0xA8
+ё	    B8	    04 51	byte1==0x04 && byte2==0x51 ? 0xB8	D1 91	byte1==0xD1 && byte2==0x91 ? 0xB8
+А	    C0	    04 10	byte1 == 0x04 ? byte2 + 0xB0	    D0 90	byte1 == 0xD0 ? byte2 + 0x30
+Я	    DF	    04 2F	                                    D0 AF
+а	    E0	    04 30	                                    D0 B0
+п	    EF	    04 3F	                                    D0 BF
+р	    F0	    04 40	                                    D1 80	byte1 == 0xD1 ? byte2 + 0x70
+я	    FF	    04 4F	                                    D1 8F
+*/
+
+
+
 class UIFileBrouser: public Browser {
 private:
 	unsigned char index;
 	unsigned char current = 0;
 	DIRECTORY_MARKER dirm[10];
 protected:
-	virtual char onFile(FILINFO * fi) {
-		if (this->current<this->dirm[this->dir_level].skip) {
+	virtual char onFile(DIR * dir, FILINFO * fi) {
+		if (this->current < this->dirm[this->dir_level].skip) {
 			this->current++;
 			return 1;
 		}
@@ -138,8 +151,6 @@ protected:
 			this->dirm[this->dir_level].more = 1;
 			return 0;
 		}
-		char * fn =  ((fi->lfname!=0) && (fi->lfname[0]!=0))? fi->lfname:fi->fname;
-		SERIAL_ECHOLN(fn);
 		const char * pic;
 		UI_FILE_BUTTON * ufb = &file_browser_ui.ui.files[this->index];
 		ufb->isDirectory = fi->fattrib & AM_DIR;
@@ -162,7 +173,13 @@ protected:
                     break;
             }
 		}
-		strcpy(ui_buf1_100, fn);
+
+        if ((fi->lfname!=0) && (fi->lfname[0]!=0)) {
+            strcpy(ui_buf1_100, fi->lfname);
+        } else {
+            strcpy(ui_buf1_100, fi->fname);
+        }
+
 		if (!ufb->isDirectory) {
             unsigned char i = strlen(ui_buf1_100) - 1;
             while ((ui_buf1_100[i] != '.') && (i > 0)) i--;

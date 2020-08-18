@@ -35,6 +35,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_print_auto_power_off	"bmp_auto_off.bin"
 #define img_print_manual_power_off	"bmp_manual_off.bin"
 #define img_ok					"bmp_ok.bin"
+#define img_ok_continue         "bmp_printc.bin"
 #define img_cancel				"bmp_cancel.bin"
 #define img_Aa				    "bmp_Aa.bin"
 #define img_page_up				"bmp_page_up.bin"
@@ -55,9 +56,10 @@ extern GUI_BITMAP bmp_struct_50x50;
 
 #define img_temperature_off		"bmp_speed0.bin"
 
-#define img_preset_pla  	"bmp_pla.bin"
-#define img_preset_sbs  	"bmp_sbs.bin"
-#define img_preset_petg  	"bmp_petg.bin"
+#define img_preset_off  	"bmp_toff.bin"
+#define img_preset_pla  	"bmp_tpla.bin"
+#define img_preset_sbs  	"bmp_tsbs.bin"
+#define img_preset_petg  	"bmp_tpetg.bin"
 
 #define img_plus  			"bmp_Add.bin"
 #define img_minus  			"bmp_Dec.bin"

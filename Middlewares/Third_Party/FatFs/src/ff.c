@@ -1844,6 +1844,7 @@ void get_fileinfo (		/* No return code */
 #if 0
         i = 0; p = fno->lfname;
 #endif
+        fno->lfname[0] = 0;
         if (dp->sect && fno->lfsize && dp->lfn_idx != 0xFFFF) {    /* Get LFN if available */
             if (!make_long_name_russian(dp->lfn, fno->lfname, fno->lfsize))
                 fno->lfname[0] = 0;

@@ -26,6 +26,7 @@ class ToolsUI : public StdWidget{
 private:
 	TOOLS_UI_CONTROLS ui;
 protected:
+    virtual void refresh_1s();
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 public:

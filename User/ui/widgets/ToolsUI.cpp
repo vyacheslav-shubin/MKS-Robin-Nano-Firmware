@@ -34,6 +34,11 @@ void ToolsUI::createControls() {
 	this->ui.ret = this->createButtonRet();
 }
 
+void ToolsUI::refresh_1s() {
+    this->drawXYZ();
+}
+
+
 void ToolsUI::on_button(UI_BUTTON hBtn) {
 	if (hBtn==this->ui.preheat) {
 		this->hide();

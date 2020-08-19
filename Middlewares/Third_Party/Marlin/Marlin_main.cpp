@@ -5485,7 +5485,7 @@ inline void gcode_G29_MESH_BED_LEVELING() {
 
       #if HAS_BED_PROBE
         // Deploy the probe. Probe will raise if needed.
-        if (DEPLOY_PROBE()) {
+      if (DEPLOY_PROBE()) {
           set_bed_leveling_enabled(abl_should_enable);
           return;
         }
@@ -15943,6 +15943,7 @@ void setup() {
       mixing_factor[i] = mixing_virtual_tool_mix[0][i];
   #endif
 
+    //mksCfg.mkstouch = 1;
     bltouch_command(BLTOUCH_RESET);
     set_bltouch_deployed(true);
     set_bltouch_deployed(false);
@@ -16092,15 +16093,6 @@ void SysTick_Handler_User() {
 
 	if (filament_fail_flag)
 		filament_fail_cnt++;
-
-	if(poweroff_det_flg==1)
-		poweroff_det_cnt++;
-		
-	if(poweroff_det_low_flg==1)
-		poweroff_det_low_cnt++;
-	
-	if(poweroff_det_high_flg==1)
-		poweroff_det_high_cnt++;
 
 	if(!(TimeIncrease * TICK_CYCLE % 5000)) {
 		wifi_check_time = 1;

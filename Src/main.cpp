@@ -118,8 +118,9 @@ int main(void) {
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
+  HAL_TIM_MspPostInit();
   MX_ADC1_Init();
-  
+
 #if defined(MKS_ROBINPRO) 
   MX_USART6_UART_Init();
 #elif defined(MKS_ROBIN) || defined(MKS_ROBIN2) || defined(MKS_ROBIN_NANO)
@@ -155,11 +156,10 @@ int main(void) {
 	MKS_TOUCH_TIM = 0;
 #endif 
 
-#if defined(MKS_ROBIN_NANO) 
+#if defined(MKS_ROBIN_NANO)
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	MKS_TOUCH_TIM = 0;
-#endif 
-
+#endif
     MKS_FAN_TIM = 0;
 
     //����TIMER
@@ -205,14 +205,6 @@ int main(void) {
     while (1)
         loop();
 }
-
-uint8_t poweroff_det_flg;
-uint32_t poweroff_det_cnt;
-uint8_t poweroff_det_low_flg;
-uint32_t poweroff_det_low_cnt;
-uint8_t poweroff_det_high_flg;
-uint32_t poweroff_det_high_cnt;
-
 
 uint32_t filament_fail_flag;
 uint32_t filament_fail_cnt = 0;

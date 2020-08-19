@@ -8,7 +8,10 @@
 #define	YSTEP_OP  PEout(0)
 #define	ZSTEP_OP  PBout(5)
 #define	E0STEP_OP  PDout(6)	
-#define	E1STEP_OP  PAout(6)	
+#define	E1STEP_OP  PAout(6)
+
+#define	BLTOUCH_OP  PAout(8)
+
 
 #define	XDIR_OP  PEout(2)	
 #define	YDIR_OP  PBout(9)
@@ -54,7 +57,7 @@
 
 #define	TC1_CS_OP 	PEout(5)
 
-/*-------------¶Ïµç¡¢¶ÏÁÏ-----------------------*/
+/*-------------ï¿½Ïµç¡¢ï¿½ï¿½ï¿½ï¿½-----------------------*/
 #define	MKS_PW_DET_OP       PAin(2)
 #define	MKS_PW_OFF_OP       PBout(2)
 #define	MKS_MT_DET1_OP      PAin(4)

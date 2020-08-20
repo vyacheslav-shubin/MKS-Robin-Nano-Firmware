@@ -4956,10 +4956,11 @@ void home_all_axes() { gcode_G28(true); }
    *  v Y-axis  1-n
    *
    */
+int mbl_probe_index = -1;
+
 //  inline void gcode_G29() {
 inline void gcode_G29_MESH_BED_LEVELING() {
 
-    static int mbl_probe_index = -1;
     #if HAS_SOFTWARE_ENDSTOPS
       static bool enable_soft_endstops;
     #endif
@@ -4970,7 +4971,7 @@ inline void gcode_G29_MESH_BED_LEVELING() {
       return;
     }
 
-    int8_t px, py;
+    signed char px, py;
 
     switch (state) {
       case MeshReport:
@@ -5093,6 +5094,7 @@ inline void gcode_G29_MESH_BED_LEVELING() {
 
       case MeshReset:
         reset_bed_level();
+        mbl_probe_index = -1;
         break;
 
     } // switch(state)

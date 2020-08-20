@@ -23,23 +23,23 @@ typedef enum {
 void MotorSettingsUI::updateControls() {
     //steps
     if (this->ui.steps.x.button!=0) {
-        sprintf(ui_buf1_100,"%.1f", Planner::axis_steps_per_mm[X_AXIS]);
+        sprintf(ui_buf1_100,"%.2f", Planner::axis_steps_per_mm[X_AXIS]);
         this->setButtonText(this->ui.steps.x.button, ui_buf1_100);
     }
     if (this->ui.steps.y.button!=0) {
-        sprintf(ui_buf1_100,"%.1f",Planner::axis_steps_per_mm[Y_AXIS]);
+        sprintf(ui_buf1_100,"%.2f",Planner::axis_steps_per_mm[Y_AXIS]);
         this->setButtonText(this->ui.steps.y.button, ui_buf1_100);
     }
     if (this->ui.steps.z.button!=0) {
-        sprintf(ui_buf1_100,"%.1f",Planner::axis_steps_per_mm[Z_AXIS]);
+        sprintf(ui_buf1_100,"%.2f",Planner::axis_steps_per_mm[Z_AXIS]);
         this->setButtonText(this->ui.steps.z.button, ui_buf1_100);
     }
     if (this->ui.steps.e0.button!=0) {
-        sprintf(ui_buf1_100,"%.1f",Planner::axis_steps_per_mm[E_AXIS]);
+        sprintf(ui_buf1_100,"%.2f",Planner::axis_steps_per_mm[E_AXIS]);
         this->setButtonText(this->ui.steps.e0.button, ui_buf1_100);
     }
     if (this->ui.steps.e1.button!=0) {
-        sprintf(ui_buf1_100,"%.1f",Planner::axis_steps_per_mm[E1_AXIS]);
+        sprintf(ui_buf1_100,"%.2f",Planner::axis_steps_per_mm[E1_AXIS]);
         this->setButtonText(this->ui.steps.e1.button, ui_buf1_100);
     }
 

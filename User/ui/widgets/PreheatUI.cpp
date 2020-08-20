@@ -14,12 +14,14 @@
 
 PreheatUI preheat_ui;
 
-
 const PREHEAT_PRESET preset_preset[PREHEAT_PRESET_COUNT] = {
+
         {img_preset_off, 0, 0},
         {img_preset_pla, 200, 60},
 		{img_preset_sbs, 230, 90},
-		{img_preset_petg, 240, 75},
+        {img_preset_petg, 240, 75},
+        {img_preset_abs, 210, 110},
+
 };
 
 

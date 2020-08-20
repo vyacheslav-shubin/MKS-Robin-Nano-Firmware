@@ -42,6 +42,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_page_down			"bmp_page_down.bin"
 #define img_page_back			"bmp_page_back.bin"
 #define img_file_delete  		"bmp_delete.bin"
+#define img_mesh_delete  		"bmp_delete.bin"
 #define img_info  		        "bmp_info96.bin"
 
 
@@ -60,6 +61,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_preset_pla  	"bmp_tpla.bin"
 #define img_preset_sbs  	"bmp_tsbs.bin"
 #define img_preset_petg  	"bmp_tpetg.bin"
+#define img_preset_abs  	"bmp_tabs.bin"
 
 #define img_plus  			"bmp_Add.bin"
 #define img_minus  			"bmp_Dec.bin"

@@ -145,6 +145,7 @@ void lang_ru(void) {
 	lang_str.dialog.confirm_delete_file = "Удалить файл:\n%s";
     lang_str.dialog.confirm_continue_print = "Печать с высоты Z:%.3f.\nПродолжить?";
     lang_str.dialog.confirm_file_not_found = "Файл не найден: \n%s";
+    lang_str.dialog.confirm_delete_mesh = "Сбросить измерения?";
     lang_str.dialog.confirm_terminate_print = "Прервать печать?";
 	lang_str.dialog.confirm_print_again = "Повторить печать?";
 	lang_str.dialog.confirm_print_with_suicide = "Автоматическое выключение.\nПрервать и повторить печать?";

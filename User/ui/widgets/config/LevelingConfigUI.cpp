@@ -85,17 +85,17 @@ void LevelingConfigUI::updateControls() {
             break;
         }
         case 1: {
-            sprintf(ui_buf1_100, "%.1f", mksCfg.x_probe_offset_from_extruder);
+            sprintf(ui_buf1_100, "%.2f", mksCfg.x_probe_offset_from_extruder);
             this->setButtonText(this->ui.probe.x_offset.button, ui_buf1_100);
-            sprintf(ui_buf1_100, "%.1f", mksCfg.y_probe_offset_from_extruder);
+            sprintf(ui_buf1_100, "%.2f", mksCfg.y_probe_offset_from_extruder);
             this->setButtonText(this->ui.probe.y_offset.button, ui_buf1_100);
-            sprintf(ui_buf1_100, "%.1f", zprobe_zoffset);
+            sprintf(ui_buf1_100, "%.2f", zprobe_zoffset);
             this->setButtonText(this->ui.probe.z_offset.button, ui_buf1_100);
-            sprintf(ui_buf1_100, "%.1f", mksCfg.xy_probe_speed);
+            sprintf(ui_buf1_100, "%.0f", mksCfg.xy_probe_speed);
             this->setButtonText(this->ui.probe.xy_speed.button, ui_buf1_100);
-            sprintf(ui_buf1_100, "%.1f", mksCfg.z_probe_speed_fast);
+            sprintf(ui_buf1_100, "%.0f", mksCfg.z_probe_speed_fast);
             this->setButtonText(this->ui.probe.z_speed_fast.button, ui_buf1_100);
-            sprintf(ui_buf1_100, "%.1f", mksCfg.z_probe_speed_slow);
+            sprintf(ui_buf1_100, "%.0f", mksCfg.z_probe_speed_slow);
             this->setButtonText(this->ui.probe.z_speed_slow.button, ui_buf1_100);
             break;
         }

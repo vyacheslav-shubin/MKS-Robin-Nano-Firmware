@@ -37,17 +37,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PreheatUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/LevelingConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MotorSettingsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MotorSettingsUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pic-build.py" beforeDir="false" afterPath="$PROJECT_DIR$/pic-build.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snapshot/mks_pic.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/mks_pic.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snapshot/robin_nano35.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/robin_nano35.zip" afterDir="false" />
     </list>
@@ -84,7 +75,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Middlewares/Third_Party/FatFs/src/option" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -136,14 +127,7 @@
       <workItem from="1595835465561" duration="390000" />
       <workItem from="1595836851399" duration="7672000" />
       <workItem from="1597415767940" duration="70285000" />
-      <workItem from="1597919741554" duration="20455000" />
-    </task>
-    <task id="LOCAL-00014" summary="printing info dialog">
-      <created>1590414282311</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1590414282311</updated>
+      <workItem from="1597919741554" duration="29681000" />
     </task>
     <task id="LOCAL-00015" summary="Calculator dialog widget">
       <created>1590504423258</created>
@@ -481,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597852281767</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="new mesh leveling UI">
+      <created>1597945765543</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1597945765543</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,7 +503,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="wifi-ui multilanguage +power off button on main ui" />
     <MESSAGE value="wifi upload firmware code refactoring + ProgressDialogUI" />
     <MESSAGE value="no file dialog ui prepare" />
     <MESSAGE value="Reprint no file dialog as widget" />
@@ -537,7 +527,8 @@
     <MESSAGE value="smapshot" />
     <MESSAGE value="long file name fix" />
     <MESSAGE value="bltouch init timer fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="bltouch init timer fixed" />
+    <MESSAGE value="new mesh leveling UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="new mesh leveling UI" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
@@ -570,10 +561,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="844" y="400" key="MultipleFileMergeDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590232149596" />
-    <state x="2" y="42" width="984" height="744" key="SettingsEditor" timestamp="1595836943837">
+    <state x="1" y="21" width="984" height="744" key="SettingsEditor" timestamp="1598004740223">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="2" y="42" width="984" height="744" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1595836943837" />
+    <state x="1" y="21" width="984" height="744" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1598004740223" />
     <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2" timestamp="1590165780112">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

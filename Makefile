@@ -19,12 +19,10 @@ CPP_OBJ			:= $(patsubst %.cpp,$(BUILD_BASE)/%.o,$(CPP_SRC))
 
 OBJ_LIST_FILE	:= $(BUILD_BASE)/obj.list
 
-PIC_LIST_FILE	:= $(BUILD_BASE)/pic.list
 PIC_INPUT		:= res/ui
 PIC_OUTPUT		:=	$(BUILD_BASE)/mks_pic
-
 PICS		:= $(patsubst $(PIC_INPUT)/%,%,$(shell find $(PIC_INPUT) -name *.png))
-BIN_PICS	:= $(patsubst %.png,$(BUILD_BASE)/mks_pic/bmp_%.bin,$(PICS))
+BIN_PICS	:= $(patsubst %.png,$(PIC_OUTPUT)/%.565,$(PICS))
 
 LIBS		:= Middlewares/GUI/GUI.a
 
@@ -43,6 +41,7 @@ SNAPSHOT_FILE	:=robin_nano35.zip
 SNAPSHOT_PIC_FILE	:=mks_pic.zip
 SNAPSHOT_DIR 	:= snapshot
 MKS_FIRMWARE 	:= $(BUILD_BASE)/$(MKS_BIN_FILE)
+WORK_DIR=$(CURDIR)
 
 LD_SCRIPT=MKS_ROBIN.ld
 
@@ -120,12 +119,18 @@ $(OBJ_LIST_FILE): $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)
 
 obj: $(OBJ_LIST_FILE)
 
-$(PIC_LIST_FILE): $(BIN_PICS)
-	echo $(BIN_PICS)>$(PIC_LIST_FILE)
 	
-pics: $(PIC_LIST_FILE)
+pics: $(BIN_PICS)
+	find $(PIC_OUTPUT) -name '*\.bin' -delete
+	mmv '$(PIC_OUTPUT)/*.565' $(PIC_OUTPUT)/bmp_#1.bin
+	mmv '$(PIC_OUTPUT)/*/*/*.565' $(PIC_OUTPUT)/#1/#2/bmp_#3.bin
 
-$(foreach src,$(PICS), $(eval $(call compile-pics, $(patsubst %.png, $(PIC_OUTPUT)/bmp_%.bin, $(src)), $(PIC_INPUT)/$(src) )))
+
+sync_pics:
+	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi
+	cp -r -u -v $(PIC_OUTPUT) $(SD_CARD)
+
+$(foreach src,$(PICS), $(eval $(call compile-pics, $(patsubst %.png, $(PIC_OUTPUT)/%.565, $(src)), $(PIC_INPUT)/$(src) )))
 
 $(foreach src,$(ASM_SRC), $(eval $(call compile-asm-objects, $(patsubst %.s, $(BUILD_BASE)/%.o, $(src)), $(src) )))
 
@@ -150,16 +155,11 @@ $(SD_CARD)/$(MKS_BIN_FILE): $(MKS_FIRMWARE)
 
 sd_bin: $(SD_CARD)/$(MKS_BIN_FILE)
 
-
 snapshot: $(MKS_FIRMWARE) pics
 	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE); fi
 	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE); fi
 	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(MKS_FIRMWARE)
-	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) $(PIC_OUTPUT)/*
-
-sync_pics:
-	if [ -d "$(SD_CARD)/bak_pic" ]; then mv $(SD_CARD)/bak_pic  $(SD_CARD)/mks_pic; fi
-	cp -r -u -v $(PIC_OUTPUT) $(SD_CARD)
+	cd $(PIC_OUTPUT) && zip -9 -r $(WORK_DIR)/$(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) *
 
 clear_wifi:
 	esptool.py --port `ls /dev/ttyUSB*` erase_flash

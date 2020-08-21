@@ -1,7 +1,11 @@
+import os
 from PIL import Image
 from sys import argv
 
 image=Image.open(argv[1])
+directory = os.path.dirname(argv[2])
+if not os.path.exists(directory):
+	os.makedirs(directory);
 out_file = open(argv[2], "wb")
 
 data=image.getdata()

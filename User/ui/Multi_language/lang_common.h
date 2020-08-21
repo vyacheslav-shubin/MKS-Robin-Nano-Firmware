@@ -75,6 +75,7 @@ typedef struct {
     const char * minumumT;
     const char * maximumT;
     const char * number_of_nozzles;
+    const char * e0_sensor_type;
     const char * nozzle;
     const char * steps;
     const char * acceleration;

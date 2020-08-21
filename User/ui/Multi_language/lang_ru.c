@@ -36,7 +36,8 @@ void lang_ru(void) {
     lang_str.config_ui.pid_termostat = "PID термостат";
     lang_str.config_ui.minumumT = "Мин T°C";
     lang_str.config_ui.maximumT = "Макс T°C";;
-    lang_str.config_ui.number_of_nozzles = "к-во сопел";
+    lang_str.config_ui.number_of_nozzles = "К-во сопел";
+    lang_str.config_ui.e0_sensor_type = "E0 сенсор";
     lang_str.config_ui.nozzle = "Сопло";
     lang_str.config_ui.steps = "Шаги";
     lang_str.config_ui.acceleration = "Ускорение";

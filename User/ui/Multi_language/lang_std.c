@@ -59,6 +59,7 @@ void lang_std(void) {
     lang_str.config_ui.minumumT = "Min T°C";
     lang_str.config_ui.maximumT = "Max T°C";;
     lang_str.config_ui.number_of_nozzles = "Number of nozzles";
+    lang_str.config_ui.e0_sensor_type = "E0 sensor type";
     lang_str.config_ui.nozzle = "Nozzle";
     lang_str.config_ui.steps = "Steps";
     lang_str.config_ui.acceleration = "Acceleration";

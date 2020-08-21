@@ -196,7 +196,7 @@ void NozzleConfigUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
     this->dual_columns = 1;
     if (page==0) {
-        this->createInputSingle(0, 0, &this->ui.nozzles, "Number of nozzles", 0);
+        this->createInputSingle(0, 0, &this->ui.nozzles, lang_str.config_ui.number_of_nozzles, 0);
         this->createInputSingle(0, 1, &this->ui.e0sensorType, "E0 type", _get_e0_sensor_type());
         this->createCheckPair(0, 2, &this->ui.pid_enabled, lang_str.config_ui.pid_termostat, mksCfg.pidtemp);
     } if (page==1) {

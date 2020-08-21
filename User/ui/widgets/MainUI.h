@@ -24,6 +24,7 @@ typedef struct {
 	UI_BUTTON filament;
     UI_BUTTON more;
     STATE_BUTTON ext1;
+    STATE_BUTTON ext2;
     STATE_BUTTON bed;
 } MAIN_UI_CONTROLS;
 
@@ -33,6 +34,7 @@ class MainUI: public StdWidget, public ActionDialogCallback{
 private:
     MAIN_UI_CONTROLS ui;
     char current_preheat_preset = 0;
+    void updateStateButtons();
 protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);

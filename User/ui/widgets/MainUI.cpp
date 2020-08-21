@@ -18,7 +18,6 @@
 #include "integration.h"
 #include "dialog/ConfirmDialogUI.h"
 #include "Application.h"
-#include "dialog/PowerOffDialogUI.h"
 
 MainUI main_ui;
 
@@ -78,13 +77,16 @@ void MainUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn == this->ui.power) {
         this->hide();
         ui_app.power_off_dialog(SUICIDE_WAIT);
-	    //this->hide();
-        //strcpy(ui_buf1_100, lang_str.power_off);
-        //strcat(ui_buf1_100, "?");
-        //confirm_dialog_ui.show(ui_buf1_100, this, 30, 0, this);
-        //power_off_dialog_ui.show();
 	}
 }
+
+void MainUI::updateStateButtons() {
+    ui_update_bed_state_button(&this->ui.bed);
+    ui_update_ext_state_button(&this->ui.ext1, 0);
+    if (this->ui.ext2.button)
+        ui_update_ext_state_button(&this->ui.ext2, 1);
+}
+
 
 void MainUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
@@ -102,17 +104,28 @@ void MainUI::createControls() {
 	} else {
 		#define middle  ((LCD_HEIGHT-BTN_Y_PIXEL)/2-titleHeight)
 		#define col(idx) SIMPLE_FIRST_PAGE_GRAP + 1 + (BTN_X_PIXEL+SIMPLE_FIRST_PAGE_GRAP) * idx
+        #define state_row(y) (ui_std_row(1) + row_offset + (row_size*y))
         this->ui.print = this->createButton(col(0), ui_std_row(0), img_print, lang_str.print);
 		this->ui.tools = this->createButton(col(1), ui_std_row(0), img_tools, lang_str.tools);
         this->ui.settings = this->createButton(col(2), ui_std_row(0), img_settings, lang_str.settings);
         this->ui.heat_preset = this->createButton(col(1), ui_std_row(1), 0, 0);
-
-        ui_std_ext1_state_button(col(0), ui_std_row(1) + 20, &this->ui.ext1);
-        ui_std_bed_state_button(col(0), ui_std_row(1) + 65, &this->ui.bed);
+        int row_offset;
+        int row_size;
+        if (is_dual_extruders()) {
+            row_offset = 0;
+            row_size = 40;
+            ui_std_ext1_state_button(col(0), state_row(0), &this->ui.ext1);
+            ui_std_ext2_state_button(col(0), state_row(1), &this->ui.ext2);
+            ui_std_bed_state_button(col(0), state_row(2), &this->ui.bed);
+        } else {
+            row_offset = 20;
+            row_size = 45;
+            ui_std_ext1_state_button(col(0), state_row(0), &this->ui.ext1);
+            ui_std_bed_state_button(col(0), state_row(1), &this->ui.bed);
+        }
         this->ui.power = this->createButton(col(2), ui_std_row(1), img_power, lang_str.power_off);
         ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
-        ui_update_bed_state_button(&this->ui.bed);
-        ui_update_ext_state_button(&this->ui.ext1, 0);
+        this->updateStateButtons();
 	}
 }
 
@@ -122,8 +135,6 @@ void MainUI::refresh_1s() {
         ui_app.drawTitle();
     if(gCfgItems.display_style == 0) {
 
-    } else {
-        ui_update_bed_state_button(&this->ui.bed);
-        ui_update_ext_state_button(&this->ui.ext1, 0);
-    }
+    } else
+        this->updateStateButtons();
 }

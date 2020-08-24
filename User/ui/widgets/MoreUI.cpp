@@ -25,25 +25,31 @@ void static do_action(int index) {
 }
 
 static void check_images() {
-	/*
+
 	uint8_t cnt;
 	SPI_FLASH_BufferRead(&cnt,PIC_COUNTER_ADDR,1);
 	if(cnt == 0xff)
 		cnt = 0;
-	char buf[20];
 	int a = PIC_NAME_ADDR;
 	for(unsigned char i = 0;i < cnt;i++) {
 		uint8_t j = 0;
 		do {
-			SPI_FLASH_BufferRead(&buf[j],a++,1);
-		} while (buf[j++] != 0);
-		for (char k=0;k<6;k++)
+			SPI_FLASH_BufferRead(&ui_buf1_100[j],a++,1);
+			if (i==sizeof(ui_buf1_100))
+			    break;
+		} while (ui_buf1_100[j++] != 0);
+		//for (char k=0;k<6;k++)
 		//int sz;
 		//SPI_FLASH_BufferRead((char*)&sz,PIC_SIZE_ADDR+i*4,4);
-		SERIAL_ECHOLNPAIR("NAME:", buf);
+		if (strstr(ui_buf1_100, "bmp_custom")==&ui_buf1_100[0]) {
+		    char c = ui_buf1_100[10];
+		    if ((c>='1') && (c<='6')) {
+		        c = c - '1';
+                has_image|=1<<c;
+		    }
+		}
 		//SERIAL_ECHOLNPAIR(" SIZE:", sz);
 	}
-	*/
 	has_image|=1<<7;
 }
 

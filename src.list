@@ -144,7 +144,7 @@ User/ui/widgets/config/MotorSettingsUI.cpp
 User/ui/widgets/config/MotorDirConfigUI.cpp
 User/ui/widgets/config/MachineConfigurationUI.cpp
 User/ui/widgets/config/AdvancedConfigUI.cpp
-User/ui/widgets/config/FilamentChangeConfigUI.cpp
+User/ui/widgets/config/FilamentConfigUI.cpp
 User/ui/widgets/config/HomeConfigUI.cpp
 User/ui/widgets/config/MachineTypeConfigUI.cpp
 User/ui/widgets/config/LanguageConfigUI.cpp

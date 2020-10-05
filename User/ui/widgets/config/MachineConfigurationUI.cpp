@@ -8,7 +8,7 @@
 #include "LevelingConfigUI.h"
 #include "AdvancedConfigUI.h"
 #include "dialog/CalculatorDialogUI.h"
-#include "FilamentChangeConfigUI.h"
+#include "FilamentConfigUI.h"
 #include "HomeConfigUI.h"
 #include "HotBedConfigUI.h"
 #include "NozzleConfigUI.h"
@@ -66,7 +66,7 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
         sensor_level_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.filament_settings)) {
         this->hide();
-        filament_change_config_ui.show(this);
+        filament_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.leveling_settings)) {
         this->hide();
         leveling_config_ui.show(this);

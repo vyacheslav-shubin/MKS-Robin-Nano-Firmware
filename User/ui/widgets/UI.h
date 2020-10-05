@@ -35,7 +35,7 @@
 #include "dialog/ProgressDialogUI.h"
 #include "config/MachineConfigurationUI.h"
 #include "config/MachineSizeUI.h"
-#include "config/FilamentChangeConfigUI.h"
+#include "config/FilamentConfigUI.h"
 #include "config/HomeConfigUI.h"
 #include "config/SensorLevelConfigUI.h"
 #include "config/LevelingConfigUI.h"

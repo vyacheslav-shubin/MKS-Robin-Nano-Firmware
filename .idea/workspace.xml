@@ -37,10 +37,30 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pic-build.py" beforeDir="false" afterPath="$PROJECT_DIR$/pic-build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snapshot/mks_pic.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/mks_pic.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snapshot/robin_nano35.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/robin_nano35.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inc/mks_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/mks_cfg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/mks_cfg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_cfg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/mks_reprint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_reprint.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/sh_tools.c" beforeDir="false" afterPath="$PROJECT_DIR$/Src/sh_tools.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/sh_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/Src/sh_tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/FilamentChangeConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/FilamentConfigUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/FilamentChangeConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/FilamentConfigUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +94,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Middlewares/Third_Party/FatFs/src/option" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -88,12 +108,23 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="work" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="work" TARGET_NAME="work" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="work" RUN_TARGET_NAME="work">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -127,49 +158,11 @@
       <workItem from="1595835465561" duration="390000" />
       <workItem from="1595836851399" duration="7672000" />
       <workItem from="1597415767940" duration="70285000" />
-      <workItem from="1597919741554" duration="29681000" />
-    </task>
-    <task id="LOCAL-00015" summary="Calculator dialog widget">
-      <created>1590504423258</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1590504423258</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Calculator dialog widget">
-      <created>1590504430043</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1590504430043</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Machine size config, filament change config as widget">
-      <created>1590588941484</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1590588941484</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Confirm dialog on filament load">
-      <created>1590590694915</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1590590694915</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Home config as widget. Direction+Speed = One widget">
-      <created>1590668049034</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1590668049034</updated>
-    </task>
-    <task id="LOCAL-00020" summary="sensor level config as widget">
-      <created>1590683778479</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1590683778479</updated>
+      <workItem from="1597919741554" duration="45655000" />
+      <workItem from="1600091202398" duration="52000" />
+      <workItem from="1600091427415" duration="140000" />
+      <workItem from="1600091703709" duration="21000" />
+      <workItem from="1600092929457" duration="12488000" />
     </task>
     <task id="LOCAL-00021" summary="sensor level config as widget">
       <created>1590683782774</created>
@@ -472,11 +465,53 @@
       <option name="project" value="LOCAL" />
       <updated>1597945765543</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="up-to-down temperature preset button">
+      <created>1598011346476</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1598011346476</updated>
+    </task>
+    <task id="LOCAL-00065" summary="main manu + dual extruder">
+      <created>1598017708348</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1598017708348</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Nozzle config/multi language">
+      <created>1598018409712</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1598018409712</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Nozzle config/multi language">
+      <created>1598018464018</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1598018464018</updated>
+    </task>
+    <task id="LOCAL-00068" summary="custom button images">
+      <created>1598261579317</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1598261579317</updated>
+    </task>
+    <task id="LOCAL-00069" summary="ui images">
+      <created>1598261624003</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1598261624003</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -503,11 +538,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="wifi upload firmware code refactoring + ProgressDialogUI" />
-    <MESSAGE value="no file dialog ui prepare" />
-    <MESSAGE value="Reprint no file dialog as widget" />
-    <MESSAGE value="wifi module" />
-    <MESSAGE value="wifi module fix" />
     <MESSAGE value="drop bind to cloud" />
     <MESSAGE value="-draw_dialog - deleted. Leveling config as single widget" />
     <MESSAGE value="-rudiments" />
@@ -528,13 +558,14 @@
     <MESSAGE value="long file name fix" />
     <MESSAGE value="bltouch init timer fixed" />
     <MESSAGE value="new mesh leveling UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="new mesh leveling UI" />
+    <MESSAGE value="up-to-down temperature preset button" />
+    <MESSAGE value="main manu + dual extruder" />
+    <MESSAGE value="Nozzle config/multi language" />
+    <MESSAGE value="custom button images" />
+    <MESSAGE value="ui images" />
+    <option name="LAST_COMMIT_MESSAGE" value="ui images" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590145878217">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="424" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590145878217" />
     <state x="2606" y="360" width="549" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591794734176">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -557,35 +588,23 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="640" height="476" key="ImportCMakeProjectWizard.topPanel/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591803636346" />
-    <state x="844" y="400" key="MultipleFileMergeDialog" timestamp="1590232149596">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="844" y="400" key="MultipleFileMergeDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590232149596" />
     <state x="1" y="21" width="984" height="744" key="SettingsEditor" timestamp="1598004740223">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1" y="21" width="984" height="744" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1598004740223" />
-    <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2" timestamp="1590165780112">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="560" y="278" width="802" height="546" key="Vcs.Push.Dialog.v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1590165780112" />
     <state x="2535" y="172" width="694" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593099881385">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="615" y="172" width="692" height="757" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592325044537" />
     <state x="2535" y="172" width="694" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593099881385" />
-    <state x="1" y="21" width="923" height="641" key="find.popup" timestamp="1597854364367">
+    <state x="1" y="21" width="923" height="641" key="find.popup" timestamp="1598263146739">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1" y="21" width="923" height="641" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1597854364367" />
-    <state x="718" y="282" key="git4idea.branch.GitSmartOperationDialog" timestamp="1591185560132">
+    <state x="1" y="21" width="923" height="641" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1598263146739" />
+    <state x="623" y="244" key="run.anything.popup" timestamp="1600097026798">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="718" y="282" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591185560132" />
-    <state x="623" y="244" key="run.anything.popup" timestamp="1593693079785">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1593693079785" />
+    <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1600097026798" />
     <state x="623" y="234" width="672" height="678" key="search.everywhere.popup" timestamp="1597929082424">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -601,7 +620,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Src/wifi_module.cpp</url>
-          <line>1048</line>
+          <line>1059</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">

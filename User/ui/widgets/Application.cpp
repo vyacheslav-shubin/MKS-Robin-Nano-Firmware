@@ -128,7 +128,7 @@ void PowerDetector::refresh_05() {
         this->init();
 }
 void PowerDetector::init() {
-    if (gCfgItems.mask_det_Function & MASK_DETECTOR_POWER) {
+    if (gCfgItems.feature_mask & MASK_DETECTOR_POWER) {
         this->active = 0;
     } else {
         this->active = (MKS_PW_DET_OP);

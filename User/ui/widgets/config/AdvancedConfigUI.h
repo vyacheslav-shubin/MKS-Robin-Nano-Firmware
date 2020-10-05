@@ -14,9 +14,6 @@ typedef struct {
 	UI_CHECK	simpleMainUI;
 	UI_CHECK	diplayBackLight;
 	UI_INPUT_WITH_DEFAULT timeShift;
-    UI_CHECK	filamentDet;
-    //todo: доделать
-    UI_CHECK	wifiScan;
 } ADVANCED_CONFIG_UI_CONTROLS;
 
 class AdvancedConfigUI  : public ConfigurationWidgetWithCalc {

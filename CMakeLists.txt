@@ -638,8 +638,8 @@ add_executable(work
 		User/ui/widgets/config/LanguageConfigUI.h
 		User/ui/widgets/config/MachineConfigurationUI.cpp
 		User/ui/widgets/config/MachineConfigurationUI.h
-		User/ui/widgets/config/FilamentChangeConfigUI.h
-		User/ui/widgets/config/FilamentChangeConfigUI.cpp
+        User/ui/widgets/config/FilamentConfigUI.h
+        User/ui/widgets/config/FilamentConfigUI.cpp
 		User/ui/widgets/config/HomeConfigUI.cpp
 		User/ui/widgets/config/SensorLevelConfigUI.h
 		User/ui/widgets/config/SensorLevelConfigUI.cpp

@@ -62,7 +62,7 @@ void draw_return_ui() {
             case ADVANCED_UI:		advanced_config_ui.show();		            break;
 			case SET_UI:			settings_ui.show();		                    break;
             case MACHINE_SETTINGS_UI:   machine_configuration_ui.show();		break;
-            case FILAMENT_SETTINGS_UI:		filament_change_config_ui.show();	break;
+            case FILAMENT_SETTINGS_UI:		filament_config_ui.show();	break;
             case XYZ_LEVELING_PARA_UI:		manual_leveling_ui.show();			break;
             case HOME_SETTINGS_UI:  home_config_ui.show();                      break;
             case ENDSTOP_TYPE_UI:	sensor_level_config_ui.show();		        break;

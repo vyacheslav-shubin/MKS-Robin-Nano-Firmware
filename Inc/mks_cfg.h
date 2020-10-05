@@ -293,7 +293,7 @@ EEPROM 2K byte ����
 //#define EPR_Y_HOME_BUMP_MM							EPR_X_HOME_BUMP_MM+2
 //#define EPR_Z_HOME_BUMP_MM							EPR_Y_HOME_BUMP_MM+2
 
-#define EPR_ENABLE_WIFI_SCAN	EPR_RESUME_SPEED + 2
+#define EPR_ENABLE_WIFI_SCAN	                        EPR_RESUME_SPEED + 2
 #define EPR_SINGLE_NOZZLE								EPR_ENABLE_WIFI_SCAN + 1
 #define EPR_STANDBY_MODE								EPR_SINGLE_NOZZLE + 1
 #define EPR_STANDBY_TIME								EPR_STANDBY_MODE + 1
@@ -304,14 +304,49 @@ EEPROM 2K byte ����
 #define EPR_BED_MINTEMP			EPR_PRINT_FINESH_COUNT + 2
 #define EPR_Z_SAFE_HOMING               EPR_BED_MINTEMP + 2
 
-#define EPR_TIME_SHIFT          EPR_Z_SAFE_HOMING + 1
-#define EPR_END_ADDR			EPR_TIME_SHIFT + 2
+#define EPR_MKS_END             EPR_Z_SAFE_HOMING + 1
+
+typedef struct  __attribute__((__packed__)) {
+    char MKS_CFG[EPR_MKS_END];
+    unsigned short TIME_SHIFT;
+} ERP_MAP;
+
+#define ERP_OFFSET(ITEM)  ((unsigned long)(&((ERP_MAP *)0)->ITEM))
+
+//2
+#define EPR_TIME_SHIFT          EPR_MKS_END
+//2*4
+//define PREHEAT_PRESET          EPR_TIME_SHIFT + 2
+
+
+#define EPR_USED EPR_MKS_END + 2
+
+
+//#define EPR_END_ADDR			EPR_TIME_SHIFT + 2
 //#define EPR_END_ADDR EPR_PRINT_FINESH_COUNT + 2//EPR_END_ADDR=1852
 
-#if EPR_END_ADDR > 2048
+#if (EPR_USED > 2048)
   #error "EPR_END_ADDR IS OVERFLOW!"
 #endif
 
+/*
+typedef struct {
+    unsigned char nozzle;
+    unsigned char bed;
+} PREHEAT_PRESET_FILANENT;
+
+typedef struct {
+    union {
+        PREHEAT_PRESET_FILANENT items[0];
+        struct {
+            PREHEAT_PRESET_FILANENT pla;
+            PREHEAT_PRESET_FILANENT sbs;
+            PREHEAT_PRESET_FILANENT petg;
+            PREHEAT_PRESET_FILANENT abs;
+        } data;
+    };
+} PREHEAT_PRESET_CONFIG;
+*/
 typedef struct
 {
 	uint8_t invert_x_dir;	        //INVERT_X_DIR
@@ -500,6 +535,7 @@ typedef struct {
 
 #define MASK_DETECTOR_FILAMENT      (1<<0)
 #define MASK_DETECTOR_POWER         (1<<1)
+#define MODULE_WIFI                 (2<<1)
 
 
 typedef struct {
@@ -589,20 +625,15 @@ typedef struct {
 		volatile uint8_t func_btn2_display_flag;
 		volatile uint8_t func_btn3_display_flag;
 	
-		volatile uint8_t extern_chinese_flg;//�ⲿ�ֿ⡣
-	
+		volatile uint8_t extern_chinese_flg;
 		volatile uint8_t power_control_flags;
-	
-		//volatile uint32_t filamentchange_speed;//�����ٶ�
-		//volatile uint8_t filamentchange_step;//���ϲ��� 
-		//volatile uint32_t filament_limit_temper;
-		
+
 		uint8_t morefunc_cnt;//volatile 
 
         FILAMENT_CHANGE_CONFIG  filamentchange;
 
-		volatile uint8_t leveling_mode;//��ƽģʽ0:�ֶ���ƽ��1:�Զ���ƽ
-		volatile uint8_t leveling_point_number;//�ֶ���ƽ����������(����3/4/5����ֵ)
+		volatile uint8_t leveling_mode;
+		volatile uint8_t leveling_point_number;
 
 		XY_POINT leveling_points[5];
 		
@@ -660,12 +691,12 @@ typedef struct {
 		volatile float stepZoffset;
 		volatile uint8_t zoffset_display_flg;
 		volatile uint8_t quickstop_display_flg;	
-    volatile uint8_t mask_det_Function;
+        volatile uint8_t feature_mask;
 
 		volatile char wifi_ap[32];	//wifi���������ַ���
 		volatile char wifi_key[64]; //wifi�����ַ���
 		volatile uint8_t wifi_mode_sel;		
-    volatile uint8_t wifi_type;
+        volatile uint8_t wifi_type;
 		volatile char cloud_enable; 
 		volatile char cloud_hostUrl[96];	//�����ӵ�ַ
 		volatile int cloud_port;		//�����Ӷ˿�

@@ -28,10 +28,6 @@ void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
         epr_write_data(EPR_TIME_SHIFT, (const unsigned char*)&gCfgItems.time_offset, sizeof(gCfgItems.time_offset));
 	} else if (hBtn == this->ui.timeShift.button) {
 	    this->calculator(lang_str.config_ui.time_shift, gCfgItems.time_offset, 0);
-    } else if (hBtn == this->ui.filamentDet.button) {
-        gCfgItems.mask_det_Function ^= MASK_DETECTOR_FILAMENT;
-        this->updateCheckButton(ui.filamentDet.button, !(gCfgItems.mask_det_Function & MASK_DETECTOR_FILAMENT));
-        epr_write_data(EPR_MASK_DET_FUNCTION,(unsigned char *)&gCfgItems.mask_det_Function, sizeof(gCfgItems.mask_det_Function));
 	} else
         ConfigurationWidget::on_button(hBtn);
 }
@@ -52,10 +48,17 @@ void AdvancedConfigUI::createControls() {
 	ConfigurationWidget::createControls();
 	memset(&this->ui, 0, sizeof(this->ui));
     this->dual_columns = 0;
-    this->createCheckPair(0, 0, &this->ui.simpleMainUI, lang_str.config_ui.simple_main_ui, gCfgItems.display_style==1);
-    this->createCheckPair(0, 1, &this->ui.filamentDet, lang_str.config_ui.filament_detector, !(gCfgItems.mask_det_Function & MASK_DETECTOR_FILAMENT));
-    this->createCheckPair(0, 2, &this->ui.diplayBackLight, lang_str.config_ui.display_backlight_off, gCfgItems.standby_mode==1);
-    this->createInputWithDefault(0, 3, &this->ui.timeShift, lang_str.config_ui.time_shift, 0);
+	switch (this->page) {
+	    case 0: {
+            this->createCheckPair(0, 0, &this->ui.simpleMainUI, lang_str.config_ui.simple_main_ui,
+                                  gCfgItems.display_style == 1);
+            this->createCheckPair(0, 1, &this->ui.diplayBackLight, lang_str.config_ui.display_backlight_off,
+                                  gCfgItems.standby_mode == 1);
+            this->createInputWithDefault(0, 2, &this->ui.timeShift, lang_str.config_ui.time_shift, 0);
+            break;
+        }
+    }
+
     this->updateControls();
 }
 

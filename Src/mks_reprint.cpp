@@ -57,7 +57,7 @@ void mkstft_ui_load() {
     epr_read_data(EPR_HAS_UPS,(uint8_t *)&gCfgItems.have_ups,sizeof(gCfgItems.have_ups));
     epr_read_data(EPR_FILAMENT_DET0_LEVEL,(uint8_t *)&gCfgItems.filament_det0_level_flg,sizeof(gCfgItems.filament_det0_level_flg));
     epr_read_data(EPR_FILAMENT_DET1_LEVEL,(uint8_t *)&gCfgItems.filament_det1_level_flg,sizeof(gCfgItems.filament_det1_level_flg));
-    epr_read_data(EPR_MASK_DET_FUNCTION,(uint8_t *)&gCfgItems.mask_det_Function,sizeof(gCfgItems.mask_det_Function));
+    epr_read_data(EPR_MASK_DET_FUNCTION, (uint8_t *)&gCfgItems.feature_mask, sizeof(gCfgItems.feature_mask));
 
     epr_read_data(EPR_LEVELING_MODE,(uint8_t *)&gCfgItems.leveling_mode,sizeof(gCfgItems.leveling_mode));
     epr_read_data(EPR_LEVELING_POINT_CNT,(uint8_t *)&gCfgItems.leveling_point_number,sizeof(gCfgItems.leveling_point_number));
@@ -129,7 +129,7 @@ void mkstft_ui_set_epr() {
 		epr_write_data(EPR_HAS_UPS,(uint8_t *)&gCfgItems.have_ups,sizeof(gCfgItems.have_ups));	
 		epr_write_data(EPR_FILAMENT_DET0_LEVEL,(uint8_t *)&gCfgItems.filament_det0_level_flg,sizeof(gCfgItems.filament_det0_level_flg));	
 		epr_write_data(EPR_FILAMENT_DET1_LEVEL,(uint8_t *)&gCfgItems.filament_det1_level_flg,sizeof(gCfgItems.filament_det1_level_flg));	
-		epr_write_data(EPR_MASK_DET_FUNCTION,(uint8_t *)&gCfgItems.mask_det_Function,sizeof(gCfgItems.mask_det_Function));	
+		epr_write_data(EPR_MASK_DET_FUNCTION, (uint8_t *)&gCfgItems.feature_mask, sizeof(gCfgItems.feature_mask));
 
 		epr_write_data(EPR_LEVELING_MODE,(uint8_t *)&gCfgItems.leveling_mode,sizeof(gCfgItems.leveling_mode));	
 		epr_write_data(EPR_LEVELING_POINT_CNT,(uint8_t *)&gCfgItems.leveling_point_number,sizeof(gCfgItems.leveling_point_number));	
@@ -214,7 +214,7 @@ void mkstft_ui_init() {
 	gCfgItems.have_ups = 0;
 	gCfgItems.filament_det0_level_flg=0;
 	gCfgItems.filament_det1_level_flg=0;
-	gCfgItems.mask_det_Function = 0;
+	gCfgItems.feature_mask = 0;
 
 	gCfgItems.power_control_flags = 0;
 	ui_print_process.suicide_enabled = gCfgItems.power_control_flags;

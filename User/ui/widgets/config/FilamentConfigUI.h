@@ -2,8 +2,8 @@
 // Created by shubin on 27.05.2020.
 //
 
-#ifndef WORK_FILAMENTCHANGECONFIGUI_H
-#define WORK_FILAMENTCHANGECONFIGUI_H
+#ifndef WORK_FILAMENTCONFIGUI_H
+#define WORK_FILAMENTCONFIGUI_H
 
 #include "ConfigurationWidget.h"
 #include "../dialog/CalculatorDialogUI.h"
@@ -17,12 +17,15 @@ typedef struct {
 typedef struct {
     FILAMET_CHANGE_UI_CONTROLS_SET 	load;
     FILAMET_CHANGE_UI_CONTROLS_SET 	unload;
-} FILAMET_CHANGE_UI_CONTROLS;
+    UI_CHECK	filamentDet;
+    UI_CHECK	e1;
+    UI_CHECK	e2;
+} FILAMET_CONFIG_UI_CONTROLS;
 
 
-class FilamentChangeConfigUI : public ConfigurationWidgetWithCalc{
+class FilamentConfigUI : public ConfigurationWidgetWithCalc{
 private:
-    FILAMET_CHANGE_UI_CONTROLS ui;
+    FILAMET_CONFIG_UI_CONTROLS ui;
     void updateValues();
     void createSet(FILAMET_CHANGE_UI_CONTROLS_SET * set, unsigned char col);
     unsigned char checkButtonSet(UI_BUTTON hBtn, unsigned char index);
@@ -34,10 +37,10 @@ protected:
         this->_setValue(value_id, value);
     }
 public:
-    virtual const char * getTitle() {return lang_str.ui_title_config_filament_change;};
-    FilamentChangeConfigUI() : ConfigurationWidgetWithCalc(FILAMENT_SETTINGS_UI, 1) {};
+    virtual const char * getTitle() {return lang_str.ui_title_config_filament;};
+    FilamentConfigUI() : ConfigurationWidgetWithCalc(FILAMENT_SETTINGS_UI, 2) {};
 };
 
-extern FilamentChangeConfigUI filament_change_config_ui;
+extern FilamentConfigUI filament_config_ui;
 
-#endif //WORK_FILAMENTCHANGECONFIGUI_H
+#endif //WORK_FILAMENTCONFIGUI_H

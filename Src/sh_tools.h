@@ -12,7 +12,9 @@
 #define POWER_CONTROL_SUNCIDE                   (1<<0)
 #define POWER_CONTROL_WAIT_HOTEND               (1<<1)
 #define POWER_CONTROL_HARDWARE_AS_SOFTWARE      (1<<2)
+#define POWER_CONTROL_MODULE_PRESENTS           (1<<3)
 
+#define is_power_control_presents()             (gCfgItems.power_control_flags & POWER_CONTROL_MODULE_PRESENTS)
 
 extern unsigned char is_filament_fail(void);
 

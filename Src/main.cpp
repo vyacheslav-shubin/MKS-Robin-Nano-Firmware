@@ -136,10 +136,14 @@ int main(void) {
 
     MYSERIAL.begin(BAUDRATE);
     SERIAL_PROTOCOLLNPGM("mksRobinNano start");
-    SERIAL_PROTOCOLPAIR("EPR_END_ADDR:",EPR_END_ADDR);
+    SERIAL_PROTOCOLPAIR("EPR_END_ADDR:",EPR_USED);
     SERIAL_EOL();
     SERIAL_ECHO_START();
-    
+    if (sizeof(ERP_MAP)>=2048) {
+        SERIAL_PROTOCOLLN("EPR SIZE OVERFLOW");
+        while (1);
+    }
+
 #ifdef USE_MKS_WIFI  
 	WIFISERIAL.begin(115200);   
 #endif

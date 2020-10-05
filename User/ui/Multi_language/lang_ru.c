@@ -5,6 +5,8 @@ void lang_ru(void) {
     lang_str.config_ui.power_off_temperature_wait = "Дожидаться охлаждения перед выключением";
     lang_str.config_ui.power_off_hardware_button_as_sofware = "Обработка аппаратной кнопки как программной";
 	lang_str.config_ui.simple_main_ui = "Простое меню";
+    lang_str.config_ui.module_wifi = "Модуль WiFi";
+    lang_str.config_ui.module_power = "Модуль присутствует";
 	lang_str.config_ui.display_backlight_off = "Выключать подсветку дисплея";
 	lang_str.config_ui.axes_inversion = "Инверсия осей";
 	lang_str.config_ui.motor_steps_settings = "Настройка шагов";
@@ -119,7 +121,7 @@ void lang_ru(void) {
 	lang_str.ui_title_printing= "Печать";
 	lang_str.ui_title_speed = "Подстройка скорости";
     lang_str.ui_title_config_machine_size = "Размеры области печати";
-    lang_str.ui_title_config_filament_change = "Настройки замены филамента";
+    lang_str.ui_title_config_filament = "Настройки филамента";
     lang_str.ui_title_leveling_points = "Контрольные точки ручной настройки";
     lang_str.ui_title_leveling_type = "Тип определения уровня стола";
     lang_str.ui_title_mesh_leveling = "Определение уровней стола";
@@ -154,6 +156,7 @@ void lang_ru(void) {
     lang_str.dialog.confirm_filament_load = "Загрузить филамент?";
     lang_str.dialog.power_off = "Выключение питания";
     lang_str.dialog.power_off_waiting_hotend = "Ожидание охлаждения";
+    lang_str.dialog.no_sd_card = "Нет SD карты";
 
     lang_str.wf.state = "Состояние";
     lang_str.wf.connected = "Подключено";
@@ -174,6 +177,6 @@ void lang_ru(void) {
     lang_str.wf.upload_fail = "Ошибка загрузки";
     lang_str.wf.upload_fail_deiail_time_expired = "Превышено время ожидания";
     lang_str.wf.protocol_error = "Нарушение протокола обмена";
-    lang_str.wf.file_write_fail = "Ошибка при запись файла";
+    lang_str.wf.file_write_fail = "Ошибка при записи файла";
 
 }

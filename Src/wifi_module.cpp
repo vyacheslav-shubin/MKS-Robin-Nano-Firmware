@@ -1038,6 +1038,17 @@ void utf8_2_gbk(uint8_t *source,uint8_t Len) {
 
 char saveFilePath[50];
 
+static void file_upload_error(const char * msg) {
+    memset(file_writer.buf, 0, sizeof(file_writer.buf));
+    file_writer.buffer_index = 0;
+    wifi_link_state = WIFI_CONNECTED;
+    upload_result = 2;
+    strcpy(ui_buf1_100, lang_str.wf.upload_fail);
+    strcat(ui_buf1_100, "\n");
+    strcat(ui_buf1_100, msg);
+    progress_ui.fail(ui_buf1_100);
+}
+
 static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	uint8_t fileNameLen = *msg;
 	FRESULT res;
@@ -1050,7 +1061,7 @@ static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
     SERIAL_ECHOLNPAIR("FILE SIZE=", file_writer.fileSize);
     SERIAL_ECHOLNPAIR("FILE NAME=", (char *)file_writer.fileName);
 
-	utf8_2_gbk(file_writer.fileName, fileNameLen);
+    utf8_2_gbk(file_writer.fileName, fileNameLen);
 	if(strlen((const char *)file_writer.fileName) > sizeof(saveFilePath))
 		return;
 
@@ -1059,90 +1070,70 @@ static void file_first_msg_handle(uint8_t * msg, uint16_t msgLen) {
 	if(SD_DET_IP == SD_DETECT_INVERTED) {
         sprintf((char *)saveFilePath, "1:/%s", file_writer.fileName);
         f_mount(&fs, (TCHAR const*)SD_Path, 0);
-    }
 
-    file_writer.fragment = -1;
+        file_writer.fragment = -1;
 
-	memset(&wifiTransferState, 0, sizeof(wifiTransferState));
+        memset(&wifiTransferState, 0, sizeof(wifiTransferState));
 
-	wifi_delay(1000);
-		
-	res = f_open(&file_writer.file, (const TCHAR *)saveFilePath, FA_CREATE_ALWAYS | FA_WRITE);
+        wifi_delay(1000);
 
-	if(res != FR_OK) {
-		upload_result = 2;
-        wifiTransferState.is_error = 1;
-        wifiTransferState.start_tick = getWifiTick();
-        strcpy(ui_buf1_100, lang_str.wf.upload_fail);
-        strcat(ui_buf1_100, "\n");
-        strcat(ui_buf1_100, lang_str.wf.file_write_fail);
-        progress_ui.fail(ui_buf1_100);
-		return;
+        res = f_open(&file_writer.file, (const TCHAR *)saveFilePath, FA_CREATE_ALWAYS | FA_WRITE);
+
+        if(res != FR_OK) {
+            file_upload_error(lang_str.wf.file_write_fail);
+        } else {
+            wifi_link_state = WIFI_TRANS_FILE;
+            upload_result = 1;
+            strcpy(ui_buf1_100, lang_str.wf.uploading);
+            strcat(ui_buf1_100, "\n");
+            strcat(ui_buf1_100, file_writer.fileName);
+            progress_ui.progress(ui_buf1_100, 0);
+        }
+    } else {
+        file_upload_error(lang_str.dialog.no_sd_card);
 	}
-	wifi_link_state = WIFI_TRANS_FILE;
-	upload_result = 1;
-    strcpy(ui_buf1_100, lang_str.wf.uploading);
-    strcat(ui_buf1_100, "\n");
-    strcat(ui_buf1_100, file_writer.fileName);
-    progress_ui.progress(ui_buf1_100, 0);
     ui_app.idle();
 }
 
 #define FRAG_MASK	((u32)(~(1 << 31)))
 
 static void file_fragment_msg_handle(uint8_t * msg, uint16_t msgLen) {
-    u32 num_write;
-	u32 frag = *((uint32_t *)msg);
-	if (frag==0)
-        SERIAL_ECHOLN("FIRST FRAGEMENT");
-	if((frag & FRAG_MASK) != file_writer.fragment  + 1) {
-		memset(file_writer.buf, 0, sizeof(file_writer.buf));
-		file_writer.buffer_index = 0;
-		wifi_link_state = WIFI_CONNECTED;	
-		upload_result = 2;
-        strcpy(ui_buf1_100, lang_str.wf.upload_fail);
-        strcat(ui_buf1_100, "\n");
-        strcat(ui_buf1_100, lang_str.wf.protocol_error);
-        progress_ui.fail(ui_buf1_100);
-	} else {
-		if(write_to_file((char *)msg + 4, msgLen - 4) < 0) {
-			memset(file_writer.buf, 0, sizeof(file_writer.buf));
-			file_writer.buffer_index = 0;
-			wifi_link_state = WIFI_CONNECTED;	
-			upload_result = 2;
-            strcpy(ui_buf1_100, lang_str.wf.upload_fail);
-            strcat(ui_buf1_100, "\n");
-            strcat(ui_buf1_100, lang_str.wf.file_write_fail);
-            progress_ui.fail(ui_buf1_100);
-			return;
-		} else {
-            unsigned char p = file_writer.fileSize==0 ? 0 : (u8)((float)file_writer.totalWrot / (float)file_writer.fileSize * 100);
-		    progress_ui.progress(0, p);
-            ui_app.idle();
-        }
-        file_writer.fragment = frag;
+    if (wifi_link_state == WIFI_TRANS_FILE) {
+        u32 num_write;
+        u32 frag = *((uint32_t *) msg);
+        if (frag == 0)
+            SERIAL_ECHOLN("FIRST FRAGEMENT");
+        if ((frag & FRAG_MASK) != file_writer.fragment + 1) {
+            file_upload_error(lang_str.wf.protocol_error);
+        } else {
+            if (write_to_file((char *) msg + 4, msgLen - 4) < 0) {
+                file_upload_error(lang_str.wf.file_write_fail);
+            } else {
+                unsigned char p = file_writer.fileSize == 0 ? 0 : (u8) ((float) file_writer.totalWrot /
+                                                                        (float) file_writer.fileSize * 100);
+                progress_ui.progress(0, p);
 
-		if(frag & (~FRAG_MASK)) {
-            SERIAL_ECHOLN("LAST FRAGEMENT");
-			FRESULT res =  f_write (&file_writer.file, file_writer.buf, file_writer.buffer_index, &num_write);
-			if((res != FR_OK) || (num_write != file_writer.buffer_index)) {
-				memset(file_writer.buf, 0, sizeof(file_writer.buf));
-				file_writer.buffer_index = 0;
-				wifi_link_state = WIFI_CONNECTED;	
-				upload_result = 2; 
-				return;
-			}
-			memset(file_writer.buf, 0, sizeof(file_writer.buf));
-			file_writer.buffer_index = 0;
-			wifi_link_state = WIFI_CONNECTED;
-			upload_result = 3;
-            strcpy(ui_buf1_100, lang_str.wf.uploaded);
-            strcat(ui_buf1_100, "\n");
-            strcat(ui_buf1_100, file_writer.fileName);
-            progress_ui.complete(ui_buf1_100);
-            ui_app.idle();
-		}
-	}
+                file_writer.fragment = frag;
+                if (frag & (~FRAG_MASK)) {
+                    SERIAL_ECHOLN("LAST FRAGEMENT");
+                    FRESULT res = f_write(&file_writer.file, file_writer.buf, file_writer.buffer_index, &num_write);
+                    if ((res != FR_OK) || (num_write != file_writer.buffer_index)) {
+                        file_upload_error(lang_str.wf.file_write_fail);
+                    } else {
+                        memset(file_writer.buf, 0, sizeof(file_writer.buf));
+                        file_writer.buffer_index = 0;
+                        wifi_link_state = WIFI_CONNECTED;
+                        upload_result = 3;
+                        strcpy(ui_buf1_100, lang_str.wf.uploaded);
+                        strcat(ui_buf1_100, "\n");
+                        strcat(ui_buf1_100, file_writer.fileName);
+                        progress_ui.complete(ui_buf1_100);
+                    }
+                }
+            }
+        }
+    }
+    ui_app.idle();
 }
 
 static void debug_msg_handle(uint8_t * msg, uint16_t msgLen) {

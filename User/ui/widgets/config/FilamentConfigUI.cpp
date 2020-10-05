@@ -2,7 +2,7 @@
 // Created by shubin on 27.05.2020.
 //
 
-#include "FilamentChangeConfigUI.h"
+#include "FilamentConfigUI.h"
 #include "mks_cfg.h"
 
 
@@ -10,7 +10,7 @@ typedef enum{
     FILAMENT_T = 0, FILAMENT_L, FILAMENT_S
 } VALUES;
 
-FilamentChangeConfigUI filament_change_config_ui;
+FilamentConfigUI filament_config_ui;
 
 
 void _set_text_values(FILAMET_CHANGE_UI_CONTROLS_SET * set, FILAMENT_CHANGE_CONFIG_SET * config) {
@@ -22,12 +22,12 @@ void _set_text_values(FILAMET_CHANGE_UI_CONTROLS_SET * set, FILAMENT_CHANGE_CONF
     BUTTON_SetText(set->speed.button, ui_buf1_100);
 }
 
-void FilamentChangeConfigUI::updateValues() {
+void FilamentConfigUI::updateValues() {
     _set_text_values(&this->ui.load, &gCfgItems.filamentchange.load);
     _set_text_values(&this->ui.unload, &gCfgItems.filamentchange.unload);
 }
 
-unsigned char FilamentChangeConfigUI::checkButtonSet(UI_BUTTON hBtn, unsigned char index) {
+unsigned char FilamentConfigUI::checkButtonSet(UI_BUTTON hBtn, unsigned char index) {
     FILAMET_CHANGE_UI_CONTROLS_SET * set = index==0 ? &this->ui.load: &this->ui.unload;
     FILAMENT_CHANGE_CONFIG_SET * config = index==0 ? &gCfgItems.filamentchange.load: &gCfgItems.filamentchange.unload;
     if (hBtn==set->speed.button) {
@@ -50,29 +50,64 @@ unsigned char FilamentChangeConfigUI::checkButtonSet(UI_BUTTON hBtn, unsigned ch
     return 1;
 }
 
-void FilamentChangeConfigUI::on_button(UI_BUTTON hBtn) {
-    if (!(checkButtonSet(hBtn, 0) || checkButtonSet(hBtn, 1)))
-        ConfigurationWidget::on_button(hBtn);
+void FilamentConfigUI::on_button(UI_BUTTON hBtn) {
+    switch (this->page) {
+        case 0: {
+            if (!(checkButtonSet(hBtn, 0) || checkButtonSet(hBtn, 1)))
+                ConfigurationWidget::on_button(hBtn);
+            break;
+        }
+        case 1: {
+            if (hBtn==this->ui.e1.button) {
+                gCfgItems.filament_det0_level_flg = gCfgItems.filament_det0_level_flg ? 0 : 1;
+                epr_write_data(EPR_FILAMENT_DET0_LEVEL,(uint8_t *)&gCfgItems.filament_det0_level_flg,1);
+                this->updateCheckButton(this->ui.e1.button, gCfgItems.filament_det0_level_flg, &lang_str.gnd_vcc);
+            } else if (hBtn==this->ui.e2.button) {
+                gCfgItems.filament_det1_level_flg = gCfgItems.filament_det1_level_flg ? 0 : 1;
+                epr_write_data(EPR_FILAMENT_DET1_LEVEL,(uint8_t *)&gCfgItems.filament_det1_level_flg,1);
+                this->updateCheckButton(this->ui.e2.button, gCfgItems.filament_det1_level_flg, &lang_str.gnd_vcc);
+            } else if (hBtn == this->ui.filamentDet.button) {
+                gCfgItems.feature_mask ^= MASK_DETECTOR_FILAMENT;
+                this->updateCheckButton(ui.filamentDet.button, !(gCfgItems.feature_mask & MASK_DETECTOR_FILAMENT));
+                epr_write_data(EPR_MASK_DET_FUNCTION, (unsigned char *)&gCfgItems.feature_mask, sizeof(gCfgItems.feature_mask));
+            } else
+                ConfigurationWidget::on_button(hBtn);
+            break;
+        }
+    }
 }
 
-void FilamentChangeConfigUI::createSet(FILAMET_CHANGE_UI_CONTROLS_SET * set, unsigned char col) {
+void FilamentConfigUI::createSet(FILAMET_CHANGE_UI_CONTROLS_SET * set, unsigned char col) {
     this->createInputWithDefault(col, 1, &set->termerature, lang_str.config_ui.filament_change_temperature, 0, 0);
     this->createInputWithDefault(col, 2, &set->speed, lang_str.config_ui.speed, 0, 0);
     this->createInputWithDefault(col, 3, &set->length, lang_str.config_ui.length, 0, 0);
 }
 
-void FilamentChangeConfigUI::createControls() {
+void FilamentConfigUI::createControls() {
     ConfigurationWidget::createControls();
-    this->dual_columns = 1;
     memset(&this->ui, 0, sizeof(this->ui));
-    this->createLabel(0, 0, lang_str.load);
-    this->createLabel(1, 0, lang_str.unload);
-    this->createSet(&this->ui.load, 0);
-    this->createSet(&this->ui.unload, 1);
-    this->updateValues();
+    switch (this->page) {
+        case 0: {
+            this->dual_columns = 1;
+            this->createLabel(0, 0, lang_str.load);
+            this->createLabel(1, 0, lang_str.unload);
+            this->createSet(&this->ui.load, 0);
+            this->createSet(&this->ui.unload, 1);
+            this->updateValues();
+            break;
+        }
+        case 1: {
+            this->dual_columns = 0;
+            this->createCheckPair(0, 0, &this->ui.filamentDet, lang_str.config_ui.filament_detector,
+                                  !(gCfgItems.feature_mask & MASK_DETECTOR_FILAMENT));
+            this->createCheckPair(0, 1, &this->ui.e1, "E1 lvl", gCfgItems.filament_det0_level_flg, &lang_str.gnd_vcc);
+            this->createCheckPair(0, 2, &this->ui.e2, "E2 lvl", gCfgItems.filament_det1_level_flg, &lang_str.gnd_vcc);
+            break;
+        }
+    }
 }
 
-void FilamentChangeConfigUI::_setValue(unsigned char value_id, u32 value) {
+void FilamentConfigUI::_setValue(unsigned char value_id, u32 value) {
     switch (value_id) {
         case FILAMENT_L:
             gCfgItems.filamentchange.load.length = value;

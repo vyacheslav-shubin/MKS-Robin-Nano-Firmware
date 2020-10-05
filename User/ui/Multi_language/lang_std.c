@@ -25,6 +25,8 @@ void lang_std(void) {
     lang_str.config_ui.power_off_temperature_wait = "Wait for cooling before power off";
     lang_str.config_ui.power_off_hardware_button_as_sofware = "Hardware power button as software";
 	lang_str.config_ui.simple_main_ui = "Simple main UI";
+    lang_str.config_ui.module_wifi = "WiFi module";
+    lang_str.config_ui.module_power = "Power module presents";
 	lang_str.config_ui.display_backlight_off = "Standby display";
 	lang_str.config_ui.axes_inversion = "Axes inversion";
 	lang_str.config_ui.motor_steps_settings = "Steps settings";
@@ -143,7 +145,7 @@ void lang_std(void) {
 	lang_str.ui_title_printing = "Printing";
 	lang_str.ui_title_speed = "Speed";
     lang_str.ui_title_config_machine_size = "Machine size";
-    lang_str.ui_title_config_filament_change = "Filament change settings";
+    lang_str.ui_title_config_filament = "Filament settings";
     lang_str.ui_title_leveling_points = "Manual leveling points";
     lang_str.ui_title_leveling_type = "Leveling mode";
     lang_str.ui_title_mesh_leveling = "Mesh leveling execute";
@@ -181,6 +183,7 @@ void lang_std(void) {
     lang_str.dialog.confirm_filament_load = "Load filament?";
     lang_str.dialog.power_off = "Power off";
     lang_str.dialog.power_off_waiting_hotend = "Waiting for cooling hotend";
+    lang_str.dialog.no_sd_card = "No SD card.";
 
     lang_str.wf.state = "State";
     lang_str.wf.connected = "Connected";

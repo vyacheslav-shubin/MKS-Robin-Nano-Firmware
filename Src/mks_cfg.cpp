@@ -833,7 +833,7 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue(">cfg_have_ups_device", (uint8_t *)&gCfgItems.have_ups, EPR_HAS_UPS);
 	eprBurnValue(">cfg_filament_det0_trigger_level", (uint8_t *)&gCfgItems.filament_det0_level_flg, EPR_FILAMENT_DET0_LEVEL);
 	eprBurnValue(">cfg_filament_det1_trigger_level", (uint8_t *)&gCfgItems.filament_det1_level_flg, EPR_FILAMENT_DET1_LEVEL);
-	eprBurnValue(">cfg_mask_det_function", (uint8_t *)&gCfgItems.mask_det_Function, EPR_MASK_DET_FUNCTION);
+	eprBurnValue(">cfg_mask_det_function", (uint8_t *)&gCfgItems.feature_mask, EPR_MASK_DET_FUNCTION);
 
 	eprBurnValue(">cfg_filament_load_length", (int32_t *)&gCfgItems.filamentchange.load.length, EPR_FILAMENT_LOAD_LENGTH);
 	eprBurnValue(">cfg_filament_load_speed", (int32_t *)&gCfgItems.filamentchange.load.speed, EPR_FILAMENT_LOAD_SPEED);

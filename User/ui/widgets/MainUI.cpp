@@ -5,6 +5,7 @@
  *      Author: shubin
  */
 
+#include "sh_tools.h"
 #include "MainUI.h"
 #include "ToolsUI.h"
 #include "SettingsUI.h"
@@ -123,7 +124,9 @@ void MainUI::createControls() {
             ui_std_ext1_state_button(col(0), state_row(0), &this->ui.ext1);
             ui_std_bed_state_button(col(0), state_row(1), &this->ui.bed);
         }
-        this->ui.power = this->createButton(col(2), ui_std_row(1), img_power, lang_str.power_off);
+        if (is_power_control_presents())
+            this->ui.power = this->createButton(col(2), ui_std_row(1), img_power, lang_str.power_off);
+
         ui_update_heatpreset_button(this->ui.heat_preset, this->current_preheat_preset);
         this->updateStateButtons();
 	}

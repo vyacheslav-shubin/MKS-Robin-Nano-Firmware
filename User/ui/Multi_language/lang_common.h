@@ -39,7 +39,9 @@ typedef struct {
     const char * power_off_after_print;
     const char * power_off_temperature_wait;
     const char * power_off_hardware_button_as_sofware;
-	const char * simple_main_ui;
+    const char * simple_main_ui;
+    const char * module_wifi;
+    const char * module_power;
 	const char * display_backlight_off;
 	const char * axes_inversion;
 	const char * motor_steps_settings;
@@ -116,6 +118,7 @@ typedef struct {
     const char * confirm_filament_load;
     const char * power_off;
     const char * power_off_waiting_hotend;
+    const char * no_sd_card;
 } DIALOG_LANG_STR;
 
 typedef struct {
@@ -218,7 +221,7 @@ typedef struct {
     const char * ui_title_speed;
     const char * ui_title_config_machine_size;
     const char * ui_title_wifi_list;
-    const char * ui_title_config_filament_change;
+    const char * ui_title_config_filament;
     const char * ui_title_config_home;
     const char * ui_title_leveling_type;
     const char * ui_title_leveling_points;

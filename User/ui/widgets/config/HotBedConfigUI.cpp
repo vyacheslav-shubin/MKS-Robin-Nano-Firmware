@@ -28,13 +28,13 @@ void HotBedConfigUI::updateControls() {
 
 void HotBedConfigUI::_setValue(unsigned char index, float value) {
     switch(index) {
-        case T_LO: {
+        case T_HI: {
             mksCfg.bed_maxtemp = value;
             epr_write_data(EPR_BED_MAXTEMP,(uint8_t *)&mksCfg.bed_maxtemp, sizeof(mksCfg.bed_maxtemp));
             thermalManager.init();
             break;
         }
-        case T_HI: {
+        case T_LO: {
             mksCfg.bed_mintemp=value;
             epr_write_data(EPR_BED_MINTEMP,(uint8_t *)&mksCfg.bed_mintemp, sizeof(mksCfg.bed_mintemp));
             thermalManager.init();

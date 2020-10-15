@@ -158,8 +158,11 @@ sd_bin: $(SD_CARD)/$(MKS_BIN_FILE)
 snapshot: $(MKS_FIRMWARE) pics
 	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE); fi
 	if [ -f  $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) ]; then rm $(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE); fi
+	if [ -f  $(SNAPSHOT_DIR)/robin_nano35_cfg.txt ]; then rm $(SNAPSHOT_DIR)/robin_nano35_cfg.txt; fi
+
 	zip -9 -j $(SNAPSHOT_DIR)/$(SNAPSHOT_FILE) $(MKS_FIRMWARE)
 	cd $(PIC_OUTPUT) && zip -9 -r $(WORK_DIR)/$(SNAPSHOT_DIR)/$(SNAPSHOT_PIC_FILE) *
+	cp -f res/robin_nano35_cfg.txt $(SNAPSHOT_DIR)/robin_nano35_cfg.txt
 
 clear_wifi:
 	esptool.py --port `ls /dev/ttyUSB*` erase_flash

@@ -281,6 +281,7 @@
 #include "wifi_module.h"
 #include "sdio_sdcard.h"
 #include "ili9320.h"
+#include "integration.h"
 
 float filament_counter;
 
@@ -1025,25 +1026,6 @@ void setup_killpin() {
   }
 
 #endif
-
-void setup_powerhold() {
-  #if HAS_SUICIDE
-    OUT_WRITE(SUICIDE_PIN, HIGH);
-  #endif
-  #if HAS_POWER_SWITCH
-    #if ENABLED(PS_DEFAULT_OFF)
-      OUT_WRITE(PS_ON_PIN, PS_ON_ASLEEP);
-    #else
-      OUT_WRITE(PS_ON_PIN, PS_ON_AWAKE);
-    #endif
-  #endif
-}
-
-void suicide() {
-  #if HAS_SUICIDE
-    OUT_WRITE(SUICIDE_PIN, LOW);
-  #endif
-}
 
 void servo_init() {
   #if NUM_SERVOS >= 1 && HAS_SERVO_0
@@ -9292,34 +9274,29 @@ inline void gcode_M140() {
  *      This code should ALWAYS be available for EMERGENCY SHUTDOWN!
  */
 inline void gcode_M81() {
-  thermalManager.disable_all_heaters();
-  stepper.finish_and_disable();
+    thermalManager.disable_all_heaters();
+    stepper.finish_and_disable();
 
-  #if FAN_COUNT > 0
-    for (uint8_t i = 0; i < FAN_COUNT; i++) fanSpeeds[i] = 0;
-    #if ENABLED(PROBING_FANS_OFF)
-      fans_paused = false;
-      ZERO(paused_fanSpeeds);
+    #if FAN_COUNT > 0
+        for (uint8_t i = 0; i < FAN_COUNT; i++) fanSpeeds[i] = 0;
+        #if ENABLED(PROBING_FANS_OFF)
+            fans_paused = false;
+            ZERO(paused_fanSpeeds);
+        #endif
     #endif
-  #endif
 
-  safe_delay(1000); // Wait 1 second before switching off
+    safe_delay(1000); // Wait 1 second before switching off
 
-  #if HAS_SUICIDE
     stepper.synchronize();
-    suicide();
-  #elif HAS_POWER_SWITCH
-    OUT_WRITE(PS_ON_PIN, PS_ON_ASLEEP);
-    powersupply_on = false;
-  #endif
+    shUI::suicide();
 
-  #if ENABLED(ULTIPANEL)
-    //LCD_MESSAGEPGM(MACHINE_NAME " " MSG_OFF ".");
-      if(LCD_LANGUAGE)
-        LCD_MESSAGEPGM(MACHINE_NAME " " "\xb5 " ".");
-      else
-        LCD_MESSAGEPGM(MACHINE_NAME " " "Off" ".");    
-  #endif
+    #if ENABLED(ULTIPANEL)
+        //LCD_MESSAGEPGM(MACHINE_NAME " " MSG_OFF ".");
+        if(LCD_LANGUAGE)
+            LCD_MESSAGEPGM(MACHINE_NAME " " "\xb5 " ".");
+        else
+            LCD_MESSAGEPGM(MACHINE_NAME " " "Off" ".");
+    #endif
 }
 
 /**
@@ -15631,7 +15608,7 @@ void kill_c(const char* lcd_msg) {
     SET_INPUT(PS_ON_PIN);
   #endif
 
-  suicide();
+  shUI::suicide();
   while (1) {
     #if ENABLED(USE_WATCHDOG)
       watchdog_reset();
@@ -15704,7 +15681,7 @@ void kill(const char* lcd_msg) {
     SET_INPUT(PS_ON_PIN);
   #endif
 
-  suicide();
+  shUI::suicide();
   while (1) {
     #if ENABLED(USE_WATCHDOG)
       watchdog_reset();
@@ -15770,7 +15747,7 @@ void setup() {
 
   setup_killpin();
 
-  setup_powerhold();
+  //setup_powerhold();
 
   #if HAS_STEPPER_RESET
     disableStepperDrivers();
@@ -15817,6 +15794,7 @@ void setup() {
   // Load data from EEPROM if available (or use defaults)
   // This also updates variables in the planner, elsewhere
   (void)settings.load();
+  shUI::power_hold();
 
   //#if HAS_M206_COMMAND
     // Initialize current position based on home_offset

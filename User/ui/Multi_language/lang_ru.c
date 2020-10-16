@@ -4,6 +4,7 @@ void lang_ru(void) {
 	lang_str.config_ui.power_off_after_print = "Выключать по окончании печати";
     lang_str.config_ui.power_off_temperature_wait = "Дожидаться охлаждения перед выключением";
     lang_str.config_ui.power_off_hardware_button_as_sofware = "Обработка аппаратной кнопки как программной";
+    lang_str.config_ui.power_hold = "Удержание питания";
 	lang_str.config_ui.simple_main_ui = "Простое меню";
     lang_str.config_ui.module_wifi = "Модуль WiFi";
     lang_str.config_ui.module_power = "Модуль присутствует";
@@ -18,6 +19,7 @@ void lang_ru(void) {
     lang_str.config_ui.probe_offset = "Смещение зонда";
     lang_str.config_ui.probe_speed = "Скорость зонда";
     lang_str.config_ui.connectorZ = "Порт Z";
+    lang_str.config_ui.restore_config = "Восстановить файл конфигурации";
 
     lang_str.config_ui.pause = "Пауза";
 

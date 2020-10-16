@@ -64,7 +64,7 @@ void mkstft_ui_load() {
 
     epr_read_data(EPR_LEVELING_POINTS,(uint8_t *)&gCfgItems.leveling_points,sizeof(gCfgItems.leveling_points));
 
-    epr_read_data(EPR_AUTO_CLOSE_MACHINE, (uint8_t *)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
+    epr_read_data(EPR_POWER_CONTROL_FLAGS, (uint8_t *)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
     ui_print_process.suicide_enabled = gCfgItems.power_control_flags & POWER_CONTROL_SUNCIDE;
     epr_read_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
 
@@ -136,7 +136,7 @@ void mkstft_ui_set_epr() {
 
 		epr_write_data(EPR_LEVELING_POINTS,(uint8_t *)&gCfgItems.leveling_points,sizeof(gCfgItems.leveling_points));
 
-		epr_write_data(EPR_AUTO_CLOSE_MACHINE, (uint8_t *)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
+		epr_write_data(EPR_POWER_CONTROL_FLAGS, (uint8_t *)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
 		epr_write_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
 		//sean 19.8.16
 		epr_write_data(EPR_ENABLE_WIFI_SCAN,(uint8_t *)&gCfgItems.wifi_scan,sizeof(gCfgItems.wifi_scan));

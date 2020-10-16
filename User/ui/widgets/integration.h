@@ -92,6 +92,8 @@ typedef struct{
     extern void powerOff();
     extern void powerOffForce();
 
+    extern void suicide();
+    extern void power_hold();
 }
 
 

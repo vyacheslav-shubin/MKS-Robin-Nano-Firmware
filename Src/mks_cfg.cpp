@@ -15,6 +15,8 @@
 #include "ubl.h"
 #include "spi_flash.h"
 #include "pic_manager.h"
+#include "sh_tools.h"
+
 void epr_read_data(int pos, uint8_t* value, uint16_t size);
 //char WELCOME_MSG[30] = "3D Printer ready.";
 
@@ -284,18 +286,19 @@ void eprBurnValue(char *string, float *data_addr, uint16_t epr_addr)
 		}
 }
 
-void eprBurnValue(char *string, uint8_t *data_addr, uint16_t epr_addr)
-{
+unsigned char eprBurnValue(char *string, uint8_t *data_addr, uint16_t epr_addr) {
   	char *tmp_index;
 	tmp_index = (char *)strstr(cfg_buf, string);
-	if(tmp_index)
-		{
-		tmp_index += strlen(string);
+	if(tmp_index) {
+        tmp_index += strlen(string);
 		mksGetParameter(tmp_index);	
 		*data_addr = atoi(cmd_code);
 		epr_write_data(epr_addr, data_addr,1);
-		}
+		return 1;
+	} else
+	    return 0;
 }
+
 void eprBurnValue(char *string, int16_t *data_addr, uint16_t epr_addr)
 {
   	char *tmp_index;
@@ -877,7 +880,10 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue_leveling(">cfg_point4:", (int32_t *)&gCfgItems.leveling_points[3].x, (int32_t *)&gCfgItems.leveling_points[3].y, EPR_LEVELING_POINT4_X, EPR_LEVELING_POINT4_Y);
 	eprBurnValue_leveling(">cfg_point5:", (int32_t *)&gCfgItems.leveling_points[4].x, (int32_t *)&gCfgItems.leveling_points[4].y, EPR_LEVELING_POINT5_X, EPR_LEVELING_POINT5_Y);
 
-	eprBurnValue(">cfg_print_over_auto_close", (uint8_t *)&gCfgItems.power_control_flags, EPR_AUTO_CLOSE_MACHINE);
+	if (eprBurnValue(">cfg_power_control_flags", (uint8_t *)&gCfgItems.power_control_flags, EPR_POWER_CONTROL_FLAGS)) {
+        gCfgItems.power_control_flags |= POWER_CONTROL_CONFIGURED;
+        epr_write_data(EPR_POWER_CONTROL_FLAGS, (const unsigned char*)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
+	}
 
 
     eprBurnValue(">Z2_STEPPER_DRIVERS", &mksCfg.z2_enable, EPR_Z2_ENABLE);

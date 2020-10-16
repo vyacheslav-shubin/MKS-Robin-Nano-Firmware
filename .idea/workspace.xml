@@ -37,30 +37,24 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Inc/mks_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/mks_cfg.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/Marlin_main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Src/mks_cfg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_cfg.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Src/mks_reprint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_reprint.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/sh_tools.c" beforeDir="false" afterPath="$PROJECT_DIR$/Src/sh_tools.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Src/sh_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/Src/sh_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MainUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/FilamentChangeConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/FilamentConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/FilamentChangeConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/FilamentConfigUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/MachineConfigurationUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/ConfigurationWidget.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snapshot/mks_pic.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/mks_pic.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snapshot/robin_nano35.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/robin_nano35.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,23 +88,24 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/res" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Middlewares/Third_Party/FatFs/src/option" />
-      <recent name="$PROJECT_DIR$/snapshot" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Src" />
       <recent name="$PROJECT_DIR$/trash" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/res" />
+      <recent name="$PROJECT_DIR$/Middlewares/Third_Party/FatFs/src/option" />
+      <recent name="$PROJECT_DIR$/snapshot" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="work" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="work" TARGET_NAME="work" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="work" RUN_TARGET_NAME="work">
@@ -163,27 +158,10 @@
       <workItem from="1600091427415" duration="140000" />
       <workItem from="1600091703709" duration="21000" />
       <workItem from="1600092929457" duration="12488000" />
-    </task>
-    <task id="LOCAL-00021" summary="sensor level config as widget">
-      <created>1590683782774</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1590683782774</updated>
-    </task>
-    <task id="LOCAL-00022" summary="application.loop -&gt; application.idle + application.beep">
-      <created>1590685860084</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1590685860084</updated>
-    </task>
-    <task id="LOCAL-00023" summary="machine type config ui as widget">
-      <created>1590761178572</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1590761178572</updated>
+      <workItem from="1601896583799" duration="1016000" />
+      <workItem from="1602758129425" duration="13000" />
+      <workItem from="1602758300551" duration="75000" />
+      <workItem from="1602759361672" duration="12419000" />
     </task>
     <task id="LOCAL-00024" summary="machine type config ui as widget">
       <created>1590761186756</created>
@@ -507,7 +485,28 @@
       <option name="project" value="LOCAL" />
       <updated>1598261624003</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Power module config -&gt; power config, Power UI enable/disable">
+      <created>1601896886600</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1601896886600</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Filament UI - distance default, bed temp min/max fixed">
+      <created>1602771312315</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1602771312316</updated>
+    </task>
+    <task id="LOCAL-00072" summary="+config file">
+      <created>1602771348926</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1602771348926</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,9 +537,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="drop bind to cloud" />
-    <MESSAGE value="-draw_dialog - deleted. Leveling config as single widget" />
-    <MESSAGE value="-rudiments" />
     <MESSAGE value="-old multilanguage" />
     <MESSAGE value="-mesh leveling as widget, NO MORE OLD UI CODE" />
     <MESSAGE value="wifi module code refactoring" />
@@ -563,44 +559,28 @@
     <MESSAGE value="Nozzle config/multi language" />
     <MESSAGE value="custom button images" />
     <MESSAGE value="ui images" />
-    <option name="LAST_COMMIT_MESSAGE" value="ui images" />
+    <MESSAGE value="Power module config -&gt; power config, Power UI enable/disable" />
+    <MESSAGE value="Filament UI - distance default, bed temp min/max fixed" />
+    <MESSAGE value="+config file" />
+    <option name="LAST_COMMIT_MESSAGE" value="+config file" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2606" y="360" width="549" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591794734176">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2606" y="360" width="549" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1591794734176" />
     <state x="1" y="21" width="1918" height="1038" key="DiffContextDialog" timestamp="1597766012128">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1" y="21" width="1918" height="1038" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1597766012128" />
-    <state x="1920" y="0" width="1920" height="1060" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592203944583" />
     <state x="2" y="42" width="430" height="520" key="FileChooserDialogImpl" timestamp="1597419703226">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="2" y="42" width="430" height="520" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1597419703226" />
-    <state x="1922" y="42" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592816041616" />
-    <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1591803636347">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="640" height="204" key="ImportCMakeProjectWizard.bottomPanel/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591803636347" />
-    <state width="640" height="476" key="ImportCMakeProjectWizard.topPanel" timestamp="1591803636346">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="640" height="476" key="ImportCMakeProjectWizard.topPanel/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1591803636346" />
     <state x="1" y="21" width="984" height="744" key="SettingsEditor" timestamp="1598004740223">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1" y="21" width="984" height="744" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1598004740223" />
-    <state x="2535" y="172" width="694" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593099881385">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="615" y="172" width="692" height="757" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592325044537" />
-    <state x="2535" y="172" width="694" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593099881385" />
-    <state x="1" y="21" width="923" height="641" key="find.popup" timestamp="1598263146739">
+    <state x="1" y="21" width="923" height="641" key="find.popup" timestamp="1602768807232">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1" y="21" width="923" height="641" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1598263146739" />
+    <state x="1" y="21" width="923" height="641" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602768807232" />
     <state x="623" y="244" key="run.anything.popup" timestamp="1600097026798">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

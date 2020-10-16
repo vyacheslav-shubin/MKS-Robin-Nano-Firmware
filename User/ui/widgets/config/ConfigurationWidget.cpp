@@ -176,6 +176,15 @@ UI_BUTTON ConfigurationWidget::createDefaultSetButton(int x, int y, const char* 
 
 }
 
+void ConfigurationWidget::createConfigButton(int col, int row, UI_CONFIG_BUTTON * button, const char* title) {
+    int x = (this->dual_columns ? 240 * col : 0);
+    int text_w = (this->dual_columns ? 240 : 480)- (70 * 2) - 8 - TEXT_X_OFFSET - 10;
+    button->button = this->createDefaultSetButton(TEXT_X_OFFSET + x + text_w + 4 + 70 + 4, ROW(row) + 6, 0);
+    button->text = BUTTON_CreateEx(TEXT_X_OFFSET + x , ROW(row),  text_w, 40, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    BUTTON_SetTextAlign(button->text,GUI_TA_LEFT | GUI_TA_VCENTER);
+    BUTTON_SetText(button->text, title);
+}
+
 void ConfigurationWidget::createInputWithDefault(int col, int row, UI_INPUT_WITH_DEFAULT * input, const char* title, const char* value,  const char* dflt) {
 	int x = (this->dual_columns ? 240 * col : 0);
 	int text_w = (this->dual_columns ? 240 : 480)- (70 * 2) - 8 - TEXT_X_OFFSET - 10;

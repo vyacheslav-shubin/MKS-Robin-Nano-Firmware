@@ -7,11 +7,31 @@
 
 #include "../Src/sh_tools.h"
 #include "AdvancedConfigUI.h"
+#include "ConfirmDialogUI.h"
 
 #include "ili9320.h"
 #include "Application.h"
 
 AdvancedConfigUI advanced_config_ui;
+
+#define CFG_FILE        "1:/robin_nano35_cfg.txt"
+#define CFG_BACUP_FILE  "1:/robin_nano35_cfg.CUR"
+
+#define DIALOG_ID_CONFIG_RENAME     0
+#define DIALOG_ID_CONFIG_NOT_FOUND  1
+
+void AdvancedConfigUI::on_action_dialog(u8 action, u8 dialog_id) {
+    confirm_dialog_ui.hide();
+    switch (dialog_id) {
+        case DIALOG_ID_CONFIG_NOT_FOUND:
+            break;
+        case DIALOG_ID_CONFIG_RENAME:
+            f_unlink(CFG_FILE);
+            f_rename(CFG_BACUP_FILE, CFG_FILE);
+            break;
+    }
+    this->show();
+}
 
 void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
     if(hBtn == this->ui.simpleMainUI.button) {
@@ -28,6 +48,18 @@ void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
         epr_write_data(EPR_TIME_SHIFT, (const unsigned char*)&gCfgItems.time_offset, sizeof(gCfgItems.time_offset));
 	} else if (hBtn == this->ui.timeShift.button) {
 	    this->calculator(lang_str.config_ui.time_shift, gCfgItems.time_offset, 0);
+    } else if (hBtn == this->ui.restore.button) {
+        this->hide();
+        FIL f;
+        if (f_open(&f, CFG_BACUP_FILE, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
+            f_close(&f);
+            strcpy(ui_buf1_100, lang_str.config_ui.restore_config);
+            strcat(ui_buf1_100, "?");
+            confirm_dialog_ui.show(ui_buf1_100, this, DIALOG_ID_CONFIG_RENAME, this);
+        } else {
+            sprintf(ui_buf1_100, lang_str.dialog.confirm_file_not_found, CFG_BACUP_FILE);
+            confirm_dialog_ui.showEx(ui_buf1_100, this, DIALOG_ID_CONFIG_NOT_FOUND, 0, CONFIRM_DIALOG_OK_BUTTON);
+        }
 	} else
         ConfigurationWidget::on_button(hBtn);
 }
@@ -55,6 +87,7 @@ void AdvancedConfigUI::createControls() {
             this->createCheckPair(0, 1, &this->ui.diplayBackLight, lang_str.config_ui.display_backlight_off,
                                   gCfgItems.standby_mode == 1);
             this->createInputWithDefault(0, 2, &this->ui.timeShift, lang_str.config_ui.time_shift, 0);
+            this->createConfigButton(0, 3, &this->ui.restore, lang_str.config_ui.restore_config);
             break;
         }
     }

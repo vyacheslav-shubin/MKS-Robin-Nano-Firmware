@@ -39,6 +39,7 @@ typedef struct {
     const char * power_off_after_print;
     const char * power_off_temperature_wait;
     const char * power_off_hardware_button_as_sofware;
+    const char * power_hold;
     const char * simple_main_ui;
     const char * module_wifi;
     const char * module_power;
@@ -66,6 +67,8 @@ typedef struct {
     const char * nozzle_settings;
     const char * hotbed_settings;
     const char * connectorZ;
+
+    const char * restore_config;
 
     const char * point;
     const char * probe_offset;

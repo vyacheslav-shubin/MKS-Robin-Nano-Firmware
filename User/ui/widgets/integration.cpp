@@ -7,6 +7,7 @@
 
 #include <ili9320.h>
 #include "ui_tools.h"
+#include "sh_tools.h"
 #include "planner.h"
 #include "mks_reprint.h"
 #include "pic_manager.h"
@@ -88,7 +89,21 @@ namespace shUI {
     void powerOffForce() {
         SERIAL_ECHOLN("FORCE POWER OFF");
         lcd_light_off();
-        MKS_PW_OFF_OP = 0;
+        suicide();
+    }
+
+    void suicide() {
+        if (is_power_control_configured()) {
+            MKS_PW_OFF_OP = (gCfgItems.power_control_flags & POWER_CONTROL_LOCK) ? 0 : 1;
+        } else
+            MKS_PW_OFF_OP = 0;
+    }
+
+    void power_hold() {
+        if (is_power_control_configured()) {
+            MKS_PW_OFF_OP = (gCfgItems.power_control_flags & POWER_CONTROL_LOCK) ? 1 : 0;
+        } else
+            MKS_PW_OFF_OP = 1;
     }
 
     void babystep(char * axe, float size) {

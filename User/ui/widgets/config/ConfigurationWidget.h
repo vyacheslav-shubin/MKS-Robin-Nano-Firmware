@@ -30,6 +30,11 @@ typedef struct {
 
 typedef struct {
     UI_BUTTON text;
+    UI_BUTTON button;
+} UI_CONFIG_BUTTON;
+
+typedef struct {
+    UI_BUTTON text;
     UI_BUTTON button1;
     UI_BUTTON button2;
 } UI_INPUT_DUAL;
@@ -78,6 +83,7 @@ protected:
 
 	void createArrowPair(int col, int row, UI_ARROW * pair, const char* title);
     void createInputWithDefault(int col, int row, UI_INPUT_WITH_DEFAULT * input, const char* title, const char* value, const char* dflt = 0);
+    void createConfigButton(int col, int row, UI_CONFIG_BUTTON * button, const char* title);
     void createInputDial(int col, int row, UI_INPUT_DUAL * input, const char* title, const char* value1, const char* value2);
     void createInputSingle(int col, int row, UI_INPUT_SINGLE * input, const char* title, const char* value);
     UI_BUTTON createInput(int x, int y, const char* value);

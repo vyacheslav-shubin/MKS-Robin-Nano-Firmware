@@ -24,6 +24,7 @@ void lang_std(void) {
 	lang_str.config_ui.power_off_after_print = "Auto shutdown after print";
     lang_str.config_ui.power_off_temperature_wait = "Wait for cooling before power off";
     lang_str.config_ui.power_off_hardware_button_as_sofware = "Hardware power button as software";
+    lang_str.config_ui.power_hold = "Power hold";
 	lang_str.config_ui.simple_main_ui = "Simple main UI";
     lang_str.config_ui.module_wifi = "WiFi module";
     lang_str.config_ui.module_power = "Power module presents";
@@ -55,6 +56,8 @@ void lang_std(void) {
     lang_str.config_ui.probe_offset = "Probe speed";
     lang_str.config_ui.connectorZ = "Connector Z";
     lang_str.config_ui.pause = "Pause";
+
+    lang_str.config_ui.restore_config = "Restore configuration file";
 
     lang_str.config_ui.heater = "Heater";
     lang_str.config_ui.pid_termostat = "PID termostat";

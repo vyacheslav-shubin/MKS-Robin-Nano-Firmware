@@ -72,7 +72,8 @@ typedef struct{
     extern void saveConfig();
     extern void loadConfig();
 
-	extern void pushGcode(const char * gcode);
+    extern void pushGcode(const char * gcode);
+    extern void injectGcode(const char * gcode);
 
 	extern void getCurrentPosition(CURRENT_POSITION * value);
 

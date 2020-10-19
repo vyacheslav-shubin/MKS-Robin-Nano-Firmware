@@ -5,6 +5,8 @@
  *      Author: shubin
  */
 
+#include "integration.h"
+#include "widgets/dialog/KeyboardUI.h"
 #include "sh_tools.h"
 #include "SettingsUI.h"
 #include "dialog/AboutDialogUI.h"
@@ -19,14 +21,17 @@ SettingsUI settings_ui;
 
 typedef enum{
     DIALOG_ID_ABOUT,
-    DIALOG_ID_INIT_WIFI
+    DIALOG_ID_INIT_WIFI,
+    DIALOG_ID_GCODE
 } ;
 
 void SettingsUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
-	this->ui.configuration = this->createButtonAt(0, 0, img_machine_settings_root, lang_str.machine_settings);
+    this->ui.gcode = this->createButtonAt(0, 0, img_gcode, lang_str.g_code);
+	this->ui.configuration = this->createButtonAt(1, 0, img_machine_settings_root, lang_str.machine_settings);
 	if (is_wifi_modue_presents())
-        this->ui.wifi = this->createButtonAt(1, 0, img_wifi, lang_str.wifi);
+        this->ui.wifi = this->createButtonAt(2, 0, img_wifi, lang_str.wifi);
+
     this->ui.about = this->createButtonAt(3, 0, img_about, lang_str.about);
     this->ui.pid = this->createButtonAt(0, 1, img_preheat, "PID Set");
 	this->ui.ret = this->createButtonRet();
@@ -65,6 +70,10 @@ void SettingsUI::on_button(UI_BUTTON hBtn) {
 	}  else if (hBtn==this->ui.pid) {
 	    this->hide();
         pid_settings_ui.show();
+	} else if (hBtn==this->ui.gcode) {
+        memset(cmd_code, 0, sizeof(cmd_code));
+        this->hide();
+        keyboard_ui.show((char *)lang_str.g_code, cmd_code, sizeof(cmd_code) - 1, this, DIALOG_ID_GCODE, this);
 	}
 }
 
@@ -85,5 +94,10 @@ void SettingsUI::on_action_dialog(u8 action, u8 dialog_id) {
                 wifi_ui.show(this);
                 break;
         };
+    } else if (dialog_id==DIALOG_ID_GCODE) {
+        keyboard_ui.hide();
+        this->show();
+        if (strlen(cmd_code)>0)
+            shUI::injectGcode(cmd_code);
     }
 }

@@ -168,6 +168,8 @@ typedef struct {
 	const char * tools;
     const char * power_off;
 
+    const char * g_code;
+
 	const char * plus;
 	const char * minus;
 

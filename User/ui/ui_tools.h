@@ -83,6 +83,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_cloud				"bmp_cloud.bin"
 #define img_about				"bmp_about.bin"
 #define img_machine_settings_root	"bmp_machinePara.bin"
+#define img_gcode	            "bmp_gcode.bin"
 
 #define img_x_plus				"bmp_xAdd.bin"
 #define img_x_minus				"bmp_xDec.bin"

@@ -221,6 +221,10 @@ namespace shUI {
 		enqueue_and_echo_commands_P(gcode);
 	}
 
+    void injectGcode(const char * gcode) {
+        MYSERIAL.inject(cmd_code);
+    }
+
 	void getCurrentPosition(CURRENT_POSITION * value) {
 		value->x = current_position[X_AXIS];
 		value->y = current_position[Y_AXIS];

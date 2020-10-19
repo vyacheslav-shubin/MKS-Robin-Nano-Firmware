@@ -58,7 +58,7 @@ void PIDSettingsUI::drawHistory() {
 void PIDSettingsUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
     this->ui.back = this->create96x80Button(_col(4), _y, img_page_back);
-    this->ui.run = this->create96x80Button(_col(0), _y, img_print_resume);
+    //this->ui.run = this->create96x80Button(_col(0), _y, img_print_resume);
     this->point=GRAPH_X_MIN+1;
     this->history_done = 0;
 }

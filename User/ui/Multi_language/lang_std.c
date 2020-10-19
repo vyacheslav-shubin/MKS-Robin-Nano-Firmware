@@ -95,6 +95,8 @@ void lang_std(void) {
 	lang_str.plus = "More";
 	lang_str.minus = "Less";
 
+    lang_str.g_code = "GCode";
+
 	lang_str.off = "Off";
 	lang_str.bed = "Bed";
 	lang_str.extruder1 = "Extruder 1";

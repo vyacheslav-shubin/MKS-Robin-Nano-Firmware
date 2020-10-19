@@ -7,7 +7,6 @@ void lang_ru(void) {
     lang_str.config_ui.power_hold = "Удержание питания";
 	lang_str.config_ui.simple_main_ui = "Простое меню";
     lang_str.config_ui.module_wifi = "Модуль WiFi";
-    lang_str.config_ui.module_power = "Модуль присутствует";
 	lang_str.config_ui.display_backlight_off = "Выключать подсветку дисплея";
 	lang_str.config_ui.axes_inversion = "Инверсия осей";
 	lang_str.config_ui.motor_steps_settings = "Настройка шагов";
@@ -20,6 +19,9 @@ void lang_ru(void) {
     lang_str.config_ui.probe_speed = "Скорость зонда";
     lang_str.config_ui.connectorZ = "Порт Z";
     lang_str.config_ui.restore_config = "Восстановить файл конфигурации";
+
+    lang_str.config_ui.module_exists = "Модуль присутствует";
+    lang_str.config_ui.ntp = "Поддержка NTP";
 
     lang_str.config_ui.pause = "Пауза";
 

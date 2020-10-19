@@ -19,6 +19,14 @@
 #define is_power_control_configured()           (gCfgItems.power_control_flags & POWER_CONTROL_CONFIGURED)
 #define is_power_control_presents()             (gCfgItems.power_control_flags & POWER_CONTROL_MODULE_PRESENTS)
 
+#define WIFI_MODULE_PRESENTS                    (1<<0)
+#define WIFI_MODULE_NTP_SUPPORT                 (1<<1)
+#define WIFI_MODULE_NTP_SUPPORT_MASK            (WIFI_MODULE_PRESENTS | WIFI_MODULE_NTP_SUPPORT)
+
+
+#define is_wifi_modue_presents()                (gCfgItems.wifi_flags & WIFI_MODULE_PRESENTS)
+#define is_ntp_support()                ((gCfgItems.wifi_flags & WIFI_MODULE_NTP_SUPPORT_MASK)==WIFI_MODULE_NTP_SUPPORT_MASK)
+
 extern unsigned char is_filament_fail(void);
 
 #ifdef __cplusplus

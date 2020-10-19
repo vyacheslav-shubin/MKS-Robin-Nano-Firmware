@@ -69,7 +69,7 @@ void mkstft_ui_load() {
     epr_read_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
 
     //sean 19.8.16
-    epr_read_data(EPR_ENABLE_WIFI_SCAN,(uint8_t *)&gCfgItems.wifi_scan,sizeof(gCfgItems.wifi_scan));
+    epr_read_data(EPR_WIFI_FLAGS, (uint8_t *)&gCfgItems.wifi_flags, sizeof(gCfgItems.wifi_flags));
 
     epr_read_data(EPR_DISABLE_WIFI,(uint8_t *)&gCfgItems.wifi_btn_state,sizeof(gCfgItems.wifi_btn_state));
     epr_read_data(EPR_PAUSE_UNLOAD_LEN,(uint8_t *)&gCfgItems.pause_unload_len,sizeof(gCfgItems.pause_unload_len ));
@@ -139,7 +139,7 @@ void mkstft_ui_set_epr() {
 		epr_write_data(EPR_POWER_CONTROL_FLAGS, (uint8_t *)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
 		epr_write_data(EPR_ENABLE_CLOUD,(uint8_t *)&gCfgItems.cloud_enable,sizeof(gCfgItems.cloud_enable));
 		//sean 19.8.16
-		epr_write_data(EPR_ENABLE_WIFI_SCAN,(uint8_t *)&gCfgItems.wifi_scan,sizeof(gCfgItems.wifi_scan));
+		epr_write_data(EPR_WIFI_FLAGS, (uint8_t *)&gCfgItems.wifi_flags, sizeof(gCfgItems.wifi_flags));
 		epr_write_data(EPR_DISABLE_WIFI,(uint8_t *)&gCfgItems.wifi_btn_state,sizeof(gCfgItems.wifi_btn_state));
 		epr_write_data(EPR_PAUSE_UNLOAD_LEN,(uint8_t *)&gCfgItems.pause_unload_len,sizeof(gCfgItems.pause_unload_len ));
 		epr_write_data(EPR_RESUME_LOAD_LEN,(uint8_t *)&gCfgItems.resume_load_len,sizeof(gCfgItems.resume_load_len ));
@@ -271,7 +271,7 @@ void mkstft_ui_init() {
 
 	gCfgItems.breakpoint_reprint_flg = 0;
 	gCfgItems.breakpoint_flg=0;
-	gCfgItems.wifi_scan = 0;
+	gCfgItems.wifi_flags = 0;
 	gCfgItems.wifi_btn_state = 0;
 	gCfgItems.pause_unload_len = 0;
 	gCfgItems.resume_load_len = 0;

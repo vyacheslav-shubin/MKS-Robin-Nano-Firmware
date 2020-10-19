@@ -293,8 +293,8 @@ EEPROM 2K byte ����
 //#define EPR_Y_HOME_BUMP_MM							EPR_X_HOME_BUMP_MM+2
 //#define EPR_Z_HOME_BUMP_MM							EPR_Y_HOME_BUMP_MM+2
 
-#define EPR_ENABLE_WIFI_SCAN	                        EPR_RESUME_SPEED + 2
-#define EPR_SINGLE_NOZZLE								EPR_ENABLE_WIFI_SCAN + 1
+#define EPR_WIFI_FLAGS	                        EPR_RESUME_SPEED + 2
+#define EPR_SINGLE_NOZZLE								EPR_WIFI_FLAGS + 1
 #define EPR_STANDBY_MODE								EPR_SINGLE_NOZZLE + 1
 #define EPR_STANDBY_TIME								EPR_STANDBY_MODE + 1
 
@@ -705,7 +705,8 @@ typedef struct {
 		volatile uint8_t display_style;
 
 		volatile float breakpoint_z_pos;
-		volatile uint8_t wifi_scan;
+		volatile uint8_t wifi_flags;
+
 		volatile uint8_t wifi_btn_state;
 		volatile int8_t pause_unload_len;
 		volatile int8_t resume_load_len;

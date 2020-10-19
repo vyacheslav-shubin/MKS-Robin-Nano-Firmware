@@ -16,6 +16,7 @@
 #include "LanguageConfigUI.h"
 #include "dialog/KeyboardUI.h"
 #include "PowerControlUI.h"
+#include "WiFiConfigUI.h"
 
 MachineConfigurationUI machine_configuration_ui;
 
@@ -39,8 +40,9 @@ void MachineConfigurationUI::createControls() {
         }
         case 1: {
             this->dual_columns = 1;
-            this->createArrowPair(0, 0, &this->ui.advanced_settings, lang_str.advanced);
-            this->createArrowPair(0, 1, &this->ui.language, lang_str.language);
+            this->createArrowPair(0, 0, &this->ui.wifi_settings, lang_str.wifi);
+            this->createArrowPair(0, 1, &this->ui.advanced_settings, lang_str.advanced);
+            this->createArrowPair(0, 2, &this->ui.language, lang_str.language);
             //this->createArrowPair(0, 2, &this->ui.test1, "Leveling");
             break;
         }
@@ -88,6 +90,9 @@ void MachineConfigurationUI::on_button(UI_BUTTON hBtn) {
     } else if (ui_is_double_button(hBtn, this->ui.power_control)) {
         this->hide();
         power_control_ui.show(this);
+    } else if (ui_is_double_button(hBtn, this->ui.wifi_settings)) {
+        this->hide();
+        wifi_config_ui.show(this);
     } else if (ui_is_double_button(hBtn, this->ui.test1)) {
     } else if (ui_is_double_button(hBtn, this->ui.test2)) {
     } else {

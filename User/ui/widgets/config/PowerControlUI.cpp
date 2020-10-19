@@ -46,7 +46,7 @@ void PowerControlUI::createControls() {
     this->dual_columns = 0;
     switch (this->page) {
         case 0: {
-            this->createCheckPair(0, 0, &this->ui.presents, lang_str.config_ui.module_power,
+            this->createCheckPair(0, 0, &this->ui.presents, lang_str.config_ui.module_exists,
                                   is_power_control_presents());
             this->createCheckPair(0, 1, &this->ui.autoPowerOff, lang_str.config_ui.power_off_after_print,
                                   gCfgItems.power_control_flags & POWER_CONTROL_SUNCIDE);

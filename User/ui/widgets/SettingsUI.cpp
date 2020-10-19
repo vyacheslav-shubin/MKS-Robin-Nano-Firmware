@@ -5,6 +5,7 @@
  *      Author: shubin
  */
 
+#include "sh_tools.h"
 #include "SettingsUI.h"
 #include "dialog/AboutDialogUI.h"
 #include "MachineConfigurationUI.h"
@@ -24,14 +25,15 @@ typedef enum{
 void SettingsUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
 	this->ui.configuration = this->createButtonAt(0, 0, img_machine_settings_root, lang_str.machine_settings);
-	this->ui.wifi = this->createButtonAt(1, 0, img_wifi, lang_str.wifi);
+	if (is_wifi_modue_presents())
+        this->ui.wifi = this->createButtonAt(1, 0, img_wifi, lang_str.wifi);
     this->ui.about = this->createButtonAt(3, 0, img_about, lang_str.about);
     this->ui.pid = this->createButtonAt(0, 1, img_preheat, "PID Set");
 	this->ui.ret = this->createButtonRet();
 }
 
 void SettingsUI::action_wifi() {
-	if(gCfgItems.wifi_scan == 1) {
+	if(gCfgItems.wifi_flags == 1) {
 		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
 			this->hide();
             wifi_ui.show(this);

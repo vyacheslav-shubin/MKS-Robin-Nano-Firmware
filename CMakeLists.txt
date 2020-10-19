@@ -729,7 +729,17 @@ add_executable(work
         User/ui/font.h
         User/ui/ui_tools.cpp
         User/ui/ui_tools.h
-		Src/EspParser.cpp Src/EspParser.h User/ui/widgets/PIDSettingsUI.cpp User/ui/widgets/PIDSettingsUI.h User/ui/widgets/dialog/PowerOffDialogUI.cpp User/ui/widgets/dialog/PowerOffDialogUI.h User/ui/widgets/config/PowerControlUI.cpp User/ui/widgets/config/PowerControlUI.h)
+		Src/EspParser.cpp
+		Src/EspParser.h
+		User/ui/widgets/PIDSettingsUI.cpp
+		User/ui/widgets/PIDSettingsUI.h
+		User/ui/widgets/dialog/PowerOffDialogUI.cpp
+		User/ui/widgets/dialog/PowerOffDialogUI.h
+		User/ui/widgets/config/PowerControlUI.cpp
+		User/ui/widgets/config/PowerControlUI.h
+		User/ui/widgets/config/WiFiConfigUI.cpp
+		User/ui/widgets/config/WiFiConfigUI.h
+)
 
 add_compile_definitions(USE_HAL_DRIVER)
 add_compile_definitions(STM32F103xE)

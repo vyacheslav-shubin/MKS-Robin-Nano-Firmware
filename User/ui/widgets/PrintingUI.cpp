@@ -79,7 +79,8 @@ void PrintingUI::createControls() {
 	this->createStateButtonAt(1, 2, &ui.fan, FAN_STATES[0], 0);
 	this->createStateButtonAt(1, 0, &ui.z, img_state_z, 0);
     this->createStateButtonAt(0, 3, &ui.speed, img_state_speed, 0);
-    this->createStateButtonAt(1, 3, &ui.realtime, img_state_time, 0);
+    if (is_ntp_support())
+        this->createStateButtonAt(1, 3, &ui.realtime, img_state_time, 0);
 
 
 	this->createStateButtonAt(0, 1, &ui.ext1, img_state_extruder1, 0);
@@ -122,7 +123,7 @@ void PrintingUI::updateStateButtons() {
 		sprintf(ui_buf1_20,"%.0f/%d%%",feedrate_mm_s, p);
 	this->updateStateButton(&ui.speed, 0, ui_buf1_20);
 
-	if (shUI::hasTime()) {
+	if ((ui.realtime.button) && (shUI::hasTime())) {
         shUI::getTimeStr(ui_buf1_20);
         this->updateStateButton(&ui.realtime, 0, ui_buf1_20);
     }

@@ -32,7 +32,7 @@ void MainUI::on_action_dialog(u8 action, u8 dialog_id) {
 }
 
 const char * MainUI::getTitle() {
-    if (shUI::hasTime()) {
+    if (is_ntp_support() && (shUI::hasTime())) {
         shUI::getTimeStr(ui_buf1_100);
         return ui_buf1_100;
     } else {

@@ -151,6 +151,7 @@ User/ui/widgets/config/LanguageConfigUI.cpp
 User/ui/widgets/config/SensorLevelConfigUI.cpp
 User/ui/widgets/config/LevelingConfigUI.cpp
 User/ui/widgets/config/HotBedConfigUI.cpp
+User/ui/widgets/config/WiFiConfigUI.cpp
 User/ui/widgets/config/NozzleConfigUI.cpp
 User/ui/widgets/config/PowerControlUI.cpp
 User/ui/widgets/dialog/DialogWidget.cpp

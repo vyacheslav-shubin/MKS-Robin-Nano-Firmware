@@ -917,7 +917,11 @@ void CardReader::mksEepromRefresh()
     //eprBurnValue(">Z_HOME_BUMP_MM", &mksCfg.z_home_bump_mm, EPR_Z_HOME_BUMP_MM);
 
     //sean 19.8.16
-    eprBurnValue(">WISI_LIST_SCAN",(uint8_t *)&gCfgItems.wifi_scan,EPR_ENABLE_WIFI_SCAN);
+
+    //eprBurnValue(">WISI_LIST_SCAN", (uint8_t *)&gCfgItems.wifi_flags, EPR_WIFI_FLAGS);
+    eprBurnValue(">wifi_flags", (uint8_t *)&gCfgItems.wifi_flags, EPR_WIFI_FLAGS);
+    eprBurnValue(">wifi_time_shift", (int16_t *)&gCfgItems.time_offset, EPR_TIME_SHIFT);
+
     hexBurnValue2(">cfg_screen_overturn_180",&gCfgItems.overturn_180,DISP_ROTATION_180_ADDR);
     eprBurnValue(">cfg_Standby_mode",(uint8_t *)&gCfgItems.standby_mode,EPR_STANDBY_MODE);
     eprBurnValue(">cfg_Standby_gap_time", (int32_t *)&gCfgItems.standby_time, EPR_STANDBY_TIME);

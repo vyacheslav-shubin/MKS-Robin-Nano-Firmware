@@ -4,7 +4,7 @@
 >cfg_have_ups_device			0			# UPS(1:yes;0:no)
 
 #DELETED 
-#cfg_print_over_auto_close		0			# auto-off when print finishes(1:yes£»0:no)
+#cfg_print_over_auto_close		0			# auto-off when print finishes(1:yesï¿½ï¿½0:no)
 
 #NEW
 >cfg_power_control_flags		28			# bit mask: 1 - auto off, 2 - wait hotend, 4 - hadware as sofware, 8 - module presents, 16 - power module lock (0 - GND, 1 - VCC)
@@ -45,7 +45,7 @@
 						#(simplified Chinese:1; traditional Chinese:2; English:3; Russian:4; Spanish:5;French:6;Italian:7).
 #==================Display Effect(refer to MKS TFT datasheet)=================================
 #user-defined function1
->setmenu_func1_display		1		#1:display this button£¬0:no
+>setmenu_func1_display		1		#1:display this buttonï¿½ï¿½0:no
 
 #each command must be separated by semicolon ";"
 >setmenu_func1:M84;
@@ -96,7 +96,7 @@
 >cfg_btn_text_offset		15		#position of button font offset bottom(unit:pixel)
 
 >cfg_screen_display_mode	1		#the style of display on the screen home(0:classic,1:simple,2:retro)
->cfg_screen_overturn_180	0x00		#The screen flips 180¡ã (0x00: no flip, 0xEE: flip)
+>cfg_screen_overturn_180	0x00		#The screen flips 180ï¿½ï¿½ (0x00: no flip, 0xEE: flip)
 
 #============================= Basic Settings  =========================
 
@@ -172,7 +172,7 @@
 >E_ENABLE_ON		0
 
 #============================= Thermal Settings  ============================
->TEMP_SENSOR_0		1		#1: 100k thermistor£»-3 : thermocouple with MAX31855
+>TEMP_SENSOR_0		1		#1: 100k thermistorï¿½ï¿½-3 : thermocouple with MAX31855
 
 >EXTRUDE_MINTEMP 	170		
 >HEATER_0_MINTEMP	5		
@@ -279,6 +279,10 @@
 
 
 #============================== Wifi Settings =============================
+#new
+>wifi_flags             3           ; bit mask 1 - module exists, 2 - NTP support
+>wifi_time_shift        240         ; time zone shift in munutes
+
 >CFG_WIFI_MODE			0				#wifi mode(0:sta;1:ap)
 >CFG_WIFI_AP_NAME		        		#wifi name
 >CFG_WIFI_KEY_CODE		         		#wifi password
@@ -287,7 +291,8 @@
 >CFG_WIFI_CLOUD_HOST	www.baizhongyun.cn	        #cloud server url
 >CFG_CLOUD_PORT			10086        				#cloud server port
 
->WISI_LIST_SCAN                 1                   #Whether to use wifi list scan (0:disable;  1:enable)
+#deleted
+#WISI_LIST_SCAN                 1                   #Whether to use wifi list scan (0:disable;  1:enable)
 
 #About information
 >about_type:MKS Robin nano35

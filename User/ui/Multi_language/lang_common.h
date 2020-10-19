@@ -42,7 +42,7 @@ typedef struct {
     const char * power_hold;
     const char * simple_main_ui;
     const char * module_wifi;
-    const char * module_power;
+    const char * module_exists;
 	const char * display_backlight_off;
 	const char * axes_inversion;
 	const char * motor_steps_settings;
@@ -55,6 +55,7 @@ typedef struct {
     const char * filament_change_temperature;
     const char * speed;
     const char * length;
+    const char * ntp;
 
     const char * machine_size;
     const char * machine_type;

@@ -19,6 +19,7 @@ typedef struct {
     UI_ARROW motor_settings;
     UI_ARROW power_control;
     //page 2
+    UI_ARROW wifi_settings;
     UI_ARROW advanced_settings;
 
     UI_ARROW language;

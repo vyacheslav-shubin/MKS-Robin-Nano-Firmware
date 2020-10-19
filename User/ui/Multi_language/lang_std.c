@@ -27,7 +27,7 @@ void lang_std(void) {
     lang_str.config_ui.power_hold = "Power hold";
 	lang_str.config_ui.simple_main_ui = "Simple main UI";
     lang_str.config_ui.module_wifi = "WiFi module";
-    lang_str.config_ui.module_power = "Power module presents";
+    lang_str.config_ui.module_exists = "Power module presents";
 	lang_str.config_ui.display_backlight_off = "Standby display";
 	lang_str.config_ui.axes_inversion = "Axes inversion";
 	lang_str.config_ui.motor_steps_settings = "Steps settings";
@@ -76,6 +76,7 @@ void lang_std(void) {
     lang_str.config_ui.power_detector = "Power control loopback";
     lang_str.config_ui.filament_detector = "Filament detector";
     lang_str.config_ui.power_control = "Power control";
+    lang_str.config_ui.ntp = "NTP supported";
 
     lang_str.dialog.refactored_by = "Software refactored by:\nVyacheslav Shubin\nshubin-vv@krista.ru";
 

@@ -5,7 +5,6 @@
  *      Author: shubin
  */
 
-#include "../Src/sh_tools.h"
 #include "AdvancedConfigUI.h"
 #include "ConfirmDialogUI.h"
 
@@ -42,12 +41,6 @@ void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
 		ui_invert_u8_flag(gCfgItems.standby_mode);
 		this->updateCheckButton(ui.diplayBackLight.button, (char)gCfgItems.standby_mode);
 		epr_write_data(EPR_STANDBY_MODE, (const unsigned char*)&gCfgItems.standby_mode, sizeof(gCfgItems.standby_mode));
-	} else if (hBtn == this->ui.timeShift.dflt) {
-        gCfgItems.time_offset = 180;
-        this->updateControls();
-        epr_write_data(EPR_TIME_SHIFT, (const unsigned char*)&gCfgItems.time_offset, sizeof(gCfgItems.time_offset));
-	} else if (hBtn == this->ui.timeShift.button) {
-	    this->calculator(lang_str.config_ui.time_shift, gCfgItems.time_offset, 0);
     } else if (hBtn == this->ui.restore.button) {
         this->hide();
         FIL f;
@@ -64,18 +57,6 @@ void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
         ConfigurationWidget::on_button(hBtn);
 }
 
-void AdvancedConfigUI::_setValue(unsigned char id, short value) {
-    gCfgItems.time_offset = value;
-    epr_write_data(EPR_TIME_SHIFT, (const unsigned char*)&gCfgItems.time_offset, sizeof(gCfgItems.time_offset));
-}
-
-void AdvancedConfigUI::updateControls() {
-    if (this->ui.timeShift.button) {
-        sprintf(ui_buf1_100, "%d", gCfgItems.time_offset);
-        this->setButtonText(this->ui.timeShift.button, ui_buf1_100);
-    }
-}
-
 void AdvancedConfigUI::createControls() {
 	ConfigurationWidget::createControls();
 	memset(&this->ui, 0, sizeof(this->ui));
@@ -86,12 +67,10 @@ void AdvancedConfigUI::createControls() {
                                   gCfgItems.display_style == 1);
             this->createCheckPair(0, 1, &this->ui.diplayBackLight, lang_str.config_ui.display_backlight_off,
                                   gCfgItems.standby_mode == 1);
-            this->createInputWithDefault(0, 2, &this->ui.timeShift, lang_str.config_ui.time_shift, 0);
-            this->createConfigButton(0, 3, &this->ui.restore, lang_str.config_ui.restore_config);
+            this->createConfigButton(0, 2, &this->ui.restore, lang_str.config_ui.restore_config);
             break;
         }
     }
 
-    this->updateControls();
 }
 

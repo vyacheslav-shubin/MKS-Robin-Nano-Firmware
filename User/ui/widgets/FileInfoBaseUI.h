@@ -10,7 +10,7 @@
 
 #include "StdWidget.h"
 
-class FileInfoBaseUI  : public StdWidget{
+class FileInfoBaseUI  : public StdWidgetWithCalc{
 protected:
 	unsigned char preview_done = 0;
 
@@ -19,7 +19,7 @@ protected:
 	}
 public:
 	virtual void refresh();
-	FileInfoBaseUI(DISP_STATE id) : StdWidget(id) {};
+	FileInfoBaseUI(DISP_STATE id) : StdWidgetWithCalc(id) {};
 };
 
 #endif /* USER_UI_WIDGETS_FILEINFOBASEUI_H_ */

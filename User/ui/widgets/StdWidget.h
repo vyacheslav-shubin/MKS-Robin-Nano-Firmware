@@ -8,6 +8,7 @@
 #ifndef USER_UI_WIDGETS_STDWIDGET_H_
 #define USER_UI_WIDGETS_STDWIDGET_H_
 
+#include "widgets/dialog/CalculatorDialogUI.h"
 #include "Widget.h"
 #include "ui_tools.h"
 
@@ -17,6 +18,14 @@
 #define ui_std_speed_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_state_speed, 0);
 #define ui_std_ext1_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_state_extruder1, 0)
 #define ui_std_ext2_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_state_extruder2, 0)
+
+typedef enum {
+    PREHEAT_CALC_ID_BED = 0,
+    PREHEAT_CALC_ID_SPR1,
+    PREHEAT_CALC_ID_SPR2
+} PREHEAT_CALC_ID;
+
+extern void preheat_set_calc_value(PREHEAT_CALC_ID id, double value);
 
 
 class StdWidget : public Widget{
@@ -30,6 +39,23 @@ protected:
 	void updateFanState(STATE_BUTTON * stateButton);
 public:
 	StdWidget(DISP_STATE id) : Widget(id) {};
+};
+
+class StdWidgetWithCalc : public StdWidget, public CalculatorDialogCallback {
+protected:
+    virtual void setValue(unsigned char id, double value) = 0;
+    void calculator(const char * label, const char * sub_label, double value, unsigned char id);
+    void calculator(const char * label,  double value, unsigned char id) {
+        this->calculator(label, 0, value, id);
+    }
+public:
+    virtual void on_calculator(unsigned char action, double result, unsigned char dialog_id) {
+        calculator_dialog_ui.hide();
+        if (action==UI_BUTTON_OK)
+            this->setValue(dialog_id, result);
+        this->show();
+    }
+    StdWidgetWithCalc(DISP_STATE id) : StdWidget(id) {};
 };
 
 #endif /* USER_UI_WIDGETS_STDWIDGET_H_ */

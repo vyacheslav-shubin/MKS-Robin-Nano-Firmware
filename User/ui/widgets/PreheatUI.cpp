@@ -14,6 +14,8 @@
 
 PreheatUI preheat_ui;
 
+
+
 const PREHEAT_PRESET preset_preset[PREHEAT_PRESET_COUNT] = {
 
         {img_preset_off, 0, 0},
@@ -42,6 +44,7 @@ static const UI_BUTTON_INFO selector_info[3] {
 #define COL(x) ui_std_col(x)
 #define COL_T(x) COL(x) + STATE_PIC_X_PIXEL
 #define ROW(y) (row_offset + (row_size*y))
+
 
 void PreheatUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
@@ -146,8 +149,24 @@ void PreheatUI::on_button(UI_BUTTON hBtn) {
 	} else if(hBtn == this->ui.back) {
 		this->hide();
 		ui_app.back_ui();
+    } else if(hBtn == this->ui.bed.button) {
+        shUI::BED_TEMP bt;
+	    shUI::getBedTemperature(&bt);
+	    this->calculator(lang_str.bed, bt.target, PREHEAT_CALC_ID_BED);
+    } else if(hBtn == this->ui.ext1.button) {
+        shUI::SPRAYER_TEMP st;
+        shUI::getSprayerTemperature(0, &st);
+        this->calculator(lang_str.extruder1, st.target, PREHEAT_CALC_ID_SPR1);
+    } else if(hBtn == this->ui.ext2.button) {
+        shUI::SPRAYER_TEMP st;
+        shUI::getSprayerTemperature(1, &st);
+        this->calculator(lang_str.extruder2, st.target, PREHEAT_CALC_ID_SPR2);
 	}
 
+}
+
+void PreheatUI::setValue(unsigned char id, double value) {
+    preheat_set_calc_value((PREHEAT_CALC_ID)id, value);
 }
 
 void PreheatUI::refresh_1s() {

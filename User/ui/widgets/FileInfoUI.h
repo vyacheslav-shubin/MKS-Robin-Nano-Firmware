@@ -33,6 +33,7 @@ class FileInfoUI  : public FileInfoBaseUI, public ActionDialogCallback{
 private:
 	FILE_INFO_UI_CONTROLS ui;
 protected:
+    virtual void setValue(unsigned char id, double value) { };
 	virtual void refresh();
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void createControls();

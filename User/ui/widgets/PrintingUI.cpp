@@ -251,10 +251,19 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn == ui.fan.button) {
 		this->hide();
 		fan_ui.show(this);
-	} else if ((hBtn == ui.ext1.button) || (hBtn == ui.ext2.button) || (hBtn == ui.bed.button)){
-		this->hide();
-		preheat_ui.show(this);
-	} else if (hBtn == ui.z.button) {
+	} else  if(hBtn == this->ui.bed.button) {
+        shUI::BED_TEMP bt;
+        shUI::getBedTemperature(&bt);
+        this->calculator(lang_str.bed, bt.target, PREHEAT_CALC_ID_BED);
+    } else if(hBtn == this->ui.ext1.button) {
+        shUI::SPRAYER_TEMP st;
+        shUI::getSprayerTemperature(0, &st);
+        this->calculator(lang_str.extruder1, st.target, PREHEAT_CALC_ID_SPR1);
+    } else if(hBtn == this->ui.ext2.button) {
+        shUI::SPRAYER_TEMP st;
+        shUI::getSprayerTemperature(1, &st);
+        this->calculator(lang_str.extruder2, st.target, PREHEAT_CALC_ID_SPR2);
+    } else if (hBtn == ui.z.button) {
 		if(mksReprint.mks_printer_state == MKS_WORKING) {
 			this->hide();
 			babystep_ui.show();
@@ -268,3 +277,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 	}
 
 };
+
+void PrintingUI::setValue(unsigned char id, double value) {
+    preheat_set_calc_value((PREHEAT_CALC_ID)id, value);
+}

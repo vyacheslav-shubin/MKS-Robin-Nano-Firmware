@@ -18,6 +18,8 @@ typedef struct {
 
 #define PREHEAT_PRESET_COUNT 5
 
+
+
 extern const PREHEAT_PRESET preset_preset[PREHEAT_PRESET_COUNT];
 
 typedef struct{
@@ -36,7 +38,7 @@ typedef struct{
 } PREHEAT_UI_CONTROLS;
 
 
-class PreheatUI: public StdWidget {
+class PreheatUI: public StdWidgetWithCalc {
 private:
 	PREHEAT_UI_CONTROLS ui;
 	char current_preset = 0;
@@ -47,12 +49,13 @@ private:
 	void updatePreset();
 	void updateTempStep();
 protected:
+    virtual void setValue(unsigned char id, double value);
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_1s();
 public:
 	virtual const char * getTitle() {return lang_str.ui_title_preheat;};
-	PreheatUI(): StdWidget(PRE_HEAT_UI) {};
+	PreheatUI(): StdWidgetWithCalc(PRE_HEAT_UI) {};
 };
 
 extern PreheatUI preheat_ui;

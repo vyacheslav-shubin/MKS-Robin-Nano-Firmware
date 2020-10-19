@@ -68,3 +68,29 @@ void StdWidget::updateFanState(STATE_BUTTON * stateButton) {
 	ui_update_fan_button(stateButton->button, stateButton->label);
 }
 
+void StdWidgetWithCalc::calculator(const char * label, const char * sub_label, double value, unsigned char id) {
+    this->hide();
+    const char * title;
+    if (sub_label) {
+        if (ui_buf1_100!=label)
+            strcpy(ui_buf1_100, label);
+        strcat(ui_buf1_100, sub_label);
+        title = ui_buf1_100;
+    } else
+        title = label;
+    calculator_dialog_ui.show(title, value, id, this, this);
+}
+
+void preheat_set_calc_value(PREHEAT_CALC_ID id, double value) {
+    switch (id) {
+        case PREHEAT_CALC_ID_BED:
+            shUI::setBedTemperature(value);
+            break;
+        case PREHEAT_CALC_ID_SPR1:
+            shUI::setSprayerTemperature(0, value);
+            break;
+        case PREHEAT_CALC_ID_SPR2:
+            shUI::setSprayerTemperature(1, value);
+            break;
+    }
+}

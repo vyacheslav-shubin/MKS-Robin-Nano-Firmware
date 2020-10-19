@@ -30,7 +30,7 @@ typedef struct{
 	char preview_done;
 } PRINTING_UI_CONTROLS;
 
-class PrintingUI : public FileInfoBaseUI, public ActionDialogCallback {
+class PrintingUI : public FileInfoBaseUI, public ActionDialogCallback  {
 private:
 	PRINTING_UI_CONTROLS ui;
 	void createStateButtonAt(char col, char row, STATE_BUTTON * btn, const char * img, const char * title);
@@ -40,6 +40,7 @@ private:
 	void updateProgress();
 	void doFinishPrint();
 protected:
+    virtual void setValue(unsigned char id, double value);
 	virtual void refresh_05();
 	virtual void refresh_1s();
 	virtual void createControls();

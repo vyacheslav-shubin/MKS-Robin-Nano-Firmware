@@ -30,7 +30,7 @@ typedef struct {
 
 
 
-class MainUI: public StdWidget, public ActionDialogCallback{
+class MainUI: public StdWidgetWithCalc, public ActionDialogCallback{
 private:
     MAIN_UI_CONTROLS ui;
     char current_preheat_preset = 0;
@@ -39,11 +39,12 @@ protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
 	virtual void refresh_1s();
+    virtual void setValue(unsigned char id, double value);
 public:
     virtual WIDGET_TYPE getType() {return WIDGET_ROOT_UI;};
     virtual void on_action_dialog(u8 action, u8 dialog_id);
 	virtual const char * getTitle();
-	MainUI() : StdWidget(PRINT_READY_UI){};
+	MainUI() : StdWidgetWithCalc(PRINT_READY_UI){};
 };
 
 extern MainUI main_ui;

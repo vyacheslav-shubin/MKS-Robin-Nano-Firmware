@@ -78,7 +78,19 @@ void MainUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn == this->ui.power) {
         this->hide();
         ui_app.power_off_dialog(SUICIDE_WAIT);
-	}
+    } else if(hBtn == this->ui.bed.button) {
+        shUI::BED_TEMP bt;
+        shUI::getBedTemperature(&bt);
+        this->calculator(lang_str.bed, bt.target, PREHEAT_CALC_ID_BED);
+    } else if(hBtn == this->ui.ext1.button) {
+        shUI::SPRAYER_TEMP st;
+        shUI::getSprayerTemperature(0, &st);
+        this->calculator(lang_str.extruder1, st.target, PREHEAT_CALC_ID_SPR1);
+    } else if(hBtn == this->ui.ext2.button) {
+        shUI::SPRAYER_TEMP st;
+        shUI::getSprayerTemperature(1, &st);
+        this->calculator(lang_str.extruder2, st.target, PREHEAT_CALC_ID_SPR2);
+    }
 }
 
 void MainUI::updateStateButtons() {
@@ -140,4 +152,8 @@ void MainUI::refresh_1s() {
 
     } else
         this->updateStateButtons();
+}
+
+void MainUI::setValue(unsigned char id, double value) {
+    preheat_set_calc_value((PREHEAT_CALC_ID)id, value);
 }

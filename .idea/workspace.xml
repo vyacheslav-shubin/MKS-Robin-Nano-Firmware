@@ -37,15 +37,23 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inc/mks_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/mks_cfg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PIDSettingsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PIDSettingsUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FanUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FanUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FanUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FanUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SettingsUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/KeyboardUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/buttons1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/buttons1.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snapshot/mks_pic.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/mks_pic.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snapshot/robin_nano35.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/robin_nano35.zip" afterDir="false" />
     </list>
@@ -154,14 +162,9 @@
       <workItem from="1601896583799" duration="1016000" />
       <workItem from="1602758129425" duration="13000" />
       <workItem from="1602758300551" duration="75000" />
-      <workItem from="1602759361672" duration="27786000" />
-    </task>
-    <task id="LOCAL-00028" summary="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)">
-      <created>1591177519185</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1591177519185</updated>
+      <workItem from="1602759361672" duration="36282000" />
+      <workItem from="1603264347281" duration="1345000" />
+      <workItem from="1603433976323" duration="10788000" />
     </task>
     <task id="LOCAL-00029" summary="Motors settings -&gt; multipage widget (direction, feed rate, jerk, acceleration, steps)">
       <created>1591177560177</created>
@@ -499,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603116015288</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="g-code run ui">
+      <created>1603119476764</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1603119476765</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +540,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="with ntp" />
     <MESSAGE value="support 100x100 preview" />
     <MESSAGE value="Power detector" />
     <MESSAGE value="snapshot" />
@@ -555,7 +564,8 @@
     <MESSAGE value="lerdge power control module" />
     <MESSAGE value="wifi config widget" />
     <MESSAGE value="temperature set with calc" />
-    <option name="LAST_COMMIT_MESSAGE" value="temperature set with calc" />
+    <MESSAGE value="g-code run ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="g-code run ui" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1" y="21" width="1918" height="1038" key="DiffContextDialog" timestamp="1597766012128">
@@ -574,10 +584,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1" y="21" width="923" height="641" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602768807232" />
-    <state x="623" y="244" key="run.anything.popup" timestamp="1603113074655">
+    <state x="623" y="244" key="run.anything.popup" timestamp="1603125701888">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1603113074655" />
+    <state x="623" y="244" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1603125701888" />
     <state x="623" y="234" width="672" height="678" key="search.everywhere.popup" timestamp="1597929082424">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

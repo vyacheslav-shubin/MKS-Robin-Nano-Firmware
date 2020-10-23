@@ -10,11 +10,12 @@
 #include "Marlin.h"
 #include "tim.h"
 #include "Application.h"
-
+#include "integration.h"
 
 FanUI fan_ui;
 
 #define _row(y) (40 * (y))
+
 
 void FanUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
@@ -32,44 +33,60 @@ void FanUI::createControls() {
 }
 
 
-void FanUI::commitFanState() {
-	MKS_FAN_TIM = fanSpeeds[0]*10000/255;
-	this->updateFanState(&this->ui.fan);
+void FanUI::on_button_click(UI_BUTTON hBtn) {
+    if (hBtn == this->ui.plus) {
+        this->ui.auto_change = 1;
+        this->ui.auto_delay = 6;
+    } else if (hBtn == this->ui.minus) {
+        this->ui.auto_change = -1;
+        this->ui.auto_delay = 6;
+    } else {
+        this->ui.auto_change = 0;
+    }
 }
 
+
 void FanUI::on_button(UI_BUTTON hBtn) {
+    this->ui.auto_change = 0;
 	if(hBtn == this->ui.back) {
 		this->hide();
 		ui_app.back_ui();
 		return;
 	} else if(hBtn == this->ui.run100) {
-		gCfgItems.fanOnoff = 1;
-		fanSpeeds[0]=255;
+	    shUI::fan_set_percent(100);
 	} else if(hBtn == this->ui.run0) {
-		gCfgItems.fanOnoff = 0;
-		gCfgItems.fanSpeed = 0;
-		fanSpeeds[0] = 0;
+        shUI::fan_set_percent(0);
 	} else if(hBtn == this->ui.run50) {
-		gCfgItems.fanOnoff = 1;
-		fanSpeeds[0]=128;
+        shUI::fan_set_percent(50);
 	} else if(hBtn == this->ui.plus) {
-		if(fanSpeeds[0]<255) {
-			gCfgItems.fanOnoff = 1;
-			fanSpeeds[0]++;
-		} else {
-			fanSpeeds[0]=255;
-		}
+        shUI::fan_inc();
 	} else if(hBtn == this->ui.minus) {
-		if(fanSpeeds[0]>0) {
-			gCfgItems.fanOnoff = 1;
-			fanSpeeds[0]--;
-		} else {
-			fanSpeeds[0]=0;
-		}
+        shUI::fan_dec();
+	} else if (hBtn == this->ui.fan.button) {
+	    this->calculator(lang_str.ui_title_fan, (double)shUI::fan_get_percent(), 0);
+	    return;
 	}
-	this->commitFanState();
+    this->updateFanState(&this->ui.fan);
+}
+
+void FanUI::refresh_025() {
+    if (this->ui.auto_change) {
+        if (this->ui.auto_delay==0) {
+            if (this->ui.auto_change==1) {
+                shUI::fan_inc();
+            } else {
+                shUI::fan_dec();
+            }
+            ui_update_fan_button_text(this->ui.fan.label);
+        } else
+            this->ui.auto_delay--;
+    }
 }
 
 void FanUI::refresh_05() {
-	this->updateFanState(&this->ui.fan);
+    this->updateFanState(&this->ui.fan);
+}
+
+void FanUI::setValue(unsigned char id, double value) {
+    shUI::fan_set_percent_double(value);
 }

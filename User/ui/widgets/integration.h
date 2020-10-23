@@ -95,6 +95,16 @@ typedef struct{
 
     extern void suicide();
     extern void power_hold();
+
+
+
+    extern void fan_commit();
+    extern void fan_inc();
+    extern void fan_dec();
+    extern void fan_set_percent(unsigned char percent);
+    extern unsigned char fan_get_percent();
+    extern void fan_set_percent_double(double percent);
+
 }
 
 

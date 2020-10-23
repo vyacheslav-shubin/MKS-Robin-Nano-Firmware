@@ -22,7 +22,8 @@
 typedef enum {
     PREHEAT_CALC_ID_BED = 0,
     PREHEAT_CALC_ID_SPR1,
-    PREHEAT_CALC_ID_SPR2
+    PREHEAT_CALC_ID_SPR2,
+    PREHEAT_CALC_ID_LAST
 } PREHEAT_CALC_ID;
 
 extern void preheat_set_calc_value(PREHEAT_CALC_ID id, double value);

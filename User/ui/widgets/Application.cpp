@@ -236,12 +236,17 @@ void Application::idle() {
         ui_timing_clear(F_UI_TIMING_SEC);
         this->refresh_1s();
     }
+    if (is_ui_timing(F_UI_TIMING_QUARTER_SEC))
+        ui_timing_clear(F_UI_TIMING_QUARTER_SEC);
 
     GUI_TOUCH_Exec();
     GUI_Exec();
 }
 
 void Application::systick() {
+
+    if(!(TimeIncrease * TICK_CYCLE % 250))	// 0.25 sec
+        ui_timing_set(F_UI_TIMING_QUARTER_SEC);
 
 	if(!(TimeIncrease * TICK_CYCLE % 500))	// 0.5 sec
 		ui_timing_set(F_UI_TIMING_HALF_SEC);

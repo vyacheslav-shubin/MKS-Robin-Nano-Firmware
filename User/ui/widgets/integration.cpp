@@ -296,6 +296,72 @@ namespace shUI {
         make_lang_str();
 	}
 
+
+    void fan_commit() {
+        MKS_FAN_TIM = fanSpeeds[0]*10000/255;
+    }
+
+    void fan_inc() {
+        if (fanSpeeds[0]>255)
+            fanSpeeds[0] = 255;
+        else {
+            unsigned char percent = fan_get_percent();
+            if (percent==100)
+                fanSpeeds[0] = 255;
+            else {
+                unsigned char new_percent = percent;
+                while (percent==new_percent) {
+                    ++fanSpeeds[0];
+                    new_percent = fan_get_percent();
+                }
+                if (new_percent==100)
+                    fanSpeeds[0] = 255;
+
+            }
+        }
+        fan_commit();
+    }
+
+    void fan_dec() {
+        if (fanSpeeds[0]>255)
+            fanSpeeds[0] = 255;
+        else {
+            unsigned char percent = fan_get_percent();
+            if (percent==0) {
+                fanSpeeds[0] = 0;
+            } else {
+                unsigned char new_percent = percent;
+                while (percent==new_percent) {
+                    --fanSpeeds[0];
+                    new_percent = fan_get_percent();
+                }
+                if (new_percent==0)
+                    fanSpeeds[0] = 0;
+            }
+        }
+        fan_commit();
+    }
+
+    void fan_set_percent(unsigned char percent) {
+        unsigned char fv = (int)((float)percent/100 * 255);
+        while ((unsigned char)(((float)fv / 255) * 100) != percent)
+            fv++;
+        fanSpeeds[0] = fv;
+        fan_commit();
+    }
+
+    unsigned char fan_get_percent() {
+        return (unsigned char)(((float)fanSpeeds[0] / 255) * 100);
+    }
+
+    void fan_set_percent_double(double percent) {
+        if (percent>100)
+            percent = 100;
+        if (percent<0)
+            percent = 0;
+        fan_set_percent((unsigned char)percent);
+    }
+
 }
 
 

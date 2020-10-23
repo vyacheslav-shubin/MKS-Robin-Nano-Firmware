@@ -72,6 +72,8 @@ protected:
 	UI_WND hWnd = 0;
 	virtual void createControls() {};
 	virtual void on_button(UI_BUTTON hBtn) {};
+    virtual void on_button_click(UI_BUTTON hBtn) {};
+    virtual void refresh_025() {};
 	virtual void refresh_05() {};
 	virtual void refresh_1s() {};
 	void dropWindow();

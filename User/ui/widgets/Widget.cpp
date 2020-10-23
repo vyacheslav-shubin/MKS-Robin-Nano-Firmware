@@ -75,9 +75,13 @@ bool Widget::is_active() {
 void Widget::on_message(WM_MESSAGE * pMsg) {
 	switch (pMsg->MsgId) {
     	case WM_NOTIFY_PARENT:
-    		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED)
-    			this->on_button((UI_BUTTON)pMsg->hWinSrc);
+    		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
+                this->on_button((UI_BUTTON) pMsg->hWinSrc);
+            } else if (pMsg->Data.v == WM_NOTIFICATION_CLICKED) {
+                this->on_button_click((UI_BUTTON) pMsg->hWinSrc);
+    		}
     		break;
+
 	}
 }
 
@@ -95,6 +99,8 @@ void Widget::createWindow() {
 }
 
 void Widget::refresh() {
+    if (is_ui_timing(F_UI_TIMING_QUARTER_SEC))
+        this->refresh_025();
 	if (is_ui_timing(F_UI_TIMING_HALF_SEC))
 		this->refresh_05();
 	if (is_ui_timing(F_UI_TIMING_SEC))

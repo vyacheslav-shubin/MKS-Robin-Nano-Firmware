@@ -12,6 +12,7 @@
 #include "wifi_module.h"
 
 extern volatile u8 ui_timing_flags;
+#define F_UI_TIMING_QUARTER_SEC		1<<2
 #define F_UI_TIMING_HALF_SEC		1<<0
 #define F_UI_TIMING_SEC				1<<1
 

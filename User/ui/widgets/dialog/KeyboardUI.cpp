@@ -5,11 +5,14 @@
 #include "KeyboardUI.h"
 #include "ui_tools.h"
 #include "Application.h"
-
+#include "serial.h"
 
 KeyboardUI keyboard_ui;
-const char * digital_key_value="1234567890-|:;()$&@\"";
+//const char * digital_key_value="1234567890-|:;()$&@\"    .,";
+const char * digital_key_value="123$&@\"456:;()789,|  0-.";
+const char * gcode_key_value="123GMT 456XYZE789STFP0-.;";
 const char * symbol_key_value = ",?!\'[]#{}%^*+=_\\/~<>";
+
 
 #define VALUE_DISP_HEIGHT 60
 #define KEY_WIDTH  66
@@ -111,7 +114,7 @@ void KeyboardUI::updateCharsSeq(const char * seq) {
 
 
 void KeyboardUI::updateChars() {
-    switch(this->viewState) {
+    switch(this->charSet) {
         case KB_LC:
             this->updateCharsFrom('a');
             break;
@@ -123,6 +126,9 @@ void KeyboardUI::updateChars() {
             break;
         case KB_SYMB:
             this->updateCharsSeq(symbol_key_value);
+            break;
+        case KB_GCODE:
+            this->updateCharsSeq(gcode_key_value);
             break;
     }
     BUTTON_SetText(this->ui.button[26], "SP");
@@ -147,19 +153,21 @@ void KeyboardUI::addChars(char index) {
             buf[this->cursor++] = ' ';
         else {
             char a = 0;
-            if (this->viewState==KB_LC)
+            if (this->charSet == KB_LC)
                 a = 'a';
-            else if (this->viewState==KB_UC)
+            else if (this->charSet == KB_UC)
                 a = 'A';
 
             if (a!=0)
                 buf[this->cursor++] = a+index;
             else {
                 const char * pa = 0;
-                if (this->viewState==KB_DIG)
+                if (this->charSet == KB_DIG)
                     pa = digital_key_value;
-                else if (this->viewState==KB_SYMB)
+                else if (this->charSet == KB_SYMB)
                     pa = symbol_key_value;
+                else if (this->charSet == KB_GCODE)
+                    pa = gcode_key_value;
                 if (pa && (index<strlen(pa)))
                     buf[this->cursor++] = pa[index];
             }
@@ -169,8 +177,14 @@ void KeyboardUI::addChars(char index) {
 
 void KeyboardUI::on_button(UI_BUTTON hBtn) {
     if (hBtn== this->ui.mode) {
-        if (++this->viewState==KB_END)
-            this->viewState = 0;
+        while (1) {
+            this->charSet <<= 1;
+            if (this->charSet == KB_END)
+                this->charSet = KB_FIRST;
+            SERIAL_ECHOLNPAIR("NEW CHARSET", this->charSet);
+            if (this->enabledCharsets & this->charSet)
+                break;
+        }
         this->updateChars();
     } else if (hBtn== this->ui.ok) {
         this->doAction(UI_BUTTON_OK);

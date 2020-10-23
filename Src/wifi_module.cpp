@@ -959,7 +959,7 @@ static void wifi_list_msg_handle(uint8_t * msg, uint16_t msgLen) {
 			//wifi_list.RSSI[i] = msg[wifiMsgIdex];
 			wifiMsgIdex  +=  1;
 		}
-		wifi_list.count = wifi_name_num;
+		wifi_list.count = valid_name_num;
 		wifi_list.selected = 0;
 	}
 }

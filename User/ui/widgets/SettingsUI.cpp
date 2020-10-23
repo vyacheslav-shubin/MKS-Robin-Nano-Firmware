@@ -38,7 +38,7 @@ void SettingsUI::createControls() {
 }
 
 void SettingsUI::action_wifi() {
-	if(gCfgItems.wifi_flags == 1) {
+	//if(gCfgItems.wifi_flags == 1) {
 		if(wifi_link_state == WIFI_CONNECTED && wifiPara.mode != 0x01) {
 			this->hide();
             wifi_ui.show(this);
@@ -48,10 +48,10 @@ void SettingsUI::action_wifi() {
             this->hide();
             wifi_wait_init_dialog_ui.show(WIFI_DIALOG_LOOKUP, this, DIALOG_ID_INIT_WIFI, this);
 		}
-	} else {
-		this->hide();
-        wifi_ui.show(this);
-	}
+	//} else {
+	//	this->hide();
+    //    wifi_ui.show(this);
+	//}
 }
 
 extern "C" void Reset_Handler(void);
@@ -73,7 +73,7 @@ void SettingsUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn==this->ui.gcode) {
         memset(cmd_code, 0, sizeof(cmd_code));
         this->hide();
-        keyboard_ui.show((char *)lang_str.g_code, cmd_code, sizeof(cmd_code) - 1, this, DIALOG_ID_GCODE, this);
+        keyboard_ui.show((char *)lang_str.g_code, cmd_code, sizeof(cmd_code) - 1, KB_GCODE_SET, KB_GCODE, this, DIALOG_ID_GCODE, this);
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "ff.h"
 #include "fatfs.h"
 #include "ili9320.h"
+#include "integration.h"
 
 extern CardReader card;
 FATFS fs;
@@ -289,6 +290,14 @@ void ui_gcode_small_preview(char *file_name, PREVIEW_META * meta, int xpos_pixel
 	}
 }
 
+
+
+void ui_update_fan_button_text(TEXT_Handle text) {
+    //sprintf(ui_buf1_20, "%d/%d%%", fanSpeeds[0], (int)get_fan_percent());
+    sprintf(ui_buf1_20, "%d%%", (int)shUI::fan_get_percent());
+    ui_set_text_value(text, ui_buf1_20);
+}
+
 void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text) {
 	static uint8_t fan_state = 0;
 	if (fanSpeeds[0]>1) {
@@ -297,12 +306,7 @@ void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text) {
 			fan_state = 0;
 		ui_update_state_button(button, FAN_STATES[fan_state]);
 	}
-	long fs = fanSpeeds[0] * 100;
-	uint8_t pr=fs/255;
-	if ((pr==0) && (fanSpeeds[0]>0))
-		pr = 1;
-	sprintf(ui_buf1_20, "%d/%d%%", fanSpeeds[0], pr);
-	ui_set_text_value(text, ui_buf1_20);
+    ui_update_fan_button_text(text);
 }
 
 

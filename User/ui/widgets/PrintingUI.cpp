@@ -39,6 +39,10 @@ typedef enum {
     DID_NO_FILAMENT
 };
 
+typedef enum {
+    FUN_SPEED_CALC_ID_LAST = PREHEAT_CALC_ID_LAST + 1
+} CALC_ID;
+
 void PrintingUI::createStateButtonAt(char col, char row, STATE_BUTTON * btn, const char * img, const char * title) {
 	this->createStateButton(COL(col), ROW(row), btn, img, title);
 }
@@ -249,8 +253,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 			confirm_dialog_ui.show(lang_str.dialog.confirm_terminate_print, this, DID_CONFIRM_STOP, this);
 		}
 	} else if (hBtn == ui.fan.button) {
-		this->hide();
-		fan_ui.show(this);
+        this->calculator(lang_str.bed, shUI::fan_get_percent(), FUN_SPEED_CALC_ID_LAST);
 	} else  if(hBtn == this->ui.bed.button) {
         shUI::BED_TEMP bt;
         shUI::getBedTemperature(&bt);
@@ -279,5 +282,11 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 };
 
 void PrintingUI::setValue(unsigned char id, double value) {
-    preheat_set_calc_value((PREHEAT_CALC_ID)id, value);
+    switch (id) {
+        case FUN_SPEED_CALC_ID_LAST:
+            shUI::fan_set_percent_double(value);
+            break;
+        default:
+            preheat_set_calc_value((PREHEAT_CALC_ID)id, value);
+    }
 }

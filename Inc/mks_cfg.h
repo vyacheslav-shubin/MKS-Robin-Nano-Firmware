@@ -588,8 +588,6 @@ typedef struct {
 		volatile int8_t curSprayerChoose_bak;
 		volatile int8_t curTempType;		//��ͷ1����ͷ2���ȴ�
 		volatile int8_t stepHeat; //?�訨��2???
-		volatile int8_t fanOnoff; //���ȿ���
-		volatile uint8_t fanSpeed;	//�����ٶ�
 		volatile int8_t sprayerNum; // ��ͷ��
 		volatile int8_t machineType; //����
 		volatile uint16_t printSpeed; 	//��ӡ�ٶ�

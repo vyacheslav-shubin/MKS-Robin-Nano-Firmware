@@ -307,6 +307,7 @@ extern void ui_file_check_preview(char *path, PREVIEW_META *meta);
 
 extern void ui_gcode_small_preview(char * file_name, PREVIEW_META * meta, int xpos_pixel,int ypos_pixel);
 
+extern void ui_update_fan_button_text(TEXT_Handle text);
 extern void ui_update_fan_button(BUTTON_Handle button, TEXT_Handle text);
 #if defined(__cplusplus)
 }

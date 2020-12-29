@@ -36,23 +36,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inc/mks_cfg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Inc/mks_cfg.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/configuration_store.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/Marlin/configuration_store.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/mks_reprint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/mks_reprint.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/sh_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/Src/sh_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/CalculatorDialogUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/CalculatorDialogUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snapshot/mks_pic.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/mks_pic.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snapshot/robin_nano35.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/robin_nano35.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/ManualLevelingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/ManualLevelingUI.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,14 +145,7 @@
       <workItem from="1607155227881" duration="702000" />
       <workItem from="1609252370237" duration="81000" />
       <workItem from="1609259612443" duration="83000" />
-      <workItem from="1609259708963" duration="1978000" />
-    </task>
-    <task id="LOCAL-00030" summary="keyboard ui">
-      <created>1591288908636</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1591288908636</updated>
+      <workItem from="1609259708963" duration="3229000" />
     </task>
     <task id="LOCAL-00031" summary="keyboard ui">
       <created>1591288915083</created>
@@ -505,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603445889752</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="zerro calc">
+      <created>1609262034676</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1609262034676</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +521,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Power detector" />
     <MESSAGE value="snapshot" />
     <MESSAGE value="PID widget, WIFI KEY upload" />
     <MESSAGE value="power control/wait for cooling  +config widget" />
@@ -561,7 +545,8 @@
     <MESSAGE value="temperature set with calc" />
     <MESSAGE value="g-code run ui" />
     <MESSAGE value="fun/edit with calculator. auto inc/dec. view only percent" />
-    <option name="LAST_COMMIT_MESSAGE" value="fun/edit with calculator. auto inc/dec. view only percent" />
+    <MESSAGE value="zerro calc" />
+    <option name="LAST_COMMIT_MESSAGE" value="zerro calc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

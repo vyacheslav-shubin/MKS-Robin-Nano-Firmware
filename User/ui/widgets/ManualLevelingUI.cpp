@@ -54,9 +54,9 @@ void ManualLevelingUI::on_button(UI_BUTTON hBtn) {
 	} else if (hBtn==buttons.leveling2) {
 		manual_leveling(1);
 	} else if (hBtn==buttons.leveling3) {
-		manual_leveling(2);
-	} else if (hBtn==buttons.leveling4) {
 		manual_leveling(3);
+	} else if (hBtn==buttons.leveling4) {
+		manual_leveling(2);
 	} else if (hBtn==buttons.leveling5) {
 		manual_leveling(4);
 	} else if (hBtn==buttons.home) {

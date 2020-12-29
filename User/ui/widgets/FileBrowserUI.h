@@ -23,7 +23,7 @@ private:
 protected:
 	virtual char onFile(DIR * dir, FILINFO * fi) {return 0;};
 public:
-	char curent_dir[MAX_FILE_NAME_SIZE];
+	char current_dir[MAX_FILE_NAME_SIZE];
 	int dir_level = 0;
 	virtual void lookup();
 	virtual void close();

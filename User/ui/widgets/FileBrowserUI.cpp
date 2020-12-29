@@ -26,6 +26,12 @@ FileBrowserUI file_browser_ui;
 
 static TCHAR lfn[_MAX_LFN + 1];
 
+void concat_file_name(char * dest,  char * directory, char * src) {
+    strcpy(dest, directory);
+    strcat(dest, "/");
+    strncat(dest, src, 12);
+}
+
 char * get_long_file_name(char * fileName) {
 	int i = strlen(fileName);
 	while ((fileName[i] != '/') && (i>=0))
@@ -74,7 +80,7 @@ void Browser::lookup() {
 
 	DIR dir;
 	memset(&dir, 0, sizeof(dir));
-	if (f_opendir(&dir, curent_dir) == FR_OK) {
+	if (f_opendir(&dir, current_dir) == FR_OK) {
 		while (f_readdir(&dir, &fi) == FR_OK) {
 			if (fi.fname[0] == 0)
 				break;
@@ -89,13 +95,13 @@ void Browser::lookup() {
 }
 
 void Browser::close() {
-	strcpy(this->curent_dir, "1:");
+	strcpy(this->current_dir, "1:");
 	this->dir_level = 0;
 }
 
 void Browser::pushDirectory(char * name) {
-	strcat(curent_dir, "/");
-	strcat(curent_dir, name);
+	strcat(current_dir, "/");
+	strcat(current_dir, name);
 	this->dir_level++;
 }
 
@@ -103,13 +109,13 @@ void Browser::popDirectory() {
 	if (this->dir_level!=0) {
 		unsigned char i=0;
 		unsigned char p=0;
-		while (curent_dir[i]!=0) {
-			if (curent_dir[i]=='/')
+		while (current_dir[i] != 0) {
+			if (current_dir[i] == '/')
 				p = i;
 			i++;
 		}
 		if (p != 0) {
-			curent_dir[p] = 0;
+            current_dir[p] = 0;
 			this->dir_level--;
 		}
 	}
@@ -155,10 +161,19 @@ protected:
 		UI_FILE_BUTTON * ufb = &file_browser_ui.ui.files[this->index];
 		ufb->isDirectory = fi->fattrib & AM_DIR;
 		strncpy(ufb->fileName, fi->fname, 12);
+#if 0
+        SERIAL_ECHOLNPAIR("S_ ", fi->fname);
+        SERIAL_ECHO("H_ ");
+        for (int jj=0;jj<12;jj++)
+            SERIAL_ECHOPAIR(",", (int)((unsigned char)fi->fname[jj] & 0x00FF));
+        SERIAL_EOL();
+        SERIAL_ECHOLNPAIR("L_ ", fi->lfname);
+#endif
 		if (ufb->isDirectory) {
 			pic = img_dir;
 		} else {
-			sprintf(ui_buf1_100, "%s/%s", curent_dir, ufb->fileName);
+		    concat_file_name(ui_buf1_100, current_dir, ufb->fileName);
+			//sprintf(ui_buf1_100, "%s/%s", curent_dir, ufb->fileName);
             ui_file_check_preview(ui_buf1_100, &ufb->previewMeta);
             switch (ufb->previewMeta.mode) {
                 case PREVIEW_50:
@@ -262,7 +277,7 @@ void FileBrowserUI::doPrev(){
 
 void FileBrowserUI::activatePrint(u8 index) {
 	memset(&ui_print_process, 0, sizeof(ui_print_process));
-	sprintf(ui_print_process.file_name, "%s/%s", browser.curent_dir, this->ui.files[index].fileName);
+    concat_file_name(ui_print_process.file_name, browser.current_dir, this->ui.files[index].fileName);
 	ui_app.dropPreview();
 	file_info_ui.show(this);
 }
@@ -317,7 +332,7 @@ void FileBrowserUI::on_button(UI_BUTTON hBtn) {
 void FileBrowserUI::drawPreview() {
 	for(unsigned char i=0; i<6; i++) {
 		if (this->ui.files[i].previewMeta.mode != PREVIEW_NONE) {
-			sprintf(ui_buf1_100, "%s/%s", browser.curent_dir, ui.files[i].fileName);
+            concat_file_name(ui_buf1_100, browser.current_dir, ui.files[i].fileName);
             int x = 0;
             int y = 0;
             switch (this->ui.files[i].previewMeta.mode) {

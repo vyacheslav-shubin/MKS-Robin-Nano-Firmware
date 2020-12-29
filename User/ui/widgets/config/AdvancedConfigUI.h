@@ -12,7 +12,8 @@
 
 typedef struct {
 	UI_CHECK	simpleMainUI;
-	UI_CHECK	diplayBackLight;
+    UI_CHECK	diplayBackLight;
+    UI_CHECK	zerro_calc;
 	UI_CONFIG_BUTTON restore;
 
 } ADVANCED_CONFIG_UI_CONTROLS;

@@ -200,11 +200,12 @@ void ui_set_text_value(TEXT_Handle handle, char* val) {
 
 #define ROW(idx) (10+50*idx)
 
-extern void ui_file_check_preview(char *path, PREVIEW_META *meta) {
+void ui_file_check_preview(char *path, PREVIEW_META *meta) {
     #define PREPERD_SIZE 1024
     FIL file;
     meta->mode = PREVIEW_NONE;
-    if (f_open(&file, path, FA_OPEN_EXISTING | FA_READ) == FR_OK) {
+    int res = f_open(&file, path, FA_OPEN_EXISTING | FA_READ);
+    if (res == FR_OK) {
         memset(bmp_public_buf, 0, PREPERD_SIZE+1);
         UINT readed;
         f_read(&file, bmp_public_buf, PREPERD_SIZE, &readed);
@@ -228,6 +229,9 @@ extern void ui_file_check_preview(char *path, PREVIEW_META *meta) {
                 }
             }
         }
+    } else {
+        SERIAL_ECHOLNPAIR("PREVIEW FILE OPEN ERROR:", path);
+        SERIAL_ECHOLNPAIR("ERROR:", res);
     }
 }
 

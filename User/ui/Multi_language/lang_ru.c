@@ -8,7 +8,8 @@ void lang_ru(void) {
 	lang_str.config_ui.simple_main_ui = "Простое меню";
     lang_str.config_ui.module_wifi = "Модуль WiFi";
 	lang_str.config_ui.display_backlight_off = "Выключать подсветку дисплея";
-	lang_str.config_ui.axes_inversion = "Инверсия осей";
+    lang_str.config_ui.zerro_calc = "Ноль на калькуляторе";
+    lang_str.config_ui.axes_inversion = "Инверсия осей";
 	lang_str.config_ui.motor_steps_settings = "Настройка шагов";
 	lang_str.config_ui.home_speed_settings = "Скорость парковки";
     lang_str.config_ui.z_safe_homing = "Z по центру";

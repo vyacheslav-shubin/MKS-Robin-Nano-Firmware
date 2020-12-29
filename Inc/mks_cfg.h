@@ -316,10 +316,10 @@ typedef struct  __attribute__((__packed__)) {
 //2
 #define EPR_TIME_SHIFT          EPR_MKS_END
 //2*4
-//define PREHEAT_PRESET          EPR_TIME_SHIFT + 2
+#define EPR_SH_FLAGS1               EPR_TIME_SHIFT + 2
 
 
-#define EPR_USED EPR_MKS_END + 2
+#define EPR_USED EPR_MKS_END + 3
 
 
 //#define EPR_END_ADDR			EPR_TIME_SHIFT + 2
@@ -717,6 +717,7 @@ typedef struct {
 		volatile uint16_t print_finish_count;
 		volatile uint16_t preview_bk_color;
         volatile short time_offset;
+        volatile unsigned char sh_flags1;
 }CFG_ITMES;
 
 extern CFG_PRINTER_ITMES mksCfg;

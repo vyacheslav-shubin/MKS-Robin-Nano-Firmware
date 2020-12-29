@@ -44,6 +44,7 @@ typedef struct {
     const char * module_wifi;
     const char * module_exists;
 	const char * display_backlight_off;
+	const char * zerro_calc;
 	const char * axes_inversion;
 	const char * motor_steps_settings;
 	const char * home_speed_settings;

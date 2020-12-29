@@ -188,6 +188,7 @@
  */
 #include "configuration_store.h"
 #include "at24cxx.h"
+#include "serial.h"
 
 MarlinSettings settings;
 

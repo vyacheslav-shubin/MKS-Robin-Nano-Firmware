@@ -16,6 +16,10 @@
 #define POWER_CONTROL_LOCK                      (1<<4)
 #define POWER_CONTROL_CONFIGURED                (1<<7)
 
+#define SH_FLAGS1_ZERROR_CALC                   (1<<0)
+#define is_zerro_calc()                (gCfgItems.sh_flags1 & SH_FLAGS1_ZERROR_CALC)
+
+
 #define is_power_control_configured()           (gCfgItems.power_control_flags & POWER_CONTROL_CONFIGURED)
 #define is_power_control_presents()             (gCfgItems.power_control_flags & POWER_CONTROL_MODULE_PRESENTS)
 

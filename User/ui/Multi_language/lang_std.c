@@ -26,6 +26,7 @@ void lang_std(void) {
     lang_str.config_ui.power_off_hardware_button_as_sofware = "Hardware power button as software";
     lang_str.config_ui.power_hold = "Power hold";
 	lang_str.config_ui.simple_main_ui = "Simple main UI";
+    lang_str.config_ui.zerro_calc = "Zerro calc init";
     lang_str.config_ui.module_wifi = "WiFi module";
     lang_str.config_ui.module_exists = "Power module presents";
 	lang_str.config_ui.display_backlight_off = "Standby display";

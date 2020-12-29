@@ -6,6 +6,7 @@
 #define WORK_CALCULATORDIALOGUI_H
 
 #include "DialogWidget.h"
+#include "sh_tools.h"
 
 #define CALC_OPERAND_BUFFER_SIZE    10
 
@@ -71,7 +72,7 @@ public:
     void show(const char * title, double value, unsigned char  dialog_id, CalculatorDialogCallback * callback, Widget * caller) {
         this->id = dialog_id;
         this->callback = callback;
-        this->init_value = value;
+        this->init_value = is_zerro_calc()?0:value;
         this->title = title;
         DialogWidget::show(caller);
     }

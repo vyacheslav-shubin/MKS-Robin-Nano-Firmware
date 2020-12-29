@@ -9,6 +9,7 @@
 #include "ConfirmDialogUI.h"
 
 #include "ili9320.h"
+#include "sh_tools.h"
 #include "Application.h"
 
 AdvancedConfigUI advanced_config_ui;
@@ -41,6 +42,10 @@ void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
 		ui_invert_u8_flag(gCfgItems.standby_mode);
 		this->updateCheckButton(ui.diplayBackLight.button, (char)gCfgItems.standby_mode);
 		epr_write_data(EPR_STANDBY_MODE, (const unsigned char*)&gCfgItems.standby_mode, sizeof(gCfgItems.standby_mode));
+    } else if(hBtn == this->ui.zerro_calc.button) {
+        gCfgItems.sh_flags1^=SH_FLAGS1_ZERROR_CALC;
+        this->updateCheckButton(ui.zerro_calc.button, is_zerro_calc());
+        epr_write_data(EPR_SH_FLAGS1, (const unsigned char*)&gCfgItems.sh_flags1, sizeof(gCfgItems.sh_flags1));
     } else if (hBtn == this->ui.restore.button) {
         this->hide();
         FIL f;
@@ -67,7 +72,11 @@ void AdvancedConfigUI::createControls() {
                                   gCfgItems.display_style == 1);
             this->createCheckPair(0, 1, &this->ui.diplayBackLight, lang_str.config_ui.display_backlight_off,
                                   gCfgItems.standby_mode == 1);
-            this->createConfigButton(0, 2, &this->ui.restore, lang_str.config_ui.restore_config);
+            this->createCheckPair(0, 2, &this->ui.zerro_calc, lang_str.config_ui.zerro_calc,
+                                  is_zerro_calc());
+
+            this->createConfigButton(0, 3, &this->ui.restore, lang_str.config_ui.restore_config);
+
             break;
         }
     }

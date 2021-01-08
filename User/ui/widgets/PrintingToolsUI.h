@@ -15,7 +15,7 @@ typedef struct {
 	UI_BUTTON 	fan;
     UI_BUTTON 	speed;
     UI_BUTTON 	speed1;
-
+    UI_BUTTON 	std_preheat;
 	UI_BUTTON 	babystep;
 	UI_BUTTON 	move;
 
@@ -27,6 +27,7 @@ typedef struct {
 class PrintingToolsUI : public StdWidget {
 private:
 	PRINTING_TOOLS_UI_CONTROLS ui;
+	unsigned char current_preset = 0;
 protected:
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);

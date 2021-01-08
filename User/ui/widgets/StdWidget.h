@@ -37,7 +37,8 @@ protected:
     UI_BUTTON createButtonRet();
     UI_BUTTON createButtonAt90x60(int phx, int phy, const char * picture);
 	void action_back();
-    void  actionFilamentChangeParking();
+    void actionFilamentChangeParking();
+    void actionBedParking();
     void action_leveling();
 	void updateFanState(STATE_BUTTON * stateButton);
 public:

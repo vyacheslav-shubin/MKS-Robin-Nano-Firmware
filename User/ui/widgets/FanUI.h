@@ -18,8 +18,6 @@ typedef struct {
 	UI_BUTTON run0;
 	UI_BUTTON back;
 	STATE_BUTTON fan;
-    char auto_change;
-    unsigned char auto_delay;
 } FUN_UI_CONTROLS;
 
 class FanUI: public StdWidgetWithCalc {
@@ -29,8 +27,8 @@ protected:
     virtual void setValue(unsigned char id, double value);
 	virtual void createControls();
 	virtual void on_button(UI_BUTTON hBtn);
-    virtual void on_button_click(UI_BUTTON hBtn);
-    virtual void refresh_025();
+    virtual unsigned char on_repeatable_button(UI_BUTTON hBtn);
+    virtual unsigned char is_repeated_button(UI_BUTTON hBtn);
 	virtual void refresh_05();
 public:
 	virtual const char * getTitle() {return lang_str.ui_title_fan;};

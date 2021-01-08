@@ -309,6 +309,8 @@ EEPROM 2K byte ����
 typedef struct  __attribute__((__packed__)) {
     char MKS_CFG[EPR_MKS_END];
     unsigned short TIME_SHIFT;
+    unsigned char SH_FLAGS;
+    float BAD_Z_HOMING;
 } ERP_MAP;
 
 #define ERP_OFFSET(ITEM)  ((unsigned long)(&((ERP_MAP *)0)->ITEM))
@@ -318,8 +320,9 @@ typedef struct  __attribute__((__packed__)) {
 //2*4
 #define EPR_SH_FLAGS1               EPR_TIME_SHIFT + 2
 
+#define EPR_BED_HOMING		EPR_SH_FLAGS1 + 1
 
-#define EPR_USED EPR_MKS_END + 3
+#define EPR_USED EPR_MKS_END + 7
 
 
 //#define EPR_END_ADDR			EPR_TIME_SHIFT + 2
@@ -448,7 +451,8 @@ typedef struct
 	float filament_change_x_pos;			//FILAMENT_CHANGE_X_POS
 	float filament_change_y_pos;			//FILAMENT_CHANGE_Y_POS
 	float filament_change_z_add;			//FILAMENT_CHANGE_Z_ADD
-	
+
+	float bed_homind_z;			//FILAMENT_CHANGE_Z_ADD
 
 	int16_t thermal_protection_period;		//THERMAL_PROTECTION_PERIOD
 	uint8_t thermal_protection_hysteresis;	//THERMAL_PROTECTION_HYSTERESIS
@@ -496,7 +500,7 @@ typedef struct
 	char cloud_hostUrl[64];	//�����ӵ�ַ
 	int cloud_port;		//�����Ӷ˿�
 #endif	
-}CFG_PRINTER_ITMES;
+} CFG_PRINTER_ITMES;
 
 typedef struct
 {

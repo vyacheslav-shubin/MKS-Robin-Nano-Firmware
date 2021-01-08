@@ -15,6 +15,7 @@ typedef struct{
 	UI_BUTTON y;
     UI_BUTTON z;
     UI_BUTTON t;
+    UI_BUTTON b;
 	UI_BUTTON all;
 	UI_BUTTON stop;
     UI_TEXT change;

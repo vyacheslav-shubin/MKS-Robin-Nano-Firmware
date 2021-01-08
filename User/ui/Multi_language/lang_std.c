@@ -34,6 +34,7 @@ void lang_std(void) {
 	lang_str.config_ui.motor_steps_settings = "Steps settings";
 	lang_str.config_ui.home_speed_settings = "Home speed setting";
     lang_str.config_ui.z_safe_homing = "Z safe homing";
+    lang_str.config_ui.y_before_x = "Y before X";
 	lang_str.config_ui.acceleration_settings = "Acceleration settings";
 	lang_str.config_ui.maximum_speed_settings = "Maximum speed settings";
 	lang_str.config_ui.jerk_settings = "Jerk settings";

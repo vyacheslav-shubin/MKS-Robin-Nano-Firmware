@@ -15,6 +15,7 @@ typedef struct {
     UI_CHECK y_dir;
     UI_CHECK z_dir;
     UI_CHECK z_safe;
+    UI_CHECK y_before_x;
     UI_INPUT_WITH_DEFAULT xy_speed;
     UI_INPUT_WITH_DEFAULT z_speed;
     UI_TEXT pause;
@@ -23,6 +24,8 @@ typedef struct {
     UI_INPUT_WITH_DEFAULT pz;
     UI_INPUT_WITH_DEFAULT pe_unload;
     UI_INPUT_WITH_DEFAULT pe_load;
+    UI_TEXT bed;
+    UI_INPUT_WITH_DEFAULT bed_z;
 } HOME_CONFIG_UI_CONTROLS;
 
 class HomeConfigUI : public ConfigurationWidgetWithCalc {
@@ -38,7 +41,7 @@ protected:
     }
 public:
     virtual const char * getTitle() {return lang_str.ui_title_config_home;};
-    HomeConfigUI() : ConfigurationWidgetWithCalc(HOME_SETTINGS_UI, 2) {};
+    HomeConfigUI() : ConfigurationWidgetWithCalc(HOME_SETTINGS_UI, 3) {};
 };
 
 

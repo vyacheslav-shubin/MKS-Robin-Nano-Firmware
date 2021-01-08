@@ -13,6 +13,7 @@ void lang_ru(void) {
 	lang_str.config_ui.motor_steps_settings = "Настройка шагов";
 	lang_str.config_ui.home_speed_settings = "Скорость парковки";
     lang_str.config_ui.z_safe_homing = "Z по центру";
+    lang_str.config_ui.y_before_x = "Порядок YX";
 	lang_str.config_ui.acceleration_settings = "Настройки ускорений";
 	lang_str.config_ui.maximum_speed_settings = "Максимальные скорости";
 	lang_str.config_ui.jerk_settings = "Настройки рывков";

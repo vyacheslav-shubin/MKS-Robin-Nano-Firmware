@@ -32,9 +32,16 @@ UI_BUTTON StdWidget::createButtonAt90x60(int phx, int phy, const char * picture)
     return this->create90x60Button(ui_std_col90x60(phx),ui_std_row90x60(phy),picture);
 }
 
+void  StdWidget::actionBedParking() {
+    if (!axis_homed[Y_AXIS])
+        shUI::pushGcode("G28 Z0");
+    sprintf(ui_buf1_100, "G91 G1 Z%.1f F%.1f", mksCfg.bed_homind_z, mksCfg.homing_feedrate_z);
+    shUI::pushGcode(ui_buf1_100);
+}
+
 void  StdWidget::actionFilamentChangeParking() {
     if (!(axis_homed[X_AXIS] && axis_homed[Y_AXIS]))
-        enqueue_and_echo_commands_P("G28 X0 Y0");
+        shUI::pushGcode("G28 X0 Y0");
     sprintf(ui_buf1_100, "G91 G1 Z%.1f F%.1f", mksCfg.filament_change_z_add, mksCfg.homing_feedrate_z);
     shUI::pushGcode(ui_buf1_100);
     sprintf(ui_buf1_100, "G90 G1 X%.1f Y%.1f F%.1f", mksCfg.filament_change_x_pos, mksCfg.filament_change_y_pos, mksCfg.homing_feedrate_xy);

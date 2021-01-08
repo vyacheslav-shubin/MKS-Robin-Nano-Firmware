@@ -8,7 +8,7 @@
 HomeConfigUI home_config_ui;
 
 typedef enum {
-    SPEED_XY, SPEED_Z_FAST, PAUSE_X, PAUSE_Y, PAUSE_dZ, PAUSE_dE
+    SPEED_XY, SPEED_Z_FAST, PAUSE_X, PAUSE_Y, PAUSE_dZ, PAUSE_dE, BED_Z_HOMING
 } VALUES;
 
 void HomeConfigUI::updateValues() {
@@ -32,6 +32,11 @@ void HomeConfigUI::updateValues() {
         sprintf(ui_buf1_100, "%.1f", mksCfg.filament_change_z_add);
         this->setButtonText(this->ui.pz.button, ui_buf1_100);
     }
+    if (this->ui.bed_z.button!=0) {
+        sprintf(ui_buf1_100, "%.1f", mksCfg.bed_homind_z);
+        this->setButtonText(this->ui.bed_z.button, ui_buf1_100);
+    }
+
 }
 
 void HomeConfigUI::_setValue(unsigned char id, float value) {
@@ -59,6 +64,10 @@ void HomeConfigUI::_setValue(unsigned char id, float value) {
             mksReprint.mks_pausePrint_z = mksCfg.filament_change_z_add;
             epr_write_data(EPR_FILAMENT_CHANGE_Z_ADD,(uint8_t *)&value, sizeof(value));
             break;
+        case BED_Z_HOMING:
+            mksCfg.bed_homind_z = value;
+            epr_write_data(EPR_BED_HOMING,(uint8_t *)&value, sizeof(value));
+            break;
     }
 }
 
@@ -72,14 +81,18 @@ void HomeConfigUI::on_button(UI_BUTTON hBtn) {
         mksCfg.y_home_dir = (mksCfg.y_home_dir==1) ? -1 : 1;
         epr_write_data(EPR_Y_HOME_DIR, (uint8_t *)&mksCfg.y_home_dir,1);
         this->updateCheckButton(this->ui.y_dir.button, mksCfg.y_home_dir==1, &lang_str.min_max);
-    }if (ui_is_double_button(hBtn, this->ui.z_dir)) {
+    }else if (ui_is_double_button(hBtn, this->ui.z_dir)) {
         mksCfg.z_home_dir = (mksCfg.z_home_dir==1) ? -1 : 1;
         epr_write_data(EPR_Z_HOME_DIR, (uint8_t *)&mksCfg.z_home_dir,1);
         this->updateCheckButton(this->ui.z_dir.button, mksCfg.z_home_dir==1, &lang_str.min_max);
-    } if (ui_is_double_button(hBtn, this->ui.z_safe)) {
+    } else if (ui_is_double_button(hBtn, this->ui.z_safe)) {
         mksCfg.z_safe_homing = (mksCfg.z_safe_homing==1) ? 0 : 1;
         epr_write_data(EPR_Z_SAFE_HOMING, (uint8_t *)&mksCfg.z_safe_homing, 1);
         this->updateCheckButton(this->ui.z_safe.button, mksCfg.z_safe_homing==1, &lang_str.yes_no);
+    } else if (ui_is_double_button(hBtn, this->ui.y_before_x)) {
+        mksCfg.home_y_before_x = (mksCfg.home_y_before_x==1) ? 0 : 1;
+        epr_write_data(EPR_HOME_Y_BEFORE_X, (uint8_t *)&mksCfg.home_y_before_x, 1);
+        this->updateCheckButton(this->ui.y_before_x.button, mksCfg.home_y_before_x==1, &lang_str.yes_no);
     } else if (hBtn==this->ui.xy_speed.button) {
         this->calculator(lang_str.config_ui.speed, " XY:", mksCfg.homing_feedrate_xy, SPEED_XY);
     } else if (hBtn==this->ui.z_speed.button) {
@@ -90,6 +103,8 @@ void HomeConfigUI::on_button(UI_BUTTON hBtn) {
         this->calculator(lang_str.config_ui.pause, " Y:", mksCfg.filament_change_y_pos, PAUSE_Y);
     } else if (hBtn==this->ui.pz.button) {
         this->calculator(lang_str.config_ui.pause, " +Z:", mksCfg.filament_change_z_add, PAUSE_dZ);
+    } else if (hBtn==this->ui.bed_z.button) {
+        this->calculator(lang_str.config_ui.pause, " BZ:", mksCfg.bed_homind_z, BED_Z_HOMING);
     } else {
         if (hBtn == this->ui.z_speed.dflt) {
             this->_setValue(SPEED_Z_FAST, 1200);
@@ -101,6 +116,8 @@ void HomeConfigUI::on_button(UI_BUTTON hBtn) {
             this->_setValue(PAUSE_Y, 5);
         } else if (hBtn == this->ui.pz.dflt) {
             this->_setValue(PAUSE_dZ, 5);
+        } else if (hBtn == this->ui.bed_z.dflt) {
+            this->_setValue(BED_Z_HOMING, (int)(mksCfg.z_max_pos / 4 * 3));
         } else {
             ConfigurationWidget::on_button(hBtn);
             return;
@@ -115,20 +132,27 @@ void HomeConfigUI::createControls() {
     this->dual_columns = 1;
     if (page==0) {
         this->ui.placement = this->createLabel(0, 0, lang_str.config_ui.direction);
-        this->ui.speed = this->createLabel(1, 0, lang_str.config_ui.speed);
         this->createCheckPair(0, 1, &this->ui.x_dir, "X", mksCfg.x_home_dir == 1, &lang_str.min_max);
         this->createCheckPair(0, 2, &this->ui.y_dir, "Y", mksCfg.y_home_dir == 1, &lang_str.min_max);
         this->createCheckPair(0, 3, &this->ui.z_dir, "Z", mksCfg.z_home_dir == 1, &lang_str.min_max);
-        this->createCheckPair(0, 4, &this->ui.z_safe, lang_str.config_ui.z_safe_homing, mksCfg.z_safe_homing == 1, &lang_str.yes_no);
+        this->createCheckPair(1, 0, &this->ui.z_safe, lang_str.config_ui.z_safe_homing, mksCfg.z_safe_homing == 1, &lang_str.yes_no);
+        this->createCheckPair(1, 1, &this->ui.y_before_x, lang_str.config_ui.y_before_x, mksCfg.home_y_before_x == 1, &lang_str.yes_no);
 
 
-        this->createInputWithDefault(1, 1, &this->ui.xy_speed, "XY", 0);
-        this->createInputWithDefault(1, 2, &this->ui.z_speed, "Z", 0);
+        //y_before_x
+        //mksCfg.home_y_before_x, EPR_HOME_Y_BEFORE_X
+
     } else if (page==1) {
         this->ui.pause = this->createLabel(0, 0, lang_str.config_ui.pause);
         this->createInputWithDefault(0, 1, &this->ui.px, "X", 0, 0);
         this->createInputWithDefault(0, 2, &this->ui.py, "Y", 0, 0);
         this->createInputWithDefault(0, 3, &this->ui.pz, "+Z", 0, 0);
+        this->ui.bed = this->createLabel(1, 0, lang_str.bed);
+        this->createInputWithDefault(1, 1, &this->ui.bed_z, "Z", 0, 0);
+    } else if (page==2) {
+        this->ui.speed = this->createLabel(0, 0, lang_str.config_ui.speed);
+        this->createInputWithDefault(0, 1, &this->ui.xy_speed, "XY", 0);
+        this->createInputWithDefault(0, 2, &this->ui.z_speed, "Z", 0);
     }
     this->updateValues();
 }

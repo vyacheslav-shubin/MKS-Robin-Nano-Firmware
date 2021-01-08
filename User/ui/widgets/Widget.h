@@ -15,6 +15,9 @@
 
 class Application;
 
+//  1/4 * N секунды
+#define BUTTON_REPEAT_COUNTDOWN 6
+
 typedef BUTTON_Handle 		UI_BUTTON;
 typedef TEXT_Handle 		UI_TEXT;
 typedef PROGBAR_Handle 		UI_PROGRESS_BAR;
@@ -71,9 +74,11 @@ protected:
 	DISP_STATE id;
 	UI_WND hWnd = 0;
 	virtual void createControls() {};
-	virtual void on_button(UI_BUTTON hBtn) {};
+    virtual void on_button(UI_BUTTON hBtn) {};
+    virtual unsigned char on_repeatable_button(UI_BUTTON hBtn) {return 0;};
+    virtual unsigned char is_repeated_button(UI_BUTTON hBtn) {return 0;};
     virtual void on_button_click(UI_BUTTON hBtn) {};
-    virtual void refresh_025() {};
+    virtual void refresh_025();
 	virtual void refresh_05() {};
 	virtual void refresh_1s() {};
 	void dropWindow();

@@ -48,7 +48,8 @@ typedef struct {
 	const char * axes_inversion;
 	const char * motor_steps_settings;
 	const char * home_speed_settings;
-	const char * z_safe_homing;
+    const char * z_safe_homing;
+    const char * y_before_x;
 	const char * acceleration_settings;
 	const char * maximum_speed_settings;
 	const char * jerk_settings;
@@ -160,7 +161,7 @@ typedef struct {
 	const char * move;
 	const char * home;
 	const char * leveling;
-	const char * filament;
+    const char * filament;
 	const char * back;
 	const char * more;
 	const char * continue_print;

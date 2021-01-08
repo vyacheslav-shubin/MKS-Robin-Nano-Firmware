@@ -27,10 +27,13 @@ class SpeedUI2: public StdWidget {
 private:
     SPEED_UI_CONTROLS2 ui;
     void updateStepButton();
+    void updateStateButtons();
 protected:
     UI_BUTTON createButtonAt90x60(int phx, int phy, const char * picture);
     virtual void createControls();
     virtual void on_button(UI_BUTTON hBtn);
+    virtual unsigned char on_repeatable_button(UI_BUTTON hBtn);
+    virtual unsigned char is_repeated_button(UI_BUTTON hBtn);
     void refresh_05();
     void refresh_1s();
 public:

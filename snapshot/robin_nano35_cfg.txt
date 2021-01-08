@@ -123,6 +123,8 @@
 >FILAMENT_CHANGE_Y_POS 5	 # Y position of hotend  for filament change and pause print
 >FILAMENT_CHANGE_Z_ADD 10	 # Z addition of hotend (lift)	for filament change and pause print 
 
+>BED_HOME_Z   220   # Z position for bed homing
+
 #Offset of the second extruders. 
 >HOTEND_OFFSET_X 	20.00 		#(in mm) offset of the second hotend on the X axis ,Offsets for the first hotend must be 0.0.
 >HOTEND_OFFSET_Y 	5.00  		#(in mm) offset of the second hotend on  the Y axis ,Offsets for the first hotend must be 0.0.

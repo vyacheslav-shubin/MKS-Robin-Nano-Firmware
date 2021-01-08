@@ -19,8 +19,8 @@ FanUI fan_ui;
 
 void FanUI::createControls() {
 	memset(&this->ui, 0, sizeof(this->ui));
-	this->ui.plus = ui_std_plus_button(0, 0);
-	this->ui.minus = ui_std_minus_button(2, 0);
+    this->ui.minus = ui_std_minus_button(0, 0);
+	this->ui.plus = ui_std_plus_button(2, 0);
 
 	this->createStateButton(ui_std_col(1), _row(1), &ui.fan, FAN_STATES[0], 0);
 
@@ -32,56 +32,46 @@ void FanUI::createControls() {
 	this->updateFanState(&this->ui.fan);
 }
 
-
-void FanUI::on_button_click(UI_BUTTON hBtn) {
-    if (hBtn == this->ui.plus) {
-        this->ui.auto_change = 1;
-        this->ui.auto_delay = 6;
-    } else if (hBtn == this->ui.minus) {
-        this->ui.auto_change = -1;
-        this->ui.auto_delay = 6;
-    } else {
-        this->ui.auto_change = 0;
-    }
-}
-
-
 void FanUI::on_button(UI_BUTTON hBtn) {
-    this->ui.auto_change = 0;
-	if(hBtn == this->ui.back) {
-		this->hide();
-		ui_app.back_ui();
-		return;
-	} else if(hBtn == this->ui.run100) {
-	    shUI::fan_set_percent(100);
-	} else if(hBtn == this->ui.run0) {
-        shUI::fan_set_percent(0);
-	} else if(hBtn == this->ui.run50) {
-        shUI::fan_set_percent(50);
-	} else if(hBtn == this->ui.plus) {
-        shUI::fan_inc();
-	} else if(hBtn == this->ui.minus) {
-        shUI::fan_dec();
-	} else if (hBtn == this->ui.fan.button) {
-	    this->calculator(lang_str.ui_title_fan, (double)shUI::fan_get_percent(), 0);
-	    return;
-	}
+    if (on_repeatable_button(hBtn)) {
+    } else {
+        if (hBtn == this->ui.back) {
+            this->hide();
+            ui_app.back_ui();
+            return;
+        } else if (hBtn == this->ui.run100) {
+            shUI::fan_set_percent(100);
+        } else if (hBtn == this->ui.run0) {
+            shUI::fan_set_percent(0);
+        } else if (hBtn == this->ui.run50) {
+            shUI::fan_set_percent(50);
+        } else if (hBtn == this->ui.plus) {
+            shUI::fan_inc();
+        } else if (hBtn == this->ui.minus) {
+            shUI::fan_dec();
+        } else if (hBtn == this->ui.fan.button) {
+            this->calculator(lang_str.ui_title_fan, (double) shUI::fan_get_percent(), 0);
+            return;
+        }
+    }
     this->updateFanState(&this->ui.fan);
 }
 
-void FanUI::refresh_025() {
-    if (this->ui.auto_change) {
-        if (this->ui.auto_delay==0) {
-            if (this->ui.auto_change==1) {
-                shUI::fan_inc();
-            } else {
-                shUI::fan_dec();
-            }
-            ui_update_fan_button_text(this->ui.fan.label);
-        } else
-            this->ui.auto_delay--;
+unsigned char FanUI::on_repeatable_button(UI_BUTTON hBtn) {
+    if(hBtn == this->ui.plus) {
+        shUI::fan_inc();
+        return 1;
+    } else if(hBtn == this->ui.minus) {
+        shUI::fan_dec();
+        return 1;
     }
+    return 0;
 }
+
+unsigned char FanUI::is_repeated_button(UI_BUTTON hBtn) {
+    return (hBtn == this->ui.plus) || (hBtn == this->ui.minus);
+};
+
 
 void FanUI::refresh_05() {
     this->updateFanState(&this->ui.fan);

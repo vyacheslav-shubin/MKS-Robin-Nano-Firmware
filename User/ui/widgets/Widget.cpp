@@ -13,6 +13,9 @@
 #include "integration.h"
 #include "Application.h"
 
+static UI_BUTTON repeat_btn;
+static char repeat_count_down;
+
 void ui_update_bed_state_button(STATE_BUTTON * button) {
     shUI::BED_TEMP bt;
     shUI::getBedTemperature(&bt);
@@ -77,8 +80,12 @@ void Widget::on_message(WM_MESSAGE * pMsg) {
     	case WM_NOTIFY_PARENT:
     		if(pMsg->Data.v == WM_NOTIFICATION_RELEASED) {
                 this->on_button((UI_BUTTON) pMsg->hWinSrc);
+                repeat_btn = 0;
             } else if (pMsg->Data.v == WM_NOTIFICATION_CLICKED) {
-                this->on_button_click((UI_BUTTON) pMsg->hWinSrc);
+    		    if (this->is_repeated_button((UI_BUTTON) pMsg->hWinSrc)) {
+                    repeat_btn = (UI_BUTTON) pMsg->hWinSrc;
+                    repeat_count_down = BUTTON_REPEAT_COUNTDOWN;
+                }
     		}
     		break;
 
@@ -107,6 +114,16 @@ void Widget::refresh() {
 		this->refresh_1s();
 }
 
+void Widget::refresh_025() {
+    if (repeat_btn) {
+        if (repeat_count_down==0) {
+            on_repeatable_button(repeat_btn);
+        } else
+            repeat_count_down--;
+    }
+};
+
+
 void Widget::recreate() {
 	this->dropWindow();
 	this->createWindow();
@@ -115,12 +132,14 @@ void Widget::recreate() {
 
 void Widget::show(Widget * caller) {
 	ui_app.push(this);
+    repeat_btn = 0;
 	this->createWindow();
 }
 
 void Widget::hide() {
 	this->dropWindow();
 	ui_app.current_ui = 0;
+    repeat_btn = 0;
 }
 
 void Widget::dropWindow(){

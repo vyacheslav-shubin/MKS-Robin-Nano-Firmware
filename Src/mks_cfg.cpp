@@ -781,6 +781,9 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue(">FILAMENT_CHANGE_Y_POS", &mksCfg.filament_change_y_pos, EPR_FILAMENT_CHANGE_Y_POS);
 	eprBurnValue(">FILAMENT_CHANGE_Z_ADD", &mksCfg.filament_change_z_add, EPR_FILAMENT_CHANGE_Z_ADD);
 
+    eprBurnValue(">BED_HOME_Z", &mksCfg.bed_homind_z, EPR_BED_HOMING);
+
+
 //THERMAL_PROTECTION_PERIOD
 	eprBurnValue(">THERMAL_PROTECTION_PERIOD", &mksCfg.thermal_protection_period, EPR_THERMAL_PROTECTION_PERIOD);
 	eprBurnValue(">THERMAL_PROTECTION_HYSTERESIS", &mksCfg.thermal_protection_hysteresis, EPR_THERMAL_PROTECTION_HYSTERESIS);
@@ -1522,7 +1525,9 @@ void CardReader::mksLoad()
 
 	epr_read_data((int)EPR_FILAMENT_CHANGE_X_POS, (uint8_t*)&mksCfg.filament_change_x_pos, sizeof(mksCfg.filament_change_x_pos)); 
 	epr_read_data((int)EPR_FILAMENT_CHANGE_Y_POS, (uint8_t*)&mksCfg.filament_change_y_pos, sizeof(mksCfg.filament_change_y_pos)); 
-	epr_read_data((int)EPR_FILAMENT_CHANGE_Z_ADD, (uint8_t*)&mksCfg.filament_change_z_add, sizeof(mksCfg.filament_change_z_add)); 
+	epr_read_data((int)EPR_FILAMENT_CHANGE_Z_ADD, (uint8_t*)&mksCfg.filament_change_z_add, sizeof(mksCfg.filament_change_z_add));
+
+    epr_read_data((int)EPR_BED_HOMING, (uint8_t*)&mksCfg.bed_homind_z, sizeof(mksCfg.bed_homind_z));
 
 
 //THERMAL_PROTECTION_PERIOD

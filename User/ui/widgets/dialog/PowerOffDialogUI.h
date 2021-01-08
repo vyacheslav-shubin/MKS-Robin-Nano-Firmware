@@ -11,6 +11,7 @@
 typedef struct {
     UI_BUTTON ok;
     UI_BUTTON cancel;
+    UI_BUTTON reboot;
     UI_TEXT	text;
     UI_PROGRESS_BAR progress;
     STATE_BUTTON ext1;

@@ -79,6 +79,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 
 #define img_preheat				"bmp_preHeat.bin"
 #define img_back				"bmp_return.bin"
+#define img_reset				"bmp_reset.bin"
 
 #define img_wifi				"bmp_wifi.bin"
 #define img_cloud				"bmp_cloud.bin"
@@ -139,6 +140,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_home_y			"bmp_homeY.bin"
 #define img_home_z			"bmp_homeZ.bin"
 #define img_home_t			"bmp_homeT.bin"
+#define img_home_b			"bmp_homeB.bin"
 #define img_stop_motor		"bmp_function1.bin"
 
 #define img_filament_load		"bmp_in.bin"
@@ -169,6 +171,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 
 #define img90x60_plus             "bmp_90x60_plus.bin"
 #define img90x60_minus             "bmp_90x60_minus.bin"
+#define img90x60_reboot             "bmp_90x60_reboot.bin"
 
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)

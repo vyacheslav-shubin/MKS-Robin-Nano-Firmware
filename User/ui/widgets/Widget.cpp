@@ -47,7 +47,7 @@ void Widget::updateCheckButton(UI_BUTTON btn, unsigned char state, BOOLEAN_LANG 
 
 void Widget::createStateButton(int x, int y, STATE_BUTTON * btn, const char * picture, const char * title) {
     btn->button = ui_create_state_button(x, y,this->hWnd, picture);
-    btn->label = ui_create_std_text(x + STATE_PIC_X_PIXEL, y, 80, STATE_PIC_Y_PIXEL, this->hWnd, title);
+    btn->label = ui_create_std_text(x + STATE_PIC_X_PIXEL, y, STATE_BUTTON_TEXT_WIDTH, STATE_PIC_Y_PIXEL, this->hWnd, title);
 }
 
 void Widget::updateStateButton(STATE_BUTTON * btn, const char * img, const char * title) {

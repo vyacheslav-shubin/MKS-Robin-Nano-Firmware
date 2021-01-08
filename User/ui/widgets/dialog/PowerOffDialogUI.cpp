@@ -30,28 +30,26 @@ bool PowerOffDialogUI::isTemperatureValid() {
 
 void PowerOffDialogUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
-    this->createDialogDecoration(img_dialog_confirm, 0);
     this->timeout = this->duration;
     this->ui.ok = this->create96x80Button(DIALOG_WIDTH - (96 + 4), DIALOG_HEIGHT - 84, img_ok);
+    this->ui.reboot = this->create90x60Button(10, DIALOG_HEIGHT - 74, img90x60_reboot);
     this->ui.cancel = this->create96x80Button(DIALOG_WIDTH - (96 + 4) * 2, DIALOG_HEIGHT - 84, img_cancel);
     this->ui.progress = ui_create_std_progbar(100, 20, DIALOG_WIDTH - 100 - 20, 20, this->hWnd);
     PROGBAR_SetValue(this->ui.progress, 0);
-    unsigned char test_height;
     if (check_temerature()) {
         if (is_dual_extruders()) {
-            ui_std_ext1_state_button(10, _down_row(1), &this->ui.ext1);
-            ui_std_ext2_state_button(10, _down_row(0), &this->ui.ext2);
-            test_height = DIALOG_HEIGHT - 60 - 10 - 40 * 3;
+            ui_std_ext1_state_button(10, 10, &this->ui.ext1);
+            ui_std_ext2_state_button(10, 10 + 40, &this->ui.ext2);
             shUI::setSprayerTemperature(1, 0);
         } else {
-            ui_std_ext1_state_button(10, _down_row(0), &this->ui.ext1);
-            test_height = DIALOG_HEIGHT - 60 - 40 * 2 - 10;
+            ui_std_ext1_state_button(10, 10, &this->ui.ext1);
         }
         shUI::setBedTemperature(0);
         shUI::setSprayerTemperature(0, 0);
-    } else
-        test_height = DIALOG_HEIGHT - 60 - 40 * 2 - 10;
-    this->ui.text = this->createTextF(10, 60, DIALOG_WIDTH - 20, test_height, TEXT_CF_HCENTER | TEXT_CF_VCENTER, lang_str.dialog.power_off);
+    } else {
+        this->createDialogDecoration(img_dialog_confirm, 0);
+    }
+    this->ui.text = this->createTextF(60, 85, DIALOG_WIDTH - 120, 50, TEXT_CF_HCENTER | TEXT_CF_VCENTER, lang_str.dialog.power_off);
 };
 
 void PowerOffDialogUI::on_button(UI_BUTTON hBtn) {
@@ -60,6 +58,8 @@ void PowerOffDialogUI::on_button(UI_BUTTON hBtn) {
         shUI::powerOff();
     } else if (hBtn == this->ui.cancel) {
         ui_app.showMainWidget();
+    } else if (hBtn == this->ui.reboot) {
+        NVIC_SystemReset();
     }
 }
 

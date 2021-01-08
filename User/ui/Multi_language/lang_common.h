@@ -212,7 +212,8 @@ typedef struct {
 	const char * waiting;
 	const char * preparing;
 	const char * point_n_fmt;
-	const char * start;
+    const char * start;
+    const char * reboot;
 
 
 	const char * ui_title_main;

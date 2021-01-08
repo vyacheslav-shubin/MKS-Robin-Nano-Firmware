@@ -140,6 +140,7 @@ void lang_std(void) {
     lang_str.point_n_fmt = "Point %d";
     lang_str.start = "Start";
 
+    lang_str.reboot = "Reboot";
 
 	lang_str.ui_title_main = "Ready";
 	lang_str.ui_title_tools = "Select tool";

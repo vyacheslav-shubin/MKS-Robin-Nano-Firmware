@@ -114,6 +114,8 @@ void lang_ru(void) {
     lang_str.point_n_fmt = "Точка %d";
     lang_str.start = "Начать";
 
+    lang_str.reboot = "Рестарт";
+
     lang_str.ui_title_main = "";
 	lang_str.ui_title_tools = "Выбор инструмента";
 	lang_str.ui_title_file_browser = "Выбор файла";

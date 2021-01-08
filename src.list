@@ -131,6 +131,7 @@ User/ui/widgets/HomeUI.cpp
 User/ui/widgets/FilamentUI.cpp
 User/ui/widgets/PrintingToolsUI.cpp
 User/ui/widgets/SpeedUI.cpp
+User/ui/widgets/SpeedUI2.cpp
 User/ui/widgets/MoreUI.cpp
 User/ui/widgets/FileBrowserUI.cpp
 User/ui/widgets/FileInfoBaseUI.cpp

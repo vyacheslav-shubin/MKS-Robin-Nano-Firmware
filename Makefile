@@ -46,7 +46,7 @@ WORK_DIR=$(CURDIR)
 LD_SCRIPT=MKS_ROBIN.ld
 
 #SD_CARD=/media/shubin/5DB9-A287
-SD_CARD=/media/shubin/sd
+SD_CARD=/media/shubin/SD
 
 #LD_SCRIPT=STM32F103VETX_FLASH.ld
 

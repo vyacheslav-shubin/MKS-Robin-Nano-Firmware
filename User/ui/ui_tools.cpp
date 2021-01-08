@@ -125,10 +125,13 @@ void ui_update_std_button(BUTTON_Handle btn, const char* file, const char* title
 
 
 GUI_BITMAP bmp_struct_96x80 = { 96, 80, 96*2, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+GUI_BITMAP bmp_struct_90x60 = { 90, 60, 90*2, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+
 GUI_BITMAP bmp_struct_50x50 = { 50, 50, 100, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_70x50 = { 70, 50, 140, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_70x28 = { 70, 28, 140, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
 GUI_BITMAP bmp_struct_30x30 = { 30, 30, 60, 16, (unsigned char *)bmp_public_buf,  0, GUI_DRAW_BMPM565};
+
 
 BUTTON_Handle ui_create_96_80_button(int x, int y, WM_HWIN hWinParent, const char *pFile) {
 	BUTTON_Handle btn = BUTTON_CreateEx(x, y, 96, 80, hWinParent, BUTTON_CF_SHOW, 0, alloc_win_id());

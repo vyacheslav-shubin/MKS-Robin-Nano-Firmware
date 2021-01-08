@@ -12,6 +12,7 @@ extern "C" {
 #endif
 
 extern GUI_BITMAP bmp_struct_96x80;
+extern GUI_BITMAP bmp_struct_90x60;
 extern GUI_BITMAP bmp_struct_50x50;
 
 
@@ -164,6 +165,11 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_radio		            "bmp_radio.bin"
 #define img_radio_sel		        "bmp_radio_sel.bin"
 
+#define img96x80_return             "bmp_page_back.bin"
+
+#define img90x60_plus             "bmp_90x60_plus.bin"
+#define img90x60_minus             "bmp_90x60_minus.bin"
+
 
 #define is_dual_extruders() (mksCfg.extruders == 2 && gCfgItems.singleNozzle == 0)
 //#define is_dual_extruders() (1)
@@ -279,6 +285,10 @@ extern void ui_drop_window(WM_HWIN wnd);
 //with placeholder
 #define ui_std_col(ph_x) (INTERVAL_H + (BTN_X_PIXEL+INTERVAL_H)*(ph_x))
 #define ui_std_row(ph_y) (INTERVAL_V + (BTN_Y_PIXEL + INTERVAL_V) * (ph_y))
+
+#define ui_std_row90x60(ph_y) (4 + (4 + 60) * (ph_y))
+#define ui_std_col90x60(ph_x) (INTERVAL_V + (90 + 4) * (ph_x))
+
 #define ui_std_window(cb) WM_CreateWindow(0, titleHeight, LCD_WIDTH, LCD_HEIGHT - titleHeight, WM_CF_SHOW, cb, 0)
 
 

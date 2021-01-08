@@ -208,6 +208,13 @@ typedef struct {
 
     const char *overflow;
 
+	const char * moving;
+	const char * waiting;
+	const char * preparing;
+	const char * point_n_fmt;
+	const char * start;
+
+
 	const char * ui_title_main;
 	const char * ui_title_tools;
 	const char * ui_title_file_browser;

@@ -158,6 +158,13 @@ void Widget::updateButton(UI_BUTTON button, const char * picture, const char * t
 }
 
 
+UI_BUTTON Widget::create90x60Button(int x, int y, const char * picture) {
+    BUTTON_Handle btn = BUTTON_CreateEx(x, y, 90, 60, this->hWnd, BUTTON_CF_SHOW, 0, 0);
+    this->buttonPreset(btn);
+    BUTTON_SetBmpFileName(btn, picture,1);
+    BUTTON_SetBitmapEx(btn, 0, &bmp_struct_90x60, 0, 0);
+    return btn;
+}
 
 UI_BUTTON Widget::create96x80Button(int x, int y, const char * picture) {
 	return ui_create_96_80_button(x, y, this->hWnd, picture);

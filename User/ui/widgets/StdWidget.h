@@ -18,6 +18,7 @@
 #define ui_std_speed_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_state_speed, 0);
 #define ui_std_ext1_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_state_extruder1, 0)
 #define ui_std_ext2_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_state_extruder2, 0)
+#define ui_std_fun_state_button(x, y, dest) this->createStateButton((x), (y), dest, img_fan_state0, 0)
 
 typedef enum {
     PREHEAT_CALC_ID_BED = 0,
@@ -33,7 +34,8 @@ class StdWidget : public Widget{
 protected:
 	UI_BUTTON createButton(int x, int y, const char * picture, const char * title);
 	UI_BUTTON createButtonAt(int phx, int phy, const char * picture, const char * title);
-	UI_BUTTON createButtonRet();
+    UI_BUTTON createButtonRet();
+    UI_BUTTON createButtonAt90x60(int phx, int phy, const char * picture);
 	void action_back();
     void  actionFilamentChangeParking();
     void action_leveling();

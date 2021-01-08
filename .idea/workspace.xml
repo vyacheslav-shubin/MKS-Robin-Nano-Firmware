@@ -36,8 +36,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/SpeedUI2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/ui/widgets/SpeedUI2.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/ManualLevelingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/ManualLevelingUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/MeshLevelingUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Widget.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Widget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/buttons1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/buttons1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src.list" beforeDir="false" afterPath="$PROJECT_DIR$/src.list" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,14 +85,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="OCFindUsagesOptions.isSearchForTextOccurrences" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -86,6 +106,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="work" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="work" TARGET_NAME="work" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="work" RUN_TARGET_NAME="work">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -145,14 +170,8 @@
       <workItem from="1607155227881" duration="702000" />
       <workItem from="1609252370237" duration="81000" />
       <workItem from="1609259612443" duration="83000" />
-      <workItem from="1609259708963" duration="3229000" />
-    </task>
-    <task id="LOCAL-00031" summary="keyboard ui">
-      <created>1591288915083</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1591288915083</updated>
+      <workItem from="1609259708963" duration="17656000" />
+      <workItem from="1610106172173" duration="1347000" />
     </task>
     <task id="LOCAL-00032" summary="wifi-ui as widget; snapshot">
       <created>1591375193150</created>
@@ -490,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609262034676</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="manual leveling/button-config fix">
+      <created>1609263529641</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1609263529641</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +547,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="snapshot" />
     <MESSAGE value="PID widget, WIFI KEY upload" />
     <MESSAGE value="power control/wait for cooling  +config widget" />
     <MESSAGE value="wifi module patch support" />
@@ -546,7 +571,8 @@
     <MESSAGE value="g-code run ui" />
     <MESSAGE value="fun/edit with calculator. auto inc/dec. view only percent" />
     <MESSAGE value="zerro calc" />
-    <option name="LAST_COMMIT_MESSAGE" value="zerro calc" />
+    <MESSAGE value="manual leveling/button-config fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="manual leveling/button-config fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

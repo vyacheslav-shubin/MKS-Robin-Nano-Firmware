@@ -13,7 +13,8 @@
 typedef struct {
 	UI_BUTTON	preheat;
 	UI_BUTTON 	fan;
-	UI_BUTTON 	speed;
+    UI_BUTTON 	speed;
+    UI_BUTTON 	speed1;
 
 	UI_BUTTON 	babystep;
 	UI_BUTTON 	move;

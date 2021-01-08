@@ -301,6 +301,14 @@ namespace shUI {
         MKS_FAN_TIM = fanSpeeds[0]*10000/255;
     }
 
+	void fun_add_percentage(short value) {
+		short p = fan_get_percent();
+		p+=value;
+		if (p<0) p = 0;
+		if (p>100) p = 100;
+		fan_set_percent(p);
+	}
+
     void fan_inc() {
         if (fanSpeeds[0]>255)
             fanSpeeds[0] = 255;

@@ -134,6 +134,13 @@ void lang_std(void) {
 	lang_str.advanced = "Advanced";
     lang_str.overflow = "OVERFLOW";
 
+    lang_str.moving = "Moving";
+    lang_str.waiting = "Waiting";
+    lang_str.preparing = "Preparing";
+    lang_str.point_n_fmt = "Point %d";
+    lang_str.start = "Start";
+
+
 	lang_str.ui_title_main = "Ready";
 	lang_str.ui_title_tools = "Select tool";
 	lang_str.ui_title_file_browser = "File browser";

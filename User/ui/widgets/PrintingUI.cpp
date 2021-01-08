@@ -18,7 +18,8 @@
 #include "ConfirmDialogUI.h"
 #include "PrintingInfoDialogUI.h"
 #include "Application.h"
-
+#include "SpeedUI.h"
+#include "SpeedUI2.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -271,6 +272,10 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 			this->hide();
 			babystep_ui.show();
 		}
+    } else if (hBtn == ui.speed.button) {
+        this->hide();
+        //speed_ui.show();
+        speed_ui_2.show();
 	} else if (hBtn == this->ui.power_control) {
 		ui_print_process.suicide_enabled = ui_print_process.suicide_enabled?0:1;
 		this->updatePowerControlButton();

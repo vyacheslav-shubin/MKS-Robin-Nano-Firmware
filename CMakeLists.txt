@@ -739,7 +739,7 @@ add_executable(work
 		User/ui/widgets/config/PowerControlUI.h
 		User/ui/widgets/config/WiFiConfigUI.cpp
 		User/ui/widgets/config/WiFiConfigUI.h
-)
+        User/ui/widgets/SpeedUI2.cpp User/ui/widgets/SpeedUI2.h)
 
 add_compile_definitions(USE_HAL_DRIVER)
 add_compile_definitions(STM32F103xE)

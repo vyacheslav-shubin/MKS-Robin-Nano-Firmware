@@ -81,6 +81,7 @@ protected:
     virtual void createFrame();
 	virtual void createWindow();
     void drawXYZ();
+    UI_BUTTON create90x60Button(int x, int y, const char * picture);
     UI_BUTTON create96x80Button(int x, int y, const char * picture);
     UI_BUTTON create70x50Button(int x, int y, const char * picture, const char * text);
 	void updateButton(UI_BUTTON button, const char * picture, const char * title);

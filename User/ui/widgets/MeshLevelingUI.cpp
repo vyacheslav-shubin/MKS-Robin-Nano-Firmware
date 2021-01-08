@@ -30,12 +30,12 @@ void MeshLevelingUI::on_message(WM_MESSAGE * pMsg) {
             GUI_SetColor(0x000000);
             GUI_FillRect(FILELD_OFFSET_X, FILELD_OFFSET_Y, FILELD_OFFSET_X + this->dx * GRID_MAX_POINTS_X + 1, FILELD_OFFSET_Y + this->dy * GRID_MAX_POINTS_Y + 1);
             GUI_SetColor(0x00ff00);
-            int _max=FILELD_OFFSET_Y + GRID_MAX_POINTS_Y * this->dy + 1;
+            int _max=FILELD_OFFSET_Y + GRID_MAX_POINTS_Y * this->dy;
             for (int i=0;i<=GRID_MAX_POINTS_X;i++) {
                 int x = FILELD_OFFSET_X + i * this->dx;
                 GUI_DrawLine(x, FILELD_OFFSET_Y, x, _max);
             }
-            _max=FILELD_OFFSET_X + GRID_MAX_POINTS_X * this->dx + 1;
+            _max=FILELD_OFFSET_X + GRID_MAX_POINTS_X * this->dx;
             for (int i=0;i<=GRID_MAX_POINTS_Y;i++) {
                 int y = FILELD_OFFSET_Y + i * this->dy;
                 GUI_DrawLine(FILELD_OFFSET_X, y, _max, y);
@@ -59,9 +59,9 @@ UI_STEP_INFO * MeshLevelingUI::getStepInfo() {
 void MeshLevelingUI::updateButtons() {
     if ((this->wait_change) && (this->mesh_step==mbl_probe_index)) {
         if (mbl_probe_index==-1)
-            this->updateStateButton(&ui.point, 0, "Waiting");
+            this->updateStateButton(&ui.point, 0, lang_str.waiting);
         else
-            this->updateStateButton(&ui.point, 0, "Moving");
+            this->updateStateButton(&ui.point, 0, lang_str.moving);
     } else {
         this->wait_change = 0;
         if (this->mesh_step != mbl_probe_index) {
@@ -73,12 +73,12 @@ void MeshLevelingUI::updateButtons() {
             rect.y1 = FILELD_OFFSET_Y + this->dy * GRID_MAX_POINTS_Y + 1;
             WM_InvalidateRect(this->hWnd, &rect);
             if (mbl_probe_index == -1) {
-                this->updateStateButton(&ui.point, 0, "Start");
+                this->updateStateButton(&ui.point, 0, lang_str.start);
             } else if (mbl_probe_index == 0) {
-                this->updateStateButton(&ui.point, 0, "Preparing");
+                this->updateStateButton(&ui.point, 0, lang_str.preparing);
             } else {
                 //fill_cell(this->mesh_step - 1);
-                sprintf(ui_buf1_100, "Point %d", mbl_probe_index);
+                sprintf(ui_buf1_100, lang_str.point_n_fmt, mbl_probe_index);
                 this->updateStateButton(&ui.point, 0, ui_buf1_100);
             }
         }

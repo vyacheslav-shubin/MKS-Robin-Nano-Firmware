@@ -10,7 +10,7 @@
 #include "Application.h"
 
 
-SpeedUI speed_ui;
+SpeedUI speed_ui_1;
 
 #define SELECTOR_SIZE	3
 #define STEPS_COUNT		3

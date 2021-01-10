@@ -33,7 +33,7 @@ UI_BUTTON StdWidget::createButtonAt90x60(int phx, int phy, const char * picture)
 }
 
 void  StdWidget::actionBedParking() {
-    if (!axis_homed[Y_AXIS])
+    if (!axis_homed[Z_AXIS])
         shUI::pushGcode("G28 Z0");
     sprintf(ui_buf1_100, "G91 G1 Z%.1f F%.1f", mksCfg.bed_homind_z, mksCfg.homing_feedrate_z);
     shUI::pushGcode(ui_buf1_100);

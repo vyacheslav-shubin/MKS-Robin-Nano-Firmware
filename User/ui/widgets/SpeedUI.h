@@ -36,6 +36,6 @@ public:
 	SpeedUI() : StdWidget(CHANGE_SPEED_UI) {};
 };
 
-extern SpeedUI speed_ui;
+extern SpeedUI speed_ui_1;
 
 #endif /* USER_UI_WIDGETS_SPEEDUI_H_ */

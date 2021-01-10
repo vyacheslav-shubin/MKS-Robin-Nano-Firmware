@@ -30,6 +30,8 @@
 #include "WifiUI.h"
 #include "WifiListUI.h"
 #include "SettingsUI.h"
+#include "SpeedUI.h"
+#include "SpeedUI2.h"
 #include "MeshLevelingUI.h"
 #include "dialog/AboutDialogUI.h"
 #include "dialog/ProgressDialogUI.h"
@@ -44,5 +46,6 @@
 #include "config/NozzleConfigUI.h"
 #include "config/MotorSettingsUI.h"
 
+#define speed_ui    speed_ui_2
 
 #endif /* USER_UI_WIDGETS_UI_H_ */

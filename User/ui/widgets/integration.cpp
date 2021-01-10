@@ -351,6 +351,8 @@ namespace shUI {
     }
 
     void fan_set_percent(unsigned char percent) {
+        if (percent>100)
+            percent = 100;
         unsigned char fv = (int)((float)percent/100 * 255);
         while ((unsigned char)(((float)fv / 255) * 100) != percent)
             fv++;

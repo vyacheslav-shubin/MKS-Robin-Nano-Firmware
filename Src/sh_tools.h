@@ -14,6 +14,7 @@
 #define POWER_CONTROL_HARDWARE_AS_SOFTWARE      (1<<2)
 #define POWER_CONTROL_MODULE_PRESENTS           (1<<3)
 #define POWER_CONTROL_LOCK                      (1<<4)
+#define POWER_CONTROL_REBOOT                    (1<<5)
 #define POWER_CONTROL_CONFIGURED                (1<<7)
 
 #define SH_FLAGS1_ZERROR_CALC                   (1<<0)
@@ -22,6 +23,7 @@
 
 #define is_power_control_configured()           (gCfgItems.power_control_flags & POWER_CONTROL_CONFIGURED)
 #define is_power_control_presents()             (gCfgItems.power_control_flags & POWER_CONTROL_MODULE_PRESENTS)
+#define is_power_control_reboot()               (gCfgItems.power_control_flags & POWER_CONTROL_REBOOT)
 
 #define WIFI_MODULE_PRESENTS                    (1<<0)
 #define WIFI_MODULE_NTP_SUPPORT                 (1<<1)

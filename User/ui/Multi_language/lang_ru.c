@@ -5,7 +5,8 @@ void lang_ru(void) {
     lang_str.config_ui.power_off_temperature_wait = "Дожидаться охлаждения перед выключением";
     lang_str.config_ui.power_off_hardware_button_as_sofware = "Обработка аппаратной кнопки как программной";
     lang_str.config_ui.power_hold = "Удержание питания";
-	lang_str.config_ui.simple_main_ui = "Простое меню";
+    lang_str.config_ui.power_reset = "Кнопка сброса";
+    lang_str.config_ui.simple_main_ui = "Простое меню";
     lang_str.config_ui.module_wifi = "Модуль WiFi";
 	lang_str.config_ui.display_backlight_off = "Выключать подсветку дисплея";
     lang_str.config_ui.zerro_calc = "Ноль на калькуляторе";

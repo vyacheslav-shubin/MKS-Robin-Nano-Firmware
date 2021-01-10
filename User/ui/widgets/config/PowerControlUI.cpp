@@ -36,6 +36,9 @@ void PowerControlUI::on_button(UI_BUTTON hBtn) {
         this->updateCheckButton(this->ui.hold.button, gCfgItems.power_control_flags & POWER_CONTROL_LOCK, &lang_str.gnd_vcc);
         epr_write_data(EPR_POWER_CONTROL_FLAGS, (const unsigned char*)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
         shUI::power_hold();
+    } else if (hBtn==this->ui.reboot.button) {
+        gCfgItems.power_control_flags^=POWER_CONTROL_REBOOT;
+        this->updateCheckButton(this->ui.reboot.button, is_power_control_reboot(), &lang_str.yes_no);
     }
         ConfigurationWidget::on_button(hBtn);
 }
@@ -61,6 +64,7 @@ void PowerControlUI::createControls() {
                                   gCfgItems.power_control_flags & POWER_CONTROL_HARDWARE_AS_SOFTWARE);
             this->createCheckPair(0, 1, &this->ui.hold, lang_str.config_ui.power_hold,
                                   gCfgItems.power_control_flags & POWER_CONTROL_LOCK, &lang_str.gnd_vcc);
+            this->createCheckPair(0, 2, &this->ui.reboot, lang_str.config_ui.power_reset, is_power_control_reboot(), &lang_str.yes_no);
             break;
         }
     }

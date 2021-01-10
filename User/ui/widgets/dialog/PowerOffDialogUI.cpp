@@ -32,7 +32,8 @@ void PowerOffDialogUI::createControls() {
     memset(&this->ui, 0, sizeof(this->ui));
     this->timeout = this->duration;
     this->ui.ok = this->create96x80Button(DIALOG_WIDTH - (96 + 4), DIALOG_HEIGHT - 84, img_ok);
-    this->ui.reboot = this->create90x60Button(10, DIALOG_HEIGHT - 74, img90x60_reboot);
+    if (is_power_control_reboot())
+        this->ui.reboot = this->create90x60Button(10, DIALOG_HEIGHT - 74, img90x60_reboot);
     this->ui.cancel = this->create96x80Button(DIALOG_WIDTH - (96 + 4) * 2, DIALOG_HEIGHT - 84, img_cancel);
     this->ui.progress = ui_create_std_progbar(100, 20, DIALOG_WIDTH - 100 - 20, 20, this->hWnd);
     PROGBAR_SetValue(this->ui.progress, 0);

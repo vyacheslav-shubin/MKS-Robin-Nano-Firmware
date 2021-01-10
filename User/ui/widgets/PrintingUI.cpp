@@ -18,8 +18,7 @@
 #include "ConfirmDialogUI.h"
 #include "PrintingInfoDialogUI.h"
 #include "Application.h"
-#include "SpeedUI.h"
-#include "SpeedUI2.h"
+#include "UI.h"
 
 #define PB_HEIGHT	25
 #define SB_OFFSET	(PB_HEIGHT + 10)
@@ -41,7 +40,7 @@ typedef enum {
 };
 
 typedef enum {
-    FUN_SPEED_CALC_ID_LAST = PREHEAT_CALC_ID_LAST + 1
+    FUN_SPEED_CALC_ID = PREHEAT_CALC_ID_LAST + 1
 } CALC_ID;
 
 void PrintingUI::createStateButtonAt(char col, char row, STATE_BUTTON * btn, const char * img, const char * title) {
@@ -254,7 +253,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 			confirm_dialog_ui.show(lang_str.dialog.confirm_terminate_print, this, DID_CONFIRM_STOP, this);
 		}
 	} else if (hBtn == ui.fan.button) {
-        this->calculator(lang_str.bed, shUI::fan_get_percent(), FUN_SPEED_CALC_ID_LAST);
+        this->calculator(lang_str.bed, shUI::fan_get_percent(), FUN_SPEED_CALC_ID);
 	} else  if(hBtn == this->ui.bed.button) {
         shUI::BED_TEMP bt;
         shUI::getBedTemperature(&bt);
@@ -274,8 +273,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 		}
     } else if (hBtn == ui.speed.button) {
         this->hide();
-        //speed_ui.show();
-        speed_ui_2.show();
+        speed_ui.show();
 	} else if (hBtn == this->ui.power_control) {
 		ui_print_process.suicide_enabled = ui_print_process.suicide_enabled?0:1;
 		this->updatePowerControlButton();
@@ -288,7 +286,7 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 
 void PrintingUI::setValue(unsigned char id, double value) {
     switch (id) {
-        case FUN_SPEED_CALC_ID_LAST:
+        case FUN_SPEED_CALC_ID:
             shUI::fan_set_percent_double(value);
             break;
         default:

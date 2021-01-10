@@ -7,7 +7,6 @@
 #include "wifi_module.h"
 //Screen TFT_screen;
 
-value_state value;
 PRINT_TIME  print_time;
 
 void start_print_time() {

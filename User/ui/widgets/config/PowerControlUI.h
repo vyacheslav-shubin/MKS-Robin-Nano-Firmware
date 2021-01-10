@@ -13,6 +13,7 @@ typedef struct {
     UI_CHECK	tempCtrl;
     UI_CHECK	hwAsSw;
     UI_CHECK	hold;
+    UI_CHECK	reboot;
 } POWER_CONTROL_UI_CONTROLS;
 
 class PowerControlUI : public ConfigurationWidget {

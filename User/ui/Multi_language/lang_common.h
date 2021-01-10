@@ -40,6 +40,7 @@ typedef struct {
     const char * power_off_temperature_wait;
     const char * power_off_hardware_button_as_sofware;
     const char * power_hold;
+    const char * power_reset;
     const char * simple_main_ui;
     const char * module_wifi;
     const char * module_exists;

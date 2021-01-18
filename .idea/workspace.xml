@@ -37,25 +37,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Src/sh_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/Src/sh_tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/draw_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/draw_ui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingToolsUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SpeedUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SpeedUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SpeedUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SpeedUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SpeedUI2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SpeedUI2.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/SpeedUI2.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/SpeedUI2.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/StdWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/UI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/dialog/PowerOffDialogUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/dialog/PowerOffDialogUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/integration.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snapshot/mks_pic.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/mks_pic.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snapshot/robin_nano35.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/robin_nano35.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,11 +87,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="work" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="work" TARGET_NAME="work" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="work" RUN_TARGET_NAME="work">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -169,14 +147,8 @@
       <workItem from="1609252370237" duration="81000" />
       <workItem from="1609259612443" duration="83000" />
       <workItem from="1609259708963" duration="17656000" />
-      <workItem from="1610106172173" duration="24017000" />
-    </task>
-    <task id="LOCAL-00036" summary="snapshot">
-      <created>1591628888090</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1591628888090</updated>
+      <workItem from="1610106172173" duration="25092000" />
+      <workItem from="1610969377131" duration="974000" />
     </task>
     <task id="LOCAL-00037" summary="no file dialog ui prepare">
       <created>1591633654021</created>
@@ -514,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610128451375</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="new speed ui, option for reboot button.">
+      <created>1610282976095</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1610282976095</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +524,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="directory name fixed, auto home when leveling/ tool parking. Config safe z home" />
     <MESSAGE value="russian file names, new heat preset button, fileinfo layout fix" />
     <MESSAGE value="smapshot" />
     <MESSAGE value="long file name fix" />
@@ -570,7 +548,8 @@
     <MESSAGE value="preheat button on printing tools widget" />
     <MESSAGE value="+reset button/power off dialog" />
     <MESSAGE value="home widget + bed + y before x..." />
-    <option name="LAST_COMMIT_MESSAGE" value="home widget + bed + y before x..." />
+    <MESSAGE value="new speed ui, option for reboot button." />
+    <option name="LAST_COMMIT_MESSAGE" value="new speed ui, option for reboot button." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -108,8 +108,10 @@ void Widget::createWindow() {
 void Widget::refresh() {
     if (is_ui_timing(F_UI_TIMING_QUARTER_SEC))
         this->refresh_025();
+
 	if (is_ui_timing(F_UI_TIMING_HALF_SEC))
 		this->refresh_05();
+
 	if (is_ui_timing(F_UI_TIMING_SEC))
 		this->refresh_1s();
 }

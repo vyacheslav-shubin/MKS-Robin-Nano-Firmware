@@ -357,6 +357,13 @@ void Application::continuePrintFile(unsigned char reread_state_from_file) {
     }
 }
 
+void Application::selectPrintFile(char * file) {
+    memset(&ui_print_process, 0, sizeof(ui_print_process));
+    ui_print_process.count.total = 1;
+    ui_print_process.count.current = 0;
+    stpcpy(ui_print_process.file_name, file);
+    ui_app.dropPreview();
+}
 
 void Application::startPrintFile(unsigned char savedPreview) {
 	this->closeCurrentWidget();
@@ -383,6 +390,7 @@ void Application::startPrintFile(unsigned char savedPreview) {
 		}
 		card.startFileprint();
 		ui_print_process.once = 0;
+        ui_print_process.count.current++;
 	}
 
 	printing_ui.show();

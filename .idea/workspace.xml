@@ -37,6 +37,21 @@
   <component name="ChangeListManager">
     <list default="true" id="ed727112-30dd-454f-bbe8-f690e1ef0e1a" name="Default Changelist" comment="Tools widget + fun button. Continue print, a print option">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/sh_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/Src/sh_tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/wifi_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Src/wifi_module.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_ru.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/Multi_language/lang_std.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/ui_tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/ui_tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/Application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FilamentUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/FileBrowserUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/PrintingUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/AdvancedConfigUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/User/ui/widgets/config/PowerControlUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snapshot/mks_pic.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/mks_pic.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snapshot/robin_nano35.zip" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot/robin_nano35.zip" afterDir="false" />
     </list>
@@ -87,14 +102,14 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="work" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="work" TARGET_NAME="work" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="work" RUN_TARGET_NAME="work">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="work" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="work" TARGET_NAME="work" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="work" RUN_TARGET_NAME="work">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -148,14 +163,8 @@
       <workItem from="1609259612443" duration="83000" />
       <workItem from="1609259708963" duration="17656000" />
       <workItem from="1610106172173" duration="25092000" />
-      <workItem from="1610969377131" duration="974000" />
-    </task>
-    <task id="LOCAL-00037" summary="no file dialog ui prepare">
-      <created>1591633654021</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1591633654021</updated>
+      <workItem from="1610969377131" duration="12249000" />
+      <workItem from="1611216720874" duration="1128000" />
     </task>
     <task id="LOCAL-00038" summary="Reprint no file dialog as widget">
       <created>1591715269542</created>
@@ -493,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610282976095</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="shapshot">
+      <created>1610970619987</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1610970619988</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -524,7 +540,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="russian file names, new heat preset button, fileinfo layout fix" />
     <MESSAGE value="smapshot" />
     <MESSAGE value="long file name fix" />
     <MESSAGE value="bltouch init timer fixed" />
@@ -549,7 +564,8 @@
     <MESSAGE value="+reset button/power off dialog" />
     <MESSAGE value="home widget + bed + y before x..." />
     <MESSAGE value="new speed ui, option for reboot button." />
-    <option name="LAST_COMMIT_MESSAGE" value="new speed ui, option for reboot button." />
+    <MESSAGE value="shapshot" />
+    <option name="LAST_COMMIT_MESSAGE" value="shapshot" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -561,7 +577,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Src/wifi_module.cpp</url>
-          <line>1059</line>
+          <line>1060</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">

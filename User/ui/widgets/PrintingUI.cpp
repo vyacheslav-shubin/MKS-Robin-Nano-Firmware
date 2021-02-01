@@ -36,11 +36,13 @@ typedef enum {
     DID_CONFIRM_STOP,
     DID_PRINT_FINISHED,
     DID_PRINT_INFO,
-    DID_NO_FILAMENT
+    DID_NO_FILAMENT,
+    DID_CONFIRM_CONTINUE,
 };
 
 typedef enum {
-    FUN_SPEED_CALC_ID = PREHEAT_CALC_ID_LAST + 1
+    FUN_SPEED_CALC_ID = PREHEAT_CALC_ID_LAST + 1,
+    COPY_COUNT
 } CALC_ID;
 
 void PrintingUI::createStateButtonAt(char col, char row, STATE_BUTTON * btn, const char * img, const char * title) {
@@ -65,12 +67,16 @@ void PrintingUI::updateProgress() {
 }
 
 void PrintingUI::doFinishPrint() {
-	stop_print_time();
-	this->hide();
-	if (is_power_control_presents() && (ui_print_process.suicide_enabled))
-        ui_app.power_off_dialog(SUICIDE_WAIT);
-	else
-	    confirm_dialog_ui.show(lang_str.dialog.confirm_print_again, this, DID_PRINT_FINISHED);
+    stop_print_time();
+    this->hide();
+    if (is_print_nonstop() && (ui_print_process.count.current<ui_print_process.count.total)) {
+        confirm_dialog_ui.showEx(lang_str.dialog.confirm_new_copy, this, DID_CONFIRM_CONTINUE, 5, CONFIRM_DIALOG_OK_BUTTON | CONFIRM_DIALOG_CANCEL_BUTTON | CONFIRM_DIALOG_PROGRESS);
+    } else {
+        if (is_power_control_presents() && (ui_print_process.suicide_enabled))
+            ui_app.power_off_dialog(SUICIDE_WAIT);
+        else
+            confirm_dialog_ui.showEx(lang_str.dialog.confirm_print_again, this, DID_PRINT_FINISHED, 30, CONFIRM_DIALOG_OK_BUTTON | CONFIRM_DIALOG_CANCEL_BUTTON | CONFIRM_DIALOG_PROGRESS);
+    }
 }
 
 
@@ -88,8 +94,14 @@ void PrintingUI::createControls() {
 
 
 	this->createStateButtonAt(0, 1, &ui.ext1, img_state_extruder1, 0);
-	if (is_dual_extruders())
-		this->createStateButtonAt(1, 1, &ui.ext2, img_state_extruder2, 0);
+	if (is_dual_extruders()) {
+        this->createStateButtonAt(1, 1, &ui.ext2, img_state_extruder2, 0);
+    } else {
+	    if (is_print_nonstop()) {
+	        sprintf(ui_buf1_100, lang_str.repeating, ui_print_process.count.current, ui_print_process.count.total);
+            this->createStateButtonAt(1, 1, &ui.nonstop, img_state_nonstop, ui_buf1_100);
+	    }
+	}
 
 	#define _col(ph_x) (96*ph_x)
 	#define _y 204
@@ -191,14 +203,21 @@ void PrintingUI::on_action_dialog(u8 action, u8 dialog_id) {
             this->show();
             break;
         }
+        case DID_CONFIRM_CONTINUE: {
+            confirm_dialog_ui.hide();
+            if ((action==UI_BUTTON_OK) || (action==UI_ACTION_TIMEOUT)) {
+                ui_app.startPrintFile(1);
+            } else if ((action==UI_BUTTON_CANCEL) ) {
+                ui_app.showMainWidget();
+            }
+            break;
+        }
         case DID_PRINT_FINISHED: {
             confirm_dialog_ui.hide();
             if (action==UI_BUTTON_OK) {
-                ui_app.startPrintFile();
-            } else if (action==UI_BUTTON_CANCEL) {
+                ui_app.startPrintFile(1);
+            } else if ((action==UI_BUTTON_CANCEL) || (action==UI_ACTION_TIMEOUT)) {
                 ui_app.showMainWidget();
-            } else if (action==UI_ACTION_TIMEOUT) {
-                shUI::powerOff();
             }
             break;
         }
@@ -271,6 +290,8 @@ void PrintingUI::on_button(UI_BUTTON hBtn) {
 			this->hide();
 			babystep_ui.show();
 		}
+    } else if (hBtn == ui.nonstop.button) {
+        this->calculator(lang_str.dialog.copy_count, ui_print_process.count.total, COPY_COUNT);
     } else if (hBtn == ui.speed.button) {
         this->hide();
         speed_ui.show();
@@ -288,6 +309,9 @@ void PrintingUI::setValue(unsigned char id, double value) {
     switch (id) {
         case FUN_SPEED_CALC_ID:
             shUI::fan_set_percent_double(value);
+            break;
+        case COPY_COUNT:
+            ui_print_process.count.total = (unsigned short)value;
             break;
         default:
             preheat_set_calc_value((PREHEAT_CALC_ID)id, value);

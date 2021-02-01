@@ -27,6 +27,7 @@ extern GUI_BITMAP bmp_struct_50x50;
 #define img_state_time  		"bmp_time_state.bin"
 #define img_state_mesh_point	"bmp_mesh_point.bin"
 #define img_state_speed  		"bmp_speed_state.bin"
+#define img_state_nonstop  	    "bmp_45x45_count.bin"
 
 //96x80 images
 #define img_print_pause  		"bmp_pause.bin"
@@ -225,11 +226,16 @@ typedef struct{
     unsigned int offset;
 } PREVIEW_META;
 
+typedef struct {
+    unsigned short  total;
+    unsigned short  current;
+} PRINT_COUNT;
 
 typedef struct {
 	unsigned char	once; //printing
 	unsigned char	suicide_enabled;
 	unsigned char 	rate;
+    PRINT_COUNT     count;
 	char			file_name[100];
 
 	UI_MIN_MAX		mmx;

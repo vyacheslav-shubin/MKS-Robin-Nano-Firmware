@@ -311,18 +311,21 @@ typedef struct  __attribute__((__packed__)) {
     unsigned short TIME_SHIFT;
     unsigned char SH_FLAGS;
     float BAD_Z_HOMING;
+    unsigned char multiple_probing;
 } ERP_MAP;
 
 #define ERP_OFFSET(ITEM)  ((unsigned long)(&((ERP_MAP *)0)->ITEM))
 
 //2
-#define EPR_TIME_SHIFT          EPR_MKS_END
+#define EPR_TIME_SHIFT				EPR_MKS_END
 //2*4
 #define EPR_SH_FLAGS1               EPR_TIME_SHIFT + 2
 
-#define EPR_BED_HOMING		EPR_SH_FLAGS1 + 1
+#define EPR_BED_HOMING				EPR_SH_FLAGS1 + 1
 
-#define EPR_USED EPR_MKS_END + 7
+#define EPR_MULTILPE_PROBING		EPR_BED_HOMING + 4
+
+#define EPR_USED EPR_MKS_END + 8
 
 
 //#define EPR_END_ADDR			EPR_TIME_SHIFT + 2
@@ -486,6 +489,8 @@ typedef struct
 	uint8_t   e_enable_on;		
 
 	uint8_t   z_safe_homing;
+
+	uint8_t   multiple_probing;
 
 	//int16_t x_home_bump_mm;
 	//int16_t y_home_bump_mm;

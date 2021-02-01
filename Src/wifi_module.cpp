@@ -554,27 +554,28 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
 
 						if(strstr((char *)&tmpStr[index], ".g") || strstr((char *)&tmpStr[index], ".G")) {
 							if(strlen((char *)&tmpStr[index]) < 80) {
-								memset(ui_print_process.file_name, 0, sizeof(ui_print_process.file_name));
+								memset(ui_buf1_100, 0, 100);
 								if(gCfgItems.wifi_type == ESP_WIFI) {
 									if(strncmp((char *)&tmpStr[index], "1:", 2) == 0) {
 										gCfgItems.fileSysType = FILE_SYS_SD;
 									} else if(strncmp((char *)&tmpStr[index], "0:", 2) == 0) {
 									} else {
 										if(gCfgItems.fileSysType == FILE_SYS_SD) {
-											strcat((char *)ui_print_process.file_name, "1:");
+											strcat(ui_buf1_100, "1:");
 										}
 										if(tmpStr[index] != '/')
-											strcat((char *)ui_print_process.file_name, "/");
+											strcat(ui_buf1_100, "/");
 									}
-									strcat((char *)ui_print_process.file_name, (char *)&tmpStr[index]);
+									strcat(ui_buf1_100, (char *)&tmpStr[index]);
 								} else
-									strcpy(ui_print_process.file_name, (char *)&tmpStr[index]);
-								res = f_open(&temp_file, ui_print_process.file_name, FA_OPEN_EXISTING | FA_READ);
+									strcpy(ui_buf1_100, (char *)&tmpStr[index]);
+								res = f_open(&temp_file, ui_buf1_100, FA_OPEN_EXISTING | FA_READ);
 								if(res == FR_OK) {
+								    f_close(&temp_file);
 									send_to_wifi("File selected\r\n", strlen("File selected\r\n"));
+                                    ui_app.selectPrintFile(ui_buf1_100);
 								} else {
 									send_to_wifi("file.open failed\r\n", strlen("file.open failed\r\n"));
-									ui_print_process.file_name[0] = 0;
 								}
 								send_to_wifi("ok\r\n", strlen("ok\r\n"));
 							}

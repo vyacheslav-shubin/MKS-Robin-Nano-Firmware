@@ -2619,13 +2619,14 @@ static void clean_up_after_endstop_or_probe_move() {
     // Prevent stepper_inactive_time from running out and EXTRUDER_RUNOUT_PREVENT from extruding
     refresh_cmd_timeout();
 
+    float first_probe_z = 0;
     // Double-probing does a fast probe followed by a slow probe
-    #if MULTIPLE_PROBING == 2
+    if (MULTIPLE_PROBING == 2) {
 
       // Do a first probe at the fast speed
       if (do_probe_move(-10, Z_PROBE_SPEED_FAST)) return NAN;
 
-      float first_probe_z = current_position[Z_AXIS];
+      first_probe_z = current_position[Z_AXIS];
 
       #if ENABLED(DEBUG_LEVELING_FEATURE)
         if (DEBUGGING(LEVELING)) SERIAL_ECHOLNPAIR("1st Probe Z:", first_probe_z);
@@ -2634,7 +2635,7 @@ static void clean_up_after_endstop_or_probe_move() {
       // move up to make clearance for the probe
       do_blocking_move_to_z(current_position[Z_AXIS] + Z_CLEARANCE_BETWEEN_PROBES, MMM_TO_MMS(Z_PROBE_SPEED_FAST));
 
-    #else
+    } else {
 
       // If the nozzle is above the travel height then
       // move down quickly before doing the slow probe
@@ -2647,28 +2648,31 @@ static void clean_up_after_endstop_or_probe_move() {
         if (!do_probe_move(z, Z_PROBE_SPEED_FAST))
           do_blocking_move_to_z(current_position[Z_AXIS] + Z_CLEARANCE_BETWEEN_PROBES, MMM_TO_MMS(Z_PROBE_SPEED_FAST));
       }
-    #endif
+    }
 
-    #if MULTIPLE_PROBING > 2
-      float probes_total = 0;
-      for (uint8_t p = MULTIPLE_PROBING + 1; --p;) {
-    #endif
+    float probes_total = 0;
 
+    if (MULTIPLE_PROBING > 2) {
+	  for (uint8_t p = MULTIPLE_PROBING + 1; --p;) {
+
+		// move down slowly to find bed
+		if (do_probe_move(-10, Z_PROBE_SPEED_SLOW)) return NAN;
+
+		probes_total += current_position[Z_AXIS];
+		if (p > 1) do_blocking_move_to_z(current_position[Z_AXIS] + Z_CLEARANCE_BETWEEN_PROBES, MMM_TO_MMS(Z_PROBE_SPEED_FAST));
+	  }
+    } else {
         // move down slowly to find bed
         if (do_probe_move(-10, Z_PROBE_SPEED_SLOW)) return NAN;
+    }
 
-    #if MULTIPLE_PROBING > 2
-        probes_total += current_position[Z_AXIS];
-        if (p > 1) do_blocking_move_to_z(current_position[Z_AXIS] + Z_CLEARANCE_BETWEEN_PROBES, MMM_TO_MMS(Z_PROBE_SPEED_FAST));
-      }
-    #endif
 
-    #if MULTIPLE_PROBING > 2
+      if (MULTIPLE_PROBING > 2) {
 
       // Return the average value of all probes
       return probes_total * (1.0 / (MULTIPLE_PROBING));
 
-    #elif MULTIPLE_PROBING == 2
+    } else if (MULTIPLE_PROBING == 2) {
 
       const float z2 = current_position[Z_AXIS];
 
@@ -2682,12 +2686,12 @@ static void clean_up_after_endstop_or_probe_move() {
       // Return a weighted average of the fast and slow probes
       return (z2 * 3.0 + first_probe_z * 2.0) * 0.2;
 
-    #else
+      } else {
 
       // Return the single probe result
       return current_position[Z_AXIS];
 
-    #endif
+    }
 
     #if ENABLED(DEBUG_LEVELING_FEATURE)
       if (DEBUGGING(LEVELING)) DEBUG_POS("<<< run_z_probe", current_position);
@@ -6817,14 +6821,14 @@ inline void gcode_G29_MESH_BED_LEVELING() {
 
     bool G38_pass_fail = false;
 
-    #if MULTIPLE_PROBING > 1
+    if (MULTIPLE_PROBING > 1) {
       // Get direction of move and retract
       float retract_mm[XYZ];
       LOOP_XYZ(i) {
         float dist = destination[i] - current_position[i];
         retract_mm[i] = FABS(dist) < G38_MINIMUM_MOVE ? 0 : home_bump_mm((AxisEnum)i) * (dist > 0 ? -1 : 1);
       }
-    #endif
+    }
 
     stepper.synchronize();  // wait until the machine is idle
 
@@ -6844,7 +6848,7 @@ inline void gcode_G29_MESH_BED_LEVELING() {
 
       G38_pass_fail = true;
 
-      #if MULTIPLE_PROBING > 1
+      if (MULTIPLE_PROBING > 1) {
         // Move away by the retract distance
         set_destination_from_current();
         LOOP_XYZ(i) destination[i] += retract_mm[i];
@@ -6865,7 +6869,7 @@ inline void gcode_G29_MESH_BED_LEVELING() {
 
         set_current_from_steppers_for_axis(ALL_AXES);
         SYNC_PLAN_POSITION_KINEMATIC();
-      #endif
+      }
     }
 
     endstops.hit_on_purpose();

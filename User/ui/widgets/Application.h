@@ -100,6 +100,7 @@ public:
     char touch(u8 action);
 	void defaultUI();
 	void dropPreview();
+    void selectPrintFile(char * file);
     void startPrintFile(unsigned char savedPreview=0);
     void continuePrintFile(unsigned char reread_state_from_file = false);
 	void terminatePrintFile();

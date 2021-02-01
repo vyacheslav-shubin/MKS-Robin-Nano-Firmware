@@ -14,6 +14,7 @@ typedef struct {
 	UI_CHECK	simpleMainUI;
     UI_CHECK	diplayBackLight;
     UI_CHECK	zerro_calc;
+    UI_CHECK	non_stop;
 	UI_CONFIG_BUTTON restore;
 
 } ADVANCED_CONFIG_UI_CONTROLS;
@@ -27,7 +28,7 @@ protected:
 public:
     virtual void on_action_dialog(u8 action, u8 dialog_id);
     virtual const char * getTitle() {return lang_str.ui_title_config_advanced;};
-	AdvancedConfigUI() : ConfigurationWidget(ADVANCED_UI, 1) {};
+	AdvancedConfigUI() : ConfigurationWidget(ADVANCED_UI, 2) {};
 };
 
 extern AdvancedConfigUI advanced_config_ui;

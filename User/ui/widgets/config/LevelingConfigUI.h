@@ -25,6 +25,7 @@ typedef struct {
 
 typedef struct {
     UI_CHECK enable;
+    UI_INPUT_WITH_DEFAULT multiple_probing;
     UI_CHECK connector;
     UI_TEXT label;
     UI_TEXT offset_label;

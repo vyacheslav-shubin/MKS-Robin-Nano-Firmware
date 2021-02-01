@@ -734,10 +734,6 @@ static_assert(1 >= 0
     */
   #endif
 
-  #if MULTIPLE_PROBING && MULTIPLE_PROBING < 2
-    #error "MULTIPLE_PROBING must be >= 2."
-  #endif
-
 #else
 
   /**

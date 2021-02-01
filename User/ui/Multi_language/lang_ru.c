@@ -19,9 +19,12 @@ void lang_ru(void) {
 	lang_str.config_ui.maximum_speed_settings = "Максимальные скорости";
 	lang_str.config_ui.jerk_settings = "Настройки рывков";
     lang_str.config_ui.probe_offset = "Смещение зонда";
+    lang_str.config_ui.probe_count = "Пробы";
     lang_str.config_ui.probe_speed = "Скорость зонда";
     lang_str.config_ui.connectorZ = "Порт Z";
     lang_str.config_ui.restore_config = "Восстановить файл конфигурации";
+    lang_str.config_ui.print_non_stop = "Печать с повтором";
+
 
     lang_str.config_ui.module_exists = "Модуль присутствует";
     lang_str.config_ui.ntp = "Поддержка NTP";
@@ -83,6 +86,7 @@ void lang_ru(void) {
 	lang_str.bed = "Стол";
 	lang_str.extruder1 = "Экструдер 1";
 	lang_str.extruder2 =  "Экструдер 2";
+    lang_str.repeating =  "Копии %d/%d";
 
 	lang_str.stop = "Стоп";
 
@@ -166,12 +170,14 @@ void lang_ru(void) {
     lang_str.dialog.confirm_delete_mesh = "Сбросить измерения?";
     lang_str.dialog.confirm_terminate_print = "Прервать печать?";
 	lang_str.dialog.confirm_print_again = "Повторить печать?";
+    lang_str.dialog.confirm_new_copy = "Следующая копия?";
 	lang_str.dialog.confirm_print_with_suicide = "Автоматическое выключение.\nПрервать и повторить печать?";
 	lang_str.dialog.error_filament_end_detected = "Обнаружен обрыв филамента";
     lang_str.dialog.confirm_filament_load = "Загрузить филамент?";
     lang_str.dialog.power_off = "Выключение питания";
     lang_str.dialog.power_off_waiting_hotend = "Ожидание охлаждения";
     lang_str.dialog.no_sd_card = "Нет SD карты";
+    lang_str.dialog.copy_count = "Число копий";
 
     lang_str.wf.state = "Состояние";
     lang_str.wf.connected = "Подключено";

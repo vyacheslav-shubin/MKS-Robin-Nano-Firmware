@@ -276,9 +276,8 @@ void FileBrowserUI::doPrev(){
 }
 
 void FileBrowserUI::activatePrint(u8 index) {
-	memset(&ui_print_process, 0, sizeof(ui_print_process));
-    concat_file_name(ui_print_process.file_name, browser.current_dir, this->ui.files[index].fileName);
-	ui_app.dropPreview();
+    concat_file_name(ui_buf1_100, browser.current_dir, this->ui.files[index].fileName);
+    ui_app.selectPrintFile(ui_buf1_100);
 	file_info_ui.show(this);
 }
 

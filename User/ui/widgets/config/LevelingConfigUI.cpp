@@ -15,6 +15,7 @@ typedef enum {
     SPEED_XY,
     SPEED_Z_FAST,
     SPEED_Z_SLOW,
+	M_PROBING,
     POINT_X,
     POINT_Y,
 } VALUES;
@@ -54,6 +55,11 @@ void LevelingConfigUI::_setValue(unsigned char id, float value) {
             epr_write_data(EPR_Z_PROBE_SPEED_SLOW, (uint8_t *)&value, sizeof(float));
             break;
         }
+        case M_PROBING: {
+            mksCfg.multiple_probing = value;
+            epr_write_data(EPR_MULTILPE_PROBING, (uint8_t *)&value, 1);
+            break;
+        }
         default: {
             if (id>=POINT_X) {
                 id-=POINT_X;
@@ -82,6 +88,8 @@ void LevelingConfigUI::updateControls() {
             this->updateRadio(this->ui.type.bilinear.button, mksCfg.bed_leveling_method==AUTO_BED_LEVELING_BILINEAR);
             this->updateRadio(this->ui.type.ubl.button, mksCfg.bed_leveling_method==AUTO_BED_LEVELING_UBL);
             this->updateRadio(this->ui.type.mesh.button,  mksCfg.bed_leveling_method==MESH_BED_LEVELING);
+            sprintf(ui_buf1_100, "%d", mksCfg.multiple_probing);
+            this->setButtonText(this->ui.probe.multiple_probing.button, ui_buf1_100);
             break;
         }
         case 1: {
@@ -140,6 +148,11 @@ void LevelingConfigUI::on_button(UI_BUTTON hBtn) {
                 _set_leveling_type(4);
             } else if (ui_is_double_button(hBtn, this->ui.type.mesh)) {
                 _set_leveling_type(5);
+            } else if (hBtn == this->ui.probe.multiple_probing.dflt) {
+            	this->setValue(M_PROBING, 2);
+            } else if (hBtn == this->ui.probe.multiple_probing.button) {
+            	this->calculator(lang_str.config_ui.probe_count, mksCfg.multiple_probing, M_PROBING);
+                return;
             } else if (hBtn==this->ui.probe.enable.button) {
                 mksCfg.mkstouch = mksCfg.mkstouch ? 0 : 1;
                 if (mksCfg.mkstouch) {
@@ -242,7 +255,7 @@ void LevelingConfigUI::createControls() {
             this->createRadio(0, 3, &this->ui.type.bilinear, "Bilinear", 0);
             this->createRadio(0, 4, &this->ui.type.ubl, "UBL", 0);
             this->createRadio(1, 0, &this->ui.type.mesh, "Mesh", 0);
-
+            this->createInputWithDefault(1, 1, &this->ui.probe.multiple_probing, lang_str.config_ui.probe_count, 0);
             this->createCheckPair(1, 2, &this->ui.probe.enable, "BLtouch", mksCfg.mkstouch);
             //todo: проверить значение
             this->createCheckPair(1, 3, &this->ui.probe.connector, lang_str.config_ui.connectorZ, mksCfg.z_min_probe_pin_mode != 1,

@@ -46,6 +46,10 @@ void AdvancedConfigUI::on_button(UI_BUTTON hBtn) {
         gCfgItems.sh_flags1^=SH_FLAGS1_ZERROR_CALC;
         this->updateCheckButton(ui.zerro_calc.button, is_zerro_calc());
         epr_write_data(EPR_SH_FLAGS1, (const unsigned char*)&gCfgItems.sh_flags1, sizeof(gCfgItems.sh_flags1));
+    } else if(hBtn == this->ui.non_stop.button) {
+        gCfgItems.sh_flags1^=SH_FLAGS1_PRINT_NONSTOP;
+        this->updateCheckButton(ui.non_stop.button, is_print_nonstop());
+        epr_write_data(EPR_SH_FLAGS1, (const unsigned char*)&gCfgItems.sh_flags1, sizeof(gCfgItems.sh_flags1));
     } else if (hBtn == this->ui.restore.button) {
         this->hide();
         FIL f;
@@ -74,12 +78,14 @@ void AdvancedConfigUI::createControls() {
                                   gCfgItems.standby_mode == 1);
             this->createCheckPair(0, 2, &this->ui.zerro_calc, lang_str.config_ui.zerro_calc,
                                   is_zerro_calc());
-
-            this->createConfigButton(0, 3, &this->ui.restore, lang_str.config_ui.restore_config);
-
+            this->createCheckPair(0, 3, &this->ui.non_stop, lang_str.config_ui.print_non_stop,
+                                  is_print_nonstop());
             break;
         }
-    }
-
+        case 1: {
+            this->createConfigButton(0, 0, &this->ui.restore, lang_str.config_ui.restore_config);
+            break;
+        }
+	}
 }
 

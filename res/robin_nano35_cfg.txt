@@ -249,7 +249,7 @@
 >XY_PROBE_SPEED 		4000	# X and Y axis travel speed (mm/m) between probes 
 >Z_PROBE_SPEED_FAST 		600	# Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 >Z_PROBE_SPEED_SLOW 		300	# Speed for the "accurate" probe of each point
-
+>MULTIPLE_PROBING			2	# Number if probing
 
 #=============================== Bed Leveling ==============================
 

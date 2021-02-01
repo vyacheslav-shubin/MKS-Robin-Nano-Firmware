@@ -15,7 +15,8 @@
 typedef struct{
 	STATE_BUTTON ext1;
 	STATE_BUTTON ext2;
-	STATE_BUTTON fan;
+    STATE_BUTTON fan;
+    STATE_BUTTON nonstop;
 	STATE_BUTTON z;
 	STATE_BUTTON bed;
 	STATE_BUTTON time;

@@ -56,11 +56,13 @@ void lang_std(void) {
     lang_str.config_ui.length= "Lenght:";;
     lang_str.config_ui.point = "Point %d";
     lang_str.config_ui.probe_offset = "Probe offset";
+    lang_str.config_ui.probe_count = "Probes";
     lang_str.config_ui.probe_offset = "Probe speed";
     lang_str.config_ui.connectorZ = "Connector Z";
     lang_str.config_ui.pause = "Pause";
 
     lang_str.config_ui.restore_config = "Restore configuration file";
+    lang_str.config_ui.print_non_stop = "Non-stop printing";
 
     lang_str.config_ui.heater = "Heater";
     lang_str.config_ui.pid_termostat = "PID termostat";
@@ -104,6 +106,7 @@ void lang_std(void) {
 	lang_str.bed = "Bed";
 	lang_str.extruder1 = "Extruder 1";
 	lang_str.extruder2 = "Extruder 2";
+    lang_str.repeating =  "Repeating %d/%d";
 
 	lang_str.stop = "Stop";
 	lang_str.load = "Load";
@@ -195,12 +198,14 @@ void lang_std(void) {
     lang_str.dialog.confirm_file_not_found = "File not found: \n%s";
 	lang_str.dialog.confirm_terminate_print = "Terminate printing?";
 	lang_str.dialog.confirm_print_again = "Print again?";
+    lang_str.dialog.confirm_new_copy = "Next copy?";
 	lang_str.dialog.confirm_print_with_suicide = "Auto power off.\nBreak and print again?";
 	lang_str.dialog.error_filament_end_detected = "Filament end detected";
     lang_str.dialog.confirm_filament_load = "Load filament?";
     lang_str.dialog.power_off = "Power off";
     lang_str.dialog.power_off_waiting_hotend = "Waiting for cooling hotend";
     lang_str.dialog.no_sd_card = "No SD card.";
+    lang_str.dialog.copy_count = "Copy count";
 
     lang_str.wf.state = "State";
     lang_str.wf.connected = "Connected";

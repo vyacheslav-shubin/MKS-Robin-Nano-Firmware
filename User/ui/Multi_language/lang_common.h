@@ -74,8 +74,11 @@ typedef struct {
 
     const char * restore_config;
 
+    const char * print_non_stop;
+
     const char * point;
     const char * probe_offset;
+    const char * probe_count;
     const char * probe_speed;
 
     const char * pause;
@@ -118,7 +121,8 @@ typedef struct {
     const char * confirm_delete_mesh;
     const char * confirm_file_not_found;
 	const char * confirm_terminate_print;
-	const char * confirm_print_again;
+    const char * confirm_print_again;
+    const char * confirm_new_copy;
 	const char * confirm_print_with_suicide;
 	const char * error_filament_end_detected;
     const char * refactored_by;
@@ -126,6 +130,7 @@ typedef struct {
     const char * power_off;
     const char * power_off_waiting_hotend;
     const char * no_sd_card;
+    const char * copy_count;
 } DIALOG_LANG_STR;
 
 typedef struct {
@@ -179,7 +184,8 @@ typedef struct {
 	const char * off;
 	const char * bed;
 	const char * extruder1;
-	const char * extruder2;
+    const char * extruder2;
+    const char * repeating;
 
 	const char * stop;
 

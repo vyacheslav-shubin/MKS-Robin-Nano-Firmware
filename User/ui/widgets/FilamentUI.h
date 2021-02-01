@@ -28,7 +28,7 @@ class FilamentUI: public StdWidget, public ActionDialogCallback {
 private:
 	FILAMENT_UI_CONTROLS ui;
 	char current_extruder = 0;
-	char current_step = 2;
+	char current_step = 3;
 	char current_speed = 2;
     void fix_temperature(unsigned char extruder);
 	void doFilament(char direction, unsigned char confirm = 1);

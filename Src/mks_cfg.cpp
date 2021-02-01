@@ -933,6 +933,7 @@ void CardReader::mksEepromRefresh()
 	eprBurnValue(">PRINT_FINISHED_COUNT", (int16_t *)&gCfgItems.print_finish_count, EPR_PRINT_FINESH_COUNT);
 
 	eprBurnValue(">Z_SAFE_HOMING", &mksCfg.z_safe_homing, EPR_Z_SAFE_HOMING);
+	eprBurnValue(">MULTIPLE_PROBING", &mksCfg.multiple_probing, EPR_MULTILPE_PROBING);
 
 /*------------------------MKS ������������ end---------------------------------*/
         
@@ -1206,6 +1207,7 @@ void CardReader::mksReset()
     mksCfg.e_enable_on=0;
 
     mksCfg.z_safe_homing = 0;
+    mksCfg.multiple_probing = 2;
 	
 	//mkstft_ui_init();
 
@@ -1567,7 +1569,8 @@ void CardReader::mksLoad()
     AT24CXX_Read((uint16_t)EPR_E_ENABLE_ON,&mksCfg.e_enable_on,1);
 
     AT24CXX_Read((uint16_t) EPR_Z_SAFE_HOMING, &mksCfg.z_safe_homing, 1);
-    
+    AT24CXX_Read((uint16_t) EPR_MULTILPE_PROBING, &mksCfg.multiple_probing, 1);
+
 	mkstft_ui_load();
 	
 }

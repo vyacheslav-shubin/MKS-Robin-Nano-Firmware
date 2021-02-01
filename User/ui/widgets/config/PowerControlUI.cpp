@@ -39,6 +39,7 @@ void PowerControlUI::on_button(UI_BUTTON hBtn) {
     } else if (hBtn==this->ui.reboot.button) {
         gCfgItems.power_control_flags^=POWER_CONTROL_REBOOT;
         this->updateCheckButton(this->ui.reboot.button, is_power_control_reboot(), &lang_str.yes_no);
+        epr_write_data(EPR_POWER_CONTROL_FLAGS, (const unsigned char*)&gCfgItems.power_control_flags, sizeof(gCfgItems.power_control_flags));
     }
         ConfigurationWidget::on_button(hBtn);
 }
